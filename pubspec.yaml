@@ -14,7 +14,7 @@ dependencies:
   
   # 核心依赖
   provider: ^6.0.5      # 状态管理
-  intl: ^0.19.0         # 国际化支持
+  intl: ">=0.19.0 <0.21.0"         # 国际化支持
   vector_graphics: ^1.1.7  # SVG图标支持
   collection: ^1.17.1   # 集合工具
   path: ^1.9.1         # 路径处理
@@ -25,8 +25,8 @@ dependencies:
   image_picker: ^1.0.4  # 图片选择器
   
   # 富文本编辑器相关
-  flutter_quill: ^10.8.4    # 富文本编辑器核心
-  flutter_quill_extensions: ^10.8.4  # 富文本编辑器扩展
+  flutter_quill: ">=10.8.4 <12.0.0"    # 富文本编辑器核心
+  flutter_quill_extensions: ">=10.8.4 <12.0.0"  # 富文本编辑器扩展
   url_launcher: ^6.2.5   # URL启动器
 
 dev_dependencies:
@@ -39,7 +39,7 @@ dev_dependencies:
   
   # 测试框架增强
   test: ^1.24.3          # 核心测试框架
-  bloc_test: ^9.1.5      # BLoC状态管理测试
+  bloc_test: ">=9.1.5 <11.0.0"      # BLoC状态管理测试
   mocktail: ^1.0.2       # 轻量级模拟库
   fake_async: ^1.3.1     # 异步测试工具
   
