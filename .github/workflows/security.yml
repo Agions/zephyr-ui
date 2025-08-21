@@ -68,12 +68,12 @@ jobs:
       run: dart run secret_scanner
       
     - name: Run CodeQL analysis
-      uses: github/codeql-action/init@v2
+      uses: github/codeql-action/init@v3
       with:
         languages: dart
         
     - name: Perform CodeQL analysis
-      uses: github/codeql-action/analyze@v2
+      uses: github/codeql-action/analyze@v3
 
   # Container Security Scan
   container-security:
