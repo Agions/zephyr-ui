@@ -2,8 +2,6 @@
 
 <div align="center">
 ![ZephyrUI Logo](https://raw.githubusercontent.com/Agions/zephyr-ui/main/assets/images/logo.png)
-</div>
-<div align="center">
 ![Flutter](https://img.shields.io/badge/Flutter-3.0+-blue?style=for-the-badge&logo=flutter&logoColor=white)
 ![Dart](https://img.shields.io/badge/Dart-3.0+-blue?style=for-the-badge&logo=dart&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
