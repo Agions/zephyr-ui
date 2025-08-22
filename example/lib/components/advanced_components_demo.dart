@@ -116,7 +116,7 @@ class AdvancedComponentsDemo extends StatelessWidget {
   }
 
   Widget _buildCarouselExample() {
-    return const ExampleCard(
+    return ExampleCard(
       title: '轮播图',
       code: '''PageView.builder(
   itemCount: 3,
@@ -127,7 +127,7 @@ class AdvancedComponentsDemo extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Center(
-        child: Text('页面 ${index + 1}'),
+        child: Text('页面 \${index + 1}'),
       ),
     );
   },
@@ -135,9 +135,9 @@ class AdvancedComponentsDemo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             '基础轮播图',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
           SizedBox(
@@ -194,9 +194,9 @@ class AdvancedComponentsDemo extends StatelessWidget {
             }),
           ),
           const SizedBox(height: 24),
-          const Text(
+          Text(
             '自动轮播',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
           Container(
@@ -204,15 +204,15 @@ class AdvancedComponentsDemo extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.orange[50],
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: Colors.orange[200]!),
+              border: Border.all(color: Colors.orange[200] ?? Colors.orange),
             ),
-            child: const Center(
+            child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.autorenew, size: 32, color: Colors.orange),
-                  SizedBox(height: 8),
-                  Text('自动轮播功能演示'),
+                  const Icon(Icons.autorenew, size: 32, color: Colors.orange),
+                  const SizedBox(height: 8),
+                  const Text('自动轮播功能演示'),
                 ],
               ),
             ),
@@ -236,7 +236,7 @@ class AdvancedComponentsDemo extends StatelessWidget {
   }
 
   Widget _buildColorPickerExample() {
-    return const ExampleCard(
+    return ExampleCard(
       title: '颜色选择器',
       code: '''Wrap(
   spacing: 8,
@@ -258,9 +258,9 @@ class AdvancedComponentsDemo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             '颜色选择',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
           Container(
@@ -405,14 +405,14 @@ class AdvancedComponentsDemo extends StatelessWidget {
         decoration: BoxDecoration(
           color: color,
           shape: BoxShape.circle,
-          border: Border.all(color: Colors.grey[300]!),
+          border: Border.all(color: Colors.grey[300] ?? Colors.grey),
         ),
       ),
     );
   }
 
   Widget _buildChartExample() {
-    return const ExampleCard(
+    return ExampleCard(
       title: '图表组件',
       code: '''// 柱状图示例
 Container(
@@ -441,7 +441,7 @@ Container(
             decoration: BoxDecoration(
               color: Colors.grey[50],
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: Colors.grey[200]!),
+              border: Border.all(color: Colors.grey[200] ?? Colors.grey),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -467,7 +467,7 @@ Container(
             decoration: BoxDecoration(
               color: Colors.grey[50],
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: Colors.grey[200]!),
+              border: Border.all(color: Colors.grey[200] ?? Colors.grey),
             ),
             child: Row(
               children: [
@@ -503,7 +503,7 @@ Container(
                     children: [
                       _buildLegendItem(Colors.blue, '已完成', '75%'),
                       const SizedBox(height: 8),
-                      _buildLegendItem(Colors.grey[300]!, '未完成', '25%'),
+                      _buildLegendItem(Colors.grey[300] ?? Colors.grey, '未完成', '25%'),
                     ],
                   ),
                 ),
@@ -522,7 +522,7 @@ Container(
             decoration: BoxDecoration(
               color: Colors.grey[50],
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: Colors.grey[200]!),
+              border: Border.all(color: Colors.grey[200] ?? Colors.grey),
             ),
             child: CustomPaint(
               painter: LineChartPainter(),

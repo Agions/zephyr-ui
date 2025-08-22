@@ -21,8 +21,8 @@ Related to #ISSUE_NUMBER
 
 ## ✅ Checklist
 Before submitting this PR, please make sure you have:
-- [ ] Read the [Contributing Guidelines](https://github.com/zephyrui/zephyr_ui/blob/main/CONTRIBUTING.md)
-- [ ] Followed the [Code Style Guide](https://github.com/zephyrui/zephyr_ui/blob/main/docs/CODE_STYLE.md)
+- [ ] Read the [Contributing Guidelines](https://github.com/agions/zephyr_ui/blob/main/CONTRIBUTING.md)
+- [ ] Followed the [Code Style Guide](https://github.com/agions/zephyr_ui/blob/main/doc/CODE_STYLE.md)
 - [ ] Written appropriate tests (unit, widget, integration)
 - [ ] Updated relevant documentation
 - [ ] Added examples for new components or features

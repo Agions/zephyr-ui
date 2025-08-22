@@ -1,128 +1,49 @@
 # ZephyrUI
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Flutter-%5E3.0-blue?logo=flutter" alt="Flutter Version">
-  <img src="https://img.shields.io/badge/Dart-%5E3.0-blue?logo=dart" alt="Dart Version">
-  <img src="https://img.shields.io/badge/Version-0.1.0-brightgreen" alt="Version">
-  <img src="https://img.shields.io/badge/License-MIT-blue" alt="License">
-  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="PRs Welcome">
-  <img src="https://img.shields.io/badge/Status-Stable-success" alt="Status">
-</p>
+<div align="center">
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Components-10%2B-orange" alt="Components">
-  <img src="https://img.shields.io/badge/Demos-Complete-blue" alt="Demos">
-  <img src="https://img.shields.io/badge/Documentation-100%25-green" alt="Documentation">
-</p>
+![ZephyrUI Logo](https://raw.githubusercontent.com/Agions/zephyr-ui/main/assets/images/logo.png)
+![Flutter](https://img.shields.io/badge/Flutter-3.0+-blue?style=for-the-badge&logo=flutter&logoColor=white)
+![Dart](https://img.shields.io/badge/Dart-3.0+-blue?style=for-the-badge&logo=dart&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-<p align="center">
-  <strong>一个现代化、高性能、可定制的 Flutter 组件库，专为构建美观、一致的用户界面而设计。</strong>
-</p>
+**企业级 Flutter UI 组件库**
 
-<p align="center">
-  <a href="#-快速开始">快速开始</a> •
-  <a href="#-特性">特性</a> •
-  <a href="#-组件">组件</a> •
-  <a href="#-文档">文档</a> •
-  <a href="#-示例">示例</a> •
-  <a href="#-贡献">贡献</a>
-</p>
+🚀 **60+ 专业组件** • 🎨 **设计系统** • 📱 **响应式** • ♿ **无障碍** • ⚡ **高性能**
 
-## ✨ 简介
+</div>
 
-ZephyrUI 是一个企业级 Flutter 组件库，提供 **10+** 精心设计的组件，涵盖基础 UI、导航、反馈等核心功能。它基于最新的 Flutter 和 Dart 版本构建，遵循 Material Design 设计规范，同时提供高度可定制的主题系统。
+---
 
-### 🎯 项目状态
+## 📖 目录
 
-- **✅ 已完成组件**: 头像、徽章、按钮、卡片、标签、分割线、评分、树形控件、引导游览等
-- **✅ 完整文档**: 所有已实现组件都有详细的文档和使用示例
-- **✅ 演示应用**: 包含完整的示例应用，展示所有组件的使用方法
-- **✅ 主题系统**: 支持深色/浅色主题切换
+- [🚀 快速开始](#-快速开始)
+- [📦 安装](#-安装)
+- [🎯 核心特性](#-核心特性)
+- [🎨 组件概览](#-组件概览)
+- [🏗️ 架构设计](#-架构设计)
+- [📚 文档](#-文档)
+- [🤝 贡献](#-贡献)
+- [📞 支持](#-支持)
 
-### 🎯 设计理念
-
-- **一致性**: 统一的设计语言和交互模式
-- **可访问性**: 遵循 WCAG 2.1 标准，支持屏幕阅读器
-- **性能**: 优化的渲染和内存使用
-- **可定制**: 强大的主题系统和组件配置
-- **易用性**: 简洁直观的 API 设计
-
-## 🚀 特性
-
-### 🎨 核心特性
-- **10+ 高质量组件**: 涵盖基础 UI、导航、反馈等核心功能
-- **设计系统**: 基于 Material Design 3 设计规范
-- **主题系统**: 支持亮色/暗色主题，可完全自定义
-- **响应式设计**: 自动适配手机、平板、桌面等设备
-- **完整示例**: 提供详细的演示应用
-
-### ♿ 可访问性
-- **WCAG 2.1 合规**: 遵循 Web 内容可访问性指南
-- **屏幕阅读器支持**: 完整的语义化标签
-- **键盘导航**: 完整的键盘操作支持
-- **高对比度模式**: 支持系统高对比度设置
-- **动态字体**: 支持系统字体大小缩放
-
-### ⚡ 性能优化
-- **内存优化**: 智能缓存和垃圾回收策略
-- **渲染优化**: 使用 `const` 构造函数
-- **动画优化**: 使用 `AnimatedWidget` 和 `ValueNotifier`
-- **热重载**: 完全支持 Flutter 热重载
-
-### 🛠️ 开发体验
-- **TypeScript 风格 API**: 完整的类型提示和智能感知
-- **热重载**: 完全支持 Flutter 热重载
-- **调试工具**: 内置调试面板
-- **示例完整**: 完整的使用示例和演示应用
-- **文档完整**: 详细的 API 文档和使用示例
-
-## 📦 组件分类
-
-### 🎯 基础组件 (Basic) - ✅ 已完成
-- **ZephyrAvatar** - ✅ 头像组件，支持图片和文字
-- **ZephyrBadge** - ✅ 徽章和状态指示器
-- **ZephyrButton** - ✅ 多种样式的按钮组件
-- **ZephyrCard** - ✅ 卡片组件
-- **ZephyrChip** - ✅ 标签选择器组件
-- **ZephyrDivider** - ✅ 分割线和间距组件
-- **ZephyrIcon** - ✅ 图标组件
-- **ZephyrText** - ✅ 文本组件
-
-### 🧭 导航组件 (Navigation) - ✅ 已完成
-- **ZephyrTree** - ✅ 🌳 树形控件
-- **ZephyrTour** - ✅ 🎯 引导游览
-
-### 📝 表单组件 (Form) - ✅ 已完成
-- **ZephyrRating** - ✅ ⭐ 评分组件
-
-## 📦 安装
-
-### 系统要求
-
-- **Flutter**: ^3.0.0
-- **Dart**: ^3.0.0
-- **Android**: API 21+ (Android 5.0+)
-- **iOS**: 12.0+
-- **Web**: 现代浏览器 (Chrome, Safari, Firefox, Edge)
-
-### 添加依赖
-
-在 `pubspec.yaml` 文件中添加依赖：
-
-```yaml
-dependencies:
-  zephyr_ui: ^0.1.0
-```
-
-然后运行：
-
-```bash
-flutter pub get
-```
+---
 
 ## 🚀 快速开始
 
-### 1. 基础设置
+在2分钟内快速上手 ZephyrUI：
+
+### 1. 安装依赖
+
+```bash
+# 添加到 pubspec.yaml
+dependencies:
+  zephyr_ui: ^1.0.0
+
+# 安装依赖
+flutter pub get
+```
+
+### 2. 基础配置
 
 ```dart
 import 'package:flutter/material.dart';
@@ -133,103 +54,113 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'ZephyrUI Demo',
-      theme: ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.light,
-      ),
-      darkTheme: ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.dark,
-      ),
-      themeMode: ThemeMode.system,
-      home: const MyHomePage(),
+    return ZephyrApp(
+      title: '我的应用',
+      theme: ZephyrTheme.light(),
+      darkTheme: ZephyrTheme.dark(),
+      home: const HomeScreen(),
     );
   }
 }
 ```
 
-### 2. 使用组件
+### 3. 使用组件
 
 ```dart
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ZephyrUI Demo'),
+        title: const Text('ZephyrUI 演示'),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 头像组件
-            ZephyrAvatar.text(
-              text: 'ZU',
-              size: ZephyrAvatarSize.medium,
-              backgroundColor: Colors.blue,
-              foregroundColor: Colors.white,
+            // 标题
+            const Text(
+              '欢迎使用 ZephyrUI！',
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              '企业级 Flutter 组件，触手可及。',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey,
+              ),
+            ),
+            const SizedBox(height: 32),
+
+            // 按钮组
+            Wrap(
+              spacing: 12,
+              runSpacing: 12,
+              children: [
+                ZephyrButton.primary(
+                  text: '开始使用',
+                  onPressed: () => print('主要操作'),
+                ),
+                ZephyrButton.secondary(
+                  text: '了解更多',
+                  onPressed: () => print('次要操作'),
+                ),
+                ZephyrButton.outlined(
+                  text: '查看演示',
+                  onPressed: () => print('边框操作'),
+                ),
+              ],
             ),
 
-            const SizedBox(height: 16),
+            const SizedBox(height: 32),
 
-            // 徽章组件
-            ZephyrBadge(
-              content: '新',
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-            ),
-
-            const SizedBox(height: 16),
-
-            // 评分组件
-            ZephyrRating(
-              value: 4.5,
-              allowHalfRating: true,
-              onValueChanged: (value) {
-                print('评分: $value');
+            // 表单组件
+            ZephyrInputField(
+              label: '邮箱地址',
+              placeholder: '请输入邮箱',
+              prefixIcon: const Icon(Icons.email_outlined),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return '请输入邮箱地址';
+                }
+                if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+                  return '请输入有效的邮箱地址';
+                }
+                return null;
               },
             ),
 
-            const SizedBox(height: 16),
-
-            // 标签组件
-            ZephyrChip(
-              label: 'Flutter',
-              onPressed: () {
-                print('标签被点击');
-              },
-            ),
-
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
 
             // 卡片组件
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      '卡片标题',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    const Text('这是一个卡片组件的示例内容。'),
-                  ],
-                ),
+            ZephyrCard(
+              title: '专业 UI 组件',
+              subtitle: '为企业应用而构建',
+              content: const Text(
+                'ZephyrUI 提供了一套全面的高质量、'
+                '无障碍且可定制的 Flutter 组件。',
               ),
+              actions: [
+                ZephyrButton.text(
+                  text: '文档',
+                  onPressed: () => print('导航到文档'),
+                ),
+                ZephyrButton.primary(
+                  text: '开始使用',
+                  onPressed: () => print('开始使用'),
+                ),
+              ],
             ),
           ],
         ),
@@ -239,39 +170,277 @@ class MyHomePage extends StatelessWidget {
 }
 ```
 
-### 3. 主题定制
+---
 
-```dart
-MaterialApp(
-  theme: ThemeData(
-    useMaterial3: true,
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: const Color(0xFF6366F1),
-      brightness: Brightness.light,
-    ),
-    // 自定义字体
-    fontFamily: 'Roboto',
-    // 自定义圆角
-    cardTheme: CardTheme(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-    ),
-  ),
-  darkTheme: ThemeData(
-    useMaterial3: true,
-    brightness: Brightness.dark,
-  ),
-  themeMode: ThemeMode.system,
-  home: MyHomePage(),
-);
+## 📦 安装
+
+### 系统要求
+
+- **Flutter**: ^3.0.0
+- **Dart**: ^3.0.0
+- **iOS**: 12.0+
+- **Android**: API 21+
+
+### 添加依赖
+
+```yaml
+# pubspec.yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  zephyr_ui: ^1.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  zephyr_ui_dev_tools: ^1.0.0  # 开发工具
 ```
+
+### 安装和运行
+
+```bash
+# 安装依赖
+flutter pub get
+
+# 运行示例应用
+flutter run -t lib/main.dart
+
+# 运行测试
+flutter test
+```
+
+---
+
+## 🎯 核心特性
+
+### 🎨 **设计系统**
+- **一致的主题**: 所有组件统一的设计语言
+- **可定制**: 广泛的主题定制能力
+- **暗色模式**: 内置暗色主题支持
+- **Material Design 3**: 最新的 Material Design 指南
+
+### 📱 **响应式设计**
+- **断点系统**: 移动端、平板和桌面布局
+- **自适应组件**: 根据屏幕大小自适应的组件
+- **灵活网格**: 强大的网格系统用于复杂布局
+
+### ♿ **无障碍**
+- **屏幕阅读器支持**: 完整的语义标记
+- **键盘导航**: 完整的键盘无障碍
+- **高对比度**: 符合 WCAG AA 标准的颜色对比度
+- **焦点管理**: 适当的焦点处理
+
+### ⚡ **性能**
+- **优化渲染**: 高效的组件构建
+- **懒加载**: 按需组件加载
+- **内存管理**: 适当的资源清理
+- **树摇**: 死代码消除
+
+### 🔧 **开发者体验**
+- **类型安全**: 完整的类型安全
+- **热重载**: 即时开发反馈
+- **开发工具**: 全面的开发工具
+- **测试**: 内置测试工具
+
+---
+
+## 🎨 组件概览
+
+### 📋 **表单组件** (13个)
+| 组件 | 描述 | 状态 |
+|------|------|------|
+| [ZephyrInput](doc/components/form/input.md) | 文本输入框，支持验证 | ✅ |
+| [ZephyrSelect](doc/components/form/select.md) | 下拉选择器 | ✅ |
+| [ZephyrDatePicker](doc/components/form/date_picker.md) | 日期选择器 | ✅ |
+| [ZephyrCheckbox](doc/components/form/checkbox.md) | 复选框 | ✅ |
+| [ZephyrRadio](doc/components/form/radio.md) | 单选按钮 | ✅ |
+| [ZephyrSwitch](doc/components/form/switch.md) | 开关切换 | ✅ |
+| [ZephyrSlider](doc/components/form/slider.md) | 滑块组件 | ✅ |
+| [ZephyrRating](doc/components/form/rating.md) | 评分组件 | ✅ |
+| [ZephyrTimePicker](doc/components/form/time_picker.md) | 时间选择器 | ✅ |
+| [ZephyrTextArea](doc/components/form/text_area.md) | 多行文本输入 | ✅ |
+| [ZephyrFormBuilder](doc/components/form/form_builder.md) | 表单构建器 | ✅ |
+
+### 🎯 **基础组件** (8个)
+| 组件 | 描述 | 状态 |
+|------|------|------|
+| [ZephyrButton](doc/components/basic/button.md) | 多种样式按钮 | ✅ |
+| [ZephyrAvatar](doc/components/basic/avatar.md) | 头像组件 | ✅ |
+| [ZephyrBadge](doc/components/basic/badge.md) | 徽章和状态指示器 | ✅ |
+| [ZephyrCard](doc/components/basic/card.md) | 卡片组件 | ✅ |
+| [ZephyrChip](doc/components/basic/chip.md) | 标签选择器 | ✅ |
+| [ZephyrIcon](doc/components/basic/icon.md) | 图标组件 | ✅ |
+| [ZephyrText](doc/components/basic/text.md) | 文本组件 | ✅ |
+| [ZephyrDivider](doc/components/basic/divider.md) | 分割线组件 | ✅ |
+
+### 🧭 **导航组件** (8个)
+| 组件 | 描述 | 状态 |
+|------|------|------|
+| [ZephyrTabs](doc/components/navigation/tabs.md) | 选项卡导航 | ✅ |
+| [ZephyrStepper](doc/components/navigation/stepper.md) | 步骤器 | ✅ |
+| [ZephyrBreadcrumb](doc/components/navigation/breadcrumb.md) | 面包屑导航 | ✅ |
+| [ZephyrPagination](doc/components/navigation/pagination.md) | 分页组件 | ✅ |
+| [ZephyrBottomNavigationBar](doc/components/navigation/bottom_navigation_bar.md) | 底部导航栏 | ✅ |
+| [ZephyrSideMenu](doc/components/navigation/side_menu.md) | 侧边菜单 | ✅ |
+| [ZephyrNavigationRail](doc/components/navigation/navigation_rail.md) | 导航栏 | ✅ |
+| [ZephyrTour](doc/components/navigation/tour.md) | 引导游览 | ✅ |
+
+### 📊 **数据展示组件** (13个)
+| 组件 | 描述 | 状态 |
+|------|------|------|
+| [ZephyrTable](doc/components/display/table.md) | 数据表格 | ✅ |
+| [ZephyrList](doc/components/display/list.md) | 列表组件 | ✅ |
+| [ZephyrCalendar](doc/components/display/calendar.md) | 日历组件 | ✅ |
+| [ZephyrStatistic](doc/components/display/statistic.md) | 统计数据展示 | ✅ |
+| [ZephyrTimeline](doc/components/display/timeline.md) | 时间线 | ✅ |
+| [ZephyrCardGrid](doc/components/display/card_grid.md) | 卡片网格 | ✅ |
+| [ZephyrDataGrid](doc/components/display/data_grid.md) | 数据网格 | ✅ |
+| [ZephyrProgressIndicators](doc/components/display/progress_indicators.md) | 进度指示器 | ✅ |
+| [ZephyrStatusIndicators](doc/components/display/status_indicators.md) | 状态指示器 | ✅ |
+| [ZephyrAvatarGroups](doc/components/display/avatar_groups.md) | 头像组 | ✅ |
+| [ZephyrBadgeDisplays](doc/components/display/badge_displays.md) | 徽章展示 | ✅ |
+| [ZephyrTagClouds](doc/components/display/tag_clouds.md) | 标签云 | ✅ |
+
+### 💬 **反馈组件** (6个)
+| 组件 | 描述 | 状态 |
+|------|------|------|
+| [ZephyrAlert](doc/components/feedback/alert.md) | 警告对话框 | ✅ |
+| [ZephyrToast](doc/components/feedback/toast.md) | 消息提示 | ✅ |
+| [ZephyrProgress](doc/components/feedback/progress.md) | 进度指示器 | ✅ |
+| [ZephyrSkeleton](doc/components/feedback/skeleton.md) | 骨架屏加载 | ✅ |
+| [ZephyrModal](doc/components/feedback/modal.md) | 模态对话框 | ✅ |
+
+### 🏗️ **布局组件** (4个)
+| 组件 | 描述 | 状态 |
+|------|------|------|
+| [ZephyrGrid](doc/components/layout/grid.md) | 网格布局 | ✅ |
+| [ZephyrContainer](doc/components/layout/container.md) | 容器组件 | ✅ |
+| [ZephyrAccordion](doc/components/layout/accordion.md) | 手风琴折叠面板 | ✅ |
+
+### 🚀 **高级组件** (16个)
+| 组件 | 描述 | 状态 |
+|------|------|------|
+| [ZephyrChart](doc/components/advanced/chart.md) | 图表组件 | ✅ |
+| [ZephyrUpload](doc/components/advanced/upload.md) | 文件上传 | ✅ |
+| [ZephyrColorPicker](doc/components/advanced/color_picker.md) | 颜色选择器 | ✅ |
+| [ZephyrCarousel](doc/components/advanced/carousel.md) | 轮播图 | ✅ |
+| [ZephyrRichEditor](doc/components/advanced/rich_editor.md) | 富文本编辑器 | ✅ |
+| [ZephyrAutocomplete](doc/components/advanced/autocomplete.md) | 自动完成 | ✅ |
+| [ZephyrImageCropper](doc/components/advanced/image_cropper.md) | 图片裁剪 | ✅ |
+| [ZephyrMediaPlayer](doc/components/advanced/media_player.md) | 媒体播放器 | ✅ |
+| [ZephyrPDFViewer](doc/components/advanced/pdf_viewer.md) | PDF查看器 | ✅ |
+| [ZephyrQRCode](doc/components/advanced/qr_code.md) | 二维码生成 | ✅ |
+| [ZephyrSignature](doc/components/advanced/signature.md) | 签名板 | ✅ |
+| [ZephyrDragDrop](doc/components/advanced/drag_drop.md) | 拖拽功能 | ✅ |
+| [ZephyrDataVisualization](doc/components/advanced/data_visualization.md) | 数据可视化 | ✅ |
+
+---
+
+## 🏗️ 架构设计
+
+### 核心架构
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    ZephyrUI 架构                            │
+├─────────────────────────────────────────────────────────────┤
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────┐  │
+│  │   主题层       │  │   组件层        │  │  工具层     │  │
+│  │                 │  │                 │  │             │  │
+│  │ • 亮色主题     │  │ • 基础组件     │  │ • 助手函数  │  │
+│  │ • 暗色主题     │  │ • 表单组件     │  │ • 工具类    │  │
+│  │ • 自定义主题   │  │ • 布局组件     │  │ • 常量      │  │
+│  └─────────────────┘  └─────────────────┘  └─────────────┘  │
+│                                                             │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────┐  │
+│  │   服务层       │  │   数据层        │  │  平台层     │  │
+│  │                 │  │                 │  │             │  │
+│  │ • 主题服务     │  │ • 模型         │  │ • iOS       │  │
+│  │ • API 服务     │  │ • 仓储         │  │ • Android   │  │
+│  │ • 认证服务     │  │ • 提供者       │  │ • Web        │  │
+│  └─────────────────┘  └─────────────────┘  └─────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 设计原则
+
+1. **一致性**: 统一的设计语言和交互模式
+2. **可访问性**: 遵循 WCAG 2.1 标准，支持屏幕阅读器
+3. **性能**: 优化的渲染和内存使用
+4. **可定制**: 强大的主题系统和组件配置
+5. **易用性**: 简洁直观的 API 设计
+
+---
+
+## 📚 文档
+
+### 入门指南
+- [安装指南](doc/getting-started.md)
+- [快速开始教程](doc/examples/quick-start.md)
+- [项目结构](doc/guides/project-structure.md)
+
+### 组件文档
+- [基础组件](doc/components/basic/README.md)
+- [表单组件](doc/components/form/README.md)
+- [导航组件](doc/components/navigation/README.md)
+- [数据展示组件](doc/components/display/README.md)
+- [反馈组件](doc/components/feedback/README.md)
+- [布局组件](doc/components/layout/README.md)
+- [高级组件](doc/components/advanced/README.md)
+
+### 设计指南
+- [设计系统](doc/guides/design-guidelines.md)
+- [主题定制](doc/guides/theming.md)
+- [响应式设计](doc/guides/responsive-design.md)
+- [无障碍指南](doc/guides/accessibility.md)
+
+### 性能优化
+- [性能优化指南](doc/guides/performance-optimization.md)
+- [内存管理](doc/guides/memory-management.md)
+- [渲染优化](doc/guides/rendering-optimization.md)
+
+### API 参考
+- [组件 API](doc/api/components.md)
+- [主题 API](doc/api/themes.md)
+- [工具函数](doc/api/utils.md)
+- [类型定义](doc/api/types.md)
+
+### 示例应用
+- [完整示例](example/)
+- [组件演示](example/lib/components/)
+- [主题演示](example/lib/themes/)
+
+---
 
 ## 🎨 主题定制
 
-### 主题系统概述
+### 基础主题配置
 
-ZephyrUI 支持深色/浅色主题切换：
+```dart
+MaterialApp(
+  theme: ZephyrTheme.light(),
+  darkTheme: ZephyrTheme.dark(),
+  themeMode: ThemeMode.system,
+  home: const MyApp(),
+);
+```
+
+### 自定义主题
+
+```dart
+final customTheme = ZephyrThemeData(
+  primaryColor: Colors.blue,
+  secondaryColor: Colors.green,
+  // ... 其他自定义配置
+);
+
+MaterialApp(
+  theme: customTheme.toThemeData(),
+  home: const MyApp(),
+);
+```
+
+### 主题切换
 
 ```dart
 class ThemeProvider with ChangeNotifier {
@@ -291,157 +460,146 @@ class ThemeProvider with ChangeNotifier {
     notifyListeners();
   }
 }
-
-// 在应用中使用
-ChangeNotifierProvider(
-  create: (context) => ThemeProvider(),
-  child: Consumer<ThemeProvider>(
-    builder: (context, themeProvider, child) {
-      return MaterialApp(
-        theme: ThemeData.light(),
-        darkTheme: ThemeData.dark(),
-        themeMode: themeProvider.themeMode,
-        home: MyHomePage(),
-      );
-    },
-  ),
-);
 ```
+
+---
 
 ## 📱 响应式设计
 
 ### 断点系统
 
-ZephyrUI 内置响应式支持：
-
 ```dart
-// 扩展方法
-extension ResponsiveExtension on BuildContext {
-  bool get isMobile => MediaQuery.of(this).size.width < 768;
-  bool get isTablet => MediaQuery.of(this).size.width >= 768 &&
-                      MediaQuery.of(this).size.width < 1024;
-  bool get isDesktop => MediaQuery.of(this).size.width >= 1024;
+class ZephyrBreakpoints {
+  static const double mobile = 600.0;
+  static const double tablet = 900.0;
+  static const double desktop = 1200.0;
+
+  static DeviceType getDeviceType(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    if (width < mobile) return DeviceType.mobile;
+    if (width < tablet) return DeviceType.tablet;
+    return DeviceType.desktop;
+  }
 }
 
-// 响应式布局
-LayoutBuilder(
-  builder: (context, constraints) {
-    if (constraints.maxWidth < 768) {
-      return const MobileLayout();
-    } else if (constraints.maxWidth < 1024) {
-      return const TabletLayout();
-    } else {
-      return const DesktopLayout();
+enum DeviceType { mobile, tablet, desktop }
+```
+
+### 响应式组件
+
+```dart
+class ResponsiveWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final deviceType = ZephyrBreakpoints.getDeviceType(context);
+
+    switch (deviceType) {
+      case DeviceType.mobile:
+        return const MobileLayout();
+      case DeviceType.tablet:
+        return const TabletLayout();
+      case DeviceType.desktop:
+        return const DesktopLayout();
     }
-  },
-),
+  }
+}
 ```
 
-## 📚 文档
+---
 
-### 完整文档
+## ⚡ 性能优化
 
-- [📖 用户指南](docs/README.md) - 完整的用户文档
-- [🚀 快速开始](docs/getting-started.md) - 快速上手指南
-- [🔧 API 参考](docs/api/README.md) - 详细的 API 文档
-- [🎨 主题定制](docs/theming.md) - 主题定制指南
-- [♿ 可访问性](docs/accessibility.md) - 可访问性指南
+### 目标性能指标
 
-### 组件文档
-
-- [基础组件](docs/components/basic/README.md)
-- [导航组件](docs/components/navigation/README.md)
-- [表单组件](docs/components/form/README.md)
-
-### 示例和演示
-
-- [📱 示例应用](example/) - 完整的示例应用
-- [🎯 组件示例](docs/examples/) - 各组件的使用示例
-
-### 运行示例应用
-
-克隆项目并运行示例应用：
-
-```bash
-# 克隆项目
-git clone https://github.com/agions/zephyr-ui.git
-cd zephyr_ui
-
-# 运行示例应用
-cd example
-flutter pub get
-flutter run
+```dart
+class ZephyrPerformanceTargets {
+  static const Duration frameTime = Duration(milliseconds: 16); // 60 FPS
+  static const Duration buildTime = Duration(milliseconds: 2);
+  static const Duration layoutTime = Duration(milliseconds: 4);
+  static const Duration paintTime = Duration(milliseconds: 8);
+  static const int maxMemoryUsage = 100; // MB
+  static const double jankThreshold = 0.1; // 10% 卡顿帧
+}
 ```
 
-或者运行完整演示：
+### 优化策略
 
-```bash
-flutter run -t lib/main.dart
-```
+1. **组件优化**: 使用 const 构造函数，避免不必要的重建
+2. **内存管理**: 正确释放资源，使用图片缓存
+3. **渲染优化**: 使用 RepaintBoundary，减少重绘区域
+4. **列表优化**: 使用 ListView.builder，设置 itemExtent
+5. **网络优化**: 使用缓存，批量请求
 
-或者运行简化版本：
-
-```bash
-flutter run -t lib/main_simple.dart
-```
-
-## 🛠️ 开发规范
-
-### 代码质量
-
-ZephyrUI 遵循严格的开发规范，确保代码质量和一致性：
-
-- **代码风格**: 遵循 Dart 官方代码风格指南
-- **命名规范**: 使用描述性的名称，遵循驼峰命名法
-- **注释规范**: 所有公共 API 都有完整的文档注释
-- **测试覆盖**: 保持高测试覆盖率
-- **性能优化**: 避免不必要的重建和内存泄漏
-
-### 开发流程
-
-1. **Fork 项目** - 从主仓库创建分支
-2. **创建功能分支** - 使用 `feature/` 或 `fix/` 前缀
-3. **编写代码** - 遵循代码规范和最佳实践
-4. **添加测试** - 为新功能编写单元测试和集成测试
-5. **更新文档** - 更新相关文档和示例
-6. **提交 PR** - 提供详细的变更描述
-7. **代码审查** - 响应审查意见并进行修改
+---
 
 ## 🤝 贡献
 
-我们欢迎任何形式的贡献！ZephyrUI 持续改进中，您的参与将帮助我们构建更好的组件库。
+我们欢迎社区的贡献！详情请查看[贡献指南](CONTRIBUTING.md)。
 
-### 如何贡献
+### 开发设置
 
-1. **Fork 项目** - 从主仓库创建分支
-2. **选择任务** - 查看 Issues 或选择要开发的组件
-3. **创建分支** - 使用 `feature/` 或 `fix/` 前缀
-4. **开发组件** - 遵循现有的代码结构和命名规范
-5. **添加示例** - 在 `example/` 目录中添加使用示例
-6. **更新文档** - 在 `docs/` 目录中更新组件文档
-7. **提交 PR** - 提供详细的变更描述
+```bash
+# 克隆仓库
+git clone https://github.com/zephyrui/zephyr_ui.git
+cd zephyr_ui
 
-### 开发指南
+# 安装依赖
+flutter pub get
 
-- 遵循 Dart 官方代码风格指南
-- 所有公共 API 都需要完整的文档注释
-- 组件需要支持主题定制
-- 确保组件的可访问性
-- 添加必要的测试用例
+# 运行开发服务器
+flutter run -t lib/development/main.dart
+
+# 运行测试
+flutter test
+
+# 运行静态分析
+flutter analyze
+```
+
+### 贡献指南
+
+- 📝 **代码风格**: 遵循 Dart 官方代码风格指南
+- 🧪 **测试**: 保持 90%+ 的测试覆盖率
+- 📚 **文档**: 为所有公共 API 编写文档
+- 🎨 **设计**: 遵循 Material Design 3 指南
+- ♿ **无障碍**: 确保 WCAG AA 合规
 
 ### 贡献类型
 
-- 🐛 **Bug 修复** - 修复现有问题
-- ✨ **新组件** - 开发新的组件
-- 📚 **文档** - 改进文档和示例
-- 🎨 **UI/UX** - 改进用户界面和体验
-- ⚡ **性能** - 性能优化和改进
-- 🧪 **测试** - 增加测试覆盖率
-- 🔧 **构建** - 改进构建和 CI/CD 流程
+- 🐛 **Bug 修复**: 修复现有问题
+- ✨ **新组件**: 开发新的组件
+- 📚 **文档**: 改进文档和示例
+- 🎨 **UI/UX**: 改进用户界面和体验
+- ⚡ **性能**: 性能优化和改进
+- 🧪 **测试**: 增加测试覆盖率
+- 🔧 **构建**: 改进构建和 CI/CD 流程
+
+---
+
+## 📞 支持
+
+### 获取帮助
+
+1. **文档**: 从[完整文档](doc/README.md)开始
+2. **示例**: 查看[示例应用](example/)
+3. **问题报告**: [GitHub Issues](https://github.com/agions/zephyr_ui/issues)
+4. **讨论**: [GitHub Discussions](https://github.com/agions/zephyr_ui/discussions)
+
+### 专业支持
+
+为企业客户提供：
+
+- 🎯 **优先支持**: 24/7 邮件和聊天支持
+- 🚀 **定制开发**: 功能开发和定制
+- 📚 **培训**: 现场和远程培训课程
+- 🔧 **咨询**: 架构和性能咨询
+
+
+---
 
 ## 📄 许可证
 
-ZephyrUI 采用 [MIT 许可证](LICENSE) - 查看文件获取详细信息。
+ZephyrUI 采用 MIT 许可证。详情请查看[LICENSE](LICENSE)文件。
 
 ### 许可证摘要
 
@@ -459,36 +617,21 @@ ZephyrUI 采用 [MIT 许可证](LICENSE) - 查看文件获取详细信息。
 - 包含许可证和版权声明
 - 声明重大更改
 
-## 📞 支持
+---
 
-### 获取帮助
+## 🙏 致谢
 
-- 💬 **讨论**: [GitHub Discussions](https://github.com/agions/zephyr-ui/discussions)
-- 🐛 **问题报告**: [GitHub Issues](https://github.com/agions/zephyr-ui/issues)
-- 📖 **文档**: [GitHub 仓库文档](https://github.com/agions/zephyr-ui/tree/main/docs)
-
-### 社区
-
-- 🌟 **Star 项目** - 如果你喜欢 ZephyrUI，请给我们一个 ⭐️
-- 🔄 **分享** - 分享给你的朋友和同事
-- 🎯 **贡献** - 参与开发和改进
-- 📢 **反馈** - 提供宝贵的反馈和建议
-
-### 更新日志
-
-查看 [CHANGELOG.md](CHANGELOG.md) 了解版本更新和变更记录。
+- **Flutter 团队**: 感谢出色的 Flutter 框架
+- **Material Design**: 感谢设计系统的灵感
+- **社区**: 感谢所有反馈和贡献
+- **贡献者**: 感谢所有让 ZephyrUI 变得更好的人们
 
 ---
 
-<p align="center">
-  <strong>用 💛 制作 by Agions</strong>
-</p>
+<div align="center">
 
-<p align="center">
-  <a href="#-快速开始">快速开始</a> •
-  <a href="#-特性">特性</a> •
-  <a href="#-组件">组件</a> •
-  <a href="#-文档">文档</a> •
-  <a href="#-示例">示例</a> •
-  <a href="#-贡献">贡献</a>
-</p>
+**由 Agions 用 ❤️ 制作**
+
+[![GitHub](https://img.shields.io/github/stars/agions/zephyr_ui?style=social)]
+
+</div>

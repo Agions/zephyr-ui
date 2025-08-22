@@ -51,7 +51,6 @@ clover.xml
 
 # Documentation
 doc/api/
-docs/api/
 
 # Build artifacts
 dist/
@@ -106,7 +105,7 @@ storybook-static/
 .dockerignore
 
 # ZephyrUI specific
-docs/api/
+doc/api/
 example/build/
 example/.dart_tool/
 example/.flutter-plugins

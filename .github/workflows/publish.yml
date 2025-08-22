@@ -171,8 +171,8 @@ jobs:
     - name: Generate API documentation
       run: |
         dart doc
-        mkdir -p docs/api
-        cp -r doc/api/* docs/api/
+        mkdir -p doc/api
+        cp -r doc/api/* doc/api/
         
     - name: Update version in documentation
       run: |
@@ -184,14 +184,14 @@ jobs:
         rm README.md.bak
         
         # Update version in documentation
-        find docs/ -name "*.md" -exec sed -i.bak "s/version: [0-9]\+\.[0-9]\+\.[0-9]\+/version: $version/g" {} \;
-        find docs/ -name "*.md.bak" -delete
+        find doc/ -name "*.md" -exec sed -i.bak "s/version: [0-9]\+\.[0-9]\+\.[0-9]\+/version: $version/g" {} \;
+        find doc/ -name "*.md.bak" -delete
         
     - name: Commit documentation updates
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add docs/ README.md
+        git add doc/ README.md
         git commit -m "docs: update documentation for version $version" || exit 0
         git push
 
@@ -209,7 +209,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs
+        publish_dir: ./doc
         destination_dir: docs
 
   # Post-Publish Checks

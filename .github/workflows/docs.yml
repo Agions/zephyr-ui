@@ -5,14 +5,14 @@ on:
     branches: [ main, develop ]
     paths: 
       - 'lib/**'
-      - 'docs/**'
+      - 'doc/**'
       - 'README.md'
       - 'pubspec.yaml'
   pull_request:
     branches: [ main, develop ]
     paths: 
       - 'lib/**'
-      - 'docs/**'
+      - 'doc/**'
       - 'README.md'
       - 'pubspec.yaml'
   schedule:
@@ -40,24 +40,24 @@ jobs:
     - name: Generate API documentation
       run: |
         dart doc
-        mkdir -p docs/api
-        cp -r doc/api/* docs/api/
+        mkdir -p doc/api
+        cp -r doc/api/* doc/api/
         
     - name: Validate API documentation
       run: |
-        if [ ! -d "docs/api" ]; then
+        if [ ! -d "doc/api" ]; then
           echo "API documentation generation failed"
           exit 1
         fi
         
         # Check for broken links
-        find docs/api -name "*.html" -exec grep -l "href.*#" {} \; | head -5
+        find doc/api -name "*.html" -exec grep -l "href.*#" {} \; | head -5
         
     - name: Upload API documentation
       uses: actions/upload-artifact@v3
       with:
         name: api-documentation
-        path: docs/api/
+        path: doc/api/
 
   # User Documentation
   user-docs:
@@ -80,8 +80,8 @@ jobs:
         
     - name: Validate markdown files
       run: |
-        markdownlint docs/ --config .markdownlint.json || true
-        find docs/ -name "*.md" -exec markdown-link-check {} \; || true
+        markdownlint doc/ --config .markdownlint.json || true
+        find doc/ -name "*.md" -exec markdown-link-check {} \; || true
         
     - name: Generate component documentation
       run: |
@@ -92,7 +92,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: user-documentation
-        path: docs/
+        path: doc/
 
   # Documentation Site
   docs-site:
@@ -292,9 +292,9 @@ jobs:
         echo "" >> docs-analytics.md
         
         # Count documentation files
-        api_docs=$(find docs/api -name "*.html" | wc -l)
-        user_docs=$(find docs -name "*.md" | wc -l)
-        examples=$(find docs -name "*.dart" | wc -l)
+        api_docs=$(find doc/api -name "*.html" | wc -l)
+        user_docs=$(find doc -name "*.md" | wc -l)
+        examples=$(find doc -name "*.dart" | wc -l)
         
         echo "- API Documentation Pages: $api_docs" >> docs-analytics.md
         echo "- User Documentation Pages: $user_docs" >> docs-analytics.md

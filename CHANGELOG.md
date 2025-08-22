@@ -1,115 +1,121 @@
-# CHANGELOG
+# 更新日志
 
-All notable changes to this project will be documented in this file.
+本文件记录了项目的所有重要变更。
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
+本项目遵循 [语义化版本](https://semver.org/spec/v2.0.0.html) 规范。
 
-## [Unreleased]
+## [0.2.2] - 2025-08-22
 
-### Added
-- Enterprise CI/CD pipeline implementation
-- GitHub Actions workflows for automated testing and deployment
-- Security scanning and vulnerability detection
-- Performance monitoring and analytics
-- Automated documentation generation and deployment
-- Code quality analysis and linting
-- Automated version management with semantic versioning
-- Dependency management with Dependabot
-- Issue and pull request templates
-- Enhanced code analysis configuration
+### 优化
+- 修正 README.md logo 链接，pub.dev 显示更美观
+- 其他细节优化
 
-### Changed
-- Updated analysis_options.yaml with enterprise-grade linting rules
-- Enhanced .gitignore with comprehensive exclusions
-- Improved project structure for better maintainability
+## [0.2.1] - 2025-08-22
 
-### Security
-- Added security scanning workflows
-- Implemented dependency vulnerability checks
-- Added CodeQL security analysis
-- Enhanced secret detection
+### 修复
+- 修复部分组件的样式兼容性问题
+- 优化文档描述和示例代码
 
-## [0.1.0] - 2025-08-19
+### 优化
+- 小幅提升性能和稳定性
 
-### Added
-- Initial release of ZephyrUI
-- 60+ enterprise-grade Flutter UI components
-- Comprehensive theme system with Material Design 3 support
-- Responsive design with built-in breakpoints
-- Internationalization support with RTL layout
-- Accessibility features with WCAG 2.1 compliance
-- Performance optimization with lazy loading and memory management
-- Complete test coverage with unit, widget, and integration tests
-- Comprehensive documentation and examples
+## [0.2.0] - 2025-08-22
 
-### Features
-- **Basic Components**: Button, Badge, Icon, Tag, Avatar, Divider, Chip, Skeleton
-- **Layout Components**: Container, Grid, Stack, Spacer, Accordion
-- **Form Components**: Input, Select, Switch, Slider, Checkbox, Radio, DatePicker, Rating, FormBuilder
-- **Navigation Components**: SideMenu, Tabs, Breadcrumb, Pagination, Stepper, Tree
-- **Feedback Components**: Modal, Toast, Tooltip, Progress, Loading, Alert, Tour
-- **Display Components**: Table, List, Timeline, Carousel, Card, Calendar, Statistic
-- **Advanced Components**: AutoComplete, Chart, ColorPicker, RichEditor, Upload, Search
+### 新增
+- 新增多项 UI 组件功能，提升组件库扩展性
+- 增强性能优化，响应速度更快
+- 增加部分 API 文档和示例
 
-### Technical Features
-- **Type Safety**: Full TypeScript-style API with complete type hints
-- **Performance**: Optimized rendering with const constructors and RepaintBoundary
-- **Accessibility**: WCAG 2.1 compliant with screen reader support
-- **Theming**: Comprehensive theme system with dark/light mode support
-- **Responsive**: Built-in breakpoint system for multi-device support
-- **Internationalization**: Multi-language support with RTL layout
-- **Testing**: 85%+ test coverage with comprehensive test suite
+### 修复
+- 修复部分组件在特殊场景下的显示问题
+- 解决部分依赖兼容性警告
 
-### Documentation
-- Complete API documentation
-- User guides and tutorials
-- Component examples and usage patterns
-- Theme customization guide
-- Performance optimization guide
-- Accessibility guide
-- Testing guide
+### 优化
+- 优化部分组件的代码结构和可维护性
+- 提升整体测试覆盖率
+- 更新部分依赖版本
+
+## [0.1.0] - 2025-08-22
+
+### 新增
+- ZephyrUI 首次发布
+- 60+ 个企业级 Flutter UI 组件
+- 基于 Material Design 3 的完整主题系统
+- 内置断点的响应式设计
+- RTL 布局的国际化的支持
+- WCAG 2.1 合规的无障碍功能
+- 懒加载和内存管理的性能优化
+- 包含单元测试、组件测试和集成测试的完整测试覆盖
+- 全面的文档和示例
+
+### 功能特性
+- **基础组件**: Button, Badge, Icon, Tag, Avatar, Divider, Chip, Skeleton
+- **布局组件**: Container, Grid, Stack, Spacer, Accordion
+- **表单组件**: Input, Select, Switch, Slider, Checkbox, Radio, DatePicker, Rating, FormBuilder
+- **导航组件**: SideMenu, Tabs, Breadcrumb, Pagination, Stepper, Tree
+- **反馈组件**: Modal, Toast, Tooltip, Progress, Loading, Alert, Tour
+- **展示组件**: Table, List, Timeline, Carousel, Card, Calendar, Statistic
+- **高级组件**: AutoComplete, Chart, ColorPicker, RichEditor, Upload, Search
+
+### 技术特性
+- **类型安全**: 完整的 TypeScript 风格 API 和类型提示
+- **性能优化**: 使用 const 构造函数和 RepaintBoundary 优化渲染
+- **无障碍**: WCAG 2.1 合规，支持屏幕阅读器
+- **主题系统**: 完整的主题系统，支持深色/浅色模式
+- **响应式**: 内置断点系统，支持多设备
+- **国际化**: 多语言支持，包含 RTL 布局
+- **测试覆盖**: 85%+ 的测试覆盖率和全面的测试套件
+
+### 文档
+- 完整的 API 文档
+- 用户指南和教程
+- 组件示例和使用模式
+- 主题自定义指南
+- 性能优化指南
+- 无障碍指南
+- 测试指南
 
 ## [0.0.1] - 2024-08-18
 
-### Added
-- Project initialization
-- Basic project structure
-- Core dependencies setup
-- Initial documentation
+### 新增
+- 项目初始化
+- 基础项目结构
+- 核心依赖设置
+- 初始文档
 
 ---
 
-## Release Notes Format
+## 版本说明格式
 
-### Version Numbering
-- **Major version**: Incompatible API changes
-- **Minor version**: Added functionality in a backward compatible manner
-- **Patch version**: Backward compatible bug fixes
+### 版本号规则
+- **主版本号**: 不兼容的 API 变更
+- **次版本号**: 向后兼容的功能性新增
+- **修订版本号**: 向后兼容的问题修复
 
-### Change Types
-- **Added**: New features or functionality
-- **Changed**: Changes in existing functionality
-- **Deprecated**: Soon-to-be removed features
-- **Removed**: Removed features
-- **Fixed**: Bug fixes
-- **Security**: Security-related changes
+### 变更类型
+- **新增**: 新功能或特性
+- **变更**: 现有功能的变更
+- **弃用**: 即将移除的功能
+- **移除**: 已移除的功能
+- **修复**: 问题修复
+- **安全**: 安全相关的变更
 
-### Release Process
-1. All changes must pass CI/CD pipeline
-2. Code coverage must be 85% or higher
-3. All security checks must pass
-4. Documentation must be updated
-5. Changes must be manually tested on supported platforms
-6. Semantic versioning must be followed
+### 发布流程
+1. 所有变更必须通过 CI/CD 流水线
+2. 代码覆盖率必须达到 85% 或更高
+3. 所有安全检查必须通过
+4. 文档必须更新
+5. 变更必须在支持的平台上手动测试
+6. 必须遵循语义化版本
 
-### Supported Platforms
+### 支持的平台
 - **Android**: API 21+ (Android 5.0+)
 - **iOS**: 12.0+
-- **Web**: Modern browsers (Chrome, Safari, Firefox, Edge)
-- **Desktop**: Windows, macOS, Linux
+- **Web**: 现代浏览器 (Chrome, Safari, Firefox, Edge)
+- **桌面**: Windows, macOS, Linux
 
-### Dependencies
+### 依赖项
 - **Flutter**: ^3.0.0
 - **Dart**: ^3.0.0
 - **Provider**: ^6.0.5
@@ -119,7 +125,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Path**: ^1.9.1
 - **Meta**: ^1.9.1
 
-### Development Dependencies
+### 开发依赖
 - **Flutter Test**: SDK
 - **Flutter Lints**: ^2.0.2
 - **Build Runner**: ^2.4.6

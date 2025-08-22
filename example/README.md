@@ -233,12 +233,12 @@ ResponsiveGrid(
 
 ## 📚 文档
 
-完整的组件文档请查看 [docs](../docs) 目录：
+完整的组件文档请查看 [doc](../doc) 目录：
 
-- [快速开始指南](../docs/getting-started.md)
-- [组件 API 文档](../docs/api/components.md)
-- [最佳实践](../docs/guides/best-practices.md)
-- [主题系统](../docs/guides/theming.md)
+- [快速开始指南](../doc/getting-started.md)
+- [组件 API 文档](../doc/api/components.md)
+- [最佳实践](../doc/guides/best-practices.md)
+- [主题系统](../doc/guides/theming.md)
 
 ## 🤝 贡献
 

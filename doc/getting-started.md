@@ -1,43 +1,43 @@
-# ZephyrUI Getting Started Guide
+# ZephyrUI 快速开始指南
 
-## Table of Contents
-- [Introduction](#introduction)
-- [Installation](#installation)
-- [Basic Setup](#basic-setup)
-- [First Component](#first-component)
-- [Theme Configuration](#theme-configuration)
-- [Common Components](#common-components)
-- [Responsive Design](#responsive-design)
-- [Accessibility](#accessibility)
-- [Testing](#testing)
-- [Next Steps](#next-steps)
+## 目录
+- [介绍](#介绍)
+- [安装](#安装)
+- [基础设置](#基础设置)
+- [第一个组件](#第一个组件)
+- [主题配置](#主题配置)
+- [常用组件](#常用组件)
+- [响应式设计](#响应式设计)
+- [无障碍](#无障碍)
+- [测试](#测试)
+- [下一步](#下一步)
 
-## Introduction
+## 介绍
 
-Welcome to ZephyrUI! This guide will help you get started with our comprehensive Flutter component library. ZephyrUI provides 60+ high-quality components with a consistent design system, built-in accessibility, and excellent performance.
+欢迎使用 ZephyrUI！本指南将帮助您开始使用我们全面的 Flutter 组件库。ZephyrUI 提供了 60+ 个高质量组件，具有一致的设计系统、内置的无障碍功能和出色的性能。
 
-### What You'll Learn
+### 您将学到
 
-- How to install and set up ZephyrUI
-- Basic component usage
-- Theme customization
-- Responsive design patterns
-- Accessibility best practices
-- Testing strategies
+- 如何安装和设置 ZephyrUI
+- 基础组件使用
+- 主题自定义
+- 响应式设计模式
+- 无障碍最佳实践
+- 测试策略
 
-## Installation
+## 安装
 
-### Prerequisites
+### 前置要求
 
-Before you begin, ensure you have the following:
+在开始之前，请确保您具备以下条件：
 
 - **Flutter**: ^3.0.0
 - **Dart**: ^3.0.0
-- A Flutter project set up
+- 已设置的 Flutter 项目
 
-### Step 1: Add ZephyrUI to Your Project
+### 第 1 步：将 ZephyrUI 添加到您的项目
 
-Add ZephyrUI to your `pubspec.yaml` file:
+将 ZephyrUI 添加到您的 `pubspec.yaml` 文件：
 
 ```yaml
 dependencies:
@@ -46,27 +46,27 @@ dependencies:
   zephyr_ui: ^0.1.0
 ```
 
-### Step 2: Install Dependencies
+### 第 2 步：安装依赖
 
-Run the following command in your terminal:
+在终端中运行以下命令：
 
 ```bash
 flutter pub get
 ```
 
-### Step 3: Import ZephyrUI
+### 第 3 步：导入 ZephyrUI
 
-Import ZephyrUI in your Dart files:
+在您的 Dart 文件中导入 ZephyrUI：
 
 ```dart
 import 'package:zephyr_ui/zephyr_ui.dart';
 ```
 
-## Basic Setup
+## 基础设置
 
-### Step 1: Wrap Your App with ZephyrApp
+### 第 1 步：用 ZephyrApp 包装您的应用
 
-Replace your `MaterialApp` with `ZephyrApp`:
+将您的 `MaterialApp` 替换为 `ZephyrApp`：
 
 ```dart
 import 'package:flutter/material.dart';
@@ -82,7 +82,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ZephyrApp(
-      title: 'My App',
+      title: '我的应用',
       theme: ZephyrTheme.light(),
       darkTheme: ZephyrTheme.dark(),
       home: const HomeScreen(),
@@ -91,7 +91,7 @@ class MyApp extends StatelessWidget {
 }
 ```
 
-### Step 2: Create a Basic Home Screen
+### 第 2 步：创建基础主页
 
 ```dart
 class HomeScreen extends StatelessWidget {
@@ -101,7 +101,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ZephyrUI Demo'),
+        title: const Text('ZephyrUI 演示'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -109,7 +109,7 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Welcome to ZephyrUI!',
+              '欢迎使用 ZephyrUI！',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -117,14 +117,14 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             const Text(
-              'This is a demonstration of ZephyrUI components.',
+              '这是 ZephyrUI 组件的演示。',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey,
               ),
             ),
             const SizedBox(height: 32),
-            // Components will be added here
+            // 组件将在这里添加
           ],
         ),
       ),
@@ -133,9 +133,9 @@ class HomeScreen extends StatelessWidget {
 }
 ```
 
-## First Component
+## 第一个组件
 
-Let's add your first ZephyrUI component - a button:
+让我们添加您的第一个 ZephyrUI 组件 - 一个按钮：
 
 ```dart
 class HomeScreen extends StatelessWidget {
@@ -145,7 +145,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ZephyrUI Demo'),
+        title: const Text('ZephyrUI 演示'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -153,7 +153,7 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Welcome to ZephyrUI!',
+              '欢迎使用 ZephyrUI！',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -161,21 +161,21 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             const Text(
-              'This is a demonstration of ZephyrUI components.',
+              '这是 ZephyrUI 组件的演示。',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey,
               ),
             ),
             const SizedBox(height: 32),
-            
-            // Your first ZephyrUI component
+
+            // 您的第一个 ZephyrUI 组件
             ZephyrButton(
-              text: 'Click Me!',
+              text: '点击我！',
               onPressed: () {
                 ZephyrToast.show(
                   context,
-                  message: 'Hello from ZephyrUI!',
+                  message: '来自 ZephyrUI 的问候！',
                   type: ZephyrToastType.success,
                 );
               },
@@ -188,11 +188,11 @@ class HomeScreen extends StatelessWidget {
 }
 ```
 
-## Theme Configuration
+## 主题配置
 
-ZephyrUI provides powerful theming capabilities. Let's customize the theme:
+ZephyrUI 提供了强大的主题功能。让我们自定义主题：
 
-### Create a Custom Theme
+### 创建自定义主题
 
 ```dart
 class MyApp extends StatelessWidget {
@@ -201,7 +201,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ZephyrApp(
-      title: 'My App',
+      title: '我的应用',
       theme: _createCustomTheme(),
       darkTheme: ZephyrTheme.dark(),
       home: const HomeScreen(),
@@ -218,8 +218,8 @@ class MyApp extends StatelessWidget {
       warningColor: const Color(0xFFF59E0B),
       successColor: const Color(0xFF10B981),
       infoColor: const Color(0xFF3B82F6),
-      
-      // Typography
+
+      // 排版
       typography: ZephyrTypography(
         fontFamily: 'Roboto',
         fontSize: 14,
@@ -230,8 +230,8 @@ class MyApp extends StatelessWidget {
         body: const TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
         caption: const TextStyle(fontSize: 12, fontWeight: FontWeight.normal),
       ),
-      
-      // Border radius
+
+      // 圆角
       borderRadius: ZephyrBorderRadius(
         small: 4,
         medium: 8,
@@ -239,8 +239,8 @@ class MyApp extends StatelessWidget {
         xlarge: 16,
         full: 9999,
       ),
-      
-      // Spacing
+
+      // 间距
       spacing: ZephyrSpacing(
         xs: 4,
         sm: 8,
@@ -254,21 +254,21 @@ class MyApp extends StatelessWidget {
 }
 ```
 
-### Dynamic Theme Switching
+### 动态主题切换
 
 ```dart
 class ThemeProvider with ChangeNotifier {
   ZephyrThemeData _theme = ZephyrTheme.light();
   bool _isDarkMode = false;
-  
+
   ZephyrThemeData get theme => _theme;
   bool get isDarkMode => _isDarkMode;
-  
+
   void setTheme(ZephyrThemeData theme) {
     _theme = theme;
     notifyListeners();
   }
-  
+
   void toggleTheme() {
     _isDarkMode = !_isDarkMode;
     _theme = _isDarkMode ? ZephyrTheme.dark() : ZephyrTheme.light();
@@ -276,7 +276,7 @@ class ThemeProvider with ChangeNotifier {
   }
 }
 
-// Update your app to use the theme provider
+// 更新您的应用以使用主题提供者
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -287,7 +287,7 @@ class MyApp extends StatelessWidget {
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child) {
           return ZephyrApp(
-            title: 'My App',
+            title: '我的应用',
             theme: themeProvider.theme,
             home: const HomeScreen(),
           );
@@ -298,11 +298,11 @@ class MyApp extends StatelessWidget {
 }
 ```
 
-## Common Components
+## 常用组件
 
-Let's add some common components to your home screen:
+让我们在您的主页上添加一些常用组件：
 
-### Form Components
+### 表单组件
 
 ```dart
 class HomeScreen extends StatelessWidget {
@@ -312,7 +312,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ZephyrUI Demo'),
+        title: const Text('ZephyrUI 演示'),
         actions: [
           Consumer<ThemeProvider>(
             builder: (context, themeProvider, child) {
@@ -331,9 +331,9 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header
+            // 页眉
             const Text(
-              'Welcome to ZephyrUI!',
+              '欢迎使用 ZephyrUI！',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -341,17 +341,17 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             const Text(
-              'This is a demonstration of ZephyrUI components.',
+              '这是 ZephyrUI 组件的演示。',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey,
               ),
             ),
             const SizedBox(height: 32),
-            
-            // Buttons
+
+            // 按钮
             const Text(
-              'Buttons',
+              '按钮',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -363,27 +363,27 @@ class HomeScreen extends StatelessWidget {
               runSpacing: 8,
               children: [
                 ZephyrButton(
-                  text: 'Primary',
+                  text: '主要',
                   type: ZephyrButtonType.primary,
                   onPressed: () {},
                 ),
                 ZephyrButton(
-                  text: 'Secondary',
+                  text: '次要',
                   type: ZephyrButtonType.secondary,
                   onPressed: () {},
                 ),
                 ZephyrButton(
-                  text: 'Text',
+                  text: '文本',
                   type: ZephyrButtonType.text,
                   onPressed: () {},
                 ),
               ],
             ),
             const SizedBox(height: 32),
-            
-            // Input Fields
+
+            // 输入字段
             const Text(
-              'Input Fields',
+              '输入字段',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -391,25 +391,25 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             ZephyrInput(
-              placeholder: 'Enter your name',
+              placeholder: '输入您的姓名',
               prefix: const Icon(Icons.person),
               onChanged: (value) {
-                print('Name: $value');
+                print('姓名: $value');
               },
             ),
             const SizedBox(height: 16),
             ZephyrInput(
-              placeholder: 'Enter your email',
+              placeholder: '输入您的邮箱',
               prefix: const Icon(Icons.email),
               onChanged: (value) {
-                print('Email: $value');
+                print('邮箱: $value');
               },
             ),
             const SizedBox(height: 32),
-            
-            // Rating Component
+
+            // 评分组件
             const Text(
-              'Rating',
+              '评分',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -420,14 +420,14 @@ class HomeScreen extends StatelessWidget {
               value: 4.5,
               allowHalfRating: true,
               onChanged: (value) {
-                print('Rating: $value');
+                print('评分: $value');
               },
             ),
             const SizedBox(height: 32),
-            
-            // Cards
+
+            // 卡片
             const Text(
-              'Cards',
+              '卡片',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -435,14 +435,14 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             ZephyrCard(
-              title: 'Feature Card',
-              subtitle: 'This is a feature card',
+              title: '功能卡片',
+              subtitle: '这是一个功能卡片',
               content: const Text(
-                'This is an example of a ZephyrCard component with custom content.',
+                '这是带有自定义内容的 ZephyrCard 组件示例。',
               ),
               actions: [
                 ZephyrButton(
-                  text: 'Learn More',
+                  text: '了解更多',
                   type: ZephyrButtonType.text,
                   onPressed: () {},
                 ),
@@ -456,11 +456,11 @@ class HomeScreen extends StatelessWidget {
 }
 ```
 
-## Responsive Design
+## 响应式设计
 
-ZephyrUI includes built-in responsive design utilities:
+ZephyrUI 包含内置的响应式设计工具：
 
-### Responsive Layout
+### 响应式布局
 
 ```dart
 class ResponsiveHomeScreen extends StatelessWidget {
@@ -470,19 +470,19 @@ class ResponsiveHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Responsive Demo'),
+        title: const Text('响应式演示'),
       ),
       body: ResponsiveBuilder(
         builder: (context, sizingInformation) {
-          // Mobile layout
+          // 移动端布局
           if (sizingInformation.isMobile) {
             return _buildMobileLayout();
           }
-          // Tablet layout
+          // 平板布局
           else if (sizingInformation.isTablet) {
             return _buildTabletLayout();
           }
-          // Desktop layout
+          // 桌面布局
           else {
             return _buildDesktopLayout();
           }
@@ -563,7 +563,7 @@ class ResponsiveHomeScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Responsive Design',
+          '响应式设计',
           style: TextStyle(
             fontSize: 32,
             fontWeight: FontWeight.bold,
@@ -571,7 +571,7 @@ class ResponsiveHomeScreen extends StatelessWidget {
         ),
         SizedBox(height: 8),
         Text(
-          'This layout adapts to different screen sizes.',
+          '此布局适应不同的屏幕尺寸。',
           style: TextStyle(
             fontSize: 16,
             color: Colors.grey,
@@ -583,9 +583,9 @@ class ResponsiveHomeScreen extends StatelessWidget {
 
   Widget _buildContent() {
     return ZephyrCard(
-      title: 'Main Content',
+      title: '主要内容',
       content: const Text(
-        'This is the main content area. It adjusts its size and layout based on the screen size.',
+        '这是主要内容区域。它根据屏幕大小调整其大小和布局。',
       ),
     );
   }
@@ -594,14 +594,14 @@ class ResponsiveHomeScreen extends StatelessWidget {
     return Column(
       children: [
         ZephyrButton(
-          text: 'Primary Action',
+          text: '主要操作',
           type: ZephyrButtonType.primary,
           onPressed: () {},
           isFullWidth: true,
         ),
         const SizedBox(height: 16),
         ZephyrButton(
-          text: 'Secondary Action',
+          text: '次要操作',
           type: ZephyrButtonType.secondary,
           onPressed: () {},
           isFullWidth: true,
@@ -612,11 +612,11 @@ class ResponsiveHomeScreen extends StatelessWidget {
 }
 ```
 
-## Accessibility
+## 无障碍
 
-ZephyrUI components are built with accessibility in mind:
+ZephyrUI 组件在设计时就考虑了无障碍性：
 
-### Accessibility Best Practices
+### 无障碍最佳实践
 
 ```dart
 class AccessibleForm extends StatelessWidget {
@@ -626,7 +626,7 @@ class AccessibleForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Accessible Form'),
+        title: const Text('无障碍表单'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -634,7 +634,7 @@ class AccessibleForm extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Contact Form',
+              '联系表单',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -642,58 +642,58 @@ class AccessibleForm extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             const Text(
-              'All fields are required',
+              '所有字段都是必需的',
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey,
               ),
             ),
             const SizedBox(height: 32),
-            
-            // Accessible input with semantic label
+
+            // 带有语义标签的无障碍输入
             ZephyrInput(
-              placeholder: 'Full Name',
+              placeholder: '全名',
               prefix: const Icon(Icons.person),
-              semanticLabel: 'Enter your full name',
+              semanticLabel: '输入您的全名',
               onChanged: (value) {
-                print('Name: $value');
+                print('姓名: $value');
               },
             ),
             const SizedBox(height: 16),
-            
-            // Accessible email input
+
+            // 无障碍邮箱输入
             ZephyrInput(
-              placeholder: 'Email Address',
+              placeholder: '邮箱地址',
               prefix: const Icon(Icons.email),
-              semanticLabel: 'Enter your email address',
+              semanticLabel: '输入您的邮箱地址',
               onChanged: (value) {
-                print('Email: $value');
+                print('邮箱: $value');
               },
             ),
             const SizedBox(height: 16),
-            
-            // Accessible rating component
+
+            // 无障碍评分组件
             ZephyrRating(
               value: 0,
-              semanticLabel: 'Rate your experience',
+              semanticLabel: '为您的体验评分',
               onChanged: (value) {
-                print('Rating: $value');
+                print('评分: $value');
               },
             ),
             const SizedBox(height: 32),
-            
-            // Accessible button
+
+            // 无障碍按钮
             ZephyrButton(
-              text: 'Submit Form',
+              text: '提交表单',
               type: ZephyrButtonType.primary,
               onPressed: () {
                 ZephyrToast.show(
                   context,
-                  message: 'Form submitted successfully!',
+                  message: '表单提交成功！',
                   type: ZephyrToastType.success,
                 );
               },
-              semanticLabel: 'Submit the contact form',
+              semanticLabel: '提交联系表单',
             ),
           ],
         ),
@@ -703,11 +703,11 @@ class AccessibleForm extends StatelessWidget {
 }
 ```
 
-## Testing
+## 测试
 
-ZephyrUI components are designed to be testable:
+ZephyrUI 组件设计为可测试的：
 
-### Component Testing Example
+### 组件测试示例
 
 ```dart
 import 'package:flutter/material.dart';
@@ -715,15 +715,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:zephyr_ui/zephyr_ui.dart';
 
 void main() {
-  group('ZephyrUI Components Test', () {
-    testWidgets('Button displays correctly and responds to taps', (WidgetTester tester) async {
+  group('ZephyrUI 组件测试', () {
+    testWidgets('按钮正确显示并响应点击', (WidgetTester tester) async {
       bool wasTapped = false;
-      
+
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: ZephyrButton(
-              text: 'Test Button',
+              text: '测试按钮',
               onPressed: () {
                 wasTapped = true;
               },
@@ -732,25 +732,25 @@ void main() {
         ),
       );
 
-      // Verify button is displayed
-      expect(find.text('Test Button'), findsOneWidget);
-      
-      // Tap the button
-      await tester.tap(find.text('Test Button'));
+      // 验证按钮显示
+      expect(find.text('测试按钮'), findsOneWidget);
+
+      // 点击按钮
+      await tester.tap(find.text('测试按钮'));
       await tester.pump();
-      
-      // Verify callback was called
+
+      // 验证回调被调用
       expect(wasTapped, isTrue);
     });
 
-    testWidgets('Input field accepts text input', (WidgetTester tester) async {
+    testWidgets('输入字段接受文本输入', (WidgetTester tester) async {
       String inputValue = '';
-      
+
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: ZephyrInput(
-              placeholder: 'Test Input',
+              placeholder: '测试输入',
               onChanged: (value) {
                 inputValue = value;
               },
@@ -759,17 +759,17 @@ void main() {
         ),
       );
 
-      // Enter text
-      await tester.enterText(find.byType(TextField), 'Hello World');
+      // 输入文本
+      await tester.enterText(find.byType(TextField), '你好世界');
       await tester.pump();
-      
-      // Verify input was captured
-      expect(inputValue, equals('Hello World'));
+
+      // 验证输入被捕获
+      expect(inputValue, equals('你好世界'));
     });
 
-    testWidgets('Rating component handles user interaction', (WidgetTester tester) async {
+    testWidgets('评分组件处理用户交互', (WidgetTester tester) async {
       double ratingValue = 0.0;
-      
+
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -783,54 +783,46 @@ void main() {
         ),
       );
 
-      // Tap on the 3rd star
+      // 点击第三颗星
       await tester.tap(find.byType(Icon).at(2));
       await tester.pump();
-      
-      // Verify rating was updated
+
+      // 验证评分已更新
       expect(ratingValue, equals(3.0));
     });
   });
 }
 ```
 
-## Next Steps
+## 下一步
 
-Congratulations! You've successfully set up ZephyrUI and created your first components. Here are some suggested next steps:
+恭喜！您已成功设置 ZephyrUI 并创建了您的第一个组件。以下是一些建议的下一步：
 
-### Explore More Components
+### 探索更多组件
 
-- **Navigation**: Try `ZephyrTabs`, `ZephyrSideMenu`, `ZephyrStepper`
-- **Data Display**: Explore `ZephyrTable`, `ZephyrList`, `ZephyrTimeline`
-- **Advanced**: Check out `ZephyrTour`, `ZephyrTree`, `ZephyrAutoComplete`
+- **导航**: 尝试 `ZephyrTabs`、`ZephyrSideMenu`、`ZephyrStepper`
+- **数据展示**: 探索 `ZephyrTable`、`ZephyrList`、`ZephyrTimeline`
+- **高级**: 查看 `ZephyrTour`、`ZephyrTree`、`ZephyrAutoComplete`
 
-### Learn Advanced Features
+### 学习高级功能
 
-- [Theme Customization](../theming.md)
-- [Responsive Design](../responsive-design.md)
-- [Accessibility Guidelines](../accessibility.md)
-- [Performance Optimization](../performance.md)
+- [主题自定义](../theming.md)
+- [响应式设计](../responsive-design.md)
+- [无障碍指南](../accessibility.md)
+- [性能优化](../performance.md)
 
-### Build Real Applications
+### 构建实际应用
 
-1. **Todo App**: Use `ZephyrInput`, `ZephyrButton`, `ZephyrList`
-2. **E-commerce**: Use `ZephyrCard`, `ZephyrRating`, `ZephyrTable`
-3. **Dashboard**: Use `ZephyrGrid`, `ZephyrStatistic`, `ZephyrChart`
+1. **待办事项应用**: 使用 `ZephyrInput`、`ZephyrButton`、`ZephyrList`
+2. **电子商务**: 使用 `ZephyrCard`、`ZephyrRating`、`ZephyrTable`
+3. **仪表板**: 使用 `ZephyrGrid`、`ZephyrStatistic`、`ZephyrChart`
 
-### Join the Community
+## 需要帮助？
 
-- 📚 **Documentation**: [Full Documentation](../README.md)
-- 🐛 **Issues**: [Report Bugs](https://github.com/zephyrui/zephyr_ui/issues)
-- 💬 **Discussions**: [Join Discussions](https://github.com/zephyrui/zephyr_ui/discussions)
-- 🌟 **Star Us**: [GitHub Repository](https://github.com/zephyrui/zephyr_ui)
+如果您遇到任何问题或有疑问：
 
-## Need Help?
+1. 查看[文档](../README.md)
+2. 搜索现有的[问题](https://github.com/agions/zephyr_ui/issues)
+3. 加入我们的[讨论](https://github.com/agions/zephyr_ui/discussions)
 
-If you encounter any issues or have questions:
-
-1. Check the [Documentation](../README.md)
-2. Search existing [Issues](https://github.com/zephyrui/zephyr_ui/issues)
-3. Join our [Discussions](https://github.com/zephyrui/zephyr_ui/discussions)
-4. Contact us at [support@zephyrui.dev](mailto:support@zephyrui.dev)
-
-Happy coding with ZephyrUI! 🚀
+祝您使用 ZephyrUI 编码愉快！🚀

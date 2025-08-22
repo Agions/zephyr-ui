@@ -1,13 +1,10 @@
-/// ZephyrUI 高级组件
+/// 高级组件模块
 ///
-/// 提供复杂交互和高级功能的UI组件。
-library advanced_components;
+/// 包含各种高级功能组件，如图表、上传、编辑器、媒体播放器等。
+library advanced;
 
 // 自动完成组件
 export 'autocomplete/index.dart';
-
-// Note: Breadcrumb component has been moved to navigation components
-// export 'breadcrumb/index.dart';
 
 // 轮播图组件
 export 'carousel/index.dart';
@@ -38,3 +35,12 @@ export 'pdfviewer/index.dart';
 
 // 媒体播放器
 export 'mediaplayer/index.dart';
+
+// 数据可视化
+export 'data_visualization.dart';
+
+// 拖拽功能
+export 'drag_drop.dart';
+
+// 时间线（高级版本）
+export 'timeline.dart';

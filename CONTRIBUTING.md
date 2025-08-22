@@ -40,7 +40,7 @@ lib/
 │   └── config/          # 配置文件
 ├── zephyr_ui.dart       # 主库导出文件
 └── ...
-docs/                    # 文档
+doc/                     # 文档
 test/                    # 测试文件
 test_goldens/            # 视觉测试文件
 assets/                  # 静态资源
@@ -62,7 +62,7 @@ CODE_OF_CONDUCT.md       # 行为准则
 
 - 使用 `dart format` 格式化代码
 - 遵循 [Effective Dart](https://dart.dev/guides/language/effective-dart) 指南
-- 参考 [组件开发规范](docs/ZephyrUI_Component_Development_Standards.md)
+- 参考 [组件开发规范](doc/ZephyrUI_Component_Development_Standards.md)
 
 ### 提交信息规范
 
@@ -114,7 +114,7 @@ git checkout -b fix/your-bug-fix
 
 ### 3. 开发
 
-- 遵循[组件开发规范](docs/ZephyrUI_Component_Development_Standards.md)
+- 遵循[组件开发规范](doc/ZephyrUI_Component_Development_Standards.md)
 - 编写相应的测试
 - 更新相关文档
 - 确保所有测试通过
@@ -168,7 +168,7 @@ flutter test --coverage
 
 ### Markdown 文档
 
-在 `docs/` 目录下维护相关文档，确保内容准确且易于理解。
+在 `doc/` 目录下维护相关文档，确保内容准确且易于理解。
 
 ## Pull Request 指南
 

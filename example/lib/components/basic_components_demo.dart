@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../widgets/responsive_layout.dart';
 import '../widgets/component_card.dart';
 import '../widgets/example_card.dart';
+import '../services/theme_service.dart';
 
 class BasicComponentsDemo extends StatelessWidget {
   const BasicComponentsDemo({super.key});
@@ -12,6 +14,18 @@ class BasicComponentsDemo extends StatelessWidget {
       appBar: AppBar(
         title: const Text('基础组件'),
         elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.palette),
+            onPressed: () => _showThemeDialog(context),
+            tooltip: '主题设置',
+          ),
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () => _showInfoDialog(context),
+            tooltip: '组件信息',
+          ),
+        ],
       ),
       body: ResponsiveLayout(
         mobile: _buildMobileLayout(context),
@@ -121,19 +135,83 @@ class BasicComponentsDemo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          '基础组件',
-          style: TextStyle(
-            fontSize: 32,
-            fontWeight: FontWeight.bold,
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Theme.of(context).colorScheme.primary,
+                Theme.of(context).colorScheme.secondary,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                '基础组件',
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w800,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'ZephyrUI 提供了 8 个基础 UI 组件，遵循 Material Design 3 规范',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white.withValues(alpha: 0.9),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.2),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Text(
+                      '8 个组件',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.2),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Text(
+                      'Material Design 3',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 24),
         Text(
-          'ZephyrUI 提供了一系列基础 UI 组件，这些组件遵循 Material Design 规范，具有一致的设计风格和良好的用户体验。',
-          style: TextStyle(
-            fontSize: 16,
-            color: Colors.grey[600],
+          '这些组件具有一致的设计风格和优秀的用户体验，支持主题定制和无障碍访问。',
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
       ],
@@ -160,75 +238,155 @@ TextButton(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            '基础按钮',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  '基础按钮',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Text(
+                'Material Design 3 按钮样式',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
           ),
           const SizedBox(height: 16),
           Wrap(
-            spacing: 8,
-            runSpacing: 8,
+            spacing: 12,
+            runSpacing: 12,
             children: [
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () => _showButtonAction(context, '主要按钮'),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                ),
                 child: const Text('主要按钮'),
               ),
               OutlinedButton(
-                onPressed: () {},
+                onPressed: () => _showButtonAction(context, '次要按钮'),
+                style: OutlinedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                ),
                 child: const Text('次要按钮'),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () => _showButtonAction(context, '文本按钮'),
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                ),
                 child: const Text('文本按钮'),
               ),
             ],
           ),
           const SizedBox(height: 24),
-          const Text(
-            '图标按钮',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.secondaryContainer,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  '图标按钮',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSecondaryContainer,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 16),
           Wrap(
-            spacing: 8,
-            runSpacing: 8,
+            spacing: 12,
+            runSpacing: 12,
             children: [
               ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () => _showButtonAction(context, '保存'),
                 icon: const Icon(Icons.save),
                 label: const Text('保存'),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                ),
               ),
               ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () => _showButtonAction(context, '删除'),
                 icon: const Icon(Icons.delete),
                 label: const Text('删除'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  foregroundColor: Colors.white,
+                  backgroundColor: Theme.of(context).colorScheme.error,
+                  foregroundColor: Theme.of(context).colorScheme.onError,
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                ),
+              ),
+              FilledButton.icon(
+                onPressed: () => _showButtonAction(context, '下载'),
+                icon: const Icon(Icons.download),
+                label: const Text('下载'),
+                style: FilledButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 24),
-          const Text(
-            '按钮状态',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.tertiaryContainer,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  '按钮状态',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onTertiaryContainer,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 16),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
+          Row(
             children: [
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () => _showButtonAction(context, '正常状态'),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                ),
                 child: const Text('正常状态'),
               ),
+              const SizedBox(width: 12),
               ElevatedButton(
                 onPressed: null,
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                ),
                 child: const Text('禁用状态'),
               ),
+              const SizedBox(width: 12),
               ElevatedButton(
                 onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                ),
                 child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -514,6 +672,168 @@ Icon(
               trailing: const Icon(Icons.chevron_right),
               onTap: () {},
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showButtonAction(BuildContext context, String buttonName) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('点击了 $buttonName 按钮'),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        action: SnackBarAction(
+          label: '确定',
+          onPressed: () => ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+        ),
+      ),
+    );
+  }
+
+  void _showThemeDialog(BuildContext context) {
+    final themeService = Provider.of<ThemeService>(context, listen: false);
+    
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('主题设置'),
+        content: SizedBox(
+          width: double.maxFinite,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // 主题模式
+              Column(
+                children: [
+                  ListTile(
+                    title: const Text('浅色主题'),
+                    leading: Radio<ThemeMode>(
+                      value: ThemeMode.light,
+                      groupValue: themeService.themeMode,
+                      onChanged: (value) => themeService.setThemeMode(value!),
+                    ),
+                  ),
+                  ListTile(
+                    title: const Text('深色主题'),
+                    leading: Radio<ThemeMode>(
+                      value: ThemeMode.dark,
+                      groupValue: themeService.themeMode,
+                      onChanged: (value) => themeService.setThemeMode(value!),
+                    ),
+                  ),
+                  ListTile(
+                    title: const Text('跟随系统'),
+                    leading: Radio<ThemeMode>(
+                      value: ThemeMode.system,
+                      groupValue: themeService.themeMode,
+                      onChanged: (value) => themeService.setThemeMode(value!),
+                    ),
+                  ),
+                ],
+              ),
+              
+              const Divider(),
+              
+              // 预设主题
+              SizedBox(
+                height: 120,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: ThemeService.themePresets.length,
+                  itemBuilder: (context, index) {
+                    final preset = ThemeService.themePresets[index];
+                    final isSelected = themeService.themePreset == index;
+                    
+                    return GestureDetector(
+                      onTap: () => themeService.applyThemePreset(index),
+                      child: Container(
+                        width: 80,
+                        margin: const EdgeInsets.only(right: 12),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: isSelected 
+                                ? Theme.of(context).colorScheme.primary
+                                : Colors.grey.withValues(alpha: 0.3),
+                            width: isSelected ? 3 : 1,
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 24,
+                              height: 24,
+                              decoration: BoxDecoration(
+                                color: preset['primary'],
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Container(
+                              width: 24,
+                              height: 24,
+                              decoration: BoxDecoration(
+                                color: preset['accent'],
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('关闭'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showInfoDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('基础组件信息'),
+        content: const Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('包含组件：'),
+            SizedBox(height: 8),
+            Text('• ZephyrButton - 按钮组件'),
+            Text('• ZephyrText - 文本组件'),
+            Text('• ZephyrIcon - 图标组件'),
+            Text('• ZephyrCard - 卡片组件'),
+            Text('• ZephyrAvatar - 头像组件'),
+            Text('• ZephyrBadge - 徽章组件'),
+            Text('• ZephyrChip - 标签组件'),
+            Text('• ZephyrDivider - 分割线组件'),
+            SizedBox(height: 16),
+            Text('特性：'),
+            SizedBox(height: 8),
+            Text('• Material Design 3 规范'),
+            Text('• 支持主题定制'),
+            Text('• 无障碍访问'),
+            Text('• 响应式设计'),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('确定'),
           ),
         ],
       ),

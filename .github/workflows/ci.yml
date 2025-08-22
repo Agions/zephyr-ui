@@ -192,8 +192,8 @@ jobs:
       
     - name: Build documentation site
       run: |
-        mkdir -p docs/api
-        cp -r doc/api/* docs/api/
+        mkdir -p doc/api
+        cp -r doc/api/* doc/api/
         
     - name: Deploy to GitHub Pages
       if: github.ref == 'refs/heads/main'

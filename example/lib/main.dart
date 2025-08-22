@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:zephyr_ui/zephyr_ui.dart';
 
-// 导入所有演示页面
+// 导入服务
+import 'services/theme_service.dart';
+
+// 导入演示页面
 import 'components/rating_demo.dart';
 import 'components/tree_demo.dart';
 import 'components/tour_demo.dart';
@@ -13,9 +17,18 @@ import 'components/chip_demo.dart';
 import 'components/divider_demo.dart';
 import 'components/navigation_demo.dart';
 import 'components/advanced_demo.dart';
+import 'pages/home_page.dart';
+import 'pages/interactive_demo_page.dart';
 
-void main() {
-  runApp(const ZephyrUIDemoApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ThemeService(),
+      child: const ZephyrUIDemoApp(),
+    ),
+  );
 }
 
 class ZephyrUIDemoApp extends StatelessWidget {
@@ -23,20 +36,13 @@ class ZephyrUIDemoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeService = Provider.of<ThemeService>(context);
+    
     return MaterialApp(
       title: 'ZephyrUI 专业组件库演示',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: true,
-        brightness: Brightness.light,
-        fontFamily: 'Roboto',
-      ),
-      darkTheme: ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: true,
-        brightness: Brightness.dark,
-      ),
-      themeMode: ThemeMode.system,
+      theme: themeService.getTheme(context),
+      darkTheme: themeService.getTheme(context),
+      themeMode: themeService.themeMode,
       home: const DemoHomePage(),
       routes: {
         '/rating': (context) => const RatingDemo(),
@@ -50,33 +56,759 @@ class ZephyrUIDemoApp extends StatelessWidget {
         '/divider': (context) => const DividerDemo(),
         '/navigation': (context) => const NavigationComponentsDemo(),
         '/advanced': (context) => const AdvancedComponentsDemo(),
+        '/interactive': (context) => const InteractiveDemoPage(),
       },
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+        DefaultMaterialLocalizations.delegate,
+        DefaultWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', 'US'),
+        Locale('zh', 'CN'),
+      ],
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            textScaleFactor: 1.0,
+          ),
+          child: child!,
+        );
+      },
     );
   }
 }
 
-class DemoHomePage extends StatelessWidget {
+class DemoHomePage extends StatefulWidget {
   const DemoHomePage({super.key});
 
   @override
+  State<DemoHomePage> createState() => _DemoHomePageState();
+}
+
+class _DemoHomePageState extends State<DemoHomePage> {
+  final ScrollController _scrollController = ScrollController();
+  
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final themeService = Provider.of<ThemeService>(context);
+    
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('ZephyrUI 专业组件库'),
-        elevation: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.info_outline),
-            onPressed: () => _showAboutDialog(context),
+      body: CustomScrollView(
+        controller: _scrollController,
+        slivers: [
+          // 应用栏
+          SliverAppBar(
+            floating: true,
+            pinned: true,
+            elevation: 0,
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            foregroundColor: Theme.of(context).colorScheme.onSurface,
+            title: const Text('ZephyrUI'),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: () => _showSearchDialog(context),
+                tooltip: '搜索组件',
+              ),
+              IconButton(
+                icon: const Icon(Icons.palette),
+                onPressed: () => _showThemeDialog(context, themeService),
+                tooltip: '主题设置',
+              ),
+              IconButton(
+                icon: const Icon(Icons.info_outline),
+                onPressed: () => _showAboutDialog(context),
+                tooltip: '关于',
+              ),
+            ],
           ),
-          IconButton(
-            icon: const Icon(Icons.brightness_6),
-            onPressed: () => _toggleTheme(context),
+          
+          // 主要内容
+          SliverPadding(
+            padding: const EdgeInsets.all(16),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate([
+                // 欢迎横幅
+                _buildWelcomeBanner(context),
+                
+                const SizedBox(height: 32),
+                
+                // 统计数据
+                _buildStatistics(context),
+                
+                const SizedBox(height: 32),
+                
+                // 快速开始
+                _buildQuickStart(context),
+                
+                const SizedBox(height: 32),
+                
+                // 核心组件分类
+                _buildComponentCategories(context),
+                
+                const SizedBox(height: 32),
+                
+                // 特色功能
+                _buildFeatures(context),
+                
+                const SizedBox(height: 32),
+                
+                // 开发者资源
+                _buildDeveloperResources(context),
+                
+                const SizedBox(height: 32),
+                
+                // 页脚
+                _buildFooter(context),
+              ]),
+            ),
           ),
         ],
       ),
-      body: const _HomeContent(),
+    );
+  }
+
+  Widget _buildWelcomeBanner(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(32),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Theme.of(context).colorScheme.primary,
+            Theme.of(context).colorScheme.secondary,
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.1),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            '欢迎使用 ZephyrUI',
+            style: TextStyle(
+              fontSize: 36,
+              fontWeight: FontWeight.w800,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            '企业级 Flutter UI 组件库',
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.white.withValues(alpha: 0.9),
+            ),
+          ),
+          const SizedBox(height: 24),
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () => Navigator.pushNamed(context, '/complete'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Theme.of(context).colorScheme.primary,
+                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const Text(
+                  '开始体验',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 16),
+              OutlinedButton(
+                onPressed: () => _showDocumentation(context),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  side: const BorderSide(color: Colors.white),
+                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const Text(
+                  '查看文档',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatistics(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: _buildStatCard(
+            context,
+            '54+',
+            '专业组件',
+            Icons.widgets,
+            Theme.of(context).colorScheme.primary,
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: _buildStatCard(
+            context,
+            '7',
+            '组件分类',
+            Icons.category,
+            Theme.of(context).colorScheme.secondary,
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: _buildStatCard(
+            context,
+            '100%',
+            'TypeScript 支持',
+            Icons.code,
+            Theme.of(context).colorScheme.tertiary,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildStatCard(
+    BuildContext context,
+    String value,
+    String label,
+    IconData icon,
+    Color color,
+  ) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            Icon(icon, size: 32, color: color),
+            const SizedBox(height: 12),
+            Text(
+              value,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w800,
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 14,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildQuickStart(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '快速开始',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        const SizedBox(height: 16),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              children: [
+                _buildStepCard(
+                  '1',
+                  '添加依赖',
+                  '在 pubspec.yaml 中添加 ZephyrUI 依赖',
+                  '''dependencies:
+  zephyr_ui: ^0.1.0''',
+                  context,
+                ),
+                const SizedBox(height: 20),
+                _buildStepCard(
+                  '2',
+                  '导入使用',
+                  '在 Dart 文件中导入并使用组件',
+                  '''import 'package:zephyr_ui/zephyr_ui.dart';
+
+ZephyrButton(
+  text: '点击我',
+  onPressed: () {},
+)''',
+                  context,
+                ),
+                const SizedBox(height: 20),
+                _buildStepCard(
+                  '3',
+                  '主题配置',
+                  '配置全局主题和样式',
+                  '''MaterialApp(
+  theme: ThemeData(
+    extensions: [
+      ZephyrThemeData(
+        primaryColor: Colors.blue,
+      ),
+    ],
+  ),
+  home: MyApp(),
+)''',
+                  context,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildStepCard(
+    String step,
+    String title,
+    String description,
+    String? code,
+    BuildContext context,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Container(
+              width: 32,
+              height: 32,
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary,
+                shape: BoxShape.circle,
+              ),
+              child: Center(
+                child: Text(
+                  step,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    description,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        if (code != null) ...[
+          const SizedBox(height: 16),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surfaceVariant,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              code,
+              style: TextStyle(
+                fontFamily: 'monospace',
+                fontSize: 12,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildComponentCategories(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '组件分类',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        const SizedBox(height: 16),
+        GridView.count(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          crossAxisCount: 2,
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
+          childAspectRatio: 1.1,
+          children: [
+            _buildCategoryCard(
+              context,
+              Icons.widgets,
+              '基础组件',
+              '8 个基础 UI 组件',
+              Colors.blue,
+              () => Navigator.pushNamed(context, '/avatar'),
+            ),
+            _buildCategoryCard(
+              context,
+              Icons.edit,
+              '表单组件',
+              '13 个表单相关组件',
+              Colors.green,
+              () => Navigator.pushNamed(context, '/complete'),
+            ),
+            _buildCategoryCard(
+              context,
+              Icons.navigation,
+              '导航组件',
+              '8 个导航相关组件',
+              Colors.orange,
+              () => Navigator.pushNamed(context, '/navigation'),
+            ),
+            _buildCategoryCard(
+              context,
+              Icons.notifications,
+              '反馈组件',
+              '6 个反馈相关组件',
+              Colors.red,
+              () => Navigator.pushNamed(context, '/complete'),
+            ),
+            _buildCategoryCard(
+              context,
+              Icons.table_chart,
+              '数据展示',
+              '13 个数据展示组件',
+              Colors.purple,
+              () => Navigator.pushNamed(context, '/complete'),
+            ),
+            _buildCategoryCard(
+              context,
+              Icons.view_quilt,
+              '布局组件',
+              '4 个布局相关组件',
+              Colors.teal,
+              () => Navigator.pushNamed(context, '/complete'),
+            ),
+            _buildCategoryCard(
+              context,
+              Icons.auto_awesome,
+              '高级组件',
+              '16 个高级功能组件',
+              Colors.indigo,
+              () => Navigator.pushNamed(context, '/advanced'),
+            ),
+            _buildCategoryCard(
+              context,
+              Icons.star,
+              '特色组件',
+              '评分、树形、导览等',
+              Colors.amber,
+              () => Navigator.pushNamed(context, '/rating'),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCategoryCard(
+    BuildContext context,
+    IconData icon,
+    String title,
+    String subtitle,
+    Color color,
+    VoidCallback onTap,
+  ) {
+    return Card(
+      elevation: 2,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(16),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(icon, size: 32, color: color),
+              const SizedBox(height: 12),
+              Text(
+                title,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 4),
+              Text(
+                subtitle,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              const Spacer(),
+              Row(
+                children: [
+                  Text(
+                    '查看详情',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(width: 4),
+                  Icon(
+                    Icons.arrow_forward,
+                    size: 16,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFeatures(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '特色功能',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        const SizedBox(height: 16),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              children: [
+                _buildFeatureItem(
+                  Icons.palette,
+                  '专业主题系统',
+                  '8 种预设主题，支持自定义颜色，深色/浅色模式切换',
+                  context,
+                ),
+                const SizedBox(height: 20),
+                _buildFeatureItem(
+                  Icons.devices,
+                  '响应式设计',
+                  '适配手机、平板、桌面等多种设备尺寸',
+                  context,
+                ),
+                const SizedBox(height: 20),
+                _buildFeatureItem(
+                  Icons.accessibility,
+                  '无障碍设计',
+                  '符合 WCAG 标准，支持屏幕阅读器和键盘导航',
+                  context,
+                ),
+                const SizedBox(height: 20),
+                _buildFeatureItem(
+                  Icons.speed,
+                  '性能优化',
+                  '优化的渲染性能，流畅的用户体验',
+                  context,
+                ),
+                const SizedBox(height: 20),
+                _buildFeatureItem(
+                  Icons.code,
+                  'TypeScript 支持',
+                  '完整的类型提示，提供优秀的开发体验',
+                  context,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFeatureItem(
+    IconData icon,
+    String title,
+    String description,
+    BuildContext context,
+  ) {
+    return Row(
+      children: [
+        Icon(icon, size: 24, color: Theme.of(context).colorScheme.primary),
+        const SizedBox(width: 16),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 4),
+              Text(
+                description,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDeveloperResources(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '开发者资源',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        const SizedBox(height: 16),
+        GridView.count(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          crossAxisCount: 2,
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
+          childAspectRatio: 1.2,
+          children: [
+            _buildResourceCard(
+              Icons.code,
+              'GitHub 仓库',
+              '开源代码和问题跟踪',
+              () => _launchURL('https://github.com/agions/zephyr-ui'),
+            ),
+            _buildResourceCard(
+              Icons.book,
+              '文档中心',
+              '完整的 API 文档和使用指南',
+              () => _showDocumentation(context),
+            ),
+            _buildResourceCard(
+              Icons.bug_report,
+              '问题反馈',
+              '报告问题和建议改进',
+              () => _launchURL('https://github.com/agions/zephyr-ui/issues'),
+            ),
+            _buildResourceCard(
+              Icons.chat,
+              '社区讨论',
+              '与其他开发者交流经验',
+              () => _launchURL('https://github.com/agions/zephyr-ui/discussions'),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildResourceCard(
+    IconData icon,
+    String title,
+    String description,
+    VoidCallback onTap,
+  ) {
+    return Card(
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(16),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, size: 32),
+              const SizedBox(height: 12),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                description,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey[600],
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFooter(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surfaceVariant,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        children: [
+          const Text(
+            'ZephyrUI - 用 ❤️ 制作',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Version 0.1.0 • Licensed under MIT',
+            style: TextStyle(
+              fontSize: 12,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -86,7 +818,7 @@ class DemoHomePage extends StatelessWidget {
       builder: (context) => AlertDialog(
         title: const Text('关于 ZephyrUI'),
         content: const Text(
-          'ZephyrUI 是一个专业的 Flutter UI 组件库，提供企业级的组件和主题系统，帮助开发者快速构建高质量的应用程序。',
+          'ZephyrUI 是一个专业的 Flutter UI 组件库，提供 54+ 企业级组件，帮助开发者快速构建高质量的应用程序。',
         ),
         actions: [
           TextButton(
@@ -98,39 +830,125 @@ class DemoHomePage extends StatelessWidget {
     );
   }
 
-  void _toggleTheme(BuildContext context) {
+  void _showThemeDialog(BuildContext context, ThemeService themeService) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('主题设置'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              title: const Text('浅色主题'),
-              leading: Radio<ThemeMode>(
-                value: ThemeMode.light,
-                groupValue: ThemeMode.system,
-                onChanged: (value) {},
+        content: SizedBox(
+          width: double.maxFinite,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // 主题模式
+              Column(
+                children: [
+                  ListTile(
+                    title: const Text('浅色主题'),
+                    leading: Radio<ThemeMode>(
+                      value: ThemeMode.light,
+                      groupValue: themeService.themeMode,
+                      onChanged: (value) => themeService.setThemeMode(value!),
+                    ),
+                  ),
+                  ListTile(
+                    title: const Text('深色主题'),
+                    leading: Radio<ThemeMode>(
+                      value: ThemeMode.dark,
+                      groupValue: themeService.themeMode,
+                      onChanged: (value) => themeService.setThemeMode(value!),
+                    ),
+                  ),
+                  ListTile(
+                    title: const Text('跟随系统'),
+                    leading: Radio<ThemeMode>(
+                      value: ThemeMode.system,
+                      groupValue: themeService.themeMode,
+                      onChanged: (value) => themeService.setThemeMode(value!),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            ListTile(
-              title: const Text('深色主题'),
-              leading: Radio<ThemeMode>(
-                value: ThemeMode.dark,
-                groupValue: ThemeMode.system,
-                onChanged: (value) {},
+              
+              const Divider(),
+              
+              // 预设主题
+              SizedBox(
+                height: 120,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: ThemeService.themePresets.length,
+                  itemBuilder: (context, index) {
+                    final preset = ThemeService.themePresets[index];
+                    final isSelected = themeService.themePreset == index;
+                    
+                    return GestureDetector(
+                      onTap: () => themeService.applyThemePreset(index),
+                      child: Container(
+                        width: 80,
+                        margin: const EdgeInsets.only(right: 12),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: isSelected 
+                                ? Theme.of(context).colorScheme.primary
+                                : Colors.grey.withValues(alpha: 0.3),
+                            width: isSelected ? 3 : 1,
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 24,
+                              height: 24,
+                              decoration: BoxDecoration(
+                                color: preset['primary'],
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Container(
+                              width: 24,
+                              height: 24,
+                              decoration: BoxDecoration(
+                                color: preset['accent'],
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('关闭'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showSearchDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('搜索组件'),
+        content: const SizedBox(
+          width: double.maxFinite,
+          child: TextField(
+            decoration: InputDecoration(
+              hintText: '输入组件名称...',
+              prefixIcon: Icon(Icons.search),
             ),
-            ListTile(
-              title: const Text('跟随系统'),
-              leading: Radio<ThemeMode>(
-                value: ThemeMode.system,
-                groupValue: ThemeMode.system,
-                onChanged: (value) {},
-              ),
-            ),
-          ],
+          ),
         ),
         actions: [
           TextButton(
@@ -138,6 +956,25 @@ class DemoHomePage extends StatelessWidget {
             child: const Text('取消'),
           ),
         ],
+      ),
+    );
+  }
+
+  void _showDocumentation(BuildContext context) {
+    // 这里可以打开文档页面
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('文档功能正在开发中...'),
+      ),
+    );
+  }
+
+  void _launchURL(String url) {
+    // 这里应该使用 url_launcher 包打开链接
+    debugPrint('Opening URL: $url');
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('将在浏览器中打开: $url'),
       ),
     );
   }

@@ -245,10 +245,10 @@ fi
 
 # Update documentation
 print_status "Updating documentation..."
-if [ -d "docs/api" ]; then
+if [ -d "doc/api" ]; then
     # Update version in documentation
-    find docs/ -name "*.md" -exec sed -i.bak "s/version: [0-9]\+\.[0-9]\+\.[0-9]\+/version: $version/g" {} \;
-    find docs/ -name "*.md.bak" -delete
+    find doc/ -name "*.md" -exec sed -i.bak "s/version: [0-9]\+\.[0-9]\+\.[0-9]\+/version: $version/g" {} \;
+    find doc/ -name "*.md.bak" -delete
     print_success "Documentation updated"
 fi
 
