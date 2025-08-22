@@ -178,18 +178,18 @@ class MyHomePage extends StatelessWidget {
               backgroundColor: Colors.blue,
               foregroundColor: Colors.white,
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // 徽章组件
             ZephyrBadge(
               content: '新',
               backgroundColor: Colors.red,
               textColor: Colors.white,
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // 评分组件
             ZephyrRating(
               value: 4.5,
@@ -198,9 +198,9 @@ class MyHomePage extends StatelessWidget {
                 print('评分: $value');
               },
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // 标签组件
             ZephyrChip(
               label: 'Flutter',
@@ -208,9 +208,9 @@ class MyHomePage extends StatelessWidget {
                 print('标签被点击');
               },
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // 卡片组件
             Card(
               child: Padding(
@@ -276,17 +276,17 @@ ZephyrUI 支持深色/浅色主题切换：
 ```dart
 class ThemeProvider with ChangeNotifier {
   ThemeMode _themeMode = ThemeMode.system;
-  
+
   ThemeMode get themeMode => _themeMode;
-  
+
   void setThemeMode(ThemeMode mode) {
     _themeMode = mode;
     notifyListeners();
   }
-  
+
   void toggleTheme() {
-    _themeMode = _themeMode == ThemeMode.light 
-        ? ThemeMode.dark 
+    _themeMode = _themeMode == ThemeMode.light
+        ? ThemeMode.dark
         : ThemeMode.light;
     notifyListeners();
   }
@@ -318,7 +318,7 @@ ZephyrUI 内置响应式支持：
 // 扩展方法
 extension ResponsiveExtension on BuildContext {
   bool get isMobile => MediaQuery.of(this).size.width < 768;
-  bool get isTablet => MediaQuery.of(this).size.width >= 768 && 
+  bool get isTablet => MediaQuery.of(this).size.width >= 768 &&
                       MediaQuery.of(this).size.width < 1024;
   bool get isDesktop => MediaQuery.of(this).size.width >= 1024;
 }
@@ -481,7 +481,7 @@ ZephyrUI 采用 [MIT 许可证](LICENSE) - 查看文件获取详细信息。
 ---
 
 <p align="center">
-  <strong>用 💛 制作 by ZephyrUI 团队</strong>
+  <strong>用 💛 制作 by Agions</strong>
 </p>
 
 <p align="center">
