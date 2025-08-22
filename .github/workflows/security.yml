@@ -39,7 +39,7 @@ jobs:
         flutter pub outdated > outdated-dependencies.txt
         
     - name: Upload dependency reports
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: dependency-reports
         path: |
@@ -96,7 +96,7 @@ jobs:
         output: 'trivy-results.sarif'
         
     - name: Upload Trivy scan results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: trivy-scan-results
         path: trivy-results.sarif
@@ -126,7 +126,7 @@ jobs:
       run: dart run license_reporter
       
     - name: Upload license report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: license-report
         path: license-report.json
@@ -159,7 +159,7 @@ jobs:
         echo "✅ License compliance check completed" >> security-audit.md
         
     - name: Upload security audit report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: security-audit-report
         path: security-audit.md
