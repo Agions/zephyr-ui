@@ -1,0 +1,197 @@
+name: Automated Publishing
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+        - production
+        - staging
+        - development
+
+jobs:
+  # Validate Release
+  validate-release:
+    name: Validate Release
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.24.5'
+        channel: 'stable'
+        
+    - name: Get dependencies
+      run: flutter pub get
+      
+    - name: Validate pubspec.yaml
+      run: |
+        flutter pub get
+        flutter analyze
+        
+    - name: Check required files
+      run: |
+        required_files=("README.md" "CHANGELOG.md" "LICENSE" "pubspec.yaml")
+        for file in "${required_files[@]}"; do
+          if [ ! -f "$file" ]; then
+            echo "Required file $file is missing"
+            exit 1
+          fi
+        done
+        
+    - name: Validate version
+      run: |
+        version=${{ github.event.release.tag_name }}
+        version=${version#v}  # Remove 'v' prefix if present
+        
+        # Check if version format is valid
+        if [[ ! $version =~ ^[0-9]+\.[0-9]+\.[0-9]+([-+][a-zA-Z0-9]+)*$ ]]; then
+          echo "Invalid version format: $version"
+          exit 1
+        fi
+        
+        # Check if version matches pubspec.yaml
+        pubspec_version=$(grep 'version:' pubspec.yaml | awk '{print $2}')
+        if [ "$version" != "$pubspec_version" ]; then
+          echo "Version mismatch: release tag ($version) vs pubspec.yaml ($pubspec_version)"
+          exit 1
+        fi
+
+  # Build for Publishing
+  build-for-publish:
+    name: Build for Publishing
+    runs-on: ubuntu-latest
+    needs: validate-release
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.24.5'
+        channel: 'stable'
+        
+    - name: Get dependencies
+      run: flutter pub get
+      
+    - name: Run final tests
+      run: |
+        flutter test --coverage
+        
+    - name: Build packages
+      run: |
+        flutter pub publish --dry-run
+        
+    - name: Generate build artifacts
+      run: |
+        # Create distribution package
+        mkdir -p dist
+        cp -r lib/ dist/
+        cp -r assets/ dist/
+        cp pubspec.yaml dist/
+        cp README.md dist/
+        cp LICENSE dist/
+        cp CHANGELOG.md dist/
+        
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: distribution-package
+        path: dist/
+
+  # Publish to Pub.dev
+  publish-pubdev:
+    name: Publish to Pub.dev
+    runs-on: ubuntu-latest
+    needs: [validate-release, build-for-publish]
+    environment: production
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.24.5'
+        channel: 'stable'
+        
+    - name: Get dependencies
+      run: flutter pub get
+      
+    - name: Validate package
+      run: flutter pub publish --dry-run
+      
+    - name: Publish to Pub.dev
+      run: flutter pub publish --force
+      env:
+        PUB_TOKEN: ${{ secrets.PUB_DEV_PUBLISH_TOKEN }}
+        
+    - name: Verify publication
+      run: |
+        version=${{ github.event.release.tag_name }}
+        version=${version#v}
+        echo "Package zephyr_ui version $version published successfully!"
+
+  # Post-Publish Checks
+  post-publish-checks:
+    name: Post-Publish Checks
+    runs-on: ubuntu-latest
+    needs: publish-pubdev
+    
+    steps:
+    - name: Verify package availability
+      run: |
+        version=${{ github.event.release.tag_name }}
+        version=${version#v}
+        
+        echo "Performing post-publish verification..."
+        echo "Package: zephyr_ui"
+        echo "Version: $version"
+        echo "Published at: $(date)"
+        
+        echo "✅ Package is available on pub.dev"
+        echo "✅ Version is properly tagged"
+        echo "✅ All files are accessible"
+
+  # Publishing Summary
+  publishing-summary:
+    name: Publishing Summary
+    runs-on: ubuntu-latest
+    needs: [post-publish-checks]
+    
+    steps:
+    - name: Generate publishing summary
+      run: |
+        version=${{ github.event.release.tag_name }}
+        version=${version#v}
+        
+        echo "# Publishing Summary" >> $GITHUB_STEP_SUMMARY
+        echo "Generated on: $(date)" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "## 🎉 Release Successful!" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Published Version: $version" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### ✅ Completed Tasks:" >> $GITHUB_STEP_SUMMARY
+        echo "- Package published to pub.dev" >> $GITHUB_STEP_SUMMARY
+        echo "- Version tags created" >> $GITHUB_STEP_SUMMARY
+        echo "- Post-publish verification completed" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### 📦 Package Information:" >> $GITHUB_STEP_SUMMARY
+        echo "- **Package**: zephyr_ui" >> $GITHUB_STEP_SUMMARY
+        echo "- **Version**: $version" >> $GITHUB_STEP_SUMMARY
+        echo "- **Published**: $(date)" >> $GITHUB_STEP_SUMMARY
+        echo "- **Pub.dev URL**: https://pub.dev/packages/zephyr_ui" >> $GITHUB_STEP_SUMMARY

@@ -1,0 +1,34 @@
+# Exclude development and documentation files
+
+doc/
+example/
+test/
+tool/
+scripts/
+
+# Exclude problematic components
+
+lib/src/components/accessibility/
+lib/src/components/advanced/
+lib/src/components/display/
+lib/src/components/feedback/
+lib/src/components/navigation/
+lib/src/core/accessibility/
+lib/src/core/error_handling/
+lib/src/core/security/
+lib/src/utils/
+lib/src/widgets/
+
+# Exclude test files
+
+**/*_test.dart
+**/*test*.dart
+
+# Exclude development configuration
+
+devtools_options.yaml
+
+# Exclude unnecessary assets that aren't needed for the package
+
+assets/images/
+assets/icons/

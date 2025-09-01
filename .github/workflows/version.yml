@@ -1,0 +1,190 @@
+name: Version Management
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [opened, synchronize, closed]
+
+jobs:
+  # Version Bump
+  version-bump:
+    name: Version Bump
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: Install semantic-release
+      run: |
+        npm install -g semantic-release @semantic-release/git @semantic-release/changelog @semantic-release/exec
+        
+    - name: Configure Git
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+    - name: Run semantic-release
+      run: semantic-release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Changelog Generation
+  changelog-generation:
+    name: Changelog Generation
+    runs-on: ubuntu-latest
+    needs: version-bump
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Generate changelog
+      run: |
+        # Generate changelog since last tag
+        if git describe --tags --abbrev=0 > /dev/null 2>&1; then
+          LAST_TAG=$(git describe --tags --abbrev=0)
+          echo "## Changelog since $LAST_TAG" > CHANGELOG_NEW.md
+          echo "" >> CHANGELOG_NEW.md
+          git log --pretty=format:"- %s (%h)" $LAST_TAG..HEAD >> CHANGELOG_NEW.md
+        else
+          echo "## Initial Release" > CHANGELOG_NEW.md
+          echo "" >> CHANGELOG_NEW.md
+          git log --pretty=format:"- %s (%h)" >> CHANGELOG_NEW.md
+        fi
+        
+        # Append to existing changelog
+        if [ -f CHANGELOG.md ]; then
+          cat CHANGELOG.md >> CHANGELOG_NEW.md
+        fi
+        mv CHANGELOG_NEW.md CHANGELOG.md
+        
+    - name: Commit changelog
+      run: |
+        git add CHANGELOG.md
+        git commit -m "docs: update changelog [skip ci]" || exit 0
+        git push
+
+  # Version Validation
+  version-validation:
+    name: Version Validation
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.19.0'
+        channel: 'stable'
+        
+    - name: Validate pubspec version
+      run: |
+        version=$(grep 'version:' pubspec.yaml | awk '{print $2}')
+        echo "Current version: $version"
+        
+        # Validate version format
+        if [[ ! $version =~ ^[0-9]+\.[0-9]+\.[0-9]+([-+][a-zA-Z0-9]+)*$ ]]; then
+          echo "Invalid version format: $version"
+          exit 1
+        fi
+        
+    - name: Check version consistency
+      run: |
+        # Check if version in pubspec matches any other version references
+        version=$(grep 'version:' pubspec.yaml | awk '{print $2}')
+        echo "Checking consistency for version: $version"
+        
+        # Add more consistency checks as needed
+        if grep -r "version.*$version" lib/ > /dev/null; then
+          echo "Version references found in code"
+        fi
+
+  # Release Notes Generation
+  release-notes:
+    name: Release Notes Generation
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' && github.event.action == 'published'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    - name: Generate release notes
+      run: |
+        version=${{ github.event.release.tag_name }}
+        echo "Generating release notes for version: $version"
+        
+        # Get previous version
+        if git describe --tags --abbrev=0 --exclude="$version" > /dev/null 2>&1; then
+          PREV_VERSION=$(git describe --tags --abbrev=0 --exclude="$version")
+          echo "Previous version: $PREV_VERSION"
+          
+          # Generate release notes
+          echo "# Release Notes for $version" > RELEASE_NOTES.md
+          echo "" >> RELEASE_NOTES.md
+          echo "## Changes since $PREV_VERSION" >> RELEASE_NOTES.md
+          echo "" >> RELEASE_NOTES.md
+          git log --pretty=format:"- %s (%h)" $PREV_VERSION..$version >> RELEASE_NOTES.md
+        else
+          echo "# Initial Release" > RELEASE_NOTES.md
+          echo "" >> RELEASE_NOTES.md
+          git log --pretty=format:"- %s (%h)" >> RELEASE_NOTES.md
+        fi
+        
+    - name: Upload release notes
+      uses: actions/upload-artifact@v3
+      with:
+        name: release-notes
+        path: RELEASE_NOTES.md
+
+  # Version Sync
+  version-sync:
+    name: Version Sync
+    runs-on: ubuntu-latest
+    needs: [version-validation]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Sync versions across files
+      run: |
+        version=$(grep 'version:' pubspec.yaml | awk '{print $2}')
+        echo "Syncing version: $version"
+        
+        # Update version in README if needed
+        if grep -q "Version-[0-9]" README.md; then
+          sed -i.bak "s/Version-[0-9]\+\.[0-9]\+\.[0-9]\+/Version-$version/g" README.md
+          rm README.md.bak
+        fi
+        
+        # Update version in other documentation files
+        find doc/ -name "*.md" -exec sed -i.bak "s/version: [0-9]\+\.[0-9]\+\.[0-9]\+/version: $version/g" {} \;
+        find doc/ -name "*.md.bak" -delete
+        
+    - name: Commit version sync
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: |
+        git add .
+        git commit -m "chore: sync version references [skip ci]" || exit 0
+        git push

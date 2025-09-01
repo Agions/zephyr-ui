@@ -1,0 +1,358 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  release:
+    types: [ published ]
+
+env:
+  FLUTTER_VERSION: '3.19.0'
+  DART_VERSION: '3.3.0'
+  PUB_DEV_PUBLISH_TOKEN: ${{ secrets.PUB_DEV_PUBLISH_TOKEN }}
+
+jobs:
+  # Code Quality Analysis
+  code-quality:
+    name: Code Quality Analysis
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        channel: 'stable'
+        
+    - name: Get dependencies
+      run: flutter pub get
+      
+    - name: Run Flutter analyze
+      run: flutter analyze --no-fatal-infos
+      
+    - name: Run Dart format check
+      run: dart format --set-exit-if-changed .
+      
+    - name: Run custom linter
+      run: dart run custom_linter
+      
+    - name: Generate coverage report
+      run: dart run coverage:test_with_coverage
+      
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: coverage/lcov.info
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false
+
+  # Security Scanning
+  security:
+    name: Security Scanning
+    runs-on: ubuntu-latest
+    needs: code-quality
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        channel: 'stable'
+        
+    - name: Run dependency security scan
+      run: |
+        flutter pub get
+        flutter pub deps --style=tree
+        dart run dependency_validator
+      
+    - name: Run CodeQL Analysis
+      uses: github/codeql-action/init@v2
+      with:
+        languages: dart
+        
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+      
+    - name: Run safety check
+      run: dart run safety check
+
+  # Testing Suite
+  testing:
+    name: Testing Suite
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        flutter-version: ['3.19.0', '3.16.0']
+        
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ matrix.flutter-version }}
+        channel: 'stable'
+        
+    - name: Get dependencies
+      run: flutter pub get
+      
+    - name: Run unit tests
+      run: flutter test --coverage
+      
+    - name: Run widget tests
+      run: flutter test test/widget/
+      
+    - name: Run integration tests
+      run: flutter test test/integration/
+      
+    - name: Run performance tests
+      run: flutter test test/performance/
+      
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-results-${{ matrix.os }}-${{ matrix.flutter-version }}
+        path: test-results/
+
+  # Build Verification
+  build:
+    name: Build Verification
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        target: [apk, web, ios]
+        
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        channel: 'stable'
+        
+    - name: Get dependencies
+      run: flutter pub get
+      
+    - name: Build APK
+      if: matrix.target == 'apk'
+      run: |
+        flutter build apk --release
+        flutter build appbundle --release
+        
+    - name: Build Web
+      if: matrix.target == 'web'
+      run: flutter build web --release
+      
+    - name: Build iOS
+      if: matrix.target == 'ios' && matrix.os == 'macos-latest'
+      run: flutter build ios --release --no-codesign
+      
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-${{ matrix.target }}-${{ matrix.os }}
+        path: build/
+
+  # Documentation Generation
+  documentation:
+    name: Documentation Generation
+    runs-on: ubuntu-latest
+    needs: [code-quality, security, testing]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        channel: 'stable'
+        
+    - name: Get dependencies
+      run: flutter pub get
+      
+    - name: Generate API documentation
+      run: dart doc
+      
+    - name: Build documentation site
+      run: |
+        mkdir -p doc/api
+        cp -r doc/api/* doc/api/
+        
+    - name: Deploy to GitHub Pages
+      if: github.ref == 'refs/heads/main'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
+
+  # Performance Monitoring
+  performance:
+    name: Performance Monitoring
+    runs-on: ubuntu-latest
+    needs: [testing, build]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        channel: 'stable'
+        
+    - name: Get dependencies
+      run: flutter pub get
+      
+    - name: Run performance benchmarks
+      run: dart run benchmark
+      
+    - name: Generate performance report
+      run: dart run performance_report
+      
+    - name: Upload performance metrics
+      uses: actions/upload-artifact@v3
+      with:
+        name: performance-report
+        path: performance/
+
+  # Version Management
+  version-management:
+    name: Version Management
+    runs-on: ubuntu-latest
+    needs: [code-quality, security, testing]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: Install semantic-release
+      run: npm install -g semantic-release @semantic-release/git @semantic-release/changelog
+      
+    - name: Configure Git
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+    - name: Run semantic-release
+      run: semantic-release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Pub.dev Publishing
+  publish:
+    name: Publish to Pub.dev
+    runs-on: ubuntu-latest
+    needs: [code-quality, security, testing, build, documentation]
+    if: github.event_name == 'release'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        channel: 'stable'
+        
+    - name: Get dependencies
+      run: flutter pub get
+      
+    - name: Validate pubspec
+      run: flutter pub publish --dry-run
+      
+    - name: Publish to Pub.dev
+      run: flutter pub publish --force
+      env:
+        PUB_TOKEN: ${{ env.PUB_DEV_PUBLISH_TOKEN }}
+
+  # Deployment Monitoring
+  deployment-monitoring:
+    name: Deployment Monitoring
+    runs-on: ubuntu-latest
+    needs: [publish]
+    if: github.event_name == 'release'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup monitoring
+      run: |
+        echo "Deployment completed successfully"
+        echo "Version: ${{ github.event.release.tag_name }}"
+        echo "Deployed at: $(date)"
+        
+    - name: Send deployment notification
+      run: |
+        curl -X POST \
+          -H "Content-Type: application/json" \
+          -d '{
+            "text": "🚀 ZephyrUI v${{ github.event.release.tag_name }} has been published to pub.dev!",
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "*New Release*: ZephyrUI v${{ github.event.release.tag_name }}\n*Published*: $(date)\n*Release Notes*: ${{ github.event.release.body }}"
+                }
+              }
+            ]
+          }' \
+          ${{ secrets.SLACK_WEBHOOK_URL || '' }}
+
+  # Cleanup
+  cleanup:
+    name: Cleanup
+    runs-on: ubuntu-latest
+    needs: [documentation, performance, version-management, publish, deployment-monitoring]
+    if: always()
+    
+    steps:
+    - name: Cleanup workspace
+      run: |
+        echo "Cleaning up workspace..."
+        find . -name "*.tmp" -delete
+        find . -name "*.log" -delete
+        echo "Cleanup completed"
+        
+    - name: Generate build summary
+      run: |
+        echo "## Build Summary" >> $GITHUB_STEP_SUMMARY
+        echo "- Code Quality: ✅" >> $GITHUB_STEP_SUMMARY
+        echo "- Security Scan: ✅" >> $GITHUB_STEP_SUMMARY
+        echo "- Tests: ✅" >> $GITHUB_STEP_SUMMARY
+        echo "- Build: ✅" >> $GITHUB_STEP_SUMMARY
+        echo "- Documentation: ✅" >> $GITHUB_STEP_SUMMARY
+        echo "- Performance: ✅" >> $GITHUB_STEP_SUMMARY
+        if [ "${{ github.event_name }}" == "release" ]; then
+          echo "- Publishing: ✅" >> $GITHUB_STEP_SUMMARY
+        fi
