@@ -31,7 +31,7 @@ Now you can import zephyr-ui UI in your Dart files and start using the component
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:zephyr-ui_ui/zephyr_ui.dart';
+import 'package:zephyr_ui/zephyr_ui.dart';
 
 void main() {
   runApp(const MyApp());

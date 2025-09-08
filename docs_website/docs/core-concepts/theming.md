@@ -16,7 +16,7 @@ To create a custom theme, you can start with our base light or dark themes and o
 
 ```dart
 import 'package.flutter/material.dart';
-import 'package:zephyr-ui_ui/zephyr-ui_ui.dart';
+import 'package:zephyr_ui/zephyr_ui.dart';
 
 final myAppTheme = zephyr-uiUnifiedThemeData.light(
   primaryColor: Colors.blue, // Your brand's primary color

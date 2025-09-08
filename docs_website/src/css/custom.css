@@ -20,7 +20,7 @@
   --ifm-font-family-monospace: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono",
     "Consolas", "Courier New", monospace;
 
-  /* Custom zephyr-ui Design System colors */
+  /* Custom Zephyr UI Design System colors */
   --zephyr-ui-primary: #6366f1;
   --zephyr-ui-primary-dark: #4f46e5;
   --zephyr-ui-secondary: #ec4899;
@@ -103,7 +103,7 @@
   --ifm-pre-color: #f1f5f9;
 }
 
-/* Custom zephyr-ui Design System styles */
+/* Custom Zephyr UI Design System styles */
 
 /* Enhanced typography */
 .markdown h1:first-child {

@@ -5,7 +5,7 @@ slug: /
 
 # Introduction
 
-**zephyr-ui Design System** is an enterprise Flutter UI framework that provides a comprehensive design system with 60+ professional components, advanced design tokens, and complete tooling for building beautiful, accessible, and performant mobile applications (iOS & Android).
+**Zephyr UI Design System** is an enterprise Flutter UI framework that provides a comprehensive design system with 60+ professional components, advanced design tokens, and complete tooling for building beautiful, accessible, and performant mobile applications (iOS & Android).
 
 ## 🌟 Key Features
 
@@ -54,11 +54,11 @@ flutter pub get
 ### Basic Usage
 
 ```dart
-import 'package:zephyr-ui_design_system/zephyr-ui_design_system.dart';
+import 'package:zephyr_ui/zephyr_ui.dart';
 
 void main() {
   runApp(
-    zephyr-uiApp(
+    MaterialApp(
       theme: zephyr-uiThemeData.light(),
       darkTheme: zephyr-uiThemeData.dark(),
       home: MyApp(),
@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('zephyr-ui Demo')),
+      appBar: AppBar(title: const Text('Zephyr UI Demo')),
       body: Center(
         child: zephyr-uiButton.primary(
           text: 'Get Started',

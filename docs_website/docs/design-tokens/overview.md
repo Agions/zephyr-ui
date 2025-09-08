@@ -1,8 +1,8 @@
-# zephyr-ui Design Token System
+# Zephyr UI Design Token System
 
 ## Overview
 
-The zephyr-ui Design Token System is a comprehensive, enterprise-grade design token implementation based on the [Design Tokens Community Group specification](https://design-tokens.github.io/community-group/format/). It provides a centralized, scalable approach to managing design decisions across your Flutter applications.
+The Zephyr UI Design Token System is a comprehensive, enterprise-grade design token implementation based on the [Design Tokens Community Group specification](https://design-tokens.github.io/community-group/format/). It provides a centralized, scalable approach to managing design decisions across your Flutter applications.
 
 ## What are Design Tokens?
 
@@ -512,4 +512,4 @@ final zephyr-uiTokens = StyleDictionaryConverter.convert(styleDictionaryTokens);
 zephyr-uiTokenManager().importTokens(zephyr-uiTokens);
 ```
 
-This comprehensive design token system provides a solid foundation for building consistent, scalable, and maintainable Flutter applications with zephyr-ui.
+This comprehensive design token system provides a solid foundation for building consistent, scalable, and maintainable Flutter applications with Zephyr UI.

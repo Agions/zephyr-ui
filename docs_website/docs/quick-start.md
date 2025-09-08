@@ -14,7 +14,7 @@ import 'package:zephyr_ui/zephyr_ui.dart';
 
 ```dart
 void main() {
-  // Initialize zephyr-ui Design System
+  // Initialize Zephyr UI
   zephyr-uiTokenManager().initialize();
 
   runApp(const MyApp());
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'zephyr-ui Demo',
+      title: 'Zephyr UI Demo',
       theme: zephyr-uiTokenManager().lightTheme,
       darkTheme: zephyr-uiTokenManager().darkTheme,
       themeMode: ThemeMode.system,
