@@ -8,6 +8,8 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
 }
 
 @media screen and (max-width: 996px) {
@@ -20,4 +22,181 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
 }
+
+.featuresSection {
+  padding: 4rem 0;
+  background: var(--ifm-color-emphasis-100);
+}
+
+.featureCard {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  height: 100%;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.featureCard:hover {
+  transform: translateY(-2px);
+}
+
+.featureCard h3 {
+  color: var(--ifm-color-primary);
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.codeExampleSection {
+  padding: 4rem 0;
+  background: var(--ifm-background-color);
+}
+
+.codeBlock {
+  background: #1e1e1e;
+  border-radius: 8px;
+  padding: 1.5rem;
+  overflow-x: auto;
+}
+
+.codeBlock pre {
+  margin: 0;
+  color: #d4d4d4;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.ctaSection {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-align: center;
+}
+
+.ctaSection h2 {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .buttons,
+  .ctaButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .buttons .button,
+  .ctaButtons .button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .featureCard {
+  background: var(--ifm-color-emphasis-0);
+  color: var(--ifm-font-color-base);
+}
+
+[data-theme='dark'] .codeBlock {
+  background: #2d2d2d;
+}
+
+[data-theme='dark'] .codeBlock pre {
+  color: #cccccc;
+}
+
+/* Animation for smooth transitions */
+.heroBanner,
+.featureCard,
+.codeBlock {
+  transition: all 0.3s ease;
+}
+
+/* Hover effects for interactive elements */
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive typography */
+@media screen and (max-width: 768px) {
+  .heroBanner h1 {
+    font-size: 2rem;
+  }
+  
+  .heroBanner p {
+    font-size: 1.1rem;
+  }
+  
+  .featureCard h3 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Custom scrollbar for code blocks */
+.codeBlock::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.codeBlock::-webkit-scrollbar-track {
+  background: #1e1e1e;
+  border-radius: 4px;
+}
+
+.codeBlock::-webkit-scrollbar-thumb {
+  background: #424242;
+  border-radius: 4px;
+}
+
+.codeBlock::-webkit-scrollbar-thumb:hover {
+  background: #4a4a4a;
+}
+
+/* Loading animation for hero section */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.heroBanner {
+  background-size: 200% 200%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Feature card animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.featureCard {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Stagger animation for multiple cards */
+.featureCard:nth-child(1) { animation-delay: 0.1s; }
+.featureCard:nth-child(2) { animation-delay: 0.2s; }
+.featureCard:nth-child(3) { animation-delay: 0.3s; }
+.featureCard:nth-child(4) { animation-delay: 0.4s; }
+.featureCard:nth-child(5) { animation-delay: 0.5s; }
+.featureCard:nth-child(6) { animation-delay: 0.6s; }

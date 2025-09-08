@@ -77,7 +77,7 @@ const config: Config = {
     announcementBar: {
       id: 'support_us',
       content:
-        '🎉 Zephyr UI v2.0 is coming soon! <a target="_blank" rel="noopener noreferrer" href="/blog/whats-new">Check out what\'s new</a>',
+        '🎉 zephyr-ui UI v2.0 is coming soon! <a target="_blank" rel="noopener noreferrer" href="/blog/whats-new">Check out what\'s new</a>',
       backgroundColor: '#fafbfc',
       textColor: '#091E42',
       isCloseable: true,
@@ -87,7 +87,7 @@ const config: Config = {
     navbar: {
       title: 'Zephyr UI',
       logo: {
-        alt: 'Zephyr UI Logo',
+        alt: 'zephyr-ui UI Logo',
         src: 'img/logo.png',
       },
       items: [
@@ -171,9 +171,9 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Zephyr UI. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} zephyr-ui UI. Built with Docusaurus.`,
       logo: {
-        alt: 'Zephyr UI Logo',
+        alt: 'zephyr-ui UI Logo',
         src: 'img/logo.png',
         href: 'https://agions.github.io/zephyr-ui',
       },
@@ -318,7 +318,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         property: 'og:image',
-        content: 'https://agions.github.io/zephyr-ui/img/docusaurus-social-card.jpg',
+        content: 'https://agions.github.io/zephyr-uiimg/social-card.png',
       },
     },
   ],
