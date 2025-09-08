@@ -89,7 +89,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'zephyr-ui Test',
+      title: 'Zephyr UI Test',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: const TestScreen(),
     );
@@ -102,7 +102,7 @@ class TestScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('zephyr-ui Installation Test')),
+      AppBar(title: const Text('Zephyr UI Installation Test'))
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -112,7 +112,7 @@ class TestScreen extends StatelessWidget {
               text: 'Test Button',
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('zephyr-ui UI is working!')),
+                  SnackBar(content: Text('Zephyr UI is working!'))
                 );
               },
             ),
