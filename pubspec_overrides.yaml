@@ -1,0 +1,58 @@
+# Pubspec overrides for chromaUI
+# Used for development and testing dependency management
+
+# Override specific versions for development
+dependency_overrides:
+  # Flutter SDK overrides
+  flutter:
+    sdk: flutter
+  flutter_test:
+    sdk: flutter
+
+  # Development overrides for testing
+  mocktail: ^1.0.0
+  test: ^1.24.0
+  flutter_lints: ^3.0.0
+
+  # Performance testing overrides
+  flutter_driver:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+
+  # Documentation overrides
+  dartdoc: ^7.0.0
+
+  # Build runner overrides
+  build_runner: ^2.4.0
+  json_serializable: ^6.7.0
+
+  # State management overrides
+  provider: ^6.0.5
+  riverpod: ^2.4.0
+
+  # UI overrides
+  flutter_svg: ^2.0.7
+  cached_network_image: ^3.3.0
+
+  # Form validation overrides
+  form_field_validator: ^1.1.0
+
+  # Chart overrides
+  fl_chart: ^0.63.0
+
+  # Icons overrides
+  flutter_iconpicker: ^3.2.0
+  font_awesome_flutter: ^10.5.0
+
+  # Animation overrides
+  flutter_staggered_animations: ^1.1.1
+
+  # Utility overrides
+  intl: ^0.18.0
+  collection: ^1.17.0
+  meta: ^1.9.0
+
+  # Development tools
+  custom_lint: ^0.5.0
+  very_good_analysis: ^5.1.0

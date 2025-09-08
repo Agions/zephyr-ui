@@ -1,0 +1,205 @@
+name: 依赖检查和安全扫描
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 6 * * 1'  # 每周一早上6点运行
+
+jobs:
+  dependency-analysis:
+    name: 依赖分析
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: stable
+
+      - name: 获取依赖
+        run: flutter pub get
+
+      - name: 检查依赖版本
+        run: flutter pub outdated --mode=null-safety
+
+      - name: 依赖验证
+        run: flutter pub run dependency_validator
+
+      - name: 检查依赖许可证
+        run: flutter pub run license_checker
+
+  security-scan:
+    name: 安全扫描
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: stable
+
+      - name: 获取依赖
+        run: flutter pub get
+
+      - name: 运行 pana 分析
+        run: dart pub run pana:analyze
+
+      - name: 检查敏感信息
+        run: |
+          # 检查是否有敏感信息泄露
+          dart pub global activate dart_pre_commit
+          dart pub global run dart_pre_commit:check_secrets
+
+      - name: 代码安全分析
+        run: flutter pub run dart_code_metrics:metrics analyze lib --report-security
+
+  license-compliance:
+    name: 许可证合规检查
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: stable
+
+      - name: 获取依赖
+        run: flutter pub get
+
+      - name: 生成许可证报告
+        run: flutter pub run licenses:report
+
+      - name: 检查许可证合规性
+        run: |
+          dart pub global activate license_checker
+          dart pub global run license_checker:check
+
+      - name: 上传许可证报告
+        uses: actions/upload-artifact@v3
+        with:
+          name: license-report
+          path: license_report.json
+
+  vulnerability-scan:
+    name: 漏洞扫描
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: stable
+
+      - name: 获取依赖
+        run: flutter pub get
+
+      - name: 运行依赖漏洞扫描
+        run: |
+          dart pub global activate vulnerability_scanner
+          dart pub global run vulnerability_scanner:scan
+
+      - name: 生成漏洞报告
+        run: dart tool/generate_vulnerability_report.dart
+
+      - name: 上传漏洞报告
+        uses: actions/upload-artifact@v3
+        with:
+          name: vulnerability-report
+          path: vulnerability_report.json
+
+  generate-report:
+    name: 生成综合报告
+    runs-on: ubuntu-latest
+    needs: [dependency-analysis, security-scan, license-compliance, vulnerability-scan]
+    if: always()
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 下载所有报告
+        uses: actions/download-artifact@v3
+
+      - name: 生成综合安全报告
+        run: |
+          echo "# 依赖和安全检查报告" > SECURITY_REPORT.md
+          echo "## 生成时间: $(date)" >> SECURITY_REPORT.md
+          echo "" >> SECURITY_REPORT.md
+          
+          echo "### 依赖分析" >> SECURITY_REPORT.md
+          if [ -f "dependency-analysis/report.json" ]; then
+            echo "✅ 依赖分析完成" >> SECURITY_REPORT.md
+          else
+            echo "❌ 依赖分析失败" >> SECURITY_REPORT.md
+          fi
+          
+          echo "### 安全扫描" >> SECURITY_REPORT.md
+          if [ -f "security-scan/report.json" ]; then
+            echo "✅ 安全扫描完成" >> SECURITY_REPORT.md
+          else
+            echo "❌ 安全扫描失败" >> SECURITY_REPORT.md
+          fi
+          
+          echo "### 许可证合规" >> SECURITY_REPORT.md
+          if [ -f "license-report/license_report.json" ]; then
+            echo "✅ 许可证检查完成" >> SECURITY_REPORT.md
+          else
+            echo "❌ 许可证检查失败" >> SECURITY_REPORT.md
+          fi
+          
+          echo "### 漏洞扫描" >> SECURITY_REPORT.md
+          if [ -f "vulnerability-report/vulnerability_report.json" ]; then
+            echo "✅ 漏洞扫描完成" >> SECURITY_REPORT.md
+          else
+            echo "❌ 漏洞扫描失败" >> SECURITY_REPORT.md
+          fi
+
+      - name: 上传综合报告
+        uses: actions/upload-artifact@v3
+        with:
+          name: comprehensive-security-report
+          path: SECURITY_REPORT.md
+
+  notify-issues:
+    name: 问题通知
+    runs-on: ubuntu-latest
+    needs: [generate-report]
+    if: failure()
+    steps:
+      - name: 发送安全检查失败通知
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          fields: repo,message,commit,author,action,eventName,ref,workflow
+          text: '🚨 安全检查失败！'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: 创建安全问题
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const { sha } = context;
+            
+            await github.rest.issues.create({
+              owner,
+              repo,
+              title: '🔒 安全检查失败',
+              body: `安全检查过程中发现问题，请查看安全报告并处理。\n\n提交: ${sha}\n时间: ${new Date().toISOString()}`,
+              labels: ['security', 'needs-attention', 'urgent'],
+            });

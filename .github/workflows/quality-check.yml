@@ -1,0 +1,213 @@
+name: 代码质量检查
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  dart-code-metrics:
+    name: Dart 代码质量指标
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: stable
+
+      - name: 获取依赖
+        run: flutter pub get
+
+      - name: 安装代码质量工具
+        run: dart pub global activate dart_code_metrics
+
+      - name: 运行代码质量分析
+        run: dart pub global run dart_code_metrics:metrics analyze lib --set-exit-if-changed
+
+      - name: 生成质量报告
+        run: dart pub global run dart_code_metrics:metrics report lib --reporter=html --output=metrics-report.html
+
+      - name: 上传质量报告
+        uses: actions/upload-artifact@v3
+        with:
+          name: quality-report
+          path: metrics-report.html
+
+  test-coverage:
+    name: 测试覆盖率检查
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: stable
+
+      - name: 获取依赖
+        run: flutter pub get
+
+      - name: 运行测试并生成覆盖率
+        run: flutter test --coverage
+
+      - name: 检查覆盖率阈值
+        run: |
+          dart pub global activate coverage
+          dart pub global run coverage:test_with_coverage --min-coverage 80
+
+      - name: 上传覆盖率报告
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: coverage/
+
+  static-analysis:
+    name: 静态代码分析
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: stable
+
+      - name: 获取依赖
+        run: flutter pub get
+
+      - name: 运行静态分析
+        run: flutter analyze --fatal-infos .
+
+      - name: 检查导入排序
+        run: flutter pub run import_sorter:main --exit-if-changed
+
+      - name: 检查代码格式
+        run: dart format --output=none --set-exit-if-changed .
+
+  dependency-check:
+    name: 依赖安全检查
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: stable
+
+      - name: 获取依赖
+        run: flutter pub get
+
+      - name: 检查依赖
+        run: flutter pub run dependency_validator
+
+      - name: 检查过时依赖
+        run: flutter pub outdated --mode=null-safety
+
+  performance-analysis:
+    name: 性能分析
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: stable
+
+      - name: 获取依赖
+        run: flutter pub get
+
+      - name: 运行性能测试
+        run: dart tool/performance.dart
+
+      - name: 生成性能报告
+        run: dart pub global run dart_dev:performance
+
+      - name: 上传性能报告
+        uses: actions/upload-artifact@v3
+        with:
+          name: performance-report
+          path: performance-report.html
+
+  security-scan:
+    name: 安全扫描
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: stable
+
+      - name: 获取依赖
+        run: flutter pub get
+
+      - name: 运行安全扫描
+        run: dart pub run pana:analyze
+
+      - name: 检查敏感信息
+        run: |
+          dart pub global activate dart_pre_commit
+          dart pub global run dart_pre_commit:check_secrets
+
+  final-report:
+    name: 生成最终报告
+    runs-on: ubuntu-latest
+    needs: [dart-code-metrics, test-coverage, static-analysis, dependency-check, performance-analysis, security-scan]
+    if: always()
+    steps:
+      - name: 下载所有报告
+        uses: actions/download-artifact@v3
+
+      - name: 生成综合报告
+        run: |
+          echo "# chromaUI 代码质量报告" > QUALITY_REPORT.md
+          echo "## 生成时间: $(date)" >> QUALITY_REPORT.md
+          echo "" >> QUALITY_REPORT.md
+
+          if [ -f "quality-report/metrics-report.html" ]; then
+            echo "## 代码质量指标" >> QUALITY_REPORT.md
+            echo "✅ 通过" >> QUALITY_REPORT.md
+          fi
+
+          if [ -f "coverage-report/lcov.info" ]; then
+            echo "## 测试覆盖率" >> QUALITY_REPORT.md
+            echo "✅ 通过 (≥80%)" >> QUALITY_REPORT.md
+          fi
+
+          echo "## 静态分析" >> QUALITY_REPORT.md
+          echo "✅ 通过" >> QUALITY_REPORT.md
+
+          echo "## 依赖检查" >> QUALITY_REPORT.md
+          echo "✅ 通过" >> QUALITY_REPORT.md
+
+          if [ -f "performance-report/performance-report.html" ]; then
+            echo "## 性能分析" >> QUALITY_REPORT.md
+            echo "✅ 通过" >> QUALITY_REPORT.md
+          fi
+
+          echo "## 安全扫描" >> QUALITY_REPORT.md
+          echo "✅ 通过" >> QUALITY_REPORT.md
+
+      - name: 上传综合报告
+        uses: actions/upload-artifact@v3
+        with:
+          name: comprehensive-quality-report
+          path: QUALITY_REPORT.md

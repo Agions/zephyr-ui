@@ -1,0 +1,50 @@
+# Development Configuration
+app_name: "chromaUI Development"
+version: "1.0.0-dev"
+environment: "development"
+
+# API Configuration
+api:
+  base_url: "https://dev-api.chroma-ui.dev"
+  timeout: 30000
+  connect_timeout: 15000
+  headers:
+    "Content-Type": "application/json"
+    "Accept": "application/json"
+  enable_logging: true
+
+# Theme Configuration
+theme:
+  primary_color: "#2196F3"
+  secondary_color: "#FF9800"
+  font_family: "Inter"
+  border_radius: 8.0
+  enable_dark_mode: true
+
+# Feature Configuration
+features:
+  enable_analytics: true
+  enable_crash_reporting: true
+  enable_performance_monitoring: true
+  enable_offline_mode: false
+  enabled_modules:
+    - "basic_components"
+    - "form_components"
+    - "display_components"
+    - "layout_components"
+
+# Analytics Configuration
+analytics:
+  tracking_id: "UA-DEV-123456"
+  enable_tracking: true
+  custom_properties:
+    environment: "development"
+    version: "1.0.0-dev"
+
+# Logging Configuration
+logging:
+  level: "DEBUG"
+  enable_console: true
+  enable_file: true
+  max_file_size: 10485760  # 10MB
+  max_files: 5

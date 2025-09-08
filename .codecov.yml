@@ -1,0 +1,152 @@
+# Codecov configuration for chromaUI
+# Enterprise-grade coverage reporting
+
+coverage:
+  status:
+    project:
+      default:
+        target: 80%
+        threshold: 1%
+        informational: true
+    patch:
+      default:
+        target: 80%
+        threshold: 1%
+        informational: true
+    changes:
+      default:
+        target: 80%
+        threshold: 1%
+        informational: true
+
+ignore:
+  - "**/*.g.dart"
+  - "**/*.freezed.dart"
+  - "**/*.mocks.dart"
+  - "**/*_test.dart"
+  - "lib/src/generated/**"
+  - "lib/src/components/**/generated/**"
+  - "test/**"
+  - "example/**"
+
+comment:
+  layout: "reach,diff,flags,tree"
+  behavior: default
+  require_changes: false
+
+flags:
+  unit:
+    paths:
+      - test/unit/
+    carryforward: true
+  widget:
+    paths:
+      - test/widget/
+    carryforward: true
+  integration:
+    paths:
+      - test/integration/
+    carryforward: true
+  performance:
+    paths:
+      - test/performance/
+    carryforward: true
+  accessibility:
+    paths:
+      - test/accessibility/
+    carryforward: true
+
+parsers:
+  gcov:
+    branch_detection:
+      conditional: yes
+      loop: yes
+      method: no
+      macro: no
+
+github_checks:
+  annotations: true
+
+component_management:
+  individual_components: true
+  default_actions:
+    # If component is not found in any component section, it will be classified under "default" component
+    # For more details: https://docs.codecov.com/docs/component-management#default-actions
+    default_actions:
+      # If component is not found in any component section, it will be classified under "default" component
+      # For more details: https://docs.codecov.com/docs/component-management#default-actions
+      comment: false
+      patch: no
+      changes: no
+
+fixes:
+  - "*/::"
+
+coverage:
+  range: 70..100
+  round: down
+  precision: 2
+
+comment:
+  layout: "reach,diff,flags,tree"
+  behavior: default
+  require_changes: false
+
+github_checks:
+  annotations: true
+
+component_management:
+  default_actions:
+    default_actions:
+      comment: false
+      patch: no
+      changes: no
+
+ignore:
+  - "**/*.g.dart"
+  - "**/*.freezed.dart"
+  - "**/*.mocks.dart"
+  - "**/*_test.dart"
+  - "lib/src/generated/**"
+  - "lib/src/components/**/generated/**"
+  - "test/**"
+  - "example/**"
+
+flags:
+  unit:
+    paths:
+      - test/unit/
+    carryforward: true
+  widget:
+    paths:
+      - test/widget/
+    carryforward: true
+  integration:
+    paths:
+      - test/integration/
+    carryforward: true
+  performance:
+    paths:
+      - test/performance/
+    carryforward: true
+  accessibility:
+    paths:
+      - test/accessibility/
+    carryforward: true
+
+status:
+  project:
+    default:
+      target: 80%
+      threshold: 1%
+      informational: true
+  patch:
+    default:
+      target: 80%
+      threshold: 1%
+      informational: true
+  changes:
+    default:
+      target: 80%
+      threshold: 1%
+      informational: true

@@ -1,0 +1,294 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [ published ]
+
+env:
+  FLUTTER_VERSION: '3.19.0'
+  DART_VERSION: '3.3.0'
+  PUB_CACHE_KEY: 'pub-cache-${{ hashFiles('pubspec.yaml') }}'
+  MELOS_VERSION: '3.4.0'
+
+jobs:
+  analyze:
+    name: 代码分析
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+
+      - name: 获取依赖
+        run: |
+          flutter pub get
+          flutter pub deps
+
+      - name: 代码格式检查
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: 静态分析
+        run: flutter analyze --fatal-infos .
+
+      - name: 导入顺序检查
+        run: flutter pub run import_sorter:main --exit-if-changed
+
+  test:
+    name: 测试套件
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        flutter-version: ['3.19.0', '3.18.0-0.5.pre']
+      fail-fast: false
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ matrix.flutter-version }}
+          channel: stable
+
+      - name: 缓存 Pub 依赖
+        uses: actions/cache@v3
+        with:
+          path: ~/.pub-cache
+          key: ${{ env.PUB_CACHE_KEY }}
+
+      - name: 获取依赖
+        run: flutter pub get
+
+      - name: 运行单元测试
+        run: flutter test --coverage
+
+      - name: 运行集成测试
+        run: flutter test integration_test/
+
+      - name: 生成覆盖率报告
+        run: |
+          dart pub global activate coverage
+          dart pub global run coverage:format_coverage --lcov --in=coverage/lcov.info --out=coverage/lcovFormatted.info --packages=.dart_tool/package_config.json --report-on=lib/
+
+      - name: 上传覆盖率到 Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: coverage/lcovFormatted.info
+          fail_ci_if_error: true
+
+  build:
+    name: 构建验证
+    runs-on: ${{ matrix.os }}
+    needs: [analyze, test]
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        target: [apk, aab, ipa]
+        exclude:
+          - os: ubuntu-latest
+            target: ipa
+          - os: windows-latest
+            target: apk
+          - os: windows-latest
+            target: aab
+          - os: windows-latest
+            target: ipa
+          - os: macos-latest
+            target: apk
+          - os: macos-latest
+            target: aab
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+
+      - name: 获取依赖
+        run: flutter pub get
+
+      - name: 构建示例应用
+        run: |
+          cd example
+          flutter pub get
+          flutter build ${{ matrix.target }} --release
+
+  performance:
+    name: 性能测试
+    runs-on: ubuntu-latest
+    needs: [analyze, test]
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+
+      - name: 获取依赖
+        run: flutter pub get
+
+      - name: 运行性能测试
+        run: dart tool/performance.dart
+
+      - name: 生成性能报告
+        run: dart pub global run dart_dev:performance
+
+  security:
+    name: 安全扫描
+    runs-on: ubuntu-latest
+    needs: [analyze, test]
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+
+      - name: 获取依赖
+        run: flutter pub get
+
+      - name: 依赖安全扫描
+        run: flutter pub run dependency_validator
+
+      - name: 代码安全扫描
+        run: dart pub run dart_code_metrics:metrics analyze lib
+
+  quality:
+    name: 代码质量检查
+    runs-on: ubuntu-latest
+    needs: [analyze, test]
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+
+      - name: 获取依赖
+        run: flutter pub get
+
+      - name: 运行代码质量检查
+        run: dart analyze --fatal-infos .
+
+      - name: 检查测试覆盖率
+        run: |
+          dart pub global activate coverage
+          dart pub global run coverage:test_with_coverage --min-coverage 80
+
+  documentation:
+    name: 文档生成
+    runs-on: ubuntu-latest
+    needs: [analyze, test, quality]
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+
+      - name: 获取依赖
+        run: flutter pub get
+
+      - name: 生成 API 文档
+        run: dart doc lib
+
+      - name: 部署文档到 GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./doc/api
+
+  deploy:
+    name: 发布部署
+    runs-on: ubuntu-latest
+    needs: [analyze, test, build, performance, security, quality, documentation]
+    if: github.event_name == 'release' && github.event.action == 'published'
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+
+      - name: 获取依赖
+        run: flutter pub get
+
+      - name: 发布到 pub.dev
+        run: dart pub publish --force
+        env:
+          PUB_TOKEN: ${{ secrets.PUB_DEV_TOKEN }}
+
+
+      - name: 创建发布说明
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { tag_name, name, body } = context.payload.release;
+            const { owner, repo } = context.repo;
+
+            await github.rest.repos.createRelease({
+              owner,
+              repo,
+              tag_name,
+              name,
+              body: `${body}\n\n## CI/CD Pipeline\n\n✅ 代码分析通过\n✅ 测试套件通过\n✅ 构建验证通过\n✅ 性能测试通过\n✅ 安全扫描通过\n✅ 质量检查通过\n✅ 文档生成完成`,
+              draft: false,
+              prerelease: false,
+            });
+
+  notify:
+    name: 通知
+    runs-on: ubuntu-latest
+    needs: [deploy]
+    if: always()
+    steps:
+      - name: 发送成功通知
+        if: needs.deploy.result == 'success'
+        uses: 8398a7/action-slack@v3
+        with:
+          status: success
+          fields: repo,message,commit,author,action,eventName,ref,workflow
+          text: '🎉 chromaUI 发布成功！'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: 发送失败通知
+        if: needs.deploy.result == 'failure'
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          fields: repo,message,commit,author,action,eventName,ref,workflow
+          text: '❌ chromaUI 发布失败！'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

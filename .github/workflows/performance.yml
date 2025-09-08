@@ -1,0 +1,233 @@
+name: 性能测试
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 2 * * *'  # 每天凌晨2点运行
+
+jobs:
+  performance-benchmark:
+    name: 性能基准测试
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        flutter-version: ['3.19.0', '3.18.0-0.5.pre']
+      fail-fast: false
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ matrix.flutter-version }}
+          channel: stable
+
+      - name: 获取依赖
+        run: flutter pub get
+
+      
+      - name: 运行性能基准测试
+        run: dart tool/performance.dart
+
+      - name: 生成性能报告
+        run: |
+          dart pub global activate benchmark_harness
+          dart tool/performance_benchmark.dart > performance_results.json
+
+      - name: 上传性能结果
+        uses: actions/upload-artifact@v3
+        with:
+          name: performance-results-${{ matrix.os }}-${{ matrix.flutter-version }}
+          path: performance_results.json
+
+  memory-usage:
+    name: 内存使用测试
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: stable
+
+      - name: 获取依赖
+        run: flutter pub get
+
+      - name: 运行内存使用测试
+        run: |
+          flutter test test/performance/memory_usage_test.dart --reporter=expanded
+
+      - name: 分析内存使用报告
+        run: |
+          dart tool/analyze_memory_usage.dart
+
+      - name: 上传内存使用报告
+        uses: actions/upload-artifact@v3
+        with:
+          name: memory-usage-report
+          path: memory_usage_report.json
+
+  render-performance:
+    name: 渲染性能测试
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: stable
+
+      - name: 获取依赖
+        run: flutter pub get
+
+      - name: 运行渲染性能测试
+        run: |
+          flutter drive --target=test/performance/render_performance_test.dart
+
+      - name: 分析渲染性能
+        run: |
+          dart tool/analyze_render_performance.dart
+
+      - name: 上传渲染性能报告
+        uses: actions/upload-artifact@v3
+        with:
+          name: render-performance-report
+          path: render_performance_report.json
+
+  widget-benchmark:
+    name: 组件性能基准测试
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: stable
+
+      - name: 获取依赖
+        run: flutter pub get
+
+      - name: 运行组件性能测试
+        run: |
+          flutter test test/performance/widget_benchmark_test.dart --reporter=expanded
+
+      - name: 生成组件性能报告
+        run: |
+          dart tool/generate_widget_benchmark_report.dart
+
+      - name: 上传组件性能报告
+        uses: actions/upload-artifact@v3
+        with:
+          name: widget-benchmark-report
+          path: widget_benchmark_report.json
+
+  comparison-with-baseline:
+    name: 性能基准对比
+    runs-on: ubuntu-latest
+    needs: [performance-benchmark, memory-usage, render-performance, widget-benchmark]
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 下载所有性能报告
+        uses: actions/download-artifact@v3
+
+      - name: 与基准性能对比
+        run: |
+          dart tool/compare_performance_baseline.dart
+
+      - name: 生成性能对比报告
+        run: |
+          echo "# 性能对比报告" > PERFORMANCE_COMPARISON.md
+          echo "## 生成时间: $(date)" >> PERFORMANCE_COMPARISON.md
+          echo "" >> PERFORMANCE_COMPARISON.md
+          echo "### 与基准性能对比结果" >> PERFORMANCE_COMPARISON.md
+          echo "" >> PERFORMANCE_COMPARISON.md
+          
+          if [ -f "performance_comparison.json" ]; then
+            dart tool/format_performance_comparison.dart >> PERFORMANCE_COMPARISON.md
+          fi
+
+      - name: 上传性能对比报告
+        uses: actions/upload-artifact@v3
+        with:
+          name: performance-comparison-report
+          path: |
+            PERFORMANCE_COMPARISON.md
+            performance_comparison.json
+
+      - name: 性能降级检查
+        run: |
+          dart tool/check_performance_regression.dart
+        continue-on-error: true
+
+  performance-dashboard:
+    name: 性能仪表板更新
+    runs-on: ubuntu-latest
+    needs: [comparison-with-baseline]
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 下载性能对比报告
+        uses: actions/download-artifact@v3
+        with:
+          name: performance-comparison-report
+
+      - name: 更新性能仪表板
+        run: |
+          dart tool/update_performance_dashboard.dart
+
+      - name: 部署性能仪表板
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./performance_dashboard
+          destination_dir: performance
+
+  notify-performance-issues:
+    name: 性能问题通知
+    runs-on: ubuntu-latest
+    needs: [comparison-with-baseline]
+    if: failure()
+    steps:
+      - name: 发送性能降级通知
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          fields: repo,message,commit,author,action,eventName,ref,workflow
+          text: '⚠️ 检测到性能降级！'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: 创建性能问题
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const { sha } = context;
+            
+            await github.rest.issues.create({
+              owner,
+              repo,
+              title: '🚨 性能降级检测',
+              body: `检测到性能降级，请查看性能报告并优化。\n\n提交: ${sha}\n时间: ${new Date().toISOString()}`,
+              labels: ['performance', 'regression', 'needs-attention'],
+            });

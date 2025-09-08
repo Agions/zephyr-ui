@@ -1,0 +1,199 @@
+# Dart test configuration
+# Enterprise-grade test settings for chromaUI
+
+# Test runner configuration
+reporter: expanded
+test_on: vm
+concurrency: 4
+timeout: 30s
+
+# 性能测试配置
+performance_test:
+  enabled: true
+  timeout: 60s
+  iterations: 100
+  warmup_iterations: 10
+  thresholds:
+    frame_build_time_ms: 16.67
+    render_time_ms: 16.67
+    memory_usage_mb: 100
+    widget_build_time_ms: 5.0
+
+# Coverage configuration
+coverage:
+  output: coverage/
+  minimum_coverage: 0.8
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "**/*.mocks.dart"
+    - "**/*_test.dart"
+    - "lib/src/generated/**"
+    - "lib/src/components/**/generated/**"
+
+# Test tags
+tags:
+  unit:
+    description: "Unit tests"
+  widget:
+    description: "Widget tests"
+  integration:
+    description: "Integration tests"
+  performance:
+    description: "Performance tests"
+  accessibility:
+    description: "Accessibility tests"
+  golden:
+    description: "Golden tests"
+  e2e:
+    description: "End-to-end tests"
+
+# Test configuration
+platforms:
+  - vm
+  - chrome
+  - firefox
+
+# Include patterns
+include:
+  - test/unit/**_test.dart
+  - test/widget/**_test.dart
+  - test/integration/**_test.dart
+  - test/performance/**_test.dart
+  - test/accessibility/**_test.dart
+  - test/golden/**_test.dart
+  - test/e2e/**_test.dart
+
+# Exclude patterns
+exclude:
+  - "**/test_data/**"
+  - "**/fixtures/**"
+  - "**/mocks/**"
+  - "**/generated/**"
+
+# Test configuration for different environments
+presets:
+  development:
+    reporter: expanded
+    concurrency: 2
+    timeout: 60s
+
+  ci:
+    reporter: expanded
+    concurrency: 4
+    timeout: 30s
+    coverage: true
+
+  performance:
+    reporter: expanded
+    concurrency: 1
+    timeout: 120s
+    tags: performance
+
+  accessibility:
+    reporter: expanded
+    concurrency: 2
+    timeout: 60s
+    tags: accessibility
+
+  golden:
+    reporter: expanded
+    concurrency: 1
+    timeout: 60s
+    tags: golden
+
+# Define test suites
+suites:
+  unit_tests:
+    include: test/unit/**_test.dart
+    tags: unit
+
+  widget_tests:
+    include: test/widget/**_test.dart
+    tags: widget
+
+  integration_tests:
+    include: test/integration/**_test.dart
+    tags: integration
+
+  performance_tests:
+    include: test/performance/**_test.dart
+    tags: performance
+
+  accessibility_tests:
+    include: test/accessibility/**_test.dart
+    tags: accessibility
+
+  golden_tests:
+    include: test/golden/**_test.dart
+    tags: golden
+
+  e2e_tests:
+    include: test/e2e/**_test.dart
+    tags: e2e
+
+# Test hooks
+hooks:
+  pre-test: |
+    echo "Running pre-test setup..."
+    dart pub get
+
+  post-test: |
+    echo "Running post-test cleanup..."
+    if [ -f "coverage/lcov.info" ]; then
+      lcov --remove coverage/lcov.info 'lib/*_test.dart' 'lib/*/*.g.dart' -o coverage/filtered.info
+      genhtml coverage/filtered.info --output-directory coverage/html
+    fi
+
+# Test configuration for specific platforms
+platform_overrides:
+  chrome:
+    headless: true
+    args:
+      - --no-sandbox
+      - --disable-setuid-sandbox
+      - --disable-dev-shm-usage
+      - --disable-accelerated-2d-canvas
+      - --no-first-run
+      - --no-zygote
+      - --disable-gpu
+
+  firefox:
+    headless: true
+    args:
+      - --headless
+      - --no-remote
+      - --private-window
+
+# Test retry configuration
+retry: 2
+retry_delay: 1s
+
+# Test shuffle configuration
+shuffle: true
+shuffle_seed: 42
+
+# Test stop configuration
+stop_on_failure: false
+stop_on_skipped: false
+
+# Test verbose configuration
+verbose: false
+trace: false
+
+# Test configuration for different build modes
+build_modes:
+  debug:
+    dart_defines:
+      - "dart.vm.profile=false"
+      - "dart.vm.product=false"
+
+  profile:
+    dart_defines:
+      - "dart.vm.profile=true"
+      - "dart.vm.product=false"
+
+  release:
+    dart_defines:
+      - "dart.vm.profile=false"
+      - "dart.vm.product=true"

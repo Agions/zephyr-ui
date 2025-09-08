@@ -1,0 +1,200 @@
+# chromaUI Mobile Configuration
+# Mobile-specific build configurations for iOS and Android
+
+# iOS Configuration
+ios:
+  # App Information
+  app_name: chromaUI Demo
+  bundle_id: com.chromaui.demo
+  version: 1.0.0
+  build_number: 1
+
+  # Icons and Launch Screen
+  icons:
+    ios: true
+    android: true
+
+  # iOS Specific Settings
+  deployment_target: "13.0"
+  device_family: [1, 2]  # iPhone, iPad
+
+  # Permissions
+  permissions:
+    - camera
+    - microphone
+    - location
+    - photos
+    - notifications
+    - contacts
+    - calendar
+    - reminders
+    - bluetooth
+    - motion
+
+  # Capabilities
+  capabilities:
+    - push_notifications
+    - background_fetch
+    - background_processing
+    - icloud
+    - siri
+
+  # App Store Information
+  app_store:
+    category: utilities
+    age_rating: 4+
+    privacy_policy_url: https://chromaui.com/privacy
+    support_url: https://chromaui.com/support
+
+# Android Configuration
+android:
+  # App Information
+  app_name: chromaUI Demo
+  package_name: com.chromaui.demo
+  version: 1.0.0
+  version_code: 1
+
+  # Icons
+  icons:
+    android: true
+    adaptive_icon: true
+
+  # Android Specific Settings
+  min_sdk_version: 21
+  target_sdk_version: 34
+  compile_sdk_version: 34
+
+  # Permissions
+  permissions:
+    - android.permission.CAMERA
+    - android.permission.RECORD_AUDIO
+    - android.permission.ACCESS_FINE_LOCATION
+    - android.permission.ACCESS_COARSE_LOCATION
+    - android.permission.READ_EXTERNAL_STORAGE
+    - android.permission.WRITE_EXTERNAL_STORAGE
+    - android.permission.POST_NOTIFICATIONS
+    - android.permission.READ_CONTACTS
+    - android.permission.READ_CALENDAR
+    - android.permission.WRITE_CALENDAR
+    - android.permission.BLUETOOTH
+    - android.permission.BLUETOOTH_ADMIN
+    - android.permission.INTERNET
+    - android.permission.ACCESS_NETWORK_STATE
+    - android.permission.ACCESS_WIFI_STATE
+    - android.permission.VIBRATE
+    - android.permission.WAKE_LOCK
+
+  # Features
+  features:
+    - android.hardware.camera
+    - android.hardware.camera.autofocus
+    - android.hardware.location
+    - android.hardware.location.gps
+    - android.hardware.location.network
+    - android.hardware.microphone
+    - android.hardware.touchscreen
+    - android.hardware.screen.portrait
+    - android.hardware.screen.landscape
+
+  # Gradle Configuration
+  gradle:
+    minify_enabled: true
+    shrink_resources: true
+
+  # ProGuard Configuration
+  proguard:
+    - keep class com.chromaui.** { *; }
+    - keepclassmembers class com.chromaui.** { *; }
+
+  # Google Play Store Information
+  play_store:
+    category: TOOLS
+    content_rating: Everyone
+    privacy_policy_url: https://chromaui.com/privacy
+    support_url: https://chromaui.com/support
+
+# Common Mobile Settings
+mobile:
+  # App Information
+  display_name: chromaUI Demo
+  app_description: Enterprise-Grade Flutter UI Component Library
+
+  # Design System
+  design_system:
+    primary_color: "#2196F3"
+    secondary_color: "#FFC107"
+    accent_color: "#FF5722"
+    background_color: "#FFFFFF"
+    surface_color: "#F5F5F5"
+    error_color: "#F44336"
+    on_primary_color: "#FFFFFF"
+    on_secondary_color: "#000000"
+    on_surface_color: "#000000"
+    on_background_color: "#000000"
+
+  # Typography
+  typography:
+    font_family: Inter
+    heading_font: Inter
+    body_font: Inter
+
+  # Spacing
+  spacing:
+    xs: 4.0
+    sm: 8.0
+    md: 16.0
+    lg: 24.0
+    xl: 32.0
+    xxl: 48.0
+
+  # Border Radius
+  border_radius:
+    sm: 4.0
+    md: 8.0
+    lg: 12.0
+    xl: 16.0
+    full: 999.0
+
+  # Animations
+  animations:
+    fast: 150
+    normal: 300
+    slow: 500
+
+  # Performance Settings
+  performance:
+    max_image_cache_size: 100  # MB
+    max_memory_cache_size: 50   # MB
+    max_concurrent_loads: 4
+    enable_image_optimization: true
+    enable_lazy_loading: true
+    enable_virtual_scrolling: true
+
+  # Security Settings
+  security:
+    enable_ssl_pinning: true
+    enable_certificate_pinning: true
+    enable_data_encryption: true
+    enable_biometric_auth: true
+
+  # Analytics Settings
+  analytics:
+    enable_analytics: true
+    enable_crash_reporting: true
+    enable_performance_monitoring: true
+    enable_user_tracking: true
+
+  # Development Settings
+  development:
+    enable_debug_menu: true
+    enable_feature_flags: true
+    enable_logging: true
+    enable_hot_reload: true
+
+  # Testing Settings
+  testing:
+    enable_widget_tests: true
+    enable_integration_tests: true
+    enable_golden_tests: true
+    enable_performance_tests: true
+    test_coverage_target: 90

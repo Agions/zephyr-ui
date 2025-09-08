@@ -1,0 +1,99 @@
+name: melos
+repository: https://github.com/agions/chromaui.git
+
+command:
+  bootstrap:
+    usePubspecOverrides: true
+    runPubGetInParallel: true
+
+  clean:
+    hooks:
+      post: dart clean
+
+  format:
+    hooks:
+      post: dart format --set-exit-if-changed .
+
+  test:
+    run: dart test
+    exec: flutter test
+    description: Run all tests
+
+  test:coverage:
+    run: dart test --coverage
+    exec: flutter test --coverage
+    description: Run tests with coverage
+
+  test:watch:
+    run: dart test --watch
+    description: Run tests in watch mode
+
+  analyze:
+    run: dart analyze .
+    description: Run static analysis
+
+  build:
+    run: dart run build_runner build --delete-conflicting-outputs
+    description: Run code generation
+
+  build:clean:
+    run: dart run build_runner clean
+    description: Clean generated files
+
+  pub:get:
+    run: dart pub get
+    description: Get dependencies
+
+  pub:upgrade:
+    run: dart pub upgrade
+    description: Upgrade dependencies
+
+  pub:outdated:
+    run: dart pub outdated
+    description: Check for outdated dependencies
+
+  docs:
+    run: dart doc
+    description: Generate documentation
+
+  publish:dry-run:
+    run: dart pub publish --dry-run
+    description: Test package publishing
+
+  publish:
+    run: dart pub publish
+    description: Publish package to pub.dev
+
+packages:
+  - .
+  - example/*
+  - test/*
+
+scripts:
+  lint:
+    run: dart run custom_lint
+    description: Run custom linting
+
+  fix:
+    run: dart fix --apply
+    description: Apply automated fixes
+
+  metrics:
+    run: dart run tool/performance.dart
+    description: Run performance analysis
+
+  quality:
+    run: |
+      melos analyze
+      melos test:coverage
+      melos format
+      melos metrics
+    description: Run full quality check
+
+  release:
+    run: |
+      melos quality
+      melos build
+      melos docs
+      melos publish:dry-run
+    description: Prepare for release
