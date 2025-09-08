@@ -1,10 +1,10 @@
 # Installation
 
-This guide will help you install and set up zephyr-ui UI in your Flutter project.
+This guide will help you install and set up Zephyr UI in your Flutter project.
 
 ## Prerequisites
 
-Before installing zephyr-ui UI, ensure you have:
+Before installing Zephyr UI, ensure you have:
 
 - **Flutter SDK**: Version 3.19.0 or higher
 - **Dart SDK**: Version 3.3.0 or higher
@@ -15,7 +15,7 @@ Before installing zephyr-ui UI, ensure you have:
 
 ### Step 1: Add Dependency
 
-Add zephyr-ui UI to your `pubspec.yaml` file:
+Add Zephyr UI to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
@@ -34,7 +34,7 @@ flutter pub get
 
 ### Step 3: Import the Library
 
-Import zephyr-ui UI in your Dart files:
+Import Zephyr UI in your Dart files:
 
 ```dart
 import 'package:zephyr-ui/zephyr-ui.dart';
@@ -44,7 +44,7 @@ import 'package:zephyr-ui/zephyr-ui.dart';
 
 ### Android Setup
 
-No additional setup is required for Android. zephyr-ui UI works out of the box with Android projects.
+No additional setup is required for Android. Zephyr UI works out of the box with Android projects.
 
 ### iOS Setup
 
@@ -73,7 +73,7 @@ dependencies:
 
 ## Verification
 
-To verify that zephyr-ui UI is properly installed, create a simple test:
+To verify that Zephyr UI is properly installed, create a simple test:
 
 ```dart
 import 'package:flutter/material.dart';
@@ -102,7 +102,7 @@ class TestScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      AppBar(title: const Text('Zephyr UI Installation Test'))
+      appBar: AppBar(title: const Text('Zephyr UI Installation Test'))
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -187,7 +187,7 @@ cd android
 
 ## Next Steps
 
-Once zephyr-ui UI is successfully installed:
+Once Zephyr UI is successfully installed:
 
 1. **Read the [Quick Start Guide](./quick-start)** to learn basic usage
 2. **Explore [Design Tokens](./design-tokens/overview)** for theming
@@ -196,7 +196,7 @@ Once zephyr-ui UI is successfully installed:
 
 ## Development Setup
 
-For development with zephyr-ui UI, consider these additional tools:
+For development with Zephyr UI, consider these additional tools:
 
 ### Recommended VS Code Extensions
 
