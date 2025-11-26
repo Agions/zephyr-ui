@@ -5,50 +5,24 @@ import 'package:flutter/foundation.dart';
 ///
 /// 提供图表的样式配置选项，包括颜色、字体、边框等。
 class ZephyrChartTheme {
-  /// 背景颜色
-  final Color backgroundColor;
-  
-  /// 边框颜色
-  final Color borderColor;
-  
-  /// 边框宽度
-  final double borderWidth;
-  
-  /// 边框圆角
-  final BorderRadius borderRadius;
-  
-  /// 标题样式
-  final TextStyle titleStyle;
-  
-  /// 副标题样式
-  final TextStyle subtitleStyle;
-  
-  /// 图例样式
-  final TextStyle legendStyle;
-  
-  /// 标签样式
-  final TextStyle labelStyle;
-  
-  /// 网格线颜色
-  final Color gridColor;
-  
-  /// 网格线宽度
-  final double gridWidth;
-  
-  /// 工具提示背景颜色
-  final Color tooltipBackgroundColor;
-  
-  /// 工具提示文本颜色
-  final Color tooltipTextColor;
-  
-  /// 工具提示边框颜色
-  final Color tooltipBorderColor;
-  
-  /// 内边距
-  final EdgeInsets padding;
-  
-  /// 默认颜色列表
-  final List<Color> defaultColors;
+  /// 创建自定义主题
+  const ZephyrChartTheme({
+    required this.backgroundColor,
+    required this.borderColor,
+    required this.borderWidth,
+    required this.borderRadius,
+    required this.titleStyle,
+    required this.subtitleStyle,
+    required this.legendStyle,
+    required this.labelStyle,
+    required this.gridColor,
+    required this.gridWidth,
+    required this.tooltipBackgroundColor,
+    required this.tooltipTextColor,
+    required this.tooltipBorderColor,
+    required this.padding,
+    required this.defaultColors,
+  });
 
   /// 创建亮色主题
   const ZephyrChartTheme.light()
@@ -130,30 +104,56 @@ class ZephyrChartTheme {
           Color(0xFFA3E635),
         ];
 
-  /// 创建自定义主题
-  const ZephyrChartTheme({
-    required this.backgroundColor,
-    required this.borderColor,
-    required this.borderWidth,
-    required this.borderRadius,
-    required this.titleStyle,
-    required this.subtitleStyle,
-    required this.legendStyle,
-    required this.labelStyle,
-    required this.gridColor,
-    required this.gridWidth,
-    required this.tooltipBackgroundColor,
-    required this.tooltipTextColor,
-    required this.tooltipBorderColor,
-    required this.padding,
-    required this.defaultColors,
-  });
+  /// 背景颜色
+  final Color backgroundColor;
+
+  /// 边框颜色
+  final Color borderColor;
+
+  /// 边框宽度
+  final double borderWidth;
+
+  /// 边框圆角
+  final BorderRadius borderRadius;
+
+  /// 标题样式
+  final TextStyle titleStyle;
+
+  /// 副标题样式
+  final TextStyle subtitleStyle;
+
+  /// 图例样式
+  final TextStyle legendStyle;
+
+  /// 标签样式
+  final TextStyle labelStyle;
+
+  /// 网格线颜色
+  final Color gridColor;
+
+  /// 网格线宽度
+  final double gridWidth;
+
+  /// 工具提示背景颜色
+  final Color tooltipBackgroundColor;
+
+  /// 工具提示文本颜色
+  final Color tooltipTextColor;
+
+  /// 工具提示边框颜色
+  final Color tooltipBorderColor;
+
+  /// 内边距
+  final EdgeInsets padding;
+
+  /// 默认颜色列表
+  final List<Color> defaultColors;
 
   /// 从上下文获取主题
   static ZephyrChartTheme of(BuildContext context) {
     final brightness = Theme.of(context).brightness;
-    return brightness == Brightness.dark 
-        ? const ZephyrChartTheme.dark() 
+    return brightness == Brightness.dark
+        ? const ZephyrChartTheme.dark()
         : const ZephyrChartTheme.light();
   }
 
@@ -186,7 +186,8 @@ class ZephyrChartTheme {
       labelStyle: labelStyle ?? this.labelStyle,
       gridColor: gridColor ?? this.gridColor,
       gridWidth: gridWidth ?? this.gridWidth,
-      tooltipBackgroundColor: tooltipBackgroundColor ?? this.tooltipBackgroundColor,
+      tooltipBackgroundColor:
+          tooltipBackgroundColor ?? this.tooltipBackgroundColor,
       tooltipTextColor: tooltipTextColor ?? this.tooltipTextColor,
       tooltipBorderColor: tooltipBorderColor ?? this.tooltipBorderColor,
       padding: padding ?? this.padding,

@@ -122,80 +122,93 @@ class ZephyrTextTheme extends ThemeExtension<ZephyrTextTheme> {
     final textTheme = Theme.of(zephyrTheme.context!).textTheme;
 
     return ZephyrTextTheme(
-      headlineLarge: textTheme.headlineLarge ?? TextStyle(
-        fontSize: ZephyrTypography.fontSize32,
-        fontWeight: ZephyrTypography.fontWeightBold,
-        color: isDark ? ZephyrColors.neutral100 : ZephyrColors.neutral900,
-        height: ZephyrTypography.lineHeight1_2,
-      ),
-      headlineMedium: textTheme.headlineMedium ?? TextStyle(
-        fontSize: ZephyrTypography.fontSize28,
-        fontWeight: ZephyrTypography.fontWeightSemiBold,
-        color: isDark ? ZephyrColors.neutral100 : ZephyrColors.neutral900,
-        height: ZephyrTypography.lineHeight1_3,
-      ),
-      headlineSmall: textTheme.headlineSmall ?? TextStyle(
-        fontSize: ZephyrTypography.fontSize24,
-        fontWeight: ZephyrTypography.fontWeightSemiBold,
-        color: isDark ? ZephyrColors.neutral100 : ZephyrColors.neutral900,
-        height: ZephyrTypography.lineHeight1_3,
-      ),
-      titleLarge: textTheme.titleLarge ?? TextStyle(
-        fontSize: ZephyrTypography.fontSize22,
-        fontWeight: ZephyrTypography.fontWeightSemiBold,
-        color: isDark ? ZephyrColors.neutral100 : ZephyrColors.neutral900,
-        height: ZephyrTypography.lineHeight1_3,
-      ),
-      titleMedium: textTheme.titleMedium ?? TextStyle(
-        fontSize: ZephyrTypography.fontSize18,
-        fontWeight: ZephyrTypography.fontWeightMedium,
-        color: isDark ? ZephyrColors.neutral100 : ZephyrColors.neutral900,
-        height: ZephyrTypography.lineHeight1_4,
-      ),
-      titleSmall: textTheme.titleSmall ?? TextStyle(
-        fontSize: ZephyrTypography.fontSize16,
-        fontWeight: ZephyrTypography.fontWeightMedium,
-        color: isDark ? ZephyrColors.neutral100 : ZephyrColors.neutral900,
-        height: ZephyrTypography.lineHeight1_4,
-      ),
-      bodyLarge: textTheme.bodyLarge ?? TextStyle(
-        fontSize: ZephyrTypography.fontSize16,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: isDark ? ZephyrColors.neutral100 : ZephyrColors.neutral900,
-        height: ZephyrTypography.lineHeight1_5,
-      ),
-      bodyMedium: textTheme.bodyMedium ?? TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: isDark ? ZephyrColors.neutral200 : ZephyrColors.neutral800,
-        height: ZephyrTypography.lineHeight1_5,
-      ),
-      bodySmall: textTheme.bodySmall ?? TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: isDark ? ZephyrColors.neutral300 : ZephyrColors.neutral700,
-        height: ZephyrTypography.lineHeight1_4,
-      ),
-      labelLarge: textTheme.labelLarge ?? TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightMedium,
-        color: isDark ? ZephyrColors.neutral200 : ZephyrColors.neutral700,
-        height: ZephyrTypography.lineHeight1_2,
-      ),
-      labelMedium: textTheme.labelMedium ?? TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightMedium,
-        color: isDark ? ZephyrColors.neutral300 : ZephyrColors.neutral600,
-        height: ZephyrTypography.lineHeight1_2,
-      ),
-      labelSmall: textTheme.labelSmall ?? TextStyle(
-        fontSize: ZephyrTypography.fontSize11,
-        fontWeight: ZephyrTypography.fontWeightMedium,
-        color: isDark ? ZephyrColors.neutral400 : ZephyrColors.neutral500,
-        height: ZephyrTypography.lineHeight1_2,
-      ),
+      headlineLarge: textTheme.headlineLarge ??
+          TextStyle(
+            fontSize: ZephyrFontTokens.fontSize32,
+            fontWeight: ZephyrFontTokens.fontWeightBold,
+            color: isDark ? ZephyrColors.neutral100 : ZephyrColors.neutral900,
+            height: ZephyrFontTokens.lineHeight1_2,
+          ),
+      headlineMedium: textTheme.headlineMedium ??
+          TextStyle(
+            fontSize: ZephyrFontTokens.fontSize28,
+            fontWeight: ZephyrFontTokens.fontWeightSemiBold,
+            color: isDark ? ZephyrColors.neutral100 : ZephyrColors.neutral900,
+            height: ZephyrFontTokens.lineHeight1_3,
+          ),
+      headlineSmall: textTheme.headlineSmall ??
+          TextStyle(
+            fontSize: ZephyrFontTokens.fontSize24,
+            fontWeight: ZephyrFontTokens.fontWeightSemiBold,
+            color: isDark ? ZephyrColors.neutral100 : ZephyrColors.neutral900,
+            height: ZephyrFontTokens.lineHeight1_3,
+          ),
+      titleLarge: textTheme.titleLarge ??
+          TextStyle(
+            fontSize: ZephyrFontTokens.fontSize22,
+            fontWeight: ZephyrFontTokens.fontWeightSemiBold,
+            color: isDark ? ZephyrColors.neutral100 : ZephyrColors.neutral900,
+            height: ZephyrFontTokens.lineHeight1_3,
+          ),
+      titleMedium: textTheme.titleMedium ??
+          TextStyle(
+            fontSize: ZephyrFontTokens.fontSize18,
+            fontWeight: ZephyrFontTokens.fontWeightMedium,
+            color: isDark ? ZephyrColors.neutral100 : ZephyrColors.neutral900,
+            height: ZephyrFontTokens.lineHeight1_4,
+          ),
+      titleSmall: textTheme.titleSmall ??
+          TextStyle(
+            fontSize: ZephyrFontTokens.fontSize16,
+            fontWeight: ZephyrFontTokens.fontWeightMedium,
+            color: isDark ? ZephyrColors.neutral100 : ZephyrColors.neutral900,
+            height: ZephyrFontTokens.lineHeight1_4,
+          ),
+      bodyLarge: textTheme.bodyLarge ??
+          TextStyle(
+            fontSize: ZephyrFontTokens.fontSize16,
+            fontWeight: ZephyrFontTokens.fontWeightRegular,
+            color: isDark ? ZephyrColors.neutral100 : ZephyrColors.neutral900,
+            height: ZephyrFontTokens.lineHeight1_5,
+          ),
+      bodyMedium: textTheme.bodyMedium ??
+          TextStyle(
+            fontSize: ZephyrFontTokens.fontSize14,
+            fontWeight: ZephyrFontTokens.fontWeightRegular,
+            color: isDark ? ZephyrColors.neutral200 : ZephyrColors.neutral800,
+            height: ZephyrFontTokens.lineHeight1_5,
+          ),
+      bodySmall: textTheme.bodySmall ??
+          TextStyle(
+            fontSize: ZephyrFontTokens.fontSize12,
+            fontWeight: ZephyrFontTokens.fontWeightRegular,
+            color: isDark ? ZephyrColors.neutral300 : ZephyrColors.neutral700,
+            height: ZephyrFontTokens.lineHeight1_4,
+          ),
+      labelLarge: textTheme.labelLarge ??
+          TextStyle(
+            fontSize: ZephyrFontTokens.fontSize14,
+            fontWeight: ZephyrFontTokens.fontWeightMedium,
+            color: isDark ? ZephyrColors.neutral200 : ZephyrColors.neutral700,
+            height: ZephyrFontTokens.lineHeight1_2,
+          ),
+      labelMedium: textTheme.labelMedium ??
+          TextStyle(
+            fontSize: ZephyrFontTokens.fontSize12,
+            fontWeight: ZephyrFontTokens.fontWeightMedium,
+            color: isDark ? ZephyrColors.neutral300 : ZephyrColors.neutral600,
+            height: ZephyrFontTokens.lineHeight1_2,
+          ),
+      labelSmall: textTheme.labelSmall ??
+          TextStyle(
+            fontSize: ZephyrFontTokens.fontSize11,
+            fontWeight: ZephyrFontTokens.fontWeightMedium,
+            color: isDark ? ZephyrColors.neutral400 : ZephyrColors.neutral500,
+            height: ZephyrFontTokens.lineHeight1_2,
+          ),
       primaryColor: isDark ? ZephyrColors.neutral100 : ZephyrColors.neutral900,
-      secondaryColor: isDark ? ZephyrColors.neutral300 : ZephyrColors.neutral600,
+      secondaryColor:
+          isDark ? ZephyrColors.neutral300 : ZephyrColors.neutral600,
       errorColor: ZephyrColors.error500,
       disabledColor: isDark ? ZephyrColors.neutral500 : ZephyrColors.neutral400,
     );
@@ -245,22 +258,30 @@ class ZephyrTextTheme extends ThemeExtension<ZephyrTextTheme> {
     if (other is! ZephyrTextTheme) return this;
 
     return ZephyrTextTheme(
-      headlineLarge: TextStyle.lerp(headlineLarge, other.headlineLarge, t) ?? headlineLarge,
-      headlineMedium: TextStyle.lerp(headlineMedium, other.headlineMedium, t) ?? headlineMedium,
-      headlineSmall: TextStyle.lerp(headlineSmall, other.headlineSmall, t) ?? headlineSmall,
+      headlineLarge: TextStyle.lerp(headlineLarge, other.headlineLarge, t) ??
+          headlineLarge,
+      headlineMedium: TextStyle.lerp(headlineMedium, other.headlineMedium, t) ??
+          headlineMedium,
+      headlineSmall: TextStyle.lerp(headlineSmall, other.headlineSmall, t) ??
+          headlineSmall,
       titleLarge: TextStyle.lerp(titleLarge, other.titleLarge, t) ?? titleLarge,
-      titleMedium: TextStyle.lerp(titleMedium, other.titleMedium, t) ?? titleMedium,
+      titleMedium:
+          TextStyle.lerp(titleMedium, other.titleMedium, t) ?? titleMedium,
       titleSmall: TextStyle.lerp(titleSmall, other.titleSmall, t) ?? titleSmall,
       bodyLarge: TextStyle.lerp(bodyLarge, other.bodyLarge, t) ?? bodyLarge,
       bodyMedium: TextStyle.lerp(bodyMedium, other.bodyMedium, t) ?? bodyMedium,
       bodySmall: TextStyle.lerp(bodySmall, other.bodySmall, t) ?? bodySmall,
       labelLarge: TextStyle.lerp(labelLarge, other.labelLarge, t) ?? labelLarge,
-      labelMedium: TextStyle.lerp(labelMedium, other.labelMedium, t) ?? labelMedium,
+      labelMedium:
+          TextStyle.lerp(labelMedium, other.labelMedium, t) ?? labelMedium,
       labelSmall: TextStyle.lerp(labelSmall, other.labelSmall, t) ?? labelSmall,
-      primaryColor: Color.lerp(primaryColor, other.primaryColor, t) ?? primaryColor,
-      secondaryColor: Color.lerp(secondaryColor, other.secondaryColor, t) ?? secondaryColor,
+      primaryColor:
+          Color.lerp(primaryColor, other.primaryColor, t) ?? primaryColor,
+      secondaryColor:
+          Color.lerp(secondaryColor, other.secondaryColor, t) ?? secondaryColor,
       errorColor: Color.lerp(errorColor, other.errorColor, t) ?? errorColor,
-      disabledColor: Color.lerp(disabledColor, other.disabledColor, t) ?? disabledColor,
+      disabledColor:
+          Color.lerp(disabledColor, other.disabledColor, t) ?? disabledColor,
     );
   }
 

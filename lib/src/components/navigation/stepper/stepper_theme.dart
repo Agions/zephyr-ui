@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 /// 此主题用于ZephyrStepper组件确定视觉样式，包括指示器颜色、大小、字体样式等。
 class ZephyrStepperTheme {
   const ZephyrStepperTheme({
+    required this.completedColor,
     this.backgroundColor,
     this.activeColor,
     this.inactiveColor,
@@ -29,7 +30,6 @@ class ZephyrStepperTheme {
     this.errorSubtitleTextStyle,
     this.animationDuration,
     this.animationCurve,
-    required this.completedColor,
   });
 
   /// 背景颜色

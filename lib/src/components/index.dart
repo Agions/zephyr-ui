@@ -1,27 +1,25 @@
-/// ZephyrUI 组件库
+/// ZephyrUI Component Library
 ///
-/// 统一导出所有组件类别，提供完整的UI组件解决方案。
+/// Unified export of all component categories, providing complete UI component solutions.
 library components;
 
-// 基础组件
+// Basic components
 export 'basic/index.dart';
 
-// 表单组件
+// Form components
 export 'form/index.dart';
 
-// 导航组件
+// Navigation components
 export 'navigation/index.dart';
 
-// 布局组件
+// Layout components
 export 'layout/index.dart';
 
-// 反馈组件
+// Feedback components
 export 'feedback/index.dart';
 
-// 数据展示组件
+// Display components
 export 'display/index.dart';
 
-// 高级组件
-export 'advanced/index.dart';
-
-
+// Shared components and utilities
+export 'shared/index.dart';

@@ -93,7 +93,7 @@ class BasicAvatarDemo extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
+
           // 图片头像
           _buildSection('图片头像', [
             ZephyrAvatar(
@@ -109,9 +109,9 @@ class BasicAvatarDemo extends StatelessWidget {
               onTap: () => _showMessage(context, '点击了方形头像'),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 文字头像
           _buildSection('文字头像', [
             ZephyrAvatar.text(
@@ -134,9 +134,9 @@ class BasicAvatarDemo extends StatelessWidget {
               foregroundColor: Colors.white,
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 图标头像
           _buildSection('图标头像', [
             ZephyrAvatar.icon(
@@ -161,9 +161,9 @@ class BasicAvatarDemo extends StatelessWidget {
               foregroundColor: Colors.white,
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 基础头像
           _buildSection('基础头像', [
             ZephyrAvatar.text(
@@ -230,7 +230,7 @@ class StyleAvatarDemo extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
+
           // 尺寸变体
           _buildSection('尺寸变体', [
             ZephyrAvatar.text(
@@ -258,9 +258,9 @@ class StyleAvatarDemo extends StatelessWidget {
               size: ZephyrAvatarSize.extraLarge,
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 形状变体
           _buildSection('形状变体', [
             ZephyrAvatar.text(
@@ -275,9 +275,9 @@ class StyleAvatarDemo extends StatelessWidget {
               size: ZephyrAvatarSize.large,
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 边框和阴影
           _buildSection('边框和阴影', [
             ZephyrAvatar.text(
@@ -301,9 +301,9 @@ class StyleAvatarDemo extends StatelessWidget {
               elevation: 4,
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 颜色变体
           _buildSection('颜色变体', [
             ZephyrAvatar.text(
@@ -376,7 +376,7 @@ class InteractiveAvatarDemo extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
+
           // 可点击头像
           _buildSection('可点击头像', [
             ZephyrAvatar.text(
@@ -395,9 +395,9 @@ class InteractiveAvatarDemo extends StatelessWidget {
               onTap: () => _showMessage(context, '图标头像被点击'),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 状态指示器
           _buildSection('状态指示器', [
             _buildStatusAvatar('在线', true),
@@ -406,12 +406,12 @@ class InteractiveAvatarDemo extends StatelessWidget {
             const SizedBox(width: 16),
             _buildStatusAvatar('忙碌', false, Colors.orange),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 用户列表
           _buildSection('用户列表', [
-            Container(
+            const Container(
               width: double.infinity,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
@@ -420,9 +420,9 @@ class InteractiveAvatarDemo extends StatelessWidget {
               child: Column(
                 children: [
                   _buildUserTile(context, '张三', '产品经理', true),
-                  const Divider(),
+                  Divider(),
                   _buildUserTile(context, '李四', 'UI设计师', false),
-                  const Divider(),
+                  Divider(),
                   _buildUserTile(context, '王五', '开发工程师', true),
                 ],
               ),
@@ -440,7 +440,8 @@ class InteractiveAvatarDemo extends StatelessWidget {
     );
   }
 
-  Widget _buildUserTile(BuildContext context, String name, String role, bool isOnline) {
+  Widget _buildUserTile(
+      BuildContext context, String name, String role, bool isOnline) {
     return ListTile(
       leading: _buildStatusAvatar(name, isOnline),
       title: Text(name),
@@ -490,33 +491,35 @@ class AdvancedAvatarDemo extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
+
           // 头像组
           _buildSection('头像组', [
             _buildAvatarGroup(),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 用户卡片
           _buildSection('用户卡片', [
-            _buildUserCard(context,
+            _buildUserCard(
+              context,
               name: '张三',
               role: '产品经理',
               status: '在线',
               avatarColor: Colors.blue,
             ),
             const SizedBox(height: 16),
-            _buildUserCard(context,
+            _buildUserCard(
+              context,
               name: '李四',
               role: 'UI设计师',
               status: '离线',
               avatarColor: Colors.green,
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 头像选择器
           _buildSection('头像选择器', [
             _buildAvatarSelector(),
@@ -527,8 +530,8 @@ class AdvancedAvatarDemo extends StatelessWidget {
   }
 
   Widget _buildAvatarGroup() {
-    return Container(
-      padding: const EdgeInsets.all(16),
+    return const Container(
+      padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey[300]!),
         borderRadius: BorderRadius.circular(8),
@@ -536,11 +539,11 @@ class AdvancedAvatarDemo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             '团队成员 (5)',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Row(
             children: [
               ZephyrAvatar(
@@ -549,28 +552,28 @@ class AdvancedAvatarDemo extends StatelessWidget {
                 backgroundColor: Colors.blue,
                 foregroundColor: Colors.white,
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               ZephyrAvatar(
                 text: 'A',
                 size: ZephyrAvatarSize.small,
                 backgroundColor: Colors.red,
                 foregroundColor: Colors.white,
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               ZephyrAvatar(
                 text: 'B',
                 size: ZephyrAvatarSize.small,
                 backgroundColor: Colors.green,
                 foregroundColor: Colors.white,
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               ZephyrAvatar(
                 text: 'C',
                 size: ZephyrAvatarSize.small,
                 backgroundColor: Colors.orange,
                 foregroundColor: Colors.white,
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Container(
                 width: 32,
                 height: 32,
@@ -578,7 +581,7 @@ class AdvancedAvatarDemo extends StatelessWidget {
                   color: Colors.grey[300],
                   shape: BoxShape.circle,
                 ),
-                child: const Center(
+                child: Center(
                   child: Text(
                     '+1',
                     style: TextStyle(
@@ -595,15 +598,16 @@ class AdvancedAvatarDemo extends StatelessWidget {
     );
   }
 
-  Widget _buildUserCard(BuildContext context, {
+  Widget _buildUserCard(
+    BuildContext context, {
     required String name,
     required String role,
     required String status,
     required Color avatarColor,
   }) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Row(
           children: [
             ZephyrAvatar.text(
@@ -612,19 +616,19 @@ class AdvancedAvatarDemo extends StatelessWidget {
               backgroundColor: avatarColor,
               foregroundColor: Colors.white,
             ),
-            const SizedBox(width: 16),
+            SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     name,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Text(
                     role,
                     style: TextStyle(
@@ -632,7 +636,7 @@ class AdvancedAvatarDemo extends StatelessWidget {
                       fontSize: 14,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Row(
                     children: [
                       Container(
@@ -643,7 +647,7 @@ class AdvancedAvatarDemo extends StatelessWidget {
                           shape: BoxShape.circle,
                         ),
                       ),
-                      const SizedBox(width: 4),
+                      SizedBox(width: 4),
                       Text(
                         status,
                         style: TextStyle(
@@ -657,7 +661,7 @@ class AdvancedAvatarDemo extends StatelessWidget {
               ),
             ),
             IconButton(
-              icon: const Icon(Icons.message),
+              icon: Icon(Icons.message),
               onPressed: () => _showMessage(context, '发送消息给 $name'),
             ),
           ],
@@ -667,8 +671,8 @@ class AdvancedAvatarDemo extends StatelessWidget {
   }
 
   Widget _buildAvatarSelector() {
-    return Container(
-      padding: const EdgeInsets.all(16),
+    return const Container(
+      padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey[300]!),
         borderRadius: BorderRadius.circular(8),
@@ -676,11 +680,11 @@ class AdvancedAvatarDemo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             '选择头像',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           GridView.count(
             shrinkWrap: true,
             crossAxisCount: 4,

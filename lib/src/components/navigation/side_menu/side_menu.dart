@@ -84,16 +84,16 @@ class ZephyrSideMenuController extends ChangeNotifier {
 class ZephyrSideMenu extends StatefulWidget {
   /// 创建一个侧边菜单
   const ZephyrSideMenu({
-    Key? key,
     required this.items,
+    super.key,
+    this.width,
     this.controller,
+    this.onSelectionChanged,
     this.header,
     this.footer,
     this.theme,
-    this.onSelectionChanged,
-    this.width,
     this.backgroundColor,
-  }) : super(key: key);
+  });
 
   /// 菜单项列表
   final List<ZephyrSideMenuItem> items;
@@ -166,8 +166,8 @@ class _ZephyrSideMenuState extends State<ZephyrSideMenu> {
       widget.theme,
     );
 
-    final double effectiveWidth = widget.width ?? effectiveTheme.width!;
-    final Color effectiveBackgroundColor =
+    final effectiveWidth = widget.width ?? effectiveTheme.width!;
+    final effectiveBackgroundColor =
         widget.backgroundColor ?? effectiveTheme.backgroundColor!;
 
     return Container(
@@ -211,16 +211,15 @@ class _ZephyrSideMenuState extends State<ZephyrSideMenu> {
     int index,
     ZephyrSideMenuTheme theme,
   ) {
-    final bool isSelected = _controller.selectedIndex == index;
-    final bool isActive = item.isActive || isSelected;
+    final isSelected = _controller.selectedIndex == index;
+    final isActive = item.isActive || isSelected;
 
-    final TextStyle? textStyle =
+    final textStyle =
         isActive ? theme.activeItemTextStyle : theme.itemTextStyle;
 
-    final Color? iconColor = isActive ? theme.activeIconColor : theme.iconColor;
+    final iconColor = isActive ? theme.activeIconColor : theme.iconColor;
 
-    final Color? backgroundColor =
-        isActive ? theme.activeItemBackgroundColor : null;
+    final backgroundColor = isActive ? theme.activeItemBackgroundColor : null;
 
     return InkWell(
       onTap: () {
@@ -275,15 +274,15 @@ class _ZephyrSideMenuState extends State<ZephyrSideMenu> {
 /// 用于创建带有侧边菜单的页面布局。
 class ZephyrSideMenuLayout extends StatefulWidget {
   const ZephyrSideMenuLayout({
-    Key? key,
     required this.menu,
     required this.content,
-    this.controller,
+    super.key,
     this.expandedWidth = 240.0,
     this.collapsedWidth = 72.0,
     this.breakpoint = 600.0,
     this.showMenuButton = true,
-  }) : super(key: key);
+    this.controller,
+  });
 
   /// 侧边菜单
   final ZephyrSideMenu menu;
@@ -330,11 +329,10 @@ class _ZephyrSideMenuLayoutState extends State<ZephyrSideMenuLayout> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isSmallScreen =
-        MediaQuery.of(context).size.width < widget.breakpoint;
+    final isSmallScreen = MediaQuery.of(context).size.width < widget.breakpoint;
 
     // 在小屏幕上始终收起菜单
-    final bool isExpanded = isSmallScreen ? false : _controller.isExpanded;
+    final isExpanded = isSmallScreen ? false : _controller.isExpanded;
 
     return Scaffold(
       body: Row(

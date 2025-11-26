@@ -121,7 +121,7 @@ class AdvancedComponentsDemo extends StatelessWidget {
       code: '''PageView.builder(
   itemCount: 3,
   itemBuilder: (context, index) {
-    return Container(
+    return const Container(
       decoration: BoxDecoration(
         color: Colors.blue[100 + (index * 100)],
         borderRadius: BorderRadius.circular(12),
@@ -135,19 +135,19 @@ class AdvancedComponentsDemo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             '基础轮播图',
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          SizedBox(
+          const SizedBox(
             height: 200,
             child: PageView.builder(
               itemCount: 3,
               itemBuilder: (context, index) {
                 final colors = [Colors.blue, Colors.green, Colors.purple];
-                return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                return const Container(
+                  margin: EdgeInsets.symmetric(horizontal: 8),
                   decoration: BoxDecoration(
                     color: colors[index].withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(12),
@@ -162,7 +162,7 @@ class AdvancedComponentsDemo extends StatelessWidget {
                           size: 48,
                           color: colors[index],
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16),
                         Text(
                           '页面 ${index + 1}',
                           style: TextStyle(
@@ -182,10 +182,10 @@ class AdvancedComponentsDemo extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(3, (index) {
-              return Container(
+              return const Container(
                 width: 8,
                 height: 8,
-                margin: const EdgeInsets.symmetric(horizontal: 4),
+                margin: EdgeInsets.symmetric(horizontal: 4),
                 decoration: BoxDecoration(
                   color: Colors.grey[400],
                   shape: BoxShape.circle,
@@ -194,12 +194,12 @@ class AdvancedComponentsDemo extends StatelessWidget {
             }),
           ),
           const SizedBox(height: 24),
-          Text(
+          const Text(
             '自动轮播',
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          Container(
+          const Container(
             height: 120,
             decoration: BoxDecoration(
               color: Colors.orange[50],
@@ -210,9 +210,9 @@ class AdvancedComponentsDemo extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.autorenew, size: 32, color: Colors.orange),
-                  const SizedBox(height: 8),
-                  const Text('自动轮播功能演示'),
+                  Icon(Icons.autorenew, size: 32, color: Colors.orange),
+                  SizedBox(height: 8),
+                  Text('自动轮播功能演示'),
                 ],
               ),
             ),
@@ -243,7 +243,7 @@ class AdvancedComponentsDemo extends StatelessWidget {
   children: [
     GestureDetector(
       onTap: () => _selectColor(Colors.red),
-      child: Container(
+      child: const Container(
         width: 32,
         height: 32,
         decoration: BoxDecoration(
@@ -258,13 +258,13 @@ class AdvancedComponentsDemo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             '颜色选择',
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          Container(
-            padding: const EdgeInsets.all(16),
+          const Container(
+            padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.grey[100],
               borderRadius: BorderRadius.circular(8),
@@ -273,8 +273,8 @@ class AdvancedComponentsDemo extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Text('选中颜色：'),
-                    const SizedBox(width: 8),
+                    Text('选中颜色：'),
+                    SizedBox(width: 8),
                     Container(
                       width: 24,
                       height: 24,
@@ -283,13 +283,13 @@ class AdvancedComponentsDemo extends StatelessWidget {
                         borderRadius: BorderRadius.circular(4),
                       ),
                     ),
-                    const SizedBox(width: 8),
-                    const Text('#2196F3'),
+                    SizedBox(width: 8),
+                    Text('#2196F3'),
                   ],
                 ),
-                const SizedBox(height: 16),
-                const Text('预设颜色'),
-                const SizedBox(height: 12),
+                SizedBox(height: 16),
+                Text('预设颜色'),
+                SizedBox(height: 12),
                 Wrap(
                   spacing: 8,
                   runSpacing: 8,
@@ -317,8 +317,8 @@ class AdvancedComponentsDemo extends StatelessWidget {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          Container(
-            padding: const EdgeInsets.all(16),
+          const Container(
+            padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.grey[100],
               borderRadius: BorderRadius.circular(8),
@@ -329,58 +329,67 @@ class AdvancedComponentsDemo extends StatelessWidget {
                   height: 100,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [Colors.red, Colors.yellow, Colors.green, Colors.blue, Colors.purple],
+                      colors: [
+                        Colors.red,
+                        Colors.yellow,
+                        Colors.green,
+                        Colors.blue,
+                        Colors.purple
+                      ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 Row(
                   children: [
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text('R'),
                           SizedBox(height: 4),
                           TextField(
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
-                              contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text('G'),
                           SizedBox(height: 4),
                           TextField(
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
-                              contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text('B'),
                           SizedBox(height: 4),
                           TextField(
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
-                              contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
                             ),
                           ),
                         ],
@@ -399,7 +408,7 @@ class AdvancedComponentsDemo extends StatelessWidget {
   Widget _buildColorOption(Color color) {
     return GestureDetector(
       onTap: () {},
-      child: Container(
+      child: const Container(
         width: 32,
         height: 32,
         decoration: BoxDecoration(
@@ -415,7 +424,7 @@ class AdvancedComponentsDemo extends StatelessWidget {
     return ExampleCard(
       title: '图表组件',
       code: '''// 柱状图示例
-Container(
+const Container(
   height: 200,
   child: Row(
     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -435,9 +444,9 @@ Container(
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          Container(
+          const Container(
             height: 200,
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.grey[50],
               borderRadius: BorderRadius.circular(8),
@@ -461,9 +470,9 @@ Container(
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          Container(
+          const Container(
             height: 200,
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.grey[50],
               borderRadius: BorderRadius.circular(8),
@@ -485,7 +494,7 @@ Container(
                         child: Center(
                           child: Text(
                             '75%',
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -502,8 +511,9 @@ Container(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildLegendItem(Colors.blue, '已完成', '75%'),
-                      const SizedBox(height: 8),
-                      _buildLegendItem(Colors.grey[300] ?? Colors.grey, '未完成', '25%'),
+                      SizedBox(height: 8),
+                      _buildLegendItem(
+                          Colors.grey[300] ?? Colors.grey, '未完成', '25%'),
                     ],
                   ),
                 ),
@@ -516,9 +526,9 @@ Container(
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          Container(
+          const Container(
             height: 150,
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.grey[50],
               borderRadius: BorderRadius.circular(8),
@@ -537,7 +547,7 @@ Container(
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Container(
+        const Container(
           width: 30,
           height: height,
           decoration: BoxDecoration(
@@ -557,7 +567,7 @@ Container(
   Widget _buildLegendItem(Color color, String label, String value) {
     return Row(
       children: [
-        Container(
+        const Container(
           width: 16,
           height: 16,
           decoration: BoxDecoration(
@@ -582,7 +592,7 @@ class LineChartPainter extends CustomPainter {
       ..color = Colors.blue
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
-    
+
     final points = [
       Offset(20, size.height - 20),
       Offset(60, size.height - 60),
@@ -590,17 +600,17 @@ class LineChartPainter extends CustomPainter {
       Offset(140, size.height - 80),
       Offset(180, size.height - 30),
     ];
-    
+
     // 绘制折线
     for (int i = 0; i < points.length - 1; i++) {
       canvas.drawLine(points[i], points[i + 1], paint);
     }
-    
+
     // 绘制数据点
     final pointPaint = Paint()
       ..color = Colors.blue
       ..style = PaintingStyle.fill;
-    
+
     for (final point in points) {
       canvas.drawCircle(point, 4, pointPaint);
     }

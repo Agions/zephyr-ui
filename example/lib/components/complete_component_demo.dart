@@ -42,27 +42,21 @@ class _CompleteComponentDemoState extends State<CompleteComponentDemo> {
             children: [
               _buildSectionHeader('Avatar 组件'),
               _buildAvatarDemo(),
-              
               const SizedBox(height: 32),
               _buildSectionHeader('Badge 组件'),
               _buildBadgeDemo(),
-              
               const SizedBox(height: 32),
               _buildSectionHeader('Divider 组件'),
               _buildDividerDemo(),
-              
               const SizedBox(height: 32),
               _buildSectionHeader('Card 组件'),
               _buildCardDemo(),
-              
               const SizedBox(height: 32),
               _buildSectionHeader('Chip 组件'),
               _buildChipDemo(),
-              
               const SizedBox(height: 32),
               _buildSectionHeader('Button 组件'),
               _buildButtonDemo(),
-              
               const SizedBox(height: 32),
               _buildSectionHeader('交互组件'),
               _buildInteractiveDemo(),
@@ -85,16 +79,16 @@ class _CompleteComponentDemoState extends State<CompleteComponentDemo> {
 
   Widget _buildAvatarDemo() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               '头像组件演示',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Wrap(
               spacing: 16,
               runSpacing: 16,
@@ -102,40 +96,43 @@ class _CompleteComponentDemoState extends State<CompleteComponentDemo> {
                 // 文字头像
                 CircleAvatar(
                   backgroundColor: Colors.blue,
-                  child: const Text(
+                  child: Text(
                     'ZT',
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                 ),
-                
+
                 // 图标头像
                 CircleAvatar(
                   backgroundColor: Colors.green,
-                  child: const Icon(
+                  child: Icon(
                     Icons.person,
                     color: Colors.white,
                   ),
                 ),
-                
+
                 // 不同尺寸
                 CircleAvatar(
                   radius: 16,
                   backgroundColor: Colors.orange,
-                  child: const Text(
+                  child: Text(
                     'S',
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                 ),
-                
+
                 CircleAvatar(
                   radius: 32,
                   backgroundColor: Colors.purple,
-                  child: const Text(
+                  child: Text(
                     'L',
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                 ),
-                
+
                 // 方形头像
                 Container(
                   width: 48,
@@ -144,20 +141,22 @@ class _CompleteComponentDemoState extends State<CompleteComponentDemo> {
                     color: Colors.red,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: const Center(
+                  child: Center(
                     child: Text(
                       'SQ',
-                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
-                
+
                 // 带边框头像
                 CircleAvatar(
                   backgroundColor: Colors.teal,
-                  child: const Text(
+                  child: Text(
                     'B',
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
@@ -170,137 +169,137 @@ class _CompleteComponentDemoState extends State<CompleteComponentDemo> {
 
   Widget _buildBadgeDemo() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               '徽章组件演示',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Row(
               children: [
                 // 标准徽章
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Text(
+                  child: Text(
                     'New',
                     style: TextStyle(color: Colors.white, fontSize: 12),
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: Colors.red,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Text(
+                  child: Text(
                     'Hot',
                     style: TextStyle(color: Colors.white, fontSize: 12),
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: Colors.green,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Text(
+                  child: Text(
                     'Sale',
                     style: TextStyle(color: Colors.white, fontSize: 12),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Row(
               children: [
                 // 数字徽章
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
                     color: Colors.red,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
                     '$_badgeCount',
-                    style: const TextStyle(color: Colors.white, fontSize: 11),
+                    style: TextStyle(color: Colors.white, fontSize: 11),
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
                     color: Colors.red,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: const Text(
+                  child: Text(
                     '99+',
                     style: TextStyle(color: Colors.white, fontSize: 11),
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
                     color: Colors.red,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: const Text(
+                  child: Text(
                     '999+',
                     style: TextStyle(color: Colors.white, fontSize: 11),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Row(
               children: [
                 // 圆点徽章
                 Container(
                   width: 8,
                   height: 8,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: Colors.red,
                     shape: BoxShape.circle,
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Container(
                   width: 8,
                   height: 8,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: Colors.green,
                     shape: BoxShape.circle,
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Container(
                   width: 8,
                   height: 8,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: Colors.blue,
                     shape: BoxShape.circle,
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 setState(() {
                   _badgeCount++;
                 });
               },
-              child: const Text('增加徽章数量'),
+              child: Text('增加徽章数量'),
             ),
           ],
         ),
@@ -310,35 +309,35 @@ class _CompleteComponentDemoState extends State<CompleteComponentDemo> {
 
   Widget _buildDividerDemo() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               '分割线组件演示',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
-            const Text('内容区域 1'),
-            const SizedBox(height: 8),
-            const Divider(),
-            const SizedBox(height: 8),
-            const Text('内容区域 2'),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
+            Text('内容区域 1'),
+            SizedBox(height: 8),
+            Divider(),
+            SizedBox(height: 8),
+            Text('内容区域 2'),
+            SizedBox(height: 16),
             Row(
               children: [
-                const Expanded(child: Text('左侧内容')),
+                Expanded(child: Text('左侧内容')),
                 Container(
                   width: 1,
                   height: 40,
                   color: Colors.grey.shade300,
                 ),
-                const Expanded(child: Text('右侧内容')),
+                Expanded(child: Text('右侧内容')),
               ],
             ),
-            const SizedBox(height: 16),
-            const Divider(
+            SizedBox(height: 16),
+            Divider(
               thickness: 2,
               color: Colors.blue,
               indent: 20,
@@ -352,16 +351,16 @@ class _CompleteComponentDemoState extends State<CompleteComponentDemo> {
 
   Widget _buildCardDemo() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               '卡片组件演示',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             GridView.count(
               shrinkWrap: true,
               crossAxisCount: 2,
@@ -372,18 +371,18 @@ class _CompleteComponentDemoState extends State<CompleteComponentDemo> {
                 Card(
                   elevation: 4,
                   child: Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.star, color: Colors.amber),
-                        const SizedBox(height: 8),
-                        const Text(
+                        Icon(Icons.star, color: Colors.amber),
+                        SizedBox(height: 8),
+                        Text(
                           '特色功能',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        const SizedBox(height: 8),
-                        const Text(
+                        SizedBox(height: 8),
+                        Text(
                           '这是一个功能卡片，展示重要信息',
                           style: TextStyle(fontSize: 12),
                         ),
@@ -395,18 +394,18 @@ class _CompleteComponentDemoState extends State<CompleteComponentDemo> {
                   color: Colors.blue.shade50,
                   elevation: 2,
                   child: Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.info, color: Colors.blue),
-                        const SizedBox(height: 8),
-                        const Text(
+                        Icon(Icons.info, color: Colors.blue),
+                        SizedBox(height: 8),
+                        Text(
                           '信息卡片',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        const SizedBox(height: 8),
-                        const Text(
+                        SizedBox(height: 8),
+                        Text(
                           '提供重要信息和提示',
                           style: TextStyle(fontSize: 12),
                         ),
@@ -424,16 +423,16 @@ class _CompleteComponentDemoState extends State<CompleteComponentDemo> {
 
   Widget _buildChipDemo() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               '标签组件演示',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Wrap(
               spacing: 8,
               children: _chips.map((chip) {
@@ -446,12 +445,13 @@ class _CompleteComponentDemoState extends State<CompleteComponentDemo> {
                       _selectedChip = selected ? chip : '';
                     });
                   },
-                  backgroundColor: isSelected ? Colors.blue : Colors.grey.shade200,
+                  backgroundColor:
+                      isSelected ? Colors.blue : Colors.grey.shade200,
                   selectedColor: Colors.blue.shade100,
                 );
               }).toList(),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text('已选择: $_selectedChip'),
           ],
         ),
@@ -461,43 +461,43 @@ class _CompleteComponentDemoState extends State<CompleteComponentDemo> {
 
   Widget _buildButtonDemo() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               '按钮组件演示',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Wrap(
               spacing: 16,
               runSpacing: 16,
               children: [
                 ElevatedButton(
                   onPressed: () {},
-                  child: const Text('主要按钮'),
+                  child: Text('主要按钮'),
                 ),
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey,
                   ),
-                  child: const Text('次要按钮'),
+                  child: Text('次要按钮'),
                 ),
                 OutlinedButton(
                   onPressed: () {},
-                  child: const Text('边框按钮'),
+                  child: Text('边框按钮'),
                 ),
                 TextButton(
                   onPressed: () {},
-                  child: const Text('文本按钮'),
+                  child: Text('文本按钮'),
                 ),
                 ElevatedButton.icon(
                   onPressed: () {},
-                  icon: const Icon(Icons.add),
-                  label: const Text('图标按钮'),
+                  icon: Icon(Icons.add),
+                  label: Text('图标按钮'),
                 ),
               ],
             ),
@@ -509,22 +509,22 @@ class _CompleteComponentDemoState extends State<CompleteComponentDemo> {
 
   Widget _buildInteractiveDemo() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               '交互组件演示',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
-            
+            SizedBox(height: 16),
+
             // 开关
             Row(
               children: [
-                const Text('开关'),
-                const SizedBox(width: 16),
+                Text('开关'),
+                SizedBox(width: 16),
                 Switch(
                   value: _isSwitched,
                   onChanged: (value) {
@@ -535,9 +535,9 @@ class _CompleteComponentDemoState extends State<CompleteComponentDemo> {
                 ),
               ],
             ),
-            
-            const SizedBox(height: 16),
-            
+
+            SizedBox(height: 16),
+
             // 滑块
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -553,9 +553,9 @@ class _CompleteComponentDemoState extends State<CompleteComponentDemo> {
                 ),
               ],
             ),
-            
-            const SizedBox(height: 16),
-            
+
+            SizedBox(height: 16),
+
             // 评分
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

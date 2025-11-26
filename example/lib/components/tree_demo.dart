@@ -22,7 +22,7 @@ class _TreeDemoState extends State<TreeDemo> {
 
   void _initializeNodes() {
     _fileSystemNodes = [
-      ZephyrTreeNode(
+      const ZephyrTreeNode(
         id: 'root',
         label: 'Project Root',
         icon: Icons.folder,
@@ -78,7 +78,7 @@ class _TreeDemoState extends State<TreeDemo> {
     ];
 
     _departmentNodes = [
-      ZephyrTreeNode(
+      const ZephyrTreeNode(
         id: 'company',
         label: 'Company',
         icon: Icons.business,
@@ -148,15 +148,12 @@ class _TreeDemoState extends State<TreeDemo> {
             _buildSectionTitle('File System Tree'),
             _buildFileSystemTree(),
             const SizedBox(height: 32),
-            
             _buildSectionTitle('Department Tree'),
             _buildDepartmentTree(),
             const SizedBox(height: 32),
-            
             _buildSectionTitle('Searchable Tree'),
             _buildSearchableTree(),
             const SizedBox(height: 32),
-            
             _buildSectionTitle('Interactive Demo'),
             _buildInteractiveDemo(),
           ],
@@ -169,20 +166,20 @@ class _TreeDemoState extends State<TreeDemo> {
     return Text(
       title,
       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-        fontWeight: FontWeight.bold,
-      ),
+            fontWeight: FontWeight.bold,
+          ),
     );
   }
 
   Widget _buildFileSystemTree() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('File System Structure:'),
-            const SizedBox(height: 16),
+            Text('File System Structure:'),
+            SizedBox(height: 16),
             SizedBox(
               height: 300,
               child: ZephyrTree<String>(
@@ -208,13 +205,13 @@ class _TreeDemoState extends State<TreeDemo> {
 
   Widget _buildDepartmentTree() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Organization Structure:'),
-            const SizedBox(height: 16),
+            Text('Organization Structure:'),
+            SizedBox(height: 16),
             SizedBox(
               height: 300,
               child: ZephyrTree<String>(
@@ -241,15 +238,15 @@ class _TreeDemoState extends State<TreeDemo> {
 
   Widget _buildSearchableTree() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Searchable Tree:'),
-            const SizedBox(height: 16),
+            Text('Searchable Tree:'),
+            SizedBox(height: 16),
             TextField(
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Search...',
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(),
@@ -260,7 +257,7 @@ class _TreeDemoState extends State<TreeDemo> {
                 });
               },
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             SizedBox(
               height: 300,
               child: ZephyrTree<String>(
@@ -279,13 +276,13 @@ class _TreeDemoState extends State<TreeDemo> {
 
   Widget _buildInteractiveDemo() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Interactive Demo:'),
-            const SizedBox(height: 16),
+            Text('Interactive Demo:'),
+            SizedBox(height: 16),
             Row(
               children: [
                 ElevatedButton(
@@ -293,28 +290,28 @@ class _TreeDemoState extends State<TreeDemo> {
                     _controller.expandNode('company');
                     setState(() {});
                   },
-                  child: const Text('Expand All'),
+                  child: Text('Expand All'),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: () {
                     _controller.collapseNode('company');
                     setState(() {});
                   },
-                  child: const Text('Collapse All'),
+                  child: Text('Collapse All'),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: () {
                     _controller.selectNode('engineering', multiple: true);
                     _controller.selectNode('design', multiple: true);
                     setState(() {});
                   },
-                  child: const Text('Select Depts'),
+                  child: Text('Select Depts'),
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             SizedBox(
               height: 300,
               child: ZephyrTree<String>(

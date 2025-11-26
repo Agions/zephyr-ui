@@ -4,6 +4,8 @@
 library responsive_optimization;
 
 import 'package:flutter/material.dart';
+import 'package:zephyr_ui/src/utils/performance/performance_optimizer.dart';
+import 'package:zephyr_ui/src/utils/responsive/responsive_utils.dart';
 import 'package:zephyr_ui/zephyr_ui.dart';
 
 /// 响应式断点
@@ -16,23 +18,23 @@ class ZephyrResponsiveBreakpoints {
 
 /// 响应式值
 class ZephyrResponsiveValue<T> {
-  final T mobile;
-  final T? tablet;
-  final T? desktop;
-  final T? largeDesktop;
-
   const ZephyrResponsiveValue({
     required this.mobile,
     this.tablet,
     this.desktop,
     this.largeDesktop,
   });
+  final T mobile;
+  final T? tablet;
+  final T? desktop;
+  final T? largeDesktop;
 
   /// 获取当前屏幕尺寸对应的值
   T getValue(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    
-    if (width >= ZephyrResponsiveBreakpoints.largeDesktop && largeDesktop != null) {
+
+    if (width >= ZephyrResponsiveBreakpoints.largeDesktop &&
+        largeDesktop != null) {
       return largeDesktop!;
     }
     if (width >= ZephyrResponsiveBreakpoints.desktop && desktop != null) {
@@ -47,12 +49,12 @@ class ZephyrResponsiveValue<T> {
 
 /// 响应式构建器
 class ZephyrResponsiveBuilder extends StatelessWidget {
-  final Widget Function(BuildContext context, ZephyrBreakpoint screenType) builder;
-
   const ZephyrResponsiveBuilder({
-    Key? key,
     required this.builder,
-  }) : super(key: key);
+    super.key,
+  });
+  final Widget Function(BuildContext context, ZephyrBreakpoint screenType)
+      builder;
 
   @override
   Widget build(BuildContext context) {
@@ -63,24 +65,24 @@ class ZephyrResponsiveBuilder extends StatelessWidget {
 
 /// 响应式布局
 class ZephyrResponsiveLayout extends StatelessWidget {
+  const ZephyrResponsiveLayout({
+    required this.mobile,
+    super.key,
+    this.tablet,
+    this.desktop,
+    this.largeDesktop,
+  });
   final Widget mobile;
   final Widget? tablet;
   final Widget? desktop;
   final Widget? largeDesktop;
 
-  const ZephyrResponsiveLayout({
-    Key? key,
-    required this.mobile,
-    this.tablet,
-    this.desktop,
-    this.largeDesktop,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    
-    if (width >= ZephyrResponsiveBreakpoints.largeDesktop && largeDesktop != null) {
+
+    if (width >= ZephyrResponsiveBreakpoints.largeDesktop &&
+        largeDesktop != null) {
       return largeDesktop!;
     }
     if (width >= ZephyrResponsiveBreakpoints.desktop && desktop != null) {
@@ -95,6 +97,17 @@ class ZephyrResponsiveLayout extends StatelessWidget {
 
 /// 优化的响应式网格
 class ZephyrResponsiveGrid extends StatelessWidget {
+  const ZephyrResponsiveGrid({
+    required this.children,
+    required this.crossAxisCount,
+    required this.mainAxisSpacing,
+    required this.crossAxisSpacing,
+    required this.childAspectRatio,
+    super.key,
+    this.padding,
+    this.controller,
+    this.shrinkWrap = false,
+  });
   final List<Widget> children;
   final ZephyrResponsiveValue<int> crossAxisCount;
   final ZephyrResponsiveValue<double> mainAxisSpacing;
@@ -103,18 +116,6 @@ class ZephyrResponsiveGrid extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final ScrollController? controller;
   final bool shrinkWrap;
-
-  const ZephyrResponsiveGrid({
-    Key? key,
-    required this.children,
-    required this.crossAxisCount,
-    required this.mainAxisSpacing,
-    required this.crossAxisSpacing,
-    required this.childAspectRatio,
-    this.padding,
-    this.controller,
-    this.shrinkWrap = false,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -139,21 +140,20 @@ class ZephyrResponsiveGrid extends StatelessWidget {
 
 /// 响应式间距
 class ZephyrResponsiveSpacing extends StatelessWidget {
+  const ZephyrResponsiveSpacing({
+    required this.value,
+    super.key,
+    this.child,
+    this.axis,
+  });
   final ZephyrResponsiveValue<double> value;
   final Widget? child;
   final Axis? axis;
 
-  const ZephyrResponsiveSpacing({
-    Key? key,
-    required this.value,
-    this.child,
-    this.axis,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final spacing = value.getValue(context);
-    
+
     if (child != null) {
       if (axis == Axis.horizontal) {
         return Row(
@@ -173,8 +173,8 @@ class ZephyrResponsiveSpacing extends StatelessWidget {
         );
       }
     }
-    
-    return axis == Axis.horizontal 
+
+    return axis == Axis.horizontal
         ? SizedBox(width: spacing)
         : SizedBox(height: spacing);
   }
@@ -182,6 +182,15 @@ class ZephyrResponsiveSpacing extends StatelessWidget {
 
 /// 响应式容器
 class ZephyrResponsiveContainer extends StatelessWidget {
+  const ZephyrResponsiveContainer({
+    required this.child,
+    super.key,
+    this.maxWidth,
+    this.maxHeight,
+    this.padding,
+    this.alignment,
+    this.decoration,
+  });
   final Widget child;
   final ZephyrResponsiveValue<double>? maxWidth;
   final ZephyrResponsiveValue<double>? maxHeight;
@@ -189,21 +198,11 @@ class ZephyrResponsiveContainer extends StatelessWidget {
   final AlignmentGeometry? alignment;
   final Decoration? decoration;
 
-  const ZephyrResponsiveContainer({
-    Key? key,
-    required this.child,
-    this.maxWidth,
-    this.maxHeight,
-    this.padding,
-    this.alignment,
-    this.decoration,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final effectiveMaxWidth = maxWidth?.getValue(context);
     final effectiveMaxHeight = maxHeight?.getValue(context);
-    
+
     return Container(
       constraints: BoxConstraints(
         maxWidth: effectiveMaxWidth ?? double.infinity,
@@ -219,6 +218,16 @@ class ZephyrResponsiveContainer extends StatelessWidget {
 
 /// 响应式字体大小
 class ZephyrResponsiveText extends StatelessWidget {
+  const ZephyrResponsiveText({
+    required this.data,
+    required this.fontSize,
+    super.key,
+    this.fontWeight,
+    this.color,
+    this.textAlign,
+    this.maxLines,
+    this.overflow,
+  });
   final String data;
   final ZephyrResponsiveValue<double> fontSize;
   final FontWeight? fontWeight;
@@ -226,17 +235,6 @@ class ZephyrResponsiveText extends StatelessWidget {
   final TextAlign? textAlign;
   final int? maxLines;
   final TextOverflow? overflow;
-
-  const ZephyrResponsiveText({
-    Key? key,
-    required this.data,
-    required this.fontSize,
-    this.fontWeight,
-    this.color,
-    this.textAlign,
-    this.maxLines,
-    this.overflow,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -256,14 +254,13 @@ class ZephyrResponsiveText extends StatelessWidget {
 
 /// 响应式边距
 class ZephyrResponsivePadding extends StatelessWidget {
-  final Widget child;
-  final ZephyrResponsiveValue<EdgeInsetsGeometry> padding;
-
   const ZephyrResponsivePadding({
-    Key? key,
     required this.child,
     required this.padding,
-  }) : super(key: key);
+    super.key,
+  });
+  final Widget child;
+  final ZephyrResponsiveValue<EdgeInsetsGeometry> padding;
 
   @override
   Widget build(BuildContext context) {
@@ -276,16 +273,15 @@ class ZephyrResponsivePadding extends StatelessWidget {
 
 /// 响应式尺寸
 class ZephyrResponsiveSizedBox extends StatelessWidget {
-  final Widget? child;
-  final ZephyrResponsiveValue<double>? width;
-  final ZephyrResponsiveValue<double>? height;
-
   const ZephyrResponsiveSizedBox({
-    Key? key,
+    super.key,
     this.child,
     this.width,
     this.height,
-  }) : super(key: key);
+  });
+  final Widget? child;
+  final ZephyrResponsiveValue<double>? width;
+  final ZephyrResponsiveValue<double>? height;
 
   @override
   Widget build(BuildContext context) {
@@ -299,14 +295,13 @@ class ZephyrResponsiveSizedBox extends StatelessWidget {
 
 /// 响应式边框半径
 class ZephyrResponsiveBorderRadius extends StatelessWidget {
-  final Widget child;
-  final ZephyrResponsiveValue<BorderRadiusGeometry> borderRadius;
-
   const ZephyrResponsiveBorderRadius({
-    Key? key,
     required this.child,
     required this.borderRadius,
-  }) : super(key: key);
+    super.key,
+  });
+  final Widget child;
+  final ZephyrResponsiveValue<BorderRadiusGeometry> borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -319,12 +314,11 @@ class ZephyrResponsiveBorderRadius extends StatelessWidget {
 
 /// 响应式方向
 class ZephyrResponsiveOrientationBuilder extends StatelessWidget {
-  final Widget Function(BuildContext context, Orientation orientation) builder;
-
   const ZephyrResponsiveOrientationBuilder({
-    Key? key,
     required this.builder,
-  }) : super(key: key);
+    super.key,
+  });
+  final Widget Function(BuildContext context, Orientation orientation) builder;
 
   @override
   Widget build(BuildContext context) {
@@ -335,58 +329,58 @@ class ZephyrResponsiveOrientationBuilder extends StatelessWidget {
 
 /// 响应式主题
 class ZephyrResponsiveTheme extends StatelessWidget {
+  const ZephyrResponsiveTheme({
+    required this.child,
+    super.key,
+    this.lightTheme,
+    this.darkTheme,
+  });
   final Widget child;
   final ZephyrResponsiveValue<ThemeData>? lightTheme;
   final ZephyrResponsiveValue<ThemeData>? darkTheme;
-
-  const ZephyrResponsiveTheme({
-    Key? key,
-    required this.child,
-    this.lightTheme,
-    this.darkTheme,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final brightness = Theme.of(context).brightness;
     final isDark = brightness == Brightness.dark;
-    
+
     ThemeData? effectiveTheme;
     if (isDark && darkTheme != null) {
       effectiveTheme = darkTheme?.getValue(context);
     } else if (!isDark && lightTheme != null) {
       effectiveTheme = lightTheme?.getValue(context);
     }
-    
+
     if (effectiveTheme != null) {
       return Theme(
         data: effectiveTheme,
         child: child,
       );
     }
-    
+
     return child;
   }
 }
 
 /// 响应式断点监听器
 class ZephyrResponsiveBreakpointListener extends StatefulWidget {
+  const ZephyrResponsiveBreakpointListener({
+    required this.child,
+    super.key,
+    this.onBreakpointChange,
+    this.initialScreenType = ZephyrBreakpoint.xs,
+  });
   final Widget child;
   final Function(ZephyrBreakpoint)? onBreakpointChange;
   final ZephyrBreakpoint initialScreenType;
 
-  const ZephyrResponsiveBreakpointListener({
-    Key? key,
-    required this.child,
-    this.onBreakpointChange,
-    this.initialScreenType = ZephyrBreakpoint.xs,
-  }) : super(key: key);
-
   @override
-  State<ZephyrResponsiveBreakpointListener> createState() => _ZephyrResponsiveBreakpointListenerState();
+  State<ZephyrResponsiveBreakpointListener> createState() =>
+      _ZephyrResponsiveBreakpointListenerState();
 }
 
-class _ZephyrResponsiveBreakpointListenerState extends State<ZephyrResponsiveBreakpointListener> {
+class _ZephyrResponsiveBreakpointListenerState
+    extends State<ZephyrResponsiveBreakpointListener> {
   ZephyrBreakpoint _currentScreenType = ZephyrBreakpoint.xs;
 
   @override

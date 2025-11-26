@@ -67,9 +67,9 @@ class ZephyrAutoCompleteUtils {
     final workingText = caseSensitive ? text : text.toLowerCase();
     final workingPattern = caseSensitive ? pattern : pattern.toLowerCase();
     
-    int score = 0;
-    int patternIndex = 0;
-    int textIndex = 0;
+    var score = 0;
+    var patternIndex = 0;
+    var textIndex = 0;
     
     while (patternIndex < workingPattern.length && textIndex < workingText.length) {
       if (workingPattern[patternIndex] == workingText[textIndex]) {
@@ -120,8 +120,8 @@ class ZephyrAutoCompleteUtils {
     if (text.contains(query)) return 100;
     
     // Calculate character overlap
-    int overlap = 0;
-    for (int i = 0; i < query.length; i++) {
+    var overlap = 0;
+    for (var i = 0; i < query.length; i++) {
       if (text.contains(query[i])) {
         overlap++;
       }
@@ -146,7 +146,7 @@ class ZephyrAutoCompleteUtils {
     List<T> items,
     String Function(T) categoryFunction,
   ) {
-    final Map<String, List<T>> grouped = {};
+    final grouped = <String, List<T>>{};
     
     for (final item in items) {
       final category = categoryFunction(item);
@@ -191,7 +191,7 @@ class ZephyrAutoCompleteUtils {
     final spans = <TextSpan>[];
     final lowercaseText = text.toLowerCase();
     final lowercaseQuery = query.toLowerCase();
-    int currentIndex = 0;
+    var currentIndex = 0;
     
     while (currentIndex < text.length) {
       final matchIndex = lowercaseText.indexOf(lowercaseQuery, currentIndex);

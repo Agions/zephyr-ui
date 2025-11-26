@@ -10,12 +10,11 @@ description: ZephyrButton 组件，支持多种样式和状态的按钮组件
 ## 🎯 快速预览
 
 ```dart
-ZephyrButton(
+ZephyrButton.primary(
+  text: '主要按钮',
   onPressed: () {
     // 处理按钮点击
   },
-  child: Text('主要按钮'),
-  variant: ZephyrVariant.primary,
 )
 ```
 
@@ -31,64 +30,51 @@ ZephyrButton(
 
 ### 主要按钮 (Primary)
 ```dart
-ZephyrButton(
-  onPressed: () {},
-  child: Text('主要按钮'),
-  variant: ZephyrVariant.primary,
+ZephyrButton.primary(
+  text: '主要按钮',
+  onPressed: () {
+    // 处理按钮点击
+  },
 )
 ```
 
 ### 次要按钮 (Secondary)
 ```dart
-ZephyrButton(
-  onPressed: () {},
-  child: Text('次要按钮'),
-  variant: ZephyrVariant.secondary,
+ZephyrButton.secondary(
+  text: '次要按钮',
+  onPressed: () {
+    // 处理按钮点击
+  },
 )
 ```
 
-### 警告按钮 (Warning)
+### 轮廓按钮 (Outline)
 ```dart
-ZephyrButton(
-  onPressed: () {},
-  child: Text('警告按钮'),
-  variant: ZephyrVariant.warning,
-)
-```
-
-### 危险按钮 (Danger)
-```dart
-ZephyrButton(
-  onPressed: () {},
-  child: Text('危险按钮'),
-  variant: ZephyrVariant.danger,
-)
-```
-
-### 成功按钮 (Success)
-```dart
-ZephyrButton(
-  onPressed: () {},
-  child: Text('成功按钮'),
-  variant: ZephyrVariant.success,
-)
-```
-
-### 幽灵按钮 (Ghost)
-```dart
-ZephyrButton(
-  onPressed: () {},
-  child: Text('幽灵按钮'),
-  variant: ZephyrVariant.ghost,
+ZephyrButton.outline(
+  text: '轮廓按钮',
+  onPressed: () {
+    // 处理按钮点击
+  },
 )
 ```
 
 ### 文本按钮 (Text)
 ```dart
-ZephyrButton(
-  onPressed: () {},
-  child: Text('文本按钮'),
-  variant: ZephyrVariant.text,
+ZephyrButton.text(
+  text: '文本按钮',
+  onPressed: () {
+    // 处理按钮点击
+  },
+)
+```
+
+### 图标按钮
+```dart
+ZephyrButton.icon(
+  icon: Icons.favorite,
+  onPressed: () {
+    // 处理按钮点击
+  },
 )
 ```
 
@@ -96,46 +82,47 @@ ZephyrButton(
 
 | 参数 | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `onPressed` | `VoidCallback?` | `null` | 按钮点击回调函数 |
-| `child` | `Widget` | 必填 | 按钮内容 |
-| `variant` | `ZephyrVariant` | `ZephyrVariant.primary` | 按钮样式变体 |
-| `size` | `ZephyrSize` | `ZephyrSize.medium` | 按钮尺寸 |
-| `disabled` | `bool` | `false` | 是否禁用 |
-| `loading` | `bool` | `false` | 是否显示加载状态 |
-| `fullWidth` | `bool` | `false` | 是否占满宽度 |
-| `icon` | `Widget?` | `null` | 前置图标 |
-| `suffixIcon` | `Widget?` | `null` | 后置图标 |
-| `shape` | `BoxShape?` | `null` | 按钮形状 |
-| `elevation` | `double?` | `null` | 阴影高度 |
-| `color` | `Color?` | `null` | 自定义颜色 |
-| `textColor` | `Color?` | `null` | 自定义文字颜色 |
+| `text` | `String` | 必填 | 按钮显示的文本 |
+| `onPressed` | `VoidCallback?` | `null` | 点击按钮时的回调 |
+| `icon` | `IconData?` | `null` | 可选的图标 |
+| `size` | `ZephyrButtonSize` | `ZephyrButtonSize.medium` | 按钮尺寸 |
+| `isFullWidth` | `bool` | `false` | 是否占据全宽 |
+| `isLoading` | `bool` | `false` | 是否处于加载状态 |
+| `isDisabled` | `bool` | `false` | 是否禁用 |
+| `theme` | `ZephyrButtonTheme?` | `null` | 按钮主题 |
 
 ## 📏 尺寸选项
 
 ### 小尺寸 (Small)
 ```dart
-ZephyrButton(
-  onPressed: () {},
-  child: Text('小按钮'),
-  size: ZephyrSize.small,
+ZephyrButton.primary(
+  text: '小按钮',
+  size: ZephyrButtonSize.small,
+  onPressed: () {
+    // 处理按钮点击
+  },
 )
 ```
 
 ### 中尺寸 (Medium)
 ```dart
-ZephyrButton(
-  onPressed: () {},
-  child: Text('中按钮'),
-  size: ZephyrSize.medium,
+ZephyrButton.primary(
+  text: '中按钮',
+  size: ZephyrButtonSize.medium,
+  onPressed: () {
+    // 处理按钮点击
+  },
 )
 ```
 
 ### 大尺寸 (Large)
 ```dart
-ZephyrButton(
-  onPressed: () {},
-  child: Text('大按钮'),
-  size: ZephyrSize.large,
+ZephyrButton.primary(
+  text: '大按钮',
+  size: ZephyrButtonSize.large,
+  onPressed: () {
+    // 处理按钮点击
+  },
 )
 ```
 
@@ -143,106 +130,64 @@ ZephyrButton(
 
 ### 禁用状态
 ```dart
-ZephyrButton(
-  onPressed: null, // 或 disabled: true
-  child: Text('禁用按钮'),
+ZephyrButton.primary(
+  text: '禁用按钮',
+  isDisabled: true,
+  onPressed: () {
+    // 处理按钮点击
+  },
 )
 ```
 
 ### 加载状态
 ```dart
-ZephyrButton(
-  onPressed: () {},
-  child: Text('加载中'),
-  loading: true,
+ZephyrButton.primary(
+  text: '加载中',
+  isLoading: true,
+  onPressed: () {
+    // 处理按钮点击
+  },
 )
 ```
 
 ## 🎨 自定义样式
 
-### 自定义颜色
-```dart
-ZephyrButton(
-  onPressed: () {},
-  child: Text('自定义按钮'),
-  color: Color(0xFF8B5CF6),
-  textColor: Colors.white,
-)
-```
-
 ### 带图标按钮
 ```dart
-ZephyrButton(
-  onPressed: () {},
-  child: Text('发送'),
-  icon: Icon(Icons.send),
+ZephyrButton.primary(
+  text: '带图标按钮',
+  icon: Icons.add,
+  onPressed: () {
+    // 处理按钮点击
+  },
 )
 ```
 
 ### 全宽按钮
 ```dart
-ZephyrButton(
-  onPressed: () {},
-  child: Text('全宽按钮'),
-  fullWidth: true,
+ZephyrButton.primary(
+  text: '全宽按钮',
+  isFullWidth: true,
+  onPressed: () {
+    // 处理按钮点击
+  },
 )
 ```
 
 ## 📱 响应式设计
 
 ```dart
-ResponsiveBuilder(
-  builder: (context, sizingInformation) {
-    final isMobile = sizingInformation.deviceType == DeviceType.mobile;
+LayoutBuilder(
+  builder: (context, constraints) {
+    final isMobile = constraints.maxWidth < 600;
     
-    return ZephyrButton(
-      onPressed: () {},
-      child: Text(isMobile ? '移动端' : '桌面端'),
-      size: isMobile ? ZephyrSize.small : ZephyrSize.medium,
+    return ZephyrButton.primary(
+      text: isMobile ? '移动端' : '桌面端',
+      size: isMobile ? ZephyrButtonSize.small : ZephyrButtonSize.medium,
+      onPressed: () {
+        // 处理按钮点击
+      },
     );
-  },
-)
-```
-
-## 🎭 主题定制
-
-```dart
-ZephyrButtonThemeData(
-  // 默认样式
-  defaultStyle: ZephyrButtonStyle(
-    backgroundColor: Colors.blue,
-    textColor: Colors.white,
-    borderRadius: BorderRadius.circular(8),
-    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-  ),
-  
-  // 变体样式
-  variants: {
-    ZephyrVariant.primary: ZephyrButtonStyle(
-      backgroundColor: Colors.blue,
-      textColor: Colors.white,
-    ),
-    ZephyrVariant.secondary: ZephyrButtonStyle(
-      backgroundColor: Colors.transparent,
-      textColor: Colors.blue,
-      borderColor: Colors.blue,
-    ),
-  },
-  
-  // 尺寸样式
-  sizes: {
-    ZephyrSize.small: ZephyrButtonStyle(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      fontSize: 14,
-    ),
-    ZephyrSize.medium: ZephyrButtonStyle(
-      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      fontSize: 16,
-    ),
-    ZephyrSize.large: ZephyrButtonStyle(
-      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-      fontSize: 18,
-    ),
   },
 )
 ```
@@ -258,9 +203,9 @@ void main() {
     testWidgets('基本按钮渲染测试', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrButton(
+          home: ZephyrButton.primary(
+            text: '测试按钮',
             onPressed: () {},
-            child: Text('测试按钮'),
           ),
         ),
       );
@@ -274,11 +219,11 @@ void main() {
       
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrButton(
+          home: ZephyrButton.primary(
+            text: '点击按钮',
             onPressed: () {
               clicked = true;
             },
-            child: Text('点击按钮'),
           ),
         ),
       );
@@ -292,24 +237,29 @@ void main() {
     testWidgets('禁用按钮测试', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrButton(
-            onPressed: null,
-            child: Text('禁用按钮'),
+          home: ZephyrButton.primary(
+            text: '禁用按钮',
+            isDisabled: true,
+            onPressed: () {
+              // 不会被调用
+            },
           ),
         ),
       );
       
       final button = tester.widget<ZephyrButton>(find.byType(ZephyrButton));
-      expect(button.disabled, true);
+      expect(button.isDisabled, true);
     });
 
     testWidgets('加载状态测试', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrButton(
-            onPressed: () {},
-            child: Text('加载按钮'),
-            loading: true,
+          home: ZephyrButton.primary(
+            text: '加载按钮',
+            isLoading: true,
+            onPressed: () {
+              // 不会被调用
+            },
           ),
         ),
       );
@@ -322,58 +272,56 @@ void main() {
 
 ## 📚 最佳实践
 
-### 1. 使用语义化的变体
+### 1. 使用语义化的构造函数
 ```dart
 // ✅ 好的做法
-ZephyrButton(
+ZephyrButton.primary(
+  text: '提交',
   onPressed: _handleSubmit,
-  child: Text('提交'),
-  variant: ZephyrVariant.primary,
 )
 
-ZephyrButton(
-  onPressed: _handleDelete,
-  child: Text('删除'),
-  variant: ZephyrVariant.danger,
+ZephyrButton.text(
+  text: '取消',
+  onPressed: _handleCancel,
 )
 
 // ❌ 避免的做法
-ZephyrButton(
+ZephyrButton._internal(
+  text: '提交',
+  type: ZephyrButtonType.filled,
   onPressed: _handleSubmit,
-  child: Text('提交'),
-  color: Colors.red, // 使用语义化的变体而不是硬编码颜色
 )
 ```
 
 ### 2. 提供清晰的视觉反馈
 ```dart
 // ✅ 好的做法
-ZephyrButton(
+ZephyrButton.primary(
+  text: _isLoading ? '提交中...' : '提交',
+  isLoading: _isLoading,
   onPressed: _isLoading ? null : _handleSubmit,
-  child: Text(_isLoading ? '提交中...' : '提交'),
-  loading: _isLoading,
 )
 
 // ❌ 避免的做法
-ZephyrButton(
+ZephyrButton.primary(
+  text: '提交',
   onPressed: _handleSubmit,
-  child: Text('提交'),
-  disabled: _isLoading, // 没有提供加载状态反馈
+  // 没有提供加载状态反馈
 )
 ```
 
 ### 3. 保持按钮文本简洁
 ```dart
 // ✅ 好的做法
-ZephyrButton(
+ZephyrButton.primary(
+  text: '保存',
   onPressed: _handleSave,
-  child: Text('保存'),
 )
 
 // ❌ 避免的做法
-ZephyrButton(
+ZephyrButton.primary(
+  text: '点击这里保存表单数据', // 文本过长
   onPressed: _handleSave,
-  child: Text('点击这里保存表单数据'), // 文本过长
 )
 ```
 
@@ -386,7 +334,7 @@ ZephyrButton(
 
 ## 📝 更新日志
 
-### v0.4.0 (2025-08-30)
+### v0.3.0 (2025-11-26)
 - ✨ 新增按钮组件
 - 🎨 支持多种样式变体
 - 📱 响应式设计支持

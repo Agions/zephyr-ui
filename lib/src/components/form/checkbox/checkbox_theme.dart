@@ -123,7 +123,7 @@ class ZephyrCheckboxTheme {
       checkColor: Colors.white,
       disabledColor: Color(0xFF9E9E9E),
       errorColor: Color(0xFFF44336),
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
         fontSize: 14,
         color: Color(0xFF212121),
       ),
@@ -161,7 +161,7 @@ class ZephyrCheckboxTheme {
       checkColor: Colors.white,
       disabledColor: Color(0xFF757575),
       errorColor: Color(0xFFEF5350),
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
         fontSize: 14,
         color: Color(0xFFFFFFFF),
       ),

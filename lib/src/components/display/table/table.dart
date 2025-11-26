@@ -3,6 +3,19 @@ import 'table_theme.dart';
 
 /// 表格列定义
 class ZephyrTableColumn<T> {
+  /// 创建表格列
+  const ZephyrTableColumn({
+    required this.title,
+    required this.dataKey,
+    this.width,
+    this.sortable = false,
+    this.filterable = false,
+    this.alignment = Alignment.centerLeft,
+    this.cellBuilder,
+    this.titleBuilder,
+    this.comparator,
+  });
+
   /// 列标题
   final String title;
 
@@ -29,38 +42,32 @@ class ZephyrTableColumn<T> {
 
   /// 排序比较器
   final int Function(T a, T b, bool ascending)? comparator;
-
-  /// 创建表格列
-  const ZephyrTableColumn({
-    required this.title,
-    required this.dataKey,
-    this.width,
-    this.sortable = false,
-    this.filterable = false,
-    this.alignment = Alignment.centerLeft,
-    this.cellBuilder,
-    this.titleBuilder,
-    this.comparator,
-  });
 }
 
 /// 表格排序信息
 class ZephyrTableSort {
-  /// 排序字段
-  final String dataKey;
-
-  /// 是否升序
-  final bool ascending;
-
   /// 创建排序信息
   const ZephyrTableSort({
     required this.dataKey,
     this.ascending = true,
   });
+
+  /// 排序字段
+  final String dataKey;
+
+  /// 是否升序
+  final bool ascending;
 }
 
 /// 表格筛选信息
 class ZephyrTableFilter {
+  /// 创建筛选信息
+  const ZephyrTableFilter({
+    required this.dataKey,
+    required this.value,
+    this.operator = 'contains',
+  });
+
   /// 筛选字段
   final String dataKey;
 
@@ -69,13 +76,6 @@ class ZephyrTableFilter {
 
   /// 筛选操作符
   final String operator;
-
-  /// 创建筛选信息
-  const ZephyrTableFilter({
-    required this.dataKey,
-    required this.value,
-    this.operator = 'contains',
-  });
 }
 
 /// ZephyrUI 表格组件
@@ -107,10 +107,38 @@ class ZephyrTableFilter {
 ///       filterable: true,
 ///     ),
 ///   ],
-///   onSelectionChanged: (selected) => print('选中: $selected'),
+///   onSelectionChanged: (selected) => debugPrint('选中: $selected'),
 /// )
 /// ```
 class ZephyrTable<T> extends StatefulWidget {
+  /// 创建表格组件
+  const ZephyrTable({
+    required this.data,
+    required this.columns,
+    super.key,
+    this.bordered = true,
+    this.striped = true,
+    this.hoverable = true,
+    this.selectable = false,
+    this.paginated = false,
+    this.pageSize = 10,
+    this.currentPage = 1,
+    this.sort,
+    this.filters,
+    this.selectedRows = const {},
+    this.height,
+    this.rowHeight = 48.0,
+    this.headerHeight = 56.0,
+    this.empty,
+    this.loading = false,
+    this.theme,
+    this.onSort,
+    this.onFilter,
+    this.onPageChange,
+    this.onSelectionChanged,
+    this.onRowTap,
+  });
+
   /// 表格数据
   final List<T> data;
 
@@ -180,34 +208,6 @@ class ZephyrTable<T> extends StatefulWidget {
   /// 行点击回调
   final Function(T data)? onRowTap;
 
-  /// 创建表格组件
-  const ZephyrTable({
-    Key? key,
-    required this.data,
-    required this.columns,
-    this.bordered = true,
-    this.striped = true,
-    this.hoverable = true,
-    this.selectable = false,
-    this.paginated = false,
-    this.pageSize = 10,
-    this.currentPage = 1,
-    this.sort,
-    this.filters,
-    this.selectedRows = const {},
-    this.height,
-    this.rowHeight = 48.0,
-    this.headerHeight = 56.0,
-    this.empty,
-    this.loading = false,
-    this.theme,
-    this.onSort,
-    this.onFilter,
-    this.onPageChange,
-    this.onSelectionChanged,
-    this.onRowTap,
-  }) : super(key: key);
-
   @override
   State<ZephyrTable<T>> createState() => _ZephyrTableState<T>();
 }
@@ -272,15 +272,15 @@ class _ZephyrTableState<T> extends State<ZephyrTable<T>> {
         (col) => col.dataKey == _currentSort!.dataKey,
         orElse: () => widget.columns.first,
       );
-      
+
       if (column.comparator != null) {
-        _sortedData.sort((a, b) => 
-          column.comparator!(a, b, _currentSort!.ascending));
+        _sortedData
+            .sort((a, b) => column.comparator!(a, b, _currentSort!.ascending));
       } else {
         _sortedData.sort((a, b) {
           final valueA = _getValueByKey(a, _currentSort!.dataKey);
           final valueB = _getValueByKey(b, _currentSort!.dataKey);
-          
+
           if (_currentSort!.ascending) {
             return Comparable.compare(valueA.toString(), valueB.toString());
           } else {
@@ -319,14 +319,14 @@ class _ZephyrTableState<T> extends State<ZephyrTable<T>> {
     if (!widget.paginated) {
       return _sortedData;
     }
-    
+
     final startIndex = (_currentPage - 1) * _pageSize;
     final endIndex = startIndex + _pageSize;
-    
+
     if (startIndex >= _sortedData.length) {
       return [];
     }
-    
+
     return _sortedData.sublist(
       startIndex,
       endIndex.clamp(0, _sortedData.length),
@@ -344,9 +344,9 @@ class _ZephyrTableState<T> extends State<ZephyrTable<T>> {
     final column = widget.columns.firstWhere(
       (col) => col.dataKey == dataKey,
     );
-    
+
     if (!column.sortable) return;
-    
+
     setState(() {
       if (_currentSort?.dataKey == dataKey) {
         _currentSort = ZephyrTableSort(
@@ -358,7 +358,7 @@ class _ZephyrTableState<T> extends State<ZephyrTable<T>> {
       }
       _processData();
     });
-    
+
     widget.onSort?.call(_currentSort!);
   }
 
@@ -370,7 +370,7 @@ class _ZephyrTableState<T> extends State<ZephyrTable<T>> {
         _selectedRows.remove(item);
       }
     });
-    
+
     widget.onSelectionChanged?.call(_selectedRows);
   }
 
@@ -382,7 +382,7 @@ class _ZephyrTableState<T> extends State<ZephyrTable<T>> {
         _selectedRows.removeAll(_currentPageData);
       }
     });
-    
+
     widget.onSelectionChanged?.call(_selectedRows);
   }
 
@@ -390,7 +390,7 @@ class _ZephyrTableState<T> extends State<ZephyrTable<T>> {
     setState(() {
       _currentPage = page;
     });
-    
+
     widget.onPageChange?.call(page, _pageSize);
   }
 
@@ -400,7 +400,7 @@ class _ZephyrTableState<T> extends State<ZephyrTable<T>> {
       decoration: BoxDecoration(
         color: _theme.backgroundColor,
         borderRadius: _theme.borderRadius,
-        border: widget.bordered 
+        border: widget.bordered
             ? Border.all(color: _theme.borderColor, width: _theme.borderWidth)
             : null,
       ),
@@ -408,15 +408,14 @@ class _ZephyrTableState<T> extends State<ZephyrTable<T>> {
         children: [
           // 表头
           _buildHeader(),
-          
+
           // 表格内容
           Expanded(
             child: _buildBody(),
           ),
-          
+
           // 分页器
-          if (widget.paginated && _sortedData.isNotEmpty)
-            _buildPagination(),
+          if (widget.paginated && _sortedData.isNotEmpty) _buildPagination(),
         ],
       ),
     );
@@ -428,7 +427,9 @@ class _ZephyrTableState<T> extends State<ZephyrTable<T>> {
       decoration: BoxDecoration(
         color: _theme.headerBackgroundColor,
         border: widget.bordered
-            ? Border(bottom: BorderSide(color: _theme.borderColor, width: _theme.borderWidth))
+            ? Border(
+                bottom: BorderSide(
+                    color: _theme.borderColor, width: _theme.borderWidth))
             : null,
       ),
       child: Row(
@@ -439,15 +440,16 @@ class _ZephyrTableState<T> extends State<ZephyrTable<T>> {
               width: 48,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Checkbox(
-                value: _currentPageData.isNotEmpty && 
-                       _currentPageData.every((item) => _selectedRows.contains(item)),
+                value: _currentPageData.isNotEmpty &&
+                    _currentPageData
+                        .every((item) => _selectedRows.contains(item)),
                 onChanged: (selected) => _handleSelectAll(selected ?? false),
               ),
             ),
-          
+
           // 列标题
-          ...widget.columns.map((column) => 
-            Expanded(
+          ...widget.columns.map(
+            (column) => Expanded(
               flex: column.width != null ? 1 : 0,
               child: Container(
                 width: column.width,
@@ -462,7 +464,6 @@ class _ZephyrTableState<T> extends State<ZephyrTable<T>> {
                         column.title,
                         style: _theme.headerTextStyle,
                       ),
-                    
                     if (column.sortable)
                       GestureDetector(
                         onTap: () => _handleSort(column.dataKey),
@@ -470,8 +471,8 @@ class _ZephyrTableState<T> extends State<ZephyrTable<T>> {
                           margin: const EdgeInsets.only(left: 8),
                           child: Icon(
                             _currentSort?.dataKey == column.dataKey
-                                ? (_currentSort!.ascending 
-                                    ? Icons.arrow_upward 
+                                ? (_currentSort!.ascending
+                                    ? Icons.arrow_upward
                                     : Icons.arrow_downward)
                                 : Icons.unfold_more,
                             size: 16,
@@ -507,17 +508,17 @@ class _ZephyrTableState<T> extends State<ZephyrTable<T>> {
         ),
       );
     }
-    
+
     if (_sortedData.isEmpty) {
       return Center(
-        child: widget.empty ?? 
-               Text(
-                 '暂无数据',
-                 style: _theme.emptyTextStyle,
-               ),
+        child: widget.empty ??
+            Text(
+              '暂无数据',
+              style: _theme.emptyTextStyle,
+            ),
       );
     }
-    
+
     return ListView.builder(
       itemCount: _currentPageData.length,
       itemExtent: widget.rowHeight,
@@ -525,7 +526,7 @@ class _ZephyrTableState<T> extends State<ZephyrTable<T>> {
         final item = _currentPageData[index];
         final isSelected = _selectedRows.contains(item);
         final isStriped = widget.striped && index.isEven;
-        
+
         return _buildRow(item, isSelected, isStriped);
       },
     );
@@ -533,7 +534,9 @@ class _ZephyrTableState<T> extends State<ZephyrTable<T>> {
 
   Widget _buildRow(T item, bool isSelected, bool isStriped) {
     return MouseRegion(
-      cursor: widget.onRowTap != null ? SystemMouseCursors.click : MouseCursor.defer,
+      cursor: widget.onRowTap != null
+          ? SystemMouseCursors.click
+          : MouseCursor.defer,
       child: GestureDetector(
         onTap: widget.onRowTap != null ? () => widget.onRowTap!(item) : null,
         child: Container(
@@ -561,13 +564,14 @@ class _ZephyrTableState<T> extends State<ZephyrTable<T>> {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Checkbox(
                     value: isSelected,
-                    onChanged: (selected) => _handleSelectionChanged(item, selected ?? false),
+                    onChanged: (selected) =>
+                        _handleSelectionChanged(item, selected ?? false),
                   ),
                 ),
-              
+
               // 单元格
-              ...widget.columns.map((column) => 
-                Expanded(
+              ...widget.columns.map(
+                (column) => Expanded(
                   flex: column.width != null ? 1 : 0,
                   child: Container(
                     width: column.width,
@@ -596,7 +600,9 @@ class _ZephyrTableState<T> extends State<ZephyrTable<T>> {
       decoration: BoxDecoration(
         color: _theme.footerBackgroundColor,
         border: widget.bordered
-            ? Border(top: BorderSide(color: _theme.borderColor, width: _theme.borderWidth))
+            ? Border(
+                top: BorderSide(
+                    color: _theme.borderColor, width: _theme.borderWidth))
             : null,
       ),
       child: Row(
@@ -607,49 +613,48 @@ class _ZephyrTableState<T> extends State<ZephyrTable<T>> {
             '第 ${(_currentPage - 1) * _pageSize + 1}-${(_currentPage * _pageSize).clamp(1, _sortedData.length)} 条，共 ${_sortedData.length} 条',
             style: _theme.paginationTextStyle,
           ),
-          
+
           // 分页控件
           Row(
             children: [
               // 上一页
               IconButton(
                 icon: const Icon(Icons.chevron_left),
-                onPressed: _currentPage > 1 
+                onPressed: _currentPage > 1
                     ? () => _handlePageChange(_currentPage - 1)
                     : null,
                 color: _theme.paginationIconColor,
               ),
-              
+
               // 页码
               ...List.generate(_totalPages.clamp(1, 5), (index) {
-                final page = _currentPage <= 3 
-                    ? index + 1 
-                    : _currentPage + index - 2;
-                
+                final page =
+                    _currentPage <= 3 ? index + 1 : _currentPage + index - 2;
+
                 if (page > _totalPages) return Container();
-                
+
                 return Container(
                   margin: const EdgeInsets.symmetric(horizontal: 2),
                   child: TextButton(
                     onPressed: () => _handlePageChange(page),
                     style: TextButton.styleFrom(
                       minimumSize: const Size(32, 32),
-                      backgroundColor: page == _currentPage 
-                          ? _theme.primaryColor 
+                      backgroundColor: page == _currentPage
+                          ? _theme.primaryColor
                           : Colors.transparent,
-                      foregroundColor: page == _currentPage 
-                          ? Colors.white 
+                      foregroundColor: page == _currentPage
+                          ? Colors.white
                           : _theme.paginationTextColor,
                     ),
                     child: Text(page.toString()),
                   ),
                 );
               }),
-              
+
               // 下一页
               IconButton(
                 icon: const Icon(Icons.chevron_right),
-                onPressed: _currentPage < _totalPages 
+                onPressed: _currentPage < _totalPages
                     ? () => _handlePageChange(_currentPage + 1)
                     : null,
                 color: _theme.paginationIconColor,

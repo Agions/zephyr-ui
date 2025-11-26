@@ -24,39 +24,39 @@ import 'chart_types.dart';
 /// )
 /// ```
 class ZephyrChart extends StatefulWidget {
-  /// 图表类型
-  final ZephyrChartType type;
-  
-  /// 数据系列
-  final List<ZephyrChartSeries> series;
-  
-  /// 图表配置
-  final ZephyrChartConfig config;
-  
-  /// 图表主题
-  final ZephyrChartTheme? theme;
-  
-  /// 图表尺寸
-  final Size? size;
-  
-  /// 点击数据点回调
-  final Function(ZephyrChartDataPoint, ZephyrChartSeries)? onDataPointTap;
-
   const ZephyrChart({
-    Key? key,
     required this.type,
     required this.series,
+    super.key,
     this.config = const ZephyrChartConfig(),
     this.theme,
     this.size,
     this.onDataPointTap,
-  }) : super(key: key);
+  });
+
+  /// 图表类型
+  final ZephyrChartType type;
+
+  /// 数据系列
+  final List<ZephyrChartSeries> series;
+
+  /// 图表配置
+  final ZephyrChartConfig config;
+
+  /// 图表主题
+  final ZephyrChartTheme? theme;
+
+  /// 图表尺寸
+  final Size? size;
+
+  /// 点击数据点回调
+  final Function(ZephyrChartDataPoint, ZephyrChartSeries)? onDataPointTap;
 
   @override
   State<ZephyrChart> createState() => _ZephyrChartState();
 }
 
-class _ZephyrChartState extends State<ZephyrChart> 
+class _ZephyrChartState extends State<ZephyrChart>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
@@ -65,8 +65,8 @@ class _ZephyrChartState extends State<ZephyrChart>
   void initState() {
     super.initState();
     _animationController = AnimationController(
-      duration: widget.config.enableAnimation 
-          ? widget.config.animationDuration 
+      duration: widget.config.enableAnimation
+          ? widget.config.animationDuration
           : Duration.zero,
       vsync: this,
     );
@@ -74,7 +74,7 @@ class _ZephyrChartState extends State<ZephyrChart>
       parent: _animationController,
       curve: Curves.easeInOut,
     );
-    
+
     if (widget.config.enableAnimation) {
       _animationController.forward();
     }
@@ -89,7 +89,7 @@ class _ZephyrChartState extends State<ZephyrChart>
   @override
   Widget build(BuildContext context) {
     final effectiveTheme = widget.theme ?? ZephyrChartTheme.of(context);
-    
+
     return Container(
       width: widget.size?.width,
       height: widget.size?.height,
@@ -110,8 +110,7 @@ class _ZephyrChartState extends State<ZephyrChart>
           Expanded(
             child: _buildChartContent(effectiveTheme),
           ),
-          if (widget.config.showLegend)
-            _buildLegend(effectiveTheme),
+          if (widget.config.showLegend) _buildLegend(effectiveTheme),
         ],
       ),
     );
@@ -307,13 +306,6 @@ class _ZephyrChartState extends State<ZephyrChart>
 
 /// 柱状图画笔
 class _BarChartPainter extends CustomPainter {
-  final List<ZephyrChartSeries> series;
-  final Animation<double> animation;
-  final ZephyrChartTheme theme;
-  final bool showGrid;
-  final bool showLabels;
-  final Function(ZephyrChartDataPoint, ZephyrChartSeries)? onTap;
-
   _BarChartPainter({
     required this.series,
     required this.animation,
@@ -322,6 +314,12 @@ class _BarChartPainter extends CustomPainter {
     required this.showLabels,
     required this.onTap,
   });
+  final List<ZephyrChartSeries> series;
+  final Animation<double> animation;
+  final ZephyrChartTheme theme;
+  final bool showGrid;
+  final bool showLabels;
+  final Function(ZephyrChartDataPoint, ZephyrChartSeries)? onTap;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -333,25 +331,32 @@ class _BarChartPainter extends CustomPainter {
     final padding = theme.padding;
     final chartWidth = size.width - padding.horizontal;
     final chartHeight = size.height - padding.vertical;
-    final maxValue = _findMaxValue();
+    final maxValue = _findMaxValue(series);
     final barWidth = chartWidth / (series.length * series[0].data.length);
     final groupWidth = barWidth * series.length;
-    final spacing = (chartWidth - groupWidth * series[0].data.length) / (series[0].data.length + 1);
+    final spacing = (chartWidth - groupWidth * series[0].data.length) /
+        (series[0].data.length + 1);
 
     // Draw grid
     if (showGrid) {
-      _drawGrid(canvas, size, padding, maxValue);
+      _drawGrid(canvas, size, padding, maxValue, theme);
     }
 
     // Draw bars
-    for (int seriesIndex = 0; seriesIndex < series.length; seriesIndex++) {
+    for (var seriesIndex = 0; seriesIndex < series.length; seriesIndex++) {
       final seriesData = series[seriesIndex];
       final color = seriesData.color;
-      
-      for (int pointIndex = 0; pointIndex < seriesData.data.length; pointIndex++) {
+
+      for (var pointIndex = 0;
+          pointIndex < seriesData.data.length;
+          pointIndex++) {
         final dataPoint = seriesData.data[pointIndex];
-        final barHeight = (dataPoint.value / maxValue) * chartHeight * animation.value;
-        final x = padding.left + spacing + pointIndex * (groupWidth + spacing) + seriesIndex * barWidth;
+        final barHeight =
+            (dataPoint.value / maxValue) * chartHeight * animation.value;
+        final x = padding.left +
+            spacing +
+            pointIndex * (groupWidth + spacing) +
+            seriesIndex * barWidth;
         final y = padding.top + chartHeight - barHeight;
 
         final paint = Paint()
@@ -363,17 +368,20 @@ class _BarChartPainter extends CustomPainter {
 
         // Draw value labels
         if (showLabels) {
-          _drawText(canvas, dataPoint.value.toString(), 
-            Offset(x + barWidth * 0.4, y - 20), theme.labelStyle);
+          _drawText(canvas, dataPoint.value.toString(),
+              Offset(x + barWidth * 0.4, y - 20), theme.labelStyle);
         }
       }
     }
 
     // Draw axis labels
     if (series.isNotEmpty) {
-      for (int i = 0; i < series[0].data.length; i++) {
+      for (var i = 0; i < series[0].data.length; i++) {
         final label = series[0].data[i].label;
-        final x = padding.left + spacing + i * (groupWidth + spacing) + groupWidth / 2;
+        final x = padding.left +
+            spacing +
+            i * (groupWidth + spacing) +
+            groupWidth / 2;
         final y = padding.top + chartHeight + 20;
         _drawText(canvas, label, Offset(x, y), theme.labelStyle);
       }
@@ -386,13 +394,6 @@ class _BarChartPainter extends CustomPainter {
 
 /// 折线图画笔
 class _LineChartPainter extends CustomPainter {
-  final List<ZephyrChartSeries> series;
-  final Animation<double> animation;
-  final ZephyrChartTheme theme;
-  final bool showGrid;
-  final bool showLabels;
-  final Function(ZephyrChartDataPoint, ZephyrChartSeries)? onTap;
-
   _LineChartPainter({
     required this.series,
     required this.animation,
@@ -401,6 +402,12 @@ class _LineChartPainter extends CustomPainter {
     required this.showLabels,
     required this.onTap,
   });
+  final List<ZephyrChartSeries> series;
+  final Animation<double> animation;
+  final ZephyrChartTheme theme;
+  final bool showGrid;
+  final bool showLabels;
+  final Function(ZephyrChartDataPoint, ZephyrChartSeries)? onTap;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -412,23 +419,26 @@ class _LineChartPainter extends CustomPainter {
     final padding = theme.padding;
     final chartWidth = size.width - padding.horizontal;
     final chartHeight = size.height - padding.vertical;
-    final maxValue = _findMaxValue();
+    final maxValue = _findMaxValue(series);
 
     // Draw grid
     if (showGrid) {
-      _drawGrid(canvas, size, padding, maxValue);
+      _drawGrid(canvas, size, padding, maxValue, theme);
     }
 
     // Draw lines
     for (final seriesData in series) {
       final color = seriesData.color;
       final path = Path();
-      
-      for (int i = 0; i < seriesData.data.length; i++) {
+
+      for (var i = 0; i < seriesData.data.length; i++) {
         final dataPoint = seriesData.data[i];
-        final x = padding.left + (i / (seriesData.data.length - 1)) * chartWidth;
-        final y = padding.top + chartHeight - (dataPoint.value / maxValue) * chartHeight * animation.value;
-        
+        final x =
+            padding.left + (i / (seriesData.data.length - 1)) * chartWidth;
+        final y = padding.top +
+            chartHeight -
+            (dataPoint.value / maxValue) * chartHeight * animation.value;
+
         if (i == 0) {
           path.moveTo(x, y);
         } else {
@@ -439,13 +449,13 @@ class _LineChartPainter extends CustomPainter {
         final paint = Paint()
           ..color = color
           ..style = PaintingStyle.fill;
-        
+
         canvas.drawCircle(Offset(x, y), 4, paint);
 
         // Draw value labels
         if (showLabels) {
-          _drawText(canvas, dataPoint.value.toString(), 
-            Offset(x, y - 20), theme.labelStyle);
+          _drawText(canvas, dataPoint.value.toString(), Offset(x, y - 20),
+              theme.labelStyle);
         }
       }
 
@@ -454,13 +464,13 @@ class _LineChartPainter extends CustomPainter {
         ..color = color
         ..strokeWidth = 2
         ..style = PaintingStyle.stroke;
-      
+
       canvas.drawPath(path, linePaint);
     }
 
     // Draw axis labels
     if (series.isNotEmpty) {
-      for (int i = 0; i < series[0].data.length; i++) {
+      for (var i = 0; i < series[0].data.length; i++) {
         final label = series[0].data[i].label;
         final x = padding.left + (i / (series[0].data.length - 1)) * chartWidth;
         final y = padding.top + chartHeight + 20;
@@ -475,12 +485,6 @@ class _LineChartPainter extends CustomPainter {
 
 /// 饼图画笔
 class _PieChartPainter extends CustomPainter {
-  final List<ZephyrChartSeries> series;
-  final Animation<double> animation;
-  final ZephyrChartTheme theme;
-  final bool showLabels;
-  final Function(ZephyrChartDataPoint, ZephyrChartSeries)? onTap;
-
   _PieChartPainter({
     required this.series,
     required this.animation,
@@ -488,6 +492,11 @@ class _PieChartPainter extends CustomPainter {
     required this.showLabels,
     required this.onTap,
   });
+  final List<ZephyrChartSeries> series;
+  final Animation<double> animation;
+  final ZephyrChartTheme theme;
+  final bool showLabels;
+  final Function(ZephyrChartDataPoint, ZephyrChartSeries)? onTap;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -499,15 +508,22 @@ class _PieChartPainter extends CustomPainter {
     final padding = theme.padding;
     final centerX = size.width / 2;
     final centerY = size.height / 2;
-    final radius = math.min(size.width - padding.horizontal, size.height - padding.vertical) / 2 - 20;
-    
-    final totalValue = series[0].data.fold(0.0, (sum, point) => sum + point.value);
-    double currentAngle = -math.pi / 2; // Start from top
+    final radius = math.min(size.width - padding.horizontal,
+                size.height - padding.vertical) /
+            2 -
+        20;
 
-    for (int i = 0; i < series[0].data.length; i++) {
+    final totalValue = series[0].data.isNotEmpty
+        ? series[0].data.fold<double>(0.0, (sum, point) => sum + point.value)
+        : 0.0;
+    var currentAngle = -math.pi / 2; // Start from top
+
+    for (var i = 0; i < series[0].data.length; i++) {
       final dataPoint = series[0].data[i];
-      final color = dataPoint.color ?? theme.defaultColors[i % theme.defaultColors.length];
-      final sliceAngle = (dataPoint.value / totalValue) * 2 * math.pi * animation.value;
+      final color = dataPoint.color ??
+          theme.defaultColors[i % theme.defaultColors.length];
+      final sliceAngle =
+          (dataPoint.value / totalValue) * 2 * math.pi * animation.value;
 
       // Draw pie slice
       final paint = Paint()
@@ -527,10 +543,12 @@ class _PieChartPainter extends CustomPainter {
         final labelAngle = currentAngle + sliceAngle / 2;
         final labelX = centerX + math.cos(labelAngle) * (radius * 0.7);
         final labelY = centerY + math.sin(labelAngle) * (radius * 0.7);
-        
-        _drawText(canvas, 
-          '${dataPoint.label}\n${((dataPoint.value / totalValue) * 100).toStringAsFixed(1)}%', 
-          Offset(labelX, labelY), theme.labelStyle);
+
+        _drawText(
+            canvas,
+            '${dataPoint.label}\n${((dataPoint.value / totalValue) * 100).toStringAsFixed(1)}%',
+            Offset(labelX, labelY),
+            theme.labelStyle);
       }
 
       currentAngle += sliceAngle;
@@ -543,13 +561,6 @@ class _PieChartPainter extends CustomPainter {
 
 /// 面积图画笔
 class _AreaChartPainter extends CustomPainter {
-  final List<ZephyrChartSeries> series;
-  final Animation<double> animation;
-  final ZephyrChartTheme theme;
-  final bool showGrid;
-  final bool showLabels;
-  final Function(ZephyrChartDataPoint, ZephyrChartSeries)? onTap;
-
   _AreaChartPainter({
     required this.series,
     required this.animation,
@@ -558,11 +569,97 @@ class _AreaChartPainter extends CustomPainter {
     required this.showLabels,
     required this.onTap,
   });
+  final List<ZephyrChartSeries> series;
+  final Animation<double> animation;
+  final ZephyrChartTheme theme;
+  final bool showGrid;
+  final bool showLabels;
+  final Function(ZephyrChartDataPoint, ZephyrChartSeries)? onTap;
 
   @override
   void paint(Canvas canvas, Size size) {
-    // TODO: 实现面积图绘制逻辑
-    _drawPlaceholder(canvas, size, '面积图');
+    if (series.isEmpty) {
+      _drawPlaceholder(canvas, size, '面积图');
+      return;
+    }
+
+    final padding = theme.padding;
+    final chartWidth = size.width - padding.horizontal;
+    final chartHeight = size.height - padding.vertical;
+    final maxValue = _findMaxValue(series);
+
+    // Draw grid
+    if (showGrid) {
+      _drawGrid(canvas, size, padding, maxValue, theme);
+    }
+
+    // Draw areas
+    for (final seriesData in series) {
+      final color = seriesData.color.withValues(alpha: 0.3);
+      final lineColor = seriesData.color;
+      final path = Path();
+      final linePath = Path();
+
+      for (var i = 0; i < seriesData.data.length; i++) {
+        final dataPoint = seriesData.data[i];
+        final x =
+            padding.left + (i / (seriesData.data.length - 1)) * chartWidth;
+        final y = padding.top +
+            chartHeight -
+            (dataPoint.value / maxValue) * chartHeight * animation.value;
+
+        if (i == 0) {
+          path.moveTo(x, y);
+          linePath.moveTo(x, y);
+        } else {
+          path.lineTo(x, y);
+          linePath.lineTo(x, y);
+        }
+
+        // Draw points
+        final pointPaint = Paint()
+          ..color = lineColor
+          ..style = PaintingStyle.fill;
+
+        canvas.drawCircle(Offset(x, y), 4, pointPaint);
+
+        // Draw value labels
+        if (showLabels) {
+          _drawText(canvas, dataPoint.value.toString(), Offset(x, y - 20),
+              theme.labelStyle);
+        }
+      }
+
+      // Complete area path
+      path.lineTo(padding.left + chartWidth, padding.top + chartHeight);
+      path.lineTo(padding.left, padding.top + chartHeight);
+      path.close();
+
+      // Draw area
+      final areaPaint = Paint()
+        ..color = color
+        ..style = PaintingStyle.fill;
+
+      canvas.drawPath(path, areaPaint);
+
+      // Draw line
+      final linePaint = Paint()
+        ..color = lineColor
+        ..strokeWidth = 2
+        ..style = PaintingStyle.stroke;
+
+      canvas.drawPath(linePath, linePaint);
+    }
+
+    // Draw axis labels
+    if (series.isNotEmpty) {
+      for (var i = 0; i < series[0].data.length; i++) {
+        final label = series[0].data[i].label;
+        final x = padding.left + (i / (series[0].data.length - 1)) * chartWidth;
+        final y = padding.top + chartHeight + 20;
+        _drawText(canvas, label, Offset(x, y), theme.labelStyle);
+      }
+    }
   }
 
   @override
@@ -571,13 +668,6 @@ class _AreaChartPainter extends CustomPainter {
 
 /// 散点图画笔
 class _ScatterChartPainter extends CustomPainter {
-  final List<ZephyrChartSeries> series;
-  final Animation<double> animation;
-  final ZephyrChartTheme theme;
-  final bool showGrid;
-  final bool showLabels;
-  final Function(ZephyrChartDataPoint, ZephyrChartSeries)? onTap;
-
   _ScatterChartPainter({
     required this.series,
     required this.animation,
@@ -586,11 +676,70 @@ class _ScatterChartPainter extends CustomPainter {
     required this.showLabels,
     required this.onTap,
   });
+  final List<ZephyrChartSeries> series;
+  final Animation<double> animation;
+  final ZephyrChartTheme theme;
+  final bool showGrid;
+  final bool showLabels;
+  final Function(ZephyrChartDataPoint, ZephyrChartSeries)? onTap;
 
   @override
   void paint(Canvas canvas, Size size) {
-    // TODO: 实现散点图绘制逻辑
-    _drawPlaceholder(canvas, size, '散点图');
+    if (series.isEmpty) {
+      _drawPlaceholder(canvas, size, '散点图');
+      return;
+    }
+
+    final padding = theme.padding;
+    final chartWidth = size.width - padding.horizontal;
+    final chartHeight = size.height - padding.vertical;
+    final maxValue = _findMaxValue(series);
+
+    // Draw grid
+    if (showGrid) {
+      _drawGrid(canvas, size, padding, maxValue, theme);
+    }
+
+    // Draw scatter points
+    for (final seriesData in series) {
+      final color = seriesData.color;
+
+      for (var i = 0; i < seriesData.data.length; i++) {
+        final dataPoint = seriesData.data[i];
+        final x =
+            padding.left + (i / (seriesData.data.length - 1)) * chartWidth;
+        final y = padding.top +
+            chartHeight -
+            (dataPoint.value / maxValue) * chartHeight * animation.value;
+
+        // Add some random scatter effect
+        final scatterX = x + (math.Random().nextDouble() - 0.5) * 20;
+        final scatterY = y + (math.Random().nextDouble() - 0.5) * 20;
+
+        // Draw point
+        final pointPaint = Paint()
+          ..color = color
+          ..style = PaintingStyle.fill;
+
+        canvas.drawCircle(Offset(scatterX, scatterY), 6, pointPaint);
+
+        // Draw value labels
+        if (showLabels) {
+          _drawText(canvas, dataPoint.value.toString(),
+              Offset(scatterX, scatterY - 20), theme.labelStyle);
+        }
+      }
+    }
+
+    // Draw axis labels
+    if (series.isNotEmpty) {
+      for (var i = 0; i < series[0].data.length; i++) {
+        final label = series[0].data[i].label;
+        final x = padding.left + (i / (series[0].data.length - 1)) * chartWidth;
+        final y = padding.top + chartHeight + 20;
+        _drawText(canvas, label, Offset(x, y), theme.labelStyle);
+      }
+    }
   }
 
   @override
@@ -599,13 +748,6 @@ class _ScatterChartPainter extends CustomPainter {
 
 /// 雷达图画笔
 class _RadarChartPainter extends CustomPainter {
-  final List<ZephyrChartSeries> series;
-  final Animation<double> animation;
-  final ZephyrChartTheme theme;
-  final bool showGrid;
-  final bool showLabels;
-  final Function(ZephyrChartDataPoint, ZephyrChartSeries)? onTap;
-
   _RadarChartPainter({
     required this.series,
     required this.animation,
@@ -614,11 +756,105 @@ class _RadarChartPainter extends CustomPainter {
     required this.showLabels,
     required this.onTap,
   });
+  final List<ZephyrChartSeries> series;
+  final Animation<double> animation;
+  final ZephyrChartTheme theme;
+  final bool showGrid;
+  final bool showLabels;
+  final Function(ZephyrChartDataPoint, ZephyrChartSeries)? onTap;
 
   @override
   void paint(Canvas canvas, Size size) {
-    // TODO: 实现雷达图绘制逻辑
-    _drawPlaceholder(canvas, size, '雷达图');
+    if (series.isEmpty) {
+      _drawPlaceholder(canvas, size, '雷达图');
+      return;
+    }
+
+    final padding = theme.padding;
+    final centerX = size.width / 2;
+    final centerY = size.height / 2;
+    final radius = math.min(size.width - padding.horizontal,
+                size.height - padding.vertical) /
+            2 -
+        20;
+
+    final maxValue = _findMaxValue(series);
+    final angleStep = 2 * math.pi / series[0].data.length;
+
+    // Draw radar grid
+    if (showGrid) {
+      final gridPaint = Paint()
+        ..color = theme.gridColor
+        ..strokeWidth = 1.0
+        ..style = PaintingStyle.stroke;
+
+      // Draw concentric circles
+      for (var i = 1; i <= 5; i++) {
+        final r = radius * i / 5;
+        canvas.drawCircle(Offset(centerX, centerY), r, gridPaint);
+      }
+
+      // Draw radial lines
+      for (var i = 0; i < series[0].data.length; i++) {
+        final angle = i * angleStep - math.pi / 2;
+        final x = centerX + math.cos(angle) * radius;
+        final y = centerY + math.sin(angle) * radius;
+        canvas.drawLine(Offset(centerX, centerY), Offset(x, y), gridPaint);
+      }
+    }
+
+    // Draw data series
+    for (final seriesData in series) {
+      final path = Path();
+      final color = seriesData.color.withValues(alpha: 0.3);
+      final lineColor = seriesData.color;
+
+      for (var i = 0; i < seriesData.data.length; i++) {
+        final dataPoint = seriesData.data[i];
+        final angle = i * angleStep - math.pi / 2;
+        final value = (dataPoint.value / maxValue) * animation.value;
+        final x = centerX + math.cos(angle) * radius * value;
+        final y = centerY + math.sin(angle) * radius * value;
+
+        if (i == 0) {
+          path.moveTo(x, y);
+        } else {
+          path.lineTo(x, y);
+        }
+
+        // Draw point
+        final pointPaint = Paint()
+          ..color = lineColor
+          ..style = PaintingStyle.fill;
+
+        canvas.drawCircle(Offset(x, y), 4, pointPaint);
+
+        // Draw labels
+        if (showLabels) {
+          final labelX = centerX + math.cos(angle) * (radius + 20);
+          final labelY = centerY + math.sin(angle) * (radius + 20);
+          _drawText(canvas, dataPoint.label, Offset(labelX, labelY),
+              theme.labelStyle);
+        }
+      }
+
+      path.close();
+
+      // Draw area
+      final areaPaint = Paint()
+        ..color = color
+        ..style = PaintingStyle.fill;
+
+      canvas.drawPath(path, areaPaint);
+
+      // Draw line
+      final linePaint = Paint()
+        ..color = lineColor
+        ..strokeWidth = 2
+        ..style = PaintingStyle.stroke;
+
+      canvas.drawPath(path, linePaint);
+    }
   }
 
   @override
@@ -627,7 +863,6 @@ class _RadarChartPainter extends CustomPainter {
 
 /// 绘制占位符
 void _drawPlaceholder(Canvas canvas, Size size, String text) {
-  
   final textPainter = TextPainter(
     text: TextSpan(
       text: '$text (开发中)',
@@ -638,25 +873,25 @@ void _drawPlaceholder(Canvas canvas, Size size, String text) {
     ),
     textDirection: TextDirection.ltr,
   );
-  
+
   textPainter.layout(
     minWidth: 0,
     maxWidth: size.width,
   );
-  
+
   final offset = Offset(
     (size.width - textPainter.width) / 2,
     (size.height - textPainter.height) / 2,
   );
-  
+
   textPainter.paint(canvas, offset);
 }
 
 /// 查找最大值
-double _findMaxValue() {
+double _findMaxValue(List<ZephyrChartSeries> series) {
   double maxValue = 0;
-  for (final series in this.series) {
-    for (final point in series.data) {
+  for (final seriesData in series) {
+    for (final point in seriesData.data) {
       if (point.value > maxValue) {
         maxValue = point.value;
       }
@@ -666,16 +901,17 @@ double _findMaxValue() {
 }
 
 /// 绘制网格
-void _drawGrid(Canvas canvas, Size size, EdgeInsets padding, double maxValue) {
+void _drawGrid(Canvas canvas, Size size, EdgeInsets padding, double maxValue,
+    ZephyrChartTheme? theme) {
   final gridPaint = Paint()
-    ..color = theme.gridColor
-    ..strokeWidth = theme.gridWidth;
+    ..color = theme?.gridColor ?? Colors.grey.withValues(alpha: 0.3)
+    ..strokeWidth = theme?.gridWidth ?? 1.0;
 
   final chartHeight = size.height - padding.vertical;
-  final gridLines = 5;
+  const gridLines = 5;
 
   // Horizontal grid lines
-  for (int i = 0; i <= gridLines; i++) {
+  for (var i = 0; i <= gridLines; i++) {
     final y = padding.top + (chartHeight / gridLines) * i;
     canvas.drawLine(
       Offset(padding.left, y),
@@ -694,11 +930,12 @@ void _drawText(Canvas canvas, String text, Offset offset, TextStyle style) {
     ),
     textDirection: TextDirection.ltr,
   );
-  
+
   textPainter.layout(
     minWidth: 0,
     maxWidth: 200,
   );
-  
-  textPainter.paint(canvas, offset - Offset(textPainter.width / 2, textPainter.height / 2));
+
+  textPainter.paint(
+      canvas, offset - Offset(textPainter.width / 2, textPainter.height / 2));
 }

@@ -4,6 +4,7 @@
 library context_extensions;
 
 import 'package:flutter/material.dart';
+import 'package:zephyr_ui/src/utils/responsive/responsive_utils.dart';
 import 'package:zephyr_ui/zephyr_ui.dart';
 
 /// BuildContext 扩展
@@ -67,13 +68,13 @@ extension ZephyrContextExtensions on BuildContext {
 
   /// 获取响应式值
   T responsive<T>({
+    required T defaultValue,
     T? xs,
     T? sm,
     T? md,
     T? lg,
     T? xl,
     T? xxl,
-    required T defaultValue,
   }) {
     return ZephyrResponsiveUtils.responsive<T>(
       this,

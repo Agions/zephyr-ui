@@ -5,7 +5,6 @@ library lazy_component_loader;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'dart:async';
 import 'dart:developer' as developer;
 
@@ -19,22 +18,14 @@ enum ComponentLoadState {
 
 /// 组件加载优先级
 enum ComponentPriority {
-  low,    // 低优先级，可延迟加载
+  low, // 低优先级，可延迟加载
   medium, // 中等优先级，需要时加载
-  high,   // 高优先级，尽快加载
+  high, // 高优先级，尽快加载
   critical, // 关键优先级，立即加载
 }
 
 /// 组件元数据
 class ComponentMetadata {
-  final String name;
-  final String path;
-  final int estimatedSizeKB;
-  final ComponentPriority priority;
-  final List<String> dependencies;
-  final DateTime? lastUsed;
-  final int loadCount;
-
   ComponentMetadata({
     required this.name,
     required this.path,
@@ -44,6 +35,13 @@ class ComponentMetadata {
     this.lastUsed,
     this.loadCount = 0,
   });
+  final String name;
+  final String path;
+  final int estimatedSizeKB;
+  final ComponentPriority priority;
+  final List<String> dependencies;
+  final DateTime? lastUsed;
+  final int loadCount;
 
   ComponentMetadata copyWith({
     String? name,
@@ -68,34 +66,34 @@ class ComponentMetadata {
 
 /// 懒加载组件管理器
 class ZephyrLazyComponentLoader {
-  /// 单例实例
-  static final ZephyrLazyComponentLoader _instance = 
-      ZephyrLazyComponentLoader._internal();
-  
-  /// 获取单例实例
-  static ZephyrLazyComponentLoader get instance => _instance;
-  
   /// 内部构造函数
   ZephyrLazyComponentLoader._internal();
 
+  /// 单例实例
+  static final ZephyrLazyComponentLoader _instance =
+      ZephyrLazyComponentLoader._internal();
+
+  /// 获取单例实例
+  static ZephyrLazyComponentLoader get instance => _instance;
+
   /// 组件注册表
   final Map<String, ComponentMetadata> _componentRegistry = {};
-  
+
   /// 已加载组件缓存
   final Map<String, Widget> _loadedComponents = {};
-  
+
   /// 加载状态跟踪
   final Map<String, ComponentLoadState> _loadStates = {};
-  
+
   /// 加载控制器
   final Map<String, Completer<Widget>> _loadControllers = {};
-  
+
   /// 预加载队列
   final List<String> _preloadQueue = [];
-  
+
   /// 内存使用监控
   final Map<String, int> _componentMemoryUsage = {};
-  
+
   /// 配置选项
   int _maxCacheSize = 50;
   Duration _cacheTimeout = const Duration(minutes: 30);
@@ -117,9 +115,9 @@ class ZephyrLazyComponentLoader {
       priority: priority,
       dependencies: dependencies,
     );
-    
+
     _loadStates[name] = ComponentLoadState.notLoaded;
-    
+
     if (kDebugMode) {
       developer.log('📦 Component registered: $name (${estimatedSizeKB}KB)');
     }
@@ -128,16 +126,18 @@ class ZephyrLazyComponentLoader {
   /// 预加载高优先级组件
   Future<void> preloadComponents() async {
     if (!_enablePreloading) return;
-    
+
     final highPriorityComponents = _componentRegistry.values
-        .where((meta) => meta.priority == ComponentPriority.critical || 
-                        meta.priority == ComponentPriority.high)
+        .where((meta) =>
+            meta.priority == ComponentPriority.critical ||
+            meta.priority == ComponentPriority.high)
         .toList();
-    
+
     // 按优先级排序
-    highPriorityComponents.sort((a, b) => b.priority.index.compareTo(a.priority.index));
-    
-    int totalSize = 0;
+    highPriorityComponents
+        .sort((a, b) => b.priority.index.compareTo(a.priority.index));
+
+    var totalSize = 0;
     for (final component in highPriorityComponents) {
       if (totalSize + component.estimatedSizeKB <= _maxPreloadSizeKB) {
         await loadComponent(component.name);
@@ -146,9 +146,10 @@ class ZephyrLazyComponentLoader {
         break;
       }
     }
-    
+
     if (kDebugMode) {
-      developer.log('🔥 Preloaded ${highPriorityComponents.length} components (${totalSize}KB)');
+      developer.log(
+          '🔥 Preloaded ${highPriorityComponents.length} components (${totalSize}KB)');
     }
   }
 
@@ -184,25 +185,24 @@ class ZephyrLazyComponentLoader {
 
       // 模拟异步加载（实际项目中这里会动态导入组件）
       final component = await _loadComponentAsync(metadata);
-      
+
       _loadedComponents[name] = component;
       _loadStates[name] = ComponentLoadState.loaded;
       _updateComponentUsage(name);
-      
+
       completer.complete(component);
-      
+
       // 清理加载控制器
       _loadControllers.remove(name);
-      
+
       if (kDebugMode) {
         developer.log('✅ Component loaded: $name');
       }
-      
     } catch (e, stackTrace) {
       _loadStates[name] = ComponentLoadState.error;
       completer.completeError(e, stackTrace);
       _loadControllers.remove(name);
-      
+
       if (kDebugMode) {
         developer.log('❌ Failed to load component $name: $e');
       }
@@ -214,12 +214,13 @@ class ZephyrLazyComponentLoader {
   /// 异步加载组件（模拟实现）
   Future<Widget> _loadComponentAsync(ComponentMetadata metadata) async {
     // 模拟网络/磁盘加载延迟
-    await Future.delayed(Duration(milliseconds: metadata.estimatedSizeKB ~/ 10));
-    
+    await Future.delayed(
+        Duration(milliseconds: metadata.estimatedSizeKB ~/ 10));
+
     // 实际项目中这里会使用动态导入：
     // final library = await deferredLibrary.loadLibrary();
     // final component = library.createComponent();
-    
+
     // 返回一个占位组件，实际项目中会返回真实组件
     return Container(
       key: Key('lazy_component_${metadata.name}'),
@@ -259,7 +260,7 @@ class ZephyrLazyComponentLoader {
   void unloadComponent(String name) {
     _loadedComponents.remove(name);
     _loadStates[name] = ComponentLoadState.notLoaded;
-    
+
     if (kDebugMode) {
       developer.log('🗑️ Component unloaded: $name');
     }
@@ -271,12 +272,12 @@ class ZephyrLazyComponentLoader {
     _loadStates.clear();
     _loadControllers.clear();
     _preloadQueue.clear();
-    
+
     // 重置所有组件状态
     for (final name in _componentRegistry.keys) {
       _loadStates[name] = ComponentLoadState.notLoaded;
     }
-    
+
     if (kDebugMode) {
       developer.log('🧹 Component cache cleared');
     }
@@ -286,7 +287,7 @@ class ZephyrLazyComponentLoader {
   void optimizeCache() {
     final now = DateTime.now();
     final componentsToRemove = <String>[];
-    
+
     for (final entry in _loadedComponents.entries) {
       final metadata = _componentRegistry[entry.key];
       if (metadata != null && metadata.lastUsed != null) {
@@ -296,29 +297,30 @@ class ZephyrLazyComponentLoader {
         }
       }
     }
-    
+
     for (final name in componentsToRemove) {
       unloadComponent(name);
     }
-    
+
     // 如果缓存仍然过大，移除最少使用的组件
     if (_loadedComponents.length > _maxCacheSize) {
       final sortedComponents = _componentRegistry.values
           .where((meta) => _loadedComponents.containsKey(meta.name))
           .toList()
         ..sort((a, b) => a.loadCount.compareTo(b.loadCount));
-      
-      final toRemove = sortedComponents.take(
-        _loadedComponents.length - _maxCacheSize
-      ).map((meta) => meta.name);
-      
+
+      final toRemove = sortedComponents
+          .take(_loadedComponents.length - _maxCacheSize)
+          .map((meta) => meta.name);
+
       for (final name in toRemove) {
         unloadComponent(name);
       }
     }
-    
+
     if (kDebugMode && componentsToRemove.isNotEmpty) {
-      developer.log('🗑️ Optimized cache: removed ${componentsToRemove.length} components');
+      developer.log(
+          '🗑️ Optimized cache: removed ${componentsToRemove.length} components');
     }
   }
 
@@ -328,7 +330,7 @@ class ZephyrLazyComponentLoader {
       0,
       (sum, name) => sum + (_componentRegistry[name]?.estimatedSizeKB ?? 0),
     );
-    
+
     return {
       'registeredComponents': _componentRegistry.length,
       'loadedComponents': _loadedComponents.length,
@@ -348,14 +350,14 @@ class ZephyrLazyComponentLoader {
       0,
       (sum, meta) => sum + meta.loadCount,
     );
-    
+
     if (totalRequests == 0) return 0.0;
-    
+
     final cacheHits = _loadedComponents.values.fold<int>(
       0,
       (sum, _) => sum + 1,
     );
-    
+
     return cacheHits / totalRequests;
   }
 
@@ -370,29 +372,29 @@ class ZephyrLazyComponentLoader {
     if (cacheTimeout != null) _cacheTimeout = cacheTimeout;
     if (enablePreloading != null) _enablePreloading = enablePreloading;
     if (maxPreloadSizeKB != null) _maxPreloadSizeKB = maxPreloadSizeKB;
-    
+
     if (kDebugMode) {
-      developer.log('⚙️ Lazy loader configured: maxCacheSize=$_maxCacheSize, enablePreloading=$_enablePreloading');
+      developer.log(
+          '⚙️ Lazy loader configured: maxCacheSize=$_maxCacheSize, enablePreloading=$_enablePreloading');
     }
   }
 }
 
 /// 懒加载组件包装器
 class ZephyrLazyComponent extends StatefulWidget {
+  const ZephyrLazyComponent({
+    required this.componentName,
+    super.key,
+    this.placeholder,
+    this.errorWidget,
+    this.onLoad,
+    this.onError,
+  });
   final String componentName;
   final Widget? placeholder;
   final Widget? errorWidget;
   final VoidCallback? onLoad;
   final VoidCallback? onError;
-
-  const ZephyrLazyComponent({
-    Key? key,
-    required this.componentName,
-    this.placeholder,
-    this.errorWidget,
-    this.onLoad,
-    this.onError,
-  }) : super(key: key);
 
   @override
   State<ZephyrLazyComponent> createState() => _ZephyrLazyComponentState();
@@ -420,7 +422,7 @@ class _ZephyrLazyComponentState extends State<ZephyrLazyComponent> {
 
   Future<void> _loadComponent() async {
     if (_isLoading) return;
-    
+
     setState(() {
       _isLoading = true;
       _error = null;
@@ -497,18 +499,17 @@ class _ZephyrLazyComponentState extends State<ZephyrLazyComponent> {
 
 /// 预加载组件包装器
 class ZephyrPreloader extends StatefulWidget {
+  const ZephyrPreloader({
+    required this.componentNames,
+    required this.child,
+    super.key,
+    this.onComplete,
+    this.onError,
+  });
   final List<String> componentNames;
   final Widget child;
   final VoidCallback? onComplete;
   final VoidCallback? onError;
-
-  const ZephyrPreloader({
-    Key? key,
-    required this.componentNames,
-    required this.child,
-    this.onComplete,
-    this.onError,
-  }) : super(key: key);
 
   @override
   State<ZephyrPreloader> createState() => _ZephyrPreloaderState();
@@ -526,7 +527,7 @@ class _ZephyrPreloaderState extends State<ZephyrPreloader> {
 
   Future<void> _preloadComponents() async {
     if (_isLoading) return;
-    
+
     setState(() {
       _isLoading = true;
     });
@@ -535,7 +536,7 @@ class _ZephyrPreloaderState extends State<ZephyrPreloader> {
       for (final componentName in widget.componentNames) {
         await _loader.loadComponent(componentName);
       }
-      
+
       if (mounted) {
         setState(() {
           _isLoading = false;
@@ -576,7 +577,7 @@ extension ZephyrLazyLoadingExtensions on BuildContext {
       onError: onError,
     );
   }
-  
+
   /// 创建预加载器
   Widget preload({
     required List<String> componentNames,
@@ -586,9 +587,9 @@ extension ZephyrLazyLoadingExtensions on BuildContext {
   }) {
     return ZephyrPreloader(
       componentNames: componentNames,
-      child: child,
       onComplete: onComplete,
       onError: onError,
+      child: child,
     );
   }
 }

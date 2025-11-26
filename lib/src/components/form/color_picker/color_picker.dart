@@ -28,7 +28,7 @@ class ZephyrColorPicker extends StatefulWidget {
   final String? semanticHint;
 
   const ZephyrColorPicker({
-    Key? key,
+    super.key,
     this.initialColor,
     this.onColorChanged,
     this.presetColors = const [
@@ -44,7 +44,7 @@ class ZephyrColorPicker extends StatefulWidget {
       Colors.indigo,
       Colors.teal,
       Colors.lime,
-      Colors.brown,
+      Colors.bluerown,
       Colors.grey,
       Colors.black,
       Colors.white,
@@ -66,7 +66,7 @@ class ZephyrColorPicker extends StatefulWidget {
     this.enableKeyboardShortcuts = true,
     this.semanticLabel,
     this.semanticHint,
-  }) : super(key: key);
+  });
 
   @override
   State<ZephyrColorPicker> createState() => _ZephyrColorPickerState();
@@ -157,8 +157,7 @@ class _ZephyrColorPickerState extends State<ZephyrColorPicker> {
           width: widget.theme.previewBorderWidth,
         ),
         boxShadow: [
-          BoxShadow(
-            color: widget.theme.shadowColor,
+          BoxShadow(color: widget.theme.shadowColor,
             blurRadius: widget.theme.shadowBlurRadius,
             offset: widget.theme.shadowOffset,
           ),
@@ -202,8 +201,7 @@ class _ZephyrColorPickerState extends State<ZephyrColorPicker> {
               ),
               boxShadow: isSelected
                   ? [
-                      BoxShadow(
-                        color: widget.theme.selectedBorderColor.withValues(alpha: 0.3),
+                      BoxShadow(color: widget.theme.selectedBorderColor.withValues(alpha: 0.3),
                         blurRadius: 4,
                         offset: const Offset(0, 2),
                       ),
@@ -270,7 +268,7 @@ class _ZephyrColorPickerState extends State<ZephyrColorPicker> {
           onChanged: _onHexChanged,
           enabled: widget.enabled,
           placeholder: '#RRGGBB${widget.enableAlpha ? 'AA' : ''}',
-          prefix: const Icon(Icons.tag),
+          prefixIcon: Icons.tag,
           theme: widget.theme.inputTheme,
         ),
       ],
@@ -374,8 +372,7 @@ class _ZephyrColorPickerState extends State<ZephyrColorPicker> {
           width: widget.theme.borderWidth,
         ),
         boxShadow: [
-          BoxShadow(
-            color: widget.theme.shadowColor,
+          BoxShadow(color: widget.theme.shadowColor,
             blurRadius: widget.theme.shadowBlurRadius,
             offset: widget.theme.shadowOffset,
           ),

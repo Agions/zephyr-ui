@@ -93,63 +93,63 @@ class BasicDividerDemo extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
+
           // 水平分割线
           _buildSection('水平分割线', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Column(
                 children: [
-                  const Text('上半部分内容'),
-                  const SizedBox(height: 16),
+                  Text('上半部分内容'),
+                  SizedBox(height: 16),
                   ZephyrDivider.horizontal(),
-                  const SizedBox(height: 16),
-                  const Text('下半部分内容'),
+                  SizedBox(height: 16),
+                  Text('下半部分内容'),
                 ],
               ),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 垂直分割线
           _buildSection('垂直分割线', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(
                 children: [
-                  const Expanded(child: Center(child: Text('左侧内容'))),
+                  Expanded(child: Center(child: Text('左侧内容'))),
                   ZephyrDivider.vertical(),
-                  const Expanded(child: Center(child: Text('中间内容'))),
+                  Expanded(child: Center(child: Text('中间内容'))),
                   ZephyrDivider.vertical(),
-                  const Expanded(child: Center(child: Text('右侧内容'))),
+                  Expanded(child: Center(child: Text('右侧内容'))),
                 ],
               ),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 带文本的分割线
           _buildSection('带文本的分割线', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Column(
                 children: [
-                  const Text('上半部分'),
-                  const SizedBox(height: 16),
+                  Text('上半部分'),
+                  SizedBox(height: 16),
                   ZephyrDivider.horizontal(
                     text: '或者',
                     textStyle: TextStyle(
@@ -157,30 +157,30 @@ class BasicDividerDemo extends StatelessWidget {
                       fontSize: 14,
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  const Text('下半部分'),
+                  SizedBox(height: 16),
+                  Text('下半部分'),
                 ],
               ),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 默认分割线
           _buildSection('默认样式', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Column(
                 children: [
-                  const Text('内容 1'),
-                  const SizedBox(height: 16),
+                  Text('内容 1'),
+                  SizedBox(height: 16),
                   ZephyrDivider.horizontal(), // 默认分割线
-                  const SizedBox(height: 16),
-                  const Text('内容 2'),
+                  SizedBox(height: 16),
+                  Text('内容 2'),
                 ],
               ),
             ),
@@ -221,171 +221,171 @@ class StyleDividerDemo extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
+
           // 颜色变体
           _buildSection('颜色变体', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Column(
                 children: [
-                  const Text('内容 1'),
-                  const SizedBox(height: 16),
+                  Text('内容 1'),
+                  SizedBox(height: 16),
                   ZephyrDivider.horizontal(
                     color: Colors.grey[300], // 默认颜色
                   ),
-                  const SizedBox(height: 16),
-                  const Text('内容 2'),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
+                  Text('内容 2'),
+                  SizedBox(height: 16),
                   ZephyrDivider.horizontal(
                     color: Colors.blue, // 蓝色分割线
                   ),
-                  const SizedBox(height: 16),
-                  const Text('内容 3'),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
+                  Text('内容 3'),
+                  SizedBox(height: 16),
                   ZephyrDivider.horizontal(
                     color: Colors.red, // 红色分割线
                   ),
-                  const SizedBox(height: 16),
-                  const Text('内容 4'),
+                  SizedBox(height: 16),
+                  Text('内容 4'),
                 ],
               ),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 厚度变体
           _buildSection('厚度变体', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Column(
                 children: [
-                  const Text('内容 1'),
-                  const SizedBox(height: 16),
+                  Text('内容 1'),
+                  SizedBox(height: 16),
                   ZephyrDivider.horizontal(
                     thickness: 1, // 默认厚度
                   ),
-                  const SizedBox(height: 16),
-                  const Text('内容 2'),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
+                  Text('内容 2'),
+                  SizedBox(height: 16),
                   ZephyrDivider.horizontal(
                     thickness: 2, // 中等厚度
                   ),
-                  const SizedBox(height: 16),
-                  const Text('内容 3'),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
+                  Text('内容 3'),
+                  SizedBox(height: 16),
                   ZephyrDivider.horizontal(
                     thickness: 4, // 厚分割线
                   ),
-                  const SizedBox(height: 16),
-                  const Text('内容 4'),
+                  SizedBox(height: 16),
+                  Text('内容 4'),
                 ],
               ),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 缩进变体
           _buildSection('缩进变体', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Column(
                 children: [
-                  const Text('内容 1'),
-                  const SizedBox(height: 16),
+                  Text('内容 1'),
+                  SizedBox(height: 16),
                   ZephyrDivider.horizontal(
                     indent: 0, // 无缩进
                     endIndent: 0,
                   ),
-                  const SizedBox(height: 16),
-                  const Text('内容 2'),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
+                  Text('内容 2'),
+                  SizedBox(height: 16),
                   ZephyrDivider.horizontal(
                     indent: 20, // 左侧缩进
                     endIndent: 20, // 右侧缩进
                   ),
-                  const SizedBox(height: 16),
-                  const Text('内容 3'),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
+                  Text('内容 3'),
+                  SizedBox(height: 16),
                   ZephyrDivider.horizontal(
                     indent: 40, // 更大的缩进
                     endIndent: 40,
                   ),
-                  const SizedBox(height: 16),
-                  const Text('内容 4'),
+                  SizedBox(height: 16),
+                  Text('内容 4'),
                 ],
               ),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 间距变体
           _buildSection('间距变体', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Column(
                 children: [
-                  const Text('内容 1'),
+                  Text('内容 1'),
                   ZephyrDivider.horizontal(
                     verticalSpacing: 8, // 小间距
                   ),
-                  const Text('内容 2'),
+                  Text('内容 2'),
                   ZephyrDivider.horizontal(
                     verticalSpacing: 16, // 中等间距
                   ),
-                  const Text('内容 3'),
+                  Text('内容 3'),
                   ZephyrDivider.horizontal(
                     verticalSpacing: 32, // 大间距
                   ),
-                  const Text('内容 4'),
+                  Text('内容 4'),
                 ],
               ),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 垂直分割线样式
           _buildSection('垂直分割线样式', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(
                 children: [
-                  const Expanded(child: Center(child: Text('左侧'))),
+                  Expanded(child: Center(child: Text('左侧'))),
                   ZephyrDivider.vertical(
                     color: Colors.blue,
                     thickness: 2,
                     width: 50,
                   ),
-                  const Expanded(child: Center(child: Text('中间'))),
+                  Expanded(child: Center(child: Text('中间'))),
                   ZephyrDivider.vertical(
                     color: Colors.red,
                     thickness: 3,
                     width: 30,
                   ),
-                  const Expanded(child: Center(child: Text('右侧'))),
+                  Expanded(child: Center(child: Text('右侧'))),
                 ],
               ),
             ),
@@ -426,11 +426,11 @@ class InteractiveDividerDemo extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
+
           // 列表中的分割线
           _buildSection('列表中的分割线', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
@@ -452,13 +452,13 @@ class InteractiveDividerDemo extends StatelessWidget {
               ),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 表格中的分割线
           _buildSection('表格中的分割线', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
@@ -466,13 +466,13 @@ class InteractiveDividerDemo extends StatelessWidget {
               child: _buildTableWithDividers(),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 导航分隔符
           _buildSection('导航分隔符', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
@@ -507,36 +507,41 @@ class InteractiveDividerDemo extends StatelessWidget {
       children: data.asMap().entries.map((entry) {
         final rowIndex = entry.key;
         final row = entry.value;
-        
+
         return Column(
           children: [
             IntrinsicHeight(
               child: Row(
-                children: row.asMap().entries.map((cellEntry) {
-                  final cellIndex = cellEntry.key;
-                  final cell = cellEntry.value;
-                  
-                  return Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.all(12),
-                      alignment: Alignment.center,
-                      child: Text(
-                        cell,
-                        style: rowIndex == 0
-                            ? const TextStyle(fontWeight: FontWeight.bold)
-                            : null,
-                      ),
-                    ),
-                  );
-                }).expand((cell) => [
-                  cell,
-                  if (cellIndex < row.length - 1)
-                    ZephyrDivider.vertical(),
-                ]).toList(),
+                children: row
+                    .asMap()
+                    .entries
+                    .map((cellEntry) {
+                      final cellIndex = cellEntry.key;
+                      final cell = cellEntry.value;
+
+                      return Expanded(
+                        child: const Container(
+                          padding: EdgeInsets.all(12),
+                          alignment: Alignment.center,
+                          child: Text(
+                            cell,
+                            style: rowIndex == 0
+                                ? TextStyle(fontWeight: FontWeight.bold)
+                                : null,
+                          ),
+                        ),
+                      );
+                    })
+                    .expand((cell) => [
+                          cell,
+                          if (cellIndex < row.length - 1)
+                            const ZephyrDivider.vertical(),
+                        ])
+                    .toList(),
               ),
             ),
             if (rowIndex < data.length - 1)
-              ZephyrDivider.horizontal(
+              const ZephyrDivider.horizontal(
                 indent: 0,
                 endIndent: 0,
               ),
@@ -556,8 +561,8 @@ class InteractiveDividerDemo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Text(
             '主要功能',
             style: TextStyle(
@@ -570,7 +575,7 @@ class InteractiveDividerDemo extends StatelessWidget {
         ...items.asMap().entries.map((entry) {
           final index = entry.key;
           final item = entry.value;
-          
+
           return Column(
             children: [
               ListTile(
@@ -579,7 +584,7 @@ class InteractiveDividerDemo extends StatelessWidget {
                 onTap: item.onTap,
               ),
               if (index < items.length - 1)
-                ZephyrDivider.horizontal(
+                const ZephyrDivider.horizontal(
                   indent: 56, // 缩进到图标后面
                   endIndent: 16,
                 ),
@@ -630,11 +635,11 @@ class AdvancedDividerDemo extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
+
           // 时间线分割线
           _buildSection('时间线分割线', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
@@ -642,27 +647,27 @@ class AdvancedDividerDemo extends StatelessWidget {
               child: _buildTimelineDivider(),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 可隐藏分割线
           _buildSection('可隐藏分割线', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const ToggleableDividerDemo(),
+              child: ToggleableDividerDemo(),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 分组分割线
           _buildSection('分组分割线', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
@@ -670,25 +675,25 @@ class AdvancedDividerDemo extends StatelessWidget {
               child: _buildGroupedDivider(),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 虚线分割线
           _buildSection('虚线分割线', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Column(
                 children: [
-                  const Text('内容 1'),
-                  const SizedBox(height: 16),
+                  Text('内容 1'),
+                  SizedBox(height: 16),
                   // 使用自定义装饰创建虚线效果
                   Container(
                     height: 1,
-                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    margin: EdgeInsets.symmetric(vertical: 8),
                     child: CustomPaint(
                       painter: DashedLinePainter(
                         color: Colors.grey[400]!,
@@ -697,27 +702,27 @@ class AdvancedDividerDemo extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  const Text('内容 2'),
+                  SizedBox(height: 16),
+                  Text('内容 2'),
                 ],
               ),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 带图标的分割线
           _buildSection('带图标的分割线', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Column(
                 children: [
-                  const Text('上半部分'),
-                  const SizedBox(height: 16),
+                  Text('上半部分'),
+                  SizedBox(height: 16),
                   Row(
                     children: [
                       Expanded(
@@ -725,7 +730,7 @@ class AdvancedDividerDemo extends StatelessWidget {
                           endIndent: 8,
                         ),
                       ),
-                      const Icon(Icons.star, color: Colors.grey),
+                      Icon(Icons.star, color: Colors.grey),
                       Expanded(
                         child: ZephyrDivider.horizontal(
                           indent: 8,
@@ -733,8 +738,8 @@ class AdvancedDividerDemo extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
-                  const Text('下半部分'),
+                  SizedBox(height: 16),
+                  Text('下半部分'),
                 ],
               ),
             ),
@@ -746,10 +751,10 @@ class AdvancedDividerDemo extends StatelessWidget {
 
   Widget _buildTimelineDivider() {
     final items = [
-      TimelineItem('订单创建', '2024-01-01 10:00', Colors.green),
-      TimelineItem('订单确认', '2024-01-01 10:30', Colors.blue),
-      TimelineItem('订单发货', '2024-01-02 14:00', Colors.orange),
-      TimelineItem('订单完成', '2024-01-03 16:00', Colors.green),
+      const TimelineItem('订单创建', '2024-01-01 10:00', Colors.green),
+      const TimelineItem('订单确认', '2024-01-01 10:30', Colors.blue),
+      const TimelineItem('订单发货', '2024-01-02 14:00', Colors.orange),
+      const TimelineItem('订单完成', '2024-01-03 16:00', Colors.green),
     ];
 
     return Column(
@@ -757,7 +762,7 @@ class AdvancedDividerDemo extends StatelessWidget {
       children: items.asMap().entries.map((entry) {
         final index = entry.key;
         final item = entry.value;
-        
+
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -765,7 +770,7 @@ class AdvancedDividerDemo extends StatelessWidget {
             Column(
               children: [
                 // 时间点
-                Container(
+                const Container(
                   width: 12,
                   height: 12,
                   decoration: BoxDecoration(
@@ -823,8 +828,8 @@ class AdvancedDividerDemo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(16),
+        const Padding(
+          padding: EdgeInsets.all(16),
           child: Text(
             '用户设置',
             style: TextStyle(
@@ -834,7 +839,7 @@ class AdvancedDividerDemo extends StatelessWidget {
             ),
           ),
         ),
-        ZephyrDivider.horizontal(
+        const ZephyrDivider.horizontal(
           indent: 16,
           endIndent: 16,
         ),

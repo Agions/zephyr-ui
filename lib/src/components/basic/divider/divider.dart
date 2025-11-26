@@ -16,7 +16,7 @@ import 'package:zephyr_ui/zephyr_ui.dart';
 class ZephyrDivider extends StatelessWidget {
   /// 创建一个水平分割线
   const ZephyrDivider.horizontal({
-    Key? key,
+    super.key,
     this.color,
     this.thickness,
     this.indent,
@@ -24,12 +24,11 @@ class ZephyrDivider extends StatelessWidget {
     this.theme,
     this.height,
   })  : _axis = Axis.horizontal,
-        width = null,
-        super(key: key);
+        width = null;
 
   /// 创建一个垂直分割线
   const ZephyrDivider.vertical({
-    Key? key,
+    super.key,
     this.color,
     this.thickness,
     this.indent,
@@ -37,8 +36,7 @@ class ZephyrDivider extends StatelessWidget {
     this.theme,
     this.width,
   })  : _axis = Axis.vertical,
-        height = null,
-        super(key: key);
+        height = null;
 
   /// 分割线颜色
   final Color? color;
@@ -67,17 +65,18 @@ class ZephyrDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 获取主题
-    final effectiveTheme = theme ?? Theme.of(context).extension<ZephyrDividerTheme>() ??
+    final effectiveTheme = theme ??
+        Theme.of(context).extension<ZephyrDividerTheme>() ??
         ZephyrDividerTheme.fallback(context);
 
     // 设置方向特定参数
-    final bool isHorizontal = _axis == Axis.horizontal;
-    final double effectiveThickness = thickness ?? effectiveTheme.thickness!;
-    final double effectiveIndent = indent ?? effectiveTheme.indent!;
-    final double effectiveEndIndent = endIndent ?? effectiveTheme.endIndent!;
+    final isHorizontal = _axis == Axis.horizontal;
+    final effectiveThickness = thickness ?? effectiveTheme.thickness!;
+    final effectiveIndent = indent ?? effectiveTheme.indent!;
+    final effectiveEndIndent = endIndent ?? effectiveTheme.endIndent!;
 
     // 计算内部尺寸
-    final double effectiveSpace = isHorizontal
+    final effectiveSpace = isHorizontal
         ? (height ?? (effectiveTheme.verticalSpacing! * 2 + effectiveThickness))
         : (width ??
             (effectiveTheme.horizontalSpacing! * 2 + effectiveThickness));

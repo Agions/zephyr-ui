@@ -144,44 +144,44 @@ class ZephyrInputTheme {
       borderRadius: 8.0,
       contentPadding:
           const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w400,
-        color: ZephyrColors.neutral900,
+        color: Colors.black,
         height: 1.5,
       ),
-      placeholderStyle: TextStyle(
+      placeholderStyle: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w400,
-        color: ZephyrColors.neutral500,
+        color: Colors.grey,
         height: 1.5,
       ),
       disabledTextColor: ZephyrColors.neutral400,
       textColor: ZephyrColors.neutral900,
-      prefixStyle: TextStyle(
+      prefixStyle: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w400,
-        color: ZephyrColors.neutral700,
+        color: Colors.black54,
       ),
-      suffixStyle: TextStyle(
+      suffixStyle: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w400,
-        color: ZephyrColors.neutral700,
+        color: Colors.black54,
       ),
-      helperStyle: TextStyle(
+      helperStyle: const TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w400,
-        color: ZephyrColors.neutral600,
+        color: Colors.black54,
       ),
-      errorStyle: TextStyle(
+      errorStyle: const TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w400,
-        color: ZephyrColors.error500,
+        color: Colors.red,
       ),
-      counterStyle: TextStyle(
+      counterStyle: const TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w400,
-        color: ZephyrColors.neutral500,
+        color: Colors.grey,
       ),
       iconSize: 20,
       iconColor: ZephyrColors.neutral500,
@@ -210,44 +210,44 @@ class ZephyrInputTheme {
       borderRadius: 8.0,
       contentPadding:
           const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w400,
-        color: ZephyrColors.neutral50,
+        color: Colors.white,
         height: 1.5,
       ),
-      placeholderStyle: TextStyle(
+      placeholderStyle: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w400,
-        color: ZephyrColors.neutral400,
+        color: Colors.white70,
         height: 1.5,
       ),
       disabledTextColor: ZephyrColors.neutral600,
       textColor: ZephyrColors.neutral50,
-      prefixStyle: TextStyle(
+      prefixStyle: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w400,
-        color: ZephyrColors.neutral200,
+        color: Colors.white70,
       ),
-      suffixStyle: TextStyle(
+      suffixStyle: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w400,
-        color: ZephyrColors.neutral200,
+        color: Colors.white70,
       ),
-      helperStyle: TextStyle(
+      helperStyle: const TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w400,
-        color: ZephyrColors.neutral400,
+        color: Colors.white70,
       ),
-      errorStyle: TextStyle(
+      errorStyle: const TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w400,
-        color: ZephyrColors.error400,
+        color: Colors.red,
       ),
-      counterStyle: TextStyle(
+      counterStyle: const TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w400,
-        color: ZephyrColors.neutral500,
+        color: Colors.white70,
       ),
       iconSize: 20,
       iconColor: ZephyrColors.neutral400,

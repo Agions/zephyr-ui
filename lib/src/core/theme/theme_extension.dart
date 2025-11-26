@@ -1,5 +1,5 @@
 /// ZephyrUI 主题扩展机制
-/// 
+///
 /// 提供灵活的主题扩展和自定义功能
 library theme_extension;
 
@@ -24,7 +24,8 @@ abstract class ZephyrThemeExtension<T extends ZephyrThemeExtension<T>> {
 }
 
 /// 颜色方案扩展
-class ZephyrColorSchemeExtension extends ZephyrThemeExtension<ZephyrColorSchemeExtension> {
+class ZephyrColorSchemeExtension
+    extends ZephyrThemeExtension<ZephyrColorSchemeExtension> {
   const ZephyrColorSchemeExtension({
     this.success = const ZephyrSuccessColors(),
     this.warning = const ZephyrWarningColors(),
@@ -55,7 +56,7 @@ class ZephyrColorSchemeExtension extends ZephyrThemeExtension<ZephyrColorSchemeE
   @override
   ZephyrColorSchemeExtension merge(ZephyrColorSchemeExtension? other) {
     if (other == null) return this;
-    
+
     return copyWith(
       success: success.merge(other.success),
       warning: warning.merge(other.warning),
@@ -127,7 +128,8 @@ class ZephyrSuccessColors {
   }
 
   @override
-  int get hashCode => Object.hashAll([color, onColor, colorContainer, onColorContainer]);
+  int get hashCode =>
+      Object.hashAll([color, onColor, colorContainer, onColorContainer]);
 }
 
 /// 警告颜色
@@ -179,7 +181,8 @@ class ZephyrWarningColors {
   }
 
   @override
-  int get hashCode => Object.hashAll([color, onColor, colorContainer, onColorContainer]);
+  int get hashCode =>
+      Object.hashAll([color, onColor, colorContainer, onColorContainer]);
 }
 
 /// 信息颜色
@@ -231,7 +234,8 @@ class ZephyrInfoColors {
   }
 
   @override
-  int get hashCode => Object.hashAll([color, onColor, colorContainer, onColorContainer]);
+  int get hashCode =>
+      Object.hashAll([color, onColor, colorContainer, onColorContainer]);
 }
 
 /// 中性颜色
@@ -348,7 +352,8 @@ class ZephyrNeutralColors {
 }
 
 /// 形状主题扩展
-class ZephyrShapeThemeExtension extends ZephyrThemeExtension<ZephyrShapeThemeExtension> {
+class ZephyrShapeThemeExtension
+    extends ZephyrThemeExtension<ZephyrShapeThemeExtension> {
   const ZephyrShapeThemeExtension({
     this.small = ZephyrRadiusTokens.small,
     this.medium = ZephyrRadiusTokens.medium,
@@ -402,7 +407,8 @@ class ZephyrShapeThemeExtension extends ZephyrThemeExtension<ZephyrShapeThemeExt
 }
 
 /// 间距主题扩展
-class ZephyrSpacingThemeExtension extends ZephyrThemeExtension<ZephyrSpacingThemeExtension> {
+class ZephyrSpacingThemeExtension
+    extends ZephyrThemeExtension<ZephyrSpacingThemeExtension> {
   const ZephyrSpacingThemeExtension({
     this.micro = ZephyrSpacingTokens.micro,
     this.small = ZephyrSpacingTokens.small,

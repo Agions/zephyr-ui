@@ -3,7 +3,7 @@ import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:zephyr_ui/zephyr_ui.dart';
 
 /// Advanced Components Demo Page
-/// 
+///
 /// Demonstrates all advanced components in the ZephyrUI library.
 class AdvancedComponentsDemo extends StatefulWidget {
   const AdvancedComponentsDemo({super.key});
@@ -14,7 +14,7 @@ class AdvancedComponentsDemo extends StatefulWidget {
 
 class _AdvancedComponentsDemoState extends State<AdvancedComponentsDemo> {
   final ScrollController _scrollController = ScrollController();
-  
+
   @override
   void dispose() {
     _scrollController.dispose();
@@ -71,14 +71,14 @@ class _AdvancedComponentsDemoState extends State<AdvancedComponentsDemo> {
   }
 
   Widget _buildHeader(BuildContext context) {
-    return Container(
+    return const Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(24),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Theme.of(context).primaryColor,
-            Theme.of(context).primaryColor.withValues(alpha: 0.8),
+            Theme.of(context).colorScheme.primary,
+            Theme.of(context).colorScheme.primary.withValues(alpha: 0.8),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -88,7 +88,7 @@ class _AdvancedComponentsDemoState extends State<AdvancedComponentsDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             '高级组件演示',
             style: TextStyle(
               fontSize: 28,
@@ -96,7 +96,7 @@ class _AdvancedComponentsDemoState extends State<AdvancedComponentsDemo> {
               color: Colors.white,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             '探索 ZephyrUI 提供的强大高级组件',
             style: TextStyle(
@@ -116,12 +116,20 @@ class _AdvancedComponentsDemoState extends State<AdvancedComponentsDemo> {
       '智能搜索和自动补全功能',
       Icons.search,
       [
-        Padding(
-          padding: const EdgeInsets.all(16),
+        const Padding(
+          padding: EdgeInsets.all(16),
           child: ZephyrAutoComplete<String>(
-            items: const [
-              'Apple', 'Banana', 'Cherry', 'Date', 'Elderberry',
-              'Fig', 'Grape', 'Honeydew', 'Kiwi', 'Lemon'
+            items: [
+              'Apple',
+              'Banana',
+              'Cherry',
+              'Date',
+              'Elderberry',
+              'Fig',
+              'Grape',
+              'Honeydew',
+              'Kiwi',
+              'Lemon'
             ],
             controller: TextEditingController(),
             placeholder: '搜索水果...',
@@ -143,14 +151,14 @@ class _AdvancedComponentsDemoState extends State<AdvancedComponentsDemo> {
       '自动播放的图片轮播展示',
       Icons.slideshow,
       [
-        SizedBox(
+        const SizedBox(
           height: 200,
           child: ZephyrCarousel(
             items: [
               ZephyrCarouselItem(
                 child: Container(
                   color: Colors.blue,
-                  child: const Center(
+                  child: Center(
                     child: Text(
                       'Slide 1',
                       style: TextStyle(color: Colors.white, fontSize: 24),
@@ -161,7 +169,7 @@ class _AdvancedComponentsDemoState extends State<AdvancedComponentsDemo> {
               ZephyrCarouselItem(
                 child: Container(
                   color: Colors.green,
-                  child: const Center(
+                  child: Center(
                     child: Text(
                       'Slide 2',
                       style: TextStyle(color: Colors.white, fontSize: 24),
@@ -172,7 +180,7 @@ class _AdvancedComponentsDemoState extends State<AdvancedComponentsDemo> {
               ZephyrCarouselItem(
                 child: Container(
                   color: Colors.orange,
-                  child: const Center(
+                  child: Center(
                     child: Text(
                       'Slide 3',
                       style: TextStyle(color: Colors.white, fontSize: 24),
@@ -181,7 +189,7 @@ class _AdvancedComponentsDemoState extends State<AdvancedComponentsDemo> {
                 ),
               ),
             ],
-            config: const ZephyrCarouselConfig(
+            config: ZephyrCarouselConfig(
               autoPlay: true,
               autoPlayInterval: Duration(seconds: 3),
               showIndicator: true,
@@ -199,14 +207,14 @@ class _AdvancedComponentsDemoState extends State<AdvancedComponentsDemo> {
       '数据可视化图表展示',
       Icons.bar_chart,
       [
-        SizedBox(
+        const SizedBox(
           height: 300,
           child: ZephyrChart(
             type: ZephyrChartType.bar,
-            series: const [
+            series: [
               ZephyrChartSeries(
                 name: '销售额',
-                data: const [
+                data: [
                   ZephyrChartDataPoint(label: '一月', value: 1000),
                   ZephyrChartDataPoint(label: '二月', value: 1500),
                   ZephyrChartDataPoint(label: '三月', value: 1200),
@@ -215,7 +223,7 @@ class _AdvancedComponentsDemoState extends State<AdvancedComponentsDemo> {
                 color: Colors.blue,
               ),
             ],
-            config: const ZephyrChartConfig(
+            config: ZephyrChartConfig(
               showLegend: true,
               showGrid: true,
               title: '月度销售统计',
@@ -247,14 +255,14 @@ class _AdvancedComponentsDemoState extends State<AdvancedComponentsDemo> {
 
   Widget _buildRichEditorDemo(BuildContext context) {
     final controller = quill.QuillController.basic();
-    
+
     return _buildDemoSection(
       context,
       '富文本编辑器',
       '功能丰富的文本编辑器',
       Icons.edit,
       [
-        SizedBox(
+        const SizedBox(
           height: 300,
           child: ZephyrRichEditor(
             controller: controller,
@@ -314,7 +322,7 @@ class _AdvancedComponentsDemoState extends State<AdvancedComponentsDemo> {
         ZephyrSignaturePad(
           width: 400,
           height: 200,
-          theme: ZephyrSignaturePadTheme.light(),
+          theme: const ZephyrSignaturePadTheme.light(),
           onSignatureChanged: (signature) {
             debugPrint('签名已更新');
           },
@@ -330,13 +338,13 @@ class _AdvancedComponentsDemoState extends State<AdvancedComponentsDemo> {
       '精确的图片裁剪工具',
       Icons.crop,
       [
-        Container(
+        const Container(
           height: 300,
           decoration: BoxDecoration(
             color: Colors.grey[200],
             borderRadius: BorderRadius.circular(8),
           ),
-          child: const Center(
+          child: Center(
             child: Text('图片裁剪演示区域'),
           ),
         ),
@@ -351,13 +359,13 @@ class _AdvancedComponentsDemoState extends State<AdvancedComponentsDemo> {
       'PDF 文档查看和注释',
       Icons.picture_as_pdf,
       [
-        Container(
+        const Container(
           height: 400,
           decoration: BoxDecoration(
             color: Colors.grey[100],
             borderRadius: BorderRadius.circular(8),
           ),
-          child: const Center(
+          child: Center(
             child: Text('PDF 查看器演示区域'),
           ),
         ),
@@ -394,7 +402,7 @@ class _AdvancedComponentsDemoState extends State<AdvancedComponentsDemo> {
       children: [
         Row(
           children: [
-            Icon(icon, size: 28, color: Theme.of(context).primaryColor),
+            Icon(icon, size: 28, color: Theme.of(context).colorScheme.primary),
             const SizedBox(width: 12),
             Expanded(
               child: Column(

@@ -24,9 +24,8 @@ class ZephyrProductionConfig {
   static const bool enableAnalytics = !kDebugMode;
 
   /// 默认动画时长（生产环境可能需要更快的动画）
-  static const Duration defaultAnimationDuration = kDebugMode
-      ? Duration(milliseconds: 300)
-      : Duration(milliseconds: 200);
+  static const Duration defaultAnimationDuration =
+      kDebugMode ? Duration(milliseconds: 300) : Duration(milliseconds: 200);
 
   /// 默认动画曲线
   static const Curve defaultAnimationCurve = Curves.easeInOut;
@@ -245,7 +244,7 @@ class ZephyrProductionConfig {
         for (final timing in timings) {
           final buildDuration = timing.buildDuration.inMicroseconds / 1000.0;
           final rasterDuration = timing.rasterDuration.inMicroseconds / 1000.0;
-          
+
           if (buildDuration > 16.0 || rasterDuration > 16.0) {
             debugPrint(
               'ZephyrUI Performance Warning: '

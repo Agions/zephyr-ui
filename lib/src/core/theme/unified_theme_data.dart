@@ -1,5 +1,5 @@
 /// ZephyrUI 统一主题数据结构
-/// 
+///
 /// 基于 Material Design 3 的统一主题系统
 library unified_theme_data;
 
@@ -29,51 +29,6 @@ class ZephyrUnifiedThemeData {
     required this.spacing,
     required this.animation,
   });
-
-  /// 亮度模式
-  final Brightness brightness;
-
-  /// 颜色方案
-  final ColorScheme colorScheme;
-
-  /// 文本主题
-  final TextTheme textTheme;
-
-  /// 应用栏主题
-  final AppBarTheme appBarTheme;
-
-  /// 卡片主题
-  final CardTheme cardTheme;
-
-  /// 芯片主题
-  final ChipThemeData chipTheme;
-
-  /// 按钮主题
-  final ElevatedButtonThemeData elevatedButtonTheme;
-  final FilledButtonThemeData filledButtonTheme;
-  final OutlinedButtonThemeData outlinedButtonTheme;
-  final TextButtonThemeData textButtonTheme;
-
-  /// 输入装饰主题
-  final InputDecorationTheme inputDecorationTheme;
-
-  /// 分割线主题
-  final DividerThemeData dividerTheme;
-
-  /// 图标主题
-  final IconThemeData iconTheme;
-
-  /// 徽章主题
-  final ZephyrBadgeTheme badgeTheme;
-
-  /// 主题扩展
-  final Map<Type, ThemeExtension<dynamic>> extensions;
-
-  /// 间距配置
-  final ZephyrSpacingTokens spacing;
-
-  /// 动画配置
-  final ZephyrAnimationTokens animation;
 
   /// 创建浅色主题
   factory ZephyrUnifiedThemeData.light({
@@ -116,11 +71,15 @@ class ZephyrUnifiedThemeData {
       appBarTheme: _createAppBarTheme(Brightness.light, colorScheme),
       cardTheme: _createCardTheme(Brightness.light, colorScheme),
       chipTheme: _createChipTheme(Brightness.light, colorScheme),
-      elevatedButtonTheme: _createElevatedButtonTheme(Brightness.light, colorScheme),
-      filledButtonTheme: _createFilledButtonTheme(Brightness.light, colorScheme),
-      outlinedButtonTheme: _createOutlinedButtonTheme(Brightness.light, colorScheme),
+      elevatedButtonTheme:
+          _createElevatedButtonTheme(Brightness.light, colorScheme),
+      filledButtonTheme:
+          _createFilledButtonTheme(Brightness.light, colorScheme),
+      outlinedButtonTheme:
+          _createOutlinedButtonTheme(Brightness.light, colorScheme),
       textButtonTheme: _createTextButtonTheme(Brightness.light, colorScheme),
-      inputDecorationTheme: _createInputDecorationTheme(Brightness.light, colorScheme),
+      inputDecorationTheme:
+          _createInputDecorationTheme(Brightness.light, colorScheme),
       dividerTheme: _createDividerTheme(Brightness.light),
       iconTheme: _createIconTheme(Brightness.light, colorScheme),
       badgeTheme: _createBadgeTheme(Brightness.light, error),
@@ -171,11 +130,14 @@ class ZephyrUnifiedThemeData {
       appBarTheme: _createAppBarTheme(Brightness.dark, colorScheme),
       cardTheme: _createCardTheme(Brightness.dark, colorScheme),
       chipTheme: _createChipTheme(Brightness.dark, colorScheme),
-      elevatedButtonTheme: _createElevatedButtonTheme(Brightness.dark, colorScheme),
+      elevatedButtonTheme:
+          _createElevatedButtonTheme(Brightness.dark, colorScheme),
       filledButtonTheme: _createFilledButtonTheme(Brightness.dark, colorScheme),
-      outlinedButtonTheme: _createOutlinedButtonTheme(Brightness.dark, colorScheme),
+      outlinedButtonTheme:
+          _createOutlinedButtonTheme(Brightness.dark, colorScheme),
       textButtonTheme: _createTextButtonTheme(Brightness.dark, colorScheme),
-      inputDecorationTheme: _createInputDecorationTheme(Brightness.dark, colorScheme),
+      inputDecorationTheme:
+          _createInputDecorationTheme(Brightness.dark, colorScheme),
       dividerTheme: _createDividerTheme(Brightness.dark),
       iconTheme: _createIconTheme(Brightness.dark, colorScheme),
       badgeTheme: _createBadgeTheme(Brightness.dark, error),
@@ -184,6 +146,51 @@ class ZephyrUnifiedThemeData {
       animation: ZephyrAnimationTokens(),
     );
   }
+
+  /// 亮度模式
+  final Brightness brightness;
+
+  /// 颜色方案
+  final ColorScheme colorScheme;
+
+  /// 文本主题
+  final TextTheme textTheme;
+
+  /// 应用栏主题
+  final AppBarTheme appBarTheme;
+
+  /// 卡片主题
+  final CardTheme cardTheme;
+
+  /// 芯片主题
+  final ChipThemeData chipTheme;
+
+  /// 按钮主题
+  final ElevatedButtonThemeData elevatedButtonTheme;
+  final FilledButtonThemeData filledButtonTheme;
+  final OutlinedButtonThemeData outlinedButtonTheme;
+  final TextButtonThemeData textButtonTheme;
+
+  /// 输入装饰主题
+  final InputDecorationTheme inputDecorationTheme;
+
+  /// 分割线主题
+  final DividerThemeData dividerTheme;
+
+  /// 图标主题
+  final IconThemeData iconTheme;
+
+  /// 徽章主题
+  final ZephyrBadgeTheme badgeTheme;
+
+  /// 主题扩展
+  final Map<Type, ThemeExtension<dynamic>> extensions;
+
+  /// 间距配置
+  final ZephyrSpacingTokens spacing;
+
+  /// 动画配置
+  final ZephyrAnimationTokens animation;
 
   /// 创建副本
   ZephyrUnifiedThemeData copyWith({
@@ -259,91 +266,91 @@ class ZephyrUnifiedThemeData {
         : Typography.material2018().white;
 
     final theme = baseTheme.copyWith(
-      displayLarge: TextStyle(
+      displayLarge: const TextStyle(
         fontSize: ZephyrTypographyTokens.displayLarge,
         fontWeight: ZephyrTypographyTokens.weightRegular,
         letterSpacing: ZephyrTypographyTokens.letterSpacingTight,
         height: ZephyrTypographyTokens.lineHeightTight,
       ),
-      displayMedium: TextStyle(
+      displayMedium: const TextStyle(
         fontSize: ZephyrTypographyTokens.displayMedium,
         fontWeight: ZephyrTypographyTokens.weightRegular,
         letterSpacing: ZephyrTypographyTokens.letterSpacingTight,
         height: ZephyrTypographyTokens.lineHeightTight,
       ),
-      displaySmall: TextStyle(
+      displaySmall: const TextStyle(
         fontSize: ZephyrTypographyTokens.displaySmall,
         fontWeight: ZephyrTypographyTokens.weightRegular,
         letterSpacing: ZephyrTypographyTokens.letterSpacingNormal,
         height: ZephyrTypographyTokens.lineHeightTight,
       ),
-      headlineLarge: TextStyle(
+      headlineLarge: const TextStyle(
         fontSize: ZephyrTypographyTokens.headlineLarge,
         fontWeight: ZephyrTypographyTokens.weightRegular,
         letterSpacing: ZephyrTypographyTokens.letterSpacingNormal,
         height: ZephyrTypographyTokens.lineHeightNormal,
       ),
-      headlineMedium: TextStyle(
+      headlineMedium: const TextStyle(
         fontSize: ZephyrTypographyTokens.headlineMedium,
         fontWeight: ZephyrTypographyTokens.weightRegular,
         letterSpacing: ZephyrTypographyTokens.letterSpacingNormal,
         height: ZephyrTypographyTokens.lineHeightNormal,
       ),
-      headlineSmall: TextStyle(
+      headlineSmall: const TextStyle(
         fontSize: ZephyrTypographyTokens.headlineSmall,
         fontWeight: ZephyrTypographyTokens.weightRegular,
         letterSpacing: ZephyrTypographyTokens.letterSpacingNormal,
         height: ZephyrTypographyTokens.lineHeightNormal,
       ),
-      titleLarge: TextStyle(
+      titleLarge: const TextStyle(
         fontSize: ZephyrTypographyTokens.titleLarge,
         fontWeight: ZephyrTypographyTokens.weightSemiBold,
         letterSpacing: ZephyrTypographyTokens.letterSpacingNormal,
         height: ZephyrTypographyTokens.lineHeightNormal,
       ),
-      titleMedium: TextStyle(
+      titleMedium: const TextStyle(
         fontSize: ZephyrTypographyTokens.titleMedium,
         fontWeight: ZephyrTypographyTokens.weightSemiBold,
         letterSpacing: ZephyrTypographyTokens.letterSpacingNormal,
         height: ZephyrTypographyTokens.lineHeightNormal,
       ),
-      titleSmall: TextStyle(
+      titleSmall: const TextStyle(
         fontSize: ZephyrTypographyTokens.titleSmall,
         fontWeight: ZephyrTypographyTokens.weightSemiBold,
         letterSpacing: ZephyrTypographyTokens.letterSpacingNormal,
         height: ZephyrTypographyTokens.lineHeightNormal,
       ),
-      bodyLarge: TextStyle(
+      bodyLarge: const TextStyle(
         fontSize: ZephyrTypographyTokens.bodyLarge,
         fontWeight: ZephyrTypographyTokens.weightRegular,
         letterSpacing: ZephyrTypographyTokens.letterSpacingNormal,
         height: ZephyrTypographyTokens.lineHeightRelaxed,
       ),
-      bodyMedium: TextStyle(
+      bodyMedium: const TextStyle(
         fontSize: ZephyrTypographyTokens.bodyMedium,
         fontWeight: ZephyrTypographyTokens.weightRegular,
         letterSpacing: ZephyrTypographyTokens.letterSpacingNormal,
         height: ZephyrTypographyTokens.lineHeightRelaxed,
       ),
-      bodySmall: TextStyle(
+      bodySmall: const TextStyle(
         fontSize: ZephyrTypographyTokens.bodySmall,
         fontWeight: ZephyrTypographyTokens.weightRegular,
         letterSpacing: ZephyrTypographyTokens.letterSpacingNormal,
         height: ZephyrTypographyTokens.lineHeightRelaxed,
       ),
-      labelLarge: TextStyle(
+      labelLarge: const TextStyle(
         fontSize: ZephyrTypographyTokens.labelLarge,
         fontWeight: ZephyrTypographyTokens.weightMedium,
         letterSpacing: ZephyrTypographyTokens.letterSpacingNormal,
         height: ZephyrTypographyTokens.lineHeightNormal,
       ),
-      labelMedium: TextStyle(
+      labelMedium: const TextStyle(
         fontSize: ZephyrTypographyTokens.labelMedium,
         fontWeight: ZephyrTypographyTokens.weightMedium,
         letterSpacing: ZephyrTypographyTokens.letterSpacingNormal,
         height: ZephyrTypographyTokens.lineHeightNormal,
       ),
-      labelSmall: TextStyle(
+      labelSmall: const TextStyle(
         fontSize: ZephyrTypographyTokens.labelSmall,
         fontWeight: ZephyrTypographyTokens.weightMedium,
         letterSpacing: ZephyrTypographyTokens.letterSpacingNormal,
@@ -355,7 +362,8 @@ class ZephyrUnifiedThemeData {
   }
 
   /// 创建应用栏主题
-  static AppBarTheme _createAppBarTheme(Brightness brightness, ColorScheme colorScheme) {
+  static AppBarTheme _createAppBarTheme(
+      Brightness brightness, ColorScheme colorScheme) {
     return AppBarTheme(
       backgroundColor: colorScheme.surface,
       foregroundColor: colorScheme.onSurface,
@@ -377,7 +385,8 @@ class ZephyrUnifiedThemeData {
   }
 
   /// 创建卡片主题
-  static CardTheme _createCardTheme(Brightness brightness, ColorScheme colorScheme) {
+  static CardTheme _createCardTheme(
+      Brightness brightness, ColorScheme colorScheme) {
     return CardTheme(
       color: colorScheme.surface,
       elevation: ZephyrElevationTokens.level1,
@@ -391,11 +400,12 @@ class ZephyrUnifiedThemeData {
   }
 
   /// 创建芯片主题
-  static ChipThemeData _createChipTheme(Brightness brightness, ColorScheme colorScheme) {
+  static ChipThemeData _createChipTheme(
+      Brightness brightness, ColorScheme colorScheme) {
     return ChipThemeData(
-      backgroundColor: colorScheme.surfaceVariant,
+      backgroundColor: colorScheme.surfaceContainerHighest,
       deleteIconColor: colorScheme.onSurfaceVariant,
-      disabledColor: colorScheme.onSurface.withOpacity(0.12),
+      disabledColor: colorScheme.onSurface.withValues(alpha:0.12),
       selectedColor: colorScheme.primaryContainer,
       secondarySelectedColor: colorScheme.primaryContainer,
       shadowColor: Colors.transparent,
@@ -427,20 +437,21 @@ class ZephyrUnifiedThemeData {
   }
 
   /// 创建按钮主题
-  static ElevatedButtonThemeData _createElevatedButtonTheme(Brightness brightness, ColorScheme colorScheme) {
+  static ElevatedButtonThemeData _createElevatedButtonTheme(
+      Brightness brightness, ColorScheme colorScheme) {
     return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: colorScheme.primary,
         foregroundColor: colorScheme.onPrimary,
-        disabledBackgroundColor: colorScheme.onSurface.withOpacity(0.12),
-        disabledForegroundColor: colorScheme.onSurface.withOpacity(0.38),
+        disabledBackgroundColor: colorScheme.onSurface.withValues(alpha:0.12),
+        disabledForegroundColor: colorScheme.onSurface.withValues(alpha:0.38),
         elevation: ZephyrElevationTokens.level1,
         shadowColor: colorScheme.shadow,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(ZephyrRadiusTokens.small),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
           fontSize: ZephyrTypographyTokens.labelLarge,
           fontWeight: ZephyrTypographyTokens.weightMedium,
           letterSpacing: ZephyrTypographyTokens.letterSpacingNormal,
@@ -449,19 +460,20 @@ class ZephyrUnifiedThemeData {
     );
   }
 
-  static FilledButtonThemeData _createFilledButtonTheme(Brightness brightness, ColorScheme colorScheme) {
+  static FilledButtonThemeData _createFilledButtonTheme(
+      Brightness brightness, ColorScheme colorScheme) {
     return FilledButtonThemeData(
       style: FilledButton.styleFrom(
         backgroundColor: colorScheme.primaryContainer,
         foregroundColor: colorScheme.onPrimaryContainer,
-        disabledBackgroundColor: colorScheme.onSurface.withOpacity(0.12),
-        disabledForegroundColor: colorScheme.onSurface.withOpacity(0.38),
+        disabledBackgroundColor: colorScheme.onSurface.withValues(alpha:0.12),
+        disabledForegroundColor: colorScheme.onSurface.withValues(alpha:0.38),
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(ZephyrRadiusTokens.small),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
           fontSize: ZephyrTypographyTokens.labelLarge,
           fontWeight: ZephyrTypographyTokens.weightMedium,
           letterSpacing: ZephyrTypographyTokens.letterSpacingNormal,
@@ -470,11 +482,12 @@ class ZephyrUnifiedThemeData {
     );
   }
 
-  static OutlinedButtonThemeData _createOutlinedButtonTheme(Brightness brightness, ColorScheme colorScheme) {
+  static OutlinedButtonThemeData _createOutlinedButtonTheme(
+      Brightness brightness, ColorScheme colorScheme) {
     return OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         foregroundColor: colorScheme.primary,
-        disabledForegroundColor: colorScheme.onSurface.withOpacity(0.38),
+        disabledForegroundColor: colorScheme.onSurface.withValues(alpha:0.38),
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(ZephyrRadiusTokens.small),
@@ -484,7 +497,7 @@ class ZephyrUnifiedThemeData {
           width: ZephyrBorderTokens.hairline,
         ),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
           fontSize: ZephyrTypographyTokens.labelLarge,
           fontWeight: ZephyrTypographyTokens.weightMedium,
           letterSpacing: ZephyrTypographyTokens.letterSpacingNormal,
@@ -493,17 +506,18 @@ class ZephyrUnifiedThemeData {
     );
   }
 
-  static TextButtonThemeData _createTextButtonTheme(Brightness brightness, ColorScheme colorScheme) {
+  static TextButtonThemeData _createTextButtonTheme(
+      Brightness brightness, ColorScheme colorScheme) {
     return TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: colorScheme.primary,
-        disabledForegroundColor: colorScheme.onSurface.withOpacity(0.38),
+        disabledForegroundColor: colorScheme.onSurface.withValues(alpha:0.38),
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(ZephyrRadiusTokens.small),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
           fontSize: ZephyrTypographyTokens.labelLarge,
           fontWeight: ZephyrTypographyTokens.weightMedium,
           letterSpacing: ZephyrTypographyTokens.letterSpacingNormal,
@@ -513,10 +527,11 @@ class ZephyrUnifiedThemeData {
   }
 
   /// 创建输入装饰主题
-  static InputDecorationTheme _createInputDecorationTheme(Brightness brightness, ColorScheme colorScheme) {
+  static InputDecorationTheme _createInputDecorationTheme(
+      Brightness brightness, ColorScheme colorScheme) {
     return InputDecorationTheme(
       filled: true,
-      fillColor: colorScheme.surfaceVariant.withOpacity(0.5),
+      fillColor: colorScheme.surfaceContainerHighest.withValues(alpha:0.5),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(ZephyrRadiusTokens.small),
         borderSide: BorderSide(
@@ -555,7 +570,7 @@ class ZephyrUnifiedThemeData {
       disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(ZephyrRadiusTokens.small),
         borderSide: BorderSide(
-          color: colorScheme.onSurface.withOpacity(0.12),
+          color: colorScheme.onSurface.withValues(alpha:0.12),
           width: ZephyrBorderTokens.hairline,
         ),
       ),
@@ -566,7 +581,7 @@ class ZephyrUnifiedThemeData {
         fontWeight: ZephyrTypographyTokens.weightMedium,
       ),
       hintStyle: TextStyle(
-        color: colorScheme.onSurfaceVariant.withOpacity(0.7),
+        color: colorScheme.onSurfaceVariant.withValues(alpha:0.7),
         fontSize: ZephyrTypographyTokens.bodyMedium,
         fontWeight: ZephyrTypographyTokens.weightRegular,
       ),
@@ -576,7 +591,7 @@ class ZephyrUnifiedThemeData {
         fontWeight: ZephyrTypographyTokens.weightRegular,
       ),
       helperStyle: TextStyle(
-        color: colorScheme.onSurfaceVariant.withOpacity(0.7),
+        color: colorScheme.onSurfaceVariant.withValues(alpha:0.7),
         fontSize: ZephyrTypographyTokens.bodySmall,
         fontWeight: ZephyrTypographyTokens.weightRegular,
       ),
@@ -599,7 +614,8 @@ class ZephyrUnifiedThemeData {
   }
 
   /// 创建图标主题
-  static IconThemeData _createIconTheme(Brightness brightness, ColorScheme colorScheme) {
+  static IconThemeData _createIconTheme(
+      Brightness brightness, ColorScheme colorScheme) {
     return IconThemeData(
       color: colorScheme.onSurfaceVariant,
       size: 24,
@@ -608,7 +624,8 @@ class ZephyrUnifiedThemeData {
   }
 
   /// 创建徽章主题
-  static ZephyrBadgeTheme _createBadgeTheme(Brightness brightness, Color errorColor) {
+  static ZephyrBadgeTheme _createBadgeTheme(
+      Brightness brightness, Color errorColor) {
     return ZephyrBadgeTheme(
       backgroundColor: errorColor,
       textColor: brightness == Brightness.light ? Colors.white : Colors.black,
@@ -620,11 +637,12 @@ class ZephyrUnifiedThemeData {
   }
 
   /// 创建默认主题扩展
-  static Map<Type, ThemeExtension<dynamic>> _createDefaultExtensions(Brightness brightness) {
+  static Map<Type, ThemeExtension<dynamic>> _createDefaultExtensions(
+      Brightness brightness) {
     return {
-      ZephyrColorSchemeExtension: ZephyrColorSchemeExtension(),
-      ZephyrShapeThemeExtension: ZephyrShapeThemeExtension(),
-      ZephyrSpacingThemeExtension: ZephyrSpacingThemeExtension(),
+      ZephyrColorSchemeExtension: const ZephyrColorSchemeExtension(),
+      ZephyrShapeThemeExtension: const ZephyrShapeThemeExtension(),
+      ZephyrSpacingThemeExtension: const ZephyrSpacingThemeExtension(),
     };
   }
 

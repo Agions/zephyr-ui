@@ -28,7 +28,7 @@ class ZephyrRatingItem {
 class ZephyrRating extends StatefulWidget {
   /// Creates a rating component
   const ZephyrRating({
-    Key? key,
+    super.key,
     this.value = 0,
     this.maxValue = 5,
     this.onChanged,
@@ -53,7 +53,7 @@ class ZephyrRating extends StatefulWidget {
     this.animationDuration = const Duration(milliseconds: 200),
     this.semanticLabel,
     this.enableAccessibilityFeatures = true,
-  }) : super(key: key);
+  });
 
   /// Current rating value
   final double value;
@@ -333,7 +333,7 @@ class _ZephyrRatingState extends State<ZephyrRating> {
 class ZephyrRatingDisplay extends StatelessWidget {
   /// Creates a rating display component
   const ZephyrRatingDisplay({
-    Key? key,
+    super.key,
     required this.value,
     this.maxValue = 5,
     this.theme,
@@ -349,7 +349,7 @@ class ZephyrRatingDisplay extends StatelessWidget {
     this.selectedColor,
     this.semanticLabel,
     this.enableAccessibilityFeatures = true,
-  }) : super(key: key);
+  });
 
   /// Rating value to display
   final double value;

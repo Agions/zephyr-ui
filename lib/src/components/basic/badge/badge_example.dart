@@ -4,7 +4,7 @@ import 'badge.dart';
 /// ZephyrBadge组件的使用示例
 class BadgeExample extends StatefulWidget {
   /// 创建示例实例
-  const BadgeExample({Key? key}) : super(key: key);
+  const BadgeExample({super.key});
 
   @override
   State<BadgeExample> createState() => _BadgeExampleState();

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'calendar_theme.dart';
-import 'package:table_calendar/table_calendar.dart';
+import 'package:table_calendar/table_calendar.dart' as table_calendar;
 
 class ZephyrCalendar extends StatefulWidget {
   const ZephyrCalendar({
@@ -40,26 +39,29 @@ class _ZephyrCalendarState extends State<ZephyrCalendar> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: TableCalendar(
+      child: table_calendar.TableCalendar(
         firstDay: _firstDay,
         lastDay: _lastDay,
         focusedDay: _focusedDay,
         selectedDayPredicate: (day) {
-          return isSameDay(_selectedDay, day);
+          return _selectedDay.year == day.year &&
+              _selectedDay.month == day.month &&
+              _selectedDay.day == day.day;
         },
-        onDaySelected: widget.onDaySelected ?? (selectedDay, focusedDay) {
-          setState(() {
-            _selectedDay = selectedDay;
-            _focusedDay = focusedDay;
-          });
-        },
-        calendarStyle: CalendarStyle(
+        onDaySelected: widget.onDaySelected ??
+            (selectedDay, focusedDay) {
+              setState(() {
+                _selectedDay = selectedDay;
+                _focusedDay = focusedDay;
+              });
+            },
+        calendarStyle: table_calendar.CalendarStyle(
           selectedDecoration: BoxDecoration(
             color: Theme.of(context).colorScheme.primary,
             shape: BoxShape.circle,
           ),
           todayDecoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
             shape: BoxShape.circle,
           ),
         ),

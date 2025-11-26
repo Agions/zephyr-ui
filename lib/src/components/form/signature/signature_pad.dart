@@ -100,7 +100,7 @@ class ZephyrSignaturePad extends StatefulWidget {
   final String? semanticLabel;
 
   const ZephyrSignaturePad({
-    Key? key,
+    super.key,
     this.width = 400,
     this.height = 200,
     this.penColor,
@@ -129,7 +129,7 @@ class ZephyrSignaturePad extends StatefulWidget {
     this.onSignatureChanged,
     this.onSignatureCleared,
     this.semanticLabel,
-  }) : super(key: key);
+  });
 
   @override
   State<ZephyrSignaturePad> createState() => _ZephyrSignaturePadState();

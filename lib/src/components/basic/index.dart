@@ -1,14 +1,17 @@
-/// 基础组件模块
+/// Basic Components Module
 ///
-/// 包含各种基础UI组件，如按钮、文本、图标、卡片、头像、徽章、分割线等。
+/// Contains various basic UI components such as buttons, text, icons, cards, avatars, badges, dividers, tags, typography, spacing, images, dropdown menus, etc.
 library basic;
 
 export 'avatar/index.dart';
 export 'badge/index.dart';
 export 'button/index.dart';
-export 'card/card.dart';
-export 'card/card_theme.dart' hide lerpDouble;
+export 'card/index.dart';
 export 'chip/index.dart';
 export 'divider/index.dart';
 export 'icon/index.dart';
+export 'image/index.dart';
+export 'dropdown/index.dart';
+export 'tag/index.dart';
 export 'text/index.dart';
+export 'typography/index.dart';

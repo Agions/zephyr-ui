@@ -9,7 +9,7 @@ import 'package:zephyr_ui/zephyr_ui.dart';
 /// ```dart
 /// ZephyrButton.primary(
 ///   text: '提交',
-///   onPressed: () => print('按钮点击'),
+///   onPressed: () => debugPrint('按钮点击'),
 /// )
 /// ```
 class ZephyrButton extends StatelessWidget {
@@ -108,7 +108,7 @@ class ZephyrButton extends StatelessWidget {
     this.theme,
     this.onPressed,
     this.icon,
-  })  : _type = type;
+  }) : _type = type;
 
   /// 按钮显示的文本
   final String text;
@@ -148,58 +148,71 @@ class ZephyrButton extends StatelessWidget {
       theme,
     );
 
+    // 提取重复使用的 borderRadius
+    final borderRadius = BorderRadius.circular(effectiveTheme.borderRadius!);
+    final isDisabled = onPressed == null;
+
     // 根据按钮类型和状态确定样式
-    Color backgroundColor;
-    Color textColor;
-    Color? overlayColor;
-    BoxBorder? border;
-    double elevation;
+    late final Color backgroundColor;
+    late final Color textColor;
+    late final Color? overlayColor;
+    late final BoxBorder? border;
+    late final double elevation;
 
-    switch (_type) {
-      case ZephyrButtonType.filled:
-        backgroundColor = effectiveTheme.primaryBackgroundColor!;
-        textColor = effectiveTheme.primaryTextColor!;
-        overlayColor = effectiveTheme.splashColor;
-        elevation = effectiveTheme.elevation!;
-        break;
-      case ZephyrButtonType.outlined:
-        backgroundColor = Colors.transparent;
-        textColor = effectiveTheme.outlineTextColor!;
-        border = Border.all(
-          color: effectiveTheme.outlineColor!,
-          width: 1.0,
-        );
-        elevation = 0.0;
-        break;
-      case ZephyrButtonType.text:
-        backgroundColor = Colors.transparent;
-        textColor = effectiveTheme.textButtonColor!;
-        elevation = 0.0;
-        break;
-      case ZephyrButtonType.icon:
-        backgroundColor = Colors.transparent;
-        textColor = effectiveTheme.primaryTextColor!;
-        elevation = 0.0;
-        break;
-      case ZephyrButtonType.fab:
-        backgroundColor = effectiveTheme.primaryBackgroundColor!;
-        textColor = effectiveTheme.primaryTextColor!;
-        overlayColor = effectiveTheme.splashColor;
-        elevation = effectiveTheme.elevation!;
-        break;
-    }
-
-    // 禁用或加载状态下的样式覆盖
-    if (onPressed == null) {
+    if (isDisabled) {
+      // 禁用状态下的样式
       backgroundColor = effectiveTheme.disabledBackgroundColor!;
       textColor = effectiveTheme.disabledTextColor!;
       elevation = effectiveTheme.disabledElevation!;
       border = null;
+      overlayColor = null;
+    } else {
+      // 正常状态下的样式
+      switch (_type) {
+        case ZephyrButtonType.filled:
+          backgroundColor = effectiveTheme.primaryBackgroundColor!;
+          textColor = effectiveTheme.primaryTextColor!;
+          overlayColor = effectiveTheme.splashColor;
+          elevation = effectiveTheme.elevation!;
+          border = null;
+          break;
+        case ZephyrButtonType.outlined:
+          backgroundColor = Colors.transparent;
+          textColor = effectiveTheme.outlineTextColor!;
+          border = Border.all(
+            color: effectiveTheme.outlineColor!,
+            width: 1.0,
+          );
+          elevation = 0.0;
+          overlayColor = null;
+          break;
+        case ZephyrButtonType.text:
+          backgroundColor = Colors.transparent;
+          textColor = effectiveTheme.textButtonColor!;
+          elevation = 0.0;
+          border = null;
+          overlayColor = null;
+          break;
+        case ZephyrButtonType.icon:
+          backgroundColor = Colors.transparent;
+          textColor = effectiveTheme.primaryTextColor!;
+          elevation = 0.0;
+          border = null;
+          overlayColor = null;
+          break;
+        case ZephyrButtonType.fab:
+          backgroundColor = effectiveTheme.primaryBackgroundColor!;
+          textColor = effectiveTheme.primaryTextColor!;
+          overlayColor = effectiveTheme.splashColor;
+          elevation = effectiveTheme.elevation!;
+          border = null;
+          break;
+      }
     }
 
     // 确定内边距和文本样式
-    EdgeInsetsGeometry padding;
-    TextStyle textStyle;
+    late final EdgeInsetsGeometry padding;
+    late final TextStyle textStyle;
 
     switch (size) {
       case ZephyrButtonSize.small:
@@ -216,33 +229,41 @@ class ZephyrButton extends StatelessWidget {
         break;
     }
 
+    // 预计算文本样式，避免重复创建
+    final effectiveTextStyle = textStyle.copyWith(color: textColor);
+
+    // 构建图标部分
+    final List<Widget> contentChildren = [];
+    if (icon != null && !isLoading) {
+      contentChildren
+        ..add(Icon(icon, color: textColor, size: 16))
+        ..add(const SizedBox(width: 8));
+    }
+    if (isLoading) {
+      contentChildren
+        ..add(SizedBox(
+          width: 16,
+          height: 16,
+          child: CircularProgressIndicator(
+            strokeWidth: 2,
+            valueColor: AlwaysStoppedAnimation<Color>(
+              effectiveTheme.loadingColor!,
+            ),
+          ),
+        ))
+        ..add(const SizedBox(width: 8));
+    }
+    // 添加文本
+    contentChildren.add(Text(
+      text,
+      style: effectiveTextStyle,
+    ));
+
     // 内容布局
     Widget content = Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        if (icon != null && !isLoading) ...[
-          Icon(icon, color: textColor, size: 16),
-          const SizedBox(width: 8),
-        ],
-        if (isLoading) ...[
-          SizedBox(
-            width: 16,
-            height: 16,
-            child: CircularProgressIndicator(
-              strokeWidth: 2,
-              valueColor: AlwaysStoppedAnimation<Color>(
-                effectiveTheme.loadingColor!,
-              ),
-            ),
-          ),
-          const SizedBox(width: 8),
-        ],
-        Text(
-          text,
-          style: textStyle.copyWith(color: textColor),
-        ),
-      ],
+      children: contentChildren,
     );
 
     // 全宽模式下进行包装
@@ -253,22 +274,23 @@ class ZephyrButton extends StatelessWidget {
       );
     }
 
+    // 优化：减少不必要的嵌套，使用更高效的布局
     return Semantics(
       button: true,
-      enabled: onPressed != null,
+      enabled: !isDisabled,
       label: text,
       child: Material(
         color: backgroundColor,
         elevation: elevation,
-        borderRadius: BorderRadius.circular(effectiveTheme.borderRadius!),
+        borderRadius: borderRadius,
         child: InkWell(
           onTap: onPressed,
-          borderRadius: BorderRadius.circular(effectiveTheme.borderRadius!),
+          borderRadius: borderRadius,
           splashColor: overlayColor,
           child: Container(
             padding: padding,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(effectiveTheme.borderRadius!),
+              borderRadius: borderRadius,
               border: border,
             ),
             child: content,

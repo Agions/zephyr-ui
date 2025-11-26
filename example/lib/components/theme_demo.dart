@@ -37,61 +37,65 @@ class _ThemeDemoState extends State<ThemeDemo> {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // 主题切换
             Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
+              child: const Padding(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
                         Icon(_isDarkMode ? Icons.dark_mode : Icons.light_mode),
-                        const SizedBox(width: 8),
-                        const Text(
+                        SizedBox(width: 8),
+                        Text(
                           '主题模式',
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
                         ),
-                        const Spacer(),
+                        Spacer(),
                         Switch(
                           value: _isDarkMode,
-                          onChanged: (value) => setState(() => _isDarkMode = value),
+                          onChanged: (value) =>
+                              setState(() => _isDarkMode = value),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Text(
                       _isDarkMode ? '深色主题' : '浅色主题',
                       style: TextStyle(
-                        color: _isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                        color:
+                            _isDarkMode ? Colors.grey[400] : Colors.grey[600],
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             const Text(
               '颜色配置',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // 主要颜色选择
             Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
+              child: const Padding(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       '主要颜色',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Wrap(
                       spacing: 12,
                       children: [
@@ -107,21 +111,22 @@ class _ThemeDemoState extends State<ThemeDemo> {
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // 次要颜色选择
             Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
+              child: const Padding(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       '次要颜色',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Wrap(
                       spacing: 12,
                       children: [
@@ -135,41 +140,43 @@ class _ThemeDemoState extends State<ThemeDemo> {
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             const Text(
               '形状配置',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // 圆角配置
             Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
+              child: const Padding(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        const Text(
+                        Text(
                           '圆角大小',
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
                         ),
-                        const Spacer(),
+                        Spacer(),
                         Text('${_borderRadius.round()}px'),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Slider(
                       value: _borderRadius,
                       min: 0,
                       max: 24,
                       divisions: 24,
-                      onChanged: (value) => setState(() => _borderRadius = value),
+                      onChanged: (value) =>
+                          setState(() => _borderRadius = value),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -183,27 +190,28 @@ class _ThemeDemoState extends State<ThemeDemo> {
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // 字体大小配置
             Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
+              child: const Padding(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        const Text(
+                        Text(
                           '字体大小',
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
                         ),
-                        const Spacer(),
+                        Spacer(),
                         Text('${_fontSize.round()}px'),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Slider(
                       value: _fontSize,
                       min: 12,
@@ -211,7 +219,7 @@ class _ThemeDemoState extends State<ThemeDemo> {
                       divisions: 12,
                       onChanged: (value) => setState(() => _fontSize = value),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Text(
                       '这是示例文本，展示字体大小效果',
                       style: TextStyle(fontSize: _fontSize),
@@ -220,19 +228,19 @@ class _ThemeDemoState extends State<ThemeDemo> {
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             const Text(
               '预览效果',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // 预览区域
             Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
+              child: const Padding(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -244,8 +252,8 @@ class _ThemeDemoState extends State<ThemeDemo> {
                         color: _primaryColor,
                       ),
                     ),
-                    const SizedBox(height: 16),
-                    
+                    SizedBox(height: 16),
+
                     // 按钮预览
                     Wrap(
                       spacing: 12,
@@ -267,16 +275,18 @@ class _ThemeDemoState extends State<ThemeDemo> {
                         ),
                       ],
                     ),
-                    
-                    const SizedBox(height: 16),
-                    
+
+                    SizedBox(height: 16),
+
                     // 卡片预览
                     Container(
-                      padding: const EdgeInsets.all(16),
+                      padding: EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: _isDarkMode ? Colors.grey[800] : Colors.grey[100],
+                        color:
+                            _isDarkMode ? Colors.grey[800] : Colors.grey[100],
                         borderRadius: BorderRadius.circular(_borderRadius),
-                        border: Border.all(color: _secondaryColor.withOpacity(0.3)),
+                        border:
+                            Border.all(color: _secondaryColor.withOpacity(0.3)),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -289,37 +299,41 @@ class _ThemeDemoState extends State<ThemeDemo> {
                               color: _isDarkMode ? Colors.white : Colors.black,
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: 8),
                           Text(
                             '这是卡片内容，展示主题定制的效果。您可以看到颜色、圆角、字体大小等样式都根据您的设置进行了调整。',
                             style: TextStyle(
                               fontSize: _fontSize,
-                              color: _isDarkMode ? Colors.grey[300] : Colors.grey[700],
+                              color: _isDarkMode
+                                  ? Colors.grey[300]
+                                  : Colors.grey[700],
                             ),
                           ),
                         ],
                       ),
                     ),
-                    
-                    const SizedBox(height: 16),
-                    
+
+                    SizedBox(height: 16),
+
                     // 图标预览
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         ZephyrIcon(Icons.home, size: 24, color: _primaryColor),
-                        ZephyrIcon(Icons.search, size: 24, color: _secondaryColor),
+                        ZephyrIcon(Icons.search,
+                            size: 24, color: _secondaryColor),
                         ZephyrIcon(Icons.favorite, size: 24, color: Colors.red),
-                        ZephyrIcon(Icons.settings, size: 24, color: _primaryColor),
+                        ZephyrIcon(Icons.settings,
+                            size: 24, color: _primaryColor),
                       ],
                     ),
                   ],
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             // 重置和应用按钮
             Row(
               children: [
@@ -346,12 +360,12 @@ class _ThemeDemoState extends State<ThemeDemo> {
 
   Widget _buildColorOption(Color color, String label) {
     final isSelected = _primaryColor == color;
-    
+
     return InkWell(
       onTap: () => setState(() => _primaryColor = color),
       borderRadius: BorderRadius.circular(8),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      child: const Container(
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
           color: isSelected ? color.withOpacity(0.2) : Colors.transparent,
           border: Border.all(
@@ -371,7 +385,7 @@ class _ThemeDemoState extends State<ThemeDemo> {
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
-            const SizedBox(width: 6),
+            SizedBox(width: 6),
             Text(
               label,
               style: TextStyle(
@@ -387,12 +401,12 @@ class _ThemeDemoState extends State<ThemeDemo> {
 
   Widget _buildSecondaryColorOption(Color color, String label) {
     final isSelected = _secondaryColor == color;
-    
+
     return InkWell(
       onTap: () => setState(() => _secondaryColor = color),
       borderRadius: BorderRadius.circular(8),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      child: const Container(
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
           color: isSelected ? color.withOpacity(0.2) : Colors.transparent,
           border: Border.all(
@@ -412,7 +426,7 @@ class _ThemeDemoState extends State<ThemeDemo> {
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
-            const SizedBox(width: 6),
+            SizedBox(width: 6),
             Text(
               label,
               style: TextStyle(
@@ -429,7 +443,7 @@ class _ThemeDemoState extends State<ThemeDemo> {
   Widget _buildBorderRadiusPreview(double radius) {
     return Column(
       children: [
-        Container(
+        const Container(
           width: 40,
           height: 40,
           decoration: BoxDecoration(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'list_theme.dart';
 
 class ZephyrListItem {
   const ZephyrListItem({
@@ -21,8 +20,8 @@ class ZephyrListItem {
 
 class ZephyrList extends StatelessWidget {
   const ZephyrList({
-    super.key,
     required this.items,
+    super.key,
     this.padding,
     this.shrinkWrap = true,
     this.physics,
@@ -58,8 +57,8 @@ class ZephyrList extends StatelessWidget {
 
 class ZephyrListView extends StatelessWidget {
   const ZephyrListView({
-    super.key,
     required this.children,
+    super.key,
     this.padding,
     this.shrinkWrap = true,
     this.physics,

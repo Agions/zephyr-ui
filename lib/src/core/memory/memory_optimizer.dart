@@ -6,32 +6,24 @@ library memory_optimizer;
 import 'dart:async';
 import 'dart:developer' as developer;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 
 /// 内存使用级别
 enum MemoryLevel {
-  low,      // 低内存使用 (< 50MB)
-  normal,   // 正常内存使用 (50-100MB)
-  high,     // 高内存使用 (100-200MB)
+  low, // 低内存使用 (< 50MB)
+  normal, // 正常内存使用 (50-100MB)
+  high, // 高内存使用 (100-200MB)
   critical, // 关键内存使用 (> 200MB)
 }
 
 /// 内存优化策略
 enum MemoryOptimizationStrategy {
-  aggressive,  // 激进优化
-  balanced,    // 平衡优化
+  aggressive, // 激进优化
+  balanced, // 平衡优化
   conservative, // 保守优化
 }
 
 /// 内存使用统计
 class MemoryUsageStats {
-  final double currentUsageMB;
-  final double peakUsageMB;
-  final double averageUsageMB;
-  final int garbageCollectionCount;
-  final int cacheEvictions;
-  final DateTime lastUpdate;
-
   MemoryUsageStats({
     required this.currentUsageMB,
     required this.peakUsageMB,
@@ -40,6 +32,12 @@ class MemoryUsageStats {
     required this.cacheEvictions,
     required this.lastUpdate,
   });
+  final double currentUsageMB;
+  final double peakUsageMB;
+  final double averageUsageMB;
+  final int garbageCollectionCount;
+  final int cacheEvictions;
+  final DateTime lastUpdate;
 
   MemoryLevel get level {
     if (currentUsageMB < 50) return MemoryLevel.low;
@@ -51,15 +49,15 @@ class MemoryUsageStats {
 
 /// 内存优化器
 class ZephyrMemoryOptimizer {
-  /// 单例实例
-  static final ZephyrMemoryOptimizer _instance = 
-      ZephyrMemoryOptimizer._internal();
-  
-  /// 获取单例实例
-  static ZephyrMemoryOptimizer get instance => _instance;
-  
   /// 内部构造函数
   ZephyrMemoryOptimizer._internal();
+
+  /// 单例实例
+  static final ZephyrMemoryOptimizer _instance =
+      ZephyrMemoryOptimizer._internal();
+
+  /// 获取单例实例
+  static ZephyrMemoryOptimizer get instance => _instance;
 
   /// 内存使用历史
   final List<double> _memoryHistory = [];
@@ -88,9 +86,9 @@ class ZephyrMemoryOptimizer {
   DateTime _lastOptimization = DateTime.now();
 
   /// 回调函数
-  final StreamController<MemoryLevel> _memoryLevelController = 
+  final StreamController<MemoryLevel> _memoryLevelController =
       StreamController<MemoryLevel>.broadcast();
-  final StreamController<String> _optimizationController = 
+  final StreamController<String> _optimizationController =
       StreamController<String>.broadcast();
 
   /// 开始监控
@@ -130,7 +128,7 @@ class ZephyrMemoryOptimizer {
   /// 监控内存使用
   void _monitorMemoryUsage() {
     final currentMemory = _getCurrentMemoryUsage();
-    
+
     // 更新历史记录
     _memoryHistory.add(currentMemory);
     if (_memoryHistory.length > _maxHistoryLength) {
@@ -156,7 +154,7 @@ class ZephyrMemoryOptimizer {
   double _getCurrentMemoryUsage() {
     // 在实际项目中，这里会使用真正的内存监控
     // 目前返回模拟值
-    final baseUsage = 50.0;
+    const baseUsage = 50.0;
     final variation = DateTime.now().millisecond % 30;
     return baseUsage + variation;
   }
@@ -165,13 +163,14 @@ class ZephyrMemoryOptimizer {
   void _performOptimization() {
     final currentMemory = _getCurrentMemoryUsage();
     final stats = getCurrentStats();
-    
+
     switch (_strategy) {
       case MemoryOptimizationStrategy.aggressive:
         _performAggressiveOptimization();
         break;
       case MemoryOptimizationStrategy.balanced:
-        if (stats.level == MemoryLevel.high || stats.level == MemoryLevel.critical) {
+        if (stats.level == MemoryLevel.high ||
+            stats.level == MemoryLevel.critical) {
           _performAggressiveOptimization();
         } else if (stats.level == MemoryLevel.normal) {
           _performModerateOptimization();
@@ -192,29 +191,29 @@ class ZephyrMemoryOptimizer {
   /// 执行激进优化
   void _performAggressiveOptimization() {
     developer.log('🔥 Performing aggressive memory optimization');
-    
+
     // 清理过期缓存
     _cleanExpiredCache();
-    
+
     // 清理不常用的缓存
     _cleanUnusedCache();
-    
+
     // 强制垃圾回收
     _forceGarbageCollection();
-    
+
     _optimizationController.add('Aggressive optimization completed');
   }
 
   /// 执行适度优化
   void _performModerateOptimization() {
     developer.log('⚡ Performing moderate memory optimization');
-    
+
     // 清理过期缓存
     _cleanExpiredCache();
-    
+
     // 限制缓存大小
     _limitCacheSize();
-    
+
     _optimizationController.add('Moderate optimization completed');
   }
 
@@ -222,19 +221,19 @@ class ZephyrMemoryOptimizer {
   void _cleanExpiredCache() {
     final now = DateTime.now();
     final expiredKeys = <String>[];
-    
+
     for (final entry in _memoryCache.entries) {
       if (now.difference(entry.value.createdAt) > _cacheTimeout) {
         expiredKeys.add(entry.key);
       }
     }
-    
+
     for (final key in expiredKeys) {
       _memoryCache.remove(key);
       _cacheAccessCounts.remove(key);
       _cacheEvictions++;
     }
-    
+
     if (expiredKeys.isNotEmpty) {
       developer.log('🗑️ Cleaned ${expiredKeys.length} expired cache entries');
     }
@@ -243,21 +242,21 @@ class ZephyrMemoryOptimizer {
   /// 清理不常用的缓存
   void _cleanUnusedCache() {
     if (_memoryCache.length <= _maxCacheSize) return;
-    
+
     final entries = _memoryCache.entries.toList();
     entries.sort((a, b) {
       final countA = _cacheAccessCounts[a.key] ?? 0;
       final countB = _cacheAccessCounts[b.key] ?? 0;
       return countA.compareTo(countB);
     });
-    
+
     final toRemove = entries.take(_memoryCache.length - _maxCacheSize);
     for (final entry in toRemove) {
       _memoryCache.remove(entry.key);
       _cacheAccessCounts.remove(entry.key);
       _cacheEvictions++;
     }
-    
+
     if (toRemove.isNotEmpty) {
       developer.log('🗑️ Cleaned ${toRemove.length} unused cache entries');
     }
@@ -266,10 +265,10 @@ class ZephyrMemoryOptimizer {
   /// 限制缓存大小
   void _limitCacheSize() {
     if (_memoryCache.length <= _maxCacheSize) return;
-    
+
     final entries = _memoryCache.entries.toList();
     entries.sort((a, b) => a.value.createdAt.compareTo(b.value.createdAt));
-    
+
     final toRemove = entries.take(_memoryCache.length - _maxCacheSize);
     for (final entry in toRemove) {
       _memoryCache.remove(entry.key);
@@ -293,7 +292,7 @@ class ZephyrMemoryOptimizer {
       sizeKB: sizeKB ?? _estimateSize(value),
       createdAt: DateTime.now(),
     );
-    
+
     _cacheAccessCounts[key] = (_cacheAccessCounts[key] ?? 0) + 1;
   }
 
@@ -319,10 +318,10 @@ class ZephyrMemoryOptimizer {
   /// 获取当前统计信息
   MemoryUsageStats getCurrentStats() {
     final currentUsage = _getCurrentMemoryUsage();
-    final averageUsage = _memoryHistory.isNotEmpty 
-        ? _memoryHistory.reduce((a, b) => a + b) / _memoryHistory.length 
+    final averageUsage = _memoryHistory.isNotEmpty
+        ? _memoryHistory.reduce((a, b) => a + b) / _memoryHistory.length
         : currentUsage;
-    
+
     return MemoryUsageStats(
       currentUsageMB: currentUsage,
       peakUsageMB: _peakMemoryUsage,
@@ -340,7 +339,7 @@ class ZephyrMemoryOptimizer {
       0,
       (sum, entry) => sum + entry.sizeKB,
     );
-    
+
     return {
       'currentStats': {
         'usageMB': stats.currentUsageMB.toStringAsFixed(2),
@@ -367,9 +366,10 @@ class ZephyrMemoryOptimizer {
 
   /// 计算缓存命中率
   double _calculateCacheHitRate() {
-    final totalAccesses = _cacheAccessCounts.values.fold<int>(0, (sum, count) => sum + count);
+    final totalAccesses =
+        _cacheAccessCounts.values.fold<int>(0, (sum, count) => sum + count);
     if (totalAccesses == 0) return 0.0;
-    
+
     final hits = _cacheAccessCounts.values.where((count) => count > 1).length;
     return hits / totalAccesses;
   }
@@ -377,25 +377,28 @@ class ZephyrMemoryOptimizer {
   /// 获取优化建议
   List<String> _getRecommendations(MemoryUsageStats stats) {
     final recommendations = <String>[];
-    
+
     if (stats.level == MemoryLevel.critical) {
-      recommendations.add('🚨 Memory usage is critical! Consider immediate optimization.');
+      recommendations
+          .add('🚨 Memory usage is critical! Consider immediate optimization.');
     } else if (stats.level == MemoryLevel.high) {
       recommendations.add('⚠️ Memory usage is high. Consider optimization.');
     }
-    
+
     if (_memoryCache.length > _maxCacheSize * 0.8) {
-      recommendations.add('💡 Cache is nearly full. Consider cleaning unused entries.');
+      recommendations
+          .add('💡 Cache is nearly full. Consider cleaning unused entries.');
     }
-    
+
     if (_garbageCollectionCount > 10) {
-      recommendations.add('🔄 Frequent garbage collection detected. Consider memory optimization.');
+      recommendations.add(
+          '🔄 Frequent garbage collection detected. Consider memory optimization.');
     }
-    
+
     if (recommendations.isEmpty) {
       recommendations.add('✅ Memory usage is optimal.');
     }
-    
+
     return recommendations;
   }
 
@@ -411,10 +414,12 @@ class ZephyrMemoryOptimizer {
     if (strategy != null) _strategy = strategy;
     if (memoryThresholdMB != null) _memoryThresholdMB = memoryThresholdMB;
     if (monitoringInterval != null) _monitoringInterval = monitoringInterval;
-    if (optimizationInterval != null) _optimizationInterval = optimizationInterval;
+    if (optimizationInterval != null) {
+      _optimizationInterval = optimizationInterval;
+    }
     if (maxCacheSize != null) _maxCacheSize = maxCacheSize;
     if (cacheTimeout != null) _cacheTimeout = cacheTimeout;
-    
+
     developer.log('⚙️ Memory optimizer configured');
   }
 
@@ -439,15 +444,14 @@ class ZephyrMemoryOptimizer {
 
 /// 内存缓存条目
 class _MemoryCacheEntry {
-  final dynamic value;
-  final int sizeKB;
-  final DateTime createdAt;
-
   _MemoryCacheEntry({
     required this.value,
     required this.sizeKB,
     required this.createdAt,
   });
+  final dynamic value;
+  final int sizeKB;
+  final DateTime createdAt;
 }
 
 /// 内存优化扩展
@@ -456,22 +460,22 @@ extension ZephyrMemoryExtensions on BuildContext {
   MemoryUsageStats getMemoryStats() {
     return ZephyrMemoryOptimizer.instance.getCurrentStats();
   }
-  
+
   /// 获取内存报告
   Map<String, dynamic> getMemoryReport() {
     return ZephyrMemoryOptimizer.instance.getDetailedReport();
   }
-  
+
   /// 添加到内存缓存
   void addToMemoryCache(String key, dynamic value, {int? sizeKB}) {
     ZephyrMemoryOptimizer.instance.addToCache(key, value, sizeKB: sizeKB);
   }
-  
+
   /// 从内存缓存获取
   dynamic getFromMemoryCache(String key) {
     return ZephyrMemoryOptimizer.instance.getFromCache(key);
   }
-  
+
   /// 清理内存缓存
   void clearMemoryCache() {
     ZephyrMemoryOptimizer.instance.clearCache();
@@ -480,16 +484,15 @@ extension ZephyrMemoryExtensions on BuildContext {
 
 /// 内存监控Widget
 class ZephyrMemoryMonitor extends StatefulWidget {
+  const ZephyrMemoryMonitor({
+    required this.child,
+    super.key,
+    this.enabled = true,
+    this.strategy = MemoryOptimizationStrategy.balanced,
+  });
   final Widget child;
   final bool enabled;
   final MemoryOptimizationStrategy strategy;
-
-  const ZephyrMemoryMonitor({
-    Key? key,
-    required this.child,
-    this.enabled = true,
-    this.strategy = MemoryOptimizationStrategy.balanced,
-  }) : super(key: key);
 
   @override
   State<ZephyrMemoryMonitor> createState() => _ZephyrMemoryMonitorState();
@@ -511,7 +514,8 @@ class _ZephyrMemoryMonitorState extends State<ZephyrMemoryMonitor> {
   @override
   void didUpdateWidget(ZephyrMemoryMonitor oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.enabled != widget.enabled || oldWidget.strategy != widget.strategy) {
+    if (oldWidget.enabled != widget.enabled ||
+        oldWidget.strategy != widget.strategy) {
       if (widget.enabled) {
         _optimizer.startMonitoring(strategy: widget.strategy);
       } else {
@@ -548,7 +552,7 @@ class _ZephyrMemoryMonitorState extends State<ZephyrMemoryMonitor> {
   Widget _buildMemoryInfo() {
     final stats = _currentStats!;
     final color = _getMemoryColor(stats.level);
-    
+
     return Positioned(
       bottom: 10,
       left: 10,

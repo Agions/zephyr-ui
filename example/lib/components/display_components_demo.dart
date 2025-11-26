@@ -171,16 +171,16 @@ class DisplayComponentsDemo extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
+            child: const Padding(
+              padding: EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     '用户列表',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Table(
                     border: TableBorder.all(color: Colors.grey[300]!),
                     children: [
@@ -225,18 +225,18 @@ class DisplayComponentsDemo extends StatelessWidget {
   }
 
   Widget _buildTableHeader(String text) {
-    return Padding(
-      padding: const EdgeInsets.all(12),
+    return const Padding(
+      padding: EdgeInsets.all(12),
       child: Text(
         text,
-        style: const TextStyle(fontWeight: FontWeight.bold),
+        style: TextStyle(fontWeight: FontWeight.bold),
       ),
     );
   }
 
   Widget _buildTableCell(String text) {
-    return Padding(
-      padding: const EdgeInsets.all(12),
+    return const Padding(
+      padding: EdgeInsets.all(12),
       child: Text(text),
     );
   }
@@ -248,8 +248,8 @@ class DisplayComponentsDemo extends StatelessWidget {
         DataCell(Text('$age')),
         DataCell(Text(job)),
         DataCell(
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          const Container(
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
               color: status == '在职' ? Colors.green[100] : Colors.orange[100],
               borderRadius: BorderRadius.circular(12),
@@ -296,40 +296,40 @@ class DisplayComponentsDemo extends StatelessWidget {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          SizedBox(
+          const SizedBox(
             height: 300,
             child: Card(
               child: ListView(
                 children: [
                   ListTile(
-                    leading: const Icon(Icons.mail, color: Colors.blue),
-                    title: const Text('邮件'),
-                    subtitle: const Text('3 封未读邮件'),
-                    trailing: const Icon(Icons.chevron_right),
+                    leading: Icon(Icons.mail, color: Colors.blue),
+                    title: Text('邮件'),
+                    subtitle: Text('3 封未读邮件'),
+                    trailing: Icon(Icons.chevron_right),
                     onTap: () {},
                   ),
-                  const Divider(),
+                  Divider(),
                   ListTile(
-                    leading: const Icon(Icons.phone, color: Colors.green),
-                    title: const Text('电话'),
-                    subtitle: const Text('2 个未接来电'),
-                    trailing: const Icon(Icons.chevron_right),
+                    leading: Icon(Icons.phone, color: Colors.green),
+                    title: Text('电话'),
+                    subtitle: Text('2 个未接来电'),
+                    trailing: Icon(Icons.chevron_right),
                     onTap: () {},
                   ),
-                  const Divider(),
+                  Divider(),
                   ListTile(
-                    leading: const Icon(Icons.message, color: Colors.purple),
-                    title: const Text('消息'),
-                    subtitle: const Text('5 条新消息'),
-                    trailing: const Icon(Icons.chevron_right),
+                    leading: Icon(Icons.message, color: Colors.purple),
+                    title: Text('消息'),
+                    subtitle: Text('5 条新消息'),
+                    trailing: Icon(Icons.chevron_right),
                     onTap: () {},
                   ),
-                  const Divider(),
+                  Divider(),
                   ListTile(
-                    leading: const Icon(Icons.notifications, color: Colors.orange),
-                    title: const Text('通知'),
-                    subtitle: const Text('1 个新通知'),
-                    trailing: const Icon(Icons.chevron_right),
+                    leading: Icon(Icons.notifications, color: Colors.orange),
+                    title: Text('通知'),
+                    subtitle: Text('1 个新通知'),
+                    trailing: Icon(Icons.chevron_right),
                     onTap: () {},
                   ),
                 ],
@@ -342,7 +342,7 @@ class DisplayComponentsDemo extends StatelessWidget {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          SizedBox(
+          const SizedBox(
             height: 250,
             child: ListView(
               children: [
@@ -370,7 +370,7 @@ class DisplayComponentsDemo extends StatelessWidget {
       default:
         statusColor = Colors.grey;
     }
-    
+
     return Card(
       child: ListTile(
         leading: Stack(
@@ -381,7 +381,7 @@ class DisplayComponentsDemo extends StatelessWidget {
             Positioned(
               right: 0,
               bottom: 0,
-              child: Container(
+              child: const Container(
                 width: 12,
                 height: 12,
                 decoration: BoxDecoration(
@@ -395,8 +395,8 @@ class DisplayComponentsDemo extends StatelessWidget {
         ),
         title: Text(name),
         subtitle: Text(email),
-        trailing: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        trailing: const Container(
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           decoration: BoxDecoration(
             color: statusColor.withValues(alpha: 0.2),
             borderRadius: BorderRadius.circular(12),
@@ -449,16 +449,16 @@ class DisplayComponentsDemo extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
+            child: const Padding(
+              padding: EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     '订单时间线',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   _buildTimelineItem(
                     '订单创建',
                     '2024-01-01 10:00',
@@ -513,7 +513,7 @@ class DisplayComponentsDemo extends StatelessWidget {
       children: [
         Column(
           children: [
-            Container(
+            const Container(
               width: 24,
               height: 24,
               decoration: BoxDecoration(
@@ -527,7 +527,7 @@ class DisplayComponentsDemo extends StatelessWidget {
               ),
             ),
             if (completed)
-              Container(
+              const Container(
                 width: 2,
                 height: 40,
                 color: Colors.grey[300],

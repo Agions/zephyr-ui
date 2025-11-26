@@ -20,105 +20,110 @@ class ResponsiveDemo extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // 响应式网格
             Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
+              child: const Padding(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       '响应式网格布局',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     _buildResponsiveGrid(context),
                   ],
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             const Text(
               '响应式组件',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // 响应式按钮
             Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
+              child: const Padding(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       '响应式按钮',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     _buildResponsiveButtons(context),
                   ],
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             // 响应式文本
             Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
+              child: const Padding(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       '响应式文本',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     _buildResponsiveText(context),
                   ],
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             // 响应式卡片
             Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
+              child: const Padding(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       '响应式卡片布局',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     _buildResponsiveCards(context),
                   ],
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             // 设备信息显示
             Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
+              child: const Padding(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       '当前设备信息',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     _buildDeviceInfo(context),
                   ],
                 ),
@@ -133,7 +138,7 @@ class ResponsiveDemo extends StatelessWidget {
   Widget _buildResponsiveGrid(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final crossAxisCount = _getResponsiveGridCount(width);
-    
+
     return GridView.count(
       shrinkWrap: true,
       crossAxisCount: crossAxisCount,
@@ -171,7 +176,7 @@ class ResponsiveDemo extends StatelessWidget {
   Widget _buildResponsiveButtons(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final isSmallScreen = width < 600;
-    
+
     return Column(
       children: [
         if (isSmallScreen) ...[
@@ -214,7 +219,7 @@ class ResponsiveDemo extends StatelessWidget {
   Widget _buildResponsiveText(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final textStyle = _getResponsiveTextStyle(width);
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -234,7 +239,7 @@ class ResponsiveDemo extends StatelessWidget {
   Widget _buildResponsiveCards(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final isSmallScreen = width < 600;
-    
+
     if (isSmallScreen) {
       // 小屏幕：垂直列表
       return Column(
@@ -293,27 +298,28 @@ class ResponsiveDemo extends StatelessWidget {
     }
   }
 
-  Widget _buildInfoCard(IconData icon, String title, String description, Color color) {
+  Widget _buildInfoCard(
+      IconData icon, String title, String description, Color color) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ZephyrIcon(icon, size: 32, color: color),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(
               title,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Expanded(
               child: Text(
                 description,
-                style: const TextStyle(fontSize: 12),
+                style: TextStyle(fontSize: 12),
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -330,7 +336,7 @@ class ResponsiveDemo extends StatelessWidget {
     final height = mediaQuery.size.height;
     final orientation = mediaQuery.orientation;
     final deviceType = _getDeviceType(width);
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -340,7 +346,8 @@ class ResponsiveDemo extends StatelessWidget {
         const SizedBox(height: 8),
         _buildInfoRow('屏幕高度', '${height.toStringAsFixed(0)}px'),
         const SizedBox(height: 8),
-        _buildInfoRow('屏幕方向', orientation == Orientation.portrait ? '竖屏' : '横屏'),
+        _buildInfoRow(
+            '屏幕方向', orientation == Orientation.portrait ? '竖屏' : '横屏'),
         const SizedBox(height: 8),
         _buildInfoRow('设备像素比', mediaQuery.devicePixelRatio.toStringAsFixed(2)),
       ],
@@ -350,11 +357,11 @@ class ResponsiveDemo extends StatelessWidget {
   Widget _buildInfoRow(String label, String value) {
     return Row(
       children: [
-        SizedBox(
+        const SizedBox(
           width: 100,
           child: Text(
             '$label:',
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
         const SizedBox(width: 8),
@@ -370,8 +377,12 @@ class ResponsiveDemo extends StatelessWidget {
   }
 
   TextStyle _getResponsiveTextStyle(double width) {
-    if (width < 600) return const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
-    if (width < 900) return const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+    if (width < 600) {
+      return const TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
+    }
+    if (width < 900) {
+      return const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+    }
     return const TextStyle(fontSize: 24, fontWeight: FontWeight.bold);
   }
 

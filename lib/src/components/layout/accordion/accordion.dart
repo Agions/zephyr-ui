@@ -1,5 +1,5 @@
 /// ZephyrUI 手风琴组件
-/// 
+///
 /// 提供可折叠的内容面板，支持多个面板同时展开或单个面板展开。
 library accordion;
 
@@ -45,8 +45,8 @@ class ZephyrAccordionItem {
 class ZephyrAccordion extends StatefulWidget {
   /// 创建手风琴组件
   const ZephyrAccordion({
-    Key? key,
     required this.items,
+    super.key,
     this.expandedIndex = 0,
     this.multipleExpansion = false,
     this.theme,
@@ -61,7 +61,7 @@ class ZephyrAccordion extends StatefulWidget {
     this.animationDuration = const Duration(milliseconds: 200),
     this.expandedIcon = const Icon(Icons.expand_less),
     this.collapsedIcon = const Icon(Icons.expand_more),
-  }) : super(key: key);
+  });
 
   /// 手风琴项目列表
   final List<ZephyrAccordionItem> items;
@@ -119,7 +119,8 @@ class _ZephyrAccordionState extends State<ZephyrAccordion> {
   void initState() {
     super.initState();
     _expandedStates = List<bool>.filled(widget.items.length, false);
-    if (widget.expandedIndex >= 0 && widget.expandedIndex < widget.items.length) {
+    if (widget.expandedIndex >= 0 &&
+        widget.expandedIndex < widget.items.length) {
       _expandedStates[widget.expandedIndex] = true;
     }
   }
@@ -129,7 +130,8 @@ class _ZephyrAccordionState extends State<ZephyrAccordion> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.items.length != widget.items.length) {
       _expandedStates = List<bool>.filled(widget.items.length, false);
-      if (widget.expandedIndex >= 0 && widget.expandedIndex < widget.items.length) {
+      if (widget.expandedIndex >= 0 &&
+          widget.expandedIndex < widget.items.length) {
         _expandedStates[widget.expandedIndex] = true;
       }
     }
@@ -140,7 +142,7 @@ class _ZephyrAccordionState extends State<ZephyrAccordion> {
 
     setState(() {
       final wasExpanded = _expandedStates[index];
-      
+
       if (widget.multipleExpansion) {
         _expandedStates[index] = !wasExpanded;
       } else {
@@ -174,7 +176,7 @@ class _ZephyrAccordionState extends State<ZephyrAccordion> {
         children: List.generate(widget.items.length, (index) {
           final isExpanded = _expandedStates[index];
           final item = widget.items[index];
-          
+
           return Column(
             children: [
               _buildItemHeader(context, theme, index, item, isExpanded),
@@ -209,7 +211,8 @@ class _ZephyrAccordionState extends State<ZephyrAccordion> {
         padding: widget.titlePadding ?? effectiveTheme.titlePadding,
         decoration: BoxDecoration(
           color: isExpanded
-              ? (widget.expandedBackgroundColor ?? effectiveTheme.expandedBackgroundColor)
+              ? (widget.expandedBackgroundColor ??
+                  effectiveTheme.expandedBackgroundColor)
               : (widget.backgroundColor ?? effectiveTheme.backgroundColor),
           borderRadius: widget.borderRadius ?? theme.borderRadius,
         ),

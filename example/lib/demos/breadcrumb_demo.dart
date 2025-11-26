@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zephyr_ui/zephyr_ui.dart';
 
 /// Breadcrumb Demo Page
-/// 
+///
 /// Demonstrates the usage of the ZephyrBreadcrumb component
 class BreadcrumbDemo extends StatefulWidget {
   const BreadcrumbDemo({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class BreadcrumbDemo extends StatefulWidget {
 
 class _BreadcrumbDemoState extends State<BreadcrumbDemo> {
   final List<String> _navigationHistory = const ['/home'];
-  
+
   final List<ZephyrBreadcrumbItem> _basicItems = const [
     ZephyrBreadcrumbItem(
       title: 'Home',
@@ -103,7 +103,8 @@ class _BreadcrumbDemoState extends State<BreadcrumbDemo> {
               'Breadcrumb with Custom Separator',
               ZephyrBreadcrumb(
                 items: _basicItems,
-                separator: const Text('>', style: TextStyle(fontSize: 16, color: Colors.grey)),
+                separator: const Text('>',
+                    style: TextStyle(fontSize: 16, color: Colors.grey)),
                 theme: ZephyrBreadcrumbTheme.light(),
               ),
             ),
@@ -121,12 +122,12 @@ class _BreadcrumbDemoState extends State<BreadcrumbDemo> {
             const SizedBox(height: 32),
             _buildDemoSection(
               'Dark Theme Breadcrumb',
-              Container(
+              const Container(
                 decoration: BoxDecoration(
                   color: Colors.grey[900],
                   borderRadius: BorderRadius.circular(8),
                 ),
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(16),
                 child: ZephyrBreadcrumb(
                   items: _basicItems,
                   theme: ZephyrBreadcrumbTheme.dark(),
@@ -182,8 +183,8 @@ class _BreadcrumbDemoState extends State<BreadcrumbDemo> {
             const SizedBox(height: 32),
             _buildDemoSection(
               'Interactive Breadcrumb Demo',
-              Container(
-                padding: const EdgeInsets.all(16),
+              const Container(
+                padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: Colors.grey[100],
                   borderRadius: BorderRadius.circular(8),
@@ -195,22 +196,22 @@ class _BreadcrumbDemoState extends State<BreadcrumbDemo> {
                       'Current Navigation Path: ${_navigationHistory.join(' > ')}',
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     ZephyrBreadcrumb(
                       items: _buildInteractiveItems(),
                       theme: ZephyrBreadcrumbTheme.light(),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Row(
                       children: [
                         ElevatedButton(
                           onPressed: _navigateBack,
-                          child: const Text('Navigate Back'),
+                          child: Text('Navigate Back'),
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         ElevatedButton(
                           onPressed: _navigateForward,
-                          child: const Text('Navigate Forward'),
+                          child: Text('Navigate Forward'),
                         ),
                       ],
                     ),
@@ -222,7 +223,8 @@ class _BreadcrumbDemoState extends State<BreadcrumbDemo> {
             _buildDemoSection(
               'Generated from Path',
               ZephyrBreadcrumb(
-                items: _buildItemsFromPath('/dashboard/products/electronics/smartphones/iphone-15'),
+                items: _buildItemsFromPath(
+                    '/dashboard/products/electronics/smartphones/iphone-15'),
                 theme: ZephyrBreadcrumbTheme.light(),
               ),
             ),
@@ -253,7 +255,7 @@ class _BreadcrumbDemoState extends State<BreadcrumbDemo> {
       final segments = path.split('/').where((s) => s.isNotEmpty).toList();
       final title = segments.isEmpty ? 'Home' : segments.last;
       final isCurrent = path == _navigationHistory.last;
-      
+
       return ZephyrBreadcrumbItem(
         title: _formatTitle(title),
         route: path,
@@ -277,9 +279,10 @@ class _BreadcrumbDemoState extends State<BreadcrumbDemo> {
   }
 
   String _formatTitle(String title) {
-    return title.split('-').map((word) => 
-      word[0].toUpperCase() + word.substring(1)
-    ).join(' ');
+    return title
+        .split('-')
+        .map((word) => word[0].toUpperCase() + word.substring(1))
+        .join(' ');
   }
 
   IconData _getIconForPath(String path) {
@@ -292,7 +295,6 @@ class _BreadcrumbDemoState extends State<BreadcrumbDemo> {
     if (path.contains('setting')) return Icons.settings;
     return Icons.folder;
   }
-
 
   void _handleNavigationByPath(String path) {
     setState(() {
@@ -320,8 +322,8 @@ class _BreadcrumbDemoState extends State<BreadcrumbDemo> {
 
   Widget _buildUtilitiesSection() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
+      child: const Padding(
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -329,9 +331,9 @@ class _BreadcrumbDemoState extends State<BreadcrumbDemo> {
               'Breadcrumb Utilities',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             _buildPathGenerator(),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             _buildValidationDemo(),
           ],
         ),
@@ -340,8 +342,9 @@ class _BreadcrumbDemoState extends State<BreadcrumbDemo> {
   }
 
   Widget _buildPathGenerator() {
-    final pathController = TextEditingController(text: '/dashboard/products/electronics/smartphones');
-    
+    final pathController = TextEditingController(
+        text: '/dashboard/products/electronics/smartphones');
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -367,16 +370,20 @@ class _BreadcrumbDemoState extends State<BreadcrumbDemo> {
     final validItems = [
       const ZephyrBreadcrumbItem(title: 'Home', route: '/'),
       const ZephyrBreadcrumbItem(title: 'Products', route: '/products'),
-      const ZephyrBreadcrumbItem(title: 'Electronics', route: '/products/electronics', isCurrent: true),
+      const ZephyrBreadcrumbItem(
+          title: 'Electronics',
+          route: '/products/electronics',
+          isCurrent: true),
     ];
-    
+
     final invalidItems = [
       const ZephyrBreadcrumbItem(title: 'Home', route: '/'),
       const ZephyrBreadcrumbItem(title: 'Products', route: '/products'),
-      const ZephyrBreadcrumbItem(title: 'Electronics', route: '/products/electronics'),
+      const ZephyrBreadcrumbItem(
+          title: 'Electronics', route: '/products/electronics'),
       // Missing current item
     ];
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -388,11 +395,12 @@ class _BreadcrumbDemoState extends State<BreadcrumbDemo> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Valid Breadcrumb: ${ZephyrBreadcrumbUtils.validateItems(validItems.map((item) => {
-                    'title': item.title,
-                    'route': item.route,
-                    'isCurrent': item.isCurrent,
-                  }).toList())}'),
+                  Text(
+                      'Valid Breadcrumb: ${ZephyrBreadcrumbUtils.validateItems(validItems.map((item) => {
+                            'title': item.title,
+                            'route': item.route,
+                            'isCurrent': item.isCurrent,
+                          }).toList())}'),
                   const SizedBox(height: 8),
                   ZephyrBreadcrumb(
                     items: validItems,
@@ -406,11 +414,12 @@ class _BreadcrumbDemoState extends State<BreadcrumbDemo> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Invalid Breadcrumb: ${ZephyrBreadcrumbUtils.validateItems(invalidItems.map((item) => {
-                    'title': item.title,
-                    'route': item.route,
-                    'isCurrent': item.isCurrent,
-                  }).toList())}'),
+                  Text(
+                      'Invalid Breadcrumb: ${ZephyrBreadcrumbUtils.validateItems(invalidItems.map((item) => {
+                            'title': item.title,
+                            'route': item.route,
+                            'isCurrent': item.isCurrent,
+                          }).toList())}'),
                   const SizedBox(height: 8),
                   ZephyrBreadcrumb(
                     items: invalidItems,

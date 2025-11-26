@@ -94,80 +94,80 @@ class BasicBadgeDemo extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
+
           // 文本徽章
           _buildSection('文本徽章', [
-            ZephyrBadge(
+            const ZephyrBadge(
               content: '新',
               backgroundColor: Colors.red,
               textColor: Colors.white,
             ),
             const SizedBox(width: 8),
-            ZephyrBadge(
+            const ZephyrBadge(
               content: '热门',
               backgroundColor: Colors.orange,
               textColor: Colors.white,
             ),
             const SizedBox(width: 8),
-            ZephyrBadge(
+            const ZephyrBadge(
               content: '推荐',
               backgroundColor: Colors.green,
               textColor: Colors.white,
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 数字徽章
           _buildSection('数字徽章', [
-            ZephyrBadge.count(
+            const ZephyrBadge.count(
               count: 1,
               backgroundColor: Colors.blue,
               textColor: Colors.white,
             ),
             const SizedBox(width: 8),
-            ZephyrBadge.count(
+            const ZephyrBadge.count(
               count: 9,
               backgroundColor: Colors.blue,
               textColor: Colors.white,
             ),
             const SizedBox(width: 8),
-            ZephyrBadge.count(
+            const ZephyrBadge.count(
               count: 99,
               backgroundColor: Colors.blue,
               textColor: Colors.white,
             ),
             const SizedBox(width: 8),
-            ZephyrBadge.count(
+            const ZephyrBadge.count(
               count: 100,
               maxCount: 99,
               backgroundColor: Colors.blue,
               textColor: Colors.white,
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 圆点徽章
           _buildSection('圆点徽章', [
-            ZephyrBadge.dot(),
+            const ZephyrBadge.dot(),
             const SizedBox(width: 8),
-            ZephyrBadge.dot(backgroundColor: Colors.green),
+            const ZephyrBadge.dot(backgroundColor: Colors.green),
             const SizedBox(width: 8),
-            ZephyrBadge.dot(backgroundColor: Colors.orange),
+            const ZephyrBadge.dot(backgroundColor: Colors.orange),
             const SizedBox(width: 8),
-            ZephyrBadge.dot(backgroundColor: Colors.red),
+            const ZephyrBadge.dot(backgroundColor: Colors.red),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 默认徽章
           _buildSection('默认样式', [
-            ZephyrBadge(content: '默认'),
+            const ZephyrBadge(content: '默认'),
             const SizedBox(width: 8),
-            ZephyrBadge.count(count: 5),
+            const ZephyrBadge.count(count: 5),
             const SizedBox(width: 8),
-            ZephyrBadge.dot(),
+            const ZephyrBadge.dot(),
           ]),
         ],
       ),
@@ -209,47 +209,47 @@ class StyleBadgeDemo extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
+
           // 颜色变体
           _buildSection('颜色变体', [
-            ZephyrBadge(
+            const ZephyrBadge(
               content: '默认',
             ),
             const SizedBox(width: 8),
-            ZephyrBadge(
+            const ZephyrBadge(
               content: '成功',
               backgroundColor: Colors.green,
               textColor: Colors.white,
             ),
             const SizedBox(width: 8),
-            ZephyrBadge(
+            const ZephyrBadge(
               content: '警告',
               backgroundColor: Colors.orange,
               textColor: Colors.white,
             ),
             const SizedBox(width: 8),
-            ZephyrBadge(
+            const ZephyrBadge(
               content: '错误',
               backgroundColor: Colors.red,
               textColor: Colors.white,
             ),
             const SizedBox(width: 8),
-            ZephyrBadge(
+            const ZephyrBadge(
               content: '信息',
               backgroundColor: Colors.blue,
               textColor: Colors.white,
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 边框样式
           _buildSection('边框样式', [
-            ZephyrBadge(
+            const ZephyrBadge(
               content: '无边框',
             ),
             const SizedBox(width: 8),
-            ZephyrBadge(
+            const ZephyrBadge(
               content: '边框',
               backgroundColor: Colors.white,
               textColor: Colors.blue,
@@ -257,7 +257,7 @@ class StyleBadgeDemo extends StatelessWidget {
               borderColor: Colors.blue,
             ),
             const SizedBox(width: 8),
-            ZephyrBadge(
+            const ZephyrBadge(
               content: '粗边框',
               backgroundColor: Colors.white,
               textColor: Colors.red,
@@ -265,12 +265,12 @@ class StyleBadgeDemo extends StatelessWidget {
               borderColor: Colors.red,
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 圆角样式
           _buildSection('圆角样式', [
-            ZephyrBadge(
+            const ZephyrBadge(
               content: '默认',
             ),
             const SizedBox(width: 8),
@@ -284,23 +284,23 @@ class StyleBadgeDemo extends StatelessWidget {
               borderRadius: BorderRadius.circular(2),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 数字徽章变体
           _buildSection('数字变体', [
-            ZephyrBadge.count(count: 1),
+            const ZephyrBadge.count(count: 1),
             const SizedBox(width: 8),
-            ZephyrBadge.count(count: 9),
+            const ZephyrBadge.count(count: 9),
             const SizedBox(width: 8),
-            ZephyrBadge.count(count: 99),
+            const ZephyrBadge.count(count: 99),
             const SizedBox(width: 8),
-            ZephyrBadge.count(
+            const ZephyrBadge.count(
               count: 100,
               maxCount: 99,
             ),
             const SizedBox(width: 8),
-            ZephyrBadge.count(
+            const ZephyrBadge.count(
               count: 999,
               maxCount: 999,
             ),
@@ -345,7 +345,7 @@ class InteractiveBadgeDemo extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
+
           // 带徽章的图标
           _buildSection('带徽章的图标', [
             _buildBadgedIcon(Icons.notifications, 3, () {
@@ -360,12 +360,12 @@ class InteractiveBadgeDemo extends StatelessWidget {
               _showMessage(context, '查看购物车');
             }),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 带徽章的列表项
           _buildSection('带徽章的列表项', [
-            Container(
+            const Container(
               width: double.infinity,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
@@ -380,7 +380,7 @@ class InteractiveBadgeDemo extends StatelessWidget {
                     Colors.blue,
                     () => _showMessage(context, '打开收件箱'),
                   ),
-                  const Divider(),
+                  Divider(),
                   _buildBadgedListItem(
                     '任务',
                     '3 个待办事项',
@@ -388,7 +388,7 @@ class InteractiveBadgeDemo extends StatelessWidget {
                     Colors.orange,
                     () => _showMessage(context, '查看任务'),
                   ),
-                  const Divider(),
+                  Divider(),
                   _buildBadgedListItem(
                     '日历',
                     '今日无日程',
@@ -400,9 +400,9 @@ class InteractiveBadgeDemo extends StatelessWidget {
               ),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 状态指示器
           _buildSection('状态指示器', [
             _buildStatusIndicator('服务器状态', '在线', Colors.green),
@@ -530,7 +530,7 @@ class _AdvancedBadgeDemoState extends State<AdvancedBadgeDemo> {
   // 模拟数据流
   final _notificationController = StreamController<int>.broadcast();
   final _messageController = StreamController<int>.broadcast();
-  
+
   int _notificationCount = 3;
   int _messageCount = 12;
 
@@ -567,7 +567,7 @@ class _AdvancedBadgeDemoState extends State<AdvancedBadgeDemo> {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
+
           // 徽章包装器
           _buildSection('徽章包装器', [
             Row(
@@ -592,13 +592,13 @@ class _AdvancedBadgeDemoState extends State<AdvancedBadgeDemo> {
               ],
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 动态徽章
           _buildSection('动态徽章', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
@@ -606,11 +606,11 @@ class _AdvancedBadgeDemoState extends State<AdvancedBadgeDemo> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     '实时通知',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Row(
                     children: [
                       _buildDynamicBadge(
@@ -618,7 +618,7 @@ class _AdvancedBadgeDemoState extends State<AdvancedBadgeDemo> {
                         _notificationStream,
                         Colors.red,
                       ),
-                      const SizedBox(width: 16),
+                      SizedBox(width: 16),
                       _buildDynamicBadge(
                         '消息',
                         _messageStream,
@@ -626,21 +626,21 @@ class _AdvancedBadgeDemoState extends State<AdvancedBadgeDemo> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () => _simulateNotification(),
-                    child: const Text('模拟通知'),
+                    child: Text('模拟通知'),
                   ),
                 ],
               ),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 多位置徽章
           _buildSection('多位置徽章', [
-            Container(
+            const Container(
               width: double.infinity,
               height: 200,
               decoration: BoxDecoration(
@@ -650,7 +650,7 @@ class _AdvancedBadgeDemoState extends State<AdvancedBadgeDemo> {
               child: Stack(
                 children: [
                   // 中心内容
-                  const Center(
+                  Center(
                     child: Text(
                       '内容区域',
                       style: TextStyle(fontSize: 18),
@@ -697,13 +697,13 @@ class _AdvancedBadgeDemoState extends State<AdvancedBadgeDemo> {
               ),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 批量徽章
           _buildSection('批量徽章', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
@@ -711,11 +711,11 @@ class _AdvancedBadgeDemoState extends State<AdvancedBadgeDemo> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     '标签云',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Wrap(
                     spacing: 8,
                     runSpacing: 8,
@@ -827,7 +827,7 @@ class _AdvancedBadgeDemoState extends State<AdvancedBadgeDemo> {
     // 模拟通知更新
     _notificationController.add(_notificationCount + 1);
   }
-  
+
   Stream<int> get _notificationStream => _notificationController.stream;
   Stream<int> get _messageStream => _messageController.stream;
 }

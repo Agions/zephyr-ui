@@ -32,7 +32,7 @@ class ZephyrCheckboxGroup extends StatefulWidget {
 
   /// 构造函数
   const ZephyrCheckboxGroup({
-    Key? key,
+    super.key,
     required this.items,
     required this.value,
     this.onChanged,
@@ -40,7 +40,7 @@ class ZephyrCheckboxGroup extends StatefulWidget {
     this.disabled = false,
     this.theme,
     this.spacing = 8.0,
-  }) : super(key: key);
+  });
 
   @override
   State<ZephyrCheckboxGroup> createState() => _ZephyrCheckboxGroupState();
@@ -139,13 +139,13 @@ class _ZephyrCheckbox extends StatelessWidget {
   final ZephyrCheckboxGroupTheme theme;
 
   const _ZephyrCheckbox({
-    Key? key,
+    super.key,
     required this.value,
     required this.onChanged,
     required this.label,
     required this.disabled,
     required this.theme,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -167,7 +167,7 @@ class _ZephyrCheckbox extends StatelessWidget {
               onChanged: onChanged,
               activeColor: theme.activeColor,
               checkColor: theme.checkColor,
-              side: BorderSide(
+              side: const BorderSide(
                 color: disabled ? theme.disabledBorderColor : theme.borderColor,
                 width: theme.borderWidth,
               ),

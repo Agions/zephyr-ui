@@ -101,7 +101,7 @@ class ZephyrColorPickerTheme {
         focusedBorderColor: Color(0xFF3B82F6),
         errorBorderColor: Color(0xFFEF4444),
         errorBackgroundColor: Color(0xFFFFF0F0),
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.normal,
           color: Color(0xFF1F2937),
@@ -126,7 +126,7 @@ class ZephyrColorPickerTheme {
           fontWeight: FontWeight.normal,
           color: Color(0xFFEF4444),
         ),
-        borderRadius: BorderRadius.all(Radius.circular(6)),
+        borderRadius: const BorderRadius.all(Radius.circular(6)),
       ),
       previewBorderRadius: 8.0,
       previewBorderWidth: 1.0,
@@ -178,7 +178,7 @@ class ZephyrColorPickerTheme {
         focusedBorderColor: Color(0xFF60A5FA),
         errorBorderColor: Color(0xFFEF4444),
         errorBackgroundColor: Color(0xFF3F1212),
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.normal,
           color: Color(0xFFF9FAFB),
@@ -203,7 +203,7 @@ class ZephyrColorPickerTheme {
           fontWeight: FontWeight.normal,
           color: Color(0xFFEF4444),
         ),
-        borderRadius: BorderRadius.all(Radius.circular(6)),
+        borderRadius: const BorderRadius.all(Radius.circular(6)),
       ),
       previewBorderRadius: 8.0,
       previewBorderWidth: 1.0,

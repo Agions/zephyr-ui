@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zephyr_ui/zephyr_ui.dart';
+import '../../../core/constants/typography_constants.dart';
 
 // Import lerpDouble from dart:ui instead of custom implementation
 import 'dart:ui' as ui;
@@ -70,7 +71,7 @@ class ZephyrTabsTheme extends ThemeExtension<ZephyrTabsTheme> {
   static ZephyrTabsTheme of(BuildContext context) {
     final theme = Theme.of(context).extension<ZephyrTabsTheme>();
     if (theme != null) return theme;
-    
+
     final zephyrTheme = ZephyrTheme.of(context);
     return _createDefaultTheme(zephyrTheme);
   }
@@ -78,40 +79,41 @@ class ZephyrTabsTheme extends ThemeExtension<ZephyrTabsTheme> {
   /// 创建默认主题
   static ZephyrTabsTheme _createDefaultTheme(ZephyrThemeData zephyrTheme) {
     final isDark = zephyrTheme.brightness == Brightness.dark;
-    
+
     return ZephyrTabsTheme(
       backgroundColor: isDark ? ZephyrColors.neutral800 : Colors.white,
       indicatorColor: zephyrTheme.primaryColor,
-      selectedTabColor: isDark 
+      selectedTabColor: isDark
           ? zephyrTheme.primaryColor.withValues(alpha: 0.2)
           : zephyrTheme.primaryColor.withValues(alpha: 0.1),
       unselectedTabColor: Colors.transparent,
-      disabledTabColor: isDark ? ZephyrColors.neutral700 : ZephyrColors.neutral100,
+      disabledTabColor:
+          isDark ? ZephyrColors.neutral700 : ZephyrColors.neutral100,
       borderColor: isDark ? ZephyrColors.neutral600 : ZephyrColors.neutral300,
       selectedTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightSemiBold,
+        fontSize: ZephyrTypographyConstants.fontSize14,
+        fontWeight: ZephyrTypographyConstants.fontWeightSemiBold,
         color: zephyrTheme.primaryColor,
-        height: ZephyrTypography.lineHeight1_4,
+        height: ZephyrTypographyConstants.lineHeight1_4,
       ),
       unselectedTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightMedium,
+        fontSize: ZephyrTypographyConstants.fontSize14,
+        fontWeight: ZephyrTypographyConstants.fontWeightMedium,
         color: isDark ? ZephyrColors.neutral300 : ZephyrColors.neutral600,
-        height: ZephyrTypography.lineHeight1_4,
+        height: ZephyrTypographyConstants.lineHeight1_4,
       ),
       disabledTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightMedium,
+        fontSize: ZephyrTypographyConstants.fontSize14,
+        fontWeight: ZephyrTypographyConstants.fontWeightMedium,
         color: isDark ? ZephyrColors.neutral500 : ZephyrColors.neutral400,
-        height: ZephyrTypography.lineHeight1_4,
+        height: ZephyrTypographyConstants.lineHeight1_4,
       ),
       tabPadding: const EdgeInsets.symmetric(
         horizontal: ZephyrSpacing.md,
         vertical: ZephyrSpacing.sm,
       ),
       indicatorHeight: 2.0,
-      borderRadius: BorderRadius.circular(ZephyrRadius.sm),
+      borderRadius: const BorderRadius.circular(ZephyrRadius.sm),
       tabHeight: 48.0,
       spacing: ZephyrSpacing.xs,
     );
@@ -155,23 +157,40 @@ class ZephyrTabsTheme extends ThemeExtension<ZephyrTabsTheme> {
   @override
   ZephyrTabsTheme lerp(ThemeExtension<ZephyrTabsTheme>? other, double t) {
     if (other is! ZephyrTabsTheme) return this;
-    
+
     return ZephyrTabsTheme(
-      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t) ?? backgroundColor,
-      indicatorColor: Color.lerp(indicatorColor, other.indicatorColor, t) ?? indicatorColor,
-      selectedTabColor: Color.lerp(selectedTabColor, other.selectedTabColor, t) ?? selectedTabColor,
-      unselectedTabColor: Color.lerp(unselectedTabColor, other.unselectedTabColor, t) ?? unselectedTabColor,
-      disabledTabColor: Color.lerp(disabledTabColor, other.disabledTabColor, t) ?? disabledTabColor,
+      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t) ??
+          backgroundColor,
+      indicatorColor:
+          Color.lerp(indicatorColor, other.indicatorColor, t) ?? indicatorColor,
+      selectedTabColor:
+          Color.lerp(selectedTabColor, other.selectedTabColor, t) ??
+              selectedTabColor,
+      unselectedTabColor:
+          Color.lerp(unselectedTabColor, other.unselectedTabColor, t) ??
+              unselectedTabColor,
+      disabledTabColor:
+          Color.lerp(disabledTabColor, other.disabledTabColor, t) ??
+              disabledTabColor,
       borderColor: Color.lerp(borderColor, other.borderColor, t) ?? borderColor,
-      selectedTextStyle: TextStyle.lerp(selectedTextStyle, other.selectedTextStyle, t) ?? selectedTextStyle,
-      unselectedTextStyle: TextStyle.lerp(unselectedTextStyle, other.unselectedTextStyle, t) ?? unselectedTextStyle,
-      disabledTextStyle: TextStyle.lerp(disabledTextStyle, other.disabledTextStyle, t) ?? disabledTextStyle,
-      tabPadding: EdgeInsetsGeometry.lerp(tabPadding, other.tabPadding, t) ?? tabPadding,
-      indicatorHeight: ui.lerpDouble(indicatorHeight, other.indicatorHeight, t) ?? indicatorHeight,
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t) ?? borderRadius,
+      selectedTextStyle:
+          TextStyle.lerp(selectedTextStyle, other.selectedTextStyle, t) ??
+              selectedTextStyle,
+      unselectedTextStyle:
+          TextStyle.lerp(unselectedTextStyle, other.unselectedTextStyle, t) ??
+              unselectedTextStyle,
+      disabledTextStyle:
+          TextStyle.lerp(disabledTextStyle, other.disabledTextStyle, t) ??
+              disabledTextStyle,
+      tabPadding: EdgeInsetsGeometry.lerp(tabPadding, other.tabPadding, t) ??
+          tabPadding,
+      indicatorHeight:
+          ui.lerpDouble(indicatorHeight, other.indicatorHeight, t) ??
+              indicatorHeight,
+      borderRadius: const BorderRadius.lerp(borderRadius, other.borderRadius, t) ??
+          borderRadius,
       tabHeight: ui.lerpDouble(tabHeight, other.tabHeight, t) ?? tabHeight,
       spacing: ui.lerpDouble(spacing, other.spacing, t) ?? spacing,
     );
   }
 }
-

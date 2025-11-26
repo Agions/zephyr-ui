@@ -1,5 +1,5 @@
 /// ZephyrUI Navigation Rail Component
-/// 
+///
 /// A modern navigation rail component for desktop and tablet applications.
 /// Supports labels, icons, badges, and smooth animations.
 library navigation_rail;
@@ -38,10 +38,10 @@ class ZephyrRailItem {
 enum ZephyrRailType {
   /// Labels only show when selected
   minimal,
-  
+
   /// Labels always show
   extended,
-  
+
   /// Only icons, no labels
   compact,
 }
@@ -50,7 +50,7 @@ enum ZephyrRailType {
 enum ZephyrRailLabelAlignment {
   /// Labels below icons
   below,
-  
+
   /// Labels to the right of icons
   right,
 }
@@ -59,29 +59,29 @@ enum ZephyrRailLabelAlignment {
 class ZephyrNavigationRail extends StatefulWidget {
   /// Creates a navigation rail
   const ZephyrNavigationRail({
-    Key? key,
     required this.items,
+    super.key,
     this.currentIndex = 0,
     this.type = ZephyrRailType.extended,
     this.labelAlignment = ZephyrRailLabelAlignment.below,
-    this.onTap,
-    this.backgroundColor,
     this.elevation = 1.0,
-    this.selectedItemColor,
-    this.unselectedItemColor,
-    this.theme,
     this.animationDuration = const Duration(milliseconds: 200),
     this.width = 72.0,
     this.extendedWidth = 256.0,
     this.groupAlignment = -1.0,
-    this.leading,
-    this.trailing,
     this.showTrailing = true,
     this.enableFeedback = true,
     this.useIndicator = true,
+    this.onTap,
+    this.backgroundColor,
+    this.selectedItemColor,
+    this.unselectedItemColor,
+    this.theme,
+    this.leading,
+    this.trailing,
     this.indicatorColor,
     this.indicatorShape,
-  }) : super(key: key);
+  });
 
   /// List of navigation items
   final List<ZephyrRailItem> items;
@@ -151,7 +151,7 @@ class ZephyrNavigationRail extends StatefulWidget {
 }
 
 class _ZephyrNavigationRailState extends State<ZephyrNavigationRail> {
-  bool _isExtended = false;
+  final bool _isExtended = false;
 
   @override
   Widget build(BuildContext context) {
@@ -172,7 +172,7 @@ class _ZephyrNavigationRailState extends State<ZephyrNavigationRail> {
                 padding: theme.leadingPadding,
                 child: widget.leading,
               ),
-            
+
             // Main navigation items
             Expanded(
               child: Align(
@@ -189,7 +189,7 @@ class _ZephyrNavigationRailState extends State<ZephyrNavigationRail> {
                 ),
               ),
             ),
-            
+
             // Trailing widget
             if (widget.trailing != null && widget.showTrailing)
               Padding(
@@ -211,7 +211,7 @@ class _ZephyrNavigationRailState extends State<ZephyrNavigationRail> {
     final isSelected = index == widget.currentIndex;
     final shouldShowLabel = _shouldShowLabel(isSelected, isExtended);
 
-    Widget iconWidget = isSelected && item.selectedIcon != null
+    var iconWidget = isSelected && item.selectedIcon != null
         ? item.selectedIcon!
         : item.icon;
 
@@ -234,7 +234,7 @@ class _ZephyrNavigationRailState extends State<ZephyrNavigationRail> {
       );
     }
 
-    Widget itemContent = Container(
+    Widget itemContent = SizedBox(
       width: isExtended ? widget.extendedWidth : widget.width,
       height: theme.itemHeight,
       child: Stack(
@@ -250,14 +250,15 @@ class _ZephyrNavigationRailState extends State<ZephyrNavigationRail> {
                 ),
               ),
             ),
-          
+
           // Main content
           AnimatedContainer(
             duration: widget.animationDuration,
             padding: theme.itemPadding,
             child: widget.labelAlignment == ZephyrRailLabelAlignment.below
                 ? _buildVerticalLayout(iconWidget, item, shouldShowLabel, theme)
-                : _buildHorizontalLayout(iconWidget, item, shouldShowLabel, theme),
+                : _buildHorizontalLayout(
+                    iconWidget, item, shouldShowLabel, theme),
           ),
         ],
       ),
@@ -388,30 +389,30 @@ class _ZephyrNavigationRailState extends State<ZephyrNavigationRail> {
 class ZephyrExpandableNavigationRail extends StatefulWidget {
   /// Creates an expandable navigation rail
   const ZephyrExpandableNavigationRail({
-    Key? key,
     required this.items,
+    super.key,
     this.currentIndex = 0,
-    this.onTap,
-    this.backgroundColor,
     this.elevation = 1.0,
-    this.selectedItemColor,
-    this.unselectedItemColor,
-    this.theme,
     this.animationDuration = const Duration(milliseconds: 200),
     this.width = 72.0,
     this.extendedWidth = 256.0,
     this.groupAlignment = -1.0,
-    this.leading,
-    this.trailing,
     this.showTrailing = true,
     this.enableFeedback = true,
     this.useIndicator = true,
+    this.initiallyExtended = false,
+    this.onTap,
+    this.backgroundColor,
+    this.selectedItemColor,
+    this.unselectedItemColor,
+    this.theme,
+    this.leading,
+    this.trailing,
     this.indicatorColor,
     this.indicatorShape,
-    this.initiallyExtended = false,
     this.toggleIcon,
     this.extendedToggleIcon,
-  }) : super(key: key);
+  });
 
   /// List of navigation items
   final List<ZephyrRailItem> items;
@@ -480,10 +481,12 @@ class ZephyrExpandableNavigationRail extends StatefulWidget {
   final Widget? extendedToggleIcon;
 
   @override
-  State<ZephyrExpandableNavigationRail> createState() => _ZephyrExpandableNavigationRailState();
+  State<ZephyrExpandableNavigationRail> createState() =>
+      _ZephyrExpandableNavigationRailState();
 }
 
-class _ZephyrExpandableNavigationRailState extends State<ZephyrExpandableNavigationRail> {
+class _ZephyrExpandableNavigationRailState
+    extends State<ZephyrExpandableNavigationRail> {
   late bool _isExtended;
 
   @override
@@ -495,7 +498,7 @@ class _ZephyrExpandableNavigationRailState extends State<ZephyrExpandableNavigat
   @override
   Widget build(BuildContext context) {
     final theme = widget.theme ?? ZephyrNavigationRailTheme.of(context);
-    
+
     return ZephyrNavigationRail(
       items: widget.items,
       currentIndex: widget.currentIndex,
@@ -513,8 +516,7 @@ class _ZephyrExpandableNavigationRailState extends State<ZephyrExpandableNavigat
       leading: widget.leading,
       trailing: Column(
         children: [
-          if (widget.trailing != null && widget.showTrailing)
-            widget.trailing!,
+          if (widget.trailing != null && widget.showTrailing) widget.trailing!,
           SizedBox(height: theme.toggleButtonSpacing),
           _buildToggleButton(theme),
         ],
@@ -547,7 +549,8 @@ class _ZephyrExpandableNavigationRailState extends State<ZephyrExpandableNavigat
               size: theme.unselectedIconSize,
             ),
             child: _isExtended
-                ? (widget.extendedToggleIcon ?? const Icon(Icons.keyboard_arrow_left))
+                ? (widget.extendedToggleIcon ??
+                    const Icon(Icons.keyboard_arrow_left))
                 : (widget.toggleIcon ?? const Icon(Icons.keyboard_arrow_right)),
           ),
         ),

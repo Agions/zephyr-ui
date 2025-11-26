@@ -11,7 +11,7 @@ class RatingDemo extends StatefulWidget {
 class _RatingDemoState extends State<RatingDemo> {
   double _rating = 3.0;
   double _halfRating = 2.5;
-  double _readOnlyRating = 4.0;
+  final double _readOnlyRating = 4.0;
   double _customIconRating = 0.0;
   double _labeledRating = 3.5;
 
@@ -29,27 +29,21 @@ class _RatingDemoState extends State<RatingDemo> {
             _buildSectionTitle('Basic Rating'),
             _buildBasicRating(),
             const SizedBox(height: 32),
-            
             _buildSectionTitle('Half Rating'),
             _buildHalfRating(),
             const SizedBox(height: 32),
-            
             _buildSectionTitle('Read-Only Rating'),
             _buildReadOnlyRating(),
             const SizedBox(height: 32),
-            
             _buildSectionTitle('Custom Icons'),
             _buildCustomIconRating(),
             const SizedBox(height: 32),
-            
             _buildSectionTitle('Labeled Rating'),
             _buildLabeledRating(),
             const SizedBox(height: 32),
-            
             _buildSectionTitle('Rating Display'),
             _buildRatingDisplay(),
             const SizedBox(height: 32),
-            
             _buildSectionTitle('Interactive Demo'),
             _buildInteractiveDemo(),
           ],
@@ -62,20 +56,20 @@ class _RatingDemoState extends State<RatingDemo> {
     return Text(
       title,
       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-        fontWeight: FontWeight.bold,
-      ),
+            fontWeight: FontWeight.bold,
+          ),
     );
   }
 
   Widget _buildBasicRating() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Current Rating: $_rating'),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             ZephyrRating(
               value: _rating,
               onChanged: (value) {
@@ -84,7 +78,7 @@ class _RatingDemoState extends State<RatingDemo> {
                 });
               },
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               'Tap on stars to rate. Current value: $_rating',
               style: Theme.of(context).textTheme.bodySmall,
@@ -97,13 +91,13 @@ class _RatingDemoState extends State<RatingDemo> {
 
   Widget _buildHalfRating() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Half Rating: $_halfRating'),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             ZephyrRating(
               value: _halfRating,
               allowHalfRating: true,
@@ -113,7 +107,7 @@ class _RatingDemoState extends State<RatingDemo> {
                 });
               },
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               'Click once for full star, click again for half star. Current value: $_halfRating',
               style: Theme.of(context).textTheme.bodySmall,
@@ -126,18 +120,18 @@ class _RatingDemoState extends State<RatingDemo> {
 
   Widget _buildReadOnlyRating() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Read-Only Rating:'),
-            const SizedBox(height: 16),
+            Text('Read-Only Rating:'),
+            SizedBox(height: 16),
             ZephyrRating(
               value: _readOnlyRating,
               readOnly: true,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               'This rating is read-only. Value: $_readOnlyRating',
               style: Theme.of(context).textTheme.bodySmall,
@@ -150,16 +144,16 @@ class _RatingDemoState extends State<RatingDemo> {
 
   Widget _buildCustomIconRating() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Custom Icons Rating: $_customIconRating'),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             ZephyrRating(
               value: _customIconRating,
-              customIcons: const [Icons.favorite, Icons.favorite_border],
+              customIcons: [Icons.favorite, Icons.favorite_border],
               selectedColor: Colors.red,
               unselectedColor: Colors.pink.shade100,
               onChanged: (value) {
@@ -168,7 +162,7 @@ class _RatingDemoState extends State<RatingDemo> {
                 });
               },
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               'Using heart icons instead of stars. Current value: $_customIconRating',
               style: Theme.of(context).textTheme.bodySmall,
@@ -181,13 +175,13 @@ class _RatingDemoState extends State<RatingDemo> {
 
   Widget _buildLabeledRating() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Labeled Rating: $_labeledRating'),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             ZephyrRating(
               value: _labeledRating,
               allowHalfRating: true,
@@ -198,7 +192,7 @@ class _RatingDemoState extends State<RatingDemo> {
                 });
               },
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               'Shows numeric labels below stars. Current value: $_labeledRating',
               style: Theme.of(context).textTheme.bodySmall,
@@ -211,13 +205,13 @@ class _RatingDemoState extends State<RatingDemo> {
 
   Widget _buildRatingDisplay() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Rating Display (Read-Only):'),
-            const SizedBox(height: 16),
+            Text('Rating Display (Read-Only):'),
+            SizedBox(height: 16),
             Wrap(
               spacing: 16,
               runSpacing: 16,
@@ -225,7 +219,7 @@ class _RatingDemoState extends State<RatingDemo> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Product A: 4.5'),
+                    Text('Product A: 4.5'),
                     ZephyrRatingDisplay(
                       value: 4.5,
                       allowHalfRating: true,
@@ -236,7 +230,7 @@ class _RatingDemoState extends State<RatingDemo> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Product B: 3.0'),
+                    Text('Product B: 3.0'),
                     ZephyrRatingDisplay(
                       value: 3.0,
                       showValue: true,
@@ -246,7 +240,7 @@ class _RatingDemoState extends State<RatingDemo> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Product C: 5.0'),
+                    Text('Product C: 5.0'),
                     ZephyrRatingDisplay(
                       value: 5.0,
                       showValue: true,
@@ -255,7 +249,7 @@ class _RatingDemoState extends State<RatingDemo> {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               'Read-only rating displays with values',
               style: Theme.of(context).textTheme.bodySmall,
@@ -268,15 +262,15 @@ class _RatingDemoState extends State<RatingDemo> {
 
   Widget _buildInteractiveDemo() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Interactive Demo:'),
-            const SizedBox(height: 16),
+            Text('Interactive Demo:'),
+            SizedBox(height: 16),
             _buildRatingConfig(),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             _buildPreviewRating(),
           ],
         ),

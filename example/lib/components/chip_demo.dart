@@ -94,7 +94,7 @@ class BasicChipDemo extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
+
           // 标准标签
           _buildSection('标准标签', [
             ZephyrChip(
@@ -112,32 +112,35 @@ class BasicChipDemo extends StatelessWidget {
               onPressed: () => _showMessage(context, '点击了 React 标签'),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 可选择标签
           _buildSection('可选择标签', [
             ZephyrChip.choice(
               label: '前端开发',
               selected: true,
-              onSelected: (selected) => _showMessage(context, '前端开发: $selected'),
+              onSelected: (selected) =>
+                  _showMessage(context, '前端开发: $selected'),
             ),
             const SizedBox(width: 8),
             ZephyrChip.choice(
               label: '后端开发',
               selected: false,
-              onSelected: (selected) => _showMessage(context, '后端开发: $selected'),
+              onSelected: (selected) =>
+                  _showMessage(context, '后端开发: $selected'),
             ),
             const SizedBox(width: 8),
             ZephyrChip.choice(
               label: '移动开发',
               selected: false,
-              onSelected: (selected) => _showMessage(context, '移动开发: $selected'),
+              onSelected: (selected) =>
+                  _showMessage(context, '移动开发: $selected'),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 过滤标签
           _buildSection('过滤标签', [
             ZephyrChip.filter(
@@ -158,9 +161,9 @@ class BasicChipDemo extends StatelessWidget {
               onSelected: (selected) => _showMessage(context, '已完成: $selected'),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 输入标签
           _buildSection('输入标签', [
             ZephyrChip.input(
@@ -181,9 +184,9 @@ class BasicChipDemo extends StatelessWidget {
               onDeleted: () => _showMessage(context, '删除了 标签3'),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 操作标签
           _buildSection('操作标签', [
             ZephyrChip.action(
@@ -250,7 +253,7 @@ class StyleChipDemo extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
+
           // 带头像的标签
           _buildSection('带头像的标签', [
             ZephyrChip(
@@ -279,9 +282,9 @@ class StyleChipDemo extends StatelessWidget {
               onPressed: () {},
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 颜色变体
           _buildSection('颜色变体', [
             ZephyrChip(
@@ -322,9 +325,9 @@ class StyleChipDemo extends StatelessWidget {
               ),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 状态变体
           _buildSection('状态变体', [
             ZephyrChip.choice(
@@ -346,9 +349,9 @@ class StyleChipDemo extends StatelessWidget {
               onSelected: (selected) {},
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 技能标签
           _buildSection('技能标签', [
             ZephyrChip(
@@ -375,9 +378,9 @@ class StyleChipDemo extends StatelessWidget {
               onPressed: () {},
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 删除图标变体
           _buildSection('删除图标变体', [
             ZephyrChip.input(
@@ -454,11 +457,11 @@ class _InteractiveChipDemoState extends State<InteractiveChipDemo> {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
+
           // 标签组
           _buildSection('标签组', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
@@ -468,7 +471,7 @@ class _InteractiveChipDemoState extends State<InteractiveChipDemo> {
                 children: [
                   Row(
                     children: [
-                      const Text('多选模式'),
+                      Text('多选模式'),
                       Switch(
                         value: multiSelect,
                         onChanged: (value) {
@@ -482,7 +485,7 @@ class _InteractiveChipDemoState extends State<InteractiveChipDemo> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   ZephyrChipGroup(
                     chips: chips,
                     selectedChips: selectedChips,
@@ -494,7 +497,7 @@ class _InteractiveChipDemoState extends State<InteractiveChipDemo> {
                       _showMessage(context, '选中了: $selection');
                     },
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Text(
                     '选中了: ${selectedChips.map((i) => chips[i].label).join(', ')}',
                     style: TextStyle(color: Colors.grey[600]),
@@ -503,13 +506,13 @@ class _InteractiveChipDemoState extends State<InteractiveChipDemo> {
               ),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 过滤器标签
           _buildSection('过滤器标签', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
@@ -517,11 +520,11 @@ class _InteractiveChipDemoState extends State<InteractiveChipDemo> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     '任务过滤器',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Wrap(
                     spacing: 8,
                     runSpacing: 8,
@@ -529,22 +532,26 @@ class _InteractiveChipDemoState extends State<InteractiveChipDemo> {
                       ZephyrChip.filter(
                         label: '全部',
                         selected: true,
-                        onSelected: (selected) => _showMessage(context, '全部: $selected'),
+                        onSelected: (selected) =>
+                            _showMessage(context, '全部: $selected'),
                       ),
                       ZephyrChip.filter(
                         label: '进行中',
                         selected: false,
-                        onSelected: (selected) => _showMessage(context, '进行中: $selected'),
+                        onSelected: (selected) =>
+                            _showMessage(context, '进行中: $selected'),
                       ),
                       ZephyrChip.filter(
                         label: '已完成',
                         selected: false,
-                        onSelected: (selected) => _showMessage(context, '已完成: $selected'),
+                        onSelected: (selected) =>
+                            _showMessage(context, '已完成: $selected'),
                       ),
                       ZephyrChip.filter(
                         label: '已取消',
                         selected: false,
-                        onSelected: (selected) => _showMessage(context, '已取消: $selected'),
+                        onSelected: (selected) =>
+                            _showMessage(context, '已取消: $selected'),
                       ),
                     ],
                   ),
@@ -552,9 +559,9 @@ class _InteractiveChipDemoState extends State<InteractiveChipDemo> {
               ),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 状态标签
           _buildSection('状态标签', [
             Row(
@@ -577,7 +584,7 @@ class _InteractiveChipDemoState extends State<InteractiveChipDemo> {
   Widget _buildStatusChip(String label, bool isActive, [Color? activeColor]) {
     return ZephyrChip(
       label: label,
-      avatar: Container(
+      avatar: const Container(
         width: 8,
         height: 8,
         decoration: BoxDecoration(
@@ -669,11 +676,11 @@ class _AdvancedChipDemoState extends State<AdvancedChipDemo> {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
+
           // 输入标签
           _buildSection('输入标签', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
@@ -681,11 +688,11 @@ class _AdvancedChipDemoState extends State<AdvancedChipDemo> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     '标签输入',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Wrap(
                     spacing: 8,
                     runSpacing: 8,
@@ -697,23 +704,23 @@ class _AdvancedChipDemoState extends State<AdvancedChipDemo> {
                       );
                     }).toList(),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Row(
                     children: [
                       Expanded(
                         child: TextField(
                           controller: _controller,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             labelText: '添加标签',
                             border: OutlineInputBorder(),
                           ),
                           onSubmitted: (_) => _addTag(),
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       ElevatedButton(
                         onPressed: _addTag,
-                        child: const Text('添加'),
+                        child: Text('添加'),
                       ),
                     ],
                   ),
@@ -721,13 +728,13 @@ class _AdvancedChipDemoState extends State<AdvancedChipDemo> {
               ),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 动态标签
           _buildSection('动态标签', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
@@ -735,16 +742,16 @@ class _AdvancedChipDemoState extends State<AdvancedChipDemo> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     '实时标签流',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   StreamBuilder<List<String>>(
                     stream: _tagStream,
                     builder: (context, snapshot) {
                       final items = snapshot.data ?? _tags;
-                      
+
                       if (items.isEmpty) {
                         return const Center(
                           child: Text('暂无数据'),
@@ -757,28 +764,29 @@ class _AdvancedChipDemoState extends State<AdvancedChipDemo> {
                         children: items.map((item) {
                           return ZephyrChip(
                             label: item,
-                            onPressed: () => _showMessage(context, '点击标签: $item'),
+                            onPressed: () =>
+                                _showMessage(context, '点击标签: $item'),
                           );
                         }).toList(),
                       );
                     },
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: _simulateTagUpdate,
-                    child: const Text('模拟标签更新'),
+                    child: Text('模拟标签更新'),
                   ),
                 ],
               ),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 标签云
           _buildSection('标签云', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
@@ -786,11 +794,11 @@ class _AdvancedChipDemoState extends State<AdvancedChipDemo> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     '热门标签',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Wrap(
                     spacing: 8,
                     runSpacing: 8,
@@ -865,13 +873,13 @@ class _AdvancedChipDemoState extends State<AdvancedChipDemo> {
               ),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 分类标签
           _buildSection('分类标签', [
-            Container(
-              padding: const EdgeInsets.all(16),
+            const Container(
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.circular(8),
@@ -879,33 +887,33 @@ class _AdvancedChipDemoState extends State<AdvancedChipDemo> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     '文章分类',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Wrap(
                     spacing: 8,
                     runSpacing: 8,
                     children: [
                       ZephyrChip(
                         label: '技术',
-                        avatar: const Icon(Icons.code, size: 16),
+                        avatar: Icon(Icons.code, size: 16),
                         onPressed: () => _showMessage(context, '技术分类'),
                       ),
                       ZephyrChip(
                         label: '设计',
-                        avatar: const Icon(Icons.palette, size: 16),
+                        avatar: Icon(Icons.palette, size: 16),
                         onPressed: () => _showMessage(context, '设计分类'),
                       ),
                       ZephyrChip(
                         label: '产品',
-                        avatar: const Icon(Icons.lightbulb, size: 16),
+                        avatar: Icon(Icons.lightbulb, size: 16),
                         onPressed: () => _showMessage(context, '产品分类'),
                       ),
                       ZephyrChip(
                         label: '运营',
-                        avatar: const Icon(Icons.trending_up, size: 16),
+                        avatar: Icon(Icons.trending_up, size: 16),
                         onPressed: () => _showMessage(context, '运营分类'),
                       ),
                     ],
@@ -954,6 +962,6 @@ class _AdvancedChipDemoState extends State<AdvancedChipDemo> {
   // 模拟数据流
   final _tagController = StreamController<List<String>>.broadcast();
   final List<String> _tags = ['Flutter', 'Dart', 'React'];
-  
+
   Stream<List<String>> get _tagStream => _tagController.stream;
 }

@@ -156,14 +156,14 @@ class _HomeContent extends StatelessWidget {
   }
 
   Widget _buildWelcomeBanner(BuildContext context) {
-    return Container(
+    return const Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(32),
+      padding: EdgeInsets.all(32),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Theme.of(context).primaryColor,
-            Theme.of(context).primaryColor.withValues(alpha: 0.8),
+            Theme.of(context).colorScheme.primary,
+            Theme.of(context).colorScheme.primary.withValues(alpha: 0.8),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -173,14 +173,14 @@ class _HomeContent extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 10,
-            offset: const Offset(0, 4),
+            offset: Offset(0, 4),
           ),
         ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             '欢迎使用 ZephyrUI',
             style: TextStyle(
               fontSize: 32,
@@ -188,7 +188,7 @@ class _HomeContent extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             '专业的 Flutter UI 组件库',
             style: TextStyle(
@@ -196,26 +196,27 @@ class _HomeContent extends StatelessWidget {
               color: Colors.white.withValues(alpha: 0.9),
             ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           Row(
             children: [
               ElevatedButton(
                 onPressed: () => _showMessage(context, '开始体验 ZephyrUI'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
-                  foregroundColor: Theme.of(context).primaryColor,
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  foregroundColor: Theme.of(context).colorScheme.primary,
+                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 ),
-                child: const Text('开始体验'),
+                child: Text('开始体验'),
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
               OutlinedButton(
-                onPressed: () => _launchURL(context, 'https://github.com/agions/zephyr-ui'),
+                onPressed: () =>
+                    _launchURL(context, 'https://github.com/agions/zephyr-ui'),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: Colors.white,
-                  side: const BorderSide(color: Colors.white),
+                  side: BorderSide(color: Colors.white),
                 ),
-                child: const Text('查看 GitHub'),
+                child: Text('查看 GitHub'),
               ),
             ],
           ),
@@ -234,8 +235,8 @@ class _HomeContent extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Card(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
+          child: const Padding(
+            padding: EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -247,7 +248,7 @@ class _HomeContent extends StatelessWidget {
   zephyr_ui: ^0.4.0''',
                   context,
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 _buildStepCard(
                   '2',
                   '导入使用',
@@ -260,7 +261,7 @@ ZephyrButton(
 )''',
                   context,
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 _buildStepCard(
                   '3',
                   '主题配置',
@@ -285,23 +286,24 @@ ZephyrButton(
     );
   }
 
-  Widget _buildStepCard(String step, String title, String description, String? code, BuildContext context) {
+  Widget _buildStepCard(String step, String title, String description,
+      String? code, BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
-            Container(
+            const Container(
               width: 24,
               height: 24,
               decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).colorScheme.primary,
                 shape: BoxShape.circle,
               ),
               child: Center(
                 child: Text(
                   step,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
@@ -336,9 +338,9 @@ ZephyrButton(
         ),
         if (code != null) ...[
           const SizedBox(height: 12),
-          Container(
+          const Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(12),
+            padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.grey[100],
               borderRadius: BorderRadius.circular(8),
@@ -346,7 +348,7 @@ ZephyrButton(
             ),
             child: Text(
               code,
-              style: const TextStyle(
+              style: TextStyle(
                 fontFamily: 'monospace',
                 fontSize: 12,
               ),
@@ -456,21 +458,21 @@ ZephyrButton(
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(8),
-        child: Padding(
-          padding: const EdgeInsets.all(20),
+        child: const Padding(
+          padding: EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Icon(icon, size: 32, color: color),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Expanded(
                 child: Text(
                   description,
@@ -480,22 +482,22 @@ ZephyrButton(
                   ),
                 ),
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               Row(
                 children: [
                   Text(
                     '查看详情',
                     style: TextStyle(
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).colorScheme.primary,
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(width: 4),
+                  SizedBox(width: 4),
                   Icon(
                     Icons.arrow_forward,
                     size: 16,
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ],
               ),
@@ -516,8 +518,8 @@ ZephyrButton(
         ),
         const SizedBox(height: 16),
         Card(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
+          child: const Padding(
+            padding: EdgeInsets.all(20),
             child: Column(
               children: [
                 _buildFeatureItem(
@@ -526,21 +528,21 @@ ZephyrButton(
                   '支持深色/浅色主题，完全可定制的样式系统',
                   context,
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 _buildFeatureItem(
                   Icons.devices,
                   '响应式设计',
                   '适配手机、平板、桌面等多种设备尺寸',
                   context,
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 _buildFeatureItem(
                   Icons.accessibility,
                   '无障碍设计',
                   '符合 WCAG 标准，支持屏幕阅读器',
                   context,
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 _buildFeatureItem(
                   Icons.speed,
                   '性能优化',
@@ -563,7 +565,7 @@ ZephyrButton(
   ) {
     return Row(
       children: [
-        Icon(icon, size: 24, color: Theme.of(context).primaryColor),
+        Icon(icon, size: 24, color: Theme.of(context).colorScheme.primary),
         const SizedBox(width: 12),
         Expanded(
           child: Column(
@@ -617,19 +619,22 @@ ZephyrButton(
               Icons.book,
               'README 文档',
               '项目说明和使用指南',
-              () => _launchURL(context, 'https://github.com/agions/zephyr-ui/blob/main/README.md'),
+              () => _launchURL(context,
+                  'https://github.com/agions/zephyr-ui/blob/main/README.md'),
             ),
             _buildResourceCard(
               Icons.description,
               'API 参考',
               '组件 API 文档和示例',
-              () => _launchURL(context, 'https://github.com/agions/zephyr-ui/tree/main/docs'),
+              () => _launchURL(context,
+                  'https://github.com/agions/zephyr-ui/tree/main/docs'),
             ),
             _buildResourceCard(
               Icons.bug_report,
               '问题反馈',
               '报告问题和建议改进',
-              () => _launchURL(context, 'https://github.com/agions/zephyr-ui/issues'),
+              () => _launchURL(
+                  context, 'https://github.com/agions/zephyr-ui/issues'),
             ),
           ],
         ),
@@ -647,21 +652,21 @@ ZephyrButton(
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(8),
-        child: Padding(
-          padding: const EdgeInsets.all(20),
+        child: const Padding(
+          padding: EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(icon, size: 32),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Text(
                 description,
                 style: TextStyle(

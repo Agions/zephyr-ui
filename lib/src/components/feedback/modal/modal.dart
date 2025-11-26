@@ -46,7 +46,7 @@ enum ZephyrModalSize {
 class ZephyrModal extends StatelessWidget {
   /// 创建一个模态框组件
   const ZephyrModal({
-    Key? key,
+    super.key,
     this.title,
     this.content,
     this.child,
@@ -56,7 +56,7 @@ class ZephyrModal extends StatelessWidget {
     this.showCloseButton = true,
     this.onClose,
     this.theme,
-  }) : super(key: key);
+  });
 
   /// 标题
   final String? title;
@@ -318,13 +318,13 @@ class ZephyrModal extends StatelessWidget {
 class ZephyrModalAction extends StatelessWidget {
   /// 创建一个模态框操作按钮
   const ZephyrModalAction({
-    Key? key,
     required this.text,
     required this.onPressed,
+    super.key,
     this.variant = ZephyrVariant.primary,
     this.size = ZephyrSize.md,
     this.icon,
-  }) : super(key: key);
+  });
 
   /// 按钮文本
   final String text;

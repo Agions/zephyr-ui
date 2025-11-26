@@ -118,7 +118,7 @@ class FeedbackComponentsDemo extends StatelessWidget {
   Widget _buildAlertExamples() {
     return ExampleCard(
       title: '提示信息',
-      code: '''Container(
+      code: '''const Container(
   padding: EdgeInsets.all(12),
   decoration: BoxDecoration(
     color: Colors.blue[50],
@@ -128,7 +128,7 @@ class FeedbackComponentsDemo extends StatelessWidget {
   child: Row(
     children: [
       Icon(Icons.info, color: Colors.blue),
-      SizedBox(width: 8),
+      const SizedBox(width: 8),
       Expanded(child: Text('这是一条信息提示')),
     ],
   ),
@@ -141,8 +141,8 @@ class FeedbackComponentsDemo extends StatelessWidget {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          Container(
-            padding: const EdgeInsets.all(12),
+          const Container(
+            padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.blue[50],
               borderRadius: BorderRadius.circular(8),
@@ -151,7 +151,7 @@ class FeedbackComponentsDemo extends StatelessWidget {
             child: Row(
               children: [
                 Icon(Icons.info, color: Colors.blue[700]),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,7 +163,7 @@ class FeedbackComponentsDemo extends StatelessWidget {
                           color: Colors.blue[900],
                         ),
                       ),
-                      const Text('这是一条信息提示'),
+                      Text('这是一条信息提示'),
                     ],
                   ),
                 ),
@@ -171,8 +171,8 @@ class FeedbackComponentsDemo extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          Container(
-            padding: const EdgeInsets.all(12),
+          const Container(
+            padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.green[50],
               borderRadius: BorderRadius.circular(8),
@@ -181,7 +181,7 @@ class FeedbackComponentsDemo extends StatelessWidget {
             child: Row(
               children: [
                 Icon(Icons.check_circle, color: Colors.green[700]),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -193,7 +193,7 @@ class FeedbackComponentsDemo extends StatelessWidget {
                           color: Colors.green[900],
                         ),
                       ),
-                      const Text('操作成功完成'),
+                      Text('操作成功完成'),
                     ],
                   ),
                 ),
@@ -201,8 +201,8 @@ class FeedbackComponentsDemo extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          Container(
-            padding: const EdgeInsets.all(12),
+          const Container(
+            padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.red[50],
               borderRadius: BorderRadius.circular(8),
@@ -211,7 +211,7 @@ class FeedbackComponentsDemo extends StatelessWidget {
             child: Row(
               children: [
                 Icon(Icons.error, color: Colors.red[700]),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -223,7 +223,7 @@ class FeedbackComponentsDemo extends StatelessWidget {
                           color: Colors.red[900],
                         ),
                       ),
-                      const Text('操作失败，请重试'),
+                      Text('操作失败，请重试'),
                     ],
                   ),
                 ),
@@ -231,8 +231,8 @@ class FeedbackComponentsDemo extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          Container(
-            padding: const EdgeInsets.all(12),
+          const Container(
+            padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.orange[50],
               borderRadius: BorderRadius.circular(8),
@@ -241,7 +241,7 @@ class FeedbackComponentsDemo extends StatelessWidget {
             child: Row(
               children: [
                 Icon(Icons.warning, color: Colors.orange[700]),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -253,7 +253,7 @@ class FeedbackComponentsDemo extends StatelessWidget {
                           color: Colors.orange[900],
                         ),
                       ),
-                      const Text('请注意检查您的输入'),
+                      Text('请注意检查您的输入'),
                     ],
                   ),
                 ),
@@ -279,13 +279,13 @@ CircularProgressIndicator(value: 0.5)''',
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          Column(
+          const Column(
             children: [
-              const LinearProgressIndicator(value: 0.3),
-              const SizedBox(height: 8),
+              LinearProgressIndicator(value: 0.3),
+              SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
+                children: [
                   Text('0%'),
                   Text('30%'),
                   Text('100%'),
@@ -294,13 +294,13 @@ CircularProgressIndicator(value: 0.5)''',
             ],
           ),
           const SizedBox(height: 16),
-          Column(
+          const Column(
             children: [
-              const LinearProgressIndicator(value: 0.7),
-              const SizedBox(height: 8),
+              LinearProgressIndicator(value: 0.7),
+              SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
+                children: [
                   Text('0%'),
                   Text('70%'),
                   Text('100%'),
@@ -314,25 +314,25 @@ CircularProgressIndicator(value: 0.5)''',
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
-                children: const [
+                children: [
                   CircularProgressIndicator(value: 0.3),
                   SizedBox(height: 8),
                   Text('30%'),
                 ],
               ),
               Column(
-                children: const [
+                children: [
                   CircularProgressIndicator(value: 0.7),
                   SizedBox(height: 8),
                   Text('70%'),
                 ],
               ),
               Column(
-                children: const [
+                children: [
                   CircularProgressIndicator(),
                   SizedBox(height: 8),
                   Text('加载中'),
@@ -351,14 +351,14 @@ CircularProgressIndicator(value: 0.5)''',
               Expanded(
                 child: Column(
                   children: [
-                    Container(
+                    const Container(
                       width: 40,
                       height: 40,
                       decoration: BoxDecoration(
                         color: Colors.green,
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.check,
                         color: Colors.white,
                       ),
@@ -371,14 +371,14 @@ CircularProgressIndicator(value: 0.5)''',
               Expanded(
                 child: Column(
                   children: [
-                    Container(
+                    const Container(
                       width: 40,
                       height: 40,
                       decoration: BoxDecoration(
                         color: Colors.blue,
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.check,
                         color: Colors.white,
                       ),
@@ -391,14 +391,14 @@ CircularProgressIndicator(value: 0.5)''',
               Expanded(
                 child: Column(
                   children: [
-                    Container(
+                    const Container(
                       width: 40,
                       height: 40,
                       decoration: BoxDecoration(
                         color: Colors.grey[300],
                         shape: BoxShape.circle,
                       ),
-                      child: const Text(
+                      child: Text(
                         '3',
                         style: TextStyle(
                           color: Colors.grey,
@@ -422,7 +422,7 @@ CircularProgressIndicator(value: 0.5)''',
     return ExampleCard(
       title: '骨架屏',
       code: '''// 文本骨架屏
-Container(
+const Container(
   height: 16,
   decoration: BoxDecoration(
     color: Colors.grey[300],
@@ -431,7 +431,7 @@ Container(
 )
 
 // 圆形骨架屏
-Container(
+const Container(
   width: 40,
   height: 40,
   decoration: BoxDecoration(
@@ -448,8 +448,8 @@ Container(
           ),
           const SizedBox(height: 16),
           Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
+            child: const Padding(
+              padding: EdgeInsets.all(16),
               child: Column(
                 children: [
                   Row(
@@ -462,7 +462,7 @@ Container(
                           shape: BoxShape.circle,
                         ),
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: 12),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -474,7 +474,7 @@ Container(
                                 borderRadius: BorderRadius.circular(4),
                               ),
                             ),
-                            const SizedBox(height: 8),
+                            SizedBox(height: 8),
                             Container(
                               height: 12,
                               width: 100,
@@ -488,7 +488,7 @@ Container(
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Row(
                     children: [
                       Container(
@@ -499,7 +499,7 @@ Container(
                           shape: BoxShape.circle,
                         ),
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: 12),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -511,7 +511,7 @@ Container(
                                 borderRadius: BorderRadius.circular(4),
                               ),
                             ),
-                            const SizedBox(height: 8),
+                            SizedBox(height: 8),
                             Container(
                               height: 12,
                               width: 120,
@@ -536,8 +536,8 @@ Container(
           ),
           const SizedBox(height: 16),
           Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
+            child: const Padding(
+              padding: EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -549,7 +549,7 @@ Container(
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
                   Container(
                     height: 14,
                     decoration: BoxDecoration(
@@ -557,7 +557,7 @@ Container(
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Container(
                     height: 14,
                     width: 200,
@@ -566,7 +566,7 @@ Container(
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Row(
                     children: [
                       Container(
@@ -577,7 +577,7 @@ Container(
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       Container(
                         height: 32,
                         width: 80,

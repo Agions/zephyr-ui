@@ -1,5 +1,5 @@
 /// ZephyrUI 设计令牌
-/// 
+///
 /// 定义了整个设计系统的基础令牌，包括颜色、间距、字体、阴影等。
 /// 这些令牌确保了整个组件库的视觉一致性。
 library design_tokens;
@@ -91,8 +91,8 @@ class ZephyrRadius {
 }
 
 /// 字体令牌
-class ZephyrTypography {
-  ZephyrTypography._();
+class ZephyrFontTokens {
+  ZephyrFontTokens._();
 
   // 字体大小
   static const double fontSize10 = 10.0;

@@ -52,7 +52,7 @@ class ZephyrSlider extends StatefulWidget {
 
   /// 创建滑块组件
   const ZephyrSlider({
-    Key? key,
+    super.key,
     required this.value,
     this.min = 0.0,
     this.max = 1.0,
@@ -64,7 +64,7 @@ class ZephyrSlider extends StatefulWidget {
     this.onChangeStart,
     this.onChangeEnd,
     this.theme,
-  }) : super(key: key);
+  });
 
   @override
   State<ZephyrSlider> createState() => _ZephyrSliderState();

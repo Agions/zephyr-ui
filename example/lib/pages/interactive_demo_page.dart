@@ -33,7 +33,7 @@ class InteractiveDemoPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            
+
             // 按钮交互式演示
             InteractiveDemoCard(
               title: '按钮组件',
@@ -46,24 +46,24 @@ ZButton(
   disabled: false,
   loading: false,
   onPressed: () {
-    print("按钮被点击");
+    debugPrint("按钮被点击");
   },
 )''',
-              options: [
-                const DemoOption(
+              options: const [
+                DemoOption(
                   key: 'text',
                   label: '按钮文本',
                   type: DemoOptionType.string,
                   defaultValue: '点击我',
                   values: ['确定', '取消', '提交', '重置'],
                 ),
-                const DemoOption(
+                DemoOption(
                   key: 'disabled',
                   label: '禁用状态',
                   type: DemoOptionType.boolean,
                   defaultValue: false,
                 ),
-                const DemoOption(
+                DemoOption(
                   key: 'loading',
                   label: '加载状态',
                   type: DemoOptionType.boolean,
@@ -72,28 +72,31 @@ ZButton(
               ],
               demo: Builder(
                 builder: (context) {
-                  final card = context.findAncestorWidgetOfExactType<InteractiveDemoCard>()!;
+                  final card = context
+                      .findAncestorWidgetOfExactType<InteractiveDemoCard>()!;
                   final text = card.getOptionValue<String>('text');
                   final disabled = card.getOptionValue<bool>('disabled');
                   final loading = card.getOptionValue<bool>('loading');
-                  
+
                   return ZButton(
                     text: text,
                     type: ZButtonType.primary,
                     disabled: disabled,
                     loading: loading,
-                    onPressed: disabled || loading ? null : () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('按钮被点击')),
-                      );
-                    },
+                    onPressed: disabled || loading
+                        ? null
+                        : () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('按钮被点击')),
+                            );
+                          },
                   );
                 },
               ),
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             // 输入框交互式演示
             InteractiveDemoCard(
               title: '输入框组件',
@@ -105,21 +108,21 @@ ZInputField(
   helperText: "用户名长度为3-20个字符",
   errorText: "用户名不能为空",
 )''',
-              options: [
-                const DemoOption(
+              options: const [
+                DemoOption(
                   key: 'label',
                   label: '标签文本',
                   type: DemoOptionType.string,
                   defaultValue: '用户名',
                   values: ['用户名', '邮箱', '密码', '手机号'],
                 ),
-                const DemoOption(
+                DemoOption(
                   key: 'showError',
                   label: '显示错误',
                   type: DemoOptionType.boolean,
                   defaultValue: false,
                 ),
-                const DemoOption(
+                DemoOption(
                   key: 'showHelper',
                   label: '显示帮助',
                   type: DemoOptionType.boolean,
@@ -128,11 +131,12 @@ ZInputField(
               ],
               demo: Builder(
                 builder: (context) {
-                  final card = context.findAncestorWidgetOfExactType<InteractiveDemoCard>()!;
+                  final card = context
+                      .findAncestorWidgetOfExactType<InteractiveDemoCard>()!;
                   final label = card.getOptionValue<String>('label');
                   final showError = card.getOptionValue<bool>('showError');
                   final showHelper = card.getOptionValue<bool>('showHelper');
-                  
+
                   return ZInputField(
                     label: label,
                     placeholder: '请输入$label',
@@ -142,9 +146,9 @@ ZInputField(
                 },
               ),
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             // 卡片交互式演示
             InteractiveDemoCard(
               title: '卡片组件',
@@ -156,20 +160,20 @@ ZCard(
   child: Text("这是卡片的内容"),
   elevation: 2,
 )''',
-              options: [
-                const DemoOption(
+              options: const [
+                DemoOption(
                   key: 'elevation',
                   label: '阴影深度',
                   type: DemoOptionType.number,
                   defaultValue: 2.0,
                 ),
-                const DemoOption(
+                DemoOption(
                   key: 'showSubtitle',
                   label: '显示副标题',
                   type: DemoOptionType.boolean,
                   defaultValue: true,
                 ),
-                const DemoOption(
+                DemoOption(
                   key: 'color',
                   label: '背景颜色',
                   type: DemoOptionType.color,
@@ -178,11 +182,13 @@ ZCard(
               ],
               demo: Builder(
                 builder: (context) {
-                  final card = context.findAncestorWidgetOfExactType<InteractiveDemoCard>()!;
+                  final card = context
+                      .findAncestorWidgetOfExactType<InteractiveDemoCard>()!;
                   final elevation = card.getOptionValue<double>('elevation');
-                  final showSubtitle = card.getOptionValue<bool>('showSubtitle');
+                  final showSubtitle =
+                      card.getOptionValue<bool>('showSubtitle');
                   final color = card.getOptionValue<Color>('color');
-                  
+
                   return ZCard(
                     title: '卡片标题',
                     subtitle: showSubtitle ? '卡片副标题' : null,
@@ -193,9 +199,9 @@ ZCard(
                 },
               ),
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             // 图标交互式演示
             InteractiveDemoCard(
               title: '图标组件',
@@ -206,23 +212,23 @@ ZIcon(
   size: 24,
   color: Colors.amber,
   onPressed: () {
-    print("图标被点击");
+    debugPrint("图标被点击");
   },
 )''',
-              options: [
-                const DemoOption(
+              options: const [
+                DemoOption(
                   key: 'size',
                   label: '图标大小',
                   type: DemoOptionType.number,
                   defaultValue: 24.0,
                 ),
-                const DemoOption(
+                DemoOption(
                   key: 'color',
                   label: '图标颜色',
                   type: DemoOptionType.color,
                   defaultValue: Colors.amber,
                 ),
-                const DemoOption(
+                DemoOption(
                   key: 'clickable',
                   label: '可点击',
                   type: DemoOptionType.boolean,
@@ -231,20 +237,23 @@ ZIcon(
               ],
               demo: Builder(
                 builder: (context) {
-                  final card = context.findAncestorWidgetOfExactType<InteractiveDemoCard>()!;
+                  final card = context
+                      .findAncestorWidgetOfExactType<InteractiveDemoCard>()!;
                   final size = card.getOptionValue<double>('size');
                   final color = card.getOptionValue<Color>('color');
                   final clickable = card.getOptionValue<bool>('clickable');
-                  
+
                   return ZIcon(
                     Icons.star,
                     size: size.toInt(),
                     color: color,
-                    onPressed: clickable ? () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('图标被点击')),
-                      );
-                    } : null,
+                    onPressed: clickable
+                        ? () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('图标被点击')),
+                            );
+                          }
+                        : null,
                   );
                 },
               ),

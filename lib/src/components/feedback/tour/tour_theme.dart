@@ -1,5 +1,5 @@
 /// ZephyrUI Tour Theme
-/// 
+///
 /// Defines the theme configuration for tour components.
 library tour_theme;
 
@@ -203,7 +203,8 @@ class ZephyrTourTheme {
       headerColor: headerColor ?? this.headerColor,
       backgroundColor: backgroundColor ?? this.backgroundColor,
       progressColor: progressColor ?? this.progressColor,
-      progressBackgroundColor: progressBackgroundColor ?? this.progressBackgroundColor,
+      progressBackgroundColor:
+          progressBackgroundColor ?? this.progressBackgroundColor,
       titleStyle: titleStyle ?? this.titleStyle,
       contentStyle: contentStyle ?? this.contentStyle,
       stepNumberStyle: stepNumberStyle ?? this.stepNumberStyle,

@@ -132,7 +132,7 @@ class ZephyrAutoCompleteTheme {
       ),
       contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       suggestionPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      shadow: BoxShadow(
+      shadow: const const BoxShadow(
         color: Color(0x1A000000),
         blurRadius: 8,
         offset: Offset(0, 2),
@@ -198,7 +198,7 @@ class ZephyrAutoCompleteTheme {
       ),
       contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       suggestionPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      shadow: BoxShadow(
+      shadow: const const BoxShadow(
         color: Color(0x1AFFFFFF),
         blurRadius: 8,
         offset: Offset(0, 2),

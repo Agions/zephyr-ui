@@ -48,6 +48,10 @@ class ZephyrThemeConfig {
       ratingTheme: ZephyrRatingTheme.light(),
       treeTheme: ZephyrTreeTheme.light(),
       tourTheme: ZephyrTourTheme.light(),
+      checkboxTheme: ZephyrCheckboxTheme.light(),
+      radioTheme: ZephyrRadioTheme.light(),
+      textAreaTheme: ZephyrTextAreaTheme.light(),
+      timePickerTheme: ZephyrTimePickerTheme.light(),
     );
   }
 
@@ -89,6 +93,10 @@ class ZephyrThemeConfig {
       ratingTheme: ZephyrRatingTheme.dark(),
       treeTheme: ZephyrTreeTheme.dark(),
       tourTheme: ZephyrTourTheme.dark(),
+      checkboxTheme: ZephyrCheckboxTheme.dark(),
+      radioTheme: ZephyrRadioTheme.dark(),
+      textAreaTheme: ZephyrTextAreaTheme.dark(),
+      timePickerTheme: ZephyrTimePickerTheme.dark(),
     );
   }
 
@@ -190,20 +198,57 @@ class ZephyrThemeConfig {
     final isDark = brightness == Brightness.dark;
 
     return ZephyrTextTheme(
-      headlineLarge: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: isDark ? Colors.white : ZephyrColors.neutral900),
-      headlineMedium: TextStyle(fontSize: 28, fontWeight: FontWeight.w600, color: isDark ? Colors.white : ZephyrColors.neutral900),
-      headlineSmall: TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: isDark ? Colors.white : ZephyrColors.neutral900),
-      titleLarge: TextStyle(fontSize: 22, fontWeight: FontWeight.w600, color: isDark ? Colors.white : ZephyrColors.neutral900),
-      titleMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: isDark ? Colors.white : ZephyrColors.neutral900),
-      titleSmall: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: isDark ? Colors.white : ZephyrColors.neutral900),
-      bodyLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: isDark ? Colors.white : ZephyrColors.neutral900),
-      bodyMedium: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: isDark ? Colors.white : ZephyrColors.neutral900),
-      bodySmall: TextStyle(fontSize: 12, fontWeight: FontWeight.normal, color: isDark ? Colors.white : ZephyrColors.neutral900),
-      labelLarge: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: isDark ? Colors.white : ZephyrColors.neutral900),
-      labelMedium: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: isDark ? Colors.white : ZephyrColors.neutral900),
-      labelSmall: TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: isDark ? Colors.white : ZephyrColors.neutral900),
+      headlineLarge: TextStyle(
+          fontSize: 32,
+          fontWeight: FontWeight.bold,
+          color: isDark ? Colors.white : ZephyrColors.neutral900),
+      headlineMedium: TextStyle(
+          fontSize: 28,
+          fontWeight: FontWeight.w600,
+          color: isDark ? Colors.white : ZephyrColors.neutral900),
+      headlineSmall: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.w600,
+          color: isDark ? Colors.white : ZephyrColors.neutral900),
+      titleLarge: TextStyle(
+          fontSize: 22,
+          fontWeight: FontWeight.w600,
+          color: isDark ? Colors.white : ZephyrColors.neutral900),
+      titleMedium: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+          color: isDark ? Colors.white : ZephyrColors.neutral900),
+      titleSmall: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+          color: isDark ? Colors.white : ZephyrColors.neutral900),
+      bodyLarge: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.normal,
+          color: isDark ? Colors.white : ZephyrColors.neutral900),
+      bodyMedium: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.normal,
+          color: isDark ? Colors.white : ZephyrColors.neutral900),
+      bodySmall: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.normal,
+          color: isDark ? Colors.white : ZephyrColors.neutral900),
+      labelLarge: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: isDark ? Colors.white : ZephyrColors.neutral900),
+      labelMedium: TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+          color: isDark ? Colors.white : ZephyrColors.neutral900),
+      labelSmall: TextStyle(
+          fontSize: 11,
+          fontWeight: FontWeight.w500,
+          color: isDark ? Colors.white : ZephyrColors.neutral900),
       primaryColor: isDark ? Colors.white : ZephyrColors.neutral900,
-      secondaryColor: isDark ? ZephyrColors.neutral400 : ZephyrColors.neutral600,
+      secondaryColor:
+          isDark ? ZephyrColors.neutral400 : ZephyrColors.neutral600,
       errorColor: ZephyrColors.error500,
       disabledColor: isDark ? ZephyrColors.neutral500 : ZephyrColors.neutral400,
     );
@@ -225,7 +270,8 @@ class ZephyrThemeConfig {
     return ZephyrIconTheme(
       defaultColor: isDark ? Colors.white : ZephyrColors.neutral900,
       primaryColor: isDark ? Colors.white : ZephyrColors.neutral900,
-      secondaryColor: isDark ? ZephyrColors.neutral400 : ZephyrColors.neutral600,
+      secondaryColor:
+          isDark ? ZephyrColors.neutral400 : ZephyrColors.neutral600,
       errorColor: ZephyrColors.error500,
       warningColor: ZephyrColors.warning500,
       successColor: ZephyrColors.success500,
@@ -277,9 +323,18 @@ class ZephyrThemeConfig {
     final isDark = brightness == Brightness.dark;
 
     return ZephyrStepperTheme(
+      completedColor: ZephyrColors.success500,
       activeColor: primary,
       inactiveColor: isDark ? ZephyrColors.neutral600 : ZephyrColors.neutral400,
-      completedColor: ZephyrColors.success500,
+      errorColor: ZephyrColors.error500,
+      borderColor: isDark ? ZephyrColors.neutral600 : ZephyrColors.neutral300,
+      borderWidth: 2.0,
+      textColor: isDark ? ZephyrColors.neutral100 : ZephyrColors.neutral900,
+      activeTextColor: primary,
+      subtitleColor: isDark ? ZephyrColors.neutral400 : ZephyrColors.neutral600,
+      stepSize: 32.0,
+      borderRadius: 8.0,
+      animationDuration: const Duration(milliseconds: 300),
     );
   }
 
@@ -289,7 +344,7 @@ class ZephyrThemeConfig {
     Color primary,
   ) {
     final isDark = brightness == Brightness.dark;
-    
+
     return ZephyrCheckboxGroupTheme(
       activeColor: primary,
       checkColor: Colors.white,
@@ -314,7 +369,7 @@ class ZephyrThemeConfig {
     Color primary,
   ) {
     final isDark = brightness == Brightness.dark;
-    
+
     return ZephyrRadioGroupTheme(
       activeColor: primary,
       borderColor: isDark ? Colors.white70 : Colors.black54,
@@ -341,14 +396,17 @@ class ZephyrThemeConfig {
     Color primary,
   ) {
     final isDark = brightness == Brightness.dark;
-    
+
     return ZephyrSliderTheme(
       activeTrackColor: primary,
       inactiveTrackColor: isDark ? Colors.grey.shade700 : Colors.grey.shade300,
       hoverActiveTrackColor: primary.withValues(alpha: 0.8),
-      hoverInactiveTrackColor: isDark ? Colors.grey.shade600 : Colors.grey.shade400,
-      disabledActiveTrackColor: isDark ? Colors.grey.shade700 : Colors.grey.shade300,
-      disabledInactiveTrackColor: isDark ? Colors.grey.shade800 : Colors.grey.shade400,
+      hoverInactiveTrackColor:
+          isDark ? Colors.grey.shade600 : Colors.grey.shade400,
+      disabledActiveTrackColor:
+          isDark ? Colors.grey.shade700 : Colors.grey.shade300,
+      disabledInactiveTrackColor:
+          isDark ? Colors.grey.shade800 : Colors.grey.shade400,
       thumbColor: primary,
       hoverThumbColor: primary.withValues(alpha: 0.8),
       disabledThumbColor: isDark ? Colors.grey.shade500 : Colors.grey.shade400,
@@ -361,7 +419,8 @@ class ZephyrThemeConfig {
       ),
       thumbBorderColor: Colors.transparent,
       hoverThumbBorderColor: primary.withValues(alpha: 0.6),
-      disabledThumbBorderColor: isDark ? Colors.grey.shade500 : Colors.grey.shade400,
+      disabledThumbBorderColor:
+          isDark ? Colors.grey.shade500 : Colors.grey.shade400,
     );
   }
 
@@ -373,7 +432,7 @@ class ZephyrThemeConfig {
     final isDark = brightness == Brightness.dark;
     final primaryLight = primary.withValues(alpha: 0.1);
     final primaryMedium = primary.withValues(alpha: 0.2);
-    
+
     return ZephyrDatePickerTheme(
       primaryColor: primary,
       selectedDateBackgroundColor: primary,

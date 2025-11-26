@@ -148,32 +148,43 @@ class ZephyrButtonTheme extends ThemeExtension<ZephyrButtonTheme> {
     }
 
     return ZephyrButtonTheme(
-      primaryBackgroundColor: Color.lerp(primaryBackgroundColor, other.primaryBackgroundColor, t),
+      primaryBackgroundColor:
+          Color.lerp(primaryBackgroundColor, other.primaryBackgroundColor, t),
       primaryTextColor: Color.lerp(primaryTextColor, other.primaryTextColor, t),
-      secondaryBackgroundColor: Color.lerp(secondaryBackgroundColor, other.secondaryBackgroundColor, t),
-      secondaryTextColor: Color.lerp(secondaryTextColor, other.secondaryTextColor, t),
+      secondaryBackgroundColor: Color.lerp(
+          secondaryBackgroundColor, other.secondaryBackgroundColor, t),
+      secondaryTextColor:
+          Color.lerp(secondaryTextColor, other.secondaryTextColor, t),
       outlineColor: Color.lerp(outlineColor, other.outlineColor, t),
       outlineTextColor: Color.lerp(outlineTextColor, other.outlineTextColor, t),
       textButtonColor: Color.lerp(textButtonColor, other.textButtonColor, t),
-      disabledBackgroundColor: Color.lerp(disabledBackgroundColor, other.disabledBackgroundColor, t),
-      disabledTextColor: Color.lerp(disabledTextColor, other.disabledTextColor, t),
+      disabledBackgroundColor:
+          Color.lerp(disabledBackgroundColor, other.disabledBackgroundColor, t),
+      disabledTextColor:
+          Color.lerp(disabledTextColor, other.disabledTextColor, t),
       borderRadius: ui.lerpDouble(borderRadius, other.borderRadius, t),
-      smallPadding: EdgeInsetsGeometry.lerp(smallPadding, other.smallPadding, t),
-      mediumPadding: EdgeInsetsGeometry.lerp(mediumPadding, other.mediumPadding, t),
-      largePadding: EdgeInsetsGeometry.lerp(largePadding, other.largePadding, t),
+      smallPadding:
+          EdgeInsetsGeometry.lerp(smallPadding, other.smallPadding, t),
+      mediumPadding:
+          EdgeInsetsGeometry.lerp(mediumPadding, other.mediumPadding, t),
+      largePadding:
+          EdgeInsetsGeometry.lerp(largePadding, other.largePadding, t),
       smallTextStyle: TextStyle.lerp(smallTextStyle, other.smallTextStyle, t),
-      mediumTextStyle: TextStyle.lerp(mediumTextStyle, other.mediumTextStyle, t),
+      mediumTextStyle:
+          TextStyle.lerp(mediumTextStyle, other.mediumTextStyle, t),
       largeTextStyle: TextStyle.lerp(largeTextStyle, other.largeTextStyle, t),
       loadingColor: Color.lerp(loadingColor, other.loadingColor, t),
       splashColor: Color.lerp(splashColor, other.splashColor, t),
       elevation: ui.lerpDouble(elevation, other.elevation, t),
-      disabledElevation: ui.lerpDouble(disabledElevation, other.disabledElevation, t),
+      disabledElevation:
+          ui.lerpDouble(disabledElevation, other.disabledElevation, t),
     );
   }
 
   /// 从主题中获取ZephyrButtonTheme实例
   static ZephyrButtonTheme of(BuildContext context) {
-    return Theme.of(context).extension<ZephyrButtonTheme>() ?? _fallbackTheme(context);
+    return Theme.of(context).extension<ZephyrButtonTheme>() ??
+        _fallbackTheme(context);
   }
 
   /// 基于父主题解析主题并返回默认值
@@ -204,9 +215,12 @@ class ZephyrButtonTheme extends ThemeExtension<ZephyrButtonTheme> {
       disabledBackgroundColor: ZephyrColors.neutral300,
       disabledTextColor: ZephyrColors.neutral600,
       borderRadius: ZephyrRadius.sm,
-      smallPadding: const EdgeInsets.symmetric(horizontal: ZephyrSpacing.sm, vertical: ZephyrSpacing.xs),
-      mediumPadding: const EdgeInsets.symmetric(horizontal: ZephyrSpacing.md, vertical: ZephyrSpacing.sm),
-      largePadding: const EdgeInsets.symmetric(horizontal: ZephyrSpacing.lg, vertical: ZephyrSpacing.md),
+      smallPadding: const EdgeInsets.symmetric(
+          horizontal: ZephyrSpacing.sm, vertical: ZephyrSpacing.xs),
+      mediumPadding: const EdgeInsets.symmetric(
+          horizontal: ZephyrSpacing.md, vertical: ZephyrSpacing.sm),
+      largePadding: const EdgeInsets.symmetric(
+          horizontal: ZephyrSpacing.lg, vertical: ZephyrSpacing.md),
       smallTextStyle: textTheme.labelSmall,
       mediumTextStyle: textTheme.labelMedium,
       largeTextStyle: textTheme.labelLarge,

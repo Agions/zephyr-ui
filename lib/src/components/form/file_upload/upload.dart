@@ -94,7 +94,7 @@ class ZephyrUpload extends StatefulWidget {
   
   /// 创建文件上传组件
   const ZephyrUpload({
-    Key? key,
+    super.key,
     required this.onUpload,
     this.onSelect,
     this.onRemove,
@@ -115,7 +115,7 @@ class ZephyrUpload extends StatefulWidget {
     this.errorBuilder,
     this.emptyBuilder,
     this.loadingBuilder,
-  }) : super(key: key);
+  });
 
   @override
   State<ZephyrUpload> createState() => _ZephyrUploadState();

@@ -27,8 +27,8 @@ import 'package:zephyr_ui/zephyr_ui.dart';
 class ZephyrGrid extends StatelessWidget {
   /// 创建网格容器
   const ZephyrGrid({
-    Key? key,
     required this.children,
+    super.key,
     this.spacing = ZephyrSpacing.md,
     this.runSpacing,
     this.padding,
@@ -36,7 +36,7 @@ class ZephyrGrid extends StatelessWidget {
     this.alignment = WrapAlignment.start,
     this.runAlignment = WrapAlignment.start,
     this.crossAxisAlignment = WrapCrossAlignment.start,
-  }) : super(key: key);
+  });
 
   /// 子组件列表
   final List<Widget> children;
@@ -99,8 +99,8 @@ class ZephyrGrid extends StatelessWidget {
 class ZephyrGridItem extends StatelessWidget {
   /// 创建网格项目
   const ZephyrGridItem({
-    Key? key,
     required this.child,
+    super.key,
     this.xs,
     this.sm,
     this.md,
@@ -110,7 +110,7 @@ class ZephyrGridItem extends StatelessWidget {
     this.flex,
     this.padding,
     this.margin,
-  }) : super(key: key);
+  });
 
   /// 子组件
   final Widget child;
@@ -162,7 +162,7 @@ class ZephyrGridItem extends StatelessWidget {
 
   /// 构建子组件
   Widget _buildChild(BuildContext context, double? width) {
-    Widget result = child;
+    var result = child;
 
     if (padding != null) {
       result = Padding(
@@ -218,15 +218,15 @@ class ZephyrGridItem extends StatelessWidget {
 class ZephyrRow extends StatelessWidget {
   /// 创建行布局
   const ZephyrRow({
-    Key? key,
     required this.children,
+    super.key,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.crossAxisAlignment = CrossAxisAlignment.center,
     this.mainAxisSize = MainAxisSize.max,
     this.spacing = 0,
     this.padding,
     this.margin,
-  }) : super(key: key);
+  });
 
   /// 子组件列表
   final List<Widget> children;
@@ -251,9 +251,9 @@ class ZephyrRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> spacedChildren = [];
+    var spacedChildren = <Widget>[];
 
-    for (int i = 0; i < children.length; i++) {
+    for (var i = 0; i < children.length; i++) {
       spacedChildren.add(children[i]);
       if (i < children.length - 1 && spacing > 0) {
         spacedChildren.add(SizedBox(width: spacing));
@@ -288,18 +288,18 @@ class ZephyrRow extends StatelessWidget {
 /// ZephyrUI 列布局
 ///
 /// 垂直排列的列布局组件。
-class ZephyrColumn extends StatelessWidget {
+class ZephyrGridColumn extends StatelessWidget {
   /// 创建列布局
-  const ZephyrColumn({
-    Key? key,
+  const ZephyrGridColumn({
     required this.children,
+    super.key,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.crossAxisAlignment = CrossAxisAlignment.center,
     this.mainAxisSize = MainAxisSize.max,
     this.spacing = 0,
     this.padding,
     this.margin,
-  }) : super(key: key);
+  });
 
   /// 子组件列表
   final List<Widget> children;
@@ -324,9 +324,9 @@ class ZephyrColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> spacedChildren = [];
+    var spacedChildren = <Widget>[];
 
-    for (int i = 0; i < children.length; i++) {
+    for (var i = 0; i < children.length; i++) {
       spacedChildren.add(children[i]);
       if (i < children.length - 1 && spacing > 0) {
         spacedChildren.add(SizedBox(height: spacing));

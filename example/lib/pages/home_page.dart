@@ -121,14 +121,14 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildWelcomeBanner(BuildContext context) {
-    return Container(
+    return const Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(32),
+      padding: EdgeInsets.all(32),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Theme.of(context).primaryColor,
-            Theme.of(context).primaryColor.withValues(alpha: 0.8),
+            Theme.of(context).colorScheme.primary,
+            Theme.of(context).colorScheme.primary.withValues(alpha: 0.8),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -138,14 +138,14 @@ class HomePage extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 10,
-            offset: const Offset(0, 4),
+            offset: Offset(0, 4),
           ),
         ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'ZephyrUI',
             style: TextStyle(
               fontSize: 42,
@@ -153,7 +153,7 @@ class HomePage extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             '专业的 Flutter UI 组件库',
             style: TextStyle(
@@ -161,27 +161,29 @@ class HomePage extends StatelessWidget {
               color: Colors.white.withValues(alpha: 0.9),
             ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           Row(
             children: [
               ElevatedButton(
-                onPressed: () => Navigator.pushNamed(context, AppRoutes.allComponents),
+                onPressed: () =>
+                    Navigator.pushNamed(context, AppRoutes.allComponents),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
-                  foregroundColor: Theme.of(context).primaryColor,
-                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                  foregroundColor: Theme.of(context).colorScheme.primary,
+                  padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                 ),
-                child: const Text('开始体验'),
+                child: Text('开始体验'),
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
               OutlinedButton(
-                onPressed: () => Navigator.pushNamed(context, AppRoutes.themeDemo),
+                onPressed: () =>
+                    Navigator.pushNamed(context, AppRoutes.themeDemo),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: Colors.white,
-                  side: const BorderSide(color: Colors.white),
-                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                  side: BorderSide(color: Colors.white),
+                  padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                 ),
-                child: const Text('主题演示'),
+                child: Text('主题演示'),
               ),
             ],
           ),
@@ -200,8 +202,8 @@ class HomePage extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Card(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
+          child: const Padding(
+            padding: EdgeInsets.all(24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -213,7 +215,7 @@ class HomePage extends StatelessWidget {
   zephyr_ui: ^0.3.0''',
                   context,
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 _buildStepCard(
                   '2',
                   '导入使用',
@@ -226,7 +228,7 @@ ZephyrButton(
 )''',
                   context,
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 _buildStepCard(
                   '3',
                   '主题配置',
@@ -243,9 +245,9 @@ ZephyrButton(
 )''',
                   context,
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 Container(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.blue[50],
                     borderRadius: BorderRadius.circular(8),
@@ -257,10 +259,10 @@ ZephyrButton(
                         children: [
                           Icon(
                             Icons.play_circle,
-                            color: Theme.of(context).primaryColor,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
-                          const SizedBox(width: 8),
-                          const Text(
+                          SizedBox(width: 8),
+                          Text(
                             '新功能：交互式演示',
                             style: TextStyle(
                               fontSize: 16,
@@ -269,19 +271,19 @@ ZephyrButton(
                           ),
                         ],
                       ),
-                      const SizedBox(height: 8),
-                      const Text(
+                      SizedBox(height: 8),
+                      Text(
                         '现在您可以实时调整组件参数，查看效果变化！',
                         style: TextStyle(fontSize: 14),
                       ),
-                      const SizedBox(height: 12),
+                      SizedBox(height: 12),
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.pushNamed(context, '/interactive-demo');
                           },
-                          child: const Text('体验交互式演示'),
+                          child: Text('体验交互式演示'),
                         ),
                       ),
                     ],
@@ -295,23 +297,24 @@ ZephyrButton(
     );
   }
 
-  Widget _buildStepCard(String step, String title, String description, String code, BuildContext context) {
+  Widget _buildStepCard(String step, String title, String description,
+      String code, BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
-            Container(
+            const Container(
               width: 32,
               height: 32,
               decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).colorScheme.primary,
                 shape: BoxShape.circle,
               ),
               child: Center(
                 child: Text(
                   step,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -345,9 +348,9 @@ ZephyrButton(
           ],
         ),
         const SizedBox(height: 12),
-        Container(
+        const Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.grey[100],
             borderRadius: BorderRadius.circular(8),
@@ -355,7 +358,7 @@ ZephyrButton(
           ),
           child: Text(
             code,
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: 'monospace',
               fontSize: 14,
             ),
@@ -366,14 +369,14 @@ ZephyrButton(
   }
 
   Widget _buildComponentCategories(BuildContext context) {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           '组件分类',
           style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         ResponsiveGrid(
           children: [
             ComponentCard(
@@ -460,14 +463,16 @@ ZephyrButton(
               icon: Icons.devices,
               title: '响应式设计',
               description: '适配手机、平板、桌面等多种设备尺寸',
-              onTap: () => Navigator.pushNamed(context, AppRoutes.responsiveDemo),
+              onTap: () =>
+                  Navigator.pushNamed(context, AppRoutes.responsiveDemo),
             ),
             const SizedBox(height: 12),
             FeatureCard(
               icon: Icons.speed,
               title: '性能优化',
               description: '优化的渲染性能，流畅的用户体验',
-              onTap: () => Navigator.pushNamed(context, AppRoutes.performanceDemo),
+              onTap: () =>
+                  Navigator.pushNamed(context, AppRoutes.performanceDemo),
             ),
             const SizedBox(height: 12),
             FeatureCard(
@@ -483,14 +488,14 @@ ZephyrButton(
   }
 
   Widget _buildResources(BuildContext context) {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           '开发者资源',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         ResponsiveGrid(
           children: [
             ComponentCard(

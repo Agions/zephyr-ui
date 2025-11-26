@@ -21,7 +21,7 @@ import 'package:zephyr_ui/zephyr_ui.dart';
 class ZephyrContainer extends StatelessWidget {
   /// 创建一个 ZephyrUI 容器
   const ZephyrContainer({
-    Key? key,
+    super.key,
     this.child,
     this.width,
     this.height,
@@ -36,7 +36,7 @@ class ZephyrContainer extends StatelessWidget {
     this.responsive = false,
     this.maxWidth,
     this.theme,
-  }) : super(key: key);
+  });
 
   /// 子组件
   final Widget? child;
@@ -132,8 +132,8 @@ class ZephyrContainer extends StatelessWidget {
 class ZephyrResponsiveContainer extends StatelessWidget {
   /// 创建一个响应式容器
   const ZephyrResponsiveContainer({
-    Key? key,
     required this.child,
+    super.key,
     this.padding,
     this.margin,
     this.decoration,
@@ -141,7 +141,7 @@ class ZephyrResponsiveContainer extends StatelessWidget {
     this.maxWidth,
     this.breakpoints,
     this.theme,
-  }) : super(key: key);
+  });
 
   /// 子组件
   final Widget child;
@@ -223,8 +223,8 @@ class ZephyrResponsiveContainer extends StatelessWidget {
 class ZephyrCardContainer extends StatelessWidget {
   /// 创建一个卡片容器
   const ZephyrCardContainer({
-    Key? key,
     required this.child,
+    super.key,
     this.padding,
     this.margin,
     this.elevation = 2,
@@ -233,7 +233,7 @@ class ZephyrCardContainer extends StatelessWidget {
     this.shadowColor,
     this.onTap,
     this.theme,
-  }) : super(key: key);
+  });
 
   /// 子组件
   final Widget child;

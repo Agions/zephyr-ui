@@ -4,7 +4,7 @@ import 'avatar.dart';
 /// ZephyrAvatar组件的使用示例
 class AvatarExample extends StatelessWidget {
   /// 创建一个示例实例
-  const AvatarExample({Key? key}) : super(key: key);
+  const AvatarExample({super.key});
 
   @override
   Widget build(BuildContext context) {

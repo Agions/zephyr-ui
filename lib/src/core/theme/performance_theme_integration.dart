@@ -6,15 +6,23 @@ library performance_theme_integration;
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:zephyr_ui/src/utils/performance/performance_optimizer.dart';
 import 'package:zephyr_ui/zephyr_ui.dart';
 import 'optimized_theme_data.dart';
 import 'optimized_theme_config.dart';
-import 'package:zephyr_ui/src/utils/performance/enhanced_performance_utils.dart';
-import 'package:zephyr_ui/src/core/build/build_optimizer.dart';
-import 'package:zephyr_ui/src/utils/performance/performance_monitor.dart';
+// Using existing performance utilities
 
 /// 性能优化主题提供者
 class ZephyrPerformanceTheme extends StatefulWidget {
+  const ZephyrPerformanceTheme({
+    required this.child,
+    super.key,
+    this.theme,
+    this.enablePerformanceMonitoring = true,
+    this.monitoringLevel = PerformanceLevel.medium,
+    this.enableMemoryOptimization = true,
+    this.enableHotReloadOptimization = true,
+  });
   final Widget child;
   final ZephyrThemeData? theme;
   final bool enablePerformanceMonitoring;
@@ -22,37 +30,32 @@ class ZephyrPerformanceTheme extends StatefulWidget {
   final bool enableMemoryOptimization;
   final bool enableHotReloadOptimization;
 
-  const ZephyrPerformanceTheme({
-    Key? key,
-    required this.child,
-    this.theme,
-    this.enablePerformanceMonitoring = true,
-    this.monitoringLevel = PerformanceLevel.medium,
-    this.enableMemoryOptimization = true,
-    this.enableHotReloadOptimization = true,
-  }) : super(key: key);
-
   @override
   State<ZephyrPerformanceTheme> createState() => _ZephyrPerformanceThemeState();
 
   /// 获取当前主题数据
   static ZephyrThemeData of(BuildContext context) {
-    final theme = context.dependOnInheritedWidgetOfExactType<_InheritedPerformanceTheme>();
+    final theme = context
+        .dependOnInheritedWidgetOfExactType<_InheritedPerformanceTheme>();
     return theme?.data ?? ZephyrOptimizedThemeData.light();
   }
 
   /// 获取性能监控器
-  static ZephyrEnhancedPerformanceMonitor getPerformanceMonitor(BuildContext context) {
-    final theme = context.dependOnInheritedWidgetOfExactType<_InheritedPerformanceTheme>();
-    return theme?.performanceMonitor ?? ZephyrEnhancedPerformanceMonitor.instance;
+  static ZephyrEnhancedPerformanceMonitor getPerformanceMonitor(
+      BuildContext context) {
+    final theme = context
+        .dependOnInheritedWidgetOfExactType<_InheritedPerformanceTheme>();
+    return theme?.performanceMonitor ??
+        ZephyrEnhancedPerformanceMonitor.instance;
   }
 }
 
-class _ZephyrPerformanceThemeState extends State<ZephyrPerformanceTheme> with TickerProviderStateMixin {
+class _ZephyrPerformanceThemeState extends State<ZephyrPerformanceTheme>
+    with TickerProviderStateMixin {
   late ZephyrThemeData _currentTheme;
   late ZephyrEnhancedPerformanceMonitor _performanceMonitor;
   late ZephyrBuildOptimizer _buildOptimizer;
-  
+
   // 主题切换动画控制器
   late AnimationController _themeAnimationController;
   late Animation<double> _themeAnimation;
@@ -60,25 +63,25 @@ class _ZephyrPerformanceThemeState extends State<ZephyrPerformanceTheme> with Ti
   @override
   void initState() {
     super.initState();
-    
+
     // 初始化主题
     _currentTheme = widget.theme ?? ZephyrOptimizedThemeData.light();
-    
+
     // 初始化性能监控器
     _performanceMonitor = ZephyrEnhancedPerformanceMonitor.instance;
     _buildOptimizer = ZephyrBuildOptimizer.instance;
-    
+
     // 初始化动画控制器
     _themeAnimationController = AnimationController(
       duration: const Duration(milliseconds: 300),
       vsync: this,
     );
-    
+
     _themeAnimation = CurvedAnimation(
       parent: _themeAnimationController,
       curve: Curves.easeInOut,
     );
-    
+
     // 启动性能优化
     _initializePerformanceOptimizations();
   }
@@ -86,7 +89,7 @@ class _ZephyrPerformanceThemeState extends State<ZephyrPerformanceTheme> with Ti
   @override
   void didUpdateWidget(ZephyrPerformanceTheme oldWidget) {
     super.didUpdateWidget(oldWidget);
-    
+
     if (oldWidget.theme != widget.theme) {
       _switchTheme(widget.theme ?? ZephyrOptimizedThemeData.light());
     }
@@ -109,21 +112,25 @@ class _ZephyrPerformanceThemeState extends State<ZephyrPerformanceTheme> with Ti
       enableBuildCache: true,
       enableHotReload: widget.enableHotReloadOptimization,
     );
-    
+
     // 启动性能监控
     if (widget.enablePerformanceMonitoring) {
       _performanceMonitor.startMonitoring(level: widget.monitoringLevel);
     }
-    
+
     // 预热主题缓存
     ZephyrOptimizedThemeConfig.instance.warmUpCache();
-    
+
     if (kDebugMode) {
-      print('🚀 ZephyrUI Performance Theme initialized with optimizations');
-      print('   • Performance Monitoring: ${widget.enablePerformanceMonitoring}');
-      print('   • Memory Optimization: ${widget.enableMemoryOptimization}');
-      print('   • Hot Reload Optimization: ${widget.enableHotReloadOptimization}');
-      print('   • Monitoring Level: ${widget.monitoringLevel}');
+      debugPrint(
+          '🚀 ZephyrUI Performance Theme initialized with optimizations');
+      debugPrint(
+          '   • Performance Monitoring: ${widget.enablePerformanceMonitoring}');
+      debugPrint(
+          '   • Memory Optimization: ${widget.enableMemoryOptimization}');
+      debugPrint(
+          '   • Hot Reload Optimization: ${widget.enableHotReloadOptimization}');
+      debugPrint('   • Monitoring Level: ${widget.monitoringLevel}');
     }
   }
 
@@ -140,13 +147,14 @@ class _ZephyrPerformanceThemeState extends State<ZephyrPerformanceTheme> with Ti
         _currentTheme = newTheme;
       });
     }
-    
+
     // 主题切换动画
     _themeAnimationController.reset();
     _themeAnimationController.forward();
-    
+
     if (kDebugMode) {
-      print('🎨 Theme switched to ${newTheme.brightness == Brightness.light ? 'light' : 'dark'} mode');
+      debugPrint(
+          '🎨 Theme switched to ${newTheme.brightness == Brightness.light ? 'light' : 'dark'} mode');
     }
   }
 
@@ -189,18 +197,17 @@ class _ZephyrPerformanceThemeState extends State<ZephyrPerformanceTheme> with Ti
 
 /// 继承的主题Widget
 class _InheritedPerformanceTheme extends InheritedWidget {
-  final ZephyrThemeData data;
-  final ZephyrEnhancedPerformanceMonitor performanceMonitor;
-  final ZephyrBuildOptimizer buildOptimizer;
-  final Animation<double> themeAnimation;
-
   const _InheritedPerformanceTheme({
     required this.data,
     required this.performanceMonitor,
     required this.buildOptimizer,
     required this.themeAnimation,
-    required Widget child,
-  }) : super(child: child);
+    required super.child,
+  });
+  final ZephyrThemeData data;
+  final ZephyrEnhancedPerformanceMonitor performanceMonitor;
+  final ZephyrBuildOptimizer buildOptimizer;
+  final Animation<double> themeAnimation;
 
   @override
   bool updateShouldNotify(_InheritedPerformanceTheme oldWidget) {
@@ -210,28 +217,30 @@ class _InheritedPerformanceTheme extends InheritedWidget {
 
 /// 性能优化的主题切换器
 class ZephyrPerformanceThemeSwitcher extends StatefulWidget {
+  const ZephyrPerformanceThemeSwitcher({
+    required this.child,
+    super.key,
+    this.animationDuration = const Duration(milliseconds: 300),
+    this.animationCurve = Curves.easeInOut,
+  });
   final Widget child;
   final Duration animationDuration;
   final Curve animationCurve;
 
-  const ZephyrPerformanceThemeSwitcher({
-    Key? key,
-    required this.child,
-    this.animationDuration = const Duration(milliseconds: 300),
-    this.animationCurve = Curves.easeInOut,
-  }) : super(key: key);
-
   @override
-  State<ZephyrPerformanceThemeSwitcher> createState() => _ZephyrPerformanceThemeSwitcherState();
+  State<ZephyrPerformanceThemeSwitcher> createState() =>
+      _ZephyrPerformanceThemeSwitcherState();
 
   /// 切换主题
   static void switchTheme(BuildContext context, Brightness brightness) {
-    final state = context.findAncestorStateOfType<_ZephyrPerformanceThemeSwitcherState>();
+    final state =
+        context.findAncestorStateOfType<_ZephyrPerformanceThemeSwitcherState>();
     state?.switchTheme(brightness);
   }
 }
 
-class _ZephyrPerformanceThemeSwitcherState extends State<ZephyrPerformanceThemeSwitcher>
+class _ZephyrPerformanceThemeSwitcherState
+    extends State<ZephyrPerformanceThemeSwitcher>
     with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
@@ -259,7 +268,7 @@ class _ZephyrPerformanceThemeSwitcherState extends State<ZephyrPerformanceThemeS
   /// 切换主题
   void switchTheme(Brightness brightness) {
     final performanceMonitor = ZephyrEnhancedPerformanceMonitor.instance;
-    
+
     performanceMonitor.measureExecutionTime('theme_switch', () {
       setState(() {
         _currentTheme = brightness == Brightness.light
@@ -267,7 +276,7 @@ class _ZephyrPerformanceThemeSwitcherState extends State<ZephyrPerformanceThemeS
             : ZephyrOptimizedThemeData.dark();
       });
     });
-    
+
     _controller.reset();
     _controller.forward();
   }
@@ -275,7 +284,7 @@ class _ZephyrPerformanceThemeSwitcherState extends State<ZephyrPerformanceThemeS
   @override
   Widget build(BuildContext context) {
     final effectiveTheme = _currentTheme ?? ZephyrPerformanceTheme.of(context);
-    
+
     return AnimatedTheme(
       data: ThemeData(
         brightness: effectiveTheme.brightness,
@@ -294,21 +303,21 @@ class _ZephyrPerformanceThemeSwitcherState extends State<ZephyrPerformanceThemeS
 extension ZephyrThemeExtensions on BuildContext {
   /// 获取性能优化的主题数据
   ZephyrThemeData get optimizedTheme => ZephyrPerformanceTheme.of(this);
-  
+
   /// 获取性能监控器
-  ZephyrEnhancedPerformanceMonitor get performanceMonitor => 
+  ZephyrEnhancedPerformanceMonitor get performanceMonitor =>
       ZephyrPerformanceTheme.getPerformanceMonitor(this);
-  
+
   /// 快速切换主题
   void switchTheme(Brightness brightness) {
     ZephyrPerformanceThemeSwitcher.switchTheme(this, brightness);
   }
-  
+
   /// 记录自定义性能指标
   void recordPerformanceMetric(String name, double value) {
     performanceMonitor.measureExecutionTime(name, () => value);
   }
-  
+
   /// 获取当前性能报告
   EnhancedPerformanceReport getPerformanceReport() {
     return performanceMonitor.getPerformanceReport();
@@ -317,22 +326,23 @@ extension ZephyrThemeExtensions on BuildContext {
 
 /// 性能主题预览组件
 class ZephyrPerformanceThemePreview extends StatefulWidget {
+  const ZephyrPerformanceThemePreview({
+    required this.child,
+    super.key,
+    this.showControls = true,
+    this.showStats = true,
+  });
   final Widget child;
   final bool showControls;
   final bool showStats;
 
-  const ZephyrPerformanceThemePreview({
-    Key? key,
-    required this.child,
-    this.showControls = true,
-    this.showStats = true,
-  }) : super(key: key);
-
   @override
-  State<ZephyrPerformanceThemePreview> createState() => _ZephyrPerformanceThemePreviewState();
+  State<ZephyrPerformanceThemePreview> createState() =>
+      _ZephyrPerformanceThemePreviewState();
 }
 
-class _ZephyrPerformanceThemePreviewState extends State<ZephyrPerformanceThemePreview> {
+class _ZephyrPerformanceThemePreviewState
+    extends State<ZephyrPerformanceThemePreview> {
   late ZephyrEnhancedPerformanceMonitor _monitor;
   Timer? _statsTimer;
   EnhancedPerformanceReport? _lastReport;
@@ -341,7 +351,7 @@ class _ZephyrPerformanceThemePreviewState extends State<ZephyrPerformanceThemePr
   void initState() {
     super.initState();
     _monitor = ZephyrEnhancedPerformanceMonitor.instance;
-    
+
     if (widget.showStats) {
       _statsTimer = Timer.periodic(const Duration(seconds: 2), (timer) {
         if (mounted) {
@@ -405,11 +415,13 @@ class _ZephyrPerformanceThemePreviewState extends State<ZephyrPerformanceThemePr
 
   Widget _buildStats() {
     if (_lastReport == null) return const SizedBox();
-    
+
     final report = _lastReport!;
-    final avgFps = report.frameTimeStats.average > 0 ? 1000 / report.frameTimeStats.average : 0;
+    final avgFps = report.frameTimeStats.average > 0
+        ? 1000 / report.frameTimeStats.average
+        : 0;
     final memoryMB = report.memoryStats.average / 1024 / 1024;
-    
+
     return Positioned(
       bottom: 10,
       right: 10,
@@ -434,14 +446,18 @@ class _ZephyrPerformanceThemePreviewState extends State<ZephyrPerformanceThemePr
             Text(
               'FPS: ${avgFps.toStringAsFixed(1)}',
               style: TextStyle(
-                color: avgFps > 55 ? Colors.green : (avgFps > 30 ? Colors.yellow : Colors.red),
+                color: avgFps > 55
+                    ? Colors.green
+                    : (avgFps > 30 ? Colors.yellow : Colors.red),
                 fontSize: 10,
               ),
             ),
             Text(
               'Memory: ${memoryMB.toStringAsFixed(1)}MB',
               style: TextStyle(
-                color: memoryMB < 100 ? Colors.green : (memoryMB < 200 ? Colors.yellow : Colors.red),
+                color: memoryMB < 100
+                    ? Colors.green
+                    : (memoryMB < 200 ? Colors.yellow : Colors.red),
                 fontSize: 10,
               ),
             ),

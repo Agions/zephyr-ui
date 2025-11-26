@@ -62,7 +62,8 @@ class ZephyrDividerTheme extends ThemeExtension<ZephyrDividerTheme> {
       indent: lerpDouble(indent, other.indent, t),
       endIndent: lerpDouble(endIndent, other.endIndent, t),
       verticalSpacing: lerpDouble(verticalSpacing, other.verticalSpacing, t),
-      horizontalSpacing: lerpDouble(horizontalSpacing, other.horizontalSpacing, t),
+      horizontalSpacing:
+          lerpDouble(horizontalSpacing, other.horizontalSpacing, t),
     );
   }
 

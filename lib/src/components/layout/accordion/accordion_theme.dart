@@ -1,5 +1,5 @@
 /// ZephyrUI 手风琴主题
-/// 
+///
 /// 定义手风琴组件的主题样式。
 library accordion_theme;
 
@@ -71,7 +71,8 @@ class ZephyrAccordionTheme {
 
   /// 从上下文获取主题
   static ZephyrAccordionTheme of(BuildContext context) {
-    return ZephyrTheme.of(context).accordionTheme ?? const ZephyrAccordionTheme();
+    return ZephyrTheme.of(context).accordionTheme ??
+        const ZephyrAccordionTheme();
   }
 
   /// 创建亮色主题
@@ -123,7 +124,8 @@ class ZephyrAccordionTheme {
   }) {
     return ZephyrAccordionTheme(
       backgroundColor: backgroundColor ?? this.backgroundColor,
-      expandedBackgroundColor: expandedBackgroundColor ?? this.expandedBackgroundColor,
+      expandedBackgroundColor:
+          expandedBackgroundColor ?? this.expandedBackgroundColor,
       borderColor: borderColor ?? this.borderColor,
       titlePadding: titlePadding ?? this.titlePadding,
       contentPadding: contentPadding ?? this.contentPadding,

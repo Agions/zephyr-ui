@@ -1,5 +1,5 @@
 /// ZephyrUI Tour Component
-/// 
+///
 /// A comprehensive feature tour component for onboarding and guiding users
 /// through application features with step-by-step tutorials.
 library tour;
@@ -9,48 +9,6 @@ import 'tour_theme.dart';
 
 /// Tour step data
 class ZephyrTourStep {
-  /// Unique identifier for the step
-  final String id;
-  
-  /// Title of the step
-  final String title;
-  
-  /// Content/description of the step
-  final String content;
-  
-  /// Target widget key for highlighting
-  final GlobalKey? targetKey;
-  
-  /// Target widget position (if no key is provided)
-  final Rect? targetRect;
-  
-  /// Step order
-  final int order;
-  
-  /// Whether the step is optional
-  final bool isOptional;
-  
-  /// Custom widget for the step
-  final Widget? customWidget;
-  
-  /// Next step ID
-  final String? nextStepId;
-  
-  /// Previous step ID
-  final String? previousStepId;
-  
-  /// Callback when step is shown
-  final VoidCallback? onShow;
-  
-  /// Callback when step is completed
-  final VoidCallback? onComplete;
-  
-  /// Callback when step is skipped
-  final VoidCallback? onSkip;
-  
-  /// Additional metadata
-  final Map<String, dynamic>? metadata;
-
   const ZephyrTourStep({
     required this.id,
     required this.title,
@@ -67,6 +25,48 @@ class ZephyrTourStep {
     this.onSkip,
     this.metadata,
   });
+
+  /// Unique identifier for the step
+  final String id;
+
+  /// Title of the step
+  final String title;
+
+  /// Content/description of the step
+  final String content;
+
+  /// Target widget key for highlighting
+  final GlobalKey? targetKey;
+
+  /// Target widget position (if no key is provided)
+  final Rect? targetRect;
+
+  /// Step order
+  final int order;
+
+  /// Whether the step is optional
+  final bool isOptional;
+
+  /// Custom widget for the step
+  final Widget? customWidget;
+
+  /// Next step ID
+  final String? nextStepId;
+
+  /// Previous step ID
+  final String? previousStepId;
+
+  /// Callback when step is shown
+  final VoidCallback? onShow;
+
+  /// Callback when step is completed
+  final VoidCallback? onComplete;
+
+  /// Callback when step is skipped
+  final VoidCallback? onSkip;
+
+  /// Additional metadata
+  final Map<String, dynamic>? metadata;
 
   /// Create a copy of the step with modified properties
   ZephyrTourStep copyWith({
@@ -108,8 +108,8 @@ class ZephyrTourStep {
 class ZephyrTour extends StatefulWidget {
   /// Creates a tour component
   const ZephyrTour({
-    Key? key,
     required this.steps,
+    super.key,
     this.theme,
     this.onTourStart,
     this.onTourComplete,
@@ -134,7 +134,7 @@ class ZephyrTour extends StatefulWidget {
     this.persistenceMode = ZephyrTourPersistence.none,
     this.startStepId,
     this.currentStepId,
-  }) : super(key: key);
+  });
 
   /// Tour steps
   final List<ZephyrTourStep> steps;
@@ -228,7 +228,7 @@ class _ZephyrTourState extends State<ZephyrTour> {
     super.initState();
     _steps = widget.steps;
     _steps.sort((a, b) => a.order.compareTo(b.order));
-    
+
     if (widget.autoStart) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _startTour();
@@ -243,10 +243,11 @@ class _ZephyrTourState extends State<ZephyrTour> {
       _steps = widget.steps;
       _steps.sort((a, b) => a.order.compareTo(b.order));
     }
-    
+
     if (oldWidget.currentStepId != widget.currentStepId) {
       if (widget.currentStepId != null) {
-        final index = _steps.indexWhere((step) => step.id == widget.currentStepId);
+        final index =
+            _steps.indexWhere((step) => step.id == widget.currentStepId);
         if (index != -1) {
           _currentStepIndex = index;
           _updateTargetRect();
@@ -268,29 +269,29 @@ class _ZephyrTourState extends State<ZephyrTour> {
 
   void _startTour() {
     if (_steps.isEmpty) return;
-    
+
     setState(() {
       _isTourActive = true;
     });
-    
+
     if (widget.startStepId != null) {
       final index = _steps.indexWhere((step) => step.id == widget.startStepId);
       if (index != -1) {
         _currentStepIndex = index;
       }
     }
-    
+
     widget.onTourStart?.call();
     _showOverlay();
   }
 
   void _showOverlay() {
     _removeOverlay();
-    
+
     _overlayEntry = OverlayEntry(
       builder: (context) => _buildOverlay(),
     );
-    
+
     Overlay.of(context).insert(_overlayEntry!);
     _updateTargetRect();
   }
@@ -302,7 +303,7 @@ class _ZephyrTourState extends State<ZephyrTour> {
 
   void _updateTargetRect() {
     if (_currentStepIndex >= _steps.length) return;
-    
+
     final step = _steps[_currentStepIndex];
     if (step.targetKey != null) {
       final context = step.targetKey!.currentContext;
@@ -327,14 +328,14 @@ class _ZephyrTourState extends State<ZephyrTour> {
         _targetRect = null;
       });
     }
-    
+
     step.onShow?.call();
     widget.onStepChange?.call(step);
   }
 
   Widget _buildOverlay() {
     final theme = widget.theme ?? ZephyrTourTheme.of(context);
-    
+
     return Material(
       color: Colors.transparent,
       child: Stack(
@@ -358,7 +359,7 @@ class _ZephyrTourState extends State<ZephyrTour> {
               ),
             ),
           ),
-          
+
           // Tour tooltip
           if (_targetRect != null)
             Positioned(
@@ -377,9 +378,9 @@ class _ZephyrTourState extends State<ZephyrTour> {
 
   Widget _buildTooltip(ZephyrTourTheme theme) {
     if (_currentStepIndex >= _steps.length) return const SizedBox();
-    
+
     final step = _steps[_currentStepIndex];
-    
+
     return Container(
       constraints: BoxConstraints(
         maxWidth: MediaQuery.of(context).size.width - 64,
@@ -419,16 +420,17 @@ class _ZephyrTourState extends State<ZephyrTour> {
                 ],
               ),
             ),
-            
+
             // Content
             Padding(
               padding: theme.contentPadding,
-              child: step.customWidget ?? Text(
-                step.content,
-                style: theme.contentStyle,
-              ),
+              child: step.customWidget ??
+                  Text(
+                    step.content,
+                    style: theme.contentStyle,
+                  ),
             ),
-            
+
             // Progress
             if (widget.showProgress && _steps.length > 1)
               Padding(
@@ -436,10 +438,11 @@ class _ZephyrTourState extends State<ZephyrTour> {
                 child: LinearProgressIndicator(
                   value: (_currentStepIndex + 1) / _steps.length,
                   backgroundColor: theme.progressBackgroundColor,
-                  valueColor: AlwaysStoppedAnimation<Color>(theme.progressColor),
+                  valueColor:
+                      AlwaysStoppedAnimation<Color>(theme.progressColor),
                 ),
               ),
-            
+
             // Actions
             Padding(
               padding: theme.actionPadding,
@@ -454,14 +457,14 @@ class _ZephyrTourState extends State<ZephyrTour> {
                     )
                   else
                     const SizedBox(width: 80),
-                  
+
                   // Skip button
                   if (widget.showSkipButton && widget.allowSkip)
                     TextButton(
                       onPressed: _skipTour,
                       child: Text(theme.skipButtonText),
                     ),
-                  
+
                   // Next button
                   if (widget.showNextButton)
                     ElevatedButton(
@@ -483,10 +486,10 @@ class _ZephyrTourState extends State<ZephyrTour> {
 
   void _nextStep() {
     if (_currentStepIndex >= _steps.length) return;
-    
+
     final step = _steps[_currentStepIndex];
     step.onComplete?.call();
-    
+
     if (_currentStepIndex == _steps.length - 1) {
       _completeTour();
     } else {
@@ -499,7 +502,7 @@ class _ZephyrTourState extends State<ZephyrTour> {
 
   void _previousStep() {
     if (_currentStepIndex <= 0) return;
-    
+
     setState(() {
       _currentStepIndex--;
     });
@@ -509,7 +512,7 @@ class _ZephyrTourState extends State<ZephyrTour> {
   void _skipTour() {
     final step = _steps[_currentStepIndex];
     step.onSkip?.call();
-    
+
     widget.onTourSkip?.call();
     _endTour();
   }
@@ -529,17 +532,16 @@ class _ZephyrTourState extends State<ZephyrTour> {
 
 /// Tour overlay painter
 class _TourOverlayPainter extends CustomPainter {
+  _TourOverlayPainter({
+    required this.overlayColor,
+    required this.highlightPadding,
+    required this.highlightBorderRadius,
+    this.targetRect,
+  });
   final Rect? targetRect;
   final Color overlayColor;
   final double highlightPadding;
   final double highlightBorderRadius;
-
-  _TourOverlayPainter({
-    this.targetRect,
-    required this.overlayColor,
-    required this.highlightPadding,
-    required this.highlightBorderRadius,
-  });
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -551,7 +553,7 @@ class _TourOverlayPainter extends CustomPainter {
 
     if (targetRect != null) {
       final highlightRect = targetRect!.inflate(highlightPadding);
-      
+
       // Create a path for the highlight area
       final path = Path()
         ..addRRect(RRect.fromRectAndRadius(
@@ -578,9 +580,9 @@ class _TourOverlayPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant _TourOverlayPainter oldDelegate) {
     return oldDelegate.targetRect != targetRect ||
-           oldDelegate.overlayColor != overlayColor ||
-           oldDelegate.highlightPadding != highlightPadding ||
-           oldDelegate.highlightBorderRadius != highlightBorderRadius;
+        oldDelegate.overlayColor != overlayColor ||
+        oldDelegate.highlightPadding != highlightPadding ||
+        oldDelegate.highlightBorderRadius != highlightBorderRadius;
   }
 }
 
@@ -588,19 +590,20 @@ class _TourOverlayPainter extends CustomPainter {
 enum ZephyrTourPersistence {
   /// No persistence
   none,
+
   /// Store in shared preferences
   sharedPreferences,
+
   /// Store in memory
   memory,
 }
 
 /// Tour controller for managing tour state
 class ZephyrTourController {
+  ZephyrTourController(this.steps);
   final List<ZephyrTourStep> steps;
   int currentStepIndex = 0;
   bool isTourActive = false;
-
-  ZephyrTourController(this.steps);
 
   void startTour() {
     isTourActive = true;

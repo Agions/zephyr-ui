@@ -20,23 +20,18 @@ class ChartDemo extends StatelessWidget {
             _buildSectionTitle('柱状图'),
             _buildBarChartExample(),
             const SizedBox(height: 32),
-            
             _buildSectionTitle('折线图'),
             _buildLineChartExample(),
             const SizedBox(height: 32),
-            
             _buildSectionTitle('饼图'),
             _buildPieChartExample(),
             const SizedBox(height: 32),
-            
             _buildSectionTitle('面积图'),
             _buildAreaChartExample(),
             const SizedBox(height: 32),
-            
             _buildSectionTitle('散点图'),
             _buildScatterChartExample(),
             const SizedBox(height: 32),
-            
             _buildSectionTitle('雷达图'),
             _buildRadarChartExample(),
           ],
@@ -199,11 +194,16 @@ class ChartDemo extends StatelessWidget {
       ZephyrChartSeries(
         name: '广告投放 vs 销售额',
         data: [
-          ZephyrChartDataPoint(label: 'A', value: 1000, metadata: {'sales': 5000}),
-          ZephyrChartDataPoint(label: 'B', value: 1500, metadata: {'sales': 7500}),
-          ZephyrChartDataPoint(label: 'C', value: 2000, metadata: {'sales': 9000}),
-          ZephyrChartDataPoint(label: 'D', value: 2500, metadata: {'sales': 12000}),
-          ZephyrChartDataPoint(label: 'E', value: 3000, metadata: {'sales': 14000}),
+          ZephyrChartDataPoint(
+              label: 'A', value: 1000, metadata: {'sales': 5000}),
+          ZephyrChartDataPoint(
+              label: 'B', value: 1500, metadata: {'sales': 7500}),
+          ZephyrChartDataPoint(
+              label: 'C', value: 2000, metadata: {'sales': 9000}),
+          ZephyrChartDataPoint(
+              label: 'D', value: 2500, metadata: {'sales': 12000}),
+          ZephyrChartDataPoint(
+              label: 'E', value: 3000, metadata: {'sales': 14000}),
         ],
         color: Colors.red,
       ),

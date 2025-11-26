@@ -1,5 +1,5 @@
 /// ZephyrUI Navigation Rail Components
-/// 
+///
 /// Navigation rail with support for labels, icons, badges, and expandable functionality.
 library navigation_rail;
 

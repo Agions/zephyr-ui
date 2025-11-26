@@ -1,6 +1,6 @@
 name: zephyr_ui
 description: A lightweight, modular Flutter UI component library with essential components for building beautiful applications.
-version: 0.3.1
+version: 0.4.0
 homepage: https://github.com/agions/zephyr-ui
 repository: https://github.com/agions/zephyr-ui
 issue_tracker: https://github.com/agions/zephyr-ui/issues
@@ -30,6 +30,7 @@ dependencies:
   meta: ^1.9.1         # 元数据注解
   video_player: ^2.9.5
   image_picker: ^1.0.4  # 图片选择器
+  table_calendar: ^3.1.2  # 日历组件
 
 dev_dependencies:
   flutter_test:

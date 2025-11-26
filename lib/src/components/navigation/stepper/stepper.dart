@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'stepper_theme.dart';
+import 'package:zephyr_ui/src/core/constants/enums.dart';
 
 /// 步骤信息
 class ZephyrStep {
@@ -8,7 +9,7 @@ class ZephyrStep {
     this.subtitle,
     this.content,
     this.icon,
-    this.state = ZephyrStepState.indexed,
+    this.state = ZephyrStepState.waiting,
   });
 
   /// 步骤标题
@@ -44,23 +45,7 @@ class ZephyrStep {
   }
 }
 
-/// 步骤状态
-enum ZephyrStepState {
-  /// 索引状态（显示数字）
-  indexed,
-
-  /// 禁用状态
-  disabled,
-
-  /// 错误状态
-  error,
-
-  /// 已完成状态
-  complete,
-
-  /// 编辑状态
-  editing,
-}
+// 使用核心枚举中的ZephyrStepState定义
 
 /// 步骤方向
 enum ZephyrStepperDirection {
@@ -77,19 +62,19 @@ enum ZephyrStepperDirection {
 class ZephyrStepper extends StatefulWidget {
   /// 创建一个步进器组件
   const ZephyrStepper({
-    Key? key,
     required this.steps,
+    super.key,
     this.currentStep = 0,
+    this.direction = ZephyrStepperDirection.vertical,
+    this.type = ZephyrStepperType.normal,
+    this.physics,
+    this.allowStepTap = true,
     this.onStepTapped,
     this.onStepContinue,
     this.onStepCancel,
     this.controlsBuilder,
-    this.direction = ZephyrStepperDirection.vertical,
-    this.type = ZephyrStepperType.normal,
     this.theme,
-    this.physics,
-    this.allowStepTap = true,
-  }) : super(key: key);
+  });
 
   /// 步骤列表
   final List<ZephyrStep> steps;
@@ -176,16 +161,16 @@ class _ZephyrStepperState extends State<ZephyrStepper> {
 
   Widget _buildVerticalStep(int index, ZephyrStepperTheme theme) {
     final step = widget.steps[index];
-    final bool isActive = index == widget.currentStep;
-    final bool isCompleted = index < widget.currentStep;
+    final isActive = index == widget.currentStep;
+    final isCompleted = index < widget.currentStep;
 
     // 确定步骤状态
-    ZephyrStepState effectiveState = step.state;
-    if (effectiveState == ZephyrStepState.indexed) {
+    var effectiveState = step.state;
+    if (effectiveState == ZephyrStepState.waiting) {
       if (isActive) {
-        effectiveState = ZephyrStepState.editing;
+        effectiveState = ZephyrStepState.active;
       } else if (isCompleted) {
-        effectiveState = ZephyrStepState.complete;
+        effectiveState = ZephyrStepState.completed;
       }
     }
 
@@ -240,8 +225,8 @@ class _ZephyrStepperState extends State<ZephyrStepper> {
   }
 
   Widget _buildVerticalConnector(int index, ZephyrStepperTheme theme) {
-    final bool isActive = index < widget.currentStep;
-    final Color connectorColor =
+    final isActive = index < widget.currentStep;
+    final connectorColor =
         isActive ? theme.activeColor! : theme.connectorColor!;
 
     return Container(
@@ -290,16 +275,16 @@ class _ZephyrStepperState extends State<ZephyrStepper> {
 
   Widget _buildHorizontalStep(int index, ZephyrStepperTheme theme) {
     final step = widget.steps[index];
-    final bool isActive = index == widget.currentStep;
-    final bool isCompleted = index < widget.currentStep;
+    final isActive = index == widget.currentStep;
+    final isCompleted = index < widget.currentStep;
 
     // 确定步骤状态
-    ZephyrStepState effectiveState = step.state;
-    if (effectiveState == ZephyrStepState.indexed) {
+    var effectiveState = step.state;
+    if (effectiveState == ZephyrStepState.waiting) {
       if (isActive) {
-        effectiveState = ZephyrStepState.editing;
+        effectiveState = ZephyrStepState.active;
       } else if (isCompleted) {
-        effectiveState = ZephyrStepState.complete;
+        effectiveState = ZephyrStepState.completed;
       }
     }
 
@@ -329,8 +314,8 @@ class _ZephyrStepperState extends State<ZephyrStepper> {
   }
 
   Widget _buildHorizontalConnector(int index, ZephyrStepperTheme theme) {
-    final bool isActive = index < widget.currentStep;
-    final Color connectorColor =
+    final isActive = index < widget.currentStep;
+    final connectorColor =
         isActive ? theme.activeColor! : theme.connectorColor!;
 
     return Container(
@@ -343,8 +328,8 @@ class _ZephyrStepperState extends State<ZephyrStepper> {
 
   Widget _buildStepIcon(
       int index, ZephyrStepState state, ZephyrStepperTheme theme) {
-    final double indicatorSize = theme.indicatorSize!;
-    final IconData? icon = widget.steps[index].icon;
+    final indicatorSize = theme.indicatorSize!;
+    final icon = widget.steps[index].icon;
 
     // 确定颜色和内容
     late Color iconColor;
@@ -352,7 +337,7 @@ class _ZephyrStepperState extends State<ZephyrStepper> {
     Widget? iconWidget;
 
     switch (state) {
-      case ZephyrStepState.indexed:
+      case ZephyrStepState.waiting:
         backgroundColor = theme.inactiveColor!;
         iconColor = Colors.white;
         iconWidget = Text(
@@ -364,7 +349,7 @@ class _ZephyrStepperState extends State<ZephyrStepper> {
           ),
         );
         break;
-      case ZephyrStepState.editing:
+      case ZephyrStepState.active:
         backgroundColor = theme.activeColor!;
         iconColor = Colors.white;
         iconWidget = icon != null
@@ -378,7 +363,7 @@ class _ZephyrStepperState extends State<ZephyrStepper> {
                 ),
               );
         break;
-      case ZephyrStepState.complete:
+      case ZephyrStepState.completed:
         backgroundColor = theme.completeColor!;
         iconColor = Colors.white;
         iconWidget = Icon(
@@ -442,13 +427,13 @@ class _ZephyrStepperState extends State<ZephyrStepper> {
     TextStyle? titleStyle;
 
     switch (state) {
-      case ZephyrStepState.indexed:
+      case ZephyrStepState.waiting:
         titleStyle = theme.titleTextStyle;
         break;
-      case ZephyrStepState.editing:
+      case ZephyrStepState.active:
         titleStyle = theme.activeTitleTextStyle;
         break;
-      case ZephyrStepState.complete:
+      case ZephyrStepState.completed:
         titleStyle = theme.titleTextStyle;
         break;
       case ZephyrStepState.disabled:
@@ -472,13 +457,13 @@ class _ZephyrStepperState extends State<ZephyrStepper> {
     TextStyle? subtitleStyle;
 
     switch (state) {
-      case ZephyrStepState.indexed:
+      case ZephyrStepState.waiting:
         subtitleStyle = theme.subtitleTextStyle;
         break;
-      case ZephyrStepState.editing:
+      case ZephyrStepState.active:
         subtitleStyle = theme.activeSubtitleTextStyle;
         break;
-      case ZephyrStepState.complete:
+      case ZephyrStepState.completed:
         subtitleStyle = theme.subtitleTextStyle;
         break;
       case ZephyrStepState.disabled:
@@ -498,7 +483,7 @@ class _ZephyrStepperState extends State<ZephyrStepper> {
   }
 
   Widget _buildDefaultControls(ZephyrStepperTheme theme) {
-    final bool isLastStep = widget.currentStep == widget.steps.length - 1;
+    final isLastStep = widget.currentStep == widget.steps.length - 1;
 
     return Padding(
       padding: const EdgeInsets.only(top: 16.0),

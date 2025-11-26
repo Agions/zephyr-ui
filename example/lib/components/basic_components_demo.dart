@@ -135,9 +135,9 @@ class BasicComponentsDemo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
+        const Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(24),
+          padding: EdgeInsets.all(24),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
@@ -152,7 +152,7 @@ class BasicComponentsDemo extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 '基础组件',
                 style: TextStyle(
                   fontSize: 28,
@@ -160,7 +160,7 @@ class BasicComponentsDemo extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Text(
                 'ZephyrUI 提供了 8 个基础 UI 组件，遵循 Material Design 3 规范',
                 style: TextStyle(
@@ -168,16 +168,16 @@ class BasicComponentsDemo extends StatelessWidget {
                   color: Colors.white.withValues(alpha: 0.9),
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
                       color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Text(
+                    child: Text(
                       '8 个组件',
                       style: TextStyle(
                         color: Colors.white,
@@ -186,14 +186,14 @@ class BasicComponentsDemo extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
                       color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Text(
+                    child: Text(
                       'Material Design 3',
                       style: TextStyle(
                         color: Colors.white,
@@ -211,8 +211,8 @@ class BasicComponentsDemo extends StatelessWidget {
         Text(
           '这些组件具有一致的设计风格和优秀的用户体验，支持主题定制和无障碍访问。',
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
         ),
       ],
     );
@@ -240,8 +240,8 @@ TextButton(
         children: [
           Row(
             children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              const Container(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.primaryContainer,
                   borderRadius: BorderRadius.circular(12),
@@ -270,21 +270,24 @@ TextButton(
               ElevatedButton(
                 onPressed: () => _showButtonAction(context, '主要按钮'),
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 ),
                 child: const Text('主要按钮'),
               ),
               OutlinedButton(
                 onPressed: () => _showButtonAction(context, '次要按钮'),
                 style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 ),
                 child: const Text('次要按钮'),
               ),
               TextButton(
                 onPressed: () => _showButtonAction(context, '文本按钮'),
                 style: TextButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 ),
                 child: const Text('文本按钮'),
               ),
@@ -293,8 +296,8 @@ TextButton(
           const SizedBox(height: 24),
           Row(
             children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              const Container(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.secondaryContainer,
                   borderRadius: BorderRadius.circular(12),
@@ -320,7 +323,8 @@ TextButton(
                 icon: const Icon(Icons.save),
                 label: const Text('保存'),
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 ),
               ),
               ElevatedButton.icon(
@@ -330,7 +334,8 @@ TextButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.error,
                   foregroundColor: Theme.of(context).colorScheme.onError,
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 ),
               ),
               FilledButton.icon(
@@ -338,7 +343,8 @@ TextButton(
                 icon: const Icon(Icons.download),
                 label: const Text('下载'),
                 style: FilledButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 ),
               ),
             ],
@@ -346,8 +352,8 @@ TextButton(
           const SizedBox(height: 24),
           Row(
             children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              const Container(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.tertiaryContainer,
                   borderRadius: BorderRadius.circular(12),
@@ -369,7 +375,8 @@ TextButton(
               ElevatedButton(
                 onPressed: () => _showButtonAction(context, '正常状态'),
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 ),
                 child: const Text('正常状态'),
               ),
@@ -377,7 +384,8 @@ TextButton(
               ElevatedButton(
                 onPressed: null,
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 ),
                 child: const Text('禁用状态'),
               ),
@@ -385,7 +393,8 @@ TextButton(
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 ),
                 child: const Row(
                   mainAxisSize: MainAxisSize.min,
@@ -470,13 +479,13 @@ Text(
             spacing: 8,
             runSpacing: 8,
             children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              const Container(
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
                   color: Colors.blue[100],
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: const Text(
+                child: Text(
                   '主要',
                   style: TextStyle(
                     color: Colors.blue,
@@ -485,13 +494,13 @@ Text(
                   ),
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              const Container(
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
                   color: Colors.green[100],
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: const Text(
+                child: Text(
                   '成功',
                   style: TextStyle(
                     color: Colors.green,
@@ -500,13 +509,13 @@ Text(
                   ),
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              const Container(
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
                   color: Colors.red[100],
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: const Text(
+                child: Text(
                   '错误',
                   style: TextStyle(
                     color: Colors.red,
@@ -523,7 +532,7 @@ Text(
   }
 
   Widget _buildIconExamples() {
-    return ExampleCard(
+    return const ExampleCard(
       title: '图标组件',
       code: '''Icon(
   Icons.home,
@@ -539,38 +548,38 @@ Icon(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             '基础图标',
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Wrap(
             spacing: 16,
             runSpacing: 16,
             children: [
               Column(
-                children: const [
+                children: [
                   Icon(Icons.home, size: 32, color: Colors.blue),
                   SizedBox(height: 4),
                   Text('首页'),
                 ],
               ),
               Column(
-                children: const [
+                children: [
                   Icon(Icons.search, size: 32, color: Colors.green),
                   SizedBox(height: 4),
                   Text('搜索'),
                 ],
               ),
               Column(
-                children: const [
+                children: [
                   Icon(Icons.notifications, size: 32, color: Colors.orange),
                   SizedBox(height: 4),
                   Text('通知'),
                 ],
               ),
               Column(
-                children: const [
+                children: [
                   Icon(Icons.settings, size: 32, color: Colors.purple),
                   SizedBox(height: 4),
                   Text('设置'),
@@ -578,15 +587,15 @@ Icon(
               ),
             ],
           ),
-          const SizedBox(height: 24),
-          const Text(
+          SizedBox(height: 24),
+          Text(
             '图标大小',
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: const [
+            children: [
               Icon(Icons.star, size: 16, color: Colors.amber),
               Icon(Icons.star, size: 24, color: Colors.amber),
               Icon(Icons.star, size: 32, color: Colors.amber),
@@ -602,13 +611,13 @@ Icon(
     return ExampleCard(
       title: '卡片组件',
       code: '''Card(
-  child: Padding(
+  child: const Padding(
     padding: EdgeInsets.all(16),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('卡片标题'),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text('卡片内容'),
       ],
     ),
@@ -623,16 +632,16 @@ Icon(
           ),
           const SizedBox(height: 16),
           Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
+            child: const Padding(
+              padding: EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     '卡片标题',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Text(
                     '这是卡片的内容描述。卡片可以包含各种类型的内容，如文本、图片、按钮等。',
                     style: TextStyle(
@@ -640,17 +649,17 @@ Icon(
                       color: Colors.grey[600],
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
                   Row(
                     children: [
                       TextButton(
                         onPressed: () {},
-                        child: const Text('取消'),
+                        child: Text('取消'),
                       ),
-                      const Spacer(),
+                      Spacer(),
                       ElevatedButton(
                         onPressed: () {},
-                        child: const Text('确认'),
+                        child: Text('确认'),
                       ),
                     ],
                   ),
@@ -696,12 +705,12 @@ Icon(
 
   void _showThemeDialog(BuildContext context) {
     final themeService = Provider.of<ThemeService>(context, listen: false);
-    
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('主题设置'),
-        content: SizedBox(
+        content: const SizedBox(
           width: double.maxFinite,
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -710,7 +719,7 @@ Icon(
               Column(
                 children: [
                   ListTile(
-                    title: const Text('浅色主题'),
+                    title: Text('浅色主题'),
                     leading: Radio<ThemeMode>(
                       value: ThemeMode.light,
                       groupValue: themeService.themeMode,
@@ -718,7 +727,7 @@ Icon(
                     ),
                   ),
                   ListTile(
-                    title: const Text('深色主题'),
+                    title: Text('深色主题'),
                     leading: Radio<ThemeMode>(
                       value: ThemeMode.dark,
                       groupValue: themeService.themeMode,
@@ -726,7 +735,7 @@ Icon(
                     ),
                   ),
                   ListTile(
-                    title: const Text('跟随系统'),
+                    title: Text('跟随系统'),
                     leading: Radio<ThemeMode>(
                       value: ThemeMode.system,
                       groupValue: themeService.themeMode,
@@ -735,9 +744,9 @@ Icon(
                   ),
                 ],
               ),
-              
-              const Divider(),
-              
+
+              Divider(),
+
               // 预设主题
               SizedBox(
                 height: 120,
@@ -747,16 +756,16 @@ Icon(
                   itemBuilder: (context, index) {
                     final preset = ThemeService.themePresets[index];
                     final isSelected = themeService.themePreset == index;
-                    
+
                     return GestureDetector(
                       onTap: () => themeService.applyThemePreset(index),
-                      child: Container(
+                      child: const Container(
                         width: 80,
-                        margin: const EdgeInsets.only(right: 12),
+                        margin: EdgeInsets.only(right: 12),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color: isSelected 
+                            color: isSelected
                                 ? Theme.of(context).colorScheme.primary
                                 : Colors.grey.withValues(alpha: 0.3),
                             width: isSelected ? 3 : 1,
@@ -773,7 +782,7 @@ Icon(
                                 shape: BoxShape.circle,
                               ),
                             ),
-                            const SizedBox(height: 4),
+                            SizedBox(height: 4),
                             Container(
                               width: 24,
                               height: 24,

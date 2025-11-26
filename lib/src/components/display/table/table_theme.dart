@@ -5,66 +5,6 @@ import 'package:flutter/material.dart';
 /// 定义表格组件的视觉样式，包括颜色、字体、边框等属性。
 /// 支持明暗主题切换和自定义样式覆盖。
 class ZephyrTableTheme {
-  /// 背景颜色
-  final Color backgroundColor;
-
-  /// 边框颜色
-  final Color borderColor;
-
-  /// 边框宽度
-  final double borderWidth;
-
-  /// 边框圆角
-  final BorderRadius borderRadius;
-
-  /// 表头背景颜色
-  final Color headerBackgroundColor;
-
-  /// 表头文本样式
-  final TextStyle headerTextStyle;
-
-  /// 表头图标颜色
-  final Color headerIconColor;
-
-  /// 单元格文本样式
-  final TextStyle cellTextStyle;
-
-  /// 选中行背景颜色
-  final Color selectedRowColor;
-
-  /// 斑马纹行背景颜色
-  final Color stripedRowColor;
-
-  /// 页脚背景颜色
-  final Color footerBackgroundColor;
-
-  /// 分页文本样式
-  final TextStyle paginationTextStyle;
-
-  /// 分页文本颜色
-  final Color paginationTextColor;
-
-  /// 分页图标颜色
-  final Color paginationIconColor;
-
-  /// 加载文本样式
-  final TextStyle loadingTextStyle;
-
-  /// 空数据文本样式
-  final TextStyle emptyTextStyle;
-
-  /// 主色调
-  final Color primaryColor;
-
-  /// 悬停行背景颜色
-  final Color hoverRowColor;
-
-  /// 排序图标颜色
-  final Color sortIconColor;
-
-  /// 筛选图标颜色
-  final Color filterIconColor;
-
   /// 创建表格主题
   const ZephyrTableTheme({
     required this.backgroundColor,
@@ -95,7 +35,7 @@ class ZephyrTableTheme {
       backgroundColor: Colors.white,
       borderColor: const Color(0xFFE5E7EB),
       borderWidth: 1.0,
-      borderRadius: BorderRadius.circular(8.0),
+      borderRadius: const BorderRadius.circular(8.0),
       headerBackgroundColor: const Color(0xFFF9FAFB),
       headerTextStyle: const TextStyle(
         fontSize: 14,
@@ -141,7 +81,7 @@ class ZephyrTableTheme {
       backgroundColor: const Color(0xFF1F2937),
       borderColor: const Color(0xFF374151),
       borderWidth: 1.0,
-      borderRadius: BorderRadius.circular(8.0),
+      borderRadius: const BorderRadius.circular(8.0),
       headerBackgroundColor: const Color(0xFF374151),
       headerTextStyle: const TextStyle(
         fontSize: 14,
@@ -205,19 +145,21 @@ class ZephyrTableTheme {
     Color? filterIconColor,
   }) {
     final baseTheme = ZephyrTableTheme.light();
-    
+
     return ZephyrTableTheme(
       backgroundColor: backgroundColor ?? baseTheme.backgroundColor,
       borderColor: borderColor ?? baseTheme.borderColor,
       borderWidth: borderWidth ?? baseTheme.borderWidth,
       borderRadius: borderRadius ?? baseTheme.borderRadius,
-      headerBackgroundColor: headerBackgroundColor ?? baseTheme.headerBackgroundColor,
+      headerBackgroundColor:
+          headerBackgroundColor ?? baseTheme.headerBackgroundColor,
       headerTextStyle: headerTextStyle ?? baseTheme.headerTextStyle,
       headerIconColor: headerIconColor ?? baseTheme.headerIconColor,
       cellTextStyle: cellTextStyle ?? baseTheme.cellTextStyle,
       selectedRowColor: selectedRowColor ?? baseTheme.selectedRowColor,
       stripedRowColor: stripedRowColor ?? baseTheme.stripedRowColor,
-      footerBackgroundColor: footerBackgroundColor ?? baseTheme.footerBackgroundColor,
+      footerBackgroundColor:
+          footerBackgroundColor ?? baseTheme.footerBackgroundColor,
       paginationTextStyle: paginationTextStyle ?? baseTheme.paginationTextStyle,
       paginationTextColor: paginationTextColor ?? baseTheme.paginationTextColor,
       paginationIconColor: paginationIconColor ?? baseTheme.paginationIconColor,
@@ -229,6 +171,66 @@ class ZephyrTableTheme {
       filterIconColor: filterIconColor ?? baseTheme.filterIconColor,
     );
   }
+
+  /// 背景颜色
+  final Color backgroundColor;
+
+  /// 边框颜色
+  final Color borderColor;
+
+  /// 边框宽度
+  final double borderWidth;
+
+  /// 边框圆角
+  final BorderRadius borderRadius;
+
+  /// 表头背景颜色
+  final Color headerBackgroundColor;
+
+  /// 表头文本样式
+  final TextStyle headerTextStyle;
+
+  /// 表头图标颜色
+  final Color headerIconColor;
+
+  /// 单元格文本样式
+  final TextStyle cellTextStyle;
+
+  /// 选中行背景颜色
+  final Color selectedRowColor;
+
+  /// 斑马纹行背景颜色
+  final Color stripedRowColor;
+
+  /// 页脚背景颜色
+  final Color footerBackgroundColor;
+
+  /// 分页文本样式
+  final TextStyle paginationTextStyle;
+
+  /// 分页文本颜色
+  final Color paginationTextColor;
+
+  /// 分页图标颜色
+  final Color paginationIconColor;
+
+  /// 加载文本样式
+  final TextStyle loadingTextStyle;
+
+  /// 空数据文本样式
+  final TextStyle emptyTextStyle;
+
+  /// 主色调
+  final Color primaryColor;
+
+  /// 悬停行背景颜色
+  final Color hoverRowColor;
+
+  /// 排序图标颜色
+  final Color sortIconColor;
+
+  /// 筛选图标颜色
+  final Color filterIconColor;
 
   /// 复制主题并修改部分属性
   ZephyrTableTheme copyWith({
@@ -258,13 +260,15 @@ class ZephyrTableTheme {
       borderColor: borderColor ?? this.borderColor,
       borderWidth: borderWidth ?? this.borderWidth,
       borderRadius: borderRadius ?? this.borderRadius,
-      headerBackgroundColor: headerBackgroundColor ?? this.headerBackgroundColor,
+      headerBackgroundColor:
+          headerBackgroundColor ?? this.headerBackgroundColor,
       headerTextStyle: headerTextStyle ?? this.headerTextStyle,
       headerIconColor: headerIconColor ?? this.headerIconColor,
       cellTextStyle: cellTextStyle ?? this.cellTextStyle,
       selectedRowColor: selectedRowColor ?? this.selectedRowColor,
       stripedRowColor: stripedRowColor ?? this.stripedRowColor,
-      footerBackgroundColor: footerBackgroundColor ?? this.footerBackgroundColor,
+      footerBackgroundColor:
+          footerBackgroundColor ?? this.footerBackgroundColor,
       paginationTextStyle: paginationTextStyle ?? this.paginationTextStyle,
       paginationTextColor: paginationTextColor ?? this.paginationTextColor,
       paginationIconColor: paginationIconColor ?? this.paginationIconColor,
@@ -280,7 +284,7 @@ class ZephyrTableTheme {
   /// 主题合并
   ZephyrTableTheme merge(ZephyrTableTheme? other) {
     if (other == null) return this;
-    
+
     return copyWith(
       backgroundColor: other.backgroundColor,
       borderColor: other.borderColor,
@@ -308,28 +312,28 @@ class ZephyrTableTheme {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    
+
     return other is ZephyrTableTheme &&
-      other.backgroundColor == backgroundColor &&
-      other.borderColor == borderColor &&
-      other.borderWidth == borderWidth &&
-      other.borderRadius == borderRadius &&
-      other.headerBackgroundColor == headerBackgroundColor &&
-      other.headerTextStyle == headerTextStyle &&
-      other.headerIconColor == headerIconColor &&
-      other.cellTextStyle == cellTextStyle &&
-      other.selectedRowColor == selectedRowColor &&
-      other.stripedRowColor == stripedRowColor &&
-      other.footerBackgroundColor == footerBackgroundColor &&
-      other.paginationTextStyle == paginationTextStyle &&
-      other.paginationTextColor == paginationTextColor &&
-      other.paginationIconColor == paginationIconColor &&
-      other.loadingTextStyle == loadingTextStyle &&
-      other.emptyTextStyle == emptyTextStyle &&
-      other.primaryColor == primaryColor &&
-      other.hoverRowColor == hoverRowColor &&
-      other.sortIconColor == sortIconColor &&
-      other.filterIconColor == filterIconColor;
+        other.backgroundColor == backgroundColor &&
+        other.borderColor == borderColor &&
+        other.borderWidth == borderWidth &&
+        other.borderRadius == borderRadius &&
+        other.headerBackgroundColor == headerBackgroundColor &&
+        other.headerTextStyle == headerTextStyle &&
+        other.headerIconColor == headerIconColor &&
+        other.cellTextStyle == cellTextStyle &&
+        other.selectedRowColor == selectedRowColor &&
+        other.stripedRowColor == stripedRowColor &&
+        other.footerBackgroundColor == footerBackgroundColor &&
+        other.paginationTextStyle == paginationTextStyle &&
+        other.paginationTextColor == paginationTextColor &&
+        other.paginationIconColor == paginationIconColor &&
+        other.loadingTextStyle == loadingTextStyle &&
+        other.emptyTextStyle == emptyTextStyle &&
+        other.primaryColor == primaryColor &&
+        other.hoverRowColor == hoverRowColor &&
+        other.sortIconColor == sortIconColor &&
+        other.filterIconColor == filterIconColor;
   }
 
   @override

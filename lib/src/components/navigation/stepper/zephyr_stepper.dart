@@ -1,9 +1,11 @@
 /// ZephyrUI 步骤指示器组件
-/// 
+///
 /// 提供专业的步骤流程展示组件，支持多种样式和交互
 
 import 'package:flutter/material.dart';
+import 'package:zephyr_ui/src/core/performance/performance_utils.dart';
 import 'package:zephyr_ui/zephyr_ui.dart';
+import 'dart:ui' as ui;
 
 /// 步骤指示器类型
 enum ZephyrStepperType {
@@ -12,16 +14,22 @@ enum ZephyrStepperType {
   wizard,
 }
 
-/// 步骤状态
-enum ZephyrStepState {
-  notReached,
-  current,
-  completed,
-  error,
-}
+// 使用核心枚举中的ZephyrStepState定义
 
 /// 步骤模型
 class ZephyrStep {
+  const ZephyrStep({
+    required this.id,
+    required this.title,
+    this.subtitle,
+    this.content,
+    this.icon,
+    this.isOptional = false,
+    this.isActive = false,
+    this.state = ZephyrStepState.waiting,
+    this.onTap,
+    this.trailing,
+  });
   final String id;
   final String title;
   final String? subtitle;
@@ -32,23 +40,24 @@ class ZephyrStep {
   final ZephyrStepState state;
   final VoidCallback? onTap;
   final Widget? trailing;
-
-  const ZephyrStep({
-    required this.id,
-    required this.title,
-    this.subtitle,
-    this.content,
-    this.icon,
-    this.isOptional = false,
-    this.isActive = false,
-    this.state = ZephyrStepState.notReached,
-    this.onTap,
-    this.trailing,
-  });
 }
 
 /// 步骤指示器组件
 class ZephyrStepper extends StatefulWidget {
+  const ZephyrStepper({
+    required this.steps,
+    super.key,
+    this.type = ZephyrStepperType.horizontal,
+    this.currentStep = 0,
+    this.onStepTapped,
+    this.onStepContinue,
+    this.onStepCancel,
+    this.showControls = true,
+    this.showStepNumbers = true,
+    this.showStepTitles = true,
+    this.padding = const EdgeInsets.all(16.0),
+    this.theme,
+  });
   final List<ZephyrStep> steps;
   final ZephyrStepperType type;
   final int currentStep;
@@ -60,21 +69,6 @@ class ZephyrStepper extends StatefulWidget {
   final bool showStepTitles;
   final EdgeInsetsGeometry padding;
   final ZephyrStepperTheme? theme;
-
-  const ZephyrStepper({
-    Key? key,
-    required this.steps,
-    this.type = ZephyrStepperType.horizontal,
-    this.currentStep = 0,
-    this.onStepTapped,
-    this.onStepContinue,
-    this.onStepCancel,
-    this.showControls = true,
-    this.showStepNumbers = true,
-    this.showStepTitles = true,
-    this.padding = const EdgeInsets.all(16.0),
-    this.theme,
-  }) : super(key: key);
 
   @override
   State<ZephyrStepper> createState() => _ZephyrStepperState();
@@ -128,7 +122,7 @@ class _ZephyrStepperState extends State<ZephyrStepper> {
   @override
   Widget build(BuildContext context) {
     final effectiveTheme = ZephyrStepperTheme.resolve(context, widget.theme);
-    
+
     return ZephyrPerformanceWidget(
       widgetName: 'ZephyrStepper',
       child: Container(
@@ -187,8 +181,8 @@ class _ZephyrStepperState extends State<ZephyrStepper> {
                 Expanded(
                   child: Container(
                     height: 2,
-                    color: isCompleted 
-                        ? effectiveTheme.completedColor 
+                    color: isCompleted
+                        ? effectiveTheme.completedColor
                         : effectiveTheme.inactiveColor,
                   ),
                 ),
@@ -236,8 +230,8 @@ class _ZephyrStepperState extends State<ZephyrStepper> {
                 margin: const EdgeInsets.only(left: 12),
                 width: 2,
                 height: 24,
-                color: isCompleted 
-                    ? effectiveTheme.completedColor 
+                color: isCompleted
+                    ? effectiveTheme.completedColor
                     : effectiveTheme.inactiveColor,
               ),
             if (!isLast) const SizedBox(height: 16),
@@ -260,7 +254,8 @@ class _ZephyrStepperState extends State<ZephyrStepper> {
             children: [
               InkWell(
                 onTap: step.onTap ?? (() => _handleStepTapped(index)),
-                borderRadius: BorderRadius.circular(effectiveTheme.borderRadius),
+                borderRadius:
+                    BorderRadius.circular(effectiveTheme.borderRadius),
                 child: _buildStepIndicator(
                   step,
                   index,
@@ -272,10 +267,10 @@ class _ZephyrStepperState extends State<ZephyrStepper> {
               ),
               if (widget.showStepTitles && step.title.isNotEmpty) ...[
                 const SizedBox(height: 8),
-                ZephyrText.caption(
-                  text: step.title,
-                  color: isCurrent 
-                      ? effectiveTheme.activeTextColor 
+                ZephyrText.labelSmall(
+                  step.title,
+                  color: isCurrent
+                      ? effectiveTheme.activeTextColor
                       : effectiveTheme.textColor,
                   textAlign: TextAlign.center,
                 ),
@@ -314,10 +309,9 @@ class _ZephyrStepperState extends State<ZephyrStepper> {
         child: step.icon!,
       );
     } else if (widget.showStepNumbers) {
-      child = ZephyrText.body(
-        text: '${index + 1}',
+      child = ZephyrText.bodySmall(
+        '${index + 1}',
         color: Colors.white,
-        fontWeight: FontWeight.bold,
       );
     } else {
       child = const SizedBox.shrink();
@@ -345,16 +339,16 @@ class _ZephyrStepperState extends State<ZephyrStepper> {
         Row(
           children: [
             Expanded(
-              child: ZephyrText.subtitle(
-                text: step.title,
-                color: step.isActive 
-                    ? effectiveTheme.activeTextColor 
+              child: ZephyrText.titleMedium(
+                step.title,
+                color: step.isActive
+                    ? effectiveTheme.activeTextColor
                     : effectiveTheme.textColor,
               ),
             ),
             if (step.isOptional)
-              ZephyrText.caption(
-                text: '(可选)',
+              ZephyrText.labelSmall(
+                '(可选)',
                 color: effectiveTheme.subtitleColor,
               ),
             if (step.trailing != null) step.trailing!,
@@ -362,8 +356,8 @@ class _ZephyrStepperState extends State<ZephyrStepper> {
         ),
         if (step.subtitle != null) ...[
           const SizedBox(height: 4),
-          ZephyrText.body(
-            text: step.subtitle!,
+          ZephyrText.bodyMedium(
+            step.subtitle!,
             color: effectiveTheme.subtitleColor,
           ),
         ],
@@ -390,20 +384,20 @@ class _ZephyrStepperState extends State<ZephyrStepper> {
           ZephyrButton.outline(
             text: '上一步',
             onPressed: _handleCancel,
-            icon: const Icon(Icons.arrow_back),
+            icon: Icons.arrow_back,
           ),
         const Spacer(),
         if (!isLastStep)
           ZephyrButton.primary(
             text: '下一步',
             onPressed: _handleContinue,
-            icon: const Icon(Icons.arrow_forward),
+            icon: Icons.arrow_forward,
           )
         else
           ZephyrButton.primary(
             text: '完成',
             onPressed: _handleContinue,
-            icon: const Icon(Icons.check),
+            icon: Icons.check,
           ),
       ],
     );
@@ -412,19 +406,6 @@ class _ZephyrStepperState extends State<ZephyrStepper> {
 
 /// 步骤指示器主题
 class ZephyrStepperTheme extends ThemeExtension<ZephyrStepperTheme> {
-  final Color activeColor;
-  final Color completedColor;
-  final Color inactiveColor;
-  final Color errorColor;
-  final Color borderColor;
-  final double borderWidth;
-  final Color textColor;
-  final Color activeTextColor;
-  final Color subtitleColor;
-  final double stepSize;
-  final double borderRadius;
-  final Duration animationDuration;
-
   const ZephyrStepperTheme({
     required this.activeColor,
     required this.completedColor,
@@ -439,6 +420,18 @@ class ZephyrStepperTheme extends ThemeExtension<ZephyrStepperTheme> {
     required this.borderRadius,
     required this.animationDuration,
   });
+  final Color activeColor;
+  final Color completedColor;
+  final Color inactiveColor;
+  final Color errorColor;
+  final Color borderColor;
+  final double borderWidth;
+  final Color textColor;
+  final Color activeTextColor;
+  final Color subtitleColor;
+  final double stepSize;
+  final double borderRadius;
+  final Duration animationDuration;
 
   @override
   ZephyrStepperTheme copyWith({
@@ -482,19 +475,27 @@ class ZephyrStepperTheme extends ThemeExtension<ZephyrStepperTheme> {
       inactiveColor: Color.lerp(inactiveColor, other.inactiveColor, t)!,
       errorColor: Color.lerp(errorColor, other.errorColor, t)!,
       borderColor: Color.lerp(borderColor, other.borderColor, t)!,
-      borderWidth: ui.lerpDouble(borderWidth, other.borderWidth, t) ?? borderWidth,
+      borderWidth:
+          ui.lerpDouble(borderWidth, other.borderWidth, t) ?? borderWidth,
       textColor: Color.lerp(textColor, other.textColor, t)!,
       activeTextColor: Color.lerp(activeTextColor, other.activeTextColor, t)!,
       subtitleColor: Color.lerp(subtitleColor, other.subtitleColor, t)!,
       stepSize: ui.lerpDouble(stepSize, other.stepSize, t) ?? stepSize,
-      borderRadius: ui.lerpDouble(borderRadius, other.borderRadius, t) ?? borderRadius,
-      animationDuration: ZephyrRatingTheme.lerpDuration(animationDuration, other.animationDuration, t),
+      borderRadius:
+          ui.lerpDouble(borderRadius, other.borderRadius, t) ?? borderRadius,
+      animationDuration: Duration(
+        milliseconds: ui
+                .lerpDouble(animationDuration.inMilliseconds.toDouble(),
+                    other.animationDuration.inMilliseconds.toDouble(), t)
+                ?.toInt() ??
+            animationDuration.inMilliseconds,
+      ),
     );
   }
 
   static ZephyrStepperTheme of(BuildContext context) {
     final theme = Theme.of(context).extension<ZephyrStepperTheme>();
-    return theme ?? _createDefaultTheme(ZephyrThemeData.of(context));
+    return theme ?? _createDefaultTheme(ZephyrTheme.of(context));
   }
 
   static ZephyrStepperTheme resolve(

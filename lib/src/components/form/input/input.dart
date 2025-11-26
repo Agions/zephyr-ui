@@ -16,7 +16,7 @@ import 'package:zephyr_ui/zephyr_ui.dart';
 class ZephyrInput extends StatefulWidget {
   /// 创建标准输入框
   const ZephyrInput({
-    Key? key,
+    super.key,
     this.placeholder,
     this.initialValue,
     this.onChanged,
@@ -42,7 +42,7 @@ class ZephyrInput extends StatefulWidget {
     this.errorText,
     this.helperText,
     this.counterText,
-  }) : super(key: key);
+  });
 
   /// 占位符文本
   final String? placeholder;
@@ -226,19 +226,19 @@ class _ZephyrInputState extends State<ZephyrInput> {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(theme.borderRadius),
-          borderSide: BorderSide(color: theme.focusedBorderColor, width: theme.focusedBorderWidth),
+          borderSide: BorderSide(color: theme.focusedBorderColor ?? Colors.blue, width: theme.focusedBorderWidth),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(theme.borderRadius),
-          borderSide: BorderSide(color: theme.errorColor, width: theme.errorBorderWidth),
+          borderSide: BorderSide(color: theme.errorColor ?? Colors.red, width: theme.errorBorderWidth),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(theme.borderRadius),
-          borderSide: BorderSide(color: theme.errorColor, width: theme.errorBorderWidth),
+          borderSide: BorderSide(color: theme.errorColor ?? Colors.red, width: theme.errorBorderWidth),
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(theme.borderRadius),
-          borderSide: BorderSide(color: theme.disabledBorderColor, width: theme.disabledBorderWidth),
+          borderSide: BorderSide(color: theme.disabledBorderColor ?? Colors.grey, width: theme.disabledBorderWidth),
         ),
         contentPadding: theme.contentPadding,
         prefixIcon: widget.prefixIcon != null
@@ -267,7 +267,7 @@ class _ZephyrInputState extends State<ZephyrInput> {
 
   Widget _buildErrorText(ZephyrInputTheme theme) {
     return Padding(
-      padding: EdgeInsets.only(top: theme.errorSpacing),
+      padding: EdgeInsets.only(top: theme.errorSpacing),,
       child: Text(
         widget.errorText ?? _errorText ?? '',
         style: theme.errorStyle,
@@ -277,7 +277,7 @@ class _ZephyrInputState extends State<ZephyrInput> {
 
   Widget _buildHelperText(ZephyrInputTheme theme) {
     return Padding(
-      padding: EdgeInsets.only(top: theme.helperSpacing),
+      padding: EdgeInsets.only(top: theme.helperSpacing),,
       child: Text(
         widget.helperText!,
         style: theme.helperStyle,

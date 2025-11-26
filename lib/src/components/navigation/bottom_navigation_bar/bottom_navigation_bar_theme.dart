@@ -1,5 +1,5 @@
 /// ZephyrUI Bottom Navigation Bar Theme
-/// 
+///
 /// Defines the theme configuration for bottom navigation bar components.
 library bottom_navigation_bar_theme;
 
@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:zephyr_ui/zephyr_ui.dart';
 
 /// ZephyrUI Bottom Navigation Bar Theme
-class ZephyrBottomNavigationBarTheme extends ThemeExtension<ZephyrBottomNavigationBarTheme> {
+class ZephyrBottomNavigationBarTheme
+    extends ThemeExtension<ZephyrBottomNavigationBarTheme> {
   /// Creates a bottom navigation bar theme
   const ZephyrBottomNavigationBarTheme({
     required this.backgroundColor,
@@ -72,28 +73,30 @@ class ZephyrBottomNavigationBarTheme extends ThemeExtension<ZephyrBottomNavigati
   static ZephyrBottomNavigationBarTheme of(BuildContext context) {
     final theme = Theme.of(context).extension<ZephyrBottomNavigationBarTheme>();
     if (theme != null) return theme;
-    
+
     final zephyrTheme = ZephyrTheme.of(context);
     return _createDefaultTheme(zephyrTheme);
   }
 
   /// Create default theme
-  static ZephyrBottomNavigationBarTheme _createDefaultTheme(ZephyrThemeData zephyrTheme) {
+  static ZephyrBottomNavigationBarTheme _createDefaultTheme(
+      ZephyrThemeData zephyrTheme) {
     final isDark = zephyrTheme.brightness == Brightness.dark;
-    
+
     return ZephyrBottomNavigationBarTheme(
       backgroundColor: isDark ? ZephyrColors.neutral900 : Colors.white,
       selectedColor: zephyrTheme.primaryColor,
-      unselectedColor: isDark ? ZephyrColors.neutral400 : ZephyrColors.neutral500,
-      selectedLabelStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightMedium,
-        height: ZephyrTypography.lineHeight1_4,
+      unselectedColor:
+          isDark ? ZephyrColors.neutral400 : ZephyrColors.neutral500,
+      selectedLabelStyle: const TextStyle(
+        fontSize: 12.0,
+        fontWeight: FontWeight.w500,
+        height: 1.4,
       ),
-      unselectedLabelStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        height: ZephyrTypography.lineHeight1_4,
+      unselectedLabelStyle: const TextStyle(
+        fontSize: 12.0,
+        fontWeight: FontWeight.w400,
+        height: 1.4,
       ),
       selectedIconSize: 24.0,
       unselectedIconSize: 24.0,
@@ -101,7 +104,8 @@ class ZephyrBottomNavigationBarTheme extends ThemeExtension<ZephyrBottomNavigati
       itemPaddingVertical: ZephyrSpacing.sm,
       itemPaddingHorizontal: ZephyrSpacing.md,
       labelSpacing: ZephyrSpacing.xs,
-      unselectedDotColor: isDark ? ZephyrColors.neutral600 : ZephyrColors.neutral300,
+      unselectedDotColor:
+          isDark ? ZephyrColors.neutral600 : ZephyrColors.neutral300,
       dotIndicatorSpacing: ZephyrSpacing.sm,
       dotIndicatorBottomSpacing: ZephyrSpacing.sm,
     );
@@ -134,33 +138,60 @@ class ZephyrBottomNavigationBarTheme extends ThemeExtension<ZephyrBottomNavigati
       unselectedIconSize: unselectedIconSize ?? this.unselectedIconSize,
       itemBorderRadius: itemBorderRadius ?? this.itemBorderRadius,
       itemPaddingVertical: itemPaddingVertical ?? this.itemPaddingVertical,
-      itemPaddingHorizontal: itemPaddingHorizontal ?? this.itemPaddingHorizontal,
+      itemPaddingHorizontal:
+          itemPaddingHorizontal ?? this.itemPaddingHorizontal,
       labelSpacing: labelSpacing ?? this.labelSpacing,
       unselectedDotColor: unselectedDotColor ?? this.unselectedDotColor,
       dotIndicatorSpacing: dotIndicatorSpacing ?? this.dotIndicatorSpacing,
-      dotIndicatorBottomSpacing: dotIndicatorBottomSpacing ?? this.dotIndicatorBottomSpacing,
+      dotIndicatorBottomSpacing:
+          dotIndicatorBottomSpacing ?? this.dotIndicatorBottomSpacing,
     );
   }
 
   @override
-  ZephyrBottomNavigationBarTheme lerp(ThemeExtension<ZephyrBottomNavigationBarTheme>? other, double t) {
+  ZephyrBottomNavigationBarTheme lerp(
+      ThemeExtension<ZephyrBottomNavigationBarTheme>? other, double t) {
     if (other is! ZephyrBottomNavigationBarTheme) return this;
-    
+
     return ZephyrBottomNavigationBarTheme(
-      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t) ?? backgroundColor,
-      selectedColor: Color.lerp(selectedColor, other.selectedColor, t) ?? selectedColor,
-      unselectedColor: Color.lerp(unselectedColor, other.unselectedColor, t) ?? unselectedColor,
-      selectedLabelStyle: TextStyle.lerp(selectedLabelStyle, other.selectedLabelStyle, t) ?? selectedLabelStyle,
-      unselectedLabelStyle: TextStyle.lerp(unselectedLabelStyle, other.unselectedLabelStyle, t) ?? unselectedLabelStyle,
-      selectedIconSize: lerpDouble(selectedIconSize, other.selectedIconSize, t) ?? selectedIconSize,
-      unselectedIconSize: lerpDouble(unselectedIconSize, other.unselectedIconSize, t) ?? unselectedIconSize,
-      itemBorderRadius: lerpDouble(itemBorderRadius, other.itemBorderRadius, t) ?? itemBorderRadius,
-      itemPaddingVertical: lerpDouble(itemPaddingVertical, other.itemPaddingVertical, t) ?? itemPaddingVertical,
-      itemPaddingHorizontal: lerpDouble(itemPaddingHorizontal, other.itemPaddingHorizontal, t) ?? itemPaddingHorizontal,
-      labelSpacing: lerpDouble(labelSpacing, other.labelSpacing, t) ?? labelSpacing,
-      unselectedDotColor: Color.lerp(unselectedDotColor, other.unselectedDotColor, t) ?? unselectedDotColor,
-      dotIndicatorSpacing: lerpDouble(dotIndicatorSpacing, other.dotIndicatorSpacing, t) ?? dotIndicatorSpacing,
-      dotIndicatorBottomSpacing: lerpDouble(dotIndicatorBottomSpacing, other.dotIndicatorBottomSpacing, t) ?? dotIndicatorBottomSpacing,
+      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t) ??
+          backgroundColor,
+      selectedColor:
+          Color.lerp(selectedColor, other.selectedColor, t) ?? selectedColor,
+      unselectedColor: Color.lerp(unselectedColor, other.unselectedColor, t) ??
+          unselectedColor,
+      selectedLabelStyle:
+          TextStyle.lerp(selectedLabelStyle, other.selectedLabelStyle, t) ??
+              selectedLabelStyle,
+      unselectedLabelStyle:
+          TextStyle.lerp(unselectedLabelStyle, other.unselectedLabelStyle, t) ??
+              unselectedLabelStyle,
+      selectedIconSize:
+          lerpDouble(selectedIconSize, other.selectedIconSize, t) ??
+              selectedIconSize,
+      unselectedIconSize:
+          lerpDouble(unselectedIconSize, other.unselectedIconSize, t) ??
+              unselectedIconSize,
+      itemBorderRadius:
+          lerpDouble(itemBorderRadius, other.itemBorderRadius, t) ??
+              itemBorderRadius,
+      itemPaddingVertical:
+          lerpDouble(itemPaddingVertical, other.itemPaddingVertical, t) ??
+              itemPaddingVertical,
+      itemPaddingHorizontal:
+          lerpDouble(itemPaddingHorizontal, other.itemPaddingHorizontal, t) ??
+              itemPaddingHorizontal,
+      labelSpacing:
+          lerpDouble(labelSpacing, other.labelSpacing, t) ?? labelSpacing,
+      unselectedDotColor:
+          Color.lerp(unselectedDotColor, other.unselectedDotColor, t) ??
+              unselectedDotColor,
+      dotIndicatorSpacing:
+          lerpDouble(dotIndicatorSpacing, other.dotIndicatorSpacing, t) ??
+              dotIndicatorSpacing,
+      dotIndicatorBottomSpacing: lerpDouble(
+              dotIndicatorBottomSpacing, other.dotIndicatorBottomSpacing, t) ??
+          dotIndicatorBottomSpacing,
     );
   }
 }

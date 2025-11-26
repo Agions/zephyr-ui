@@ -5,7 +5,7 @@ library performance_extensions;
 
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:zephyr_ui/zephyr_ui.dart';
+import 'package:zephyr_ui/src/utils/performance/performance_optimizer.dart';
 
 /// 性能优化的输入框扩展
 extension ZephyrInputPerformanceExtension on StatefulWidget {
@@ -25,17 +25,16 @@ extension ZephyrInputPerformanceExtension on StatefulWidget {
 
 /// 性能监控包装器
 class _PerformanceMonitorWidget extends StatefulWidget {
-  final Widget child;
-  final String name;
-
   const _PerformanceMonitorWidget({
     required this.child,
     required this.name,
-    Key? key,
-  }) : super(key: key);
+  });
+  final Widget child;
+  final String name;
 
   @override
-  State<_PerformanceMonitorWidget> createState() => _PerformanceMonitorWidgetState();
+  State<_PerformanceMonitorWidget> createState() =>
+      _PerformanceMonitorWidgetState();
 }
 
 class _PerformanceMonitorWidgetState extends State<_PerformanceMonitorWidget> {
@@ -50,6 +49,21 @@ class _PerformanceMonitorWidgetState extends State<_PerformanceMonitorWidget> {
 
 /// 防抖的文本字段
 class ZephyrDebouncedTextField extends StatefulWidget {
+  const ZephyrDebouncedTextField({
+    super.key,
+    this.controller,
+    this.initialValue,
+    this.onChanged,
+    this.debounceDuration = const Duration(milliseconds: 300),
+    this.decoration,
+    this.style,
+    this.obscureText = false,
+    this.maxLines = 1,
+    this.minLines,
+    this.enabled = true,
+    this.keyboardType,
+    this.textInputAction,
+  });
   final TextEditingController? controller;
   final String? initialValue;
   final ValueChanged<String>? onChanged;
@@ -63,24 +77,9 @@ class ZephyrDebouncedTextField extends StatefulWidget {
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
 
-  const ZephyrDebouncedTextField({
-    Key? key,
-    this.controller,
-    this.initialValue,
-    this.onChanged,
-    this.debounceDuration = const Duration(milliseconds: 300),
-    this.decoration,
-    this.style,
-    this.obscureText = false,
-    this.maxLines = 1,
-    this.minLines,
-    this.enabled = true,
-    this.keyboardType,
-    this.textInputAction,
-  }) : super(key: key);
-
   @override
-  State<ZephyrDebouncedTextField> createState() => _ZephyrDebouncedTextFieldState();
+  State<ZephyrDebouncedTextField> createState() =>
+      _ZephyrDebouncedTextFieldState();
 }
 
 class _ZephyrDebouncedTextFieldState extends State<ZephyrDebouncedTextField> {
@@ -90,7 +89,8 @@ class _ZephyrDebouncedTextFieldState extends State<ZephyrDebouncedTextField> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? TextEditingController(text: widget.initialValue);
+    _controller =
+        widget.controller ?? TextEditingController(text: widget.initialValue);
     _controller.addListener(_handleTextChanged);
   }
 
@@ -99,7 +99,8 @@ class _ZephyrDebouncedTextFieldState extends State<ZephyrDebouncedTextField> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.controller != widget.controller) {
       _controller.removeListener(_handleTextChanged);
-      _controller = widget.controller ?? TextEditingController(text: widget.initialValue);
+      _controller =
+          widget.controller ?? TextEditingController(text: widget.initialValue);
       _controller.addListener(_handleTextChanged);
     }
   }
@@ -147,6 +148,16 @@ class _ZephyrDebouncedTextFieldState extends State<ZephyrDebouncedTextField> {
 
 /// 优化的列表视图
 class ZephyrOptimizedListView extends StatefulWidget {
+  const ZephyrOptimizedListView({
+    required this.children,
+    super.key,
+    this.controller,
+    this.padding,
+    this.shrinkWrap = false,
+    this.separator,
+    this.itemCount,
+    this.itemBuilder,
+  });
   final List<Widget> children;
   final ScrollController? controller;
   final EdgeInsetsGeometry? padding;
@@ -155,19 +166,9 @@ class ZephyrOptimizedListView extends StatefulWidget {
   final int? itemCount;
   final Widget Function(BuildContext, int)? itemBuilder;
 
-  const ZephyrOptimizedListView({
-    Key? key,
-    required this.children,
-    this.controller,
-    this.padding,
-    this.shrinkWrap = false,
-    this.separator,
-    this.itemCount,
-    this.itemBuilder,
-  }) : super(key: key);
-
   @override
-  State<ZephyrOptimizedListView> createState() => _ZephyrOptimizedListViewState();
+  State<ZephyrOptimizedListView> createState() =>
+      _ZephyrOptimizedListViewState();
 }
 
 class _ZephyrOptimizedListViewState extends State<ZephyrOptimizedListView> {
@@ -217,6 +218,16 @@ class _ZephyrOptimizedListViewState extends State<ZephyrOptimizedListView> {
 
 /// 优化的网格视图
 class ZephyrOptimizedGridView extends StatefulWidget {
+  const ZephyrOptimizedGridView({
+    required this.children,
+    required this.crossAxisCount,
+    super.key,
+    this.mainAxisSpacing = 0,
+    this.crossAxisSpacing = 0,
+    this.childAspectRatio = 1.0,
+    this.padding,
+    this.controller,
+  });
   final List<Widget> children;
   final int crossAxisCount;
   final double mainAxisSpacing;
@@ -225,19 +236,9 @@ class ZephyrOptimizedGridView extends StatefulWidget {
   final EdgeInsetsGeometry? padding;
   final ScrollController? controller;
 
-  const ZephyrOptimizedGridView({
-    Key? key,
-    required this.children,
-    required this.crossAxisCount,
-    this.mainAxisSpacing = 0,
-    this.crossAxisSpacing = 0,
-    this.childAspectRatio = 1.0,
-    this.padding,
-    this.controller,
-  }) : super(key: key);
-
   @override
-  State<ZephyrOptimizedGridView> createState() => _ZephyrOptimizedGridViewState();
+  State<ZephyrOptimizedGridView> createState() =>
+      _ZephyrOptimizedGridViewState();
 }
 
 class _ZephyrOptimizedGridViewState extends State<ZephyrOptimizedGridView> {
@@ -278,19 +279,19 @@ class _ZephyrOptimizedGridViewState extends State<ZephyrOptimizedGridView> {
 
 /// 性能监控的包装器
 class ZephyrPerformanceWrapper extends StatefulWidget {
+  const ZephyrPerformanceWrapper({
+    required this.child,
+    required this.name,
+    super.key,
+    this.enabled = true,
+  });
   final Widget child;
   final String name;
   final bool enabled;
 
-  const ZephyrPerformanceWrapper({
-    Key? key,
-    required this.child,
-    required this.name,
-    this.enabled = true,
-  }) : super(key: key);
-
   @override
-  State<ZephyrPerformanceWrapper> createState() => _ZephyrPerformanceWrapperState();
+  State<ZephyrPerformanceWrapper> createState() =>
+      _ZephyrPerformanceWrapperState();
 }
 
 class _ZephyrPerformanceWrapperState extends State<ZephyrPerformanceWrapper> {

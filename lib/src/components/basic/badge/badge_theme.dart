@@ -39,7 +39,7 @@ class ZephyrBadgeTheme extends ThemeExtension<ZephyrBadgeTheme> {
     return ZephyrBadgeTheme(
       backgroundColor: colorScheme.error,
       textColor: colorScheme.onError,
-      borderRadius: BorderRadius.circular(10.0),
+      borderRadius: const BorderRadius.circular(10.0),
       padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
       borderWidth: 0.0,
       borderColor: Colors.transparent,
@@ -74,7 +74,7 @@ class ZephyrBadgeTheme extends ThemeExtension<ZephyrBadgeTheme> {
     return ZephyrBadgeTheme(
       backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t)!,
       textColor: Color.lerp(textColor, other.textColor, t)!,
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius: const BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
       padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
       borderWidth: lerpDouble(borderWidth, other.borderWidth, t)!,
       borderColor: Color.lerp(borderColor, other.borderColor, t)!,

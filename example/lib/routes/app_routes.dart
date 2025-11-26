@@ -27,7 +27,7 @@ class AppRoutes {
   static const String responsiveDemo = '/responsive-demo';
   static const String performanceDemo = '/performance-demo';
   static const String interactiveDemo = '/interactive-demo';
-  
+
   static Map<String, WidgetBuilder> getRoutes() {
     return {
       home: (context) => const HomePage(),

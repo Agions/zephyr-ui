@@ -7,7 +7,7 @@ import 'avatar_theme.dart';
 class ZephyrAvatar extends StatelessWidget {
   /// 创建一个标准头像
   const ZephyrAvatar({
-    Key? key,
+    super.key,
     this.child,
     this.image,
     this.text,
@@ -20,19 +20,18 @@ class ZephyrAvatar extends StatelessWidget {
     this.elevation,
     this.shadowColor,
     this.onTap,
-  })  : assert(
+  }) : assert(
           (child != null && image == null && text == null) ||
               (child == null && image != null && text == null) ||
               (child == null && image == null && text != null) ||
               (child == null && image == null && text == null),
           '只能提供child、image或text中的一个',
-        ),
-        super(key: key);
+        );
 
   /// 使用图片创建头像
   factory ZephyrAvatar.image({
-    Key? key,
     required ImageProvider image,
+    Key? key,
     ZephyrAvatarSize size = ZephyrAvatarSize.medium,
     ZephyrAvatarShape shape = ZephyrAvatarShape.circle,
     double? borderWidth,
@@ -56,8 +55,8 @@ class ZephyrAvatar extends StatelessWidget {
 
   /// 使用文字创建头像
   factory ZephyrAvatar.text({
-    Key? key,
     required String text,
+    Key? key,
     Color? backgroundColor,
     Color? foregroundColor,
     ZephyrAvatarSize size = ZephyrAvatarSize.medium,
@@ -85,8 +84,8 @@ class ZephyrAvatar extends StatelessWidget {
 
   /// 使用图标创建头像
   factory ZephyrAvatar.icon({
-    Key? key,
     required IconData icon,
+    Key? key,
     Color? backgroundColor,
     Color? foregroundColor,
     ZephyrAvatarSize size = ZephyrAvatarSize.medium,
@@ -229,7 +228,7 @@ class ZephyrAvatar extends StatelessWidget {
         ),
       );
     } else if (text != null) {
-      String displayText = text!.length > 2 ? text!.substring(0, 2) : text!;
+      var displayText = text!.length > 2 ? text!.substring(0, 2) : text!;
       content = Center(
         child: Text(
           displayText.toUpperCase(),

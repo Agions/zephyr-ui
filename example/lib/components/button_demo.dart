@@ -20,7 +20,7 @@ class ButtonDemo extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // 基础按钮 - 使用Flutter原生按钮作为示例
             Wrap(
               spacing: 12,
@@ -48,15 +48,15 @@ class ButtonDemo extends StatelessWidget {
                 ),
               ],
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             const Text(
               '按钮尺寸',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // 尺寸变化
             Wrap(
               spacing: 12,
@@ -79,15 +79,15 @@ class ButtonDemo extends StatelessWidget {
                 ),
               ],
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             const Text(
               '按钮状态',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // 状态变化
             Wrap(
               spacing: 12,
@@ -108,15 +108,15 @@ class ButtonDemo extends StatelessWidget {
                 ),
               ],
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             const Text(
               '带图标的按钮',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // 图标按钮
             Wrap(
               spacing: 12,
@@ -144,15 +144,15 @@ class ButtonDemo extends StatelessWidget {
                 ),
               ],
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             const Text(
               '全宽按钮',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // 全宽按钮
             Column(
               children: [
@@ -169,15 +169,15 @@ class ButtonDemo extends StatelessWidget {
                 ),
               ],
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             const Text(
               '按钮组',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // 按钮组
             Row(
               children: [
@@ -196,15 +196,15 @@ class ButtonDemo extends StatelessWidget {
                 ),
               ],
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             const Text(
               '自定义颜色按钮',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // 自定义颜色
             Wrap(
               spacing: 12,

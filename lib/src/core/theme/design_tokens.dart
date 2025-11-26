@@ -1,5 +1,5 @@
 /// ZephyrUI 设计令牌系统
-/// 
+///
 /// 基于 Material Design 3 规范的统一设计令牌系统
 /// 包含颜色、间距、字体、阴影、动画等完整的设计系统
 library design_tokens;
@@ -60,7 +60,7 @@ class ZephyrColorTokens {
   static const Color neutral94 = Color(0xFFEFEFEF);
   static const Color neutral95 = Color(0xFFF2F2F2);
   static const Color neutral96 = Color(0xFFF5F5F5);
-  static const Color neutral98 = Color(0xFAFAFA);
+  static const Color neutral98 = Color(0x00fafafa);
   static const Color neutral99 = Color(0xFFFBFBFB);
   static const Color neutral100 = Color(0xFFFFFFFF);
 
@@ -216,7 +216,7 @@ class ZephyrShadowTokens {
   ZephyrShadowTokens._();
 
   static const List<BoxShadow> none = [];
-  
+
   static const List<BoxShadow> extraSmall = [
     BoxShadow(
       color: Color(0x0A000000),

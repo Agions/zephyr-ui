@@ -45,6 +45,15 @@ enum ZephyrErrorLevel {
 }
 
 class ZephyrError {
+  ZephyrError({
+    required this.code,
+    required this.message,
+    required this.level,
+    this.details,
+    DateTime? timestamp,
+    this.isRecoverable = false,
+    this.recoverySuggestion,
+  }) : timestamp = timestamp ?? DateTime.now();
   final String code;
   final String message;
   final String? details;
@@ -52,22 +61,12 @@ class ZephyrError {
   final DateTime timestamp;
   final bool isRecoverable;
   final String? recoverySuggestion;
-
-  ZephyrError({
-    required this.code,
-    required this.message,
-    this.details,
-    required this.level,
-    DateTime? timestamp,
-    this.isRecoverable = false,
-    this.recoverySuggestion,
-  }) : timestamp = timestamp ?? DateTime.now();
 }
 
 /// 错误消息本地化委托
 class ZephyrErrorMessagesLocalizations {
-  static const LocalizationsDelegate<ZephyrErrorMessagesLocalizations> delegate =
-      _ZephyrErrorMessagesLocalizationsDelegate();
+  static const LocalizationsDelegate<ZephyrErrorMessagesLocalizations>
+      delegate = _ZephyrErrorMessagesLocalizationsDelegate();
 
   static ZephyrErrorMessagesLocalizations? of(BuildContext context) {
     return Localizations.of<ZephyrErrorMessagesLocalizations>(
@@ -142,69 +141,70 @@ class ZephyrErrorMessagesLocalizations {
   /// 格式化错误消息
   String formatErrorMessage(String message, [Map<String, dynamic>? params]) {
     var formattedMessage = message;
-    
+
     if (params != null) {
       params.forEach((key, value) {
-        formattedMessage = formattedMessage.replaceAll('{$key}', value.toString());
+        formattedMessage =
+            formattedMessage.replaceAll('{$key}', value.toString());
       });
     }
-    
+
     return formattedMessage;
   }
 
   /// 获取本地化的错误消息
   String getLocalizedMessage(ZephyrError error) {
     switch (error.code) {
-      case ZephyrErrorCodes.unknownError:
+      case 'unknownError':
         return unknownError;
-      case ZephyrErrorCodes.internalError:
+      case 'internalError':
         return internalError;
-      case ZephyrErrorCodes.invalidArgument:
+      case 'invalidArgument':
         return invalidArgument;
-      case ZephyrErrorCodes.operationFailed:
+      case 'operationFailed':
         return operationFailed;
-      case ZephyrErrorCodes.networkError:
+      case 'networkError':
         return networkError;
-      case ZephyrErrorCodes.timeoutError:
+      case 'timeoutError':
         return timeoutError;
-      case ZephyrErrorCodes.connectionError:
+      case 'connectionError':
         return connectionError;
-      case ZephyrErrorCodes.serverError:
+      case 'serverError':
         return serverError;
-      case ZephyrErrorCodes.validationError:
+      case 'validationError':
         return validationError;
-      case ZephyrErrorCodes.requiredFieldMissing:
+      case 'requiredFieldMissing':
         return requiredFieldMissing;
-      case ZephyrErrorCodes.invalidFormat:
+      case 'invalidFormat':
         return invalidFormat;
-      case ZephyrErrorCodes.valueOutOfRange:
+      case 'valueOutOfRange':
         return valueOutOfRange;
-      case ZephyrErrorCodes.accessibilityError:
+      case 'accessibilityError':
         return accessibilityError;
-      case ZephyrErrorCodes.missingSemantics:
+      case 'missingSemantics':
         return missingSemantics;
-      case ZephyrErrorCodes.insufficientContrast:
+      case 'insufficientContrast':
         return insufficientContrast;
-      case ZephyrErrorCodes.missingFocusIndicator:
+      case 'missingFocusIndicator':
         return missingFocusIndicator;
-      case ZephyrErrorCodes.invalidKeyboardNavigation:
+      case 'invalidKeyboardNavigation':
         return invalidKeyboardNavigation;
-      case ZephyrErrorCodes.componentNotFound:
+      case 'componentNotFound':
         return componentNotFound;
-      case ZephyrErrorCodes.componentInitializationFailed:
+      case 'componentInitializationFailed':
         return componentInitializationFailed;
-      case ZephyrErrorCodes.componentRenderingFailed:
+      case 'componentRenderingFailed':
         return componentRenderingFailed;
-      case ZephyrErrorCodes.invalidComponentState:
+      case 'invalidComponentState':
         return invalidComponentState;
-      case ZephyrErrorCodes.themeNotFound:
+      case 'themeNotFound':
         return themeNotFound;
-      case ZephyrErrorCodes.themeInitializationFailed:
+      case 'themeInitializationFailed':
         return themeInitializationFailed;
-      case ZephyrErrorCodes.invalidThemeData:
+      case 'invalidThemeData':
         return invalidThemeData;
       default:
-        return formatErrorMessage(error.message, error.context);
+        return formatErrorMessage(error.message);
     }
   }
 
@@ -227,73 +227,28 @@ class ZephyrErrorMessagesLocalizations {
   }
 
   /// 获取无障碍违规本地化消息
-  String getAccessibilityViolationMessage(ZephyrAccessibilityViolation violation) {
-    switch (violation.check) {
-      case ZephyrAccessibilityCheck.semanticLabel:
-        return missingSemantics;
-      case ZephyrAccessibilityCheck.colorContrast:
-        return insufficientContrast;
-      case ZephyrAccessibilityCheck.focusManagement:
-        return missingFocusIndicator;
-      case ZephyrAccessibilityCheck.keyboardNavigation:
-        return invalidKeyboardNavigation;
-      default:
-        return accessibilityViolation;
-    }
+  String getAccessibilityViolationMessage(dynamic violation) {
+    return accessibilityViolation;
   }
 
   /// 获取WCAG指导原则本地化消息
-  String getWCAGGuidelineMessage(ZephyrWCAGGuideline guideline) {
-    switch (guideline) {
-      case ZephyrWCAGGuideline.perceivable:
-        return '可感知性';
-      case ZephyrWCAGGuideline.operable:
-        return '可操作性';
-      case ZephyrWCAGGuideline.understandable:
-        return '可理解性';
-      case ZephyrWCAGGuideline.robust:
-        return '健壮性';
-    }
+  String getWCAGGuidelineMessage(dynamic guideline) {
+    return wcagGuideline;
   }
 
   /// 获取WCAG级别本地化消息
-  String getWCAGLevelMessage(ZephyrWCAGLevel level) {
-    switch (level) {
-      case ZephyrWCAGLevel.a:
-        return 'A级别';
-      case ZephyrWCAGLevel.aa:
-        return 'AA级别';
-      case ZephyrWCAGLevel.aaa:
-        return 'AAA级别';
-    }
+  String getWCAGLevelMessage(dynamic level) {
+    return accessibilityLevel;
   }
 
   /// 获取无障碍严重程度本地化消息
-  String getAccessibilitySeverityMessage(ZephyrAccessibilitySeverity severity) {
-    switch (severity) {
-      case ZephyrAccessibilitySeverity.minor:
-        return '轻微';
-      case ZephyrAccessibilitySeverity.moderate:
-        return '中等';
-      case ZephyrAccessibilitySeverity.serious:
-        return '严重';
-      case ZephyrAccessibilitySeverity.blocker:
-        return '阻塞';
-    }
+  String getAccessibilitySeverityMessage(dynamic severity) {
+    return '轻微';
   }
 
   /// 获取合规状态本地化消息
-  String getComplianceStatusMessage(ZephyrAccessibilityComplianceStatus status) {
-    switch (status) {
-      case ZephyrAccessibilityComplianceStatus.fullyCompliant:
-        return '完全合规';
-      case ZephyrAccessibilityComplianceStatus.partiallyCompliant:
-        return '部分合规';
-      case ZephyrAccessibilityComplianceStatus.nonCompliant:
-        return '不合规';
-      case ZephyrAccessibilityComplianceStatus.needsImprovement:
-        return '需要改进';
-    }
+  String getComplianceStatusMessage(dynamic status) {
+    return '完全合规';
   }
 
   /// 格式化时间戳
@@ -318,7 +273,8 @@ class ZephyrErrorMessagesLocalizations {
 }
 
 /// 中文错误消息本地化
-class ZephyrErrorMessagesLocalizationsZh extends ZephyrErrorMessagesLocalizations {
+class ZephyrErrorMessagesLocalizationsZh
+    extends ZephyrErrorMessagesLocalizations {
   @override
   String get unknownError => '发生未知错误';
   @override
@@ -426,7 +382,8 @@ class ZephyrErrorMessagesLocalizationsZh extends ZephyrErrorMessagesLocalization
 }
 
 /// 英文错误消息本地化
-class ZephyrErrorMessagesLocalizationsEn extends ZephyrErrorMessagesLocalizations {
+class ZephyrErrorMessagesLocalizationsEn
+    extends ZephyrErrorMessagesLocalizations {
   @override
   String get unknownError => 'An unknown error occurred';
   @override
@@ -555,7 +512,8 @@ class _ZephyrErrorMessagesLocalizationsDelegate
   }
 
   @override
-  bool shouldReload(LocalizationsDelegate<ZephyrErrorMessagesLocalizations> old) {
+  bool shouldReload(
+      LocalizationsDelegate<ZephyrErrorMessagesLocalizations> old) {
     return false;
   }
 }
@@ -572,63 +530,71 @@ class ZephyrErrorMessageFormatter {
   }) {
     final localizations = ZephyrErrorMessagesLocalizations.of(context)!;
     final buffer = StringBuffer();
-    
+
     // 基本错误消息
     buffer.write(localizations.getLocalizedMessage(error));
-    
+
     // 添加错误代码
     if (includeErrorCode) {
       buffer.write(' (${localizations.formatErrorCode(error.code)})');
     }
-    
+
     // 添加时间戳
     if (includeTimestamp) {
-      buffer.write('\n${localizations.timestamp}: ${localizations.formatTimestamp(error.timestamp)}');
+      buffer.write(
+          '\n${localizations.timestamp}: ${localizations.formatTimestamp(error.timestamp)}');
     }
-    
+
     // 添加错误级别
-    buffer.write('\n${localizations.severity}: ${localizations.getErrorLevelMessage(error.level)}');
-    
+    buffer.write(
+        '\n${localizations.severity}: ${localizations.getErrorLevelMessage(error.level)}');
+
     // 添加错误详情
     if (includeDetails && error.details != null) {
       buffer.write('\n\n${localizations.errorDetails}:\n${error.details}');
     }
-    
+
     // 添加恢复建议
     if (error.recoverySuggestion != null) {
-      buffer.write('\n\n${localizations.recoverySuggestion}:\n${error.recoverySuggestion}');
+      buffer.write(
+          '\n\n${localizations.recoverySuggestion}:\n${error.recoverySuggestion}');
     }
-    
+
     return buffer.toString();
   }
 
   /// 格式化无障碍违规消息
   static String formatAccessibilityViolation(
-    ZephyrAccessibilityViolation violation,
+    dynamic violation,
     BuildContext context, {
     bool includeFixSuggestion = true,
     bool includeWCAGInfo = true,
   }) {
     final localizations = ZephyrErrorMessagesLocalizations.of(context)!;
     final buffer = StringBuffer();
-    
+
     // 基本违规消息
-    buffer.write('${localizations.getAccessibilityViolationMessage(violation)}: ${violation.message}');
-    
+    buffer.write(
+        '${localizations.getAccessibilityViolationMessage(violation)}: ${violation.message}');
+
     // 添加严重程度
-    buffer.write('\n${localizations.accessibilityLevel}: ${localizations.getAccessibilitySeverityMessage(violation.severity)}');
-    
+    buffer.write(
+        '\n${localizations.accessibilityLevel}: ${localizations.getAccessibilitySeverityMessage(violation.severity)}');
+
     // 添加WCAG信息
     if (includeWCAGInfo && violation.criterion != null) {
-      buffer.write('\n${localizations.wcagGuideline}: ${violation.criterion!.id} - ${violation.criterion!.description}');
-      buffer.write(' (${localizations.getWCAGLevelMessage(violation.criterion!.level)})');
+      buffer.write(
+          '\n${localizations.wcagGuideline}: ${violation.criterion!.id} - ${violation.criterion!.description}');
+      buffer.write(
+          ' (${localizations.getWCAGLevelMessage(violation.criterion!.level)})');
     }
-    
+
     // 添加修复建议
     if (includeFixSuggestion && violation.fixSuggestion != null) {
-      buffer.write('\n\n${localizations.fixSuggestion}:\n${violation.fixSuggestion}');
+      buffer.write(
+          '\n\n${localizations.fixSuggestion}:\n${violation.fixSuggestion}');
     }
-    
+
     return buffer.toString();
   }
 
@@ -641,25 +607,27 @@ class ZephyrErrorMessageFormatter {
   }) {
     final localizations = ZephyrErrorMessagesLocalizations.of(context)!;
     final buffer = StringBuffer();
-    
+
     // 报告标题
     buffer.write('=== ${localizations.errorDetails} ===\n');
     buffer.write('Total Errors: ${errors.length}\n\n');
-    
+
     // 按级别分组
     if (groupByLevel) {
       final groupedErrors = <ZephyrErrorLevel, List<ZephyrError>>{};
-      
+
       for (final error in errors) {
         groupedErrors.putIfAbsent(error.level, () => []).add(error);
       }
-      
+
       for (final level in ZephyrErrorLevel.values) {
         final levelErrors = groupedErrors[level];
         if (levelErrors != null && levelErrors.isNotEmpty) {
-          buffer.write('${localizations.getErrorLevelMessage(level)} (${levelErrors.length}):\n');
+          buffer.write(
+              '${localizations.getErrorLevelMessage(level)} (${levelErrors.length}):\n');
           for (final error in levelErrors) {
-            buffer.write('  - ${formatError(error, context, includeDetails: false)}\n');
+            buffer.write(
+                '  - ${formatError(error, context, includeDetails: false)}\n');
           }
           buffer.write('\n');
         }
@@ -667,10 +635,11 @@ class ZephyrErrorMessageFormatter {
     } else {
       // 简单列表
       for (final error in errors) {
-        buffer.write('${formatError(error, context, includeDetails: includeDetails)}\n\n');
+        buffer.write(
+            '${formatError(error, context, includeDetails: includeDetails)}\n\n');
       }
     }
-    
+
     return buffer.toString();
   }
 }

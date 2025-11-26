@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zephyr_ui/zephyr_ui.dart';
+import '../../../core/constants/typography_constants.dart';
 
 /// 选择器组件主题
 class ZephyrSelectTheme extends ThemeExtension<ZephyrSelectTheme> {
@@ -121,31 +122,31 @@ class ZephyrSelectTheme extends ThemeExtension<ZephyrSelectTheme> {
           isDark ? ZephyrColors.neutral700 : ZephyrColors.neutral100,
       disabledBorderColor:
           isDark ? ZephyrColors.neutral600 : ZephyrColors.neutral200,
-      textStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize16,
-        fontWeight: ZephyrTypography.fontWeightRegular,
+      textStyle: const TextStyle(
+        fontSize: ZephyrTypographyConstants.fontSize16,
+        fontWeight: ZephyrTypographyConstants.fontWeightRegular,
         color: isDark ? ZephyrColors.neutral100 : ZephyrColors.neutral900,
-        height: ZephyrTypography.lineHeight1_5,
+        height: ZephyrTypographyConstants.lineHeight1_5,
       ),
       labelStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightMedium,
+        fontSize: ZephyrTypographyConstants.fontSize14,
+        fontWeight: ZephyrTypographyConstants.fontWeightMedium,
         color: isDark ? ZephyrColors.neutral200 : ZephyrColors.neutral700,
       ),
       placeholderStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize16,
-        fontWeight: ZephyrTypography.fontWeightRegular,
+        fontSize: ZephyrTypographyConstants.fontSize16,
+        fontWeight: ZephyrTypographyConstants.fontWeightRegular,
         color: isDark ? ZephyrColors.neutral400 : ZephyrColors.neutral500,
-        height: ZephyrTypography.lineHeight1_5,
+        height: ZephyrTypographyConstants.lineHeight1_5,
       ),
       helperTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightRegular,
+        fontSize: ZephyrTypographyConstants.fontSize12,
+        fontWeight: ZephyrTypographyConstants.fontWeightRegular,
         color: isDark ? ZephyrColors.neutral300 : ZephyrColors.neutral600,
       ),
-      errorTextStyle: const TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightRegular,
+      errorTextStyle: TextStyle(
+        fontSize: ZephyrTypographyConstants.fontSize12,
+        fontWeight: ZephyrTypographyConstants.fontWeightRegular,
         color: ZephyrColors.error500,
       ),
       dropdownBackgroundColor: isDark ? ZephyrColors.neutral800 : Colors.white,
@@ -155,23 +156,23 @@ class ZephyrSelectTheme extends ThemeExtension<ZephyrSelectTheme> {
           ? Colors.black.withValues(alpha: 0.3)
           : Colors.black.withValues(alpha: 0.1),
       optionTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize16,
-        fontWeight: ZephyrTypography.fontWeightRegular,
+        fontSize: ZephyrTypographyConstants.fontSize16,
+        fontWeight: ZephyrTypographyConstants.fontWeightRegular,
         color: isDark ? ZephyrColors.neutral100 : ZephyrColors.neutral900,
-        height: ZephyrTypography.lineHeight1_5,
+        height: ZephyrTypographyConstants.lineHeight1_5,
       ),
       selectedOptionTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize16,
-        fontWeight: ZephyrTypography.fontWeightMedium,
+        fontSize: ZephyrTypographyConstants.fontSize16,
+        fontWeight: ZephyrTypographyConstants.fontWeightMedium,
         color: zephyrTheme.primaryColor,
-        height: ZephyrTypography.lineHeight1_5,
+        height: ZephyrTypographyConstants.lineHeight1_5,
       ),
       hoveredOptionBackgroundColor:
           isDark ? ZephyrColors.neutral700 : ZephyrColors.neutral50,
       selectedOptionBackgroundColor: isDark
           ? zephyrTheme.primaryColor.withValues(alpha: 0.2)
           : zephyrTheme.primaryColor.withValues(alpha: 0.1),
-      borderRadius: BorderRadius.circular(ZephyrRadius.md),
+      borderRadius: const BorderRadius.circular(ZephyrRadius.md),
       dropdownBorderRadius: BorderRadius.circular(ZephyrRadius.md),
       borderWidth: 1.0,
       elevation: 4.0,
@@ -273,7 +274,7 @@ class ZephyrSelectTheme extends ThemeExtension<ZephyrSelectTheme> {
           hoveredOptionBackgroundColor, other.hoveredOptionBackgroundColor, t)!,
       selectedOptionBackgroundColor: Color.lerp(selectedOptionBackgroundColor,
           other.selectedOptionBackgroundColor, t)!,
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius: const BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
       dropdownBorderRadius: BorderRadius.lerp(
           dropdownBorderRadius, other.dropdownBorderRadius, t)!,
       borderWidth: lerpDouble(borderWidth, other.borderWidth, t),

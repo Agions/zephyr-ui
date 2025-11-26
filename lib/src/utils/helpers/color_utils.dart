@@ -1,5 +1,5 @@
 /// 颜色工具类
-/// 
+///
 /// 提供颜色相关的工具函数，包括颜色计算、对比度检查、颜色生成等。
 library color_utils;
 
@@ -11,26 +11,26 @@ class ZephyrColorUtils {
   ZephyrColorUtils._();
 
   /// 计算两个颜色之间的对比度
-  /// 
+  ///
   /// 返回值范围为 1.0 到 21.0，值越大对比度越高
   /// WCAG AA 标准要求对比度至少为 4.5:1
   /// WCAG AAA 标准要求对比度至少为 7:1
   static double calculateContrast(Color foreground, Color background) {
     final foregroundLuminance = _calculateLuminance(foreground);
     final backgroundLuminance = _calculateLuminance(background);
-    
+
     final lighter = math.max(foregroundLuminance, backgroundLuminance);
     final darker = math.min(foregroundLuminance, backgroundLuminance);
-    
+
     return (lighter + 0.05) / (darker + 0.05);
   }
 
   /// 计算颜色的相对亮度
   static double _calculateLuminance(Color color) {
-    final r = _linearizeColorComponent(color.red / 255.0);
-    final g = _linearizeColorComponent(color.green / 255.0);
-    final b = _linearizeColorComponent(color.blue / 255.0);
-    
+    final r = _linearizeColorComponent(color.r / 255.0);
+    final g = _linearizeColorComponent(color.g / 255.0);
+    final b = _linearizeColorComponent(color.b / 255.0);
+
     return 0.2126 * r + 0.7152 * g + 0.0722 * b;
   }
 
@@ -57,52 +57,55 @@ class ZephyrColorUtils {
   static Color getBestTextColor(Color backgroundColor) {
     final whiteContrast = calculateContrast(Colors.white, backgroundColor);
     final blackContrast = calculateContrast(Colors.black, backgroundColor);
-    
+
     return whiteContrast > blackContrast ? Colors.white : Colors.black;
   }
 
   /// 调整颜色亮度
-  /// 
+  ///
   /// [amount] 范围为 -1.0 到 1.0
   /// 正值使颜色变亮，负值使颜色变暗
   static Color adjustBrightness(Color color, double amount) {
-    assert(amount >= -1.0 && amount <= 1.0, 'Amount must be between -1.0 and 1.0');
-    
+    assert(
+        amount >= -1.0 && amount <= 1.0, 'Amount must be between -1.0 and 1.0');
+
     final hsl = HSLColor.fromColor(color);
     final lightness = (hsl.lightness + amount).clamp(0.0, 1.0);
-    
+
     return hsl.withLightness(lightness).toColor();
   }
 
   /// 调整颜色饱和度
-  /// 
+  ///
   /// [amount] 范围为 -1.0 到 1.0
   /// 正值增加饱和度，负值降低饱和度
   static Color adjustSaturation(Color color, double amount) {
-    assert(amount >= -1.0 && amount <= 1.0, 'Amount must be between -1.0 and 1.0');
-    
+    assert(
+        amount >= -1.0 && amount <= 1.0, 'Amount must be between -1.0 and 1.0');
+
     final hsl = HSLColor.fromColor(color);
     final saturation = (hsl.saturation + amount).clamp(0.0, 1.0);
-    
+
     return hsl.withSaturation(saturation).toColor();
   }
 
   /// 调整颜色透明度
-  /// 
+  ///
   /// [opacity] 范围为 0.0 到 1.0
   static Color adjustOpacity(Color color, double opacity) {
-    assert(opacity >= 0.0 && opacity <= 1.0, 'Opacity must be between 0.0 and 1.0');
-    
+    assert(opacity >= 0.0 && opacity <= 1.0,
+        'Opacity must be between 0.0 and 1.0');
+
     return color.withValues(alpha: opacity);
   }
 
   /// 混合两个颜色
-  /// 
+  ///
   /// [ratio] 范围为 0.0 到 1.0
   /// 0.0 返回第一个颜色，1.0 返回第二个颜色
   static Color blendColors(Color color1, Color color2, double ratio) {
     assert(ratio >= 0.0 && ratio <= 1.0, 'Ratio must be between 0.0 and 1.0');
-    
+
     return Color.lerp(color1, color2, ratio)!;
   }
 
@@ -110,12 +113,12 @@ class ZephyrColorUtils {
   static List<Color> generateColorShades(Color baseColor, {int count = 9}) {
     final hsl = HSLColor.fromColor(baseColor);
     final shades = <Color>[];
-    
-    for (int i = 0; i < count; i++) {
+
+    for (var i = 0; i < count; i++) {
       final lightness = 0.95 - (i * 0.1);
       shades.add(hsl.withLightness(lightness.clamp(0.0, 1.0)).toColor());
     }
-    
+
     return shades;
   }
 

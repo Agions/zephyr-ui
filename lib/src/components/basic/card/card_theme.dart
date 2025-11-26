@@ -154,7 +154,7 @@ class ZephyrCardTheme extends ThemeExtension<ZephyrCardTheme> {
     }
 
     // 创建新的elevations映射，对每个变体的值进行插值
-    Map<ZephyrCardVariant, double> lerpedElevations = {};
+    var lerpedElevations = <ZephyrCardVariant, double>{};
     elevations.forEach((variant, value) {
       lerpedElevations[variant] =
           _lerpDouble(value, other.elevations[variant] ?? value, t)!;
@@ -166,7 +166,7 @@ class ZephyrCardTheme extends ThemeExtension<ZephyrCardTheme> {
       shadowColor: Color.lerp(shadowColor, other.shadowColor, t),
       surfaceTintColor: Color.lerp(surfaceTintColor, other.surfaceTintColor, t),
       elevations: lerpedElevations,
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+      borderRadius: const BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
       borderWidth: _lerpDouble(borderWidth, other.borderWidth, t)!,
       borderColor: Color.lerp(borderColor, other.borderColor, t),
       padding: EdgeInsetsGeometry.lerp(padding, other.padding, t)!,
@@ -217,8 +217,8 @@ double? _lerpDouble(double? a, double? b, double t) {
 /// 在两个Duration值之间进行插值
 Duration lerpDuration(Duration a, Duration b, double t) {
   return Duration(
-    milliseconds:
-        _lerpDouble(a.inMilliseconds.toDouble(), b.inMilliseconds.toDouble(), t)!
-            .round(),
+    milliseconds: _lerpDouble(
+            a.inMilliseconds.toDouble(), b.inMilliseconds.toDouble(), t)!
+        .round(),
   );
 }

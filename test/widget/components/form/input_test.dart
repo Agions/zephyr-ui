@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/forms/input/input.dart';
+import 'package:zephyr_ui/src/components/form/input/input.dart';
 
 void main() {
   group('ZephyrInput Widget Tests', () {

@@ -16,7 +16,7 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _usernameController = TextEditingController();
-  
+
   bool _notificationsEnabled = true;
   bool _emailNotifications = false;
   bool _smsNotifications = true;
@@ -24,15 +24,22 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
   String? _selectedCountry;
   bool _showPassword = false;
   bool _isLoading = false;
-  
+
   final List<String> _countries = [
-    '中国', '美国', '英国', '日本', '韩国', '德国', '法国', '澳大利亚'
+    '中国',
+    '美国',
+    '英国',
+    '日本',
+    '韩国',
+    '德国',
+    '法国',
+    '澳大利亚'
   ];
 
   @override
   Widget build(BuildContext context) {
     final themeService = Provider.of<ThemeService>(context);
-    
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('表单组件'),
@@ -43,7 +50,8 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
             onPressed: () => _showInfoDialog(context),
           ),
           IconButton(
-            icon: Icon(themeService.isDarkMode ? Icons.light_mode : Icons.dark_mode),
+            icon: Icon(
+                themeService.isDarkMode ? Icons.light_mode : Icons.dark_mode),
             onPressed: () => themeService.toggleTheme(),
           ),
         ],
@@ -129,21 +137,21 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
   }
 
   Widget _buildIntroduction() {
-    return Container(
+    return const Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(24),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Theme.of(context).primaryColor.withValues(alpha: 0.1),
-            Theme.of(context).primaryColor.withValues(alpha: 0.05),
+            Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+            Theme.of(context).colorScheme.primary.withValues(alpha: 0.05),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: Theme.of(context).primaryColor.withValues(alpha: 0.2),
+          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
         ),
       ),
       child: Column(
@@ -152,19 +160,19 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).colorScheme.primary,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.form,
                   color: Colors.white,
                   size: 32,
                 ),
               ),
-              const SizedBox(width: 16),
-              const Expanded(
+              SizedBox(width: 16),
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -188,7 +196,7 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Wrap(
             spacing: 8,
             children: [
@@ -206,13 +214,13 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
   }
 
   Widget _buildFeatureChip(IconData icon, String label) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+    return const Container(
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
+        color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: Theme.of(context).primaryColor.withValues(alpha: 0.3),
+          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
         ),
       ),
       child: Row(
@@ -221,14 +229,14 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
           Icon(
             icon,
             size: 16,
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).colorScheme.primary,
           ),
-          const SizedBox(width: 4),
+          SizedBox(width: 4),
           Text(
             label,
             style: TextStyle(
               fontSize: 12,
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).colorScheme.primary,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -421,7 +429,9 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
               labelText: '选择国家',
               border: const OutlineInputBorder(),
               prefixIcon: const Icon(Icons.public),
-              helperText: _selectedCountry == null ? '请选择一个国家' : '已选择: $_selectedCountry',
+              helperText: _selectedCountry == null
+                  ? '请选择一个国家'
+                  : '已选择: $_selectedCountry',
             ),
             items: _countries.map((country) {
               return DropdownMenuItem<String>(
@@ -486,17 +496,19 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
                   title: const Text('邮件通知'),
                   subtitle: Text(_emailNotifications ? '已启用' : '已禁用'),
                   value: _emailNotifications && _notificationsEnabled,
-                  onChanged: _notificationsEnabled ? (value) {
-                    setState(() {
-                      _emailNotifications = value;
-                    });
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('邮件通知${value ? '已启用' : '已禁用'}'),
-                        duration: const Duration(seconds: 1),
-                      ),
-                    );
-                  } : null,
+                  onChanged: _notificationsEnabled
+                      ? (value) {
+                          setState(() {
+                            _emailNotifications = value;
+                          });
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('邮件通知${value ? '已启用' : '已禁用'}'),
+                              duration: const Duration(seconds: 1),
+                            ),
+                          );
+                        }
+                      : null,
                 ),
                 const Divider(),
                 SwitchListTile(
@@ -504,17 +516,19 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
                   title: const Text('短信通知'),
                   subtitle: Text(_smsNotifications ? '已启用' : '已禁用'),
                   value: _smsNotifications && _notificationsEnabled,
-                  onChanged: _notificationsEnabled ? (value) {
-                    setState(() {
-                      _smsNotifications = value;
-                    });
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('短信通知${value ? '已启用' : '已禁用'}'),
-                        duration: const Duration(seconds: 1),
-                      ),
-                    );
-                  } : null,
+                  onChanged: _notificationsEnabled
+                      ? (value) {
+                          setState(() {
+                            _smsNotifications = value;
+                          });
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('短信通知${value ? '已启用' : '已禁用'}'),
+                              duration: const Duration(seconds: 1),
+                            ),
+                          );
+                        }
+                      : null,
                 ),
               ],
             ),
@@ -532,16 +546,19 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text('音量'),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  const Container(
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primary
+                          .withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
                       '${(_volume * 100).round()}%',
                       style: TextStyle(
-                        color: Theme.of(context).primaryColor,
+                        color: Theme.of(context).colorScheme.primary,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -557,7 +574,7 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
                 },
                 divisions: 10,
                 label: '${(_volume * 100).round()}%',
-                activeColor: Theme.of(context).primaryColor,
+                activeColor: Theme.of(context).colorScheme.primary,
                 inactiveColor: Colors.grey.shade300,
               ),
               Row(
@@ -569,11 +586,13 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
                   ),
                   IconButton(
                     icon: const Icon(Icons.volume_down),
-                    onPressed: () => setState(() => _volume = (_volume - 0.1).clamp(0, 1)),
+                    onPressed: () =>
+                        setState(() => _volume = (_volume - 0.1).clamp(0, 1)),
                   ),
                   IconButton(
                     icon: const Icon(Icons.volume_up),
-                    onPressed: () => setState(() => _volume = (_volume + 0.1).clamp(0, 1)),
+                    onPressed: () =>
+                        setState(() => _volume = (_volume + 0.1).clamp(0, 1)),
                   ),
                   IconButton(
                     icon: const Icon(Icons.volume_max),
@@ -614,8 +633,8 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
         obscureText: true,
         validator: _validatePassword,
       ),
-      SizedBox(height: 24),
-      SizedBox(
+      const SizedBox(height: 24),
+      const SizedBox(
         width: double.infinity,
         child: ElevatedButton(
           onPressed: _handleSubmit,
@@ -636,8 +655,8 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
           ),
           const SizedBox(height: 16),
           Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
+            child: const Padding(
+              padding: EdgeInsets.all(16),
               child: Form(
                 key: _formKey,
                 child: Column(
@@ -646,25 +665,28 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
                       controller: _usernameController,
                       decoration: InputDecoration(
                         labelText: '用户名',
-                        border: const OutlineInputBorder(),
-                        prefixIcon: const Icon(Icons.person),
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.person),
                         helperText: '请输入 3-20 个字符的用户名',
                       ),
                       validator: _validateUsername,
                       textInputAction: TextInputAction.next,
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     TextFormField(
                       controller: _passwordController,
                       decoration: InputDecoration(
                         labelText: '密码',
-                        border: const OutlineInputBorder(),
-                        prefixIcon: const Icon(Icons.lock),
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.lock),
                         suffixIcon: IconButton(
                           icon: Icon(
-                            _showPassword ? Icons.visibility : Icons.visibility_off,
+                            _showPassword
+                                ? Icons.visibility
+                                : Icons.visibility_off,
                           ),
-                          onPressed: () => setState(() => _showPassword = !_showPassword),
+                          onPressed: () =>
+                              setState(() => _showPassword = !_showPassword),
                         ),
                         helperText: '密码长度至少 6 个字符',
                       ),
@@ -673,7 +695,7 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
                       textInputAction: TextInputAction.done,
                       onFieldSubmitted: (_) => _handleSubmit(),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Row(
                       children: [
                         Checkbox(
@@ -687,8 +709,8 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
                             );
                           },
                         ),
-                        const Text('记住我'),
-                        const Spacer(),
+                        Text('记住我'),
+                        Spacer(),
                         TextButton(
                           onPressed: () {
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -698,20 +720,20 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
                               ),
                             );
                           },
-                          child: const Text('忘记密码？'),
+                          child: Text('忘记密码？'),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: _isLoading ? null : _handleSubmit,
                         style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          padding: EdgeInsets.symmetric(vertical: 16),
                         ),
                         child: _isLoading
-                            ? const SizedBox(
+                            ? SizedBox(
                                 width: 20,
                                 height: 20,
                                 child: CircularProgressIndicator(
@@ -719,10 +741,10 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
                                   strokeWidth: 2,
                                 ),
                               )
-                            : const Text('登录'),
+                            : Text('登录'),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Row(
                       children: [
                         Expanded(
@@ -741,10 +763,10 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
                                 ),
                               );
                             },
-                            child: const Text('重置'),
+                            child: Text('重置'),
                           ),
                         ),
-                        const SizedBox(width: 16),
+                        SizedBox(width: 16),
                         Expanded(
                           child: TextButton(
                             onPressed: () {
@@ -755,7 +777,7 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
                                 ),
                               );
                             },
-                            child: const Text('注册账号'),
+                            child: Text('注册账号'),
                           ),
                         ),
                       ],
@@ -766,14 +788,14 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
             ),
           ),
           const SizedBox(height: 16),
-          Container(
-            padding: const EdgeInsets.all(12),
+          const Container(
+            padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.blue.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: Colors.blue.withValues(alpha: 0.3)),
             ),
-            child: const Row(
+            child: Row(
               children: [
                 Icon(Icons.info, color: Colors.blue, size: 20),
                 SizedBox(width: 8),
@@ -794,13 +816,13 @@ class _FormComponentsDemoState extends State<FormComponentsDemo> {
   Future<void> _handleSubmit() async {
     if (_formKey.currentState?.validate() ?? false) {
       setState(() => _isLoading = true);
-      
+
       // 模拟网络请求
       await Future.delayed(const Duration(seconds: 2));
-      
+
       if (mounted) {
         setState(() => _isLoading = false);
-        
+
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('登录成功！欢迎 ${_usernameController.text}'),

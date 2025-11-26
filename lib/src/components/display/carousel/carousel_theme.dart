@@ -5,44 +5,22 @@ import 'package:flutter/foundation.dart';
 ///
 /// 提供轮播图的样式配置选项。
 class ZephyrCarouselTheme {
-  /// 导航按钮大小
-  final double navigationButtonSize;
-  
-  /// 导航按钮图标大小
-  final double navigationButtonIconSize;
-  
-  /// 导航按钮背景颜色
-  final Color navigationButtonBackgroundColor;
-  
-  /// 导航按钮图标颜色
-  final Color navigationButtonIconColor;
-  
-  /// 导航按钮阴影
-  final List<BoxShadow>? navigationButtonShadow;
-  
-  /// 活动指示器大小
-  final double activeIndicatorSize;
-  
-  /// 非活动指示器大小
-  final double inactiveIndicatorSize;
-  
-  /// 活动指示器颜色
-  final Color activeIndicatorColor;
-  
-  /// 非活动指示器颜色
-  final Color inactiveIndicatorColor;
-  
-  /// 指示器背景颜色
-  final Color indicatorBackgroundColor;
-  
-  /// 指示器文本样式
-  final TextStyle indicatorTextStyle;
-  
-  /// 指示器间距
-  final EdgeInsets indicatorSpacing;
-  
-  /// 指示器内边距
-  final EdgeInsets indicatorPadding;
+  /// 创建自定义主题
+  const ZephyrCarouselTheme({
+    required this.navigationButtonSize,
+    required this.navigationButtonIconSize,
+    required this.navigationButtonBackgroundColor,
+    required this.navigationButtonIconColor,
+    required this.navigationButtonShadow,
+    required this.activeIndicatorSize,
+    required this.inactiveIndicatorSize,
+    required this.activeIndicatorColor,
+    required this.inactiveIndicatorColor,
+    required this.indicatorBackgroundColor,
+    required this.indicatorTextStyle,
+    required this.indicatorSpacing,
+    required this.indicatorPadding,
+  });
 
   /// 创建亮色主题
   const ZephyrCarouselTheme.light()
@@ -51,7 +29,7 @@ class ZephyrCarouselTheme {
         navigationButtonBackgroundColor = Colors.white,
         navigationButtonIconColor = Colors.black87,
         navigationButtonShadow = const [
-          BoxShadow(
+          const BoxShadow(
             color: Color(0x1A000000),
             blurRadius: 4,
             offset: Offset(0, 2),
@@ -77,7 +55,7 @@ class ZephyrCarouselTheme {
         navigationButtonBackgroundColor = const Color(0xFF1F2937),
         navigationButtonIconColor = Colors.white,
         navigationButtonShadow = const [
-          BoxShadow(
+          const BoxShadow(
             color: Color(0x33000000),
             blurRadius: 4,
             offset: Offset(0, 2),
@@ -96,28 +74,50 @@ class ZephyrCarouselTheme {
         indicatorSpacing = const EdgeInsets.symmetric(horizontal: 4),
         indicatorPadding = const EdgeInsets.all(16);
 
-  /// 创建自定义主题
-  const ZephyrCarouselTheme({
-    required this.navigationButtonSize,
-    required this.navigationButtonIconSize,
-    required this.navigationButtonBackgroundColor,
-    required this.navigationButtonIconColor,
-    required this.navigationButtonShadow,
-    required this.activeIndicatorSize,
-    required this.inactiveIndicatorSize,
-    required this.activeIndicatorColor,
-    required this.inactiveIndicatorColor,
-    required this.indicatorBackgroundColor,
-    required this.indicatorTextStyle,
-    required this.indicatorSpacing,
-    required this.indicatorPadding,
-  });
+  /// 导航按钮大小
+  final double navigationButtonSize;
+
+  /// 导航按钮图标大小
+  final double navigationButtonIconSize;
+
+  /// 导航按钮背景颜色
+  final Color navigationButtonBackgroundColor;
+
+  /// 导航按钮图标颜色
+  final Color navigationButtonIconColor;
+
+  /// 导航按钮阴影
+  final List<BoxShadow>? navigationButtonShadow;
+
+  /// 活动指示器大小
+  final double activeIndicatorSize;
+
+  /// 非活动指示器大小
+  final double inactiveIndicatorSize;
+
+  /// 活动指示器颜色
+  final Color activeIndicatorColor;
+
+  /// 非活动指示器颜色
+  final Color inactiveIndicatorColor;
+
+  /// 指示器背景颜色
+  final Color indicatorBackgroundColor;
+
+  /// 指示器文本样式
+  final TextStyle indicatorTextStyle;
+
+  /// 指示器间距
+  final EdgeInsets indicatorSpacing;
+
+  /// 指示器内边距
+  final EdgeInsets indicatorPadding;
 
   /// 从上下文获取主题
   static ZephyrCarouselTheme of(BuildContext context) {
     final brightness = Theme.of(context).brightness;
-    return brightness == Brightness.dark 
-        ? const ZephyrCarouselTheme.dark() 
+    return brightness == Brightness.dark
+        ? const ZephyrCarouselTheme.dark()
         : const ZephyrCarouselTheme.light();
   }
 
@@ -139,15 +139,22 @@ class ZephyrCarouselTheme {
   }) {
     return ZephyrCarouselTheme(
       navigationButtonSize: navigationButtonSize ?? this.navigationButtonSize,
-      navigationButtonIconSize: navigationButtonIconSize ?? this.navigationButtonIconSize,
-      navigationButtonBackgroundColor: navigationButtonBackgroundColor ?? this.navigationButtonBackgroundColor,
-      navigationButtonIconColor: navigationButtonIconColor ?? this.navigationButtonIconColor,
-      navigationButtonShadow: navigationButtonShadow ?? this.navigationButtonShadow,
+      navigationButtonIconSize:
+          navigationButtonIconSize ?? this.navigationButtonIconSize,
+      navigationButtonBackgroundColor: navigationButtonBackgroundColor ??
+          this.navigationButtonBackgroundColor,
+      navigationButtonIconColor:
+          navigationButtonIconColor ?? this.navigationButtonIconColor,
+      navigationButtonShadow:
+          navigationButtonShadow ?? this.navigationButtonShadow,
       activeIndicatorSize: activeIndicatorSize ?? this.activeIndicatorSize,
-      inactiveIndicatorSize: inactiveIndicatorSize ?? this.inactiveIndicatorSize,
+      inactiveIndicatorSize:
+          inactiveIndicatorSize ?? this.inactiveIndicatorSize,
       activeIndicatorColor: activeIndicatorColor ?? this.activeIndicatorColor,
-      inactiveIndicatorColor: inactiveIndicatorColor ?? this.inactiveIndicatorColor,
-      indicatorBackgroundColor: indicatorBackgroundColor ?? this.indicatorBackgroundColor,
+      inactiveIndicatorColor:
+          inactiveIndicatorColor ?? this.inactiveIndicatorColor,
+      indicatorBackgroundColor:
+          indicatorBackgroundColor ?? this.indicatorBackgroundColor,
       indicatorTextStyle: indicatorTextStyle ?? this.indicatorTextStyle,
       indicatorSpacing: indicatorSpacing ?? this.indicatorSpacing,
       indicatorPadding: indicatorPadding ?? this.indicatorPadding,
@@ -179,7 +186,8 @@ class ZephyrCarouselTheme {
     return other is ZephyrCarouselTheme &&
         other.navigationButtonSize == navigationButtonSize &&
         other.navigationButtonIconSize == navigationButtonIconSize &&
-        other.navigationButtonBackgroundColor == navigationButtonBackgroundColor &&
+        other.navigationButtonBackgroundColor ==
+            navigationButtonBackgroundColor &&
         other.navigationButtonIconColor == navigationButtonIconColor &&
         listEquals(other.navigationButtonShadow, navigationButtonShadow) &&
         other.activeIndicatorSize == activeIndicatorSize &&

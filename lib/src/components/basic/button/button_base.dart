@@ -4,16 +4,16 @@ import 'package:zephyr_ui/zephyr_ui.dart';
 /// 按钮基础实现类，处理按钮的核心渲染逻辑
 class ZephyrButtonBase extends StatelessWidget {
   const ZephyrButtonBase({
-    Key? key,
     required this.text,
     required this.onPressed,
     required this.type,
     required this.size,
+    super.key,
     this.icon,
     this.theme,
     this.isFullWidth = false,
     this.isLoading = false,
-  }) : super(key: key);
+  });
 
   /// 按钮显示的文本
   final String text;

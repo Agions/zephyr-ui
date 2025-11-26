@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'services/theme_service.dart';
 import 'routes/app_routes.dart';
-import 'pages/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // 初始化主题服务
   final themeService = ThemeService();
   await themeService._loadThemePreferences();
-  
+
   runApp(
     ChangeNotifierProvider.value(
       value: themeService,
@@ -25,7 +24,7 @@ class ZephyrUIDemoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeService = Provider.of<ThemeService>(context);
-    
+
     return MaterialApp(
       title: 'ZephyrUI 组件库演示',
       debugShowCheckedModeBanner: false,

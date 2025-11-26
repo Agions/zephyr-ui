@@ -32,8 +32,10 @@ class ZephyrTabItem {
 enum ZephyrTabsType {
   /// 线条型（底部指示器）
   line,
+
   /// 卡片型（背景色区分）
   card,
+
   /// 按钮型（圆角背景）
   button,
 }
@@ -62,14 +64,14 @@ enum ZephyrTabsType {
 class ZephyrTabs extends StatefulWidget {
   /// 创建一个标签页组件
   const ZephyrTabs({
-    Key? key,
     required this.tabs,
+    super.key,
     this.initialIndex = 0,
     this.type = ZephyrTabsType.line,
     this.scrollable = false,
     this.onTabChanged,
     this.theme,
-  }) : super(key: key);
+  });
 
   /// 标签页列表
   final List<ZephyrTabItem> tabs;
@@ -133,7 +135,7 @@ class _ZephyrTabsState extends State<ZephyrTabs>
 
   void _handleTabChanged() {
     if (_tabController.indexIsChanging) return;
-    
+
     final newIndex = _tabController.index;
     if (_currentIndex != newIndex) {
       setState(() {
@@ -146,7 +148,7 @@ class _ZephyrTabsState extends State<ZephyrTabs>
   @override
   Widget build(BuildContext context) {
     final theme = widget.theme ?? ZephyrTabsTheme.of(context);
-    
+
     return Column(
       children: [
         _buildTabBar(theme),
@@ -174,13 +176,15 @@ class _ZephyrTabsState extends State<ZephyrTabs>
       child: TabBar(
         controller: _tabController,
         isScrollable: widget.scrollable,
-        indicatorColor: widget.type == ZephyrTabsType.line ? theme.indicatorColor : Colors.transparent,
+        indicatorColor: widget.type == ZephyrTabsType.line
+            ? theme.indicatorColor
+            : Colors.transparent,
         indicatorWeight: theme.indicatorHeight,
         labelColor: theme.selectedTextStyle.color,
         unselectedLabelColor: theme.unselectedTextStyle.color,
         labelStyle: theme.selectedTextStyle,
         unselectedLabelStyle: theme.unselectedTextStyle,
-        labelPadding: widget.scrollable 
+        labelPadding: widget.scrollable
             ? EdgeInsets.symmetric(horizontal: theme.spacing)
             : EdgeInsets.zero,
         tabs: widget.tabs.asMap().entries.map((entry) {
@@ -195,7 +199,7 @@ class _ZephyrTabsState extends State<ZephyrTabs>
   Widget _buildTab(ZephyrTabsTheme theme, ZephyrTabItem tab, int index) {
     final isSelected = _currentIndex == index;
     final isEnabled = tab.enabled;
-    
+
     Widget tabContent = Container(
       height: theme.tabHeight,
       padding: theme.tabPadding,
@@ -233,11 +237,13 @@ class _ZephyrTabsState extends State<ZephyrTabs>
     return Tab(child: tabContent);
   }
 
-  BoxDecoration? _getTabDecoration(ZephyrTabsTheme theme, bool isSelected, bool isEnabled) {
+  BoxDecoration? _getTabDecoration(
+      ZephyrTabsTheme theme, bool isSelected, bool isEnabled) {
     if (!isEnabled) {
       return BoxDecoration(
         color: theme.disabledTabColor,
-        borderRadius: widget.type == ZephyrTabsType.button ? theme.borderRadius : null,
+        borderRadius:
+            widget.type == ZephyrTabsType.button ? theme.borderRadius : null,
       );
     }
 
@@ -256,11 +262,12 @@ class _ZephyrTabsState extends State<ZephyrTabs>
     }
   }
 
-  TextStyle _getTabTextStyle(ZephyrTabsTheme theme, bool isSelected, bool isEnabled) {
+  TextStyle _getTabTextStyle(
+      ZephyrTabsTheme theme, bool isSelected, bool isEnabled) {
     if (!isEnabled) {
       return theme.disabledTextStyle;
     }
-    
+
     return isSelected ? theme.selectedTextStyle : theme.unselectedTextStyle;
   }
 }
@@ -269,14 +276,14 @@ class _ZephyrTabsState extends State<ZephyrTabs>
 class ZephyrTabBar extends StatefulWidget {
   /// 创建一个标签栏组件
   const ZephyrTabBar({
-    Key? key,
     required this.tabs,
+    super.key,
     this.initialIndex = 0,
     this.type = ZephyrTabsType.line,
     this.scrollable = false,
     this.onTabChanged,
     this.theme,
-  }) : super(key: key);
+  });
 
   /// 标签页列表
   final List<ZephyrTabItem> tabs;
@@ -326,7 +333,7 @@ class _ZephyrTabBarState extends State<ZephyrTabBar>
 
   void _handleTabChanged() {
     if (_tabController.indexIsChanging) return;
-    
+
     final newIndex = _tabController.index;
     if (_currentIndex != newIndex) {
       setState(() {
@@ -339,7 +346,7 @@ class _ZephyrTabBarState extends State<ZephyrTabBar>
   @override
   Widget build(BuildContext context) {
     final theme = widget.theme ?? ZephyrTabsTheme.of(context);
-    
+
     return Container(
       decoration: BoxDecoration(
         color: theme.backgroundColor,
@@ -353,7 +360,9 @@ class _ZephyrTabBarState extends State<ZephyrTabBar>
       child: TabBar(
         controller: _tabController,
         isScrollable: widget.scrollable,
-        indicatorColor: widget.type == ZephyrTabsType.line ? theme.indicatorColor : Colors.transparent,
+        indicatorColor: widget.type == ZephyrTabsType.line
+            ? theme.indicatorColor
+            : Colors.transparent,
         indicatorWeight: theme.indicatorHeight,
         labelColor: theme.selectedTextStyle.color,
         unselectedLabelColor: theme.unselectedTextStyle.color,

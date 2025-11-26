@@ -4,4 +4,5 @@
 library chip;
 
 export 'chip.dart';
-export 'chip_theme.dart' hide lerpDouble;
+export 'chip_theme.dart';
+export 'chip_example.dart';

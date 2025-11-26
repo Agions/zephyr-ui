@@ -7,7 +7,7 @@ import 'package:zephyr_ui/zephyr_ui.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // 初始化错误处理器
   ZephyrErrorHandler.instance.init(
     ZephyrErrorHandlerConfig(
@@ -17,12 +17,12 @@ void main() async {
       enableAutoRecovery: true,
       maxRetryAttempts: 3,
       showDetailedErrorsInDebug: true,
-      onError: (error) {
-        print('全局错误: ${error.message}');
+      onError: (error, stackTrace) {
+        debugPrint('全局错误: ${error.message}');
       },
     ),
   );
-  
+
   // 初始化无障碍管理器
   await ZephyrAccessibilityManager.instance.init(
     config: ZephyrAccessibilityManagerConfig(
@@ -43,7 +43,7 @@ void main() async {
       ),
     ),
   );
-  
+
   runApp(const AccessibilityDemoApp());
 }
 
@@ -140,7 +140,7 @@ class FormDemoPage extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           const SizedBox(height: 24),
-          
+
           // 注册表单
           ZephyrErrorBoundary(
             config: ZephyrErrorBoundaryConfig(
@@ -148,9 +148,9 @@ class FormDemoPage extends StatelessWidget {
             ),
             child: const RegistrationForm(),
           ),
-          
+
           const SizedBox(height: 32),
-          
+
           // 登录表单
           ZephyrErrorBoundary(
             config: ZephyrErrorBoundaryConfig(
@@ -178,7 +178,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  
+
   bool _isLoading = false;
   String? _errorMessage;
 
@@ -194,8 +194,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Form(
           key: _formKey,
           child: Column(
@@ -205,8 +205,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 '用户注册',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              const SizedBox(height: 16),
-              
+              SizedBox(height: 16),
+
               // 姓名输入
               ZephyrAccessibleInput(
                 labelText: '姓名',
@@ -229,9 +229,9 @@ class _RegistrationFormState extends State<RegistrationForm> {
                   return null;
                 },
               ),
-              
-              const SizedBox(height: 16),
-              
+
+              SizedBox(height: 16),
+
               // 邮箱输入
               ZephyrAccessibleInput(
                 labelText: '邮箱',
@@ -254,9 +254,9 @@ class _RegistrationFormState extends State<RegistrationForm> {
                   return null;
                 },
               ),
-              
-              const SizedBox(height: 16),
-              
+
+              SizedBox(height: 16),
+
               // 密码输入
               ZephyrAccessiblePasswordInput(
                 labelText: '密码',
@@ -274,9 +274,9 @@ class _RegistrationFormState extends State<RegistrationForm> {
                   return null;
                 },
               ),
-              
-              const SizedBox(height: 16),
-              
+
+              SizedBox(height: 16),
+
               // 确认密码
               ZephyrAccessiblePasswordInput(
                 labelText: '确认密码',
@@ -293,13 +293,13 @@ class _RegistrationFormState extends State<RegistrationForm> {
                   return null;
                 },
               ),
-              
-              const SizedBox(height: 24),
-              
+
+              SizedBox(height: 24),
+
               // 错误消息
               if (_errorMessage != null)
                 Container(
-                  padding: const EdgeInsets.all(12),
+                  padding: EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.errorContainer,
                     borderRadius: BorderRadius.circular(8),
@@ -311,9 +311,9 @@ class _RegistrationFormState extends State<RegistrationForm> {
                     ),
                   ),
                 ),
-              
-              const SizedBox(height: 16),
-              
+
+              SizedBox(height: 16),
+
               // 提交按钮
               SizedBox(
                 width: double.infinity,
@@ -346,7 +346,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
         () async {
           // 模拟网络请求
           await Future.delayed(const Duration(seconds: 2));
-          
+
           // 模拟注册成功
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -356,7 +356,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
         },
         componentName: 'RegistrationForm',
         context: context,
-        onError: (error) {
+        onError: (error, stackTrace) {
           setState(() {
             _errorMessage = error.getLocalizedMessage(context);
           });
@@ -386,7 +386,7 @@ class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  
+
   bool _isLoading = false;
   bool _rememberMe = false;
 
@@ -400,8 +400,8 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Form(
           key: _formKey,
           child: Column(
@@ -411,8 +411,8 @@ class _LoginFormState extends State<LoginForm> {
                 '用户登录',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              const SizedBox(height: 16),
-              
+              SizedBox(height: 16),
+
               // 邮箱输入
               ZephyrAccessibleInput(
                 labelText: '邮箱',
@@ -430,9 +430,9 @@ class _LoginFormState extends State<LoginForm> {
                   return null;
                 },
               ),
-              
-              const SizedBox(height: 16),
-              
+
+              SizedBox(height: 16),
+
               // 密码输入
               ZephyrAccessiblePasswordInput(
                 labelText: '密码',
@@ -446,9 +446,9 @@ class _LoginFormState extends State<LoginForm> {
                   return null;
                 },
               ),
-              
-              const SizedBox(height: 16),
-              
+
+              SizedBox(height: 16),
+
               // 记住我
               ZephyrAccessibleCheckbox(
                 label: '记住我',
@@ -459,9 +459,9 @@ class _LoginFormState extends State<LoginForm> {
                   });
                 },
               ),
-              
-              const SizedBox(height: 24),
-              
+
+              SizedBox(height: 24),
+
               // 提交按钮
               SizedBox(
                 width: double.infinity,
@@ -470,9 +470,9 @@ class _LoginFormState extends State<LoginForm> {
                   onPressed: _isLoading ? null : _handleSubmit,
                 ),
               ),
-              
-              const SizedBox(height: 16),
-              
+
+              SizedBox(height: 16),
+
               // 忘记密码链接
               Center(
                 child: ZephyrAccessibleButton(
@@ -504,9 +504,9 @@ class _LoginFormState extends State<LoginForm> {
         () async {
           // 模拟登录请求
           await Future.delayed(const Duration(seconds: 2));
-          
+
           // 模拟登录验证
-          if (_emailController.text == 'demo@example.com' && 
+          if (_emailController.text == 'demo@example.com' &&
               _passwordController.text == 'password') {
             if (mounted) {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -523,7 +523,7 @@ class _LoginFormState extends State<LoginForm> {
         },
         componentName: 'LoginForm',
         context: context,
-        onError: (error) {
+        onError: (error, stackTrace) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(error.getLocalizedMessage(context)),
@@ -565,22 +565,22 @@ class ErrorHandlingDemoPage extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           const SizedBox(height: 24),
-          
+
           // 网络错误演示
           const NetworkErrorDemo(),
-          
+
           const SizedBox(height: 24),
-          
+
           // 组件错误演示
           const ComponentErrorDemo(),
-          
+
           const SizedBox(height: 24),
-          
+
           // 异步错误演示
           const AsyncErrorDemo(),
-          
+
           const SizedBox(height: 24),
-          
+
           // 验证错误演示
           const ValidationErrorDemo(),
         ],
@@ -612,7 +612,7 @@ class _NetworkErrorDemoState extends State<NetworkErrorDemo> {
       _data = await ZephyrErrorBoundary.safeExecute(
         () async {
           await Future.delayed(const Duration(seconds: 1));
-          
+
           // 模拟网络错误
           if (DateTime.now().second % 2 == 0) {
             throw ZephyrNetworkError(
@@ -623,12 +623,12 @@ class _NetworkErrorDemoState extends State<NetworkErrorDemo> {
               method: 'GET',
             );
           }
-          
+
           return '数据加载成功！';
         },
         componentName: 'NetworkErrorDemo',
         context: context,
-        onError: (error) {
+        onError: (error, stackTrace) {
           setState(() {
             _error = error;
           });
@@ -646,8 +646,8 @@ class _NetworkErrorDemoState extends State<NetworkErrorDemo> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -655,18 +655,17 @@ class _NetworkErrorDemoState extends State<NetworkErrorDemo> {
               '网络错误处理',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               '点击按钮模拟网络请求，有时会失败以演示错误处理。',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
-            const SizedBox(height: 16),
-            
+            SizedBox(height: 16),
             if (_isLoading)
-              const Center(child: CircularProgressIndicator())
+              Center(child: CircularProgressIndicator())
             else if (_error != null)
               Container(
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.errorContainer,
                   borderRadius: BorderRadius.circular(8),
@@ -680,14 +679,14 @@ class _NetworkErrorDemoState extends State<NetworkErrorDemo> {
                           Icons.error_outline,
                           color: Theme.of(context).colorScheme.error,
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Text(
                           '网络错误',
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Text(
                       _error!.getLocalizedMessage(context),
                       style: TextStyle(
@@ -695,7 +694,7 @@ class _NetworkErrorDemoState extends State<NetworkErrorDemo> {
                       ),
                     ),
                     if (_error!.recoverySuggestion != null) ...[
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       Text(
                         '建议：${_error!.recoverySuggestion}',
                         style: TextStyle(
@@ -711,9 +710,7 @@ class _NetworkErrorDemoState extends State<NetworkErrorDemo> {
                 _data!,
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
-            
-            const SizedBox(height: 16),
-            
+            SizedBox(height: 16),
             ZephyrAccessibleButton(
               text: '加载数据',
               onPressed: _isLoading ? null : _loadData,
@@ -739,8 +736,8 @@ class _ComponentErrorDemoState extends State<ComponentErrorDemo> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -748,18 +745,17 @@ class _ComponentErrorDemoState extends State<ComponentErrorDemo> {
               '组件错误边界',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               '错误边界可以捕获子组件的错误并显示友好的错误信息。',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
-            const SizedBox(height: 16),
-            
+            SizedBox(height: 16),
             ZephyrErrorBoundary(
               config: ZephyrErrorBoundaryConfig(
                 strategy: ZephyrErrorHandlingStrategy.showUserMessage,
-                errorBuilder: (error) => Container(
-                  padding: const EdgeInsets.all(16),
+                errorBuilder: (error) => const Container(
+                  padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.errorContainer,
                     borderRadius: BorderRadius.circular(8),
@@ -771,12 +767,12 @@ class _ComponentErrorDemoState extends State<ComponentErrorDemo> {
                         color: Theme.of(context).colorScheme.error,
                         size: 48,
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       Text(
                         '组件发生了错误',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       Text(
                         error.message,
                         style: TextStyle(
@@ -787,13 +783,9 @@ class _ComponentErrorDemoState extends State<ComponentErrorDemo> {
                   ),
                 ),
               ),
-              child: _showError 
-                  ? const ErrorProneComponent() 
-                  : const NormalComponent(),
+              child: _showError ? ErrorProneComponent() : NormalComponent(),
             ),
-            
-            const SizedBox(height: 16),
-            
+            SizedBox(height: 16),
             ZephyrAccessibleButton(
               text: _showError ? '显示正常组件' : '触发错误',
               onPressed: () {
@@ -815,8 +807,8 @@ class NormalComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
+    return const Container(
+      padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.primaryContainer,
         borderRadius: BorderRadius.circular(8),
@@ -866,7 +858,7 @@ class _AsyncErrorDemoState extends State<AsyncErrorDemo> {
 
   Future<String> _fetchData() async {
     await Future.delayed(const Duration(seconds: 2));
-    
+
     // 模拟异步错误
     throw ZephyrError(
       code: ZephyrErrorCodes.operationFailed,
@@ -879,8 +871,8 @@ class _AsyncErrorDemoState extends State<AsyncErrorDemo> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -888,50 +880,60 @@ class _AsyncErrorDemoState extends State<AsyncErrorDemo> {
               '异步错误处理',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               '异步错误边界可以处理异步操作中的错误。',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
-            const SizedBox(height: 16),
-            
-            ZephyrAsyncErrorBoundary(
-              asyncBuilder: (context) async {
-                return _dataFuture ??= await _fetchData();
+            SizedBox(height: 16),
+            FutureBuilder<String>(
+              future: _dataFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  final error = snapshot.error is ZephyrError 
+                      ? snapshot.error as ZephyrError
+                      : ZephyrError(message: snapshot.error.toString());
+                  return Container(
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.errorContainer,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.sync_problem,
+                          color: Theme.of(context).colorScheme.error,
+                          size: 48,
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          '异步操作失败',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          error.message,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onErrorContainer,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                } else if (snapshot.hasData) {
+                  return Text(
+                    '数据加载成功: ${snapshot.data}',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  );
+                } else {
+                  return Text('暂无数据');
+                }
               },
-              loadingWidget: const Center(child: CircularProgressIndicator()),
-              errorBuilder: (error) => Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.errorContainer,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.sync_problem,
-                      color: Theme.of(context).colorScheme.error,
-                      size: 48,
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      '异步操作失败',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      error.message,
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.onErrorContainer,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
             ),
-            
-            const SizedBox(height: 16),
-            
+            SizedBox(height: 16),
             ZephyrAccessibleButton(
               text: '重新加载',
               onPressed: _loadData,
@@ -966,8 +968,8 @@ class _ValidationErrorDemoState extends State<ValidationErrorDemo> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Form(
           key: _formKey,
           child: Column(
@@ -977,13 +979,12 @@ class _ValidationErrorDemoState extends State<ValidationErrorDemo> {
                 '验证错误处理',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Text(
                 '实时验证和友好的错误消息提示。',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
-              const SizedBox(height: 16),
-              
+              SizedBox(height: 16),
               ZephyrAccessibleInput(
                 labelText: '邮箱',
                 placeholder: '请输入邮箱地址',
@@ -1003,9 +1004,7 @@ class _ValidationErrorDemoState extends State<ValidationErrorDemo> {
                   return null;
                 },
               ),
-              
-              const SizedBox(height: 16),
-              
+              SizedBox(height: 16),
               ZephyrAccessibleInput(
                 labelText: '年龄',
                 placeholder: '请输入年龄',
@@ -1029,9 +1028,7 @@ class _ValidationErrorDemoState extends State<ValidationErrorDemo> {
                   return null;
                 },
               ),
-              
-              const SizedBox(height: 16),
-              
+              SizedBox(height: 16),
               ZephyrAccessibleButton(
                 text: '验证',
                 onPressed: () {
@@ -1071,22 +1068,22 @@ class AccessibilityFeaturesPage extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           const SizedBox(height: 24),
-          
+
           // 键盘导航演示
           const KeyboardNavigationDemo(),
-          
+
           const SizedBox(height: 24),
-          
+
           // 语义化演示
           const SemanticsDemo(),
-          
+
           const SizedBox(height: 24),
-          
+
           // 焦点管理演示
           const FocusManagementDemo(),
-          
+
           const SizedBox(height: 24),
-          
+
           // 自适应演示
           const AdaptiveDemo(),
         ],
@@ -1102,8 +1099,8 @@ class KeyboardNavigationDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -1111,13 +1108,12 @@ class KeyboardNavigationDemo extends StatelessWidget {
               '键盘导航',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               '使用Tab键在按钮间导航，Enter或Space键激活按钮。',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
-            const SizedBox(height: 16),
-            
+            SizedBox(height: 16),
             Row(
               children: [
                 Expanded(
@@ -1130,7 +1126,7 @@ class KeyboardNavigationDemo extends StatelessWidget {
                     },
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Expanded(
                   child: ZephyrAccessibleButton(
                     text: '按钮 2',
@@ -1141,7 +1137,7 @@ class KeyboardNavigationDemo extends StatelessWidget {
                     },
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Expanded(
                   child: ZephyrAccessibleButton(
                     text: '按钮 3',
@@ -1168,8 +1164,8 @@ class SemanticsDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -1177,13 +1173,13 @@ class SemanticsDemo extends StatelessWidget {
               '语义化标记',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               '这些元素都有适当的语义化标记，屏幕阅读器可以正确识别它们。',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
-            const SizedBox(height: 16),
-            
+            SizedBox(height: 16),
+
             // 图像按钮
             ZephyrAccessibleButton(
               text: '搜索',
@@ -1194,9 +1190,9 @@ class SemanticsDemo extends StatelessWidget {
                 );
               },
             ),
-            
-            const SizedBox(height: 8),
-            
+
+            SizedBox(height: 8),
+
             // 图像
             ZephyrAccessibleImage(
               child: Image.network(
@@ -1206,9 +1202,9 @@ class SemanticsDemo extends StatelessWidget {
               ),
               description: '示例图片，150x150像素',
             ),
-            
-            const SizedBox(height: 8),
-            
+
+            SizedBox(height: 8),
+
             // 自定义语义化组件
             ZephyrAccessibilityWrapper(
               config: ZephyrAccessibilityWrapperConfig(
@@ -1226,12 +1222,12 @@ class SemanticsDemo extends StatelessWidget {
                 },
                 child: Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.primaryContainer,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: const Text('点击我'),
+                  child: Text('点击我'),
                 ),
               ),
             ),
@@ -1266,8 +1262,8 @@ class _FocusManagementDemoState extends State<FocusManagementDemo> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -1275,13 +1271,12 @@ class _FocusManagementDemoState extends State<FocusManagementDemo> {
               '焦点管理',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               '点击按钮查看焦点指示器，使用Tab键在输入框间切换。',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
-            const SizedBox(height: 16),
-            
+            SizedBox(height: 16),
             ZephyrAccessibleInput(
               labelText: '输入框 1',
               focusNode: _focusNode1,
@@ -1289,9 +1284,7 @@ class _FocusManagementDemoState extends State<FocusManagementDemo> {
                 _focusNode2.requestFocus();
               },
             ),
-            
-            const SizedBox(height: 8),
-            
+            SizedBox(height: 8),
             ZephyrAccessibleInput(
               labelText: '输入框 2',
               focusNode: _focusNode2,
@@ -1299,9 +1292,7 @@ class _FocusManagementDemoState extends State<FocusManagementDemo> {
                 _focusNode3.requestFocus();
               },
             ),
-            
-            const SizedBox(height: 8),
-            
+            SizedBox(height: 8),
             ZephyrAccessibleInput(
               labelText: '输入框 3',
               focusNode: _focusNode3,
@@ -1323,8 +1314,8 @@ class AdaptiveDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -1332,13 +1323,13 @@ class AdaptiveDemo extends StatelessWidget {
               '自适应无障碍',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               '根据系统设置自动调整无障碍功能。',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
-            const SizedBox(height: 16),
-            
+            SizedBox(height: 16),
+
             // 大文本演示
             Builder(
               builder: (context) {
@@ -1359,15 +1350,15 @@ class AdaptiveDemo extends StatelessWidget {
                 );
               },
             ),
-            
-            const SizedBox(height: 16),
-            
+
+            SizedBox(height: 16),
+
             // 高对比度演示
             Builder(
               builder: (context) {
                 final isHighContrast = MediaQuery.of(context).highContrast;
-                return Container(
-                  padding: const EdgeInsets.all(16),
+                return const Container(
+                  padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: isHighContrast ? Colors.black : Colors.blue,
                     borderRadius: BorderRadius.circular(8),
@@ -1403,7 +1394,7 @@ class _SettingsPageState extends State<SettingsPage> {
   void initState() {
     super.initState();
     _config = ZephyrAccessibilityManager.instance.currentConfig;
-    
+
     // 监听配置变化
     ZephyrAccessibilityManager.instance.addConfigListener((config) {
       setState(() {
@@ -1430,11 +1421,11 @@ class _SettingsPageState extends State<SettingsPage> {
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           const SizedBox(height: 24),
-          
+
           // 文本缩放
           Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
+            child: const Padding(
+              padding: EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -1442,11 +1433,11 @@ class _SettingsPageState extends State<SettingsPage> {
                     '文本缩放',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Text(
                     '当前缩放: ${_config.textScaleFactor.toStringAsFixed(1)}x',
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Row(
                     children: [
                       Expanded(
@@ -1454,22 +1445,26 @@ class _SettingsPageState extends State<SettingsPage> {
                           text: '减小',
                           onPressed: _config.textScaleFactor > 0.5
                               ? () {
-                                  final newScale = _config.textScaleFactor - 0.1;
-                                  ZephyrAccessibilityManager.instance.updateConfig(
+                                  final newScale =
+                                      _config.textScaleFactor - 0.1;
+                                  ZephyrAccessibilityManager.instance
+                                      .updateConfig(
                                     _config.copyWith(textScaleFactor: newScale),
                                   );
                                 }
                               : null,
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       Expanded(
                         child: ZephyrAccessibleButton(
                           text: '增大',
                           onPressed: _config.textScaleFactor < 3.0
                               ? () {
-                                  final newScale = _config.textScaleFactor + 0.1;
-                                  ZephyrAccessibilityManager.instance.updateConfig(
+                                  final newScale =
+                                      _config.textScaleFactor + 0.1;
+                                  ZephyrAccessibilityManager.instance
+                                      .updateConfig(
                                     _config.copyWith(textScaleFactor: newScale),
                                   );
                                 }
@@ -1482,13 +1477,13 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           // 高对比度
           Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
+            child: const Padding(
+              padding: EdgeInsets.all(16),
               child: ZephyrAccessibleSwitch(
                 label: '高对比度模式',
                 value: _config.highContrast,
@@ -1500,13 +1495,13 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           // 减少动画
           Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
+            child: const Padding(
+              padding: EdgeInsets.all(16),
               child: ZephyrAccessibleSwitch(
                 label: '减少动画',
                 value: _config.reduceMotion,
@@ -1518,18 +1513,20 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           // 屏幕阅读器
           Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
+            child: const Padding(
+              padding: EdgeInsets.all(16),
               child: ZephyrAccessibleSwitch(
                 label: '屏幕阅读器支持',
-                value: _config.enabledFeatures.contains(ZephyrAccessibilityFeature.screenReader),
+                value: _config.enabledFeatures
+                    .contains(ZephyrAccessibilityFeature.screenReader),
                 onChanged: (value) {
-                  final features = Set<ZephyrAccessibilityFeature>.from(_config.enabledFeatures);
+                  final features = Set<ZephyrAccessibilityFeature>.from(
+                      _config.enabledFeatures);
                   if (value) {
                     features.add(ZephyrAccessibilityFeature.screenReader);
                   } else {
@@ -1542,9 +1539,9 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           // 重置设置
           ZephyrAccessibleButton(
             text: '重置为默认设置',

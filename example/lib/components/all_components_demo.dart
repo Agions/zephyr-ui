@@ -86,7 +86,7 @@ class AllComponentsDemo extends StatelessWidget {
   }
 
   Widget _buildComponentGrid(BuildContext context) {
-    return ResponsiveGrid(
+    return const ResponsiveGrid(
       mobileColumns: 1,
       tabletColumns: 2,
       desktopColumns: 3,

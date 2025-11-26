@@ -7,7 +7,7 @@ import 'card_theme.dart';
 class ZephyrCard extends StatefulWidget {
   /// 创建一个Zephyr卡片组件
   const ZephyrCard({
-    Key? key,
+    super.key,
     this.child,
     this.backgroundColor,
     this.foregroundColor,
@@ -32,7 +32,7 @@ class ZephyrCard extends StatefulWidget {
     this.highlightColor,
     this.focusNode,
     this.autofocus = false,
-  }) : super(key: key);
+  });
 
   /// 创建一个扁平卡片（无阴影）
   factory ZephyrCard.flat({
@@ -304,29 +304,29 @@ class _ZephyrCardState extends State<ZephyrCard> {
     final theme = Theme.of(context).extension<ZephyrCardTheme>() ??
         ZephyrCardTheme.fallback(context);
 
+    // 提取重复使用的属性
+    final isEnabled = widget.enabled;
+    final hasTapCallbacks = widget.onTap != null || widget.onLongPress != null;
+    final showInteraction = isEnabled && hasTapCallbacks;
+
     // 确定最终使用的属性值
     final backgroundColor = widget.backgroundColor ?? theme.backgroundColor;
     final foregroundColor = widget.foregroundColor ?? theme.foregroundColor;
     final shadowColor = widget.shadowColor ?? theme.shadowColor;
-      final borderRadius = widget.borderRadius ?? theme.borderRadius;
+    final borderRadius = widget.borderRadius ?? theme.borderRadius;
     final padding = widget.padding ?? theme.padding;
     final margin = widget.margin ?? theme.margin;
-    // 根据变体确定阴影高度
-    double baseElevation =
-        widget.elevation ?? theme.getElevation(widget.variant);
+    
+    // 根据变体确定阴影高度，优化：提取为局部变量
+    final baseElevation = widget.elevation ?? theme.getElevation(widget.variant);
 
-    // 根据交互状态调整阴影高度
-    double currentElevation = baseElevation;
-    if (widget.enabled) {
-      if (_isHovered) {
-        currentElevation += theme.hoverElevationDelta;
-      }
-    } else {
-      currentElevation = 0;
-    }
+    // 根据交互状态调整阴影高度，优化：简化条件判断
+    final currentElevation = showInteraction && _isHovered 
+        ? baseElevation + theme.hoverElevationDelta 
+        : (isEnabled ? baseElevation : 0);
 
-    // 根据变体设置边框
-    BoxBorder? border;
+    // 根据变体设置边框，优化：提取重复使用的值
+    final BoxBorder? border;
     if (widget.variant == ZephyrCardVariant.outlined) {
       final borderWidth = widget.borderWidth ?? theme.borderWidth;
       final borderColor = widget.borderColor ??
@@ -336,16 +336,17 @@ class _ZephyrCardState extends State<ZephyrCard> {
         width: borderWidth,
         color: borderColor,
       );
+    } else {
+      border = null;
     }
 
-    // 构建卡片内容
-    Widget content = widget.child ?? const SizedBox();
+    // 构建卡片内容，优化：避免不必要的空容器
+    Widget content = widget.child ?? const SizedBox.shrink();
 
-    // 应用前景色（如果有）
+    // 应用前景色（如果有），优化：只有在需要时才创建新的Widget
     if (foregroundColor != null) {
       content = DefaultTextStyle(
-        style:
-            DefaultTextStyle.of(context).style.copyWith(color: foregroundColor),
+        style: DefaultTextStyle.of(context).style.copyWith(color: foregroundColor),
         child: IconTheme(
           data: IconThemeData(color: foregroundColor),
           child: content,
@@ -359,6 +360,23 @@ class _ZephyrCardState extends State<ZephyrCard> {
       child: content,
     );
 
+    // 优化：预计算阴影，避免重复创建
+    final List<BoxShadow>? boxShadow;
+    if (currentElevation > 0) {
+      final effectiveShadowColor = shadowColor?.withValues(alpha: 0.2) ??
+          Colors.black.withValues(alpha: 0.2);
+      boxShadow = [
+        BoxShadow(
+          color: effectiveShadowColor,
+          blurRadius: currentElevation * 4,
+          spreadRadius: currentElevation / 2,
+          offset: Offset(0, currentElevation),
+        ),
+      ];
+    } else {
+      boxShadow = null;
+    }
+
     // 构建卡片容器
     Widget card = AnimatedContainer(
       duration: theme.animationDuration,
@@ -369,17 +387,7 @@ class _ZephyrCardState extends State<ZephyrCard> {
         color: backgroundColor,
         borderRadius: borderRadius,
         border: border,
-        boxShadow: currentElevation > 0
-            ? [
-                BoxShadow(
-                  color: shadowColor?.withValues(alpha: 0.2) ??
-                      Colors.black.withValues(alpha: 0.2),
-                  blurRadius: currentElevation * 4,
-                  spreadRadius: currentElevation / 2,
-                  offset: Offset(0, currentElevation),
-                ),
-              ]
-            : null,
+        boxShadow: boxShadow,
       ),
       child: Material(
         type: MaterialType.transparency,
@@ -395,13 +403,12 @@ class _ZephyrCardState extends State<ZephyrCard> {
       child: card,
     );
 
-    // 添加交互行为
-    if (widget.enabled &&
-        (widget.onTap != null || widget.onLongPress != null)) {
+    // 添加交互行为，优化：减少不必要的嵌套
+    if (showInteraction) {
       card = Semantics(
         label: widget.semanticLabel,
         button: true,
-        enabled: widget.enabled,
+        enabled: isEnabled,
         child: InkWell(
           splashColor: widget.splashColor,
           highlightColor: widget.highlightColor,
@@ -413,9 +420,7 @@ class _ZephyrCardState extends State<ZephyrCard> {
             setState(() {
               _isHovered = value;
             });
-            if (widget.onHover != null) {
-              widget.onHover!(value);
-            }
+            widget.onHover?.call(value);
           },
           onHighlightChanged: (value) {
             setState(() {
@@ -432,7 +437,7 @@ class _ZephyrCardState extends State<ZephyrCard> {
       card = Semantics(
         label: widget.semanticLabel,
         button: false,
-        enabled: widget.enabled,
+        enabled: isEnabled,
         child: card,
       );
     }

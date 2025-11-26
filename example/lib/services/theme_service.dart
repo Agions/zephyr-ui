@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// ZephyrUI 专业主题服务
-/// 
+///
 /// 提供企业级的主题管理功能，包括：
 /// - 深色/浅色主题切换
 /// - 自定义主题颜色配置
@@ -15,37 +15,52 @@ class ThemeService extends ChangeNotifier {
   static const String _primaryColorKey = 'zephyr_ui_primary_color';
   static const String _accentColorKey = 'zephyr_ui_accent_color';
   static const String _themePresetKey = 'zephyr_ui_theme_preset';
-  
+
   ThemeMode _themeMode = ThemeMode.system;
   Color _primaryColor = const Color(0xFF6366F1); // Indigo
   Color _accentColor = const Color(0xFFEC4899); // Pink
   int _themePreset = 0;
-  
+
   ThemeMode get themeMode => _themeMode;
   Color get primaryColor => _primaryColor;
   Color get accentColor => _accentColor;
   int get themePreset => _themePreset;
-  
+
   bool get isDarkMode => _themeMode == ThemeMode.dark;
   bool get isLightMode => _themeMode == ThemeMode.light;
   bool get isSystemMode => _themeMode == ThemeMode.system;
-  
+
   ThemeService() {
     _loadThemePreferences();
   }
-  
+
   /// 预设主题方案
   static const List<Map<String, Color>> themePresets = [
-    {'primary': Color(0xFF6366F1), 'accent': Color(0xFFEC4899)}, // Indigo + Pink
-    {'primary': Color(0xFF10B981), 'accent': Color(0xFF14B8A6)}, // Emerald + Teal
+    {
+      'primary': Color(0xFF6366F1),
+      'accent': Color(0xFFEC4899)
+    }, // Indigo + Pink
+    {
+      'primary': Color(0xFF10B981),
+      'accent': Color(0xFF14B8A6)
+    }, // Emerald + Teal
     {'primary': Color(0xFFF59E0B), 'accent': Color(0xFFEF4444)}, // Amber + Red
-    {'primary': Color(0xFF8B5CF6), 'accent': Color(0xFFEC4899)}, // Violet + Pink
+    {
+      'primary': Color(0xFF8B5CF6),
+      'accent': Color(0xFFEC4899)
+    }, // Violet + Pink
     {'primary': Color(0xFF3B82F6), 'accent': Color(0xFF06B6D4)}, // Blue + Cyan
-    {'primary': Color(0xFF84CC16), 'accent': Color(0xFF10B981)}, // Lime + Emerald
+    {
+      'primary': Color(0xFF84CC16),
+      'accent': Color(0xFF10B981)
+    }, // Lime + Emerald
     {'primary': Color(0xFFEF4444), 'accent': Color(0xFFF97316)}, // Red + Orange
-    {'primary': Color(0xFF6366F1), 'accent': Color(0xFF14B8A6)}, // Indigo + Teal
+    {
+      'primary': Color(0xFF6366F1),
+      'accent': Color(0xFF14B8A6)
+    }, // Indigo + Teal
   ];
-  
+
   /// 从持久化存储加载主题设置
   Future<void> _loadThemePreferences() async {
     try {
@@ -54,23 +69,23 @@ class ThemeService extends ChangeNotifier {
       final primaryColorValue = prefs.getInt(_primaryColorKey);
       final accentColorValue = prefs.getInt(_accentColorKey);
       final presetIndex = prefs.getInt(_themePresetKey) ?? 0;
-      
+
       _themeMode = ThemeMode.values[themeIndex];
       _themePreset = presetIndex;
-      
+
       if (primaryColorValue != null) {
         _primaryColor = Color(primaryColorValue);
       }
       if (accentColorValue != null) {
         _accentColor = Color(accentColorValue);
       }
-      
+
       notifyListeners();
     } catch (e) {
       debugPrint('Failed to load theme preferences: $e');
     }
   }
-  
+
   /// 保存主题设置到持久化存储
   Future<void> _saveThemePreferences() async {
     try {
@@ -83,28 +98,28 @@ class ThemeService extends ChangeNotifier {
       debugPrint('Failed to save theme preferences: $e');
     }
   }
-  
+
   /// 设置主题模式
   Future<void> setThemeMode(ThemeMode mode) async {
     _themeMode = mode;
     await _saveThemePreferences();
     notifyListeners();
   }
-  
+
   /// 设置主色调
   Future<void> setPrimaryColor(Color color) async {
     _primaryColor = color;
     await _saveThemePreferences();
     notifyListeners();
   }
-  
+
   /// 设置强调色
   Future<void> setAccentColor(Color color) async {
     _accentColor = color;
     await _saveThemePreferences();
     notifyListeners();
   }
-  
+
   /// 应用预设主题
   Future<void> applyThemePreset(int presetIndex) async {
     if (presetIndex >= 0 && presetIndex < themePresets.length) {
@@ -116,22 +131,21 @@ class ThemeService extends ChangeNotifier {
       notifyListeners();
     }
   }
-  
+
   /// 切换深色/浅色主题
   Future<void> toggleTheme() async {
-    _themeMode = _themeMode == ThemeMode.light 
-        ? ThemeMode.dark 
-        : ThemeMode.light;
+    _themeMode =
+        _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
     await _saveThemePreferences();
     notifyListeners();
   }
-  
+
   /// 获取当前主题数据
   ThemeData getTheme(BuildContext context) {
     final brightness = _getBrightness(context);
     return _buildThemeData(brightness);
   }
-  
+
   /// 获取当前主题亮度
   Brightness _getBrightness(BuildContext context) {
     switch (_themeMode) {
@@ -143,7 +157,7 @@ class ThemeService extends ChangeNotifier {
         return MediaQuery.platformBrightnessOf(context);
     }
   }
-  
+
   /// 构建主题数据
   ThemeData _buildThemeData(Brightness brightness) {
     final colorScheme = ColorScheme.fromSeed(
@@ -151,12 +165,12 @@ class ThemeService extends ChangeNotifier {
       secondary: _accentColor,
       brightness: brightness,
     );
-    
+
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
       brightness: brightness,
-      
+
       // 应用栏主题
       appBarTheme: AppBarTheme(
         backgroundColor: colorScheme.surface,
@@ -176,7 +190,7 @@ class ThemeService extends ChangeNotifier {
           color: colorScheme.onSurface,
         ),
       ),
-      
+
       // 卡片主题
       cardTheme: CardTheme(
         elevation: 2,
@@ -186,7 +200,7 @@ class ThemeService extends ChangeNotifier {
         clipBehavior: Clip.antiAlias,
         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
       ),
-      
+
       // 按钮主题
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -201,7 +215,7 @@ class ThemeService extends ChangeNotifier {
           ),
         ),
       ),
-      
+
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -214,7 +228,7 @@ class ThemeService extends ChangeNotifier {
           ),
         ),
       ),
-      
+
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -227,7 +241,7 @@ class ThemeService extends ChangeNotifier {
           ),
         ),
       ),
-      
+
       // 输入框主题
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
@@ -268,7 +282,8 @@ class ThemeService extends ChangeNotifier {
             color: colorScheme.onSurface.withValues(alpha: 0.12),
           ),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         filled: true,
         fillColor: colorScheme.surface,
         hintStyle: TextStyle(
@@ -291,10 +306,10 @@ class ThemeService extends ChangeNotifier {
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         alignLabelWithHint: true,
       ),
-      
+
       // 芯片主题
       chipTheme: ChipThemeData(
-        backgroundColor: colorScheme.surfaceVariant,
+        backgroundColor: colorScheme.surfaceContainerHighest,
         deleteIconColor: colorScheme.onSurfaceVariant,
         disabledColor: colorScheme.onSurface.withValues(alpha: 0.12),
         selectedColor: colorScheme.primaryContainer,
@@ -322,7 +337,7 @@ class ThemeService extends ChangeNotifier {
           color: colorScheme.outline.withValues(alpha: 0.12),
         ),
       ),
-      
+
       // 标签页主题
       tabBarTheme: TabBarTheme(
         labelColor: colorScheme.primary,
@@ -354,9 +369,9 @@ class ThemeService extends ChangeNotifier {
           return null;
         }),
         splashFactory: InkRipple.splashFactory,
-        mouseCursor: MaterialStateProperty.all(SystemMouseCursors.click),
+        mouseCursor: WidgetStateProperty.all(SystemMouseCursors.click),
       ),
-      
+
       // 分割线主题
       dividerTheme: DividerThemeData(
         color: colorScheme.outline.withValues(alpha: 0.12),
@@ -365,7 +380,7 @@ class ThemeService extends ChangeNotifier {
         indent: 0,
         endIndent: 0,
       ),
-      
+
       // 列表瓦片主题
       listTileTheme: ListTileThemeData(
         titleTextStyle: TextStyle(
@@ -394,7 +409,7 @@ class ThemeService extends ChangeNotifier {
         iconColor: colorScheme.onSurfaceVariant,
         textColor: colorScheme.onSurface,
       ),
-      
+
       // 底部导航栏主题
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: colorScheme.surface,
@@ -412,7 +427,7 @@ class ThemeService extends ChangeNotifier {
         ),
         landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
       ),
-      
+
       // 浮动操作按钮主题
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: colorScheme.primaryContainer,
@@ -429,7 +444,7 @@ class ThemeService extends ChangeNotifier {
           maxHeight: 56,
         ),
       ),
-      
+
       // 开关主题
       switchTheme: SwitchThemeData(
         thumbColor: WidgetStateProperty.resolveWith((states) {
@@ -460,9 +475,9 @@ class ThemeService extends ChangeNotifier {
           return colorScheme.outline.withValues(alpha: 0.12);
         }),
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        mouseCursor: MaterialStateProperty.all(SystemMouseCursors.click),
+        mouseCursor: WidgetStateProperty.all(SystemMouseCursors.click),
       ),
-      
+
       // 复选框主题
       checkboxTheme: CheckboxThemeData(
         shape: RoundedRectangleBorder(
@@ -497,7 +512,7 @@ class ThemeService extends ChangeNotifier {
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         visualDensity: VisualDensity.standard,
       ),
-      
+
       // 单选按钮主题
       radioTheme: RadioThemeData(
         fillColor: WidgetStateProperty.resolveWith((states) {
@@ -524,7 +539,7 @@ class ThemeService extends ChangeNotifier {
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         visualDensity: VisualDensity.standard,
       ),
-      
+
       // 滑块主题
       sliderTheme: SliderThemeData(
         activeTrackColor: colorScheme.primary,
@@ -544,7 +559,7 @@ class ThemeService extends ChangeNotifier {
         showValueIndicator: ShowValueIndicator.onlyForDiscrete,
         minThumbSeparation: 0,
       ),
-      
+
       // 进度指示器主题
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: colorScheme.primary,
@@ -553,7 +568,7 @@ class ThemeService extends ChangeNotifier {
         refreshBackgroundColor: colorScheme.surface,
         linearMinHeight: 6,
       ),
-      
+
       // 文本主题
       textTheme: TextTheme(
         displayLarge: TextStyle(
@@ -632,10 +647,10 @@ class ThemeService extends ChangeNotifier {
           color: colorScheme.primary,
         ),
       ),
-      
+
       // 脚手架背景色
       scaffoldBackgroundColor: colorScheme.surface,
-      
+
       // 对话框主题
       dialogTheme: DialogTheme(
         backgroundColor: colorScheme.surface,
@@ -654,12 +669,13 @@ class ThemeService extends ChangeNotifier {
           fontWeight: FontWeight.normal,
           color: colorScheme.onSurfaceVariant,
         ),
-        actionsPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        actionsPadding:
+            const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         titlePadding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
         contentPadding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
         alignment: Alignment.center,
       ),
-      
+
       // 底部表单主题
       bottomSheetTheme: BottomSheetThemeData(
         backgroundColor: colorScheme.surface,
@@ -675,9 +691,9 @@ class ThemeService extends ChangeNotifier {
         dragHandleSize: const Size(40, 4),
         showDragHandle: true,
       ),
-      
+
       // 扩展颜色
-      extensions: <ThemeExtension<dynamic>>[
+      extensions: const <ThemeExtension<dynamic>>[
         _ZephyrThemeExtension(
           success: Colors.green,
           warning: Colors.orange,
@@ -687,7 +703,7 @@ class ThemeService extends ChangeNotifier {
       ],
     );
   }
-  
+
   /// 重置为默认主题
   Future<void> resetToDefault() async {
     _themeMode = ThemeMode.system;
@@ -708,12 +724,12 @@ class _ZephyrThemeExtension extends ThemeExtension<_ZephyrThemeExtension> {
     required this.error,
     required this.info,
   });
-  
+
   final Color success;
   final Color warning;
   final Color error;
   final Color info;
-  
+
   @override
   _ZephyrThemeExtension copyWith({
     Color? success,
@@ -728,9 +744,10 @@ class _ZephyrThemeExtension extends ThemeExtension<_ZephyrThemeExtension> {
       info: info ?? this.info,
     );
   }
-  
+
   @override
-  _ZephyrThemeExtension lerp(ThemeExtension<_ZephyrThemeExtension>? other, double t) {
+  _ZephyrThemeExtension lerp(
+      ThemeExtension<_ZephyrThemeExtension>? other, double t) {
     if (other is! _ZephyrThemeExtension) {
       return this;
     }

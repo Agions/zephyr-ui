@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// Rich Editor Demo Page
-/// 
+///
 /// Demonstrates the capabilities of the ZephyrRichEditor component
 class RichEditorDemo extends StatefulWidget {
   const RichEditorDemo({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class RichEditorDemo extends StatefulWidget {
 class _RichEditorDemoState extends State<RichEditorDemo> {
   // Note: This would require flutter_quill package to work
   // For now, this is a placeholder implementation
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,26 +23,26 @@ class _RichEditorDemoState extends State<RichEditorDemo> {
         foregroundColor: Colors.white,
       ),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
+        child: const Padding(
+          padding: EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(
+              Icon(
                 Icons.edit,
                 size: 80,
                 color: Colors.blue,
               ),
-              const SizedBox(height: 24),
-              const Text(
+              SizedBox(height: 24),
+              Text(
                 'Rich Editor Component',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 16),
-              const Text(
+              SizedBox(height: 16),
+              Text(
                 'The ZephyrRichEditor component provides a comprehensive rich text editing experience with:\n\n'
                 '• Complete formatting toolbar (bold, italic, underline, etc.)\n'
                 '• Header and text sizing options\n'
@@ -60,12 +60,12 @@ class _RichEditorDemoState extends State<RichEditorDemo> {
                 style: TextStyle(fontSize: 16),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text('Back to Components'),
+                child: Text('Back to Components'),
               ),
             ],
           ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:zephyr_ui/zephyr_ui.dart';
 
 // 完整的组件示例应用
 class CompleteComponentDemo extends StatefulWidget {
@@ -99,9 +98,9 @@ class HomeDemo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // 欢迎横幅
-          Container(
+          const Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(24),
+            padding: EdgeInsets.all(24),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [Colors.blue, Colors.purple],
@@ -113,7 +112,7 @@ class HomeDemo extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   '欢迎使用 ZephyrUI',
                   style: TextStyle(
                     fontSize: 28,
@@ -121,7 +120,7 @@ class HomeDemo extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text(
                   '专业的 Flutter UI 组件库',
                   style: TextStyle(
@@ -129,14 +128,14 @@ class HomeDemo extends StatelessWidget {
                     color: Colors.white.withOpacity(0.9),
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: Colors.blue,
                   ),
-                  child: const Text('开始使用'),
+                  child: Text('开始使用'),
                 ),
               ],
             ),
@@ -205,8 +204,8 @@ class HomeDemo extends StatelessWidget {
           ),
           const SizedBox(height: 16),
 
-          Container(
-            padding: const EdgeInsets.all(16),
+          const Container(
+            padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.grey[100],
               borderRadius: BorderRadius.circular(8),
@@ -214,18 +213,18 @@ class HomeDemo extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   '1. 添加依赖',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Container(
-                  padding: const EdgeInsets.all(8),
+                  padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  child: const Text(
+                  child: Text(
                     'dependencies:\n  zephyr_ui: ^0.3.0',
                     style: TextStyle(
                       color: Colors.white,
@@ -233,19 +232,19 @@ class HomeDemo extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
-                const Text(
+                SizedBox(height: 16),
+                Text(
                   '2. 导入并使用',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Container(
-                  padding: const EdgeInsets.all(8),
+                  padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  child: const Text(
+                  child: Text(
                     'import \'package:zephyr_ui/zephyr_ui.dart\';\n\nZephyrButton(\n  text: \'点击我\',\n  onPressed: () {},\n)',
                     style: TextStyle(
                       color: Colors.white,
@@ -261,23 +260,24 @@ class HomeDemo extends StatelessWidget {
     );
   }
 
-  Widget _buildFeatureCard(IconData icon, String title, String description, Color color) {
+  Widget _buildFeatureCard(
+      IconData icon, String title, String description, Color color) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Icon(icon, size: 32, color: color),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(
               title,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               description,
               style: TextStyle(
@@ -293,8 +293,8 @@ class HomeDemo extends StatelessWidget {
 
   Widget _buildComponentPreview() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           children: [
             Row(
@@ -302,43 +302,43 @@ class HomeDemo extends StatelessWidget {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {},
-                    child: const Text('主要按钮'),
+                    child: Text('主要按钮'),
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Expanded(
                   child: OutlinedButton(
                     onPressed: () {},
-                    child: const Text('次要按钮'),
+                    child: Text('次要按钮'),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 16),
-            const TextField(
+            SizedBox(height: 16),
+            TextField(
               decoration: InputDecoration(
                 labelText: '输入框',
                 border: OutlineInputBorder(),
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Column(
-                  children: const [
+                  children: [
                     Icon(Icons.star, color: Colors.amber),
                     Text('评分'),
                   ],
                 ),
                 Column(
-                  children: const [
+                  children: [
                     Icon(Icons.toggle_on, color: Colors.blue),
                     Text('开关'),
                   ],
                 ),
                 Column(
-                  children: const [
+                  children: [
                     Icon(Icons.check_box, color: Colors.green),
                     Text('复选框'),
                   ],
@@ -396,9 +396,9 @@ class ButtonDemo extends StatelessWidget {
               child: const Text('正常状态'),
             ),
             const SizedBox(width: 8),
-            ElevatedButton(
+            const ElevatedButton(
               onPressed: null,
-              child: const Text('禁用状态'),
+              child: Text('禁用状态'),
             ),
             const SizedBox(width: 8),
             ElevatedButton(
@@ -501,21 +501,20 @@ class FormDemo extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-
           Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
+            child: const Padding(
+              padding: EdgeInsets.all(16),
               child: Column(
                 children: [
-                  const TextField(
+                  TextField(
                     decoration: InputDecoration(
                       labelText: '用户名',
                       border: OutlineInputBorder(),
                       prefixIcon: Icon(Icons.person),
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  const TextField(
+                  SizedBox(height: 16),
+                  TextField(
                     decoration: InputDecoration(
                       labelText: '邮箱',
                       border: OutlineInputBorder(),
@@ -523,8 +522,8 @@ class FormDemo extends StatelessWidget {
                     ),
                     keyboardType: TextInputType.emailAddress,
                   ),
-                  const SizedBox(height: 16),
-                  const TextField(
+                  SizedBox(height: 16),
+                  TextField(
                     decoration: InputDecoration(
                       labelText: '密码',
                       border: OutlineInputBorder(),
@@ -532,70 +531,67 @@ class FormDemo extends StatelessWidget {
                     ),
                     obscureText: true,
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Row(
                     children: [
                       Checkbox(value: false, onChanged: (value) {}),
-                      const Text('记住我'),
-                      const Spacer(),
+                      Text('记住我'),
+                      Spacer(),
                       TextButton(
                         onPressed: () {},
-                        child: const Text('忘记密码？'),
+                        child: Text('忘记密码？'),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {},
-                      child: const Text('登录'),
+                      child: Text('登录'),
                     ),
                   ),
                 ],
               ),
             ),
           ),
-
           const SizedBox(height: 24),
-
           const Text(
             '其他表单组件',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 12),
-
           Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
+            child: const Padding(
+              padding: EdgeInsets.all(16),
               child: Column(
                 children: [
                   // 开关
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('通知'),
+                      Text('通知'),
                       Switch(value: true, onChanged: (value) {}),
                     ],
                   ),
-                  const Divider(),
+                  Divider(),
                   // 滑块
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('音量'),
+                      Text('音量'),
                       Slider(
                         value: 0.7,
                         onChanged: (value) {},
                       ),
                     ],
                   ),
-                  const Divider(),
+                  Divider(),
                   // 单选按钮
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('性别'),
+                      Text('性别'),
                       Row(
                         children: [
                           Radio<String>(
@@ -603,13 +599,13 @@ class FormDemo extends StatelessWidget {
                             groupValue: 'male',
                             onChanged: (value) {},
                           ),
-                          const Text('男'),
+                          Text('男'),
                           Radio<String>(
                             value: 'female',
                             groupValue: 'male',
                             onChanged: (value) {},
                           ),
-                          const Text('女'),
+                          Text('女'),
                         ],
                       ),
                     ],
@@ -644,22 +640,22 @@ class LayoutDemo extends StatelessWidget {
           // 卡片布局
           _buildSection('卡片布局', [
             Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
+              child: const Padding(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        const CircleAvatar(
+                        CircleAvatar(
                           child: Icon(Icons.person),
                         ),
-                        const SizedBox(width: 12),
+                        SizedBox(width: 12),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
+                              Text(
                                 '用户名',
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
@@ -675,23 +671,23 @@ class LayoutDemo extends StatelessWidget {
                         ),
                         IconButton(
                           onPressed: () {},
-                          icon: const Icon(Icons.more_vert),
+                          icon: Icon(Icons.more_vert),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 12),
-                    const Text('这是卡片的内容描述，可以包含任何信息。'),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
+                    Text('这是卡片的内容描述，可以包含任何信息。'),
+                    SizedBox(height: 12),
                     Row(
                       children: [
                         TextButton(
                           onPressed: () {},
-                          child: const Text('取消'),
+                          child: Text('取消'),
                         ),
-                        const Spacer(),
+                        Spacer(),
                         ElevatedButton(
                           onPressed: () {},
-                          child: const Text('确认'),
+                          child: Text('确认'),
                         ),
                       ],
                     ),
@@ -803,8 +799,8 @@ class FeedbackDemo extends StatelessWidget {
 
           // 提示信息
           _buildSection('提示信息', [
-            Container(
-              padding: const EdgeInsets.all(12),
+            const Container(
+              padding: EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: Colors.blue[50],
                 borderRadius: BorderRadius.circular(8),
@@ -813,7 +809,7 @@ class FeedbackDemo extends StatelessWidget {
               child: Row(
                 children: [
                   Icon(Icons.info, color: Colors.blue[700]),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -825,7 +821,7 @@ class FeedbackDemo extends StatelessWidget {
                             color: Colors.blue[900],
                           ),
                         ),
-                        const Text('这是一条信息提示'),
+                        Text('这是一条信息提示'),
                       ],
                     ),
                   ),
@@ -838,16 +834,16 @@ class FeedbackDemo extends StatelessWidget {
 
           // 进度指示器
           _buildSection('进度指示器', [
-            Column(
+            const Column(
               children: [
-                const LinearProgressIndicator(value: 0.7),
-                const SizedBox(height: 8),
+                LinearProgressIndicator(value: 0.7),
+                SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('0%'),
-                    const Text('70%'),
-                    const Text('100%'),
+                    Text('0%'),
+                    Text('70%'),
+                    Text('100%'),
                   ],
                 ),
               ],
@@ -866,17 +862,17 @@ class FeedbackDemo extends StatelessWidget {
                     Positioned(
                       right: 0,
                       top: 0,
-                      child: Container(
-                        padding: const EdgeInsets.all(2),
+                      child: const Container(
+                        padding: EdgeInsets.all(2),
                         decoration: BoxDecoration(
                           color: Colors.red,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        constraints: const BoxConstraints(
+                        constraints: BoxConstraints(
                           minWidth: 16,
                           minHeight: 16,
                         ),
-                        child: const Text(
+                        child: Text(
                           '3',
                           style: TextStyle(
                             color: Colors.white,
@@ -895,17 +891,17 @@ class FeedbackDemo extends StatelessWidget {
                     Positioned(
                       right: 0,
                       top: 0,
-                      child: Container(
-                        padding: const EdgeInsets.all(2),
+                      child: const Container(
+                        padding: EdgeInsets.all(2),
                         decoration: BoxDecoration(
                           color: Colors.green,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        constraints: const BoxConstraints(
+                        constraints: BoxConstraints(
                           minWidth: 16,
                           minHeight: 16,
                         ),
-                        child: const Text(
+                        child: Text(
                           'New',
                           style: TextStyle(
                             color: Colors.white,
@@ -983,7 +979,7 @@ class AdvancedDemo extends StatelessWidget {
                       Tab(text: '标签3'),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 200,
                     child: TabBarView(
                       children: [
@@ -1081,8 +1077,8 @@ class AdvancedDemo extends StatelessWidget {
         DataCell(Text('$age')),
         DataCell(Text(job)),
         DataCell(
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          const Container(
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
               color: status == '在职' ? Colors.green[100] : Colors.orange[100],
               borderRadius: BorderRadius.circular(12),
@@ -1119,29 +1115,29 @@ class AdvancedDemo extends StatelessWidget {
   void _showBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      builder: (context) => Container(
-        padding: const EdgeInsets.all(16),
+      builder: (context) => const Container(
+        padding: EdgeInsets.all(16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
+            Text(
               '选择操作',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             ListTile(
-              leading: const Icon(Icons.edit),
-              title: const Text('编辑'),
+              leading: Icon(Icons.edit),
+              title: Text('编辑'),
               onTap: () => Navigator.pop(context),
             ),
             ListTile(
-              leading: const Icon(Icons.share),
-              title: const Text('分享'),
+              leading: Icon(Icons.share),
+              title: Text('分享'),
               onTap: () => Navigator.pop(context),
             ),
             ListTile(
-              leading: const Icon(Icons.delete),
-              title: const Text('删除'),
+              leading: Icon(Icons.delete),
+              title: Text('删除'),
               onTap: () => Navigator.pop(context),
             ),
           ],

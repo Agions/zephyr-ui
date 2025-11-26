@@ -63,7 +63,7 @@ class ZephyrIconTheme extends ThemeExtension<ZephyrIconTheme> {
   static ZephyrIconTheme of(BuildContext context) {
     final theme = Theme.of(context).extension<ZephyrIconTheme>();
     if (theme != null) return theme;
-    
+
     final zephyrTheme = ZephyrTheme.of(context);
     return _createDefaultTheme(zephyrTheme);
   }
@@ -134,17 +134,24 @@ class ZephyrIconTheme extends ThemeExtension<ZephyrIconTheme> {
   @override
   ZephyrIconTheme lerp(ThemeExtension<ZephyrIconTheme>? other, double t) {
     if (other is! ZephyrIconTheme) return this;
-    
+
     return ZephyrIconTheme(
-      defaultColor: Color.lerp(defaultColor, other.defaultColor, t) ?? defaultColor,
-      primaryColor: Color.lerp(primaryColor, other.primaryColor, t) ?? primaryColor,
-      secondaryColor: Color.lerp(secondaryColor, other.secondaryColor, t) ?? secondaryColor,
+      defaultColor:
+          Color.lerp(defaultColor, other.defaultColor, t) ?? defaultColor,
+      primaryColor:
+          Color.lerp(primaryColor, other.primaryColor, t) ?? primaryColor,
+      secondaryColor:
+          Color.lerp(secondaryColor, other.secondaryColor, t) ?? secondaryColor,
       errorColor: Color.lerp(errorColor, other.errorColor, t) ?? errorColor,
-      warningColor: Color.lerp(warningColor, other.warningColor, t) ?? warningColor,
-      successColor: Color.lerp(successColor, other.successColor, t) ?? successColor,
+      warningColor:
+          Color.lerp(warningColor, other.warningColor, t) ?? warningColor,
+      successColor:
+          Color.lerp(successColor, other.successColor, t) ?? successColor,
       infoColor: Color.lerp(infoColor, other.infoColor, t) ?? infoColor,
-      disabledColor: Color.lerp(disabledColor, other.disabledColor, t) ?? disabledColor,
-      defaultSize: ui.lerpDouble(defaultSize, other.defaultSize, t) ?? defaultSize,
+      disabledColor:
+          Color.lerp(disabledColor, other.disabledColor, t) ?? disabledColor,
+      defaultSize:
+          ui.lerpDouble(defaultSize, other.defaultSize, t) ?? defaultSize,
       smallSize: ui.lerpDouble(smallSize, other.smallSize, t) ?? smallSize,
       mediumSize: ui.lerpDouble(mediumSize, other.mediumSize, t) ?? mediumSize,
       largeSize: ui.lerpDouble(largeSize, other.largeSize, t) ?? largeSize,

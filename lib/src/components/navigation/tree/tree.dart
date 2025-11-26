@@ -1,5 +1,5 @@
 /// ZephyrUI Tree Component
-/// 
+///
 /// A hierarchical tree component with expand/collapse functionality,
 /// selection support, and customizable styling.
 library tree;
@@ -9,42 +9,6 @@ import 'tree_theme.dart';
 
 /// Tree node data
 class ZephyrTreeNode<T> {
-  /// Unique identifier for the node
-  final String id;
-  
-  /// Display label
-  final String label;
-  
-  /// Data associated with the node
-  final T? data;
-  
-  /// Icon for the node
-  final IconData? icon;
-  
-  /// Expanded icon
-  final IconData? expandedIcon;
-  
-  /// Collapsed icon
-  final IconData? collapsedIcon;
-  
-  /// Child nodes
-  final List<ZephyrTreeNode<T>> children;
-  
-  /// Whether the node is expanded
-  final bool isExpanded;
-  
-  /// Whether the node is selected
-  final bool isSelected;
-  
-  /// Whether the node is disabled
-  final bool isDisabled;
-  
-  /// Custom widget for the node
-  final Widget? customWidget;
-  
-  /// Additional metadata
-  final Map<String, dynamic>? metadata;
-
   const ZephyrTreeNode({
     required this.id,
     required this.label,
@@ -93,42 +57,78 @@ class ZephyrTreeNode<T> {
 
   /// Check if the node has children
   bool get hasChildren => children.isNotEmpty;
+
+  /// Unique identifier for the node
+  final String id;
+
+  /// Display label
+  final String label;
+
+  /// Data associated with the node
+  final T? data;
+
+  /// Icon for the node
+  final IconData? icon;
+
+  /// Expanded icon
+  final IconData? expandedIcon;
+
+  /// Collapsed icon
+  final IconData? collapsedIcon;
+
+  /// Child nodes
+  final List<ZephyrTreeNode<T>> children;
+
+  /// Whether the node is expanded
+  final bool isExpanded;
+
+  /// Whether the node is selected
+  final bool isSelected;
+
+  /// Whether the node is disabled
+  final bool isDisabled;
+
+  /// Custom widget for the node
+  final Widget? customWidget;
+
+  /// Additional metadata
+  final Map<String, dynamic>? metadata;
 }
 
 /// Tree component
 class ZephyrTree<T> extends StatefulWidget {
   /// Creates a tree component
   const ZephyrTree({
-    Key? key,
     required this.nodes,
+    super.key,
+    this.indentation = 24,
+    this.nodeHeight = 32,
+    this.iconSize = 16,
+    this.showLines = true,
+    this.showIcons = true,
+    this.allowMultipleSelection = false,
+    this.allowExpandCollapse = true,
+    this.highlightSearchResults = true,
+    this.animationDuration = const Duration(milliseconds: 200),
+    this.enableAccessibilityFeatures = true,
+    this.shrinkWrap = false,
     this.onNodeTap,
     this.onNodeExpand,
     this.onNodeCollapse,
     this.onNodeSelect,
     this.theme,
-    this.indentation = 24,
-    this.nodeHeight = 32,
-    this.iconSize = 16,
+    this.scrollController,
+    this.physics,
     this.expandIcon = Icons.keyboard_arrow_right,
     this.collapseIcon = Icons.keyboard_arrow_down,
     this.leafIcon,
-    this.showLines = true,
-    this.showIcons = true,
-    this.allowMultipleSelection = false,
-    this.allowExpandCollapse = true,
     this.initialExpandedNodes = const [],
     this.initialSelectedNodes = const [],
     this.disabledNodes = const [],
     this.searchQuery,
-    this.highlightSearchResults = true,
-    this.animationDuration = const Duration(milliseconds: 200),
     this.semanticLabel,
-    this.enableAccessibilityFeatures = true,
-    this.scrollController,
-    this.physics,
-    this.shrinkWrap = false,
     this.padding,
-  }) : super(key: key);
+  });
 
   /// Root nodes of the tree
   final List<ZephyrTreeNode<T>> nodes;
@@ -243,11 +243,11 @@ class _ZephyrTreeState<T> extends State<ZephyrTree<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = widget.theme ?? ZephyrTreeTheme.of(context);
     final filteredNodes = _filterNodes(_nodes);
 
     return Semantics(
-      label: widget.semanticLabel ?? 'Tree view with ${filteredNodes.length} items',
+      label: widget.semanticLabel ??
+          'Tree view with ${filteredNodes.length} items',
       enabled: widget.enableAccessibilityFeatures,
       child: ListView.builder(
         controller: widget.scrollController,
@@ -272,7 +272,8 @@ class _ZephyrTreeState<T> extends State<ZephyrTree<T>> {
   }
 
   bool _nodeMatchesSearch(ZephyrTreeNode<T> node) {
-    final matches = node.label.toLowerCase().contains(widget.searchQuery!.toLowerCase());
+    final matches =
+        node.label.toLowerCase().contains(widget.searchQuery!.toLowerCase());
     if (matches) return true;
 
     // Check children recursively
@@ -325,7 +326,8 @@ class _ZephyrTreeState<T> extends State<ZephyrTree<T>> {
     bool isHighlighted,
     ZephyrTreeTheme theme,
   ) {
-    Widget nodeContent = node.customWidget ?? _buildDefaultNodeContent(node, theme);
+    var nodeContent =
+        node.customWidget ?? _buildDefaultNodeContent(node, theme);
 
     // Add highlight if needed
     if (isHighlighted) {
@@ -381,7 +383,7 @@ class _ZephyrTreeState<T> extends State<ZephyrTree<T>> {
             if (hasChildren && widget.allowExpandCollapse)
               _buildExpandCollapseButton(node, isExpanded, theme),
             if (hasChildren && widget.allowExpandCollapse)
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
             // Node icon
             if (widget.showIcons && node.icon != null)
               Icon(
@@ -389,8 +391,7 @@ class _ZephyrTreeState<T> extends State<ZephyrTree<T>> {
                 size: widget.iconSize,
                 color: theme.iconColor,
               ),
-            if (widget.showIcons && node.icon != null)
-              SizedBox(width: 8),
+            if (widget.showIcons && node.icon != null) const SizedBox(width: 8),
             // Node content
             Expanded(
               child: DefaultTextStyle(
@@ -406,7 +407,8 @@ class _ZephyrTreeState<T> extends State<ZephyrTree<T>> {
     );
   }
 
-  Widget _buildDefaultNodeContent(ZephyrTreeNode<T> node, ZephyrTreeTheme theme) {
+  Widget _buildDefaultNodeContent(
+      ZephyrTreeNode<T> node, ZephyrTreeTheme theme) {
     return Row(
       children: [
         Expanded(
@@ -454,13 +456,13 @@ class _ZephyrTreeState<T> extends State<ZephyrTree<T>> {
     if (!widget.allowMultipleSelection) {
       _selectedNodes.clear();
     }
-    
+
     if (_selectedNodes.contains(node.id)) {
       _selectedNodes.remove(node.id);
     } else {
       _selectedNodes.add(node.id);
     }
-    
+
     widget.onNodeSelect?.call(node);
     setState(() {});
   }
@@ -479,19 +481,14 @@ class _ZephyrTreeState<T> extends State<ZephyrTree<T>> {
 
 /// Tree view controller for managing tree state
 class ZephyrTreeController<T> {
-  List<ZephyrTreeNode<T>> _nodes;
-  final Set<String> _expandedNodes = {};
-  final Set<String> _selectedNodes = {};
-
   ZephyrTreeController(this._nodes);
 
   /// Get the current nodes
   List<ZephyrTreeNode<T>> get nodes => _nodes;
 
-  /// Set the nodes
-  set nodes(List<ZephyrTreeNode<T>> value) {
-    _nodes = value;
-  }
+  final List<ZephyrTreeNode<T>> _nodes;
+  final Set<String> _expandedNodes = {};
+  final Set<String> _selectedNodes = {};
 
   /// Expand a node
   void expandNode(String nodeId) {
@@ -536,7 +533,8 @@ class ZephyrTreeController<T> {
     return _findNodeRecursive(_nodes, nodeId);
   }
 
-  ZephyrTreeNode<T>? _findNodeRecursive(List<ZephyrTreeNode<T>> nodes, String nodeId) {
+  ZephyrTreeNode<T>? _findNodeRecursive(
+      List<ZephyrTreeNode<T>> nodes, String nodeId) {
     for (final node in nodes) {
       if (node.id == nodeId) {
         return node;

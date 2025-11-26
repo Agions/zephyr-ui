@@ -28,26 +28,26 @@ enum ZephyrChipVariant {
 /// ```dart
 /// ZephyrChip(
 ///   label: 'Flutter',
-///   onPressed: () => print('Chip pressed'),
+///   onPressed: () => debugPrint('Chip pressed'),
 /// )
 ///
 /// ZephyrChip.choice(
 ///   label: '前端开发',
 ///   selected: true,
-///   onSelected: (selected) => print('Selected: $selected'),
+///   onSelected: (selected) => debugPrint('Selected: $selected'),
 /// )
 ///
 /// ZephyrChip.filter(
 ///   label: '已完成',
 ///   selected: false,
-///   onSelected: (selected) => print('Filter: $selected'),
+///   onSelected: (selected) => debugPrint('Filter: $selected'),
 /// )
 /// ```
 class ZephyrChip extends StatelessWidget {
   /// 创建一个标准标签
   const ZephyrChip({
-    Key? key,
     required this.label,
+    super.key,
     this.avatar,
     this.deleteIcon,
     this.onPressed,
@@ -56,13 +56,12 @@ class ZephyrChip extends StatelessWidget {
     this.enabled = true,
     this.variant = ZephyrChipVariant.standard,
     this.theme,
-  })  : onSelected = null,
-        super(key: key);
+  }) : onSelected = null;
 
   /// 创建一个可选择标签
   const ZephyrChip.choice({
-    Key? key,
     required this.label,
+    super.key,
     this.avatar,
     this.selected = false,
     this.enabled = true,
@@ -71,13 +70,12 @@ class ZephyrChip extends StatelessWidget {
   })  : variant = ZephyrChipVariant.choice,
         deleteIcon = null,
         onPressed = null,
-        onDeleted = null,
-        super(key: key);
+        onDeleted = null;
 
   /// 创建一个过滤标签
   const ZephyrChip.filter({
-    Key? key,
     required this.label,
+    super.key,
     this.avatar,
     this.selected = false,
     this.enabled = true,
@@ -86,13 +84,12 @@ class ZephyrChip extends StatelessWidget {
   })  : variant = ZephyrChipVariant.filter,
         deleteIcon = null,
         onPressed = null,
-        onDeleted = null,
-        super(key: key);
+        onDeleted = null;
 
   /// 创建一个输入标签
   const ZephyrChip.input({
-    Key? key,
     required this.label,
+    super.key,
     this.avatar,
     this.deleteIcon,
     this.enabled = true,
@@ -101,13 +98,12 @@ class ZephyrChip extends StatelessWidget {
   })  : variant = ZephyrChipVariant.input,
         selected = false,
         onPressed = null,
-        onSelected = null,
-        super(key: key);
+        onSelected = null;
 
   /// 创建一个操作标签
   const ZephyrChip.action({
-    Key? key,
     required this.label,
+    super.key,
     this.avatar,
     this.enabled = true,
     this.onPressed,
@@ -116,8 +112,7 @@ class ZephyrChip extends StatelessWidget {
         deleteIcon = null,
         selected = false,
         onDeleted = null,
-        onSelected = null,
-        super(key: key);
+        onSelected = null;
 
   /// 标签文本
   final String label;
@@ -151,7 +146,8 @@ class ZephyrChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = this.theme ?? Theme.of(context).extension<ZephyrChipTheme>() ??
+    final theme = this.theme ??
+        Theme.of(context).extension<ZephyrChipTheme>() ??
         ZephyrChipTheme.fallback(context);
 
     return Material(
@@ -165,7 +161,7 @@ class ZephyrChip extends StatelessWidget {
             color: _getBackgroundColor(theme),
             border: Border.all(
               color: _getBorderColor(theme),
-              width: theme.borderWidth,
+              width: theme.borderWidth ?? 1.0,
             ),
             borderRadius: theme.borderRadius,
           ),
@@ -193,8 +189,9 @@ class ZephyrChip extends StatelessWidget {
                 child: Text(
                   label,
                   style: theme.textStyle?.copyWith(
-                    color: _getTextColor(theme),
-                  ) ?? TextStyle(color: _getTextColor(theme)),
+                        color: _getTextColor(theme),
+                      ) ??
+                      TextStyle(color: _getTextColor(theme)),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
@@ -229,11 +226,15 @@ class ZephyrChip extends StatelessWidget {
 
   Color _getBackgroundColor(ZephyrChipTheme theme) {
     if (!enabled) {
-      return theme.disabledBackgroundColor ?? theme.backgroundColor ?? Colors.grey.shade200;
+      return theme.disabledBackgroundColor ??
+          theme.backgroundColor ??
+          Colors.grey.shade200;
     }
 
     if (selected) {
-      return theme.selectedBackgroundColor ?? theme.backgroundColor ?? Colors.blue.shade100;
+      return theme.selectedBackgroundColor ??
+          theme.backgroundColor ??
+          Colors.blue.shade100;
     }
 
     return theme.backgroundColor ?? Colors.grey.shade100;
@@ -241,26 +242,30 @@ class ZephyrChip extends StatelessWidget {
 
   Color _getBorderColor(ZephyrChipTheme theme) {
     if (!enabled) {
-      return theme.disabledBorderColor ?? theme.borderColor;
+      return theme.disabledBorderColor ??
+          theme.borderColor ??
+          Colors.transparent;
     }
 
     if (selected) {
-      return theme.selectedBorderColor ?? theme.borderColor;
+      return theme.selectedBorderColor ??
+          theme.borderColor ??
+          Colors.transparent;
     }
 
-    return theme.borderColor;
+    return theme.borderColor ?? Colors.transparent;
   }
 
   Color _getTextColor(ZephyrChipTheme theme) {
     if (!enabled) {
-      return theme.disabledTextColor ?? theme.textColor;
+      return theme.disabledTextColor ?? theme.textColor ?? Colors.black54;
     }
 
     if (selected) {
-      return theme.selectedTextColor ?? theme.textColor;
+      return theme.selectedTextColor ?? theme.textColor ?? Colors.black87;
     }
 
-    return theme.textColor;
+    return theme.textColor ?? Colors.black87;
   }
 }
 
@@ -268,15 +273,15 @@ class ZephyrChip extends StatelessWidget {
 class ZephyrChipGroup extends StatefulWidget {
   /// 创建一个标签组
   const ZephyrChipGroup({
-    Key? key,
     required this.chips,
+    super.key,
     this.selectedChips = const [],
     this.multiSelect = false,
     this.onSelectionChanged,
     this.spacing = 8.0,
     this.runSpacing = 8.0,
     this.theme,
-  }) : super(key: key);
+  });
 
   /// 标签列表
   final List<ZephyrChipData> chips;

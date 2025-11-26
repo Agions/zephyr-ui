@@ -17,8 +17,8 @@ class ResponsiveLayout extends StatelessWidget {
   }
 
   static bool isTablet(BuildContext context) {
-    return MediaQuery.of(context).size.width >= 768 && 
-           MediaQuery.of(context).size.width < 1024;
+    return MediaQuery.of(context).size.width >= 768 &&
+        MediaQuery.of(context).size.width < 1024;
   }
 
   static bool isDesktop(BuildContext context) {
@@ -28,7 +28,7 @@ class ResponsiveLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size.width;
-    
+
     if (size >= 1024 && desktop != null) {
       return desktop!;
     } else if (size >= 768 && tablet != null) {
@@ -61,7 +61,7 @@ class ResponsiveGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size.width;
     int crossAxisCount;
-    
+
     if (size >= 1024) {
       crossAxisCount = desktopColumns!;
     } else if (size >= 768) {
@@ -72,13 +72,15 @@ class ResponsiveGrid extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        final itemWidth = (constraints.maxWidth - (spacing * (crossAxisCount - 1))) / crossAxisCount;
-        
+        final itemWidth =
+            (constraints.maxWidth - (spacing * (crossAxisCount - 1))) /
+                crossAxisCount;
+
         return Wrap(
           spacing: spacing,
           runSpacing: runSpacing,
           children: children.map((child) {
-            return SizedBox(
+            return const SizedBox(
               width: itemWidth,
               child: child,
             );
@@ -102,7 +104,7 @@ class ResponsiveValue<T> {
 
   T getValue(BuildContext context) {
     final size = MediaQuery.of(context).size.width;
-    
+
     if (size >= 1024 && desktop != null) {
       return desktop!;
     } else if (size >= 768 && tablet != null) {
@@ -114,7 +116,8 @@ class ResponsiveValue<T> {
 }
 
 class ResponsiveSpacing {
-  static double getSpacing(BuildContext context, {double mobile = 16, double? tablet, double? desktop}) {
+  static double getSpacing(BuildContext context,
+      {double mobile = 16, double? tablet, double? desktop}) {
     return ResponsiveValue<double>(
       mobile: mobile,
       tablet: tablet,
@@ -122,30 +125,36 @@ class ResponsiveSpacing {
     ).getValue(context);
   }
 
-  static EdgeInsets getPadding(BuildContext context, {
+  static EdgeInsets getPadding(
+    BuildContext context, {
     double mobile = 16,
     double? tablet,
     double? desktop,
   }) {
-    final spacing = getSpacing(context, mobile: mobile, tablet: tablet, desktop: desktop);
+    final spacing =
+        getSpacing(context, mobile: mobile, tablet: tablet, desktop: desktop);
     return EdgeInsets.all(spacing);
   }
 
-  static EdgeInsets getHorizontalPadding(BuildContext context, {
+  static EdgeInsets getHorizontalPadding(
+    BuildContext context, {
     double mobile = 16,
     double? tablet,
     double? desktop,
   }) {
-    final spacing = getSpacing(context, mobile: mobile, tablet: tablet, desktop: desktop);
+    final spacing =
+        getSpacing(context, mobile: mobile, tablet: tablet, desktop: desktop);
     return EdgeInsets.symmetric(horizontal: spacing);
   }
 
-  static EdgeInsets getVerticalPadding(BuildContext context, {
+  static EdgeInsets getVerticalPadding(
+    BuildContext context, {
     double mobile = 16,
     double? tablet,
     double? desktop,
   }) {
-    final spacing = getSpacing(context, mobile: mobile, tablet: tablet, desktop: desktop);
+    final spacing =
+        getSpacing(context, mobile: mobile, tablet: tablet, desktop: desktop);
     return EdgeInsets.symmetric(vertical: spacing);
   }
 }

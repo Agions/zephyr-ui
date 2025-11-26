@@ -1,5 +1,5 @@
 /// ZephyrUI Bottom Navigation Bar Component
-/// 
+///
 /// A modern bottom navigation bar with support for labels, icons, badges,
 /// and smooth animations. Perfect for mobile applications.
 library bottom_navigation_bar;
@@ -38,10 +38,10 @@ class ZephyrBottomNavigationItem {
 enum ZephyrBottomNavigationType {
   /// Labels only show when active
   shifting,
-  
+
   /// Labels always show
   fixed,
-  
+
   /// Only icons, no labels
   iconOnly,
 }
@@ -50,20 +50,20 @@ enum ZephyrBottomNavigationType {
 class ZephyrBottomNavigationBar extends StatefulWidget {
   /// Creates a bottom navigation bar
   const ZephyrBottomNavigationBar({
-    super.key,
     required this.items,
+    super.key,
     this.currentIndex = 0,
     this.type = ZephyrBottomNavigationType.fixed,
-    this.onTap,
-    this.backgroundColor,
     this.elevation = 8.0,
-    this.selectedItemColor,
-    this.unselectedItemColor,
-    this.theme,
     this.animationDuration = const Duration(milliseconds: 200),
     this.showSelectedLabels = true,
     this.showUnselectedLabels = true,
     this.enableFeedback = true,
+    this.onTap,
+    this.backgroundColor,
+    this.selectedItemColor,
+    this.unselectedItemColor,
+    this.theme,
   });
 
   /// List of navigation items
@@ -106,14 +106,15 @@ class ZephyrBottomNavigationBar extends StatefulWidget {
   final bool enableFeedback;
 
   @override
-  State<ZephyrBottomNavigationBar> createState() => _ZephyrBottomNavigationBarState();
+  State<ZephyrBottomNavigationBar> createState() =>
+      _ZephyrBottomNavigationBarState();
 }
 
 class _ZephyrBottomNavigationBarState extends State<ZephyrBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     final theme = widget.theme ?? ZephyrBottomNavigationBarTheme.of(context);
-    
+
     return Container(
       decoration: BoxDecoration(
         color: widget.backgroundColor ?? theme.backgroundColor,
@@ -151,9 +152,8 @@ class _ZephyrBottomNavigationBarState extends State<ZephyrBottomNavigationBar> {
     final isSelected = index == widget.currentIndex;
     final shouldShowLabel = _shouldShowLabel(isSelected);
 
-    Widget iconWidget = isSelected && item.activeIcon != null
-        ? item.activeIcon!
-        : item.icon;
+    var iconWidget =
+        isSelected && item.activeIcon != null ? item.activeIcon! : item.icon;
 
     // Apply color based on selection state
     if (isSelected) {
@@ -234,13 +234,16 @@ class _ZephyrBottomNavigationBarState extends State<ZephyrBottomNavigationBar> {
       case ZephyrBottomNavigationType.shifting:
         return isSelected && widget.showSelectedLabels;
       case ZephyrBottomNavigationType.fixed:
-        return isSelected ? widget.showSelectedLabels : widget.showUnselectedLabels;
+        return isSelected
+            ? widget.showSelectedLabels
+            : widget.showUnselectedLabels;
       case ZephyrBottomNavigationType.iconOnly:
         return false;
     }
   }
 
-  TextStyle _getLabelStyle(bool isSelected, ZephyrBottomNavigationBarTheme theme) {
+  TextStyle _getLabelStyle(
+      bool isSelected, ZephyrBottomNavigationBarTheme theme) {
     if (isSelected) {
       return theme.selectedLabelStyle.copyWith(
         color: widget.selectedItemColor ?? theme.selectedColor,
@@ -257,23 +260,23 @@ class _ZephyrBottomNavigationBarState extends State<ZephyrBottomNavigationBar> {
 class ZephyrBottomNavigationBarWithDots extends StatefulWidget {
   /// Creates a bottom navigation bar with dot indicators
   const ZephyrBottomNavigationBarWithDots({
-    super.key,
     required this.items,
+    super.key,
     this.currentIndex = 0,
     this.type = ZephyrBottomNavigationType.fixed,
-    this.onTap,
-    this.backgroundColor,
     this.elevation = 8.0,
-    this.selectedItemColor,
-    this.unselectedItemColor,
-    this.theme,
     this.animationDuration = const Duration(milliseconds: 200),
     this.showSelectedLabels = true,
     this.showUnselectedLabels = true,
     this.enableFeedback = true,
-    this.dotColor,
     this.dotSize = 4.0,
     this.showDotIndicator = true,
+    this.onTap,
+    this.backgroundColor,
+    this.selectedItemColor,
+    this.unselectedItemColor,
+    this.theme,
+    this.dotColor,
   });
 
   /// List of navigation items
@@ -325,14 +328,16 @@ class ZephyrBottomNavigationBarWithDots extends StatefulWidget {
   final bool showDotIndicator;
 
   @override
-  State<ZephyrBottomNavigationBarWithDots> createState() => _ZephyrBottomNavigationBarWithDotsState();
+  State<ZephyrBottomNavigationBarWithDots> createState() =>
+      _ZephyrBottomNavigationBarWithDotsState();
 }
 
-class _ZephyrBottomNavigationBarWithDotsState extends State<ZephyrBottomNavigationBarWithDots> {
+class _ZephyrBottomNavigationBarWithDotsState
+    extends State<ZephyrBottomNavigationBarWithDots> {
   @override
   Widget build(BuildContext context) {
     final theme = widget.theme ?? ZephyrBottomNavigationBarTheme.of(context);
-    
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -362,7 +367,7 @@ class _ZephyrBottomNavigationBarWithDotsState extends State<ZephyrBottomNavigati
             children: widget.items.asMap().entries.map((entry) {
               final index = entry.key;
               final isSelected = index == widget.currentIndex;
-              
+
               return AnimatedContainer(
                 duration: widget.animationDuration,
                 margin: EdgeInsets.symmetric(horizontal: widget.dotSize / 2),
@@ -370,7 +375,9 @@ class _ZephyrBottomNavigationBarWithDotsState extends State<ZephyrBottomNavigati
                 height: widget.dotSize,
                 decoration: BoxDecoration(
                   color: isSelected
-                      ? (widget.dotColor ?? widget.selectedItemColor ?? theme.selectedColor)
+                      ? (widget.dotColor ??
+                          widget.selectedItemColor ??
+                          theme.selectedColor)
                       : theme.unselectedDotColor,
                   borderRadius: BorderRadius.circular(widget.dotSize / 2),
                 ),

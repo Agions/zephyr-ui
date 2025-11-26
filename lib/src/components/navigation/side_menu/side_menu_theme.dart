@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 /// 此主题用于ZephyrSideMenu组件确定视觉样式，包括背景色、文本样式等。
 class ZephyrSideMenuTheme {
   const ZephyrSideMenuTheme({
+    required this.selectedItemColor,
+    required this.unselectedItemColor,
     this.backgroundColor,
     this.width,
     this.contentPadding,
@@ -20,8 +22,6 @@ class ZephyrSideMenuTheme {
     this.headerBackgroundColor,
     this.headerTextStyle,
     this.footerBackgroundColor,
-    required this.selectedItemColor,
-    required this.unselectedItemColor,
   });
 
   /// 侧边菜单背景色
@@ -177,7 +177,8 @@ class ZephyrSideMenuTheme {
         fontWeight: FontWeight.w500,
         color: theme.colorScheme.primary,
       ),
-      activeItemBackgroundColor: theme.colorScheme.primary.withValues(alpha: 0.12),
+      activeItemBackgroundColor:
+          theme.colorScheme.primary.withValues(alpha: 0.12),
       iconColor: isDark ? Colors.white70 : Colors.black54,
       activeIconColor: theme.colorScheme.primary,
       dividerColor: isDark ? Colors.white24 : Colors.black12,

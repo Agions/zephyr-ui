@@ -27,25 +27,25 @@ import 'carousel_types.dart';
 /// )
 /// ```
 class ZephyrCarousel extends StatefulWidget {
-  /// 轮播图项目
-  final List<ZephyrCarouselItem> items;
-  
-  /// 轮播图配置
-  final ZephyrCarouselConfig config;
-  
-  /// 轮播图主题
-  final ZephyrCarouselTheme? theme;
-  
-  /// 页面变化回调
-  final Function(int index)? onPageChanged;
-
   const ZephyrCarousel({
-    Key? key,
     required this.items,
+    super.key,
     this.config = const ZephyrCarouselConfig(),
     this.theme,
     this.onPageChanged,
-  }) : super(key: key);
+  });
+
+  /// 轮播图项目
+  final List<ZephyrCarouselItem> items;
+
+  /// 轮播图配置
+  final ZephyrCarouselConfig config;
+
+  /// 轮播图主题
+  final ZephyrCarouselTheme? theme;
+
+  /// 页面变化回调
+  final Function(int index)? onPageChanged;
 
   @override
   State<ZephyrCarousel> createState() => _ZephyrCarouselState();
@@ -62,7 +62,7 @@ class _ZephyrCarouselState extends State<ZephyrCarousel> {
     super.initState();
     _currentIndex = 0;
     _pageController = PageController();
-    
+
     if (widget.config.autoPlay) {
       _startAutoPlay();
     }
@@ -145,7 +145,7 @@ class _ZephyrCarouselState extends State<ZephyrCarousel> {
   @override
   Widget build(BuildContext context) {
     final effectiveTheme = widget.theme ?? ZephyrCarouselTheme.of(context);
-    
+
     return SizedBox(
       height: widget.config.height,
       child: Column(
@@ -158,8 +158,7 @@ class _ZephyrCarouselState extends State<ZephyrCarousel> {
               ],
             ),
           ),
-          if (widget.config.showIndicator)
-            _buildIndicator(effectiveTheme),
+          if (widget.config.showIndicator) _buildIndicator(effectiveTheme),
         ],
       ),
     );
@@ -190,13 +189,12 @@ class _ZephyrCarouselState extends State<ZephyrCarousel> {
           widget.onPageChanged?.call(_currentIndex);
         },
         allowImplicitScrolling: widget.config.enableSwipe,
-        physics: widget.config.enableSwipe 
-            ? const PageScrollPhysics() 
+        physics: widget.config.enableSwipe
+            ? const PageScrollPhysics()
             : const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
-          final itemIndex = widget.config.loop 
-              ? index % widget.items.length 
-              : index;
+          final itemIndex =
+              widget.config.loop ? index % widget.items.length : index;
           return widget.items[itemIndex].child;
         },
       ),
@@ -304,7 +302,7 @@ class _ZephyrCarouselState extends State<ZephyrCarousel> {
       mainAxisSize: MainAxisSize.min,
       children: List.generate(widget.items.length, (index) {
         final isSelected = index == _currentIndex;
-          
+
         return GestureDetector(
           onTap: () {
             _pageController.animateToPage(
@@ -314,12 +312,16 @@ class _ZephyrCarouselState extends State<ZephyrCarousel> {
             );
           },
           child: Container(
-            width: isSelected ? theme.activeIndicatorSize : theme.inactiveIndicatorSize,
-            height: isSelected ? theme.activeIndicatorSize : theme.inactiveIndicatorSize,
+            width: isSelected
+                ? theme.activeIndicatorSize
+                : theme.inactiveIndicatorSize,
+            height: isSelected
+                ? theme.activeIndicatorSize
+                : theme.inactiveIndicatorSize,
             margin: theme.indicatorSpacing,
             decoration: BoxDecoration(
-              color: isSelected 
-                  ? theme.activeIndicatorColor 
+              color: isSelected
+                  ? theme.activeIndicatorColor
                   : theme.inactiveIndicatorColor,
               shape: BoxShape.circle,
             ),

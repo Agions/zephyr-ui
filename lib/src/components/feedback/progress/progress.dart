@@ -5,7 +5,6 @@ library progress;
 
 import 'package:flutter/material.dart';
 import 'package:zephyr_ui/zephyr_ui.dart';
-import 'progress_theme.dart';
 
 /// ZephyrUI 线性进度条
 ///
@@ -21,7 +20,7 @@ import 'progress_theme.dart';
 class ZephyrLinearProgress extends StatelessWidget {
   /// 创建线性进度条
   const ZephyrLinearProgress({
-    Key? key,
+    super.key,
     this.value,
     this.label,
     this.showLabel = false,
@@ -34,7 +33,7 @@ class ZephyrLinearProgress extends StatelessWidget {
     this.semanticsLabel,
     this.semanticsValue,
     this.theme,
-  }) : super(key: key);
+  });
 
   /// 进度值 (0.0 到 1.0)，null 表示不确定进度
   final double? value;
@@ -76,7 +75,8 @@ class ZephyrLinearProgress extends StatelessWidget {
   Widget build(BuildContext context) {
     final effectiveTheme = theme ?? ZephyrProgressTheme.of(context, variant);
     final effectiveHeight = minHeight ?? _getHeight();
-    final effectiveBorderRadius = borderRadius ?? BorderRadius.circular(effectiveHeight / 2);
+    final effectiveBorderRadius =
+        borderRadius ?? BorderRadius.circular(effectiveHeight / 2);
 
     Widget progressBar = Container(
       height: effectiveHeight,
@@ -150,7 +150,7 @@ class ZephyrLinearProgress extends StatelessWidget {
 class ZephyrCircularProgress extends StatelessWidget {
   /// 创建圆形进度条
   const ZephyrCircularProgress({
-    Key? key,
+    super.key,
     this.value,
     this.size = ZephyrSize.md,
     this.variant = ZephyrVariant.primary,
@@ -162,7 +162,7 @@ class ZephyrCircularProgress extends StatelessWidget {
     this.semanticsValue,
     this.child,
     this.theme,
-  }) : super(key: key);
+  });
 
   /// 进度值 (0.0 到 1.0)，null 表示不确定进度
   final double? value;
@@ -265,15 +265,15 @@ class ZephyrCircularProgress extends StatelessWidget {
 class ZephyrStepProgress extends StatelessWidget {
   /// 创建步骤进度条
   const ZephyrStepProgress({
-    Key? key,
     required this.steps,
     required this.currentStep,
+    super.key,
     this.variant = ZephyrVariant.primary,
     this.direction = Axis.horizontal,
     this.showLabels = true,
     this.spacing = ZephyrSpacing.md,
     this.theme,
-  }) : super(key: key);
+  });
 
   /// 步骤列表
   final List<ZephyrProgressStep> steps;
@@ -308,7 +308,8 @@ class ZephyrStepProgress extends StatelessWidget {
   }
 
   /// 构建水平步骤
-  Widget _buildHorizontalSteps(BuildContext context, ZephyrProgressTheme theme) {
+  Widget _buildHorizontalSteps(
+      BuildContext context, ZephyrProgressTheme theme) {
     return Row(
       children: [
         for (int i = 0; i < steps.length; i++) ...[
@@ -333,7 +334,8 @@ class ZephyrStepProgress extends StatelessWidget {
   }
 
   /// 构建单个步骤
-  Widget _buildStep(BuildContext context, ZephyrProgressTheme theme, int index) {
+  Widget _buildStep(
+      BuildContext context, ZephyrProgressTheme theme, int index) {
     final step = steps[index];
     final isCompleted = index < currentStep;
     final isCurrent = index == currentStep;
@@ -419,9 +421,10 @@ class ZephyrStepProgress extends StatelessWidget {
   }
 
   /// 构建连接线
-  Widget _buildConnector(BuildContext context, ZephyrProgressTheme theme, int index) {
+  Widget _buildConnector(
+      BuildContext context, ZephyrProgressTheme theme, int index) {
     final isCompleted = index < currentStep - 1;
-    
+
     return Expanded(
       child: Container(
         height: 2,
@@ -432,13 +435,15 @@ class ZephyrStepProgress extends StatelessWidget {
   }
 
   /// 构建垂直连接线
-  Widget _buildVerticalConnector(BuildContext context, ZephyrProgressTheme theme, int index) {
+  Widget _buildVerticalConnector(
+      BuildContext context, ZephyrProgressTheme theme, int index) {
     final isCompleted = index < currentStep - 1;
-    
+
     return Container(
       width: 2,
       height: 40,
-      margin: const EdgeInsets.only(left: 15, top: ZephyrSpacing.xs, bottom: ZephyrSpacing.xs),
+      margin: const EdgeInsets.only(
+          left: 15, top: ZephyrSpacing.xs, bottom: ZephyrSpacing.xs),
       color: isCompleted ? theme.valueColor : theme.backgroundColor,
     );
   }

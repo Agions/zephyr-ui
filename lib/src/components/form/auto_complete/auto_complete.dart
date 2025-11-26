@@ -42,12 +42,12 @@ class ZephyrAutoComplete<T> extends StatefulWidget {
   final int Function(T, T)? sortPredicate;
   final bool Function(T, String)? searchPredicate;
 
-  ZephyrAutoComplete({
-    Key? key,
+  const ZephyrAutoComplete({
+    super.key,
     required this.items,
     required this.controller,
+    required String Function(T) displayStringForOption,
     this.placeholder,
-    String Function(T)? displayStringForOption,
     this.itemBuilder,
     this.onSelected,
     this.multiSelect = false,
@@ -78,13 +78,10 @@ class ZephyrAutoComplete<T> extends StatefulWidget {
     this.sortPredicate,
     this.searchPredicate,
   })  : theme = theme ?? ZephyrAutoCompleteTheme.light(),
-        displayStringForOption = displayStringForOption ?? _defaultDisplayString,
-        super(key: key);
+        displayStringForOption = displayStringForOption;
 
   @override
   State<ZephyrAutoComplete<T>> createState() => _ZephyrAutoCompleteState<T>();
-
-  static String _defaultDisplayString<T>(T item) => item.toString();
 }
 
 class _ZephyrAutoCompleteState<T> extends State<ZephyrAutoComplete<T>> {
@@ -274,29 +271,29 @@ class _ZephyrAutoCompleteState<T> extends State<ZephyrAutoComplete<T>> {
             ) ?? const TextStyle(),
             contentPadding: theme.contentPadding,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(theme.borderRadius ?? 8.0),
-              borderSide: BorderSide(
+              borderRadius: const BorderRadius.circular(theme.borderRadius ?? 8.0),
+              borderSide: const BorderSide(
                 color: hasError ? (theme.errorBorderColor ?? Colors.red) : (theme.borderColor ?? Colors.grey),
                 width: theme.borderWidth ?? 1.0,
               ),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(theme.borderRadius ?? 8.0),
-              borderSide: BorderSide(
+              borderRadius: const BorderRadius.circular(theme.borderRadius ?? 8.0),
+              borderSide: const BorderSide(
                 color: hasError ? (theme.errorBorderColor ?? Colors.red) : (theme.borderColor ?? Colors.grey),
                 width: theme.borderWidth ?? 1.0,
               ),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(theme.borderRadius ?? 8.0),
-              borderSide: BorderSide(
+              borderRadius: const BorderRadius.circular(theme.borderRadius ?? 8.0),
+              borderSide: const BorderSide(
                 color: hasError ? (theme.errorBorderColor ?? Colors.red) : (theme.focusedBorderColor ?? Colors.blue),
                 width: theme.borderWidth ?? 1.0,
               ),
             ),
             disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(theme.borderRadius ?? 8.0),
-              borderSide: BorderSide(
+              borderRadius: const BorderRadius.circular(theme.borderRadius ?? 8.0),
+              borderSide: const BorderSide(
                 color: theme.disabledBorderColor ?? Colors.grey,
                 width: theme.borderWidth ?? 1.0,
               ),
@@ -370,7 +367,7 @@ class _ZephyrAutoCompleteState<T> extends State<ZephyrAutoComplete<T>> {
       child: Material(
         elevation: theme.elevation ?? 4.0,
         color: theme.suggestionBackgroundColor ?? Colors.white,
-        borderRadius: BorderRadius.circular(theme.borderRadius ?? 8.0),
+        borderRadius: const BorderRadius.circular(theme.borderRadius ?? 8.0),
         child: ConstrainedBox(
           constraints: BoxConstraints(
             maxHeight: theme.suggestionMaxHeight ?? 300.0,
@@ -449,7 +446,7 @@ class _ZephyrAutoCompleteState<T> extends State<ZephyrAutoComplete<T>> {
       child: Material(
         elevation: theme.elevation ?? 4.0,
         color: theme.suggestionBackgroundColor ?? Colors.white,
-        borderRadius: BorderRadius.circular(theme.borderRadius ?? 8.0),
+        borderRadius: const BorderRadius.circular(theme.borderRadius ?? 8.0),
         child: Container(
           padding: theme.suggestionPadding,
           child: Text(

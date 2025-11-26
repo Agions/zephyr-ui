@@ -71,7 +71,7 @@ class ZephyrDatePicker extends StatefulWidget {
 
   /// 创建日期选择器
   const ZephyrDatePicker({
-    Key? key,
+    super.key,
     this.initialDate,
     this.initialStartDate,
     this.initialEndDate,
@@ -90,7 +90,7 @@ class ZephyrDatePicker extends StatefulWidget {
     this.monthFormat,
     this.showResetButton = true,
     this.theme,
-  }) : super(key: key);
+  });
 
   @override
   State<ZephyrDatePicker> createState() => _ZephyrDatePickerState();

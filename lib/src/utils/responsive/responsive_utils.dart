@@ -1,5 +1,5 @@
 /// 响应式工具类
-/// 
+///
 /// 提供响应式设计相关的工具函数，帮助组件适配不同屏幕尺寸。
 library responsive_utils;
 
@@ -13,7 +13,7 @@ class ZephyrResponsiveUtils {
   /// 获取当前屏幕的断点
   static ZephyrBreakpoint getBreakpoint(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    
+
     if (width >= ZephyrBreakpoints.xxl) {
       return ZephyrBreakpoint.xxl;
     } else if (width >= ZephyrBreakpoints.xl) {
@@ -32,7 +32,8 @@ class ZephyrResponsiveUtils {
   /// 判断是否为移动设备
   static bool isMobile(BuildContext context) {
     final breakpoint = getBreakpoint(context);
-    return breakpoint == ZephyrBreakpoint.xs || breakpoint == ZephyrBreakpoint.sm;
+    return breakpoint == ZephyrBreakpoint.xs ||
+        breakpoint == ZephyrBreakpoint.sm;
   }
 
   /// 判断是否为平板设备
@@ -44,24 +45,24 @@ class ZephyrResponsiveUtils {
   /// 判断是否为桌面设备
   static bool isDesktop(BuildContext context) {
     final breakpoint = getBreakpoint(context);
-    return breakpoint == ZephyrBreakpoint.lg || 
-           breakpoint == ZephyrBreakpoint.xl || 
-           breakpoint == ZephyrBreakpoint.xxl;
+    return breakpoint == ZephyrBreakpoint.lg ||
+        breakpoint == ZephyrBreakpoint.xl ||
+        breakpoint == ZephyrBreakpoint.xxl;
   }
 
   /// 根据断点返回不同的值
   static T responsive<T>(
     BuildContext context, {
+    required T defaultValue,
     T? xs,
     T? sm,
     T? md,
     T? lg,
     T? xl,
     T? xxl,
-    required T defaultValue,
   }) {
     final breakpoint = getBreakpoint(context);
-    
+
     switch (breakpoint) {
       case ZephyrBreakpoint.xs:
         return xs ?? defaultValue;
@@ -79,7 +80,8 @@ class ZephyrResponsiveUtils {
   }
 
   /// 获取响应式列数
-  static int getColumns(BuildContext context, {
+  static int getColumns(
+    BuildContext context, {
     int xs = 1,
     int sm = 2,
     int md = 3,
@@ -100,7 +102,8 @@ class ZephyrResponsiveUtils {
   }
 
   /// 获取响应式间距
-  static double getSpacing(BuildContext context, {
+  static double getSpacing(
+    BuildContext context, {
     double xs = ZephyrSpacing.sm,
     double sm = ZephyrSpacing.md,
     double md = ZephyrSpacing.lg,
@@ -121,13 +124,14 @@ class ZephyrResponsiveUtils {
   }
 
   /// 获取响应式字体大小
-  static double getFontSize(BuildContext context, {
-    double xs = ZephyrTypography.fontSize14,
-    double sm = ZephyrTypography.fontSize16,
-    double md = ZephyrTypography.fontSize18,
-    double lg = ZephyrTypography.fontSize20,
-    double xl = ZephyrTypography.fontSize24,
-    double xxl = ZephyrTypography.fontSize28,
+  static double getFontSize(
+    BuildContext context, {
+    double xs = 14,
+    double sm = 16,
+    double md = 18,
+    double lg = 20,
+    double xl = 24,
+    double xxl = 28,
   }) {
     return responsive<double>(
       context,
@@ -196,43 +200,43 @@ class ZephyrResponsiveUtils {
 class ZephyrResponsiveBuilder extends StatelessWidget {
   /// 创建响应式构建器
   const ZephyrResponsiveBuilder({
-    Key? key,
+    required this.builder,
+    super.key,
     this.xs,
     this.sm,
     this.md,
     this.lg,
     this.xl,
     this.xxl,
-    required this.builder,
-  }) : super(key: key);
+  });
 
   /// 超小屏幕构建器
   final Widget Function(BuildContext context)? xs;
-  
+
   /// 小屏幕构建器
   final Widget Function(BuildContext context)? sm;
-  
+
   /// 中等屏幕构建器
   final Widget Function(BuildContext context)? md;
-  
+
   /// 大屏幕构建器
   final Widget Function(BuildContext context)? lg;
-  
+
   /// 超大屏幕构建器
   final Widget Function(BuildContext context)? xl;
-  
+
   /// 超超大屏幕构建器
   final Widget Function(BuildContext context)? xxl;
-  
+
   /// 默认构建器
   final Widget Function(BuildContext context) builder;
 
   @override
   Widget build(BuildContext context) {
     final breakpoint = ZephyrResponsiveUtils.getBreakpoint(context);
-    
+
     Widget Function(BuildContext context)? selectedBuilder;
-    
+
     switch (breakpoint) {
       case ZephyrBreakpoint.xs:
         selectedBuilder = xs;
@@ -253,7 +257,7 @@ class ZephyrResponsiveBuilder extends StatelessWidget {
         selectedBuilder = xxl ?? xl ?? lg ?? md ?? sm ?? xs;
         break;
     }
-    
+
     return (selectedBuilder ?? builder)(context);
   }
 }

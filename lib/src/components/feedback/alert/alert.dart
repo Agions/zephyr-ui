@@ -1,5 +1,5 @@
 /// ZephyrUI 警告组件
-/// 
+///
 /// 提供各种类型的警告和通知消息。
 library alert;
 
@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:zephyr_ui/zephyr_ui.dart';
 
 /// ZephyrUI 警告组件
-/// 
+///
 /// 用于显示重要信息、警告、错误或成功消息的组件。
-/// 
+///
 /// 示例用法:
 /// ```dart
 /// ZephyrAlert.success(
@@ -20,8 +20,8 @@ import 'package:zephyr_ui/zephyr_ui.dart';
 class ZephyrAlert extends StatelessWidget {
   /// 创建一个警告组件
   const ZephyrAlert({
-    Key? key,
     required this.variant,
+    super.key,
     this.title,
     this.message,
     this.icon,
@@ -29,11 +29,11 @@ class ZephyrAlert extends StatelessWidget {
     this.onClose,
     this.showCloseButton = false,
     this.theme,
-  }) : super(key: key);
+  });
 
   /// 创建成功警告
   const ZephyrAlert.success({
-    Key? key,
+    super.key,
     this.title,
     this.message,
     this.icon,
@@ -41,11 +41,11 @@ class ZephyrAlert extends StatelessWidget {
     this.onClose,
     this.showCloseButton = false,
     this.theme,
-  }) : variant = ZephyrVariant.success, super(key: key);
+  }) : variant = ZephyrVariant.success;
 
   /// 创建警告
   const ZephyrAlert.warning({
-    Key? key,
+    super.key,
     this.title,
     this.message,
     this.icon,
@@ -53,11 +53,11 @@ class ZephyrAlert extends StatelessWidget {
     this.onClose,
     this.showCloseButton = false,
     this.theme,
-  }) : variant = ZephyrVariant.warning, super(key: key);
+  }) : variant = ZephyrVariant.warning;
 
   /// 创建错误警告
   const ZephyrAlert.error({
-    Key? key,
+    super.key,
     this.title,
     this.message,
     this.icon,
@@ -65,11 +65,11 @@ class ZephyrAlert extends StatelessWidget {
     this.onClose,
     this.showCloseButton = false,
     this.theme,
-  }) : variant = ZephyrVariant.error, super(key: key);
+  }) : variant = ZephyrVariant.error;
 
   /// 创建信息警告
   const ZephyrAlert.info({
-    Key? key,
+    super.key,
     this.title,
     this.message,
     this.icon,
@@ -77,7 +77,7 @@ class ZephyrAlert extends StatelessWidget {
     this.onClose,
     this.showCloseButton = false,
     this.theme,
-  }) : variant = ZephyrVariant.info, super(key: key);
+  }) : variant = ZephyrVariant.info;
 
   /// 警告类型
   final ZephyrVariant variant;
@@ -106,7 +106,7 @@ class ZephyrAlert extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveTheme = theme ?? ZephyrAlertTheme.of(context, variant);
-    
+
     return Container(
       padding: effectiveTheme.padding,
       margin: effectiveTheme.margin,
@@ -130,8 +130,7 @@ class ZephyrAlert extends StatelessWidget {
               children: [
                 if (title != null) _buildTitle(effectiveTheme),
                 if (message != null) _buildMessage(effectiveTheme),
-                if (actions != null && actions!.isNotEmpty)
-                  _buildActions(),
+                if (actions != null && actions!.isNotEmpty) _buildActions(),
               ],
             ),
           ),
@@ -227,13 +226,13 @@ class ZephyrAlert extends StatelessWidget {
 }
 
 /// ZephyrUI 横幅警告
-/// 
+///
 /// 全宽度的横幅样式警告组件。
 class ZephyrBanner extends StatelessWidget {
   /// 创建横幅警告
   const ZephyrBanner({
-    Key? key,
     required this.variant,
+    super.key,
     this.title,
     this.message,
     this.icon,
@@ -241,11 +240,11 @@ class ZephyrBanner extends StatelessWidget {
     this.onClose,
     this.showCloseButton = true,
     this.theme,
-  }) : super(key: key);
+  });
 
   /// 创建成功横幅
   const ZephyrBanner.success({
-    Key? key,
+    super.key,
     this.title,
     this.message,
     this.icon,
@@ -253,11 +252,11 @@ class ZephyrBanner extends StatelessWidget {
     this.onClose,
     this.showCloseButton = true,
     this.theme,
-  }) : variant = ZephyrVariant.success, super(key: key);
+  }) : variant = ZephyrVariant.success;
 
   /// 创建警告横幅
   const ZephyrBanner.warning({
-    Key? key,
+    super.key,
     this.title,
     this.message,
     this.icon,
@@ -265,11 +264,11 @@ class ZephyrBanner extends StatelessWidget {
     this.onClose,
     this.showCloseButton = true,
     this.theme,
-  }) : variant = ZephyrVariant.warning, super(key: key);
+  }) : variant = ZephyrVariant.warning;
 
   /// 创建错误横幅
   const ZephyrBanner.error({
-    Key? key,
+    super.key,
     this.title,
     this.message,
     this.icon,
@@ -277,11 +276,11 @@ class ZephyrBanner extends StatelessWidget {
     this.onClose,
     this.showCloseButton = true,
     this.theme,
-  }) : variant = ZephyrVariant.error, super(key: key);
+  }) : variant = ZephyrVariant.error;
 
   /// 创建信息横幅
   const ZephyrBanner.info({
-    Key? key,
+    super.key,
     this.title,
     this.message,
     this.icon,
@@ -289,7 +288,7 @@ class ZephyrBanner extends StatelessWidget {
     this.onClose,
     this.showCloseButton = true,
     this.theme,
-  }) : variant = ZephyrVariant.info, super(key: key);
+  }) : variant = ZephyrVariant.info;
 
   /// 警告类型
   final ZephyrVariant variant;

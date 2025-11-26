@@ -20,7 +20,7 @@ class IconDemo extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // 基础图标展示
             Wrap(
               spacing: 16,
@@ -36,60 +36,60 @@ class IconDemo extends StatelessWidget {
                 _buildIconCard(Icons.notifications, '通知', Colors.pink),
               ],
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             const Text(
               '图标尺寸',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // 尺寸变化
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Column(
                   children: [
                     ZephyrIcon(Icons.star, size: 16),
-                    const SizedBox(height: 4),
-                    const Text('16px', style: TextStyle(fontSize: 12)),
+                    SizedBox(height: 4),
+                    Text('16px', style: TextStyle(fontSize: 12)),
                   ],
                 ),
                 Column(
                   children: [
                     ZephyrIcon(Icons.star, size: 24),
-                    const SizedBox(height: 4),
-                    const Text('24px', style: TextStyle(fontSize: 12)),
+                    SizedBox(height: 4),
+                    Text('24px', style: TextStyle(fontSize: 12)),
                   ],
                 ),
                 Column(
                   children: [
                     ZephyrIcon(Icons.star, size: 32),
-                    const SizedBox(height: 4),
-                    const Text('32px', style: TextStyle(fontSize: 12)),
+                    SizedBox(height: 4),
+                    Text('32px', style: TextStyle(fontSize: 12)),
                   ],
                 ),
                 Column(
                   children: [
                     ZephyrIcon(Icons.star, size: 48),
-                    const SizedBox(height: 4),
-                    const Text('48px', style: TextStyle(fontSize: 12)),
+                    SizedBox(height: 4),
+                    Text('48px', style: TextStyle(fontSize: 12)),
                   ],
                 ),
               ],
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             const Text(
               '图标颜色',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // 颜色变化
-            Wrap(
+            const Wrap(
               spacing: 16,
               runSpacing: 16,
               children: [
@@ -103,15 +103,15 @@ class IconDemo extends StatelessWidget {
                 ZephyrIcon(Icons.cloud, size: 32, color: Colors.cyan),
               ],
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             const Text(
               '可点击图标',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // 可点击图标
             Wrap(
               spacing: 16,
@@ -123,103 +123,109 @@ class IconDemo extends StatelessWidget {
                 _buildClickableIcon(Icons.bookmark, '收藏', Colors.red),
               ],
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             const Text(
               '带背景图标',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // 带背景图标
             Wrap(
               spacing: 16,
               runSpacing: 16,
               children: [
-                _buildIconWithBackground(Icons.phone, '电话', Colors.blue.withOpacity(0.1)),
-                _buildIconWithBackground(Icons.email, '邮件', Colors.green.withOpacity(0.1)),
-                _buildIconWithBackground(Icons.location_on, '位置', Colors.red.withOpacity(0.1)),
-                _buildIconWithBackground(Icons.web, '网站', Colors.purple.withOpacity(0.1)),
+                _buildIconWithBackground(
+                    Icons.phone, '电话', Colors.blue.withOpacity(0.1)),
+                _buildIconWithBackground(
+                    Icons.email, '邮件', Colors.green.withOpacity(0.1)),
+                _buildIconWithBackground(
+                    Icons.location_on, '位置', Colors.red.withOpacity(0.1)),
+                _buildIconWithBackground(
+                    Icons.web, '网站', Colors.purple.withOpacity(0.1)),
               ],
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             const Text(
               '状态图标',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // 状态图标
-            Card(
+            const Card(
               child: Padding(
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(16),
                 child: Column(
                   children: [
                     Row(
                       children: [
-                        ZephyrIcon(Icons.check_circle, size: 20, color: Colors.green),
-                        const SizedBox(width: 8),
-                        const Expanded(child: Text('任务已完成')),
+                        ZephyrIcon(Icons.check_circle,
+                            size: 20, color: Colors.green),
+                        SizedBox(width: 8),
+                        Expanded(child: Text('任务已完成')),
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Row(
                       children: [
-                        ZephyrIcon(Icons.pending, size: 20, color: Colors.orange),
-                        const SizedBox(width: 8),
-                        const Expanded(child: Text('任务进行中')),
+                        ZephyrIcon(Icons.pending,
+                            size: 20, color: Colors.orange),
+                        SizedBox(width: 8),
+                        Expanded(child: Text('任务进行中')),
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Row(
                       children: [
                         ZephyrIcon(Icons.error, size: 20, color: Colors.red),
-                        const SizedBox(width: 8),
-                        const Expanded(child: Text('任务失败')),
+                        SizedBox(width: 8),
+                        Expanded(child: Text('任务失败')),
                       ],
                     ),
                   ],
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             const Text(
               '图标 + 文本',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // 图标文本组合
             Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
+              child: const Padding(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   children: [
                     _buildIconText(Icons.phone, '联系电话', '138-0000-0000'),
-                    const Divider(),
+                    Divider(),
                     _buildIconText(Icons.email, '邮箱地址', 'example@email.com'),
-                    const Divider(),
+                    Divider(),
                     _buildIconText(Icons.location_on, '地址', '北京市朝阳区'),
-                    const Divider(),
+                    Divider(),
                     _buildIconText(Icons.language, '网站', 'www.example.com'),
                   ],
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 32),
-            
+
             const Text(
               '交互式图标',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            
+
             // 交互式图标
             const _InteractiveIconDemo(),
           ],
@@ -230,15 +236,15 @@ class IconDemo extends StatelessWidget {
 
   Widget _buildIconCard(IconData icon, String label, Color color) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           children: [
             ZephyrIcon(icon, size: 32, color: color),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               label,
-              style: const TextStyle(fontSize: 12),
+              style: TextStyle(fontSize: 12),
             ),
           ],
         ),
@@ -251,15 +257,15 @@ class IconDemo extends StatelessWidget {
       child: InkWell(
         onTap: () => _showMessage('$label 被点击'),
         borderRadius: BorderRadius.circular(8),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
+        child: const Padding(
+          padding: EdgeInsets.all(16),
           child: Column(
             children: [
               ZephyrIcon(icon, size: 32, color: color),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Text(
                 label,
-                style: const TextStyle(fontSize: 12),
+                style: TextStyle(fontSize: 12),
               ),
             ],
           ),
@@ -268,10 +274,11 @@ class IconDemo extends StatelessWidget {
     );
   }
 
-  Widget _buildIconWithBackground(IconData icon, String label, Color backgroundColor) {
+  Widget _buildIconWithBackground(
+      IconData icon, String label, Color backgroundColor) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           children: [
             Container(
@@ -285,10 +292,10 @@ class IconDemo extends StatelessWidget {
                 child: ZephyrIcon(icon, size: 24),
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               label,
-              style: const TextStyle(fontSize: 12),
+              style: TextStyle(fontSize: 12),
             ),
           ],
         ),
@@ -331,15 +338,15 @@ class _InteractiveIconDemoState extends State<_InteractiveIconDemo> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           children: [
-            const Text(
+            Text(
               '交互式图标示例',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -350,16 +357,17 @@ class _InteractiveIconDemoState extends State<_InteractiveIconDemo> {
                       _isFavorite ? Icons.favorite : Icons.favorite_border,
                       size: 32,
                       color: _isFavorite ? Colors.red : Colors.grey,
-                      onPressed: () => setState(() => _isFavorite = !_isFavorite),
+                      onPressed: () =>
+                          setState(() => _isFavorite = !_isFavorite),
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Text(
                       _isFavorite ? '已收藏' : '收藏',
-                      style: const TextStyle(fontSize: 12),
+                      style: TextStyle(fontSize: 12),
                     ),
                   ],
                 ),
-                
+
                 // 点赞图标
                 Column(
                   children: [
@@ -374,14 +382,14 @@ class _InteractiveIconDemoState extends State<_InteractiveIconDemo> {
                         });
                       },
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Text(
                       '$_likeCount',
-                      style: const TextStyle(fontSize: 12),
+                      style: TextStyle(fontSize: 12),
                     ),
                   ],
                 ),
-                
+
                 // 分享图标
                 Column(
                   children: [
@@ -391,8 +399,8 @@ class _InteractiveIconDemoState extends State<_InteractiveIconDemo> {
                       color: Colors.green,
                       onPressed: () => _showMessage('分享功能'),
                     ),
-                    const SizedBox(height: 4),
-                    const Text(
+                    SizedBox(height: 4),
+                    Text(
                       '分享',
                       style: TextStyle(fontSize: 12),
                     ),

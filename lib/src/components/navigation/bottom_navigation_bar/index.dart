@@ -1,5 +1,5 @@
 /// ZephyrUI Bottom Navigation Bar Components
-/// 
+///
 /// Bottom navigation bar with support for labels, icons, badges, and animations.
 library bottom_navigation_bar;
 

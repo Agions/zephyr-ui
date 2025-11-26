@@ -7,10 +7,10 @@ import 'theme_data.dart';
 class ZephyrTheme extends InheritedWidget {
   /// 创建一个主题提供者
   const ZephyrTheme({
-    Key? key,
     required this.data,
-    required Widget child,
-  }) : super(key: key, child: child);
+    required super.child,
+    super.key,
+  });
 
   /// 主题数据
   final ZephyrThemeData data;
@@ -19,8 +19,7 @@ class ZephyrTheme extends InheritedWidget {
   ///
   /// 如果在widget树中没有找到ZephyrTheme，则返回默认的亮色主题。
   static ZephyrThemeData of(BuildContext context) {
-    final ZephyrTheme? theme =
-        context.dependOnInheritedWidgetOfExactType<ZephyrTheme>();
+    final theme = context.dependOnInheritedWidgetOfExactType<ZephyrTheme>();
     return theme?.data ?? ZephyrThemeData.light();
   }
 

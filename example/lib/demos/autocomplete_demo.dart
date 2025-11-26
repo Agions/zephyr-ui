@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zephyr_ui/zephyr_ui.dart';
 
 /// AutoComplete Demo Page
-/// 
+///
 /// Demonstrates the capabilities of the ZephyrAutoComplete component
 class AutoCompleteDemo extends StatefulWidget {
   const AutoCompleteDemo({Key? key}) : super(key: key);
@@ -41,11 +41,36 @@ class _AutoCompleteDemoState extends State<AutoCompleteDemo> {
   ];
 
   final List<Map<String, dynamic>> _users = [
-    {'id': 1, 'name': 'John Doe', 'email': 'john@example.com', 'role': 'Developer'},
-    {'id': 2, 'name': 'Jane Smith', 'email': 'jane@example.com', 'role': 'Designer'},
-    {'id': 3, 'name': 'Bob Johnson', 'email': 'bob@example.com', 'role': 'Manager'},
-    {'id': 4, 'name': 'Alice Brown', 'email': 'alice@example.com', 'role': 'Developer'},
-    {'id': 5, 'name': 'Charlie Wilson', 'email': 'charlie@example.com', 'role': 'Analyst'},
+    {
+      'id': 1,
+      'name': 'John Doe',
+      'email': 'john@example.com',
+      'role': 'Developer'
+    },
+    {
+      'id': 2,
+      'name': 'Jane Smith',
+      'email': 'jane@example.com',
+      'role': 'Designer'
+    },
+    {
+      'id': 3,
+      'name': 'Bob Johnson',
+      'email': 'bob@example.com',
+      'role': 'Manager'
+    },
+    {
+      'id': 4,
+      'name': 'Alice Brown',
+      'email': 'alice@example.com',
+      'role': 'Developer'
+    },
+    {
+      'id': 5,
+      'name': 'Charlie Wilson',
+      'email': 'charlie@example.com',
+      'role': 'Analyst'
+    },
   ];
 
   @override
@@ -77,7 +102,6 @@ class _AutoCompleteDemoState extends State<AutoCompleteDemo> {
             if (_selectedItem != null)
               Text('Selected: $_selectedItem',
                   style: const TextStyle(fontWeight: FontWeight.bold)),
-            
             const SizedBox(height: 32),
             _buildSectionTitle('Multi-Select AutoComplete'),
             const SizedBox(height: 16),
@@ -93,7 +117,7 @@ class _AutoCompleteDemoState extends State<AutoCompleteDemo> {
                   }
                 });
               },
-              ),
+            ),
             const SizedBox(height: 16),
             Wrap(
               spacing: 8,
@@ -108,7 +132,6 @@ class _AutoCompleteDemoState extends State<AutoCompleteDemo> {
                       ))
                   .toList(),
             ),
-            
             const SizedBox(height: 32),
             _buildSectionTitle('Custom Item Builder'),
             const SizedBox(height: 16),
@@ -128,7 +151,6 @@ class _AutoCompleteDemoState extends State<AutoCompleteDemo> {
                 );
               },
             ),
-            
             const SizedBox(height: 32),
             _buildSectionTitle('Async Data Loading'),
             const SizedBox(height: 16),
@@ -139,12 +161,11 @@ class _AutoCompleteDemoState extends State<AutoCompleteDemo> {
               asyncItems: (query) async {
                 await Future.delayed(const Duration(milliseconds: 500));
                 return _countries
-                    .where((country) => 
+                    .where((country) =>
                         country.toLowerCase().contains(query.toLowerCase()))
                     .toList();
               },
             ),
-            
             const SizedBox(height: 32),
             _buildSectionTitle('Features'),
             const SizedBox(height: 16),

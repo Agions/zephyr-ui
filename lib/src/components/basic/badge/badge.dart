@@ -12,8 +12,8 @@ class ZephyrBadge extends StatelessWidget {
   ///
   /// [content] 为必填参数，指定徽章显示的文本内容
   const ZephyrBadge({
-    Key? key,
     required this.content,
+    super.key,
     this.backgroundColor,
     this.textColor,
     this.borderRadius,
@@ -23,16 +23,15 @@ class ZephyrBadge extends StatelessWidget {
   })  : isNumeric = false,
         count = null,
         maxCount = null,
-        isDot = false,
-        super(key: key);
+        isDot = false;
 
   /// 创建数字徽章
   ///
   /// [count] 指定徽章内显示的数字
   /// [maxCount] 可选参数，当 [count] 超过此值时，显示为 "[maxCount]+"
   const ZephyrBadge.count({
-    Key? key,
     required this.count,
+    super.key,
     this.maxCount,
     this.backgroundColor,
     this.textColor,
@@ -42,14 +41,13 @@ class ZephyrBadge extends StatelessWidget {
     this.borderColor,
   })  : content = null,
         isNumeric = true,
-        isDot = false,
-        super(key: key);
+        isDot = false;
 
   /// 创建圆点徽章
   ///
   /// 一个无文本的小圆点，通常用作状态指示器
   const ZephyrBadge.dot({
-    Key? key,
+    super.key,
     this.backgroundColor,
     this.borderRadius,
     this.borderWidth,
@@ -60,8 +58,7 @@ class ZephyrBadge extends StatelessWidget {
         isNumeric = false,
         count = null,
         maxCount = null,
-        isDot = true,
-        super(key: key);
+        isDot = true;
 
   /// 徽章显示的文本内容
   final String? content;

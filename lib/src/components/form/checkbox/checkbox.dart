@@ -21,7 +21,7 @@ import 'package:zephyr_ui/zephyr_ui.dart';
 class ZephyrCheckbox extends StatefulWidget {
   /// 创建一个复选框组件
   const ZephyrCheckbox({
-    Key? key,
+    super.key,
     required this.value,
     this.onChanged,
     this.label,
@@ -37,7 +37,7 @@ class ZephyrCheckbox extends StatefulWidget {
     this.theme,
     this.semanticLabel,
     this.enableAccessibilityFeatures = true,
-  }) : super(key: key);
+  });
 
   /// 当前选中状态
   final bool value;

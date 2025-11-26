@@ -118,7 +118,7 @@ class LayoutComponentsDemo extends StatelessWidget {
   Widget _buildContainerExamples() {
     return ExampleCard(
       title: '容器组件',
-      code: '''Container(
+      code: '''const Container(
   padding: EdgeInsets.all(16),
   decoration: BoxDecoration(
     color: Colors.blue[50],
@@ -135,28 +135,28 @@ class LayoutComponentsDemo extends StatelessWidget {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          Container(
-            padding: const EdgeInsets.all(16),
+          const Container(
+            padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.blue[50],
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: Colors.blue[200]!),
             ),
-            child: const Text('这是一个基础容器'),
+            child: Text('这是一个基础容器'),
           ),
           const SizedBox(height: 16),
-          Container(
-            padding: const EdgeInsets.all(16),
+          const Container(
+            padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.green[50],
               borderRadius: BorderRadius.circular(12),
               border: Border.all(color: Colors.green[200]!),
             ),
-            child: const Text('圆角更大的容器'),
+            child: Text('圆角更大的容器'),
           ),
           const SizedBox(height: 16),
-          Container(
-            padding: const EdgeInsets.all(16),
+          const Container(
+            padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.purple[50],
               borderRadius: BorderRadius.circular(16),
@@ -168,7 +168,7 @@ class LayoutComponentsDemo extends StatelessWidget {
                 ),
               ],
             ),
-            child: const Text('带阴影的容器'),
+            child: Text('带阴影的容器'),
           ),
         ],
       ),
@@ -204,12 +204,12 @@ class LayoutComponentsDemo extends StatelessWidget {
             crossAxisSpacing: 8,
             mainAxisSpacing: 8,
             childAspectRatio: 1.2,
-            children: [
+            children: const [
               Card(
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Icon(Icons.home, size: 32),
                       SizedBox(height: 8),
                       Text('首页'),
@@ -221,7 +221,7 @@ class LayoutComponentsDemo extends StatelessWidget {
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Icon(Icons.search, size: 32),
                       SizedBox(height: 8),
                       Text('搜索'),
@@ -233,7 +233,7 @@ class LayoutComponentsDemo extends StatelessWidget {
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Icon(Icons.person, size: 32),
                       SizedBox(height: 8),
                       Text('个人'),
@@ -245,7 +245,7 @@ class LayoutComponentsDemo extends StatelessWidget {
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Icon(Icons.settings, size: 32),
                       SizedBox(height: 8),
                       Text('设置'),
@@ -269,47 +269,47 @@ class LayoutComponentsDemo extends StatelessWidget {
             mainAxisSpacing: 8,
             childAspectRatio: 1.0,
             children: [
-              Container(
+              const Container(
                 decoration: BoxDecoration(
                   color: Colors.red[100],
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Center(child: Text('1')),
+                child: Center(child: Text('1')),
               ),
-              Container(
+              const Container(
                 decoration: BoxDecoration(
                   color: Colors.blue[100],
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Center(child: Text('2')),
+                child: Center(child: Text('2')),
               ),
-              Container(
+              const Container(
                 decoration: BoxDecoration(
                   color: Colors.green[100],
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Center(child: Text('3')),
+                child: Center(child: Text('3')),
               ),
-              Container(
+              const Container(
                 decoration: BoxDecoration(
                   color: Colors.yellow[100],
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Center(child: Text('4')),
+                child: Center(child: Text('4')),
               ),
-              Container(
+              const Container(
                 decoration: BoxDecoration(
                   color: Colors.purple[100],
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Center(child: Text('5')),
+                child: Center(child: Text('5')),
               ),
-              Container(
+              const Container(
                 decoration: BoxDecoration(
                   color: Colors.orange[100],
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Center(child: Text('6')),
+                child: Center(child: Text('6')),
               ),
             ],
           ),
@@ -334,7 +334,7 @@ class LayoutComponentsDemo extends StatelessWidget {
           title: Text('面板标题'),
         );
       },
-      body: Padding(
+      body: const Padding(
         padding: EdgeInsets.all(16),
         child: Text('面板内容'),
       ),

@@ -66,8 +66,8 @@ class ZephyrProgressTheme {
           isDark ? ZephyrColors.neutral700 : ZephyrColors.neutral200,
       valueColor: valueColor,
       labelStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightMedium,
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
         color: isDark ? ZephyrColors.neutral200 : ZephyrColors.neutral700,
       ),
     );

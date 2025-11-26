@@ -7,7 +7,7 @@ import 'table.dart';
 ///
 /// 展示ZephyrTable组件的各种用法和配置选项。
 class ZephyrTableExample extends StatefulWidget {
-  const ZephyrTableExample({Key? key}) : super(key: key);
+  const ZephyrTableExample({super.key});
 
   @override
   State<ZephyrTableExample> createState() => _ZephyrTableExampleState();
@@ -16,16 +16,76 @@ class ZephyrTableExample extends StatefulWidget {
 class _ZephyrTableExampleState extends State<ZephyrTableExample> {
   // 示例数据
   final List<Map<String, dynamic>> _users = [
-    {'id': 1, 'name': '张三', 'email': 'zhangsan@example.com', 'age': 28, 'status': 'active'},
-    {'id': 2, 'name': '李四', 'email': 'lisi@example.com', 'age': 32, 'status': 'inactive'},
-    {'id': 3, 'name': '王五', 'email': 'wangwu@example.com', 'age': 25, 'status': 'active'},
-    {'id': 4, 'name': '赵六', 'email': 'zhaoliu@example.com', 'age': 35, 'status': 'pending'},
-    {'id': 5, 'name': '钱七', 'email': 'qianqi@example.com', 'age': 29, 'status': 'active'},
-    {'id': 6, 'name': '孙八', 'email': 'sunba@example.com', 'age': 31, 'status': 'inactive'},
-    {'id': 7, 'name': '周九', 'email': 'zhoujiu@example.com', 'age': 27, 'status': 'active'},
-    {'id': 8, 'name': '吴十', 'email': 'wushi@example.com', 'age': 33, 'status': 'pending'},
-    {'id': 9, 'name': '郑十一', 'email': 'zhengshiyi@example.com', 'age': 26, 'status': 'active'},
-    {'id': 10, 'name': '王十二', 'email': 'wangshier@example.com', 'age': 30, 'status': 'inactive'},
+    {
+      'id': 1,
+      'name': '张三',
+      'email': 'zhangsan@example.com',
+      'age': 28,
+      'status': 'active'
+    },
+    {
+      'id': 2,
+      'name': '李四',
+      'email': 'lisi@example.com',
+      'age': 32,
+      'status': 'inactive'
+    },
+    {
+      'id': 3,
+      'name': '王五',
+      'email': 'wangwu@example.com',
+      'age': 25,
+      'status': 'active'
+    },
+    {
+      'id': 4,
+      'name': '赵六',
+      'email': 'zhaoliu@example.com',
+      'age': 35,
+      'status': 'pending'
+    },
+    {
+      'id': 5,
+      'name': '钱七',
+      'email': 'qianqi@example.com',
+      'age': 29,
+      'status': 'active'
+    },
+    {
+      'id': 6,
+      'name': '孙八',
+      'email': 'sunba@example.com',
+      'age': 31,
+      'status': 'inactive'
+    },
+    {
+      'id': 7,
+      'name': '周九',
+      'email': 'zhoujiu@example.com',
+      'age': 27,
+      'status': 'active'
+    },
+    {
+      'id': 8,
+      'name': '吴十',
+      'email': 'wushi@example.com',
+      'age': 33,
+      'status': 'pending'
+    },
+    {
+      'id': 9,
+      'name': '郑十一',
+      'email': 'zhengshiyi@example.com',
+      'age': 26,
+      'status': 'active'
+    },
+    {
+      'id': 10,
+      'name': '王十二',
+      'email': 'wangshier@example.com',
+      'age': 30,
+      'status': 'inactive'
+    },
   ];
 
   // 选中行
@@ -36,7 +96,6 @@ class _ZephyrTableExampleState extends State<ZephyrTableExample> {
 
   // 排序信息
   ZephyrTableSort? _currentSort;
-
 
   @override
   Widget build(BuildContext context) {
@@ -53,32 +112,32 @@ class _ZephyrTableExampleState extends State<ZephyrTableExample> {
             _buildSectionTitle('基础表格'),
             _buildBasicTable(),
             const SizedBox(height: 32),
-            
+
             // 可排序表格
             _buildSectionTitle('可排序表格'),
             _buildSortableTable(),
             const SizedBox(height: 32),
-            
+
             // 可选择表格
             _buildSectionTitle('可选择表格'),
             _buildSelectableTable(),
             const SizedBox(height: 32),
-            
+
             // 分页表格
             _buildSectionTitle('分页表格'),
             _buildPaginatedTable(),
             const SizedBox(height: 32),
-            
+
             // 自定义单元格表格
             _buildSectionTitle('自定义单元格表格'),
             _buildCustomCellTable(),
             const SizedBox(height: 32),
-            
+
             // 加载状态表格
             _buildSectionTitle('加载状态表格'),
             _buildLoadingTable(),
             const SizedBox(height: 32),
-            
+
             // 空数据表格
             _buildSectionTitle('空数据表格'),
             _buildEmptyTable(),
@@ -322,7 +381,7 @@ class _ZephyrTableExampleState extends State<ZephyrTableExample> {
               final status = data['status'] as String;
               Color color;
               String text;
-              
+
               switch (status) {
                 case 'active':
                   color = Colors.green;
@@ -340,7 +399,7 @@ class _ZephyrTableExampleState extends State<ZephyrTableExample> {
                   color = Colors.grey;
                   text = '未知';
               }
-              
+
               return Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(

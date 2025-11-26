@@ -1,5 +1,5 @@
 /// ZephyrUI 主题工具类
-/// 
+///
 /// 提供主题相关的实用工具和辅助方法
 library theme_utils;
 
@@ -47,13 +47,17 @@ class ZephyrThemeUtils {
   /// 获取颜色阴影
   static Color getColorShade(Color color, {double amount = 0.2}) {
     final hsl = HSLColor.fromColor(color);
-    return hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0)).toColor();
+    return hsl
+        .withLightness((hsl.lightness - amount).clamp(0.0, 1.0))
+        .toColor();
   }
 
   /// 获取颜色色调
   static Color getColorTint(Color color, {double amount = 0.2}) {
     final hsl = HSLColor.fromColor(color);
-    return hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0)).toColor();
+    return hsl
+        .withLightness((hsl.lightness + amount).clamp(0.0, 1.0))
+        .toColor();
   }
 
   /// 获取颜色透明度变化
@@ -104,7 +108,7 @@ class ZephyrThemeUtils {
     double? desktopSize,
   }) {
     final width = MediaQuery.sizeOf(context).width;
-    
+
     if (width >= ZephyrBreakpointTokens.lg && desktopSize != null) {
       return desktopSize;
     }
@@ -122,7 +126,7 @@ class ZephyrThemeUtils {
     EdgeInsets? desktopPadding,
   }) {
     final width = MediaQuery.sizeOf(context).width;
-    
+
     if (width >= ZephyrBreakpointTokens.lg && desktopPadding != null) {
       return desktopPadding;
     }
@@ -140,7 +144,7 @@ class ZephyrThemeUtils {
     Widget? desktop,
   }) {
     final width = MediaQuery.sizeOf(context).width;
-    
+
     if (width >= ZephyrBreakpointTokens.lg && desktop != null) {
       return desktop;
     }
@@ -195,7 +199,7 @@ class ZephyrThemeUtils {
               child: Container(
                 decoration: BoxDecoration(
                   color: theme.colorScheme.primary,
-                  borderRadius: BorderRadius.vertical(
+                  borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(ZephyrRadiusTokens.medium),
                   ),
                 ),
@@ -265,21 +269,22 @@ class ZephyrThemeUtils {
   /// 生成主题报告
   static String generateThemeReport(ZephyrUnifiedThemeData theme) {
     final buffer = StringBuffer();
-    
+
     buffer.writeln('=== ZephyrUI 主题报告 ===');
     buffer.writeln('');
     buffer.writeln('亮度模式: ${theme.brightness.name}');
     buffer.writeln('');
-    
+
     buffer.writeln('颜色方案:');
     buffer.writeln('  主色: ${formatColorValue(theme.colorScheme.primary)}');
     buffer.writeln('  次要色: ${formatColorValue(theme.colorScheme.secondary)}');
     buffer.writeln('  第三色: ${formatColorValue(theme.colorScheme.tertiary)}');
     buffer.writeln('  错误色: ${formatColorValue(theme.colorScheme.error)}');
     buffer.writeln('  表面色: ${formatColorValue(theme.colorScheme.surface)}');
-    buffer.writeln('  表面色变体: ${formatColorValue(theme.colorScheme.surfaceVariant)}');
+    buffer.writeln(
+        '  表面色变体: ${formatColorValue(theme.colorScheme.surfaceContainerHighest)}');
     buffer.writeln('');
-    
+
     buffer.writeln('文本主题:');
     buffer.writeln('  显示大号: ${theme.textTheme.displayLarge?.fontSize}px');
     buffer.writeln('  标题大号: ${theme.textTheme.headlineLarge?.fontSize}px');
@@ -288,7 +293,7 @@ class ZephyrThemeUtils {
     buffer.writeln('  正文中号: ${theme.textTheme.bodyMedium?.fontSize}px');
     buffer.writeln('  标签大号: ${theme.textTheme.labelLarge?.fontSize}px');
     buffer.writeln('');
-    
+
     buffer.writeln('间距配置:');
     buffer.writeln('  微小: ${theme.spacing.micro}px');
     buffer.writeln('  小号: ${theme.spacing.small}px');
@@ -296,14 +301,14 @@ class ZephyrThemeUtils {
     buffer.writeln('  大号: ${theme.spacing.large}px');
     buffer.writeln('  特大: ${theme.spacing.extraLarge}px');
     buffer.writeln('');
-    
+
     buffer.writeln('动画配置:');
     buffer.writeln('  超快: ${theme.animation.ultraFast.inMilliseconds}ms');
     buffer.writeln('  快速: ${theme.animation.fast.inMilliseconds}ms');
     buffer.writeln('  正常: ${theme.animation.normal.inMilliseconds}ms');
     buffer.writeln('  慢速: ${theme.animation.slow.inMilliseconds}ms');
     buffer.writeln('  超慢: ${theme.animation.ultraSlow.inMilliseconds}ms');
-    
+
     return buffer.toString();
   }
 
@@ -319,17 +324,17 @@ class ZephyrThemeUtils {
         theme.colorScheme.surface,
         theme.colorScheme.onSurface,
       ];
-      
+
       for (final color in colors) {
         if (color.value == 0) return false;
       }
-      
+
       // 验证文本主题
       if (theme.textTheme.bodyLarge?.fontSize == null) return false;
-      
+
       // 验证间距
       if (theme.spacing.small <= 0) return false;
-      
+
       return true;
     } catch (e) {
       return false;
@@ -353,7 +358,7 @@ class ZephyrThemeUtils {
         'large': theme.spacing.large,
       },
     };
-    
+
     final configString = config.toString();
     await Clipboard.setData(ClipboardData(text: configString));
   }
@@ -405,7 +410,9 @@ class _ColorPickerWidgetState extends State<_ColorPickerWidget> {
                     color: color,
                     borderRadius: BorderRadius.circular(4),
                     border: Border.all(
-                      color: _selectedColor == color ? Colors.black : Colors.transparent,
+                      color: _selectedColor == color
+                          ? Colors.black
+                          : Colors.transparent,
                       width: 2,
                     ),
                   ),
@@ -453,7 +460,7 @@ class _ColorPickerWidgetState extends State<_ColorPickerWidget> {
     Colors.amber,
     Colors.orange,
     Colors.deepOrange,
-    Colors.brown,
+    Colors.bluerown,
     Colors.grey,
     Colors.blueGrey,
     Colors.black,

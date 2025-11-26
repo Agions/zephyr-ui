@@ -1,5 +1,5 @@
 /// ZephyrUI Navigation Rail Theme
-/// 
+///
 /// Defines the theme configuration for navigation rail components.
 library navigation_rail_theme;
 
@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:zephyr_ui/zephyr_ui.dart';
 
 /// ZephyrUI Navigation Rail Theme
-class ZephyrNavigationRailTheme extends ThemeExtension<ZephyrNavigationRailTheme> {
+class ZephyrNavigationRailTheme
+    extends ThemeExtension<ZephyrNavigationRailTheme> {
   /// Creates a navigation rail theme
   const ZephyrNavigationRailTheme({
     required this.backgroundColor,
@@ -76,28 +77,30 @@ class ZephyrNavigationRailTheme extends ThemeExtension<ZephyrNavigationRailTheme
   static ZephyrNavigationRailTheme of(BuildContext context) {
     final theme = Theme.of(context).extension<ZephyrNavigationRailTheme>();
     if (theme != null) return theme;
-    
+
     final zephyrTheme = ZephyrTheme.of(context);
     return _createDefaultTheme(zephyrTheme);
   }
 
   /// Create default theme
-  static ZephyrNavigationRailTheme _createDefaultTheme(ZephyrThemeData zephyrTheme) {
+  static ZephyrNavigationRailTheme _createDefaultTheme(
+      ZephyrThemeData zephyrTheme) {
     final isDark = zephyrTheme.brightness == Brightness.dark;
-    
+
     return ZephyrNavigationRailTheme(
       backgroundColor: isDark ? ZephyrColors.neutral900 : Colors.white,
       selectedColor: zephyrTheme.primaryColor,
-      unselectedColor: isDark ? ZephyrColors.neutral400 : ZephyrColors.neutral600,
-      selectedLabelStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightMedium,
-        height: ZephyrTypography.lineHeight1_4,
+      unselectedColor:
+          isDark ? ZephyrColors.neutral400 : ZephyrColors.neutral600,
+      selectedLabelStyle: const TextStyle(
+        fontSize: 12.0,
+        fontWeight: FontWeight.w500,
+        height: 1.4,
       ),
-      unselectedLabelStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        height: ZephyrTypography.lineHeight1_4,
+      unselectedLabelStyle: const TextStyle(
+        fontSize: 12.0,
+        fontWeight: FontWeight.w400,
+        height: 1.4,
       ),
       selectedIconSize: 24.0,
       unselectedIconSize: 24.0,
@@ -153,25 +156,48 @@ class ZephyrNavigationRailTheme extends ThemeExtension<ZephyrNavigationRailTheme
   }
 
   @override
-  ZephyrNavigationRailTheme lerp(ThemeExtension<ZephyrNavigationRailTheme>? other, double t) {
+  ZephyrNavigationRailTheme lerp(
+      ThemeExtension<ZephyrNavigationRailTheme>? other, double t) {
     if (other is! ZephyrNavigationRailTheme) return this;
-    
+
     return ZephyrNavigationRailTheme(
-      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t) ?? backgroundColor,
-      selectedColor: Color.lerp(selectedColor, other.selectedColor, t) ?? selectedColor,
-      unselectedColor: Color.lerp(unselectedColor, other.unselectedColor, t) ?? unselectedColor,
-      selectedLabelStyle: TextStyle.lerp(selectedLabelStyle, other.selectedLabelStyle, t) ?? selectedLabelStyle,
-      unselectedLabelStyle: TextStyle.lerp(unselectedLabelStyle, other.unselectedLabelStyle, t) ?? unselectedLabelStyle,
-      selectedIconSize: lerpDouble(selectedIconSize, other.selectedIconSize, t) ?? selectedIconSize,
-      unselectedIconSize: lerpDouble(unselectedIconSize, other.unselectedIconSize, t) ?? unselectedIconSize,
+      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t) ??
+          backgroundColor,
+      selectedColor:
+          Color.lerp(selectedColor, other.selectedColor, t) ?? selectedColor,
+      unselectedColor: Color.lerp(unselectedColor, other.unselectedColor, t) ??
+          unselectedColor,
+      selectedLabelStyle:
+          TextStyle.lerp(selectedLabelStyle, other.selectedLabelStyle, t) ??
+              selectedLabelStyle,
+      unselectedLabelStyle:
+          TextStyle.lerp(unselectedLabelStyle, other.unselectedLabelStyle, t) ??
+              unselectedLabelStyle,
+      selectedIconSize:
+          lerpDouble(selectedIconSize, other.selectedIconSize, t) ??
+              selectedIconSize,
+      unselectedIconSize:
+          lerpDouble(unselectedIconSize, other.unselectedIconSize, t) ??
+              unselectedIconSize,
       itemHeight: lerpDouble(itemHeight, other.itemHeight, t) ?? itemHeight,
-      itemPadding: EdgeInsetsGeometry.lerp(itemPadding, other.itemPadding, t) ?? itemPadding,
-      itemBorderRadius: BorderRadius.lerp(itemBorderRadius, other.itemBorderRadius, t) ?? itemBorderRadius,
-      labelSpacing: lerpDouble(labelSpacing, other.labelSpacing, t) ?? labelSpacing,
-      indicatorColor: Color.lerp(indicatorColor, other.indicatorColor, t) ?? indicatorColor,
-      leadingPadding: EdgeInsetsGeometry.lerp(leadingPadding, other.leadingPadding, t) ?? leadingPadding,
-      trailingPadding: EdgeInsetsGeometry.lerp(trailingPadding, other.trailingPadding, t) ?? trailingPadding,
-      toggleButtonSpacing: lerpDouble(toggleButtonSpacing, other.toggleButtonSpacing, t) ?? toggleButtonSpacing,
+      itemPadding: EdgeInsetsGeometry.lerp(itemPadding, other.itemPadding, t) ??
+          itemPadding,
+      itemBorderRadius:
+          BorderRadius.lerp(itemBorderRadius, other.itemBorderRadius, t) ??
+              itemBorderRadius,
+      labelSpacing:
+          lerpDouble(labelSpacing, other.labelSpacing, t) ?? labelSpacing,
+      indicatorColor:
+          Color.lerp(indicatorColor, other.indicatorColor, t) ?? indicatorColor,
+      leadingPadding:
+          EdgeInsetsGeometry.lerp(leadingPadding, other.leadingPadding, t) ??
+              leadingPadding,
+      trailingPadding:
+          EdgeInsetsGeometry.lerp(trailingPadding, other.trailingPadding, t) ??
+              trailingPadding,
+      toggleButtonSpacing:
+          lerpDouble(toggleButtonSpacing, other.toggleButtonSpacing, t) ??
+              toggleButtonSpacing,
     );
   }
 }

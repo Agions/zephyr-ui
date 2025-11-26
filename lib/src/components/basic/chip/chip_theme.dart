@@ -49,29 +49,6 @@ class ZephyrChipTheme extends ThemeExtension<ZephyrChipTheme> {
 
   /// 禁用状态边框颜色
 
-  /// 创建一个默认的ZephyrChipTheme实例
-  static ZephyrChipTheme fallback(BuildContext context) {
-    final theme = Theme.of(context);
-    return ZephyrChipTheme(
-      backgroundColor: theme.chipTheme.backgroundColor,
-      selectedBackgroundColor: theme.colorScheme.primary,
-      disabledBackgroundColor: theme.disabledColor.withOpacity(0.1),
-      textColor: theme.colorScheme.onSurface,
-      selectedTextColor: theme.colorScheme.onPrimary,
-      disabledTextColor: theme.disabledColor,
-      borderColor: theme.dividerColor,
-      selectedBorderColor: theme.colorScheme.primary,
-      disabledBorderColor: theme.disabledColor,
-      deleteIconColor: theme.colorScheme.onSurface,
-      textStyle: theme.textTheme.bodyMedium,
-      borderRadius: BorderRadius.circular(16.0),
-      borderWidth: 1.0,
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-      height: 32.0,
-      iconSize: 18.0,
-      spacing: 4.0,
-    );
-  }
   final Color? disabledBorderColor;
 
   /// 删除图标颜色
@@ -105,9 +82,11 @@ class ZephyrChipTheme extends ThemeExtension<ZephyrChipTheme> {
     final isDark = theme.brightness == Brightness.dark;
 
     return ZephyrChipTheme(
-      backgroundColor: isDark ? colorScheme.surface : colorScheme.surfaceContainerHighest,
+      backgroundColor:
+          isDark ? colorScheme.surface : colorScheme.surfaceContainerHighest,
       selectedBackgroundColor: colorScheme.primary,
-      disabledBackgroundColor: isDark ? colorScheme.surface : colorScheme.surfaceContainerHighest,
+      disabledBackgroundColor:
+          isDark ? colorScheme.surface : colorScheme.surfaceContainerHighest,
       textColor: colorScheme.onSurface,
       selectedTextColor: colorScheme.onPrimary,
       disabledTextColor: colorScheme.onSurface.withValues(alpha: 0.38),
@@ -120,7 +99,7 @@ class ZephyrChipTheme extends ThemeExtension<ZephyrChipTheme> {
         fontWeight: FontWeight.w500,
         height: 1.4,
       ),
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: const BorderRadius.circular(16),
       borderWidth: 1.0,
       padding: const EdgeInsets.symmetric(
         horizontal: 12,
@@ -154,8 +133,10 @@ class ZephyrChipTheme extends ThemeExtension<ZephyrChipTheme> {
   }) {
     return ZephyrChipTheme(
       backgroundColor: backgroundColor ?? this.backgroundColor,
-      selectedBackgroundColor: selectedBackgroundColor ?? this.selectedBackgroundColor,
-      disabledBackgroundColor: disabledBackgroundColor ?? this.disabledBackgroundColor,
+      selectedBackgroundColor:
+          selectedBackgroundColor ?? this.selectedBackgroundColor,
+      disabledBackgroundColor:
+          disabledBackgroundColor ?? this.disabledBackgroundColor,
       textColor: textColor ?? this.textColor,
       selectedTextColor: selectedTextColor ?? this.selectedTextColor,
       disabledTextColor: disabledTextColor ?? this.disabledTextColor,
@@ -179,17 +160,23 @@ class ZephyrChipTheme extends ThemeExtension<ZephyrChipTheme> {
 
     return ZephyrChipTheme(
       backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
-      selectedBackgroundColor: Color.lerp(selectedBackgroundColor, other.selectedBackgroundColor, t),
-      disabledBackgroundColor: Color.lerp(disabledBackgroundColor, other.disabledBackgroundColor, t),
+      selectedBackgroundColor:
+          Color.lerp(selectedBackgroundColor, other.selectedBackgroundColor, t),
+      disabledBackgroundColor:
+          Color.lerp(disabledBackgroundColor, other.disabledBackgroundColor, t),
       textColor: Color.lerp(textColor, other.textColor, t),
-      selectedTextColor: Color.lerp(selectedTextColor, other.selectedTextColor, t),
-      disabledTextColor: Color.lerp(disabledTextColor, other.disabledTextColor, t),
+      selectedTextColor:
+          Color.lerp(selectedTextColor, other.selectedTextColor, t),
+      disabledTextColor:
+          Color.lerp(disabledTextColor, other.disabledTextColor, t),
       borderColor: Color.lerp(borderColor, other.borderColor, t),
-      selectedBorderColor: Color.lerp(selectedBorderColor, other.selectedBorderColor, t),
-      disabledBorderColor: Color.lerp(disabledBorderColor, other.disabledBorderColor, t),
+      selectedBorderColor:
+          Color.lerp(selectedBorderColor, other.selectedBorderColor, t),
+      disabledBorderColor:
+          Color.lerp(disabledBorderColor, other.disabledBorderColor, t),
       deleteIconColor: Color.lerp(deleteIconColor, other.deleteIconColor, t),
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t),
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t),
+      borderRadius: const BorderRadius.lerp(borderRadius, other.borderRadius, t),
       borderWidth: lerpDouble(borderWidth, other.borderWidth, t),
       padding: EdgeInsetsGeometry.lerp(padding, other.padding, t),
       height: lerpDouble(height, other.height, t),

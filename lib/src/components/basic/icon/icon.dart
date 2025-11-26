@@ -19,14 +19,14 @@ class ZephyrIcon extends StatelessWidget {
   /// [icon] 是要显示的图标
   const ZephyrIcon(
     this.icon, {
-    Key? key,
+    super.key,
     this.size = ZephyrIconSize.medium,
     this.status = ZephyrIconStatus.normal,
     this.color,
     this.customSize,
     this.semanticLabel,
     this.theme,
-  }) : super(key: key);
+  });
 
   /// 创建一个小号图标
   factory ZephyrIcon.small(
@@ -272,7 +272,7 @@ class ZephyrIcon extends StatelessWidget {
     );
 
     // 根据状态确定颜色
-    Color? effectiveColor = color;
+    var effectiveColor = color;
     if (effectiveColor == null) {
       switch (status) {
         case ZephyrIconStatus.normal:
@@ -303,7 +303,7 @@ class ZephyrIcon extends StatelessWidget {
     }
 
     // 根据尺寸确定大小
-    double? effectiveSize = customSize;
+    var effectiveSize = customSize;
     if (effectiveSize == null) {
       switch (size) {
         case ZephyrIconSize.small:

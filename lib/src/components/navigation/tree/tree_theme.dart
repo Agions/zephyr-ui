@@ -1,5 +1,5 @@
 /// ZephyrUI Tree Theme
-/// 
+///
 /// Defines the theme configuration for tree components.
 library tree_theme;
 
@@ -84,7 +84,7 @@ class ZephyrTreeTheme {
 
   /// Get theme from context
   static ZephyrTreeTheme of(BuildContext context) {
-    return ZephyrTheme.of(context).treeTheme ?? const ZephyrTreeTheme();
+    return ZephyrTheme.of(context).treeTheme;
   }
 
   /// Create light theme
@@ -116,7 +116,7 @@ class ZephyrTreeTheme {
       disabledTextColor: Color(0xFF616161),
       badgeColor: Color(0xFFFF7043),
       badgeTextColor: Colors.white,
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
         fontSize: 14,
         color: Color(0xFFE0E0E0),
       ),

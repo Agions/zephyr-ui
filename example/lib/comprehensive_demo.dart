@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zephyr_ui/zephyr_ui.dart';
 
 /// ZephyrUI 综合演示页面
-/// 
+///
 /// 展示所有54+组件的完整功能，体现企业级组件库的强大能力。
 class ComprehensiveDemo extends StatefulWidget {
   const ComprehensiveDemo({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class ComprehensiveDemo extends StatefulWidget {
 
 class _ComprehensiveDemoState extends State<ComprehensiveDemo> {
   int _currentIndex = 0;
-  
+
   final List<Widget> _pages = [
     const BasicComponentsDemo(),
     const FormComponentsDemo(),
@@ -30,7 +30,7 @@ class _ComprehensiveDemoState extends State<ComprehensiveDemo> {
       body: Row(
         children: [
           // 侧边导航
-          Container(
+          const Container(
             width: 280,
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surface,
@@ -44,7 +44,7 @@ class _ComprehensiveDemoState extends State<ComprehensiveDemo> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: const EdgeInsets.all(24),
+                  padding: EdgeInsets.all(24),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.primaryContainer,
                   ),
@@ -52,15 +52,15 @@ class _ComprehensiveDemoState extends State<ComprehensiveDemo> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ZephyrText.headlineLarge('ZephyrUI'),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       ZephyrText.bodyMedium('54+ 企业级组件'),
                     ],
                   ),
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 Expanded(
                   child: ListView(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 16),
                     children: [
                       _buildNavItem(
                         icon: Icons.widgets,
@@ -87,7 +87,8 @@ class _ComprehensiveDemoState extends State<ComprehensiveDemo> {
                         index: 3,
                       ),
                       _buildNavItem(
-                        icon: IconData(0xf1e8, fontFamily: 'MaterialIcons'), // chart
+                        icon: IconData(0xf1e8,
+                            fontFamily: 'MaterialIcons'), // chart
                         title: '数据展示',
                         subtitle: '13个组件',
                         index: 4,
@@ -126,14 +127,14 @@ class _ComprehensiveDemoState extends State<ComprehensiveDemo> {
     required int index,
   }) {
     final isSelected = _currentIndex == index;
-    
+
     return GestureDetector(
       onTap: () => setState(() => _currentIndex = index),
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 8),
-        padding: const EdgeInsets.all(16),
+      child: const Container(
+        margin: EdgeInsets.only(bottom: 8),
+        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: isSelected 
+          color: isSelected
               ? Theme.of(context).colorScheme.primaryContainer
               : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
@@ -146,11 +147,11 @@ class _ComprehensiveDemoState extends State<ComprehensiveDemo> {
         child: Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(8),
+              padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: isSelected
                     ? Theme.of(context).colorScheme.primary
-                    : Theme.of(context).colorScheme.surfaceVariant,
+                    : Theme.of(context).colorScheme.surfaceContainerHighest,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
@@ -161,7 +162,7 @@ class _ComprehensiveDemoState extends State<ComprehensiveDemo> {
                 size: 20,
               ),
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -202,7 +203,7 @@ class BasicComponentsDemo extends StatelessWidget {
           ZephyrText.headlineLarge('基础组件'),
           ZephyrText.bodyMedium('8个精心设计的基础UI组件'),
           const SizedBox(height: 32),
-          
+
           // 头像组件
           _buildSection('头像组件', [
             Row(
@@ -220,10 +221,10 @@ class BasicComponentsDemo extends StatelessWidget {
               ],
             ),
           ]),
-          
+
           // 徽章组件
           _buildSection('徽章组件', [
-            Wrap(
+            const Wrap(
               spacing: 16,
               children: [
                 ZephyrBadge(content: '新'),
@@ -233,7 +234,7 @@ class BasicComponentsDemo extends StatelessWidget {
               ],
             ),
           ]),
-          
+
           // 按钮组件
           _buildSection('按钮组件', [
             Wrap(
@@ -246,7 +247,7 @@ class BasicComponentsDemo extends StatelessWidget {
               ],
             ),
           ]),
-          
+
           // 卡片组件
           _buildSection('卡片组件', [
             ZephyrCard(
@@ -258,7 +259,7 @@ class BasicComponentsDemo extends StatelessWidget {
               ],
             ),
           ]),
-          
+
           // 标签组件
           _buildSection('标签组件', [
             Wrap(
@@ -270,7 +271,7 @@ class BasicComponentsDemo extends StatelessWidget {
               ],
             ),
           ]),
-          
+
           // 分割线组件
           _buildSection('分割线组件', [
             Column(
@@ -284,10 +285,10 @@ class BasicComponentsDemo extends StatelessWidget {
               ],
             ),
           ]),
-          
+
           // 图标组件
           _buildSection('图标组件', [
-            Wrap(
+            const Wrap(
               spacing: 16,
               children: [
                 ZephyrIcon(Icons.home, size: 24),
@@ -297,7 +298,7 @@ class BasicComponentsDemo extends StatelessWidget {
               ],
             ),
           ]),
-          
+
           // 文本组件
           _buildSection('文本组件', [
             Column(
@@ -347,7 +348,6 @@ class FormComponentsDemo extends StatelessWidget {
           ZephyrText.headlineLarge('表单组件'),
           ZephyrText.bodyMedium('13个完整的表单组件'),
           const SizedBox(height: 32),
-          
           ZephyrCard(
             title: '完整表单示例',
             content: Column(
@@ -363,7 +363,7 @@ class FormComponentsDemo extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 16),
-                ZephyrInput(
+                const ZephyrInput(
                   placeholder: '请输入密码',
                   obscureText: true,
                   prefixIcon: Icons.lock,
@@ -371,7 +371,7 @@ class FormComponentsDemo extends StatelessWidget {
                 const SizedBox(height: 16),
                 ZephyrSelect(
                   placeholder: '请选择职业',
-                  items: ['开发者', '设计师', '产品经理', '其他'],
+                  items: const ['开发者', '设计师', '产品经理', '其他'],
                   onChanged: (value) {},
                 ),
                 const SizedBox(height: 16),
@@ -422,7 +422,6 @@ class NavigationComponentsDemo extends StatelessWidget {
           ZephyrText.headlineLarge('导航组件'),
           ZephyrText.bodyMedium('8个导航组件'),
           const SizedBox(height: 32),
-          
           ZephyrCard(
             title: '导航示例',
             content: Column(
@@ -432,21 +431,21 @@ class NavigationComponentsDemo extends StatelessWidget {
                   items: ['首页', '产品', '详情'],
                 ),
                 const SizedBox(height: 24),
-                
+
                 // 选项卡
                 ZephyrTabs(
-                  tabs: ['概览', '详情', '设置'],
+                  tabs: const ['概览', '详情', '设置'],
                   onTabChanged: (index) {},
                 ),
                 const SizedBox(height: 24),
-                
+
                 // 步骤器
-                ZephyrStepper(
+                const ZephyrStepper(
                   steps: ['第一步', '第二步', '第三步'],
                   currentStep: 1,
                 ),
                 const SizedBox(height: 24),
-                
+
                 // 分页
                 ZephyrPagination(
                   currentPage: 1,
@@ -476,7 +475,7 @@ class FeedbackComponentsDemo extends StatelessWidget {
           ZephyrText.headlineLarge('反馈组件'),
           ZephyrText.bodyMedium('6个反馈组件'),
           const SizedBox(height: 32),
-          
+
           Wrap(
             spacing: 16,
             runSpacing: 16,
@@ -502,14 +501,14 @@ class FeedbackComponentsDemo extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 24),
-          
+
           // 进度指示器
           ZephyrProgress(
             value: 0.7,
             type: ZephyrProgressType.linear,
           ),
           const SizedBox(height: 16),
-          
+
           // 骨架屏
           ZephyrSkeleton(
             type: ZephyrSkeletonType.list,
@@ -534,7 +533,7 @@ class DisplayComponentsDemo extends StatelessWidget {
           ZephyrText.headlineLarge('数据展示组件'),
           ZephyrText.bodyMedium('13个数据展示组件'),
           const SizedBox(height: 32),
-          
+
           // 统计数据
           Row(
             children: [
@@ -558,14 +557,14 @@ class DisplayComponentsDemo extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 24),
-          
+
           // 表格
-          ZephyrCard(
+          const ZephyrCard(
             title: '数据表格',
             content: SizedBox(
               height: 300,
               child: ZephyrTable(
-                columns: const ['姓名', '年龄', '职业'],
+                columns: ['姓名', '年龄', '职业'],
                 rows: [
                   ['张三', '28', '开发者'],
                   ['李四', '32', '设计师'],
@@ -575,7 +574,7 @@ class DisplayComponentsDemo extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          
+
           // 时间线
           ZephyrCard(
             title: '时间线',
@@ -614,31 +613,31 @@ class LayoutComponentsDemo extends StatelessWidget {
           ZephyrText.headlineLarge('布局组件'),
           ZephyrText.bodyMedium('4个布局组件'),
           const SizedBox(height: 32),
-          
+
           // 网格布局
-          ZephyrGrid(
+          const ZephyrGrid(
             crossAxisCount: 3,
             children: [
-              ZephyrCard(title: '卡片1', content: const Text('内容1')),
-              ZephyrCard(title: '卡片2', content: const Text('内容2')),
-              ZephyrCard(title: '卡片3', content: const Text('内容3')),
-              ZephyrCard(title: '卡片4', content: const Text('内容4')),
-              ZephyrCard(title: '卡片5', content: const Text('内容5')),
-              ZephyrCard(title: '卡片6', content: const Text('内容6')),
+              ZephyrCard(title: '卡片1', content: Text('内容1')),
+              ZephyrCard(title: '卡片2', content: Text('内容2')),
+              ZephyrCard(title: '卡片3', content: Text('内容3')),
+              ZephyrCard(title: '卡片4', content: Text('内容4')),
+              ZephyrCard(title: '卡片5', content: Text('内容5')),
+              ZephyrCard(title: '卡片6', content: Text('内容6')),
             ],
           ),
           const SizedBox(height: 24),
-          
+
           // 手风琴
-          ZephyrAccordion(
+          const ZephyrAccordion(
             items: [
               ZephyrAccordionItem(
                 title: '什么是ZephyrUI？',
-                content: const Text('ZephyrUI是一个企业级的Flutter组件库，提供54+个高质量组件。'),
+                content: Text('ZephyrUI是一个企业级的Flutter组件库，提供54+个高质量组件。'),
               ),
               ZephyrAccordionItem(
                 title: '如何使用？',
-                content: const Text('只需要导入包并按照文档使用即可。'),
+                content: Text('只需要导入包并按照文档使用即可。'),
               ),
             ],
           ),
@@ -662,7 +661,7 @@ class AdvancedComponentsDemo extends StatelessWidget {
           ZephyrText.headlineLarge('高级组件'),
           ZephyrText.bodyMedium('16个高级功能组件'),
           const SizedBox(height: 32),
-          
+
           Wrap(
             spacing: 16,
             children: [
@@ -687,36 +686,36 @@ class AdvancedComponentsDemo extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 24),
-          
+
           // 轮播图
           ZephyrCard(
             title: '轮播图',
-            content: SizedBox(
+            content: const SizedBox(
               height: 200,
               child: ZephyrCarousel(
                 items: [
                   Container(
                     color: Colors.blue,
-                    child: const Center(child: Text('幻灯片1')),
+                    child: Center(child: Text('幻灯片1')),
                   ),
                   Container(
                     color: Colors.green,
-                    child: const Center(child: Text('幻灯片2')),
+                    child: Center(child: Text('幻灯片2')),
                   ),
                   Container(
                     color: Colors.orange,
-                    child: const Center(child: Text('幻灯片3')),
+                    child: Center(child: Text('幻灯片3')),
                   ),
                 ],
               ),
             ),
           ),
           const SizedBox(height: 24),
-          
+
           // 图表
           ZephyrCard(
             title: '图表组件',
-            content: SizedBox(
+            content: const SizedBox(
               height: 300,
               child: ZephyrChart(
                 type: ZephyrChartType.line,

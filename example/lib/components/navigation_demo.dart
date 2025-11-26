@@ -1,5 +1,5 @@
 /// ZephyrUI Navigation Components Demo
-/// 
+///
 /// Comprehensive demo showcasing all navigation components.
 library navigation_demo;
 
@@ -10,7 +10,8 @@ class NavigationComponentsDemo extends StatefulWidget {
   const NavigationComponentsDemo({super.key});
 
   @override
-  State<NavigationComponentsDemo> createState() => _NavigationComponentsDemoState();
+  State<NavigationComponentsDemo> createState() =>
+      _NavigationComponentsDemoState();
 }
 
 class _NavigationComponentsDemoState extends State<NavigationComponentsDemo>
@@ -81,35 +82,33 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo>
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
           const Text('Standard Bottom Navigation'),
           const SizedBox(height: 8),
           ZephyrBottomNavigationBar(
             currentIndex: _bottomNavIndex,
             onTap: (index) => setState(() => _bottomNavIndex = index),
-            items: [
+            items: const [
               ZephyrBottomNavigationItem(
-                icon: const Icon(Icons.home),
+                icon: Icon(Icons.home),
                 label: 'Home',
-                activeIcon: const Icon(Icons.home_filled),
+                activeIcon: Icon(Icons.home_filled),
                 badge: ZephyrBadge.count(count: 5),
               ),
               ZephyrBottomNavigationItem(
-                icon: const Icon(Icons.search),
+                icon: Icon(Icons.search),
                 label: 'Search',
               ),
               ZephyrBottomNavigationItem(
-                icon: const Icon(Icons.notifications),
+                icon: Icon(Icons.notifications),
                 label: 'Notifications',
                 badge: ZephyrBadge.dot(),
               ),
               ZephyrBottomNavigationItem(
-                icon: const Icon(Icons.person),
+                icon: Icon(Icons.person),
                 label: 'Profile',
               ),
             ],
           ),
-          
           const SizedBox(height: 32),
           const Text('Bottom Navigation with Dots'),
           const SizedBox(height: 8),
@@ -118,17 +117,17 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo>
             onTap: (index) => setState(() => _bottomNavIndex = index),
             showDotIndicator: true,
             dotColor: Colors.blue,
-            items: [
+            items: const [
               ZephyrBottomNavigationItem(
-                icon: const Icon(Icons.dashboard),
+                icon: Icon(Icons.dashboard),
                 label: 'Dashboard',
               ),
               ZephyrBottomNavigationItem(
-                icon: const Icon(Icons.analytics),
+                icon: Icon(Icons.analytics),
                 label: 'Analytics',
               ),
               ZephyrBottomNavigationItem(
-                icon: const Icon(Icons.settings),
+                icon: Icon(Icons.settings),
                 label: 'Settings',
               ),
             ],
@@ -149,7 +148,6 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo>
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
           const Text('Standard Breadcrumb'),
           const SizedBox(height: 8),
           ZephyrBreadcrumb(
@@ -179,7 +177,6 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo>
               ),
             ],
           ),
-          
           const SizedBox(height: 32),
           const Text('Collapsible Breadcrumb'),
           const SizedBox(height: 8),
@@ -236,24 +233,24 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo>
           onTap: (index) => ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Navigated to item $index')),
           ),
-          items: [
+          items: const [
             ZephyrRailItem(
-              icon: const Icon(Icons.dashboard),
+              icon: Icon(Icons.dashboard),
               label: 'Dashboard',
-              selectedIcon: const Icon(Icons.dashboard_outlined),
+              selectedIcon: Icon(Icons.dashboard_outlined),
               badge: ZephyrBadge.count(count: 3),
             ),
             ZephyrRailItem(
-              icon: const Icon(Icons.analytics),
+              icon: Icon(Icons.analytics),
               label: 'Analytics',
             ),
             ZephyrRailItem(
-              icon: const Icon(Icons.notifications),
+              icon: Icon(Icons.notifications),
               label: 'Notifications',
               badge: ZephyrBadge.dot(),
             ),
             ZephyrRailItem(
-              icon: const Icon(Icons.settings),
+              icon: Icon(Icons.settings),
               label: 'Settings',
             ),
           ],
@@ -281,7 +278,7 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo>
           const SnackBar(content: Text('Dashboard selected')),
         ),
       ),
-      ZephyrSideMenuItem(
+      const ZephyrSideMenuItem(
         title: 'Analytics',
         icon: Icons.analytics,
         children: [
@@ -295,12 +292,12 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo>
           ),
         ],
       ),
-      ZephyrSideMenuItem(
+      const ZephyrSideMenuItem(
         title: 'Settings',
         icon: Icons.settings,
         badge: ZephyrBadge.count(count: 5),
       ),
-      ZephyrSideMenuItem(
+      const ZephyrSideMenuItem(
         title: 'Help',
         icon: Icons.help,
       ),
@@ -309,13 +306,13 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo>
     return ZephyrSideMenuLayout(
       menu: ZephyrSideMenu(
         items: menuItems,
-        header: Container(
-          padding: const EdgeInsets.all(16.0),
-          child: const FlutterLogo(size: 48),
+        header: const Container(
+          padding: EdgeInsets.all(16.0),
+          child: FlutterLogo(size: 48),
         ),
-        footer: Container(
-          padding: const EdgeInsets.all(16.0),
-          child: const Text('v1.0.0'),
+        footer: const Container(
+          padding: EdgeInsets.all(16.0),
+          child: Text('v1.0.0'),
         ),
       ),
       content: const Center(
@@ -332,25 +329,25 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo>
             ZephyrTabItem(
               label: 'Overview',
               icon: const Icon(Icons.dashboard),
-              content: Container(
-                padding: const EdgeInsets.all(16.0),
-                child: const Text('Dashboard overview content goes here.'),
+              content: const Container(
+                padding: EdgeInsets.all(16.0),
+                child: Text('Dashboard overview content goes here.'),
               ),
             ),
             ZephyrTabItem(
               label: 'Analytics',
               icon: const Icon(Icons.analytics),
-              content: Container(
-                padding: const EdgeInsets.all(16.0),
-                child: const Text('Analytics data and charts go here.'),
+              content: const Container(
+                padding: EdgeInsets.all(16.0),
+                child: Text('Analytics data and charts go here.'),
               ),
             ),
             ZephyrTabItem(
               label: 'Reports',
               icon: const Icon(Icons.description),
-              content: Container(
-                padding: const EdgeInsets.all(16.0),
-                child: const Text('Reports and documents go here.'),
+              content: const Container(
+                padding: EdgeInsets.all(16.0),
+                child: Text('Reports and documents go here.'),
               ),
             ),
           ],
@@ -371,7 +368,6 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo>
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
           ZephyrStepper(
             currentStep: _stepperIndex,
             onStepTapped: (index) => setState(() => _stepperIndex = index),
@@ -389,14 +385,15 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo>
               ZephyrStep(
                 title: 'Personal Information',
                 subtitle: 'Enter your details',
-                content: Container(
-                  padding: const EdgeInsets.all(16.0),
-                  child: const Column(
+                content: const Container(
+                  padding: EdgeInsets.all(16.0),
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextField(decoration: InputDecoration(labelText: 'Name')),
                       SizedBox(height: 16),
-                      TextField(decoration: InputDecoration(labelText: 'Email')),
+                      TextField(
+                          decoration: InputDecoration(labelText: 'Email')),
                     ],
                   ),
                 ),
@@ -404,12 +401,13 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo>
               ZephyrStep(
                 title: 'Address',
                 subtitle: 'Enter your address',
-                content: Container(
-                  padding: const EdgeInsets.all(16.0),
-                  child: const Column(
+                content: const Container(
+                  padding: EdgeInsets.all(16.0),
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      TextField(decoration: InputDecoration(labelText: 'Street')),
+                      TextField(
+                          decoration: InputDecoration(labelText: 'Street')),
                       SizedBox(height: 16),
                       TextField(decoration: InputDecoration(labelText: 'City')),
                     ],
@@ -419,9 +417,10 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo>
               ZephyrStep(
                 title: 'Confirmation',
                 subtitle: 'Review your information',
-                content: Container(
-                  padding: const EdgeInsets.all(16.0),
-                  child: const Text('Please review your information before submitting.'),
+                content: const Container(
+                  padding: EdgeInsets.all(16.0),
+                  child:
+                      Text('Please review your information before submitting.'),
                 ),
               ),
             ],
@@ -450,17 +449,17 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo>
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
           ZephyrPagination(
             config: config,
-            onPageChanged: (page) => setState(() => _paginationCurrentPage = page),
-            onPageSizeChanged: (pageSize) => setState(() => _paginationItemsPerPage = pageSize),
+            onPageChanged: (page) =>
+                setState(() => _paginationCurrentPage = page),
+            onPageSizeChanged: (pageSize) =>
+                setState(() => _paginationItemsPerPage = pageSize),
           ),
-          
           const SizedBox(height: 32),
           const Text('Data Items'),
           const SizedBox(height: 8),
-          Container(
+          const Container(
             height: 200,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
@@ -469,7 +468,10 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo>
             child: ListView.builder(
               itemCount: _paginationItemsPerPage,
               itemBuilder: (context, index) {
-                final itemIndex = (_paginationCurrentPage - 1) * _paginationItemsPerPage + index + 1;
+                final itemIndex =
+                    (_paginationCurrentPage - 1) * _paginationItemsPerPage +
+                        index +
+                        1;
                 return ListTile(
                   title: Text('Item $itemIndex'),
                   subtitle: Text('This is item number $itemIndex'),
@@ -484,7 +486,7 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo>
 
   Widget _buildTreeViewDemo() {
     final treeNodes = [
-      ZephyrTreeNode(
+      const ZephyrTreeNode(
         id: '1',
         label: 'Documents',
         icon: Icons.folder,
@@ -523,7 +525,7 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo>
           ),
         ],
       ),
-      ZephyrTreeNode(
+      const ZephyrTreeNode(
         id: '2',
         label: 'Images',
         icon: Icons.folder,
@@ -561,8 +563,7 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo>
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
-          Container(
+          const Container(
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(8),
@@ -572,10 +573,12 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo>
               onNodeTap: (node) => ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Selected: ${node.label}')),
               ),
-              onNodeExpand: (node) => ScaffoldMessenger.of(context).showSnackBar(
+              onNodeExpand: (node) =>
+                  ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Expanded: ${node.label}')),
               ),
-              onNodeCollapse: (node) => ScaffoldMessenger.of(context).showSnackBar(
+              onNodeCollapse: (node) =>
+                  ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('Collapsed: ${node.label}')),
               ),
             ),

@@ -53,14 +53,14 @@ class ZephyrRadioGroup<T> extends StatefulWidget {
 
   /// 创建单选按钮组
   const ZephyrRadioGroup({
-    Key? key,
+    super.key,
     required this.items,
     required this.value,
     this.direction = ZephyrRadioDirection.vertical,
     this.disabled = false,
     this.onChanged,
     this.theme,
-  }) : super(key: key);
+  });
 
   @override
   State<ZephyrRadioGroup<T>> createState() => _ZephyrRadioGroupState<T>();
@@ -128,14 +128,14 @@ class _ZephyrRadio<T> extends StatelessWidget {
   final ZephyrRadioGroupTheme theme;
 
   const _ZephyrRadio({
-    Key? key,
+    super.key,
     required this.value,
     required this.groupValue,
     required this.label,
     required this.disabled,
     required this.onChanged,
     required this.theme,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

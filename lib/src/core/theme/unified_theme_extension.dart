@@ -1,5 +1,5 @@
 /// ZephyrUI 统一主题扩展
-/// 
+///
 /// 为 Flutter 的 ThemeData 添加 ZephyrUI 的扩展功能
 library unified_theme_extension;
 
@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'unified_theme_data.dart';
 
 /// ZephyrUI 统一主题扩展
-class ZephyrUnifiedThemeExtension extends ThemeExtension<ZephyrUnifiedThemeExtension> {
+class ZephyrUnifiedThemeExtension
+    extends ThemeExtension<ZephyrUnifiedThemeExtension> {
   const ZephyrUnifiedThemeExtension({
     required this.data,
   });
@@ -25,11 +26,12 @@ class ZephyrUnifiedThemeExtension extends ThemeExtension<ZephyrUnifiedThemeExten
   }
 
   @override
-  ZephyrUnifiedThemeExtension lerp(ThemeExtension<ZephyrUnifiedThemeExtension>? other, double t) {
+  ZephyrUnifiedThemeExtension lerp(
+      ThemeExtension<ZephyrUnifiedThemeExtension>? other, double t) {
     if (other is! ZephyrUnifiedThemeExtension) {
       return this;
     }
-    
+
     // 这里可以实现主题之间的插值动画
     return ZephyrUnifiedThemeExtension(
       data: data, // 简化处理，实际可以实现更复杂的插值逻辑
@@ -37,35 +39,38 @@ class ZephyrUnifiedThemeExtension extends ThemeExtension<ZephyrUnifiedThemeExten
   }
 
   /// 从主题数据创建扩展
-  static ZephyrUnifiedThemeExtension fromThemeData(ZephyrUnifiedThemeData themeData) {
+  static ZephyrUnifiedThemeExtension fromThemeData(
+      ZephyrUnifiedThemeData themeData) {
     return ZephyrUnifiedThemeExtension(data: themeData);
   }
 
   /// 从上下文获取主题数据
   static ZephyrUnifiedThemeData? of(BuildContext context) {
-    final extension = Theme.of(context).extension<ZephyrUnifiedThemeExtension>();
+    final extension =
+        Theme.of(context).extension<ZephyrUnifiedThemeExtension>();
     return extension?.data;
   }
 
   /// 创建默认扩展
-  static ZephyrUnifiedThemeExtension get defaultLight => 
+  static ZephyrUnifiedThemeExtension get defaultLight =>
       ZephyrUnifiedThemeExtension(data: ZephyrUnifiedThemeData.light());
 
-  static ZephyrUnifiedThemeExtension get defaultDark => 
+  static ZephyrUnifiedThemeExtension get defaultDark =>
       ZephyrUnifiedThemeExtension(data: ZephyrUnifiedThemeData.dark());
 }
 
 /// 主题扩展构建器
 class ZephyrThemeExtensionBuilder extends StatelessWidget {
   const ZephyrThemeExtensionBuilder({
-    Key? key,
     required this.themeData,
     required this.builder,
+    super.key,
     this.child,
-  }) : super(key: key);
+  });
 
   final ZephyrUnifiedThemeData themeData;
-  final Widget Function(BuildContext context, ZephyrUnifiedThemeData theme) builder;
+  final Widget Function(BuildContext context, ZephyrUnifiedThemeData theme)
+      builder;
   final Widget? child;
 
   @override
@@ -88,22 +93,23 @@ class ZephyrThemeExtensionBuilder extends StatelessWidget {
 /// 主题切换动画包装器
 class ZephyrAnimatedThemeSwitcher extends StatefulWidget {
   const ZephyrAnimatedThemeSwitcher({
-    Key? key,
     required this.child,
+    super.key,
     this.duration = const Duration(milliseconds: 300),
     this.curve = Curves.easeInOut,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final Duration duration;
   final Curve curve;
 
   @override
-  State<ZephyrAnimatedThemeSwitcher> createState() => _ZephyrAnimatedThemeSwitcherState();
+  State<ZephyrAnimatedThemeSwitcher> createState() =>
+      _ZephyrAnimatedThemeSwitcherState();
 }
 
-class _ZephyrAnimatedThemeSwitcherState extends State<ZephyrAnimatedThemeSwitcher>
-    with TickerProviderStateMixin {
+class _ZephyrAnimatedThemeSwitcherState
+    extends State<ZephyrAnimatedThemeSwitcher> with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -161,12 +167,13 @@ class _ZephyrAnimatedThemeSwitcherState extends State<ZephyrAnimatedThemeSwitche
 /// 主题监听器
 class ZephyrThemeListener extends StatefulWidget {
   const ZephyrThemeListener({
-    Key? key,
     required this.builder,
+    super.key,
     this.child,
-  }) : super(key: key);
+  });
 
-  final Widget Function(BuildContext context, ZephyrUnifiedThemeData? theme) builder;
+  final Widget Function(BuildContext context, ZephyrUnifiedThemeData? theme)
+      builder;
   final Widget? child;
 
   @override
@@ -179,7 +186,7 @@ class _ZephyrThemeListenerState extends State<ZephyrThemeListener> {
   @override
   Widget build(BuildContext context) {
     final theme = ZephyrUnifiedThemeExtension.of(context);
-    
+
     if (theme != _currentTheme) {
       _currentTheme = theme;
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -196,15 +203,16 @@ class _ZephyrThemeListenerState extends State<ZephyrThemeListener> {
 /// 主题提供者
 class ZephyrThemeProvider extends InheritedWidget {
   const ZephyrThemeProvider({
-    Key? key,
     required this.themeData,
-    required Widget child,
-  }) : super(key: key, child: child);
+    required super.child,
+    super.key,
+  });
 
   final ZephyrUnifiedThemeData themeData;
 
   static ZephyrUnifiedThemeData? of(BuildContext context) {
-    final provider = context.dependOnInheritedWidgetOfExactType<ZephyrThemeProvider>();
+    final provider =
+        context.dependOnInheritedWidgetOfExactType<ZephyrThemeProvider>();
     return provider?.themeData;
   }
 
@@ -217,16 +225,17 @@ class ZephyrThemeProvider extends InheritedWidget {
 /// 主题状态管理器
 class ZephyrThemeStateManager extends StatefulWidget {
   const ZephyrThemeStateManager({
-    Key? key,
     required this.child,
+    super.key,
     this.onThemeChanged,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final Function(ZephyrUnifiedThemeData)? onThemeChanged;
 
   @override
-  State<ZephyrThemeStateManager> createState() => _ZephyrThemeStateManagerState();
+  State<ZephyrThemeStateManager> createState() =>
+      _ZephyrThemeStateManagerState();
 
   static _ZephyrThemeStateManagerState? of(BuildContext context) {
     return context.findAncestorStateOfType<_ZephyrThemeStateManagerState>();
@@ -259,11 +268,11 @@ class _ZephyrThemeStateManagerState extends State<ZephyrThemeStateManager> {
 /// 主题装饰器
 class ZephyrThemeDecorator extends StatelessWidget {
   const ZephyrThemeDecorator({
-    Key? key,
     required this.child,
+    super.key,
     this.themeData,
     this.animationDuration = const Duration(milliseconds: 300),
-  }) : super(key: key);
+  });
 
   final Widget child;
   final ZephyrUnifiedThemeData? themeData;
@@ -271,7 +280,9 @@ class ZephyrThemeDecorator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveTheme = themeData ?? ZephyrUnifiedThemeExtension.of(context) ?? ZephyrUnifiedThemeData.light();
+    final effectiveTheme = themeData ??
+        ZephyrUnifiedThemeExtension.of(context) ??
+        ZephyrUnifiedThemeData.light();
 
     return ZephyrAnimatedThemeSwitcher(
       duration: animationDuration,
@@ -293,10 +304,10 @@ class ZephyrThemeDecorator extends StatelessWidget {
 /// 主题调试器
 class ZephyrThemeDebugger extends StatelessWidget {
   const ZephyrThemeDebugger({
-    Key? key,
+    super.key,
     this.enabled = true,
     this.child,
-  }) : super(key: key);
+  });
 
   final bool enabled;
   final Widget? child;

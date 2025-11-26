@@ -5,6 +5,7 @@ library text_area_theme;
 
 import 'package:flutter/material.dart';
 import 'package:zephyr_ui/zephyr_ui.dart';
+import '../../../core/constants/typography_constants.dart';
 
 /// ZephyrUI 文本域主题
 class ZephyrTextAreaTheme extends ThemeExtension<ZephyrTextAreaTheme> {
@@ -122,43 +123,43 @@ class ZephyrTextAreaTheme extends ThemeExtension<ZephyrTextAreaTheme> {
       errorBackgroundColor: isDark
           ? ZephyrColors.error500.withValues(alpha: 0.1)
           : ZephyrColors.error50,
-      textStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize16,
-        fontWeight: ZephyrTypography.fontWeightRegular,
+      textStyle: const TextStyle(
+        fontSize: ZephyrTypographyConstants.fontSize16,
+        fontWeight: ZephyrTypographyConstants.fontWeightRegular,
         color: textColor,
-        height: ZephyrTypography.lineHeight1_5,
+        height: ZephyrTypographyConstants.lineHeight1_5,
       ),
       labelStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightMedium,
+        fontSize: ZephyrTypographyConstants.fontSize14,
+        fontWeight: ZephyrTypographyConstants.fontWeightMedium,
         color: isDark ? ZephyrColors.neutral200 : ZephyrColors.neutral700,
       ),
       placeholderStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize16,
-        fontWeight: ZephyrTypography.fontWeightRegular,
+        fontSize: ZephyrTypographyConstants.fontSize16,
+        fontWeight: ZephyrTypographyConstants.fontWeightRegular,
         color: isDark ? ZephyrColors.neutral500 : ZephyrColors.neutral400,
       ),
       helperTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightRegular,
+        fontSize: ZephyrTypographyConstants.fontSize12,
+        fontWeight: ZephyrTypographyConstants.fontWeightRegular,
         color: isDark ? ZephyrColors.neutral400 : ZephyrColors.neutral600,
       ),
-      errorTextStyle: const TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightRegular,
+      errorTextStyle: TextStyle(
+        fontSize: ZephyrTypographyConstants.fontSize12,
+        fontWeight: ZephyrTypographyConstants.fontWeightRegular,
         color: ZephyrColors.error500,
       ),
-      warningTextStyle: const TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightRegular,
+      warningTextStyle: TextStyle(
+        fontSize: ZephyrTypographyConstants.fontSize12,
+        fontWeight: ZephyrTypographyConstants.fontWeightRegular,
         color: ZephyrColors.warning500,
       ),
       characterCountStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightRegular,
+        fontSize: ZephyrTypographyConstants.fontSize12,
+        fontWeight: ZephyrTypographyConstants.fontWeightRegular,
         color: isDark ? ZephyrColors.neutral500 : ZephyrColors.neutral400,
       ),
-      borderRadius: BorderRadius.circular(ZephyrRadius.md),
+      borderRadius: const BorderRadius.circular(ZephyrRadius.md),
     );
   }
 
@@ -215,7 +216,7 @@ class ZephyrTextAreaTheme extends ThemeExtension<ZephyrTextAreaTheme> {
       errorTextStyle: TextStyle.lerp(errorTextStyle, other.errorTextStyle, t) ?? errorTextStyle,
       warningTextStyle: TextStyle.lerp(warningTextStyle, other.warningTextStyle, t) ?? warningTextStyle,
       characterCountStyle: TextStyle.lerp(characterCountStyle, other.characterCountStyle, t) ?? characterCountStyle,
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t) ?? borderRadius,
+      borderRadius: const BorderRadius.lerp(borderRadius, other.borderRadius, t) ?? borderRadius,
     );
   }
 

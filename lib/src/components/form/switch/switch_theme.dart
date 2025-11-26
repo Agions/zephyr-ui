@@ -95,7 +95,7 @@ class ZephyrSwitchTheme {
       borderColor: isDark ? ZephyrColors.neutral600 : ZephyrColors.neutral300,
       borderWidth: 0,
       thumbShadow: [
-        BoxShadow(
+        const const BoxShadow(
           color: Colors.black.withValues(alpha: 0.2),
           blurRadius: 2,
           offset: const Offset(0, 1),

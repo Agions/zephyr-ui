@@ -1,5 +1,5 @@
 /// ZephyrUI 专业组件示例
-/// 
+///
 /// 展示新增的专业UI组件的使用方法和效果
 
 import 'package:flutter/material.dart';
@@ -116,7 +116,7 @@ class TimelineDemo extends StatelessWidget {
               color: Colors.grey.shade600,
             ),
             const SizedBox(height: 24),
-            
+
             // 基础时间线
             ZephyrText.subtitle(
               text: '基础时间线',
@@ -159,7 +159,7 @@ class TimelineDemo extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 32),
-            
+
             // 详细时间线
             ZephyrText.subtitle(
               text: '详细时间线',
@@ -199,7 +199,7 @@ class TimelineDemo extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 32),
-            
+
             // 卡片时间线
             ZephyrText.subtitle(
               text: '卡片时间线',
@@ -263,7 +263,7 @@ class RatingDemo extends StatelessWidget {
               color: Colors.grey.shade600,
             ),
             const SizedBox(height: 24),
-            
+
             // 基础评分
             ZephyrText.subtitle(
               text: '基础评分',
@@ -273,7 +273,7 @@ class RatingDemo extends StatelessWidget {
             Row(
               children: [
                 const ZephyrText.body(text: '当前评分: '),
-                ZephyrRating(
+                const ZephyrRating(
                   value: 4.5,
                   max: 5,
                   showValue: true,
@@ -281,7 +281,7 @@ class RatingDemo extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-            
+
             // 只读评分
             ZephyrText.subtitle(
               text: '只读评分',
@@ -328,7 +328,7 @@ class RatingDemo extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 24),
-            
+
             // 不同图标类型
             ZephyrText.subtitle(
               text: '不同图标类型',
@@ -377,7 +377,7 @@ class RatingDemo extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 24),
-            
+
             // 交互式评分
             ZephyrText.subtitle(
               text: '交互式评分',
@@ -405,7 +405,7 @@ class RatingDemo extends StatelessWidget {
               },
             ),
             const SizedBox(height: 24),
-            
+
             // 半星评分
             ZephyrText.subtitle(
               text: '半星评分',
@@ -467,14 +467,14 @@ class StepperDemo extends StatelessWidget {
               color: Colors.grey.shade600,
             ),
             const SizedBox(height: 24),
-            
+
             // 水平步骤指示器
             ZephyrText.subtitle(
               text: '水平步骤指示器',
               color: Colors.grey.shade800,
             ),
             const SizedBox(height: 16),
-            ZephyrStepper(
+            const ZephyrStepper(
               type: ZephyrStepperType.horizontal,
               currentStep: 1,
               steps: [
@@ -503,14 +503,14 @@ class StepperDemo extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 32),
-            
+
             // 垂直步骤指示器
             ZephyrText.subtitle(
               text: '垂直步骤指示器',
               color: Colors.grey.shade800,
             ),
             const SizedBox(height: 16),
-            ZephyrStepper(
+            const ZephyrStepper(
               type: ZephyrStepperType.vertical,
               currentStep: 2,
               steps: [
@@ -519,39 +519,39 @@ class StepperDemo extends StatelessWidget {
                   title: '用户注册',
                   subtitle: '填写基本信息',
                   isCompleted: true,
-                  icon: const Icon(Icons.person, color: Colors.white),
+                  icon: Icon(Icons.person, color: Colors.white),
                 ),
                 ZephyrStep(
                   id: '2',
                   title: '邮箱验证',
                   subtitle: '验证邮箱地址',
                   isCompleted: true,
-                  icon: const Icon(Icons.email, color: Colors.white),
+                  icon: Icon(Icons.email, color: Colors.white),
                 ),
                 ZephyrStep(
                   id: '3',
                   title: '设置密码',
                   subtitle: '设置登录密码',
                   isActive: true,
-                  icon: const Icon(Icons.lock, color: Colors.white),
+                  icon: Icon(Icons.lock, color: Colors.white),
                 ),
                 ZephyrStep(
                   id: '4',
                   title: '完成注册',
                   subtitle: '注册成功',
-                  icon: const Icon(Icons.check, color: Colors.white),
+                  icon: Icon(Icons.check, color: Colors.white),
                 ),
               ],
             ),
             const SizedBox(height: 32),
-            
+
             // 向导式步骤指示器
             ZephyrText.subtitle(
               text: '向导式步骤指示器',
               color: Colors.grey.shade800,
             ),
             const SizedBox(height: 16),
-            ZephyrStepper(
+            const ZephyrStepper(
               type: ZephyrStepperType.wizard,
               currentStep: 1,
               steps: [
@@ -580,7 +580,7 @@ class StepperDemo extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 32),
-            
+
             // 带内容的步骤指示器
             ZephyrText.subtitle(
               text: '带内容的步骤指示器',
@@ -605,10 +605,10 @@ class StepperDemo extends StatelessWidget {
                           id: '1',
                           title: '基本信息',
                           subtitle: '填写个人基本信息',
-                          content: Container(
-                            padding: const EdgeInsets.all(16),
+                          content: const Container(
+                            padding: EdgeInsets.all(16),
                             color: Colors.blue.shade50,
-                            child: const Column(
+                            child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 ZephyrText.body(text: '姓名: 张三'),
@@ -623,13 +623,14 @@ class StepperDemo extends StatelessWidget {
                           id: '2',
                           title: '联系方式',
                           subtitle: '填写联系方式',
-                          content: Container(
-                            padding: const EdgeInsets.all(16),
+                          content: const Container(
+                            padding: EdgeInsets.all(16),
                             color: Colors.green.shade50,
-                            child: const Column(
+                            child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                ZephyrText.body(text: '邮箱: zhangsan@example.com'),
+                                ZephyrText.body(
+                                    text: '邮箱: zhangsan@example.com'),
                                 ZephyrText.body(text: '电话: 138****5678'),
                               ],
                             ),
@@ -640,10 +641,10 @@ class StepperDemo extends StatelessWidget {
                           id: '3',
                           title: '完成注册',
                           subtitle: '注册成功',
-                          content: Container(
-                            padding: const EdgeInsets.all(16),
+                          content: const Container(
+                            padding: EdgeInsets.all(16),
                             color: Colors.orange.shade50,
-                            child: const ZephyrText.body(
+                            child: ZephyrText.body(
                               text: '恭喜您，注册成功！',
                               color: Colors.green,
                             ),
@@ -689,7 +690,7 @@ class CarouselDemo extends StatelessWidget {
               color: Colors.grey.shade600,
             ),
             const SizedBox(height: 24),
-            
+
             // 基础轮播图
             ZephyrText.subtitle(
               text: '基础轮播图',
@@ -701,10 +702,11 @@ class CarouselDemo extends StatelessWidget {
               items: [
                 ZephyrCarouselItem(
                   id: '1',
-                  child: Container(
+                  child: const Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: NetworkImage('https://picsum.photos/400/200?random=1'),
+                        image: NetworkImage(
+                            'https://picsum.photos/400/200?random=1'),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -714,10 +716,11 @@ class CarouselDemo extends StatelessWidget {
                 ),
                 ZephyrCarouselItem(
                   id: '2',
-                  child: Container(
+                  child: const Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: NetworkImage('https://picsum.photos/400/200?random=2'),
+                        image: NetworkImage(
+                            'https://picsum.photos/400/200?random=2'),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -727,10 +730,11 @@ class CarouselDemo extends StatelessWidget {
                 ),
                 ZephyrCarouselItem(
                   id: '3',
-                  child: Container(
+                  child: const Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: NetworkImage('https://picsum.photos/400/200?random=3'),
+                        image: NetworkImage(
+                            'https://picsum.photos/400/200?random=3'),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -741,7 +745,7 @@ class CarouselDemo extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 32),
-            
+
             // 带动画效果的轮播图
             ZephyrText.subtitle(
               text: '淡入淡出效果',
@@ -754,9 +758,9 @@ class CarouselDemo extends StatelessWidget {
               items: [
                 ZephyrCarouselItem(
                   id: '1',
-                  child: Container(
+                  child: const Container(
                     color: Colors.blue,
-                    child: const Center(
+                    child: Center(
                       child: ZephyrText.heading(
                         text: '第一页',
                         color: Colors.white,
@@ -766,9 +770,9 @@ class CarouselDemo extends StatelessWidget {
                 ),
                 ZephyrCarouselItem(
                   id: '2',
-                  child: Container(
+                  child: const Container(
                     color: Colors.green,
-                    child: const Center(
+                    child: Center(
                       child: ZephyrText.heading(
                         text: '第二页',
                         color: Colors.white,
@@ -778,9 +782,9 @@ class CarouselDemo extends StatelessWidget {
                 ),
                 ZephyrCarouselItem(
                   id: '3',
-                  child: Container(
+                  child: const Container(
                     color: Colors.orange,
-                    child: const Center(
+                    child: Center(
                       child: ZephyrText.heading(
                         text: '第三页',
                         color: Colors.white,
@@ -791,7 +795,7 @@ class CarouselDemo extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 32),
-            
+
             // 缩放效果轮播图
             ZephyrText.subtitle(
               text: '缩放效果',
@@ -804,13 +808,13 @@ class CarouselDemo extends StatelessWidget {
               items: [
                 ZephyrCarouselItem(
                   id: '1',
-                  child: Container(
+                  child: const Container(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [Colors.purple, Colors.pink],
                       ),
                     ),
-                    child: const Center(
+                    child: Center(
                       child: ZephyrText.heading(
                         text: '渐变背景',
                         color: Colors.white,
@@ -820,13 +824,13 @@ class CarouselDemo extends StatelessWidget {
                 ),
                 ZephyrCarouselItem(
                   id: '2',
-                  child: Container(
+                  child: const Container(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [Colors.blue, Colors.cyan],
                       ),
                     ),
-                    child: const Center(
+                    child: Center(
                       child: ZephyrText.heading(
                         text: '科技感',
                         color: Colors.white,
@@ -837,7 +841,7 @@ class CarouselDemo extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 32),
-            
+
             // 深度效果轮播图
             ZephyrText.subtitle(
               text: '深度效果',
@@ -850,9 +854,9 @@ class CarouselDemo extends StatelessWidget {
               items: [
                 ZephyrCarouselItem(
                   id: '1',
-                  child: Container(
+                  child: const Container(
                     color: Colors.red.shade400,
-                    child: const Center(
+                    child: Center(
                       child: ZephyrText.heading(
                         text: '红色主题',
                         color: Colors.white,
@@ -862,9 +866,9 @@ class CarouselDemo extends StatelessWidget {
                 ),
                 ZephyrCarouselItem(
                   id: '2',
-                  child: Container(
+                  child: const Container(
                     color: Colors.yellow.shade400,
-                    child: const Center(
+                    child: Center(
                       child: ZephyrText.heading(
                         text: '黄色主题',
                         color: Colors.white,
@@ -874,9 +878,9 @@ class CarouselDemo extends StatelessWidget {
                 ),
                 ZephyrCarouselItem(
                   id: '3',
-                  child: Container(
+                  child: const Container(
                     color: Colors.green.shade400,
-                    child: const Center(
+                    child: Center(
                       child: ZephyrText.heading(
                         text: '绿色主题',
                         color: Colors.white,
@@ -887,7 +891,7 @@ class CarouselDemo extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 32),
-            
+
             // 不同指示器类型
             ZephyrText.subtitle(
               text: '数字指示器',
@@ -900,9 +904,9 @@ class CarouselDemo extends StatelessWidget {
               items: [
                 ZephyrCarouselItem(
                   id: '1',
-                  child: Container(
+                  child: const Container(
                     color: Colors.indigo,
-                    child: const Center(
+                    child: Center(
                       child: ZephyrText.heading(
                         text: '第一页',
                         color: Colors.white,
@@ -912,9 +916,9 @@ class CarouselDemo extends StatelessWidget {
                 ),
                 ZephyrCarouselItem(
                   id: '2',
-                  child: Container(
+                  child: const Container(
                     color: Colors.teal,
-                    child: const Center(
+                    child: Center(
                       child: ZephyrText.heading(
                         text: '第二页',
                         color: Colors.white,
@@ -925,7 +929,7 @@ class CarouselDemo extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 32),
-            
+
             // 分数指示器
             ZephyrText.subtitle(
               text: '分数指示器',
@@ -938,9 +942,9 @@ class CarouselDemo extends StatelessWidget {
               items: [
                 ZephyrCarouselItem(
                   id: '1',
-                  child: Container(
+                  child: const Container(
                     color: Colors.brown,
-                    child: const Center(
+                    child: Center(
                       child: ZephyrText.heading(
                         text: '图片 1',
                         color: Colors.white,
@@ -950,9 +954,9 @@ class CarouselDemo extends StatelessWidget {
                 ),
                 ZephyrCarouselItem(
                   id: '2',
-                  child: Container(
+                  child: const Container(
                     color: Colors.pink,
-                    child: const Center(
+                    child: Center(
                       child: ZephyrText.heading(
                         text: '图片 2',
                         color: Colors.white,
@@ -962,9 +966,9 @@ class CarouselDemo extends StatelessWidget {
                 ),
                 ZephyrCarouselItem(
                   id: '3',
-                  child: Container(
+                  child: const Container(
                     color: Colors.purple,
-                    child: const Center(
+                    child: Center(
                       child: ZephyrText.heading(
                         text: '图片 3',
                         color: Colors.white,

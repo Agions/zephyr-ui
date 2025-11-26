@@ -17,10 +17,10 @@ class CodeViewerDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: Container(
+      child: const Container(
         width: MediaQuery.of(context).size.width * 0.8,
         height: MediaQuery.of(context).size.height * 0.7,
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -29,7 +29,7 @@ class CodeViewerDialog extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -37,7 +37,7 @@ class CodeViewerDialog extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.copy),
+                      icon: Icon(Icons.copy),
                       onPressed: () {
                         Clipboard.setData(ClipboardData(text: code));
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -50,7 +50,7 @@ class CodeViewerDialog extends StatelessWidget {
                       tooltip: '复制代码',
                     ),
                     IconButton(
-                      icon: const Icon(Icons.close),
+                      icon: Icon(Icons.close),
                       onPressed: () => Navigator.of(context).pop(),
                       tooltip: '关闭',
                     ),
@@ -58,19 +58,19 @@ class CodeViewerDialog extends StatelessWidget {
                 ),
               ],
             ),
-            const Divider(),
-            const SizedBox(height: 8),
+            Divider(),
+            SizedBox(height: 8),
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.grey[900],
                   borderRadius: BorderRadius.circular(8),
                 ),
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(16),
                 child: SingleChildScrollView(
                   child: SelectableText(
                     code,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontFamily: 'monospace',
                       fontSize: 14,
                       color: Colors.white,
@@ -109,7 +109,7 @@ class InteractiveDemoCard extends StatefulWidget {
 }
 
 class _InteractiveDemoCardState extends State<InteractiveDemoCard> {
-  Map<String, dynamic> _optionValues = {};
+  final Map<String, dynamic> _optionValues = {};
 
   @override
   void initState() {
@@ -140,8 +140,8 @@ class _InteractiveDemoCardState extends State<InteractiveDemoCard> {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -154,12 +154,12 @@ class _InteractiveDemoCardState extends State<InteractiveDemoCard> {
                     children: [
                       Text(
                         widget.title,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 4),
+                      SizedBox(height: 4),
                       Text(
                         widget.description,
                         style: TextStyle(
@@ -171,22 +171,22 @@ class _InteractiveDemoCardState extends State<InteractiveDemoCard> {
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.code),
+                  icon: Icon(Icons.code),
                   onPressed: _showCodeViewer,
                   tooltip: '查看代码',
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             if (widget.options.isNotEmpty) ...[
-              const Text(
+              Text(
                 '参数调整',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Wrap(
                 spacing: 16,
                 runSpacing: 8,
@@ -194,18 +194,18 @@ class _InteractiveDemoCardState extends State<InteractiveDemoCard> {
                   return _buildOptionControl(option);
                 }).toList(),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
             ],
-            const Text(
+            Text(
               '演示效果',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Container(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.grey[100],
                 borderRadius: BorderRadius.circular(8),
@@ -214,7 +214,7 @@ class _InteractiveDemoCardState extends State<InteractiveDemoCard> {
               child: widget.demo,
             ),
             if (widget.controls.isNotEmpty) ...[
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: widget.controls,
@@ -261,7 +261,7 @@ class _InteractiveDemoCardState extends State<InteractiveDemoCard> {
           children: [
             Text(option.label),
             const SizedBox(width: 8),
-            SizedBox(
+            const SizedBox(
               width: 80,
               child: TextField(
                 keyboardType: TextInputType.number,
@@ -272,8 +272,9 @@ class _InteractiveDemoCardState extends State<InteractiveDemoCard> {
                   }
                 },
                 decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  border: OutlineInputBorder(),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 ),
               ),
             ),
@@ -295,7 +296,7 @@ class _InteractiveDemoCardState extends State<InteractiveDemoCard> {
                   _updateOption(option.key, color);
                 }
               },
-              child: Container(
+              child: const Container(
                 width: 24,
                 height: 24,
                 decoration: BoxDecoration(
@@ -321,17 +322,23 @@ class ColorPickerDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = [
-      Colors.red, Colors.blue, Colors.green, Colors.yellow,
-      Colors.purple, Colors.orange, Colors.pink, Colors.teal,
+      Colors.red,
+      Colors.blue,
+      Colors.green,
+      Colors.yellow,
+      Colors.purple,
+      Colors.orange,
+      Colors.pink,
+      Colors.teal,
     ];
 
     return Dialog(
       title: const Text('选择颜色'),
-      child: SizedBox(
+      child: const SizedBox(
         width: 200,
         height: 200,
         child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 4,
             crossAxisSpacing: 8,
             mainAxisSpacing: 8,
@@ -340,7 +347,7 @@ class ColorPickerDialog extends StatelessWidget {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () => Navigator.of(context).pop(colors[index]),
-              child: Container(
+              child: const Container(
                 decoration: BoxDecoration(
                   color: colors[index],
                   borderRadius: BorderRadius.circular(8),

@@ -1,5 +1,5 @@
 /// ZephyrUI 分页主题
-/// 
+///
 /// 定义分页组件的主题样式。
 library pagination_theme;
 
@@ -36,7 +36,8 @@ class ZephyrPaginationTheme {
 
   /// 从上下文获取主题
   static ZephyrPaginationTheme of(BuildContext context) {
-    return ZephyrTheme.of(context).paginationTheme ?? const ZephyrPaginationTheme();
+    return ZephyrTheme.of(context).paginationTheme ??
+        const ZephyrPaginationTheme();
   }
 
   /// 创建亮色主题

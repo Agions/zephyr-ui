@@ -1,5 +1,5 @@
 /// ZephyrUI 主题配置
-/// 
+///
 /// 提供预定义主题配置和主题工厂方法
 library theme_configurations;
 
@@ -194,7 +194,7 @@ class ZephyrThemeConfigurations {
     }
 
     ZephyrUnifiedThemeData baseTheme;
-    
+
     switch (themeName) {
       case 'accessibility':
         baseTheme = ZephyrUnifiedThemeData.light(
@@ -222,7 +222,8 @@ class ZephyrThemeConfigurations {
   }
 
   /// 从配置创建主题
-  static ZephyrUnifiedThemeData createThemeFromConfig(ZephyrThemeConfig config) {
+  static ZephyrUnifiedThemeData createThemeFromConfig(
+      ZephyrThemeConfig config) {
     if (config.brightness == Brightness.light) {
       return ZephyrUnifiedThemeData.light(
         primaryColor: config.primaryColor,
@@ -250,7 +251,7 @@ class ZephyrThemeConfigurations {
   }) {
     // 基础主题创建
     ZephyrUnifiedThemeData theme;
-    
+
     if (brightness == Brightness.light) {
       theme = ZephyrUnifiedThemeData.light(
         primaryColor: primaryColor,
@@ -269,11 +270,11 @@ class ZephyrThemeConfigurations {
     if (highContrast == true) {
       theme = _applyHighContrast(theme);
     }
-    
+
     if (largeText == true) {
       theme = _applyLargeText(theme);
     }
-    
+
     if (reducedMotion == true) {
       theme = _applyReducedMotion(theme);
     }
@@ -282,7 +283,8 @@ class ZephyrThemeConfigurations {
   }
 
   /// 应用高对比度
-  static ZephyrUnifiedThemeData _applyHighContrast(ZephyrUnifiedThemeData theme) {
+  static ZephyrUnifiedThemeData _applyHighContrast(
+      ZephyrUnifiedThemeData theme) {
     final colorScheme = theme.colorScheme.copyWith(
       primary: Colors.black,
       onPrimary: Colors.white,
@@ -319,12 +321,13 @@ class ZephyrThemeConfigurations {
   }
 
   /// 应用减少动画
-  static ZephyrUnifiedThemeData _applyReducedMotion(ZephyrUnifiedThemeData theme) {
+  static ZephyrUnifiedThemeData _applyReducedMotion(
+      ZephyrUnifiedThemeData theme) {
     final animation = ZephyrAnimationTokens();
-    
+
     // 这里可以添加减少动画的逻辑
     // 实际实现可能需要修改动画配置
-    
+
     return theme.copyWith(animation: animation);
   }
 
@@ -347,12 +350,12 @@ class ZephyrThemeConfigurations {
   static bool validateThemeConfig(ZephyrThemeConfig config) {
     try {
       // 验证颜色
-      if (config.primaryColor.value == 0) return false;
-      if (config.secondaryColor.value == 0) return false;
-      
+      if (config.primaryColor.toARGB32() == 0) return false;
+      if (config.secondaryColor.toARGB32() == 0) return false;
+
       // 验证字体
       if (config.fontFamily?.isEmpty == true) return false;
-      
+
       return true;
     } catch (e) {
       return false;
@@ -378,8 +381,10 @@ class ZephyrThemeConfigurations {
         (b) => b.name == config['brightness'],
         orElse: () => Brightness.light,
       ),
-      primaryColor: Color(config['primaryColor'] ?? ZephyrColorTokens.primary60.value),
-      secondaryColor: Color(config['secondaryColor'] ?? ZephyrColorTokens.secondary60.value),
+      primaryColor:
+          Color(config['primaryColor'] ?? ZephyrColorTokens.primary60.value),
+      secondaryColor: Color(
+          config['secondaryColor'] ?? ZephyrColorTokens.secondary60.value),
       fontFamily: config['fontFamily'],
     );
   }
@@ -428,7 +433,7 @@ class ZephyrSpecialTheme {
     required this.description,
     this.highContrast = false,
     this.largeText = false,
-    this.reducedMotion = false,
+    this.rucedMotion = false,
     this.minimalColors = false,
     this.vibrantColors = false,
     this.enhancedAnimations = false,

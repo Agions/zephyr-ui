@@ -62,7 +62,7 @@ class ZephyrContainerTheme {
       backgroundColor: isDark ? ZephyrColors.neutral800 : Colors.white,
       padding: const EdgeInsets.all(ZephyrSpacing.md),
       margin: EdgeInsets.zero,
-      borderRadius: BorderRadius.circular(ZephyrRadius.md),
+      borderRadius: const BorderRadius.circular(ZephyrRadius.md),
       border: Border.all(
         color: isDark ? ZephyrColors.neutral700 : ZephyrColors.neutral200,
         width: 1,
@@ -113,7 +113,7 @@ class ZephyrContainerTheme {
       backgroundColor: Color.lerp(a.backgroundColor, b.backgroundColor, t),
       padding: EdgeInsetsGeometry.lerp(a.padding, b.padding, t),
       margin: EdgeInsetsGeometry.lerp(a.margin, b.margin, t),
-      borderRadius: BorderRadius.lerp(a.borderRadius, b.borderRadius, t),
+      borderRadius: const BorderRadius.lerp(a.borderRadius, b.borderRadius, t),
       border: Border.lerp(a.border, b.border, t),
       boxShadow: BoxShadow.lerpList(a.boxShadow, b.boxShadow, t),
       constraints: BoxConstraints.lerp(a.constraints, b.constraints, t),

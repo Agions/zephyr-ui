@@ -26,7 +26,7 @@ import 'text_area_theme.dart';
 class ZephyrTextArea extends StatefulWidget {
   /// 创建一个文本域组件
   const ZephyrTextArea({
-    Key? key,
+    super.key,
     this.controller,
     this.initialValue,
     this.label,
@@ -61,7 +61,7 @@ class ZephyrTextArea extends StatefulWidget {
     this.scrollController,
     this.scrollPhysics,
     this.theme,
-  }) : super(key: key);
+  });
 
   /// 文本控制器
   final TextEditingController? controller;
@@ -393,16 +393,16 @@ class _ZephyrTextAreaState extends State<ZephyrTextArea> {
       case ZephyrVariant.outline:
         return OutlineInputBorder(
           borderRadius: theme.borderRadius,
-          borderSide: BorderSide(color: color, width: focused ? 2 : 1),
+          borderSide: const BorderSide(color: color, width: focused ? 2 : 1),
         );
       case ZephyrVariant.neutral:
         return UnderlineInputBorder(
-          borderSide: BorderSide(color: color, width: focused ? 2 : 1),
+          borderSide: const BorderSide(color: color, width: focused ? 2 : 1),
         );
       default:
         return OutlineInputBorder(
           borderRadius: theme.borderRadius,
-          borderSide: BorderSide(color: color, width: focused ? 2 : 1),
+          borderSide: const BorderSide(color: color, width: focused ? 2 : 1),
         );
     }
   }

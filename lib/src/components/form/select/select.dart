@@ -48,7 +48,7 @@ class ZephyrSelectOption<T> {
 class ZephyrSelect<T> extends StatefulWidget {
   /// 创建一个选择器组件
   const ZephyrSelect({
-    Key? key,
+    super.key,
     required this.options,
     this.value,
     this.label,
@@ -66,7 +66,7 @@ class ZephyrSelect<T> extends StatefulWidget {
     this.onFocusChange,
     this.validator,
     this.theme,
-  }) : super(key: key);
+  });
 
   /// 选项列表
   final List<ZephyrSelectOption<T>> options;
@@ -422,7 +422,7 @@ class _ZephyrSelectState<T> extends State<ZephyrSelect<T>> {
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         border: Border(
-          bottom: BorderSide(
+          bottom: const BorderSide(
             color: theme.dropdownBorderColor,
             width: theme.borderWidth,
           ),

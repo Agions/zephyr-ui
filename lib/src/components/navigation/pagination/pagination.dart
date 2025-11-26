@@ -1,5 +1,5 @@
 /// ZephyrUI 分页组件
-/// 
+///
 /// 提供数据分页功能，支持多种样式和自定义配置。
 library pagination;
 
@@ -66,15 +66,15 @@ class ZephyrPaginationConfig {
 class ZephyrPagination extends StatefulWidget {
   /// 创建分页组件
   const ZephyrPagination({
-    Key? key,
     required this.config,
-    this.onPageChanged,
-    this.onPageSizeChanged,
-    this.theme,
+    super.key,
     this.alignment = WrapAlignment.center,
     this.spacing = 8,
     this.runSpacing = 8,
     this.showPageInfo = true,
+    this.onPageChanged,
+    this.onPageSizeChanged,
+    this.theme,
     this.pageInfoBuilder,
     this.pageButtonBuilder,
     this.firstPageButtonBuilder,
@@ -82,7 +82,7 @@ class ZephyrPagination extends StatefulWidget {
     this.previousPageButtonBuilder,
     this.nextPageButtonBuilder,
     this.pageSizeSelectorBuilder,
-  }) : super(key: key);
+  });
 
   /// 分页配置
   final ZephyrPaginationConfig config;
@@ -109,7 +109,8 @@ class ZephyrPagination extends StatefulWidget {
   final bool showPageInfo;
 
   /// 页码信息构建器
-  final Widget Function(BuildContext context, ZephyrPaginationConfig config)? pageInfoBuilder;
+  final Widget Function(BuildContext context, ZephyrPaginationConfig config)?
+      pageInfoBuilder;
 
   /// 页码按钮构建器
   final Widget Function(
@@ -185,7 +186,7 @@ class _ZephyrPaginationState extends State<ZephyrPagination> {
       return List.generate(totalPages, (index) => index + 1);
     }
 
-    List<int> pages = [];
+    var pages = <int>[];
     final halfVisible = (maxVisible - 1) ~/ 2;
 
     if (currentPage <= halfVisible) {
@@ -193,10 +194,12 @@ class _ZephyrPaginationState extends State<ZephyrPagination> {
       pages.add(totalPages);
     } else if (currentPage >= totalPages - halfVisible) {
       pages.add(1);
-      pages.addAll(List.generate(maxVisible - 1, (index) => totalPages - maxVisible + 2 + index));
+      pages.addAll(List.generate(
+          maxVisible - 1, (index) => totalPages - maxVisible + 2 + index));
     } else {
       pages.add(1);
-      pages.addAll(List.generate(maxVisible - 2, (index) => currentPage - halfVisible + index));
+      pages.addAll(List.generate(
+          maxVisible - 2, (index) => currentPage - halfVisible + index));
       pages.add(totalPages);
     }
 
@@ -229,7 +232,8 @@ class _ZephyrPaginationState extends State<ZephyrPagination> {
       return;
     }
 
-    final newCurrentPage = ((_config.currentPage - 1) * _config.itemsPerPage ~/ pageSize) + 1;
+    final newCurrentPage =
+        ((_config.currentPage - 1) * _config.itemsPerPage ~/ pageSize) + 1;
 
     setState(() {
       _config = ZephyrPaginationConfig(
@@ -290,10 +294,10 @@ class _ZephyrPaginationState extends State<ZephyrPagination> {
   Widget _buildFirstButton(ZephyrPaginationTheme theme) {
     final disabled = !_config.hasPrevious;
     return widget.firstPageButtonBuilder?.call(
-      context,
-      () => _goToPage(1),
-      disabled,
-    ) ??
+          context,
+          () => _goToPage(1),
+          disabled,
+        ) ??
         ZephyrButton.outline(
           text: '',
           onPressed: disabled ? null : () => _goToPage(1),
@@ -305,10 +309,10 @@ class _ZephyrPaginationState extends State<ZephyrPagination> {
   Widget _buildPreviousButton(ZephyrPaginationTheme theme) {
     final disabled = !_config.hasPrevious;
     return widget.previousPageButtonBuilder?.call(
-      context,
-      () => _goToPage(_config.currentPage - 1),
-      disabled,
-    ) ??
+          context,
+          () => _goToPage(_config.currentPage - 1),
+          disabled,
+        ) ??
         ZephyrButton.outline(
           text: '',
           onPressed: disabled ? null : () => _goToPage(_config.currentPage - 1),
@@ -320,10 +324,10 @@ class _ZephyrPaginationState extends State<ZephyrPagination> {
   Widget _buildNextButton(ZephyrPaginationTheme theme) {
     final disabled = !_config.hasNext;
     return widget.nextPageButtonBuilder?.call(
-      context,
-      () => _goToPage(_config.currentPage + 1),
-      disabled,
-    ) ??
+          context,
+          () => _goToPage(_config.currentPage + 1),
+          disabled,
+        ) ??
         ZephyrButton.outline(
           text: '',
           onPressed: disabled ? null : () => _goToPage(_config.currentPage + 1),
@@ -335,10 +339,10 @@ class _ZephyrPaginationState extends State<ZephyrPagination> {
   Widget _buildLastButton(ZephyrPaginationTheme theme) {
     final disabled = !_config.hasNext;
     return widget.lastPageButtonBuilder?.call(
-      context,
-      () => _goToPage(_config.totalPages),
-      disabled,
-    ) ??
+          context,
+          () => _goToPage(_config.totalPages),
+          disabled,
+        ) ??
         ZephyrButton.outline(
           text: '',
           onPressed: disabled ? null : () => _goToPage(_config.totalPages),
@@ -349,9 +353,9 @@ class _ZephyrPaginationState extends State<ZephyrPagination> {
 
   List<Widget> _buildPageButtons(ZephyrPaginationTheme theme) {
     final visiblePages = _getVisiblePages();
-    final List<Widget> buttons = [];
+    final buttons = <Widget>[];
 
-    for (int i = 0; i < visiblePages.length; i++) {
+    for (var i = 0; i < visiblePages.length; i++) {
       final page = visiblePages[i];
       final isCurrent = page == _config.currentPage;
 
@@ -367,11 +371,11 @@ class _ZephyrPaginationState extends State<ZephyrPagination> {
 
       buttons.add(
         widget.pageButtonBuilder?.call(
-          context,
-          page,
-          isCurrent,
-          () => _goToPage(page),
-        ) ??
+              context,
+              page,
+              isCurrent,
+              () => _goToPage(page),
+            ) ??
             ZephyrButton.primary(
               text: page.toString(),
               onPressed: isCurrent ? null : () => _goToPage(page),
@@ -385,11 +389,11 @@ class _ZephyrPaginationState extends State<ZephyrPagination> {
 
   Widget _buildPageSizeSelector(ZephyrPaginationTheme theme) {
     return widget.pageSizeSelectorBuilder?.call(
-      context,
-      _config.itemsPerPage,
-      _config.pageSizeOptions,
-      _changePageSize,
-    ) ??
+          context,
+          _config.itemsPerPage,
+          _config.pageSizeOptions,
+          _changePageSize,
+        ) ??
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           decoration: BoxDecoration(

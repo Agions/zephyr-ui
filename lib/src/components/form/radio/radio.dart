@@ -22,7 +22,7 @@ import 'package:zephyr_ui/zephyr_ui.dart';
 class ZephyrRadio<T> extends StatefulWidget {
   /// 创建一个单选框组件
   const ZephyrRadio({
-    Key? key,
+    super.key,
     required this.value,
     required this.groupValue,
     this.onChanged,
@@ -38,7 +38,7 @@ class ZephyrRadio<T> extends StatefulWidget {
     this.theme,
     this.semanticLabel,
     this.enableAccessibilityFeatures = true,
-  }) : super(key: key);
+  });
 
   /// 当前选项的值
   final T value;
@@ -125,7 +125,7 @@ class _ZephyrRadioState<T> extends State<ZephyrRadio<T>> {
           _isFocused = focused;
         });
       },
-      borderRadius: BorderRadius.circular(_getRadioSize()),
+      borderRadius: const BorderRadius.circular(_getRadioSize()),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

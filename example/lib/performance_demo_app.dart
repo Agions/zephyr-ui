@@ -13,7 +13,7 @@ import 'package:zephyr_ui/zephyr_ui.dart';
 void main() {
   // Initialize basic performance monitoring
   ZephyrPerformanceUtils.startMonitoring();
-  
+
   runApp(const PerformanceDemoApp());
 }
 
@@ -38,7 +38,8 @@ class PerformanceDemoHomePage extends StatefulWidget {
   const PerformanceDemoHomePage({Key? key}) : super(key: key);
 
   @override
-  State<PerformanceDemoHomePage> createState() => _PerformanceDemoHomePageState();
+  State<PerformanceDemoHomePage> createState() =>
+      _PerformanceDemoHomePageState();
 }
 
 class _PerformanceDemoHomePageState extends State<PerformanceDemoHomePage> {
@@ -74,7 +75,8 @@ class _PerformanceDemoHomePageState extends State<PerformanceDemoHomePage> {
                 _isDarkMode = !_isDarkMode;
               });
               // Simple theme switching
-              final brightness = _isDarkMode ? Brightness.dark : Brightness.light;
+              final brightness =
+                  _isDarkMode ? Brightness.dark : Brightness.light;
               // Note: You might want to implement theme switching in your app
             },
           ),
@@ -108,12 +110,14 @@ class _PerformanceDemoHomePageState extends State<PerformanceDemoHomePage> {
 
   Widget _buildPerformanceStats() {
     final report = context.getPerformanceReport();
-    final avgFps = report.frameTimeStats.average > 0 ? 1000 / report.frameTimeStats.average : 0;
+    final avgFps = report.frameTimeStats.average > 0
+        ? 1000 / report.frameTimeStats.average
+        : 0;
     final memoryMB = report.memoryStats.average / 1024 / 1024;
 
-    return Container(
-      padding: const EdgeInsets.all(16),
-      margin: const EdgeInsets.all(16),
+    return const Container(
+      padding: EdgeInsets.all(16),
+      margin: EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.blue.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
@@ -121,35 +125,44 @@ class _PerformanceDemoHomePageState extends State<PerformanceDemoHomePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             '🚀 Performance Statistics',
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Row(
             children: [
               Expanded(
-                child: _buildStatCard('FPS', avgFps.toStringAsFixed(1), 
-                  avgFps > 55 ? Colors.green : (avgFps > 30 ? Colors.yellow : Colors.red)),
+                child: _buildStatCard(
+                    'FPS',
+                    avgFps.toStringAsFixed(1),
+                    avgFps > 55
+                        ? Colors.green
+                        : (avgFps > 30 ? Colors.yellow : Colors.red)),
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Expanded(
-                child: _buildStatCard('Memory', '${memoryMB.toStringAsFixed(1)}MB',
-                  memoryMB < 100 ? Colors.green : (memoryMB < 200 ? Colors.yellow : Colors.red)),
+                child: _buildStatCard(
+                    'Memory',
+                    '${memoryMB.toStringAsFixed(1)}MB',
+                    memoryMB < 100
+                        ? Colors.green
+                        : (memoryMB < 200 ? Colors.yellow : Colors.red)),
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Expanded(
-                child: _buildStatCard('Widgets', '${report.widgetBuildStats.length}', Colors.blue),
+                child: _buildStatCard('Widgets',
+                    '${report.widgetBuildStats.length}', Colors.blue),
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             'Monitoring Level: ${report.monitoringLevel.toString().split('.').last}',
-            style: const TextStyle(fontSize: 12, color: Colors.grey),
+            style: TextStyle(fontSize: 12, color: Colors.grey),
           ),
         ],
       ),
@@ -157,8 +170,8 @@ class _PerformanceDemoHomePageState extends State<PerformanceDemoHomePage> {
   }
 
   Widget _buildStatCard(String title, String value, Color color) {
-    return Container(
-      padding: const EdgeInsets.all(8),
+    return const Container(
+      padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(4),
@@ -187,8 +200,8 @@ class _PerformanceDemoHomePageState extends State<PerformanceDemoHomePage> {
   }
 
   Widget _buildDemoControls() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         children: [
           Expanded(
@@ -201,15 +214,16 @@ class _PerformanceDemoHomePageState extends State<PerformanceDemoHomePage> {
               child: Text('Counter: $_counter'),
             ),
           ),
-          const SizedBox(width: 8),
+          SizedBox(width: 8),
           Expanded(
             child: ElevatedButton(
               onPressed: () {
                 setState(() {
-                  _items.addAll(List.generate(10, (index) => 'New Item ${_items.length + index}'));
+                  _items.addAll(List.generate(
+                      10, (index) => 'New Item ${_items.length + index}'));
                 });
               },
-              child: const Text('Add Items'),
+              child: Text('Add Items'),
             ),
           ),
         ],
@@ -265,7 +279,8 @@ class PerformanceSettingsPage extends StatefulWidget {
   const PerformanceSettingsPage({Key? key}) : super(key: key);
 
   @override
-  State<PerformanceSettingsPage> createState() => _PerformanceSettingsPageState();
+  State<PerformanceSettingsPage> createState() =>
+      _PerformanceSettingsPageState();
 }
 
 class _PerformanceSettingsPageState extends State<PerformanceSettingsPage> {
@@ -359,8 +374,8 @@ class _PerformanceSettingsPageState extends State<PerformanceSettingsPage> {
 
   Widget _buildBuildStats() {
     final stats = ZephyrBuildOptimizer.instance.getBuildStats();
-    return Container(
-      padding: const EdgeInsets.all(16),
+    return const Container(
+      padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.grey.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
@@ -370,11 +385,11 @@ class _PerformanceSettingsPageState extends State<PerformanceSettingsPage> {
         children: [
           Text('Environment: ${stats['environment']}'),
           Text('Platform: ${stats['platform']}'),
-          const SizedBox(height: 8),
-          const Text('Recommendations:'),
-          ...List<String>.from(stats['recommendations']).map((rec) => 
-            Padding(
-              padding: const EdgeInsets.only(left: 16),
+          SizedBox(height: 8),
+          Text('Recommendations:'),
+          ...List<String>.from(stats['recommendations']).map(
+            (rec) => const Padding(
+              padding: EdgeInsets.only(left: 16),
               child: Text('• $rec'),
             ),
           ),
@@ -385,8 +400,8 @@ class _PerformanceSettingsPageState extends State<PerformanceSettingsPage> {
 
   Widget _buildThemeCacheStats() {
     final stats = ZephyrOptimizedThemeConfig.instance.getCacheStats();
-    return Container(
-      padding: const EdgeInsets.all(16),
+    return const Container(
+      padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.grey.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
@@ -396,11 +411,11 @@ class _PerformanceSettingsPageState extends State<PerformanceSettingsPage> {
         children: [
           Text('Cache Size: ${stats['prebuiltThemesCount']}'),
           Text('Builder Cache: ${stats['builderCacheCount']}'),
-          const SizedBox(height: 8),
-          const Text('Cached Themes:'),
-          ...List<String>.from(stats['cachedThemes'] ?? []).map((theme) => 
-            Padding(
-              padding: const EdgeInsets.only(left: 16),
+          SizedBox(height: 8),
+          Text('Cached Themes:'),
+          ...List<String>.from(stats['cachedThemes'] ?? []).map(
+            (theme) => const Padding(
+              padding: EdgeInsets.only(left: 16),
               child: Text('• $theme'),
             ),
           ),

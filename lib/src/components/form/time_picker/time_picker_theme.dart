@@ -5,6 +5,7 @@ library time_picker_theme;
 
 import 'package:flutter/material.dart';
 import 'package:zephyr_ui/zephyr_ui.dart';
+import '../../../core/constants/typography_constants.dart';
 
 /// ZephyrUI 时间选择器主题
 class ZephyrTimePickerTheme extends ThemeExtension<ZephyrTimePickerTheme> {
@@ -86,46 +87,46 @@ class ZephyrTimePickerTheme extends ThemeExtension<ZephyrTimePickerTheme> {
     return ZephyrTimePickerTheme(
       headerBackgroundColor: zephyrTheme.primaryColor,
       headerTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize18,
-        fontWeight: ZephyrTypography.fontWeightMedium,
+        fontSize: ZephyrTypographyConstants.fontSize18,
+        fontWeight: ZephyrTypographyConstants.fontWeightMedium,
         color: Colors.white,
       ),
       timeNumberStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize24,
-        fontWeight: ZephyrTypography.fontWeightMedium,
+        fontSize: ZephyrTypographyConstants.fontSize24,
+        fontWeight: ZephyrTypographyConstants.fontWeightMedium,
         color: isDark ? ZephyrColors.neutral100 : ZephyrColors.neutral900,
       ),
       timeSeparatorStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize24,
-        fontWeight: ZephyrTypography.fontWeightMedium,
+        fontSize: ZephyrTypographyConstants.fontSize24,
+        fontWeight: ZephyrTypographyConstants.fontWeightMedium,
         color: isDark ? ZephyrColors.neutral100 : ZephyrColors.neutral900,
       ),
       labelStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightRegular,
+        fontSize: ZephyrTypographyConstants.fontSize12,
+        fontWeight: ZephyrTypographyConstants.fontWeightRegular,
         color: isDark ? ZephyrColors.neutral400 : ZephyrColors.neutral600,
       ),
       periodStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightRegular,
+        fontSize: ZephyrTypographyConstants.fontSize14,
+        fontWeight: ZephyrTypographyConstants.fontWeightRegular,
         color: isDark ? ZephyrColors.neutral300 : ZephyrColors.neutral700,
       ),
       selectedPeriodStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightMedium,
+        fontSize: ZephyrTypographyConstants.fontSize14,
+        fontWeight: ZephyrTypographyConstants.fontWeightMedium,
         color: Colors.white,
       ),
       selectedPeriodColor: zephyrTheme.primaryColor,
       buttonTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightMedium,
+        fontSize: ZephyrTypographyConstants.fontSize14,
+        fontWeight: ZephyrTypographyConstants.fontWeightMedium,
         color: zephyrTheme.primaryColor,
       ),
       confirmButtonColor: zephyrTheme.primaryColor,
       borderColor: isDark ? ZephyrColors.neutral600 : ZephyrColors.neutral300,
       iconColor: isDark ? ZephyrColors.neutral300 : ZephyrColors.neutral700,
       disabledIconColor: isDark ? ZephyrColors.neutral600 : ZephyrColors.neutral400,
-      borderRadius: BorderRadius.circular(ZephyrRadius.md),
+      borderRadius: const BorderRadius.circular(ZephyrRadius.md),
     );
   }
 
@@ -182,7 +183,7 @@ class ZephyrTimePickerTheme extends ThemeExtension<ZephyrTimePickerTheme> {
       borderColor: Color.lerp(borderColor, other.borderColor, t) ?? borderColor,
       iconColor: Color.lerp(iconColor, other.iconColor, t) ?? iconColor,
       disabledIconColor: Color.lerp(disabledIconColor, other.disabledIconColor, t) ?? disabledIconColor,
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t) ?? borderRadius,
+      borderRadius: const BorderRadius.lerp(borderRadius, other.borderRadius, t) ?? borderRadius,
     );
   }
 

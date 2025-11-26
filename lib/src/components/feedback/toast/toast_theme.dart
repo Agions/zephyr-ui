@@ -110,7 +110,7 @@ class ZephyrToastTheme extends ThemeExtension<ZephyrToastTheme> {
   static ZephyrToastTheme of(BuildContext context) {
     final theme = Theme.of(context).extension<ZephyrToastTheme>();
     if (theme != null) return theme;
-    
+
     final zephyrTheme = ZephyrTheme.of(context);
     return _createDefaultTheme(zephyrTheme);
   }
@@ -118,7 +118,7 @@ class ZephyrToastTheme extends ThemeExtension<ZephyrToastTheme> {
   /// 创建默认主题
   static ZephyrToastTheme _createDefaultTheme(ZephyrThemeData zephyrTheme) {
     final isDark = zephyrTheme.brightness == Brightness.dark;
-    
+
     return ZephyrToastTheme(
       backgroundColor: isDark ? ZephyrColors.neutral800 : Colors.white,
       successBackgroundColor: ZephyrColors.success500,
@@ -135,13 +135,15 @@ class ZephyrToastTheme extends ThemeExtension<ZephyrToastTheme> {
       warningIconColor: Colors.white,
       errorIconColor: Colors.white,
       infoIconColor: Colors.white,
-      shadowColor: isDark ? Colors.black.withValues(alpha: 0.3) : Colors.black.withValues(alpha: 0.1),
+      shadowColor: isDark
+          ? Colors.black.withValues(alpha: 0.3)
+          : Colors.black.withValues(alpha: 0.1),
       textStyle: const TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightMedium,
-        height: ZephyrTypography.lineHeight1_4,
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        height: 1.4,
       ),
-      borderRadius: BorderRadius.circular(ZephyrRadius.md),
+      borderRadius: const BorderRadius.circular(ZephyrRadius.md),
       padding: const EdgeInsets.all(ZephyrSpacing.md),
       margin: const EdgeInsets.all(ZephyrSpacing.md),
       elevation: 4.0,
@@ -180,8 +182,10 @@ class ZephyrToastTheme extends ThemeExtension<ZephyrToastTheme> {
   }) {
     return ZephyrToastTheme(
       backgroundColor: backgroundColor ?? this.backgroundColor,
-      successBackgroundColor: successBackgroundColor ?? this.successBackgroundColor,
-      warningBackgroundColor: warningBackgroundColor ?? this.warningBackgroundColor,
+      successBackgroundColor:
+          successBackgroundColor ?? this.successBackgroundColor,
+      warningBackgroundColor:
+          warningBackgroundColor ?? this.warningBackgroundColor,
       errorBackgroundColor: errorBackgroundColor ?? this.errorBackgroundColor,
       infoBackgroundColor: infoBackgroundColor ?? this.infoBackgroundColor,
       textColor: textColor ?? this.textColor,
@@ -209,26 +213,48 @@ class ZephyrToastTheme extends ThemeExtension<ZephyrToastTheme> {
   @override
   ZephyrToastTheme lerp(ThemeExtension<ZephyrToastTheme>? other, double t) {
     if (other is! ZephyrToastTheme) return this;
-    
+
     return ZephyrToastTheme(
-      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t) ?? backgroundColor,
-      successBackgroundColor: Color.lerp(successBackgroundColor, other.successBackgroundColor, t) ?? successBackgroundColor,
-      warningBackgroundColor: Color.lerp(warningBackgroundColor, other.warningBackgroundColor, t) ?? warningBackgroundColor,
-      errorBackgroundColor: Color.lerp(errorBackgroundColor, other.errorBackgroundColor, t) ?? errorBackgroundColor,
-      infoBackgroundColor: Color.lerp(infoBackgroundColor, other.infoBackgroundColor, t) ?? infoBackgroundColor,
+      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t) ??
+          backgroundColor,
+      successBackgroundColor:
+          Color.lerp(successBackgroundColor, other.successBackgroundColor, t) ??
+              successBackgroundColor,
+      warningBackgroundColor:
+          Color.lerp(warningBackgroundColor, other.warningBackgroundColor, t) ??
+              warningBackgroundColor,
+      errorBackgroundColor:
+          Color.lerp(errorBackgroundColor, other.errorBackgroundColor, t) ??
+              errorBackgroundColor,
+      infoBackgroundColor:
+          Color.lerp(infoBackgroundColor, other.infoBackgroundColor, t) ??
+              infoBackgroundColor,
       textColor: Color.lerp(textColor, other.textColor, t) ?? textColor,
-      successTextColor: Color.lerp(successTextColor, other.successTextColor, t) ?? successTextColor,
-      warningTextColor: Color.lerp(warningTextColor, other.warningTextColor, t) ?? warningTextColor,
-      errorTextColor: Color.lerp(errorTextColor, other.errorTextColor, t) ?? errorTextColor,
-      infoTextColor: Color.lerp(infoTextColor, other.infoTextColor, t) ?? infoTextColor,
+      successTextColor:
+          Color.lerp(successTextColor, other.successTextColor, t) ??
+              successTextColor,
+      warningTextColor:
+          Color.lerp(warningTextColor, other.warningTextColor, t) ??
+              warningTextColor,
+      errorTextColor:
+          Color.lerp(errorTextColor, other.errorTextColor, t) ?? errorTextColor,
+      infoTextColor:
+          Color.lerp(infoTextColor, other.infoTextColor, t) ?? infoTextColor,
       iconColor: Color.lerp(iconColor, other.iconColor, t) ?? iconColor,
-      successIconColor: Color.lerp(successIconColor, other.successIconColor, t) ?? successIconColor,
-      warningIconColor: Color.lerp(warningIconColor, other.warningIconColor, t) ?? warningIconColor,
-      errorIconColor: Color.lerp(errorIconColor, other.errorIconColor, t) ?? errorIconColor,
-      infoIconColor: Color.lerp(infoIconColor, other.infoIconColor, t) ?? infoIconColor,
+      successIconColor:
+          Color.lerp(successIconColor, other.successIconColor, t) ??
+              successIconColor,
+      warningIconColor:
+          Color.lerp(warningIconColor, other.warningIconColor, t) ??
+              warningIconColor,
+      errorIconColor:
+          Color.lerp(errorIconColor, other.errorIconColor, t) ?? errorIconColor,
+      infoIconColor:
+          Color.lerp(infoIconColor, other.infoIconColor, t) ?? infoIconColor,
       shadowColor: Color.lerp(shadowColor, other.shadowColor, t) ?? shadowColor,
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t) ?? textStyle,
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t) ?? borderRadius,
+      borderRadius: const BorderRadius.lerp(borderRadius, other.borderRadius, t) ??
+          borderRadius,
       padding: EdgeInsetsGeometry.lerp(padding, other.padding, t) ?? padding,
       margin: EdgeInsetsGeometry.lerp(margin, other.margin, t) ?? margin,
       elevation: ui.lerpDouble(elevation, other.elevation, t) ?? elevation,
@@ -238,4 +264,3 @@ class ZephyrToastTheme extends ThemeExtension<ZephyrToastTheme> {
     );
   }
 }
-

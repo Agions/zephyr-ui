@@ -93,23 +93,23 @@ class BasicCardDemo extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
+
           // 标准卡片
           _buildSection('标准卡片', [
             ZephyrCard(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
+              child: const Padding(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       '卡片标题',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Text(
                       '这是卡片的内容描述，可以包含任何文本或组件。',
                       style: TextStyle(color: Colors.grey[600]),
@@ -120,9 +120,9 @@ class BasicCardDemo extends StatelessWidget {
               onTap: () => _showMessage(context, '标准卡片被点击'),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 扁平卡片
           _buildSection('扁平卡片', [
             ZephyrCard.flat(
@@ -133,9 +133,9 @@ class BasicCardDemo extends StatelessWidget {
               onTap: () => _showMessage(context, '扁平卡片被点击'),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 高阴影卡片
           _buildSection('高阴影卡片', [
             ZephyrCard.elevated(
@@ -147,9 +147,9 @@ class BasicCardDemo extends StatelessWidget {
               onTap: () => _showMessage(context, '高阴影卡片被点击'),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 填充卡片
           _buildSection('填充卡片', [
             ZephyrCard.filled(
@@ -160,9 +160,9 @@ class BasicCardDemo extends StatelessWidget {
               ),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 轮廓卡片
           _buildSection('轮廓卡片', [
             ZephyrCard.outlined(
@@ -219,100 +219,100 @@ class StyleCardDemo extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
+
           // 背景颜色
           _buildSection('背景颜色', [
-            ZephyrCard(
-              child: const Padding(
+            const ZephyrCard(
+              child: Padding(
                 padding: EdgeInsets.all(16),
                 child: Text('默认背景'),
               ),
             ),
             const SizedBox(height: 16),
             ZephyrCard(
+              backgroundColor: Colors.blue[50],
               child: const Padding(
                 padding: EdgeInsets.all(16),
                 child: Text('蓝色背景'),
               ),
-              backgroundColor: Colors.blue[50],
             ),
             const SizedBox(height: 16),
             ZephyrCard(
+              backgroundColor: Colors.green[50],
               child: const Padding(
                 padding: EdgeInsets.all(16),
                 child: Text('绿色背景'),
               ),
-              backgroundColor: Colors.green[50],
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 阴影效果
           _buildSection('阴影效果', [
-            ZephyrCard(
-              child: const Padding(
+            const ZephyrCard(
+              elevation: 0,
+              child: Padding(
                 padding: EdgeInsets.all(16),
                 child: Text('无阴影'),
               ),
-              elevation: 0,
             ),
             const SizedBox(height: 16),
-            ZephyrCard(
-              child: const Padding(
+            const ZephyrCard(
+              elevation: 2,
+              child: Padding(
                 padding: EdgeInsets.all(16),
                 child: Text('轻微阴影'),
               ),
-              elevation: 2,
             ),
             const SizedBox(height: 16),
-            ZephyrCard(
-              child: const Padding(
+            const ZephyrCard(
+              elevation: 4,
+              child: Padding(
                 padding: EdgeInsets.all(16),
                 child: Text('中等阴影'),
               ),
-              elevation: 4,
             ),
             const SizedBox(height: 16),
-            ZephyrCard(
-              child: const Padding(
+            const ZephyrCard(
+              elevation: 8,
+              child: Padding(
                 padding: EdgeInsets.all(16),
                 child: Text('深阴影'),
               ),
-              elevation: 8,
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 圆角样式
           _buildSection('圆角样式', [
-            ZephyrCard(
-              child: const Padding(
+            const ZephyrCard(
+              child: Padding(
                 padding: EdgeInsets.all(16),
                 child: Text('默认圆角'),
               ),
             ),
             const SizedBox(height: 16),
             ZephyrCard(
+              borderRadius: BorderRadius.circular(4),
               child: const Padding(
                 padding: EdgeInsets.all(16),
                 child: Text('小圆角'),
               ),
-              borderRadius: BorderRadius.circular(4),
             ),
             const SizedBox(height: 16),
             ZephyrCard(
+              borderRadius: BorderRadius.circular(16),
               child: const Padding(
                 padding: EdgeInsets.all(16),
                 child: Text('大圆角'),
               ),
-              borderRadius: BorderRadius.circular(16),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 边框样式
           _buildSection('边框样式', [
             ZephyrCard.outlined(
@@ -323,51 +323,51 @@ class StyleCardDemo extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             ZephyrCard.outlined(
+              borderColor: Colors.blue,
+              borderWidth: 2,
               child: const Padding(
                 padding: EdgeInsets.all(16),
                 child: Text('蓝色边框'),
               ),
-              borderColor: Colors.blue,
-              borderWidth: 2,
             ),
             const SizedBox(height: 16),
             ZephyrCard.outlined(
+              borderColor: Colors.red,
+              borderWidth: 3,
               child: const Padding(
                 padding: EdgeInsets.all(16),
                 child: Text('红色边框'),
               ),
-              borderColor: Colors.red,
-              borderWidth: 3,
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 尺寸定制
           _buildSection('尺寸定制', [
-            ZephyrCard(
-              child: const Padding(
+            const ZephyrCard(
+              width: 200,
+              child: Padding(
                 padding: EdgeInsets.all(16),
                 child: Text('固定宽度'),
               ),
-              width: 200,
             ),
             const SizedBox(height: 16),
-            ZephyrCard(
-              child: const Padding(
+            const ZephyrCard(
+              height: 100,
+              child: Padding(
                 padding: EdgeInsets.all(16),
                 child: Text('固定高度'),
               ),
-              height: 100,
             ),
             const SizedBox(height: 16),
-            ZephyrCard(
-              child: const Padding(
+            const ZephyrCard(
+              width: 200,
+              height: 150,
+              child: Padding(
                 padding: EdgeInsets.all(16),
                 child: Text('固定尺寸'),
               ),
-              width: 200,
-              height: 150,
             ),
           ]),
         ],
@@ -406,7 +406,7 @@ class InteractiveCardDemo extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
+
           // 可点击卡片
           _buildSection('可点击卡片', [
             ZephyrCard(
@@ -425,9 +425,9 @@ class InteractiveCardDemo extends StatelessWidget {
               onLongPress: () => _showMessage(context, '卡片被长按'),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 禁用状态
           _buildSection('禁用状态', [
             ZephyrCard(
@@ -439,17 +439,17 @@ class InteractiveCardDemo extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             ZephyrCard(
+              enabled: false,
+              onTap: () => _showMessage(context, '禁用卡片被点击'),
               child: const Padding(
                 padding: EdgeInsets.all(16),
                 child: Text('禁用状态'),
               ),
-              enabled: false,
-              onTap: () => _showMessage(context, '禁用卡片被点击'),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 用户信息卡片
           _buildSection('用户信息卡片', [
             _buildUserCard(
@@ -459,12 +459,12 @@ class InteractiveCardDemo extends StatelessWidget {
               onTap: () => _showMessage(context, '查看用户资料'),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 设置项卡片
           _buildSection('设置项卡片', [
-            Container(
+            const Container(
               width: double.infinity,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey[300]!),
@@ -477,13 +477,13 @@ class InteractiveCardDemo extends StatelessWidget {
                     subtitle: '管理您的账号信息',
                     onTap: () => _showMessage(context, '打开账号设置'),
                   ),
-                  const Divider(),
+                  Divider(),
                   _buildSettingItemCard(
                     title: '通知设置',
                     subtitle: '管理推送通知',
                     onTap: () => _showMessage(context, '打开通知设置'),
                   ),
-                  const Divider(),
+                  Divider(),
                   _buildSettingItemCard(
                     title: '隐私设置',
                     subtitle: '管理隐私选项',
@@ -506,8 +506,8 @@ class InteractiveCardDemo extends StatelessWidget {
   }) {
     return ZephyrCard(
       onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Row(
           children: [
             ZephyrAvatar.text(
@@ -516,19 +516,19 @@ class InteractiveCardDemo extends StatelessWidget {
               backgroundColor: Colors.blue,
               foregroundColor: Colors.white,
             ),
-            const SizedBox(width: 16),
+            SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     name,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4),
                   Text(
                     email,
                     style: TextStyle(
@@ -538,7 +538,7 @@ class InteractiveCardDemo extends StatelessWidget {
                 ],
               ),
             ),
-            const Icon(Icons.chevron_right),
+            Icon(Icons.chevron_right),
           ],
         ),
       ),
@@ -600,7 +600,7 @@ class AdvancedCardDemo extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          
+
           // 统计卡片
           _buildSection('统计卡片', [
             Row(
@@ -651,9 +651,9 @@ class AdvancedCardDemo extends StatelessWidget {
               ],
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 产品卡片
           _buildSection('产品卡片', [
             _buildProductCard(
@@ -664,9 +664,9 @@ class AdvancedCardDemo extends StatelessWidget {
               onAddToCart: () => _showMessage(context, '添加到购物车'),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 可折叠卡片
           _buildSection('可折叠卡片', [
             const ExpandableCard(
@@ -698,29 +698,29 @@ class AdvancedCardDemo extends StatelessWidget {
               ),
             ),
           ]),
-          
+
           const SizedBox(height: 24),
-          
+
           // 响应式卡片布局
           _buildSection('响应式布局', [
             LayoutBuilder(
               builder: (context, constraints) {
                 if (constraints.maxWidth > 600) {
                   // 平板或桌面布局
-                  return Row(
+                  return const Row(
                     children: [
                       Expanded(
                         child: ZephyrCard(
-                          child: const Padding(
+                          child: Padding(
                             padding: EdgeInsets.all(16),
                             child: Text('左侧卡片'),
                           ),
                         ),
                       ),
-                      const SizedBox(width: 16),
+                      SizedBox(width: 16),
                       Expanded(
                         child: ZephyrCard(
-                          child: const Padding(
+                          child: Padding(
                             padding: EdgeInsets.all(16),
                             child: Text('右侧卡片'),
                           ),
@@ -730,17 +730,17 @@ class AdvancedCardDemo extends StatelessWidget {
                   );
                 } else {
                   // 手机布局
-                  return Column(
+                  return const Column(
                     children: [
                       ZephyrCard(
-                        child: const Padding(
+                        child: Padding(
                           padding: EdgeInsets.all(16),
                           child: Text('上方卡片'),
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16),
                       ZephyrCard(
-                        child: const Padding(
+                        child: Padding(
                           padding: EdgeInsets.all(16),
                           child: Text('下方卡片'),
                         ),
@@ -764,8 +764,8 @@ class AdvancedCardDemo extends StatelessWidget {
     required Color color,
   }) {
     return ZephyrCard(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -786,7 +786,7 @@ class AdvancedCardDemo extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             Text(
               value,
               style: TextStyle(
@@ -795,7 +795,7 @@ class AdvancedCardDemo extends StatelessWidget {
                 color: color,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               change,
               style: TextStyle(
@@ -822,14 +822,14 @@ class AdvancedCardDemo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // 产品图片
-          Container(
+          const Container(
             height: 150,
             width: double.infinity,
             decoration: BoxDecoration(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
               color: Colors.grey[200],
             ),
-            child: const Center(
+            child: Center(
               child: Icon(
                 Icons.image,
                 size: 64,
@@ -837,32 +837,32 @@ class AdvancedCardDemo extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16),
+          const Padding(
+            padding: EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   name,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text(
                   description,
                   style: TextStyle(
                     color: Colors.grey[600],
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       '¥$price',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.red,
@@ -870,7 +870,7 @@ class AdvancedCardDemo extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: onAddToCart,
-                      child: const Text('加入购物车'),
+                      child: Text('加入购物车'),
                     ),
                   ],
                 ),
@@ -944,14 +944,14 @@ class _ExpandableCardState extends State<ExpandableCard> {
                 _isExpanded = !_isExpanded;
               });
             },
-            child: Padding(
-              padding: const EdgeInsets.all(16),
+            child: const Padding(
+              padding: EdgeInsets.all(16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     widget.title,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
@@ -965,8 +965,8 @@ class _ExpandableCardState extends State<ExpandableCard> {
           ),
           if (_isExpanded) ...[
             const Divider(),
-            Padding(
-              padding: const EdgeInsets.all(16),
+            const Padding(
+              padding: EdgeInsets.all(16),
               child: widget.content,
             ),
           ],

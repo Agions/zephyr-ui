@@ -8,7 +8,8 @@ class NavigationComponentsDemo extends StatefulWidget {
   const NavigationComponentsDemo({super.key});
 
   @override
-  State<NavigationComponentsDemo> createState() => _NavigationComponentsDemoState();
+  State<NavigationComponentsDemo> createState() =>
+      _NavigationComponentsDemoState();
 }
 
 class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
@@ -16,7 +17,7 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
   int _currentStep = 1;
   int _tabIndex = 0;
   int _scrollableTabindex = 0;
-  
+
   final List<Widget> _pages = [
     const Center(child: Text('首页', style: TextStyle(fontSize: 24))),
     const Center(child: Text('搜索', style: TextStyle(fontSize: 24))),
@@ -35,7 +36,7 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
   @override
   Widget build(BuildContext context) {
     final themeService = Provider.of<ThemeService>(context);
-    
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('导航组件'),
@@ -46,7 +47,8 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
             onPressed: () => _showInfoDialog(context),
           ),
           IconButton(
-            icon: Icon(themeService.isDarkMode ? Icons.light_mode : Icons.dark_mode),
+            icon: Icon(
+                themeService.isDarkMode ? Icons.light_mode : Icons.dark_mode),
             onPressed: () => themeService.toggleTheme(),
           ),
         ],
@@ -132,21 +134,21 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
   }
 
   Widget _buildIntroduction() {
-    return Container(
+    return const Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(24),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Theme.of(context).primaryColor.withValues(alpha: 0.1),
-            Theme.of(context).primaryColor.withValues(alpha: 0.05),
+            Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+            Theme.of(context).colorScheme.primary.withValues(alpha: 0.05),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: Theme.of(context).primaryColor.withValues(alpha: 0.2),
+          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
         ),
       ),
       child: Column(
@@ -155,19 +157,19 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).colorScheme.primary,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.navigation,
                   color: Colors.white,
                   size: 32,
                 ),
               ),
-              const SizedBox(width: 16),
-              const Expanded(
+              SizedBox(width: 16),
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -191,7 +193,7 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Wrap(
             spacing: 8,
             children: [
@@ -209,13 +211,13 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
   }
 
   Widget _buildFeatureChip(IconData icon, String label) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+    return const Container(
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
+        color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: Theme.of(context).primaryColor.withValues(alpha: 0.3),
+          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
         ),
       ),
       child: Row(
@@ -224,14 +226,14 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
           Icon(
             icon,
             size: 16,
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).colorScheme.primary,
           ),
-          const SizedBox(width: 4),
+          SizedBox(width: 4),
           Text(
             label,
             style: TextStyle(
               fontSize: 12,
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).colorScheme.primary,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -277,7 +279,7 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          Container(
+          const Container(
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey.shade300),
               borderRadius: BorderRadius.circular(12),
@@ -298,10 +300,10 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
                           ),
                         );
                       },
-                      indicatorColor: Theme.of(context).primaryColor,
-                      labelColor: Theme.of(context).primaryColor,
+                      indicatorColor: Theme.of(context).colorScheme.primary,
+                      labelColor: Theme.of(context).colorScheme.primary,
                       unselectedLabelColor: Colors.grey,
-                      tabs: const [
+                      tabs: [
                         Tab(text: '首页'),
                         Tab(text: '发现'),
                         Tab(text: '我的'),
@@ -310,18 +312,12 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
                     Expanded(
                       child: TabBarView(
                         children: [
-                          _buildInteractiveTabContent('首页', Icons.home, 
-                            '欢迎来到首页！这里是您最常用的功能入口。',
-                            ['快速开始', '最近使用', '推荐内容']
-                          ),
+                          _buildInteractiveTabContent('首页', Icons.home,
+                              '欢迎来到首页！这里是您最常用的功能入口。', ['快速开始', '最近使用', '推荐内容']),
                           _buildInteractiveTabContent('发现', Icons.explore,
-                            '探索更多精彩内容和功能。',
-                            ['热门推荐', '最新动态', '分类浏览']
-                          ),
+                              '探索更多精彩内容和功能。', ['热门推荐', '最新动态', '分类浏览']),
                           _buildInteractiveTabContent('我的', Icons.person,
-                            '个人信息和设置管理。',
-                            ['个人资料', '账户设置', '使用统计']
-                          ),
+                              '个人信息和设置管理。', ['个人资料', '账户设置', '使用统计']),
                         ],
                       ),
                     ),
@@ -336,7 +332,7 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          Container(
+          const Container(
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey.shade300),
               borderRadius: BorderRadius.circular(12),
@@ -353,15 +349,22 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
                         setState(() => _scrollableTabindex = index);
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('切换到: ${['首页', '搜索', '收藏', '设置', '帮助', '关于'][index]}'),
+                            content: Text('切换到: ${[
+                              '首页',
+                              '搜索',
+                              '收藏',
+                              '设置',
+                              '帮助',
+                              '关于'
+                            ][index]}'),
                             duration: const Duration(seconds: 1),
                           ),
                         );
                       },
-                      indicatorColor: Theme.of(context).primaryColor,
-                      labelColor: Theme.of(context).primaryColor,
+                      indicatorColor: Theme.of(context).colorScheme.primary,
+                      labelColor: Theme.of(context).colorScheme.primary,
                       unselectedLabelColor: Colors.grey,
-                      tabs: const [
+                      tabs: [
                         Tab(icon: Icon(Icons.home), text: '首页'),
                         Tab(icon: Icon(Icons.search), text: '搜索'),
                         Tab(icon: Icon(Icons.favorite), text: '收藏'),
@@ -374,9 +377,12 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
                       child: TabBarView(
                         children: [
                           _buildScrollableTabContent('首页', Icons.home, '主页内容'),
-                          _buildScrollableTabContent('搜索', Icons.search, '搜索功能'),
-                          _buildScrollableTabContent('收藏', Icons.favorite, '收藏列表'),
-                          _buildScrollableTabContent('设置', Icons.settings, '系统设置'),
+                          _buildScrollableTabContent(
+                              '搜索', Icons.search, '搜索功能'),
+                          _buildScrollableTabContent(
+                              '收藏', Icons.favorite, '收藏列表'),
+                          _buildScrollableTabContent(
+                              '设置', Icons.settings, '系统设置'),
                           _buildScrollableTabContent('帮助', Icons.help, '帮助中心'),
                           _buildScrollableTabContent('关于', Icons.info, '关于我们'),
                         ],
@@ -392,28 +398,30 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
     );
   }
 
-  Widget _buildInteractiveTabContent(String title, IconData icon, String description, List<String> items) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
+  Widget _buildInteractiveTabContent(
+      String title, IconData icon, String description, List<String> items) {
+    return const Padding(
+      padding: EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Icon(icon, size: 32, color: Theme.of(context).primaryColor),
-              const SizedBox(width: 12),
+              Icon(icon,
+                  size: 32, color: Theme.of(context).colorScheme.primary),
+              SizedBox(width: 12),
               Text(
                 title,
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Text(
             description,
             style: TextStyle(fontSize: 14, color: Colors.grey[600]),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Expanded(
             child: ListView.builder(
               itemCount: items.length,
@@ -421,7 +429,10 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
                 return Card(
                   child: ListTile(
                     leading: CircleAvatar(
-                      backgroundColor: Theme.of(context).primaryColor.withValues(alpha: 0.1),
+                      backgroundColor: Theme.of(context)
+                          .colorScheme
+                          .primary
+                          .withValues(alpha: 0.1),
                       child: Text('${index + 1}'),
                     ),
                     title: Text(items[index]),
@@ -444,18 +455,21 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
     );
   }
 
-  Widget _buildScrollableTabContent(String title, IconData icon, String content) {
+  Widget _buildScrollableTabContent(
+      String title, IconData icon, String content) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            padding: const EdgeInsets.all(20),
+          const Container(
+            padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
+              color:
+                  Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
-            child: Icon(icon, size: 48, color: Theme.of(context).primaryColor),
+            child: Icon(icon,
+                size: 48, color: Theme.of(context).colorScheme.primary),
           ),
           const SizedBox(height: 16),
           Text(
@@ -525,7 +539,7 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          Container(
+          const Container(
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey.shade300),
               borderRadius: BorderRadius.circular(12),
@@ -534,10 +548,10 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
               children: [
                 Container(
                   height: 200,
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.grey.shade50,
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(12),
                       topRight: Radius.circular(12),
                     ),
@@ -552,33 +566,38 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
                     setState(() => _bottomNavIndex = index);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('切换到: ${['首页', '搜索', '收藏', '我的'][index]}'),
+                        content:
+                            Text('切换到: ${['首页', '搜索', '收藏', '我的'][index]}'),
                         duration: const Duration(seconds: 1),
                       ),
                     );
                   },
                   type: BottomNavigationBarType.fixed,
-                  selectedItemColor: Theme.of(context).primaryColor,
+                  selectedItemColor: Theme.of(context).colorScheme.primary,
                   unselectedItemColor: Colors.grey,
                   items: [
                     BottomNavigationBarItem(
-                      icon: const Icon(Icons.home_outlined),
-                      activeIcon: Icon(Icons.home, color: Theme.of(context).primaryColor),
+                      icon: Icon(Icons.home_outlined),
+                      activeIcon: Icon(Icons.home,
+                          color: Theme.of(context).colorScheme.primary),
                       label: '首页',
                     ),
                     BottomNavigationBarItem(
-                      icon: const Icon(Icons.search_outlined),
-                      activeIcon: Icon(Icons.search, color: Theme.of(context).primaryColor),
+                      icon: Icon(Icons.search_outlined),
+                      activeIcon: Icon(Icons.search,
+                          color: Theme.of(context).colorScheme.primary),
                       label: '搜索',
                     ),
                     BottomNavigationBarItem(
-                      icon: const Icon(Icons.favorite_border),
-                      activeIcon: Icon(Icons.favorite, color: Theme.of(context).primaryColor),
+                      icon: Icon(Icons.favorite_border),
+                      activeIcon: Icon(Icons.favorite,
+                          color: Theme.of(context).colorScheme.primary),
                       label: '收藏',
                     ),
                     BottomNavigationBarItem(
-                      icon: const Icon(Icons.person_outline),
-                      activeIcon: Icon(Icons.person, color: Theme.of(context).primaryColor),
+                      icon: Icon(Icons.person_outline),
+                      activeIcon: Icon(Icons.person,
+                          color: Theme.of(context).colorScheme.primary),
                       label: '我的',
                     ),
                   ],
@@ -592,7 +611,7 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          Container(
+          const Container(
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey.shade300),
               borderRadius: BorderRadius.circular(12),
@@ -601,15 +620,15 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
               children: [
                 Container(
                   height: 150,
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.grey.shade50,
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(12),
                       topRight: Radius.circular(12),
                     ),
                   ),
-                  child: const Center(
+                  child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -617,7 +636,8 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
                         SizedBox(height: 8),
                         Text('通知中心', style: TextStyle(fontSize: 18)),
                         SizedBox(height: 4),
-                        Text('您有新的消息', style: TextStyle(fontSize: 14, color: Colors.grey)),
+                        Text('您有新的消息',
+                            style: TextStyle(fontSize: 14, color: Colors.grey)),
                       ],
                     ),
                   ),
@@ -627,16 +647,17 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
                   onTap: (index) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('点击了: ${['首页', '消息', '发现', '我的'][index]}'),
+                        content:
+                            Text('点击了: ${['首页', '消息', '发现', '我的'][index]}'),
                         duration: const Duration(seconds: 1),
                       ),
                     );
                   },
                   type: BottomNavigationBarType.fixed,
-                  selectedItemColor: Theme.of(context).primaryColor,
+                  selectedItemColor: Theme.of(context).colorScheme.primary,
                   unselectedItemColor: Colors.grey,
                   items: [
-                    const BottomNavigationBarItem(
+                    BottomNavigationBarItem(
                       icon: Icon(Icons.home_outlined),
                       label: '首页',
                     ),
@@ -671,11 +692,11 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
                       ),
                       label: '消息',
                     ),
-                    const BottomNavigationBarItem(
+                    BottomNavigationBarItem(
                       icon: Icon(Icons.explore_outlined),
                       label: '发现',
                     ),
-                    const BottomNavigationBarItem(
+                    BottomNavigationBarItem(
                       icon: Icon(Icons.person_outline),
                       label: '我的',
                     ),
@@ -692,19 +713,22 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
   Widget _buildBottomNavContent() {
     final List<Widget> contents = [
       _buildPageContent('首页', Icons.home, '欢迎回到首页！', ['今日推荐', '最近使用', '快捷功能']),
-      _buildPageContent('搜索', Icons.search, '搜索您需要的内容', ['热门搜索', '搜索历史', '高级搜索']),
-      _buildPageContent('收藏', Icons.favorite, '您收藏的内容', ['文章收藏', '图片收藏', '链接收藏']),
+      _buildPageContent(
+          '搜索', Icons.search, '搜索您需要的内容', ['热门搜索', '搜索历史', '高级搜索']),
+      _buildPageContent(
+          '收藏', Icons.favorite, '您收藏的内容', ['文章收藏', '图片收藏', '链接收藏']),
       _buildPageContent('我的', Icons.person, '个人中心', ['个人信息', '设置', '帮助']),
     ];
-    
+
     return contents[_bottomNavIndex];
   }
 
-  Widget _buildPageContent(String title, IconData icon, String description, List<String> features) {
+  Widget _buildPageContent(
+      String title, IconData icon, String description, List<String> features) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(icon, size: 48, color: Theme.of(context).primaryColor),
+        Icon(icon, size: 48, color: Theme.of(context).colorScheme.primary),
         const SizedBox(height: 12),
         Text(
           title,
@@ -719,17 +743,20 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
         Wrap(
           spacing: 8,
           children: features.map((feature) {
-            return Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            return const Container(
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
+                color: Theme.of(context)
+                    .colorScheme
+                    .primary
+                    .withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Text(
                 feature,
                 style: TextStyle(
                   fontSize: 12,
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             );
@@ -780,7 +807,7 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          Container(
+          const Container(
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey.shade300),
               borderRadius: BorderRadius.circular(12),
@@ -794,7 +821,8 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
                     setState(() => _currentStep++);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('进入步骤 ${_currentStep + 1}: ${_stepTitles[_currentStep]}'),
+                        content: Text(
+                            '进入步骤 ${_currentStep + 1}: ${_stepTitles[_currentStep]}'),
                         duration: const Duration(seconds: 1),
                       ),
                     );
@@ -813,7 +841,8 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
                     setState(() => _currentStep--);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('返回步骤 ${_currentStep + 1}: ${_stepTitles[_currentStep]}'),
+                        content: Text(
+                            '返回步骤 ${_currentStep + 1}: ${_stepTitles[_currentStep]}'),
                         duration: const Duration(seconds: 1),
                       ),
                     );
@@ -823,28 +852,31 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
                   setState(() => _currentStep = index);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('跳转到步骤 ${index + 1}: ${_stepTitles[index]}'),
+                      content:
+                          Text('跳转到步骤 ${index + 1}: ${_stepTitles[index]}'),
                       duration: const Duration(seconds: 1),
                     ),
                   );
                 },
                 controlsBuilder: (context, details) {
-                  return Padding(
-                    padding: const EdgeInsets.all(16),
+                  return const Padding(
+                    padding: EdgeInsets.all(16),
                     child: Row(
                       children: [
                         if (_currentStep > 0)
                           Expanded(
                             child: OutlinedButton(
                               onPressed: details.onStepCancel,
-                              child: const Text('上一步'),
+                              child: Text('上一步'),
                             ),
                           ),
-                        if (_currentStep > 0) const SizedBox(width: 12),
+                        if (_currentStep > 0) SizedBox(width: 12),
                         Expanded(
                           child: ElevatedButton(
                             onPressed: details.onStepContinue,
-                            child: Text(_currentStep == _stepTitles.length - 1 ? '完成' : '下一步'),
+                            child: Text(_currentStep == _stepTitles.length - 1
+                                ? '完成'
+                                : '下一步'),
                           ),
                         ),
                       ],
@@ -854,8 +886,8 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
                 steps: List.generate(_stepTitles.length, (index) {
                   return Step(
                     title: Text(_stepTitles[index]),
-                    content: Container(
-                      padding: const EdgeInsets.all(16),
+                    content: const Container(
+                      padding: EdgeInsets.all(16),
                       decoration: BoxDecoration(
                         color: Colors.grey.shade50,
                         borderRadius: BorderRadius.circular(8),
@@ -865,9 +897,9 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
                         children: [
                           Text(
                             _stepContents[index],
-                            style: const TextStyle(fontSize: 14),
+                            style: TextStyle(fontSize: 14),
                           ),
-                          const SizedBox(height: 12),
+                          SizedBox(height: 12),
                           if (index == 0) _buildStep1Content(),
                           if (index == 1) _buildStep2Content(),
                           if (index == 2) _buildStep3Content(),
@@ -883,8 +915,8 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
             ),
           ),
           const SizedBox(height: 16),
-          Container(
-            padding: const EdgeInsets.all(12),
+          const Container(
+            padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.blue.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
@@ -892,12 +924,12 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
             ),
             child: Row(
               children: [
-                const Icon(Icons.info, color: Colors.blue, size: 20),
-                const SizedBox(width: 8),
+                Icon(Icons.info, color: Colors.blue, size: 20),
+                SizedBox(width: 8),
                 Expanded(
                   child: Text(
                     '当前进度: 步骤 ${_currentStep + 1}/${_stepTitles.length} - ${_stepTitles[_currentStep]}',
-                    style: const TextStyle(fontSize: 12, color: Colors.blue),
+                    style: TextStyle(fontSize: 12, color: Colors.blue),
                   ),
                 ),
               ],
@@ -919,7 +951,7 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
   }
 
   Widget _buildStep1Content() {
-    return Column(
+    return const Column(
       children: [
         Row(
           children: [
@@ -928,17 +960,17 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
                 decoration: InputDecoration(
                   labelText: '商品名称',
                   border: OutlineInputBorder(),
-                  prefixIcon: const Icon(Icons.shopping_cart),
+                  prefixIcon: Icon(Icons.shopping_cart),
                 ),
               ),
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             Expanded(
               child: TextField(
                 decoration: InputDecoration(
                   labelText: '数量',
                   border: OutlineInputBorder(),
-                  prefixIcon: const Icon(Icons.format_list_numbered),
+                  prefixIcon: Icon(Icons.format_list_numbered),
                 ),
                 keyboardType: TextInputType.number,
               ),
@@ -950,22 +982,22 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
   }
 
   Widget _buildStep2Content() {
-    return Column(
+    return const Column(
       children: [
         TextField(
           decoration: InputDecoration(
             labelText: '收货地址',
             border: OutlineInputBorder(),
-            prefixIcon: const Icon(Icons.location_on),
+            prefixIcon: Icon(Icons.location_on),
           ),
           maxLines: 2,
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         TextField(
           decoration: InputDecoration(
             labelText: '联系电话',
             border: OutlineInputBorder(),
-            prefixIcon: const Icon(Icons.phone),
+            prefixIcon: Icon(Icons.phone),
           ),
           keyboardType: TextInputType.phone,
         ),
@@ -976,8 +1008,8 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
   Widget _buildStep3Content() {
     return Column(
       children: [
-        Container(
-          padding: const EdgeInsets.all(12),
+        const Container(
+          padding: EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: Colors.grey.shade100,
             borderRadius: BorderRadius.circular(8),
@@ -985,29 +1017,30 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('订单摘要', style: TextStyle(fontWeight: FontWeight.bold)),
-              const SizedBox(height: 8),
+              Text('订单摘要', style: TextStyle(fontWeight: FontWeight.bold)),
+              SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('商品总价:'),
+                  Text('商品总价:'),
                   Text('¥299.00'),
                 ],
               ),
-              const SizedBox(height: 4),
+              SizedBox(height: 4),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('运费:'),
+                  Text('运费:'),
                   Text('¥10.00'),
                 ],
               ),
-              const Divider(),
+              Divider(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('总计:', style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text('¥309.00', style: const TextStyle(fontWeight: FontWeight.bold)),
+                  Text('总计:', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text('¥309.00',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 ],
               ),
             ],
@@ -1020,18 +1053,19 @@ class _NavigationComponentsDemoState extends State<NavigationComponentsDemo> {
   Widget _buildStep4Content() {
     return Column(
       children: [
-        Container(
-          padding: const EdgeInsets.all(16),
+        const Container(
+          padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.green.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: Colors.green.withValues(alpha: 0.3)),
           ),
-          child: const Column(
+          child: Column(
             children: [
               Icon(Icons.check_circle, color: Colors.green, size: 48),
               SizedBox(height: 8),
-              Text('订单已完成！', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text('订单已完成！',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               SizedBox(height: 4),
               Text('感谢您的购买，我们将尽快为您发货。'),
             ],

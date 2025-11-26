@@ -26,7 +26,9 @@ class ZephyrText extends StatelessWidget {
     this.softWrap,
     this.textScaleFactor,
     this.theme,
-  })  : _variant = ZephyrTextVariant.custom;
+    this.decoration,
+    this.onPressed,
+  }) : _variant = ZephyrTextVariant.custom;
 
   /// 创建一个大号标题文本
   factory ZephyrText.headlineLarge(
@@ -365,7 +367,9 @@ class ZephyrText extends StatelessWidget {
     this.softWrap,
     this.textScaleFactor,
     this.theme,
-  })  : _variant = variant;
+    this.decoration,
+    this.onPressed,
+  }) : _variant = variant;
 
   /// 显示的文本内容
   final String text;

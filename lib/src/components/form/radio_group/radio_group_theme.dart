@@ -48,7 +48,7 @@ class ZephyrRadioGroupTheme {
           activeColor: Colors.blue,
           borderColor: Colors.grey,
           disabledBorderColor: Colors.grey,
-          textStyle: TextStyle(),
+          textStyle: const TextStyle(),
           selectedTextStyle: TextStyle(fontWeight: FontWeight.bold),
           disabledTextStyle: TextStyle(color: Colors.grey),
         );

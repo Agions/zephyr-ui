@@ -1,5 +1,5 @@
 /// ZephyrUI 警告主题
-/// 
+///
 /// 定义警告组件的主题样式。
 library alert_theme;
 
@@ -52,7 +52,7 @@ class ZephyrAlertTheme extends ThemeExtension<ZephyrAlertTheme> {
   static ZephyrAlertTheme of(BuildContext context, ZephyrVariant variant) {
     final theme = Theme.of(context).extension<ZephyrAlertTheme>();
     if (theme != null) return theme;
-    
+
     final zephyrTheme = ZephyrTheme.of(context);
     return _createDefaultTheme(zephyrTheme, variant);
   }
@@ -63,7 +63,7 @@ class ZephyrAlertTheme extends ThemeExtension<ZephyrAlertTheme> {
     ZephyrVariant variant,
   ) {
     final isDark = zephyrTheme.brightness == Brightness.dark;
-    
+
     Color backgroundColor;
     Color borderColor;
     Color iconColor;
@@ -71,58 +71,44 @@ class ZephyrAlertTheme extends ThemeExtension<ZephyrAlertTheme> {
 
     switch (variant) {
       case ZephyrVariant.success:
-        backgroundColor = isDark 
+        backgroundColor = isDark
             ? ZephyrColors.success700.withValues(alpha: 0.2)
             : ZephyrColors.success50;
         borderColor = ZephyrColors.success500;
         iconColor = ZephyrColors.success700;
-        textColor = isDark 
-            ? ZephyrColors.success50
-            : ZephyrColors.success700;
+        textColor = isDark ? ZephyrColors.success50 : ZephyrColors.success700;
         break;
       case ZephyrVariant.warning:
-        backgroundColor = isDark 
+        backgroundColor = isDark
             ? ZephyrColors.warning700.withValues(alpha: 0.2)
             : ZephyrColors.warning50;
         borderColor = ZephyrColors.warning500;
         iconColor = ZephyrColors.warning700;
-        textColor = isDark 
-            ? ZephyrColors.warning50
-            : ZephyrColors.warning700;
+        textColor = isDark ? ZephyrColors.warning50 : ZephyrColors.warning700;
         break;
       case ZephyrVariant.error:
-        backgroundColor = isDark 
+        backgroundColor = isDark
             ? ZephyrColors.error700.withValues(alpha: 0.2)
             : ZephyrColors.error50;
         borderColor = ZephyrColors.error500;
         iconColor = ZephyrColors.error700;
-        textColor = isDark 
-            ? ZephyrColors.error50
-            : ZephyrColors.error700;
+        textColor = isDark ? ZephyrColors.error50 : ZephyrColors.error700;
         break;
       case ZephyrVariant.info:
-        backgroundColor = isDark 
+        backgroundColor = isDark
             ? ZephyrColors.info700.withValues(alpha: 0.2)
             : ZephyrColors.info50;
         borderColor = ZephyrColors.info500;
         iconColor = ZephyrColors.info700;
-        textColor = isDark 
-            ? ZephyrColors.info50
-            : ZephyrColors.info700;
+        textColor = isDark ? ZephyrColors.info50 : ZephyrColors.info700;
         break;
       default:
-        backgroundColor = isDark 
-            ? ZephyrColors.neutral800
-            : ZephyrColors.neutral100;
-        borderColor = isDark 
-            ? ZephyrColors.neutral600
-            : ZephyrColors.neutral300;
-        iconColor = isDark 
-            ? ZephyrColors.neutral400
-            : ZephyrColors.neutral600;
-        textColor = isDark 
-            ? ZephyrColors.neutral200
-            : ZephyrColors.neutral800;
+        backgroundColor =
+            isDark ? ZephyrColors.neutral800 : ZephyrColors.neutral100;
+        borderColor =
+            isDark ? ZephyrColors.neutral600 : ZephyrColors.neutral300;
+        iconColor = isDark ? ZephyrColors.neutral400 : ZephyrColors.neutral600;
+        textColor = isDark ? ZephyrColors.neutral200 : ZephyrColors.neutral800;
     }
 
     return ZephyrAlertTheme(
@@ -130,20 +116,20 @@ class ZephyrAlertTheme extends ThemeExtension<ZephyrAlertTheme> {
       borderColor: borderColor,
       iconColor: iconColor,
       titleStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize16,
-        fontWeight: ZephyrTypography.fontWeightSemiBold,
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
         color: textColor,
-        height: ZephyrTypography.lineHeight1_4,
+        height: 1.4,
       ),
       messageStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightRegular,
+        fontSize: 14,
+        fontWeight: FontWeight.normal,
         color: textColor,
-        height: ZephyrTypography.lineHeight1_5,
+        height: 1.5,
       ),
       padding: const EdgeInsets.all(ZephyrSpacing.lg),
       margin: const EdgeInsets.only(bottom: ZephyrSpacing.md),
-      borderRadius: BorderRadius.circular(ZephyrRadius.md),
+      borderRadius: const BorderRadius.circular(ZephyrRadius.md),
       border: Border.all(color: borderColor, width: 1),
     );
   }
@@ -176,16 +162,19 @@ class ZephyrAlertTheme extends ThemeExtension<ZephyrAlertTheme> {
   @override
   ZephyrAlertTheme lerp(ThemeExtension<ZephyrAlertTheme>? other, double t) {
     if (other is! ZephyrAlertTheme) return this;
-    
+
     return ZephyrAlertTheme(
-      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t) ?? backgroundColor,
+      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t) ??
+          backgroundColor,
       borderColor: Color.lerp(borderColor, other.borderColor, t) ?? borderColor,
       iconColor: Color.lerp(iconColor, other.iconColor, t) ?? iconColor,
       titleStyle: TextStyle.lerp(titleStyle, other.titleStyle, t) ?? titleStyle,
-      messageStyle: TextStyle.lerp(messageStyle, other.messageStyle, t) ?? messageStyle,
+      messageStyle:
+          TextStyle.lerp(messageStyle, other.messageStyle, t) ?? messageStyle,
       padding: EdgeInsetsGeometry.lerp(padding, other.padding, t) ?? padding,
       margin: EdgeInsetsGeometry.lerp(margin, other.margin, t) ?? margin,
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t) ?? borderRadius,
+      borderRadius: const BorderRadius.lerp(borderRadius, other.borderRadius, t) ??
+          borderRadius,
       border: Border.lerp(border, other.border, t) ?? border,
     );
   }

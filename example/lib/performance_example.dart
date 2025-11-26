@@ -39,11 +39,12 @@ class PerformanceExampleHome extends StatefulWidget {
 }
 
 class _PerformanceExampleHomeState extends State<PerformanceExampleHome> {
-  final ZephyrEnhancedPerformanceMonitor _performanceMonitor = 
+  final ZephyrEnhancedPerformanceMonitor _performanceMonitor =
       ZephyrEnhancedPerformanceMonitor.instance;
   final ZephyrMemoryOptimizer _memoryOptimizer = ZephyrMemoryOptimizer.instance;
   final ZephyrBuildOptimizer _buildOptimizer = ZephyrBuildOptimizer.instance;
-  final ZephyrLazyComponentLoader _lazyLoader = ZephyrLazyComponentLoader.instance;
+  final ZephyrLazyComponentLoader _lazyLoader =
+      ZephyrLazyComponentLoader.instance;
 
   bool _showPerformanceOverlay = true;
   bool _showMemoryMonitor = true;
@@ -60,24 +61,24 @@ class _PerformanceExampleHomeState extends State<PerformanceExampleHome> {
   void _initializeOptimizations() {
     // 启动性能监控
     _performanceMonitor.startMonitoring(level: PerformanceLevel.high);
-    
+
     // 启动内存优化
     _memoryOptimizer.startMonitoring(
       strategy: MemoryOptimizationStrategy.balanced,
       memoryThresholdMB: 150.0,
     );
-    
+
     // 启动构建优化
     _buildOptimizer.startMonitoring();
-    
+
     // 注册懒加载组件
     _registerLazyComponents();
-    
+
     // 预加载关键组件
     _preloadCriticalComponents();
-    
+
     if (kDebugMode) {
-      print('🚀 Performance optimizations initialized');
+      debugPrint('🚀 Performance optimizations initialized');
     }
   }
 
@@ -88,14 +89,14 @@ class _PerformanceExampleHomeState extends State<PerformanceExampleHome> {
       estimatedSizeKB: 150,
       priority: ComponentPriority.medium,
     );
-    
+
     _lazyLoader.registerComponent(
       name: 'data_table',
       path: 'lib/components/tables/data_table.dart',
       estimatedSizeKB: 80,
       priority: ComponentPriority.high,
     );
-    
+
     _lazyLoader.registerComponent(
       name: 'image_gallery',
       path: 'lib/components/gallery/image_gallery.dart',
@@ -125,7 +126,9 @@ class _PerformanceExampleHomeState extends State<PerformanceExampleHome> {
                 onPressed: () => context.showPerformanceDashboard(),
               ),
               IconButton(
-                icon: Icon(_showPerformanceOverlay ? Icons.visibility : Icons.visibility_off),
+                icon: Icon(_showPerformanceOverlay
+                    ? Icons.visibility
+                    : Icons.visibility_off),
                 onPressed: () {
                   setState(() {
                     _showPerformanceOverlay = !_showPerformanceOverlay;
@@ -162,22 +165,22 @@ class _PerformanceExampleHomeState extends State<PerformanceExampleHome> {
 
   Widget _buildOptimizationControls() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Optimization Controls',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Wrap(
               spacing: 8,
               runSpacing: 8,
               children: [
                 FilterChip(
-                  label: const Text('Performance Overlay'),
+                  label: Text('Performance Overlay'),
                   selected: _showPerformanceOverlay,
                   onSelected: (value) {
                     setState(() {
@@ -186,7 +189,7 @@ class _PerformanceExampleHomeState extends State<PerformanceExampleHome> {
                   },
                 ),
                 FilterChip(
-                  label: const Text('Memory Monitor'),
+                  label: Text('Memory Monitor'),
                   selected: _showMemoryMonitor,
                   onSelected: (value) {
                     setState(() {
@@ -195,7 +198,7 @@ class _PerformanceExampleHomeState extends State<PerformanceExampleHome> {
                   },
                 ),
                 FilterChip(
-                  label: const Text('Lazy Loading'),
+                  label: Text('Lazy Loading'),
                   selected: _enableLazyLoading,
                   onSelected: (value) {
                     setState(() {
@@ -204,7 +207,7 @@ class _PerformanceExampleHomeState extends State<PerformanceExampleHome> {
                   },
                 ),
                 FilterChip(
-                  label: const Text('Memory Optimization'),
+                  label: Text('Memory Optimization'),
                   selected: _enableMemoryOptimization,
                   onSelected: (value) {
                     setState(() {
@@ -218,7 +221,7 @@ class _PerformanceExampleHomeState extends State<PerformanceExampleHome> {
                   },
                 ),
                 FilterChip(
-                  label: const Text('Build Optimization'),
+                  label: Text('Build Optimization'),
                   selected: _enableBuildOptimization,
                   onSelected: (value) {
                     setState(() {
@@ -241,37 +244,40 @@ class _PerformanceExampleHomeState extends State<PerformanceExampleHome> {
 
   Widget _buildPerformanceMetrics() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Performance Metrics',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             StreamBuilder<PerformanceReport>(
-              stream: Stream.periodic(const Duration(seconds: 2), (_) {
+              stream: Stream.periodic(Duration(seconds: 2), (_) {
                 return _performanceMonitor.getPerformanceReport();
               }),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return const Center(child: CircularProgressIndicator());
                 }
-                
+
                 final report = snapshot.data!;
-                final avgFps = report.frameTimeStats.average > 0 
-                    ? 1000 / report.frameTimeStats.average 
+                final avgFps = report.frameTimeStats.average > 0
+                    ? 1000 / report.frameTimeStats.average
                     : 0;
                 final memoryMB = report.memoryStats.average / 1024 / 1024;
-                
+
                 return Column(
                   children: [
-                    _buildMetricRow('Average FPS', '${avgFps.toStringAsFixed(1)}'),
-                    _buildMetricRow('Frame Time', '${report.frameTimeStats.average.toStringAsFixed(2)}ms'),
-                    _buildMetricRow('Memory Usage', '${memoryMB.toStringAsFixed(1)}MB'),
-                    _buildMetricRow('Widget Count', '${report.widgetBuildStats.length}'),
+                    _buildMetricRow('Average FPS', avgFps.toStringAsFixed(1)),
+                    _buildMetricRow('Frame Time',
+                        '${report.frameTimeStats.average.toStringAsFixed(2)}ms'),
+                    _buildMetricRow(
+                        'Memory Usage', '${memoryMB.toStringAsFixed(1)}MB'),
+                    _buildMetricRow(
+                        'Widget Count', '${report.widgetBuildStats.length}'),
                     _buildMetricRow('Active Alerts', '${report.alerts.length}'),
                   ],
                 );
@@ -284,15 +290,15 @@ class _PerformanceExampleHomeState extends State<PerformanceExampleHome> {
   }
 
   Widget _buildMetricRow(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(label),
           Text(
             value,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ],
       ),
@@ -301,47 +307,51 @@ class _PerformanceExampleHomeState extends State<PerformanceExampleHome> {
 
   Widget _buildThemeOptimizationDemo() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Theme Optimization Demo',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Row(
               children: [
                 ElevatedButton(
                   onPressed: () => context.switchTheme(Brightness.light),
-                  child: const Text('Light Theme'),
+                  child: Text('Light Theme'),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: () => context.switchTheme(Brightness.dark),
-                  child: const Text('Dark Theme'),
+                  child: Text('Dark Theme'),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: () {
                     final stats = context.getThemeCacheStats();
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Theme Cache: ${stats['cacheSize']} items, Hit Rate: ${stats['hitRate']}'),
+                        content: Text(
+                            'Theme Cache: ${stats['cacheSize']} items, Hit Rate: ${stats['hitRate']}'),
                         duration: const Duration(seconds: 2),
                       ),
                     );
                   },
-                  child: const Text('Cache Stats'),
+                  child: Text('Cache Stats'),
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Container(
               height: 100,
               decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
+                color: Theme.of(context)
+                    .colorScheme
+                    .primary
+                    .withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Center(
@@ -359,34 +369,36 @@ class _PerformanceExampleHomeState extends State<PerformanceExampleHome> {
 
   Widget _buildLazyLoadingDemo() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Lazy Loading Demo',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             if (_enableLazyLoading)
               Column(
                 children: [
                   context.lazyLoad(
                     componentName: 'data_table',
-                    placeholder: const Center(child: CircularProgressIndicator()),
-                    errorWidget: const Center(child: Text('Failed to load component')),
+                    placeholder: Center(child: CircularProgressIndicator()),
+                    errorWidget:
+                        Center(child: Text('Failed to load component')),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   context.lazyLoad(
                     componentName: 'complex_chart',
-                    placeholder: const Center(child: CircularProgressIndicator()),
-                    errorWidget: const Center(child: Text('Failed to load component')),
+                    placeholder: Center(child: CircularProgressIndicator()),
+                    errorWidget:
+                        Center(child: Text('Failed to load component')),
                   ),
                 ],
               )
             else
-              const Center(child: Text('Lazy loading disabled')),
+              Center(child: Text('Lazy loading disabled')),
           ],
         ),
       ),
@@ -395,28 +407,30 @@ class _PerformanceExampleHomeState extends State<PerformanceExampleHome> {
 
   Widget _buildMemoryOptimizationDemo() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Memory Optimization Demo',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Row(
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    context.addToMemoryCache('test_data', {'key': 'value'}, sizeKB: 10);
+                    context.addToMemoryCache('test_data', {'key': 'value'},
+                        sizeKB: 10);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Data added to memory cache')),
+                      const SnackBar(
+                          content: Text('Data added to memory cache')),
                     );
                   },
-                  child: const Text('Add to Cache'),
+                  child: Text('Add to Cache'),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: () {
                     context.clearMemoryCache();
@@ -424,19 +438,20 @@ class _PerformanceExampleHomeState extends State<PerformanceExampleHome> {
                       const SnackBar(content: Text('Memory cache cleared')),
                     );
                   },
-                  child: const Text('Clear Cache'),
+                  child: Text('Clear Cache'),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: () {
                     final stats = context.getMemoryStats();
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Memory: ${stats.currentUsageMB.toStringAsFixed(1)}MB'),
+                        content: Text(
+                            'Memory: ${stats.currentUsageMB.toStringAsFixed(1)}MB'),
                       ),
                     );
                   },
-                  child: const Text('Memory Stats'),
+                  child: Text('Memory Stats'),
                 ),
               ],
             ),
@@ -448,16 +463,16 @@ class _PerformanceExampleHomeState extends State<PerformanceExampleHome> {
 
   Widget _buildBuildOptimizationDemo() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Build Optimization Demo',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Row(
               children: [
                 ElevatedButton(
@@ -465,13 +480,14 @@ class _PerformanceExampleHomeState extends State<PerformanceExampleHome> {
                     final report = context.getBuildPerformanceReport();
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Build time: ${report['latestBuild']?['timeMs'] ?? 0}ms'),
+                        content: Text(
+                            'Build time: ${report['latestBuild']?['timeMs'] ?? 0}ms'),
                       ),
                     );
                   },
-                  child: const Text('Build Stats'),
+                  child: Text('Build Stats'),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: () {
                     context.cleanBuildCache();
@@ -479,7 +495,7 @@ class _PerformanceExampleHomeState extends State<PerformanceExampleHome> {
                       const SnackBar(content: Text('Build cache cleaned')),
                     );
                   },
-                  child: const Text('Clean Cache'),
+                  child: Text('Clean Cache'),
                 ),
               ],
             ),
@@ -491,16 +507,16 @@ class _PerformanceExampleHomeState extends State<PerformanceExampleHome> {
 
   Widget _buildComplexComponentDemo() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+      child: const Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Complex Component Demo',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             SizedBox(
               height: 200,
               child: ListView.builder(
@@ -508,7 +524,8 @@ class _PerformanceExampleHomeState extends State<PerformanceExampleHome> {
                 itemBuilder: (context, index) {
                   return ListTile(
                     title: Text('Item $index'),
-                    subtitle: Text('This is a complex list item with multiple widgets'),
+                    subtitle: const Text(
+                        'This is a complex list item with multiple widgets'),
                     trailing: const Icon(Icons.chevron_right),
                   );
                 },

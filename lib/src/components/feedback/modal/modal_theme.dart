@@ -66,7 +66,7 @@ class ZephyrModalTheme extends ThemeExtension<ZephyrModalTheme> {
   static ZephyrModalTheme of(BuildContext context) {
     final theme = Theme.of(context).extension<ZephyrModalTheme>();
     if (theme != null) return theme;
-    
+
     final zephyrTheme = ZephyrTheme.of(context);
     return _createDefaultTheme(zephyrTheme);
   }
@@ -74,28 +74,30 @@ class ZephyrModalTheme extends ThemeExtension<ZephyrModalTheme> {
   /// 创建默认主题
   static ZephyrModalTheme _createDefaultTheme(ZephyrThemeData zephyrTheme) {
     final isDark = zephyrTheme.brightness == Brightness.dark;
-    
+
     return ZephyrModalTheme(
       backgroundColor: isDark ? ZephyrColors.neutral800 : Colors.white,
       barrierColor: Colors.black.withValues(alpha: 0.5),
-      shadowColor: isDark ? Colors.black.withValues(alpha: 0.3) : Colors.black.withValues(alpha: 0.1),
-      borderRadius: BorderRadius.circular(ZephyrRadius.lg),
+      shadowColor: isDark
+          ? Colors.black.withValues(alpha: 0.3)
+          : Colors.black.withValues(alpha: 0.1),
+      borderRadius: const BorderRadius.circular(ZephyrRadius.lg),
       elevation: 8.0,
       padding: const EdgeInsets.all(ZephyrSpacing.lg),
       margin: const EdgeInsets.all(ZephyrSpacing.lg),
       maxWidth: 600.0,
       maxHeight: 800.0,
       titleTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize20,
-        fontWeight: ZephyrTypography.fontWeightSemiBold,
+        fontSize: 20,
+        fontWeight: FontWeight.w600,
         color: isDark ? ZephyrColors.neutral100 : ZephyrColors.neutral900,
-        height: ZephyrTypography.lineHeight1_4,
+        height: 1.4,
       ),
       contentTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize16,
-        fontWeight: ZephyrTypography.fontWeightRegular,
+        fontSize: 16,
+        fontWeight: FontWeight.normal,
         color: isDark ? ZephyrColors.neutral200 : ZephyrColors.neutral700,
-        height: ZephyrTypography.lineHeight1_5,
+        height: 1.5,
       ),
       actionSpacing: ZephyrSpacing.sm,
       contentSpacing: ZephyrSpacing.md,
@@ -138,22 +140,29 @@ class ZephyrModalTheme extends ThemeExtension<ZephyrModalTheme> {
   @override
   ZephyrModalTheme lerp(ThemeExtension<ZephyrModalTheme>? other, double t) {
     if (other is! ZephyrModalTheme) return this;
-    
+
     return ZephyrModalTheme(
-      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t) ?? backgroundColor,
-      barrierColor: Color.lerp(barrierColor, other.barrierColor, t) ?? barrierColor,
+      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t) ??
+          backgroundColor,
+      barrierColor:
+          Color.lerp(barrierColor, other.barrierColor, t) ?? barrierColor,
       shadowColor: Color.lerp(shadowColor, other.shadowColor, t) ?? shadowColor,
-      borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t) ?? borderRadius,
+      borderRadius: const BorderRadius.lerp(borderRadius, other.borderRadius, t) ??
+          borderRadius,
       elevation: ui.lerpDouble(elevation, other.elevation, t) ?? elevation,
       padding: EdgeInsetsGeometry.lerp(padding, other.padding, t) ?? padding,
       margin: EdgeInsetsGeometry.lerp(margin, other.margin, t) ?? margin,
       maxWidth: ui.lerpDouble(maxWidth, other.maxWidth, t) ?? maxWidth,
       maxHeight: ui.lerpDouble(maxHeight, other.maxHeight, t) ?? maxHeight,
-      titleTextStyle: TextStyle.lerp(titleTextStyle, other.titleTextStyle, t) ?? titleTextStyle,
-      contentTextStyle: TextStyle.lerp(contentTextStyle, other.contentTextStyle, t) ?? contentTextStyle,
-      actionSpacing: ui.lerpDouble(actionSpacing, other.actionSpacing, t) ?? actionSpacing,
-      contentSpacing: ui.lerpDouble(contentSpacing, other.contentSpacing, t) ?? contentSpacing,
+      titleTextStyle: TextStyle.lerp(titleTextStyle, other.titleTextStyle, t) ??
+          titleTextStyle,
+      contentTextStyle:
+          TextStyle.lerp(contentTextStyle, other.contentTextStyle, t) ??
+              contentTextStyle,
+      actionSpacing:
+          ui.lerpDouble(actionSpacing, other.actionSpacing, t) ?? actionSpacing,
+      contentSpacing: ui.lerpDouble(contentSpacing, other.contentSpacing, t) ??
+          contentSpacing,
     );
   }
 }
-

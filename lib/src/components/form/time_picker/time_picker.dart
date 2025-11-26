@@ -30,7 +30,7 @@ enum ZephyrTimePickerMode {
 class ZephyrTimePicker extends StatefulWidget {
   /// 创建时间选择器组件
   const ZephyrTimePicker({
-    Key? key,
+    super.key,
     this.initialTime,
     this.mode = ZephyrTimePickerMode.hour24,
     this.onTimeSelected,
@@ -41,7 +41,7 @@ class ZephyrTimePicker extends StatefulWidget {
     this.showSeconds = false,
     this.minuteInterval = 1,
     this.secondInterval = 1,
-  }) : super(key: key);
+  });
 
   /// 初始时间
   final TimeOfDay? initialTime;
@@ -234,8 +234,8 @@ class _ZephyrTimePickerState extends State<ZephyrTimePicker> {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   border: Border(
-                    top: BorderSide(color: _theme.borderColor),
-                    bottom: BorderSide(color: _theme.borderColor),
+                    top: const BorderSide(color: _theme.borderColor),
+                    bottom: const BorderSide(color: _theme.borderColor),
                   ),
                 ),
                 child: Text(
@@ -305,7 +305,7 @@ class _ZephyrTimePickerState extends State<ZephyrTimePicker> {
                   decoration: BoxDecoration(
                     color: !isPM ? _theme.selectedPeriodColor : null,
                     border: Border(
-                      bottom: BorderSide(color: _theme.borderColor),
+                      bottom: const BorderSide(color: _theme.borderColor),
                     ),
                   ),
                   child: Text(

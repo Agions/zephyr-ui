@@ -40,7 +40,7 @@ class ZephyrRating extends StatefulWidget {
   final ZephyrRatingTheme? theme;
 
   const ZephyrRating({
-    Key? key,
+    super.key,
     required this.value,
     this.max = 5,
     this.iconType = ZephyrRatingIconType.star,
@@ -55,7 +55,7 @@ class ZephyrRating extends StatefulWidget {
     this.onChanged,
     this.semanticLabel,
     this.theme,
-  }) : super(key: key);
+  });
 
   @override
   State<ZephyrRating> createState() => _ZephyrRatingState();
@@ -183,7 +183,7 @@ class _ZephyrRatingState extends State<ZephyrRating> {
               mainAxisSize: MainAxisSize.min,
               children: List.generate(widget.max, (index) {
                 return Padding(
-                  padding: EdgeInsets.only(right: index < widget.max - 1 ? _spacing : 0),
+                  padding: const EdgeInsets.only(right: index < widget.max - 1 ? _spacing : 0),
                   child: _buildRatingItem(index),
                 );
               }),
@@ -229,7 +229,7 @@ class ZephyrRatingDisplay extends StatelessWidget {
   final ZephyrRatingTheme? theme;
 
   const ZephyrRatingDisplay({
-    Key? key,
+    super.key,
     required this.value,
     this.max = 5,
     this.iconType = ZephyrRatingIconType.star,
@@ -240,7 +240,7 @@ class ZephyrRatingDisplay extends StatelessWidget {
     this.showValue = false,
     this.semanticLabel,
     this.theme,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -14,59 +14,62 @@ class _TourDemoState extends State<TourDemo> {
   final GlobalKey _menuKey = GlobalKey();
   final GlobalKey _contentKey = GlobalKey();
   final GlobalKey _settingsKey = GlobalKey();
-  
+
   bool _showTour = false;
   final ZephyrTourController _tourController = ZephyrTourController([]);
 
   List<ZephyrTourStep> get _tourSteps => [
-    ZephyrTourStep(
-      id: 'welcome',
-      title: 'Welcome to Tour Demo',
-      content: 'This is a demonstration of the ZephyrUI Tour component. Let\'s explore the features!',
-      order: 0,
-    ),
-    ZephyrTourStep(
-      id: 'fab',
-      title: 'Floating Action Button',
-      content: 'This is the floating action button. Tap it to perform primary actions.',
-      order: 1,
-      targetKey: _fabKey,
-    ),
-    ZephyrTourStep(
-      id: 'search',
-      title: 'Search Bar',
-      content: 'Use this search bar to find content quickly.',
-      order: 2,
-      targetKey: _searchKey,
-    ),
-    ZephyrTourStep(
-      id: 'menu',
-      title: 'Navigation Menu',
-      content: 'Access different sections from this menu.',
-      order: 3,
-      targetKey: _menuKey,
-    ),
-    ZephyrTourStep(
-      id: 'content',
-      title: 'Main Content',
-      content: 'This is where your main content will be displayed.',
-      order: 4,
-      targetKey: _contentKey,
-    ),
-    ZephyrTourStep(
-      id: 'settings',
-      title: 'Settings',
-      content: 'Configure your preferences in the settings.',
-      order: 5,
-      targetKey: _settingsKey,
-    ),
-    ZephyrTourStep(
-      id: 'complete',
-      title: 'Tour Complete!',
-      content: 'Congratulations! You\'ve completed the tour. You can now explore the app on your own.',
-      order: 6,
-    ),
-  ];
+        const ZephyrTourStep(
+          id: 'welcome',
+          title: 'Welcome to Tour Demo',
+          content:
+              'This is a demonstration of the ZephyrUI Tour component. Let\'s explore the features!',
+          order: 0,
+        ),
+        ZephyrTourStep(
+          id: 'fab',
+          title: 'Floating Action Button',
+          content:
+              'This is the floating action button. Tap it to perform primary actions.',
+          order: 1,
+          targetKey: _fabKey,
+        ),
+        ZephyrTourStep(
+          id: 'search',
+          title: 'Search Bar',
+          content: 'Use this search bar to find content quickly.',
+          order: 2,
+          targetKey: _searchKey,
+        ),
+        ZephyrTourStep(
+          id: 'menu',
+          title: 'Navigation Menu',
+          content: 'Access different sections from this menu.',
+          order: 3,
+          targetKey: _menuKey,
+        ),
+        ZephyrTourStep(
+          id: 'content',
+          title: 'Main Content',
+          content: 'This is where your main content will be displayed.',
+          order: 4,
+          targetKey: _contentKey,
+        ),
+        ZephyrTourStep(
+          id: 'settings',
+          title: 'Settings',
+          content: 'Configure your preferences in the settings.',
+          order: 5,
+          targetKey: _settingsKey,
+        ),
+        const ZephyrTourStep(
+          id: 'complete',
+          title: 'Tour Complete!',
+          content:
+              'Congratulations! You\'ve completed the tour. You can now explore the app on your own.',
+          order: 6,
+        ),
+      ];
 
   @override
   Widget build(BuildContext context) {
@@ -121,11 +124,11 @@ class _TourDemoState extends State<TourDemo> {
     return Column(
       children: [
         // Search bar
-        Padding(
-          padding: const EdgeInsets.all(16),
+        const Padding(
+          padding: EdgeInsets.all(16),
           child: TextField(
             key: _searchKey,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               labelText: 'Search...',
               prefixIcon: Icon(Icons.search),
               border: OutlineInputBorder(),
@@ -134,16 +137,16 @@ class _TourDemoState extends State<TourDemo> {
         ),
 
         // Navigation menu
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
           child: Card(
             key: _menuKey,
             child: ListView(
               shrinkWrap: true,
               children: [
                 ListTile(
-                  leading: const Icon(Icons.home),
-                  title: const Text('Home'),
+                  leading: Icon(Icons.home),
+                  title: Text('Home'),
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Home tapped')),
@@ -151,8 +154,8 @@ class _TourDemoState extends State<TourDemo> {
                   },
                 ),
                 ListTile(
-                  leading: const Icon(Icons.dashboard),
-                  title: const Text('Dashboard'),
+                  leading: Icon(Icons.dashboard),
+                  title: Text('Dashboard'),
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Dashboard tapped')),
@@ -160,8 +163,8 @@ class _TourDemoState extends State<TourDemo> {
                   },
                 ),
                 ListTile(
-                  leading: const Icon(Icons.person),
-                  title: const Text('Profile'),
+                  leading: Icon(Icons.person),
+                  title: Text('Profile'),
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Profile tapped')),
@@ -177,23 +180,23 @@ class _TourDemoState extends State<TourDemo> {
 
         // Main content area
         Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: Card(
               key: _contentKey,
               child: Padding(
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Tour Component Features',
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     _buildFeatureList(),
                   ],
                 ),
@@ -203,18 +206,18 @@ class _TourDemoState extends State<TourDemo> {
         ),
 
         // Tour controls
-        Padding(
-          padding: const EdgeInsets.all(16),
+        const Padding(
+          padding: EdgeInsets.all(16),
           child: Column(
             children: [
-              const Text(
+              Text(
                 'Tour Controls',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -224,7 +227,7 @@ class _TourDemoState extends State<TourDemo> {
                         _showTour = true;
                       });
                     },
-                    child: const Text('Start Tour'),
+                    child: Text('Start Tour'),
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -233,16 +236,16 @@ class _TourDemoState extends State<TourDemo> {
                         _showTour = true;
                       });
                     },
-                    child: const Text('Start with Controller'),
+                    child: Text('Start with Controller'),
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               OutlinedButton(
                 onPressed: () {
                   _showCustomTour();
                 },
-                child: const Text('Custom Tour'),
+                child: Text('Custom Tour'),
               ),
             ],
           ),
@@ -268,12 +271,12 @@ class _TourDemoState extends State<TourDemo> {
   }
 
   Widget _buildFeatureItem(String title, IconData icon) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
+    return const Padding(
+      padding: EdgeInsets.only(bottom: 8),
       child: Row(
         children: [
           Icon(icon, size: 20),
-          const SizedBox(width: 8),
+          SizedBox(width: 8),
           Text(title),
         ],
       ),

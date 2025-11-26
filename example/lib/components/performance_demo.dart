@@ -144,8 +144,8 @@ Image.network(
           ),
           const SizedBox(height: 16),
           Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
+            child: const Padding(
+              padding: EdgeInsets.all(16),
               child: Column(
                 children: [
                   _buildOptimizationItem(
@@ -154,21 +154,21 @@ Image.network(
                     Icons.refresh,
                     Colors.blue,
                   ),
-                  const Divider(),
+                  Divider(),
                   _buildOptimizationItem(
                     '懒加载',
                     '只在需要时加载组件和数据',
                     Icons.downloading,
                     Colors.green,
                   ),
-                  const Divider(),
+                  Divider(),
                   _buildOptimizationItem(
                     '图片优化',
                     '压缩图片和使用缓存',
                     Icons.image,
                     Colors.orange,
                   ),
-                  const Divider(),
+                  Divider(),
                   _buildOptimizationItem(
                     '内存管理',
                     '及时释放不再使用的资源',
@@ -184,7 +184,8 @@ Image.network(
     );
   }
 
-  Widget _buildOptimizationItem(String title, String description, IconData icon, Color color) {
+  Widget _buildOptimizationItem(
+      String title, String description, IconData icon, Color color) {
     return Row(
       children: [
         Icon(icon, color: color, size: 24),
@@ -239,14 +240,14 @@ ListView.builder(
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          Container(
+          const Container(
             height: 200,
             decoration: BoxDecoration(
               color: Colors.grey[100],
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: Colors.grey[300]!),
             ),
-            child: const Center(
+            child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -270,7 +271,7 @@ ListView.builder(
                     child: Text('${index + 1}'),
                   ),
                   title: Text('懒加载项目 ${index + 1}'),
-                  subtitle: Text('这个项目在需要时才会渲染'),
+                  subtitle: const Text('这个项目在需要时才会渲染'),
                 ),
               );
             },
@@ -302,8 +303,8 @@ imageCache.maximumSizeBytes = 50 * 1024 * 1024;''',
           ),
           const SizedBox(height: 16),
           Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
+            child: const Padding(
+              padding: EdgeInsets.all(16),
               child: Column(
                 children: [
                   Row(
@@ -316,7 +317,7 @@ imageCache.maximumSizeBytes = 50 * 1024 * 1024;''',
                           Colors.blue,
                         ),
                       ),
-                      const SizedBox(width: 16),
+                      SizedBox(width: 16),
                       Expanded(
                         child: _buildMemoryMetric(
                           '缓存大小',
@@ -327,7 +328,7 @@ imageCache.maximumSizeBytes = 50 * 1024 * 1024;''',
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Row(
                     children: [
                       Expanded(
@@ -338,7 +339,7 @@ imageCache.maximumSizeBytes = 50 * 1024 * 1024;''',
                           Colors.orange,
                         ),
                       ),
-                      const SizedBox(width: 16),
+                      SizedBox(width: 16),
                       Expanded(
                         child: _buildMemoryMetric(
                           '对象池',
@@ -354,8 +355,8 @@ imageCache.maximumSizeBytes = 50 * 1024 * 1024;''',
             ),
           ),
           const SizedBox(height: 16),
-          Container(
-            padding: const EdgeInsets.all(16),
+          const Container(
+            padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.green[50],
               borderRadius: BorderRadius.circular(8),
@@ -364,7 +365,7 @@ imageCache.maximumSizeBytes = 50 * 1024 * 1024;''',
             child: Row(
               children: [
                 Icon(Icons.check_circle, color: Colors.green),
-                const SizedBox(width: 12),
+                SizedBox(width: 12),
                 Expanded(
                   child: Text(
                     '内存使用正常，未发现内存泄漏',
@@ -382,9 +383,10 @@ imageCache.maximumSizeBytes = 50 * 1024 * 1024;''',
     );
   }
 
-  Widget _buildMemoryMetric(String label, String value, IconData icon, Color color) {
-    return Container(
-      padding: const EdgeInsets.all(12),
+  Widget _buildMemoryMetric(
+      String label, String value, IconData icon, Color color) {
+    return const Container(
+      padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
@@ -392,7 +394,7 @@ imageCache.maximumSizeBytes = 50 * 1024 * 1024;''',
       child: Column(
         children: [
           Icon(icon, color: color),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             value,
             style: TextStyle(
@@ -401,7 +403,7 @@ imageCache.maximumSizeBytes = 50 * 1024 * 1024;''',
               color: color,
             ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4),
           Text(
             label,
             style: TextStyle(

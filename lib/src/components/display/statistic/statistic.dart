@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'statistic_theme.dart';
 
 class ZephyrStatistic extends StatelessWidget {
   const ZephyrStatistic({
-    super.key,
     required this.title,
     required this.value,
+    super.key,
     this.suffix,
     this.prefix,
     this.description,
@@ -35,7 +34,7 @@ class ZephyrStatistic extends StatelessWidget {
             Text(
               title,
               style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.onSurface.withOpacity(0.7),
+                color: theme.colorScheme.onSurface.withValues(alpha:0.7),
               ),
             ),
             const SizedBox(height: 8),
@@ -74,9 +73,8 @@ class ZephyrStatistic extends StatelessWidget {
                     Text(
                       trend!,
                       style: theme.textTheme.bodySmall?.copyWith(
-                        color: trend!.startsWith('+') 
-                            ? Colors.green 
-                            : Colors.red,
+                        color:
+                            trend!.startsWith('+') ? Colors.green : Colors.red,
                       ),
                     ),
                   if (description != null) ...[
@@ -85,7 +83,7 @@ class ZephyrStatistic extends StatelessWidget {
                       child: Text(
                         description!,
                         style: theme.textTheme.bodySmall?.copyWith(
-                          color: theme.colorScheme.onSurface.withOpacity(0.7),
+                          color: theme.colorScheme.onSurface.withValues(alpha:0.7),
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),

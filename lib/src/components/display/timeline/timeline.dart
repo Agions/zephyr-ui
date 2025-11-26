@@ -2,6 +2,18 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 class ZephyrTimeline extends StatelessWidget {
+  const ZephyrTimeline({
+    required this.items,
+    super.key,
+    this.type = TimelineType.left,
+    this.showConnectionLines = true,
+    this.lineColor,
+    this.dotColor,
+    this.dotSize,
+    this.reverse = false,
+    this.header,
+    this.footer,
+  });
   final List<TimelineItem> items;
   final TimelineType type;
   final bool showConnectionLines;
@@ -12,23 +24,10 @@ class ZephyrTimeline extends StatelessWidget {
   final Widget? header;
   final Widget? footer;
 
-  const ZephyrTimeline({
-    super.key,
-    required this.items,
-    this.type = TimelineType.left,
-    this.showConnectionLines = true,
-    this.lineColor,
-    this.dotColor,
-    this.dotSize,
-    this.reverse = false,
-    this.header,
-    this.footer,
-  });
-
   @override
   Widget build(BuildContext context) {
     final effectiveItems = reverse ? items.reversed.toList() : items;
-    
+
     return Column(
       children: [
         if (header != null) header!,
@@ -59,13 +58,12 @@ class ZephyrTimeline extends StatelessWidget {
         final index = entry.key;
         final item = entry.value;
         final isLast = index == items.length - 1;
-        
+
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildTimelineDot(item, index),
-            if (showConnectionLines && !isLast)
-              _buildVerticalLine(),
+            if (showConnectionLines && !isLast) _buildVerticalLine(),
             const SizedBox(width: 16),
             Expanded(
               child: _buildTimelineContent(item),
@@ -82,7 +80,7 @@ class ZephyrTimeline extends StatelessWidget {
         final index = entry.key;
         final item = entry.value;
         final isLast = index == items.length - 1;
-        
+
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -90,8 +88,7 @@ class ZephyrTimeline extends StatelessWidget {
               child: _buildTimelineContent(item),
             ),
             const SizedBox(width: 16),
-            if (showConnectionLines && !isLast)
-              _buildVerticalLine(),
+            if (showConnectionLines && !isLast) _buildVerticalLine(),
             _buildTimelineDot(item, index),
           ],
         );
@@ -99,14 +96,15 @@ class ZephyrTimeline extends StatelessWidget {
     );
   }
 
-  Widget _buildAlternateTimeline(BuildContext context, List<TimelineItem> items) {
+  Widget _buildAlternateTimeline(
+      BuildContext context, List<TimelineItem> items) {
     return Column(
       children: items.asMap().entries.map((entry) {
         final index = entry.key;
         final item = entry.value;
         final isLast = index == items.length - 1;
         final isLeft = index % 2 == 0;
-        
+
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -117,8 +115,7 @@ class ZephyrTimeline extends StatelessWidget {
               const SizedBox(width: 16),
             ],
             _buildTimelineDot(item, index),
-            if (showConnectionLines && !isLast)
-              _buildVerticalLine(),
+            if (showConnectionLines && !isLast) _buildVerticalLine(),
             const SizedBox(width: 16),
             Expanded(
               child: isLeft ? _buildTimelineContent(item) : Container(),
@@ -141,7 +138,7 @@ class ZephyrTimeline extends StatelessWidget {
         final index = entry.key;
         final item = entry.value;
         final isLast = index == items.length - 1;
-        
+
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -152,8 +149,7 @@ class ZephyrTimeline extends StatelessWidget {
             Column(
               children: [
                 _buildTimelineDot(item, index),
-                if (showConnectionLines && !isLast)
-                  _buildVerticalLine(),
+                if (showConnectionLines && !isLast) _buildVerticalLine(),
               ],
             ),
             const SizedBox(width: 16),
@@ -167,9 +163,10 @@ class ZephyrTimeline extends StatelessWidget {
   }
 
   Widget _buildTimelineDot(TimelineItem item, int index) {
-    final effectiveDotColor = item.dotColor ?? dotColor ?? Theme.of(item.context!).primaryColor;
+    final effectiveDotColor =
+        item.dotColor ?? dotColor ?? Theme.of(item.context!).primaryColor;
     final effectiveDotSize = item.dotSize ?? dotSize ?? 16;
-    
+
     return Container(
       width: effectiveDotSize,
       height: effectiveDotSize,
@@ -247,6 +244,17 @@ class ZephyrTimeline extends StatelessWidget {
 }
 
 class TimelineItem {
+  TimelineItem({
+    required this.title,
+    this.context,
+    this.subtitle,
+    this.content,
+    this.footer,
+    this.trailing,
+    this.dotIcon,
+    this.dotColor,
+    this.dotSize,
+  });
   final BuildContext? context;
   final String title;
   final String? subtitle;
@@ -256,18 +264,6 @@ class TimelineItem {
   final IconData? dotIcon;
   final Color? dotColor;
   final double? dotSize;
-
-  TimelineItem({
-    this.context,
-    required this.title,
-    this.subtitle,
-    this.content,
-    this.footer,
-    this.trailing,
-    this.dotIcon,
-    this.dotColor,
-    this.dotSize,
-  });
 }
 
 enum TimelineType {
@@ -278,6 +274,17 @@ enum TimelineType {
 }
 
 class ZephyrProcessTimeline extends StatefulWidget {
+  const ZephyrProcessTimeline({
+    required this.steps,
+    required this.currentStep,
+    super.key,
+    this.onStepChanged,
+    this.style = ProcessTimelineStyle.horizontal,
+    this.activeColor,
+    this.inactiveColor,
+    this.showStepNumbers = true,
+    this.allowStepSelection = false,
+  });
   final List<ProcessStep> steps;
   final int currentStep;
   final ValueChanged<int>? onStepChanged;
@@ -286,18 +293,6 @@ class ZephyrProcessTimeline extends StatefulWidget {
   final Color? inactiveColor;
   final bool showStepNumbers;
   final bool allowStepSelection;
-
-  const ZephyrProcessTimeline({
-    super.key,
-    required this.steps,
-    required this.currentStep,
-    this.onStepChanged,
-    this.style = ProcessTimelineStyle.horizontal,
-    this.activeColor,
-    this.inactiveColor,
-    this.showStepNumbers = true,
-    this.allowStepSelection = false,
-  });
 
   @override
   State<ZephyrProcessTimeline> createState() => _ZephyrProcessTimelineState();
@@ -325,7 +320,7 @@ class _ZephyrProcessTimelineState extends State<ZephyrProcessTimeline> {
           final step = entry.value;
           final isActive = index <= widget.currentStep;
           final isCompleted = index < widget.currentStep;
-          
+
           return Row(
             children: [
               _buildProcessStep(step, index, isActive, isCompleted),
@@ -345,7 +340,7 @@ class _ZephyrProcessTimelineState extends State<ZephyrProcessTimeline> {
         final step = entry.value;
         final isActive = index <= widget.currentStep;
         final isCompleted = index < widget.currentStep;
-        
+
         return Column(
           children: [
             Row(
@@ -393,7 +388,7 @@ class _ZephyrProcessTimelineState extends State<ZephyrProcessTimeline> {
                 progress: (widget.currentStep + 1) / widget.steps.length,
                 color: widget.activeColor ?? Theme.of(context).primaryColor,
               ),
-              child: Container(
+              child: const SizedBox(
                 width: 200,
                 height: 200,
               ),
@@ -403,15 +398,17 @@ class _ZephyrProcessTimelineState extends State<ZephyrProcessTimeline> {
           ...widget.steps.asMap().entries.map((entry) {
             final index = entry.key;
             final step = entry.value;
-            final angle = (index / widget.steps.length) * 2 * math.pi - math.pi / 2;
-            final radius = 100;
+            final angle =
+                (index / widget.steps.length) * 2 * math.pi - math.pi / 2;
+            const radius = 100;
             final x = radius * math.cos(angle) + 150;
             final y = radius * math.sin(angle) + 150;
-            
+
             return Positioned(
               left: x - 16,
               top: y - 16,
-              child: _buildProcessStep(step, index, index <= widget.currentStep, index < widget.currentStep),
+              child: _buildProcessStep(step, index, index <= widget.currentStep,
+                  index < widget.currentStep),
             );
           }).toList(),
           // 中心内容
@@ -441,10 +438,12 @@ class _ZephyrProcessTimelineState extends State<ZephyrProcessTimeline> {
     );
   }
 
-  Widget _buildProcessStep(ProcessStep step, int index, bool isActive, bool isCompleted) {
-    final effectiveActiveColor = widget.activeColor ?? Theme.of(context).primaryColor;
+  Widget _buildProcessStep(
+      ProcessStep step, int index, bool isActive, bool isCompleted) {
+    final effectiveActiveColor =
+        widget.activeColor ?? Theme.of(context).primaryColor;
     final effectiveInactiveColor = widget.inactiveColor ?? Colors.grey[300];
-    
+
     return GestureDetector(
       onTap: widget.allowStepSelection
           ? () => widget.onStepChanged?.call(index)
@@ -465,7 +464,7 @@ class _ZephyrProcessTimelineState extends State<ZephyrProcessTimeline> {
                   ),
                 )
               : (isCompleted
-                  ? Icon(Icons.check, color: Colors.white, size: 16)
+                  ? const Icon(Icons.check, color: Colors.white, size: 16)
                   : null),
         ),
       ),
@@ -494,15 +493,14 @@ class _ZephyrProcessTimelineState extends State<ZephyrProcessTimeline> {
 }
 
 class ProcessStep {
-  final String title;
-  final String? subtitle;
-  final Widget? content;
-
   ProcessStep({
     required this.title,
     this.subtitle,
     this.content,
   });
+  final String title;
+  final String? subtitle;
+  final Widget? content;
 }
 
 enum ProcessTimelineStyle {
@@ -512,34 +510,33 @@ enum ProcessTimelineStyle {
 }
 
 class CircularProgressPainter extends CustomPainter {
+  CircularProgressPainter({required this.progress, required this.color});
   final double progress;
   final Color color;
-
-  CircularProgressPainter({required this.progress, required this.color});
 
   @override
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.height / 2);
     final radius = math.min(size.width, size.height) / 2 - 10;
-    
+
     // 背景圆环
     final backgroundPaint = Paint()
       ..color = Colors.grey[300]!
       ..style = PaintingStyle.stroke
       ..strokeWidth = 8;
-    
+
     canvas.drawCircle(center, radius, backgroundPaint);
-    
+
     // 进度圆环
     final progressPaint = Paint()
       ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = 8
       ..strokeCap = StrokeCap.round;
-    
-    final startAngle = -math.pi / 2;
+
+    const startAngle = -math.pi / 2;
     final sweepAngle = progress * 2 * math.pi;
-    
+
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius),
       startAngle,

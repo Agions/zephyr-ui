@@ -1,25 +1,18 @@
 /// ZephyrUI 时间线组件
-/// 
+///
 /// 提供专业的时间线展示组件，支持多种样式和交互
 
 import 'package:flutter/material.dart';
 import 'package:zephyr_ui/zephyr_ui.dart' as zephyr_ui;
 import 'dart:ui' as ui;
 
+// 为 ZephyrText 创建别名以简化使用
+typedef ZephyrText = zephyr_ui.ZephyrText;
+typedef ZephyrCard = zephyr_ui.ZephyrCard;
+typedef ZephyrThemeData = zephyr_ui.ZephyrThemeData;
+
 /// 时间线项目模型
 class ZephyrTimelineItem {
-  final String id;
-  final String title;
-  final String? subtitle;
-  final String? description;
-  final Widget? icon;
-  final Color? color;
-  final DateTime? time;
-  final bool isCompleted;
-  final bool isActive;
-  final Widget? trailing;
-  final VoidCallback? onTap;
-
   const ZephyrTimelineItem({
     required this.id,
     required this.title,
@@ -33,6 +26,18 @@ class ZephyrTimelineItem {
     this.trailing,
     this.onTap,
   });
+
+  final String id;
+  final String title;
+  final String? subtitle;
+  final String? description;
+  final Widget? icon;
+  final Color? color;
+  final DateTime? time;
+  final bool isCompleted;
+  final bool isActive;
+  final Widget? trailing;
+  final VoidCallback? onTap;
 }
 
 /// 时间线方向
@@ -51,6 +56,22 @@ enum ZephyrTimelineStyle {
 
 /// 时间线组件
 class ZephyrTimeline extends StatelessWidget {
+  const ZephyrTimeline({
+    required this.items,
+    super.key,
+    this.direction = ZephyrTimelineDirection.vertical,
+    this.style = ZephyrTimelineStyle.basic,
+    this.crossAxisAlignment = CrossAxisAlignment.start,
+    this.spacing = 16.0,
+    this.lineThickness = 2.0,
+    this.dotSize = 12.0,
+    this.padding = const EdgeInsets.all(16.0),
+    this.showTime = true,
+    this.showTrailing = true,
+    this.theme,
+    this.lineColor,
+  });
+
   final List<ZephyrTimelineItem> items;
   final ZephyrTimelineDirection direction;
   final ZephyrTimelineStyle style;
@@ -64,34 +85,15 @@ class ZephyrTimeline extends StatelessWidget {
   final bool showTrailing;
   final ZephyrTimelineTheme? theme;
 
-  const ZephyrTimeline({
-    Key? key,
-    required this.items,
-    this.direction = ZephyrTimelineDirection.vertical,
-    this.style = ZephyrTimelineStyle.basic,
-    this.crossAxisAlignment = CrossAxisAlignment.start,
-    this.spacing = 16.0,
-    this.lineThickness = 2.0,
-    this.lineColor,
-    this.dotSize = 12.0,
-    this.padding = const EdgeInsets.all(16.0),
-    this.showTime = true,
-    this.showTrailing = true,
-    this.theme,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final effectiveTheme = ZephyrTimelineTheme.resolve(context, theme);
-    
-    return zephyr_ui.ZephyrPerformanceWidget(
-      widgetName: 'ZephyrTimeline',
-      child: Container(
-        padding: padding,
-        child: direction == ZephyrTimelineDirection.vertical
-            ? _buildVerticalTimeline(effectiveTheme)
-            : _buildHorizontalTimeline(effectiveTheme),
-      ),
+
+    return Container(
+      padding: padding,
+      child: direction == ZephyrTimelineDirection.vertical
+          ? _buildVerticalTimeline(effectiveTheme)
+          : _buildHorizontalTimeline(effectiveTheme),
     );
   }
 
@@ -103,21 +105,21 @@ class ZephyrTimeline extends StatelessWidget {
           // 连接线
           final itemIndex = index ~/ 2;
           final isLastItem = itemIndex == items.length - 1;
-          
+
           if (isLastItem) return const SizedBox.shrink();
-          
+
           return Container(
             width: lineThickness,
             height: spacing,
             color: lineColor ?? effectiveTheme.lineColor,
           );
         }
-        
+
         // 时间线项目
         final itemIndex = index ~/ 2;
         final item = items[itemIndex];
         final isLastItem = itemIndex == items.length - 1;
-        
+
         return _buildTimelineItem(
           item,
           effectiveTheme,
@@ -137,21 +139,21 @@ class ZephyrTimeline extends StatelessWidget {
             // 连接线
             final itemIndex = index ~/ 2;
             final isLastItem = itemIndex == items.length - 1;
-            
+
             if (isLastItem) return const SizedBox.shrink();
-            
+
             return Container(
               width: spacing,
               height: lineThickness,
               color: lineColor ?? effectiveTheme.lineColor,
             );
           }
-          
+
           // 时间线项目
           final itemIndex = index ~/ 2;
           final item = items[itemIndex];
           final isLastItem = itemIndex == items.length - 1;
-          
+
           return _buildTimelineItem(
             item,
             effectiveTheme,
@@ -169,12 +171,21 @@ class ZephyrTimeline extends StatelessWidget {
     bool isLastItem = false,
     bool isHorizontal = false,
   }) {
-    final itemWidget = switch (style) {
-      ZephyrTimelineStyle.basic => _buildBasicItem(item, effectiveTheme),
-      ZephyrTimelineStyle.detailed => _buildDetailedItem(item, effectiveTheme),
-      ZephyrTimelineStyle.compact => _buildCompactItem(item, effectiveTheme),
-      ZephyrTimelineStyle.card => _buildCardItem(item, effectiveTheme),
-    };
+    Widget itemWidget;
+    switch (style) {
+      case ZephyrTimelineStyle.basic:
+        itemWidget = _buildBasicItem(item, effectiveTheme);
+        break;
+      case ZephyrTimelineStyle.detailed:
+        itemWidget = _buildDetailedItem(item, effectiveTheme);
+        break;
+      case ZephyrTimelineStyle.compact:
+        itemWidget = _buildCompactItem(item, effectiveTheme);
+        break;
+      case ZephyrTimelineStyle.card:
+        itemWidget = _buildCardItem(item, effectiveTheme);
+        break;
+    }
 
     return InkWell(
       onTap: item.onTap,
@@ -203,12 +214,13 @@ class ZephyrTimeline extends StatelessWidget {
     );
   }
 
-  Widget _buildTimelineDot(ZephyrTimelineItem item, ZephyrTimelineTheme effectiveTheme) {
-    final dotColor = item.color ?? 
-        (item.isCompleted 
-            ? effectiveTheme.completedColor 
-            : item.isActive 
-                ? effectiveTheme.activeColor 
+  Widget _buildTimelineDot(
+      ZephyrTimelineItem item, ZephyrTimelineTheme effectiveTheme) {
+    final dotColor = item.color ??
+        (item.isCompleted
+            ? effectiveTheme.completedColor
+            : item.isActive
+                ? effectiveTheme.activeColor
                 : effectiveTheme.inactiveColor);
 
     return Container(
@@ -234,25 +246,28 @@ class ZephyrTimeline extends StatelessWidget {
     );
   }
 
-  Widget _buildBasicItem(ZephyrTimelineItem item, ZephyrTimelineTheme effectiveTheme) {
+  Widget _buildBasicItem(
+      ZephyrTimelineItem item, ZephyrTimelineTheme effectiveTheme) {
     return Column(
       crossAxisAlignment: crossAxisAlignment,
       children: [
-        ZephyrText.subtitle(
-          text: item.title,
-          color: item.isActive ? effectiveTheme.activeTextColor : effectiveTheme.textColor,
+        ZephyrText.titleMedium(
+          item.title,
+          color: item.isActive
+              ? effectiveTheme.activeTextColor
+              : effectiveTheme.textColor,
         ),
         if (item.subtitle != null) ...[
           const SizedBox(height: 4),
-          ZephyrText.body(
-            text: item.subtitle!,
+          ZephyrText.bodyMedium(
+            item.subtitle!,
             color: effectiveTheme.subtitleColor,
           ),
         ],
         if (showTime && item.time != null) ...[
           const SizedBox(height: 4),
-          ZephyrText.caption(
-            text: _formatTime(item.time!),
+          ZephyrText.bodySmall(
+            _formatTime(item.time!),
             color: effectiveTheme.timeColor,
           ),
         ],
@@ -260,36 +275,39 @@ class ZephyrTimeline extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailedItem(ZephyrTimelineItem item, ZephyrTimelineTheme effectiveTheme) {
+  Widget _buildDetailedItem(
+      ZephyrTimelineItem item, ZephyrTimelineTheme effectiveTheme) {
     return Column(
       crossAxisAlignment: crossAxisAlignment,
       children: [
         Row(
           children: [
             Expanded(
-              child: ZephyrText.subtitle(
-                text: item.title,
-                color: item.isActive ? effectiveTheme.activeTextColor : effectiveTheme.textColor,
+              child: ZephyrText.titleMedium(
+                item.title,
+                color: item.isActive
+                    ? effectiveTheme.activeTextColor
+                    : effectiveTheme.textColor,
               ),
             ),
             if (showTime && item.time != null)
-              ZephyrText.caption(
-                text: _formatTime(item.time!),
+              ZephyrText.bodySmall(
+                _formatTime(item.time!),
                 color: effectiveTheme.timeColor,
               ),
           ],
         ),
         if (item.subtitle != null) ...[
           const SizedBox(height: 4),
-          ZephyrText.body(
-            text: item.subtitle!,
+          ZephyrText.bodyMedium(
+            item.subtitle!,
             color: effectiveTheme.subtitleColor,
           ),
         ],
         if (item.description != null) ...[
           const SizedBox(height: 8),
-          ZephyrText.body(
-            text: item.description!,
+          ZephyrText.bodyMedium(
+            item.description!,
             color: effectiveTheme.descriptionColor,
           ),
         ],
@@ -297,25 +315,29 @@ class ZephyrTimeline extends StatelessWidget {
     );
   }
 
-  Widget _buildCompactItem(ZephyrTimelineItem item, ZephyrTimelineTheme effectiveTheme) {
+  Widget _buildCompactItem(
+      ZephyrTimelineItem item, ZephyrTimelineTheme effectiveTheme) {
     return Row(
       children: [
         Expanded(
-          child: ZephyrText.body(
-            text: item.title,
-            color: item.isActive ? effectiveTheme.activeTextColor : effectiveTheme.textColor,
+          child: ZephyrText.bodyMedium(
+            item.title,
+            color: item.isActive
+                ? effectiveTheme.activeTextColor
+                : effectiveTheme.textColor,
           ),
         ),
         if (showTime && item.time != null)
-          ZephyrText.caption(
-            text: _formatTime(item.time!),
+          ZephyrText.bodySmall(
+            _formatTime(item.time!),
             color: effectiveTheme.timeColor,
           ),
       ],
     );
   }
 
-  Widget _buildCardItem(ZephyrTimelineItem item, ZephyrTimelineTheme effectiveTheme) {
+  Widget _buildCardItem(
+      ZephyrTimelineItem item, ZephyrTimelineTheme effectiveTheme) {
     return ZephyrCard(
       child: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -342,20 +364,6 @@ class ZephyrTimeline extends StatelessWidget {
 
 /// 时间线主题
 class ZephyrTimelineTheme extends ThemeExtension<ZephyrTimelineTheme> {
-  final Color lineColor;
-  final Color completedColor;
-  final Color activeColor;
-  final Color inactiveColor;
-  final Color borderColor;
-  final double borderWidth;
-  final Color iconColor;
-  final Color textColor;
-  final Color activeTextColor;
-  final Color subtitleColor;
-  final Color descriptionColor;
-  final Color timeColor;
-  final double borderRadius;
-
   const ZephyrTimelineTheme({
     required this.lineColor,
     required this.completedColor,
@@ -371,6 +379,20 @@ class ZephyrTimelineTheme extends ThemeExtension<ZephyrTimelineTheme> {
     required this.timeColor,
     required this.borderRadius,
   });
+
+  final Color lineColor;
+  final Color completedColor;
+  final Color activeColor;
+  final Color inactiveColor;
+  final Color borderColor;
+  final double borderWidth;
+  final Color iconColor;
+  final Color textColor;
+  final Color activeTextColor;
+  final Color subtitleColor;
+  final Color descriptionColor;
+  final Color timeColor;
+  final double borderRadius;
 
   @override
   ZephyrTimelineTheme copyWith({
@@ -406,7 +428,8 @@ class ZephyrTimelineTheme extends ThemeExtension<ZephyrTimelineTheme> {
   }
 
   @override
-  ZephyrTimelineTheme lerp(ThemeExtension<ZephyrTimelineTheme>? other, double t) {
+  ZephyrTimelineTheme lerp(
+      ThemeExtension<ZephyrTimelineTheme>? other, double t) {
     if (other is! ZephyrTimelineTheme) {
       return this;
     }
@@ -416,20 +439,23 @@ class ZephyrTimelineTheme extends ThemeExtension<ZephyrTimelineTheme> {
       activeColor: Color.lerp(activeColor, other.activeColor, t)!,
       inactiveColor: Color.lerp(inactiveColor, other.inactiveColor, t)!,
       borderColor: Color.lerp(borderColor, other.borderColor, t)!,
-      borderWidth: ui.lerpDouble(borderWidth, other.borderWidth, t) ?? borderWidth,
+      borderWidth:
+          ui.lerpDouble(borderWidth, other.borderWidth, t) ?? borderWidth,
       iconColor: Color.lerp(iconColor, other.iconColor, t)!,
       textColor: Color.lerp(textColor, other.textColor, t)!,
       activeTextColor: Color.lerp(activeTextColor, other.activeTextColor, t)!,
       subtitleColor: Color.lerp(subtitleColor, other.subtitleColor, t)!,
-      descriptionColor: Color.lerp(descriptionColor, other.descriptionColor, t)!,
+      descriptionColor:
+          Color.lerp(descriptionColor, other.descriptionColor, t)!,
       timeColor: Color.lerp(timeColor, other.timeColor, t)!,
-      borderRadius: ui.lerpDouble(borderRadius, other.borderRadius, t) ?? borderRadius,
+      borderRadius:
+          ui.lerpDouble(borderRadius, other.borderRadius, t) ?? borderRadius,
     );
   }
 
   static ZephyrTimelineTheme of(BuildContext context) {
     final theme = Theme.of(context).extension<ZephyrTimelineTheme>();
-    return theme ?? _createDefaultTheme(ZephyrThemeData.of(context));
+    return theme ?? _createDefaultTheme();
   }
 
   static ZephyrTimelineTheme resolve(
@@ -439,7 +465,7 @@ class ZephyrTimelineTheme extends ThemeExtension<ZephyrTimelineTheme> {
     return theme ?? of(context);
   }
 
-  static ZephyrTimelineTheme _createDefaultTheme(ZephyrThemeData zephyrTheme) {
+  static ZephyrTimelineTheme _createDefaultTheme() {
     return ZephyrTimelineTheme(
       lineColor: Colors.grey.shade300,
       completedColor: Colors.green,

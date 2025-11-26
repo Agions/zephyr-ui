@@ -22,7 +22,7 @@ import 'package:zephyr_ui/zephyr_ui.dart';
 class ZephyrSwitch extends StatefulWidget {
   /// 创建一个开关组件
   const ZephyrSwitch({
-    Key? key,
+    super.key,
     required this.value,
     required this.onChanged,
     this.size = ZephyrSize.md,
@@ -40,7 +40,7 @@ class ZephyrSwitch extends StatefulWidget {
     this.focusNode,
     this.autofocus = false,
     this.theme,
-  }) : super(key: key);
+  });
 
   /// 开关状态
   final bool value;
@@ -183,7 +183,7 @@ class _ZephyrSwitchState extends State<ZephyrSwitch>
       width: trackWidth,
       height: trackHeight,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(trackHeight / 2),
+        borderRadius: const BorderRadius.circular(trackHeight / 2),
         color: isEnabled ? trackColor : theme.disabledColor,
         border: theme.borderWidth > 0
             ? Border.all(
@@ -252,7 +252,7 @@ class _ZephyrSwitchState extends State<ZephyrSwitch>
 class ZephyrLabeledSwitch extends StatelessWidget {
   /// 创建带标签的开关
   const ZephyrLabeledSwitch({
-    Key? key,
+    super.key,
     required this.value,
     required this.onChanged,
     this.label,
@@ -266,7 +266,7 @@ class ZephyrLabeledSwitch extends StatelessWidget {
     this.thumbColor,
     this.trackColor,
     this.theme,
-  }) : super(key: key);
+  });
 
   /// 开关状态
   final bool value;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zephyr_ui/zephyr_ui.dart';
 
 /// Color Picker Demo Page
-/// 
+///
 /// Demonstrates the usage of the ZephyrColorPicker component
 class ColorPickerDemo extends StatefulWidget {
   const ColorPickerDemo({Key? key}) : super(key: key);
@@ -144,12 +144,12 @@ class _ColorPickerDemoState extends State<ColorPickerDemo> {
             const SizedBox(height: 32),
             _buildDemoSection(
               'Dark Theme Color Picker',
-              Container(
+              const Container(
                 decoration: BoxDecoration(
                   color: Colors.grey[900],
                   borderRadius: BorderRadius.circular(8),
                 ),
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(16),
                 child: ZephyrColorPicker(
                   initialColor: _selectedColor,
                   onColorChanged: (color) {
@@ -203,8 +203,8 @@ class _ColorPickerDemoState extends State<ColorPickerDemo> {
 
   Widget _buildColorInfo() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
+      child: const Padding(
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -212,7 +212,7 @@ class _ColorPickerDemoState extends State<ColorPickerDemo> {
               'Selected Color Information',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Row(
               children: [
                 Container(
@@ -227,17 +227,22 @@ class _ColorPickerDemoState extends State<ColorPickerDemo> {
                     ),
                   ),
                 ),
-                const SizedBox(width: 16),
+                SizedBox(width: 16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('HEX: ${ZephyrColorPickerUtils.toHex(_selectedColor)}'),
-                      Text('RGB: ${_selectedColor.r}, ${_selectedColor.g}, ${_selectedColor.b}'),
+                      Text(
+                          'HEX: ${ZephyrColorPickerUtils.toHex(_selectedColor)}'),
+                      Text(
+                          'RGB: ${_selectedColor.r}, ${_selectedColor.g}, ${_selectedColor.b}'),
                       Text('Alpha: ${_selectedColor.a}'),
-                      Text('Name: ${ZephyrColorPickerUtils.getColorName(_selectedColor)}'),
-                      Text('Temperature: ${ZephyrColorPickerUtils.getColorTemperature(_selectedColor)}'),
-                      Text('Brightness: ${ZephyrColorPickerUtils.getBrightness(_selectedColor).toStringAsFixed(2)}'),
+                      Text(
+                          'Name: ${ZephyrColorPickerUtils.getColorName(_selectedColor)}'),
+                      Text(
+                          'Temperature: ${ZephyrColorPickerUtils.getColorTemperature(_selectedColor)}'),
+                      Text(
+                          'Brightness: ${ZephyrColorPickerUtils.getBrightness(_selectedColor).toStringAsFixed(2)}'),
                     ],
                   ),
                 ),
@@ -251,8 +256,8 @@ class _ColorPickerDemoState extends State<ColorPickerDemo> {
 
   Widget _buildColorUtilities() {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
+      child: const Padding(
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -260,11 +265,11 @@ class _ColorPickerDemoState extends State<ColorPickerDemo> {
               'Color Utilities',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             _buildColorPalette(),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             _buildColorHarmonies(),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             _buildColorManipulation(),
           ],
         ),
@@ -274,7 +279,7 @@ class _ColorPickerDemoState extends State<ColorPickerDemo> {
 
   Widget _buildColorPalette() {
     final palette = ZephyrColorPickerUtils.generatePalette(_selectedColor, 8);
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -283,9 +288,9 @@ class _ColorPickerDemoState extends State<ColorPickerDemo> {
         Row(
           children: palette.map((color) {
             return Expanded(
-              child: Container(
+              child: const Container(
                 height: 40,
-                margin: const EdgeInsets.symmetric(horizontal: 2),
+                margin: EdgeInsets.symmetric(horizontal: 2),
                 decoration: BoxDecoration(
                   color: color,
                   borderRadius: BorderRadius.circular(4),
@@ -299,7 +304,8 @@ class _ColorPickerDemoState extends State<ColorPickerDemo> {
   }
 
   Widget _buildColorHarmonies() {
-    final complementary = ZephyrColorPickerUtils.getComplementaryColors(_selectedColor);
+    final complementary =
+        ZephyrColorPickerUtils.getComplementaryColors(_selectedColor);
     final triadic = ZephyrColorPickerUtils.getTriadicColors(_selectedColor);
     final analogous = ZephyrColorPickerUtils.getAnalogousColors(_selectedColor);
 
@@ -320,7 +326,7 @@ class _ColorPickerDemoState extends State<ColorPickerDemo> {
   Widget _buildColorRow(String label, List<Color> colors) {
     return Row(
       children: [
-        SizedBox(
+        const SizedBox(
           width: 100,
           child: Text(label),
         ),
@@ -328,9 +334,9 @@ class _ColorPickerDemoState extends State<ColorPickerDemo> {
           child: Row(
             children: colors.map((color) {
               return Expanded(
-                child: Container(
+                child: const Container(
                   height: 30,
-                  margin: const EdgeInsets.symmetric(horizontal: 2),
+                  margin: EdgeInsets.symmetric(horizontal: 2),
                   decoration: BoxDecoration(
                     color: color,
                     borderRadius: BorderRadius.circular(4),
@@ -356,7 +362,8 @@ class _ColorPickerDemoState extends State<ColorPickerDemo> {
             ElevatedButton(
               onPressed: () {
                 setState(() {
-                  _selectedColor = ZephyrColorPickerUtils.lighten(_selectedColor, 0.1);
+                  _selectedColor =
+                      ZephyrColorPickerUtils.lighten(_selectedColor, 0.1);
                 });
               },
               child: const Text('Lighten'),
@@ -364,7 +371,8 @@ class _ColorPickerDemoState extends State<ColorPickerDemo> {
             ElevatedButton(
               onPressed: () {
                 setState(() {
-                  _selectedColor = ZephyrColorPickerUtils.darken(_selectedColor, 0.1);
+                  _selectedColor =
+                      ZephyrColorPickerUtils.darken(_selectedColor, 0.1);
                 });
               },
               child: const Text('Darken'),
@@ -372,7 +380,8 @@ class _ColorPickerDemoState extends State<ColorPickerDemo> {
             ElevatedButton(
               onPressed: () {
                 setState(() {
-                  _selectedColor = ZephyrColorPickerUtils.saturate(_selectedColor, 0.1);
+                  _selectedColor =
+                      ZephyrColorPickerUtils.saturate(_selectedColor, 0.1);
                 });
               },
               child: const Text('Saturate'),
@@ -380,7 +389,8 @@ class _ColorPickerDemoState extends State<ColorPickerDemo> {
             ElevatedButton(
               onPressed: () {
                 setState(() {
-                  _selectedColor = ZephyrColorPickerUtils.desaturate(_selectedColor, 0.1);
+                  _selectedColor =
+                      ZephyrColorPickerUtils.desaturate(_selectedColor, 0.1);
                 });
               },
               child: const Text('Desaturate'),
