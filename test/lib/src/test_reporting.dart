@@ -5,7 +5,6 @@ library test_reporting;
 
 import 'dart:convert';
 import 'dart:io';
-import 'package:path/path.dart' as path;
 
 /// 测试报告工具类
 class TestReportUtils {
@@ -499,7 +498,7 @@ ${_generateRecommendationsMarkdown(testData)}
     return '''
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-    <testsuite name="ZephyrUI Tests" 
+    <testsuite name="VelocityUI Tests" 
                tests="${summary['totalTests'] ?? 0}" 
                failures="${summary['failedTests'] ?? 0}" 
                errors="${summary['errorTests'] ?? 0}" 
@@ -680,7 +679,7 @@ ${_generateRecommendationsMarkdown(testData)}
   /// 格式化变化
   static String _formatChange(double current, double baseline) {
     if (baseline == 0) return 'N/A';
-    final change = ((current - baseline) / baseline * 100);
+    final change = (current - baseline) / baseline * 100;
     return '${change > 0 ? '+' : ''}${change.toStringAsFixed(1)}%';
   }
   
@@ -778,16 +777,6 @@ ${_generateRecommendationsMarkdown(testData)}
 
 /// 测试报告配置
 class TestReportConfig {
-  static const String defaultOutputPath = 'test_results';
-  static const String defaultFormat = 'html';
-  static const bool defaultIncludeCharts = true;
-  static const bool defaultIncludeRecommendations = true;
-  
-  final String outputPath;
-  final String format;
-  final bool includeCharts;
-  final bool includeRecommendations;
-  final List<String> customSections;
   
   const TestReportConfig({
     this.outputPath = defaultOutputPath,
@@ -826,13 +815,23 @@ class TestReportConfig {
     includeRecommendations: includeRecommendations,
     customSections: customSections,
   );
+  static const String defaultOutputPath = 'test_results';
+  static const String defaultFormat = 'html';
+  static const bool defaultIncludeCharts = true;
+  static const bool defaultIncludeRecommendations = true;
+  
+  final String outputPath;
+  final String format;
+  final bool includeCharts;
+  final bool includeRecommendations;
+  final List<String> customSections;
 }
 
 /// 测试报告生成器
 class TestReportGenerator {
-  final TestReportConfig config;
   
   TestReportGenerator({this.config = const TestReportConfig()});
+  final TestReportConfig config;
   
   /// 生成测试报告
   Future<void> generateReport(

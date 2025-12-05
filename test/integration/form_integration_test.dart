@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/basic/button/button.dart';
-import 'package:zephyr_ui/src/components/forms/input/input.dart';
-import 'package:zephyr_ui/src/components/forms/select/select.dart';
-import 'package:zephyr_ui/src/components/forms/checkbox_group/checkbox_group.dart';
-import 'package:zephyr_ui/src/components/forms/radio_group/radio_group.dart';
-import 'package:zephyr_ui/src/components/forms/slider/slider.dart';
+import 'package:velocity_ui/src/components/basic/button/button.dart';
+import 'package:velocity_ui/src/components/forms/input/input.dart';
+import 'package:velocity_ui/src/components/forms/select/select.dart';
+import 'package:velocity_ui/src/components/forms/checkbox_group/checkbox_group.dart';
+import 'package:velocity_ui/src/components/forms/radio_group/radio_group.dart';
+import 'package:velocity_ui/src/components/forms/slider/slider.dart';
 
 void main() {
-  group('ZephyrUI Form Integration Tests', () {
+  group('VelocityUI Form Integration Tests', () {
     testWidgets('Basic form submission flow', (WidgetTester tester) async {
       // Form state variables
       String? email;
       String? password;
-      bool formSubmitted = false;
+      var formSubmitted = false;
 
       await tester.pumpWidget(
         MaterialApp(
@@ -22,20 +22,20 @@ void main() {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  ZephyrInput(
+                  VelocityInput(
                     label: 'Email',
                     placeholder: 'Enter your email',
                     onChanged: (value) => email = value,
                   ),
                   const SizedBox(height: 16),
-                  ZephyrInput(
+                  VelocityInput(
                     label: 'Password',
                     placeholder: 'Enter your password',
                     obscureText: true,
                     onChanged: (value) => password = value,
                   ),
                   const SizedBox(height: 24),
-                  ZephyrButton.primary(
+                  VelocityButton.primary(
                     text: 'Submit',
                     onPressed: () {
                       if ((email?.isNotEmpty ?? false) && (password?.isNotEmpty ?? false)) {
@@ -53,9 +53,9 @@ void main() {
       await tester.pumpAndSettle();
 
       // Fill in form
-      await tester.enterText(find.byType(ZephyrInput).first, 'test@example.com');
+      await tester.enterText(find.byType(VelocityInput).first, 'test@example.com');
       await tester.pumpAndSettle();
-      await tester.enterText(find.byType(ZephyrInput).last, 'password123');
+      await tester.enterText(find.byType(VelocityInput).last, 'password123');
       await tester.pumpAndSettle();
 
       // Submit form
@@ -70,7 +70,7 @@ void main() {
 
     testWidgets('Form validation prevents empty submission', (WidgetTester tester) async {
       String? email;
-      bool formSubmitted = false;
+      var formSubmitted = false;
 
       await tester.pumpWidget(
         MaterialApp(
@@ -79,13 +79,13 @@ void main() {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  ZephyrInput(
+                  VelocityInput(
                     label: 'Email',
                     placeholder: 'Enter your email',
                     onChanged: (value) => email = value,
                   ),
                   const SizedBox(height: 24),
-                  ZephyrButton.primary(
+                  VelocityButton.primary(
                     text: 'Submit',
                     onPressed: () {
                       if (email?.isNotEmpty ?? false) {
@@ -119,13 +119,13 @@ void main() {
           home: Scaffold(
             body: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: ZephyrSelect<String>(
+              child: VelocitySelect<String>(
                 label: 'Choose an option',
                 placeholder: 'Select one',
                 options: const [
-                  ZephyrSelectOption(value: 'option1', label: 'Option 1'),
-                  ZephyrSelectOption(value: 'option2', label: 'Option 2'),
-                  ZephyrSelectOption(value: 'option3', label: 'Option 3'),
+                  VelocitySelectOption(value: 'option1', label: 'Option 1'),
+                  VelocitySelectOption(value: 'option2', label: 'Option 2'),
+                  VelocitySelectOption(value: 'option3', label: 'Option 3'),
                 ],
                 onChanged: (value) => selectedValue = value,
               ),
@@ -151,18 +151,18 @@ void main() {
     });
 
     testWidgets('Checkbox group integration', (WidgetTester tester) async {
-      List<String> selectedValues = [];
+      var selectedValues = <String>[];
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: ZephyrCheckboxGroup(
+              child: VelocityCheckboxGroup(
                 items: const [
-                  ZephyrCheckboxItem(value: 'feature1', label: 'Feature 1'),
-                  ZephyrCheckboxItem(value: 'feature2', label: 'Feature 2'),
-                  ZephyrCheckboxItem(value: 'feature3', label: 'Feature 3'),
+                  VelocityCheckboxItem(value: 'feature1', label: 'Feature 1'),
+                  VelocityCheckboxItem(value: 'feature2', label: 'Feature 2'),
+                  VelocityCheckboxItem(value: 'feature3', label: 'Feature 3'),
                 ],
                 value: selectedValues,
                 onChanged: (values) => selectedValues = values,
@@ -194,11 +194,11 @@ void main() {
           home: Scaffold(
             body: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: ZephyrRadioGroup<String>(
+              child: VelocityRadioGroup<String>(
                 items: const [
-                  ZephyrRadioItem(value: 'radio1', label: 'Radio 1'),
-                  ZephyrRadioItem(value: 'radio2', label: 'Radio 2'),
-                  ZephyrRadioItem(value: 'radio3', label: 'Radio 3'),
+                  VelocityRadioItem(value: 'radio1', label: 'Radio 1'),
+                  VelocityRadioItem(value: 'radio2', label: 'Radio 2'),
+                  VelocityRadioItem(value: 'radio3', label: 'Radio 3'),
                 ],
                 value: selectedValue,
                 onChanged: (value) => selectedValue = value,
@@ -219,14 +219,14 @@ void main() {
     });
 
     testWidgets('Slider component integration', (WidgetTester tester) async {
-      double sliderValue = 5.0;
+      var sliderValue = 5.0;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: ZephyrSlider(
+              child: VelocitySlider(
                 label: 'Satisfaction Level',
                 min: 0.0,
                 max: 10.0,
@@ -241,7 +241,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Drag slider to increase value
-      await tester.drag(find.byType(ZephyrSlider), const Offset(100, 0));
+      await tester.drag(find.byType(VelocitySlider), const Offset(100, 0));
       await tester.pumpAndSettle();
 
       // Verify value increased

@@ -1,6 +1,6 @@
 # 贡献指南
 
-感谢你对 ZephyrUI 的关注！我们欢迎任何形式的贡献，包括但不限于：
+感谢你对 VelocityUI 的关注！我们欢迎任何形式的贡献，包括但不限于：
 
 - 报告 Bug
 - 提交 Pull Request
@@ -18,19 +18,19 @@
 2. 克隆到本地：
 
    ```bash
-   git clone https://github.com/agions/zephyr-ui.git
+   git clone https://github.com/agions/velocity-ui.git
    ```
 
 3. 安装依赖：
 
    ```bash
-   cd zephyr-ui
+   cd velocity-ui
    flutter pub get
    ```
 
 ## 项目结构
 
-ZephyrUI 遵循标准的 Flutter 包结构：
+VelocityUI 遵循标准的 Flutter 包结构：
 
 ```
 lib/
@@ -144,7 +144,7 @@ git checkout -b fix/your-bug-fix
 
 ### 3. 开发
 
-- 遵循[组件开发规范](doc/ZephyrUI_Component_Development_Standards.md)
+- 遵循[组件开发规范](doc/VelocityUI_Component_Development_Standards.md)
 - 编写相应的测试
 - 更新相关文档
 - 确保所有测试通过
@@ -221,7 +221,7 @@ flutter test --coverage
 
 ## 发布流程
 
-ZephyrUI 遵循 [Semantic Versioning](https://semver.org/) 规范：
+VelocityUI 遵循 [Semantic Versioning](https://semver.org/) 规范：
 
 - 主版本号（MAJOR）：不兼容的 API 修改
 - 次版本号（MINOR）：向后兼容的功能性新增
@@ -253,7 +253,7 @@ ZephyrUI 遵循 [Semantic Versioning](https://semver.org/) 规范：
 
 ## 社区
 
-- [GitHub Issues](https://github.com/agions/zephyr-ui/issues)
-- [GitHub Discussions](https://github.com/agions/zephyr-ui/discussions)
+- [GitHub Issues](https://github.com/agions/velocity-ui/issues)
+- [GitHub Discussions](https://github.com/agions/velocity-ui/discussions)
 
 感谢你的贡献！

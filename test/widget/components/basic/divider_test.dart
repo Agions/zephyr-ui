@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/basic/divider/divider.dart';
-import 'package:zephyr_ui/src/components/basic/divider/divider_theme.dart';
-import 'package:zephyr_ui/src/core/theme/theme_data.dart';
+import 'package:velocity_ui/src/components/basic/divider/divider.dart';
+import 'package:velocity_ui/src/components/basic/divider/divider_theme.dart';
+import 'package:velocity_ui/src/core/theme/theme_data.dart';
 
 void main() {
-  group('ZephyrDivider Widget Tests', () {
+  group('VelocityDivider Widget Tests', () {
     late final ThemeData theme;
 
     setUpAll(() {
-      final zephyrTheme = ZephyrThemeData.light();
+      final velocityTheme = VelocityThemeData.light();
       theme = ThemeData(
-        brightness: zephyrTheme.brightness,
-        primaryColor: zephyrTheme.primaryColor,
+        brightness: velocityTheme.brightness,
+        primaryColor: velocityTheme.primaryColor,
       );
     });
 
@@ -22,15 +22,15 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.horizontal(),
+            body: VelocityDivider.horizontal(),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       expect(
           find.descendant(
-            of: find.byType(ZephyrDivider),
+            of: find.byType(VelocityDivider),
             matching: find.byType(Container),
           ),
           findsOneWidget);
@@ -42,15 +42,15 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.vertical(),
+            body: VelocityDivider.vertical(),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       expect(
           find.descendant(
-            of: find.byType(ZephyrDivider),
+            of: find.byType(VelocityDivider),
             matching: find.byType(Container),
           ),
           findsOneWidget);
@@ -64,16 +64,16 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.horizontal(
+            body: VelocityDivider.horizontal(
               color: customColor,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       final container = tester.widget<Container>(find.descendant(
-        of: find.byType(ZephyrDivider),
+        of: find.byType(VelocityDivider),
         matching: find.byType(Container),
       ));
       final decoration = container.decoration as BoxDecoration;
@@ -88,16 +88,16 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.vertical(
+            body: VelocityDivider.vertical(
               color: customColor,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       final container = tester.widget<Container>(find.descendant(
-        of: find.byType(ZephyrDivider),
+        of: find.byType(VelocityDivider),
         matching: find.byType(Container),
       ));
       final decoration = container.decoration as BoxDecoration;
@@ -112,16 +112,16 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.horizontal(
+            body: VelocityDivider.horizontal(
               thickness: customThickness,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       final container = tester.widget<Container>(find.descendant(
-        of: find.byType(ZephyrDivider),
+        of: find.byType(VelocityDivider),
         matching: find.byType(Container),
       ));
       expect(container.constraints?.minHeight, customThickness);
@@ -135,16 +135,16 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.vertical(
+            body: VelocityDivider.vertical(
               thickness: customThickness,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       final container = tester.widget<Container>(find.descendant(
-        of: find.byType(ZephyrDivider),
+        of: find.byType(VelocityDivider),
         matching: find.byType(Container),
       ));
       expect(container.constraints?.minWidth, customThickness);
@@ -158,16 +158,16 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.horizontal(
+            body: VelocityDivider.horizontal(
               indent: customIndent,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       final container = tester.widget<Container>(find.descendant(
-        of: find.byType(ZephyrDivider),
+        of: find.byType(VelocityDivider),
         matching: find.byType(Container),
       ));
       final margin = container.margin as EdgeInsetsDirectional;
@@ -182,16 +182,16 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.horizontal(
+            body: VelocityDivider.horizontal(
               endIndent: customEndIndent,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       final container = tester.widget<Container>(find.descendant(
-        of: find.byType(ZephyrDivider),
+        of: find.byType(VelocityDivider),
         matching: find.byType(Container),
       ));
       final margin = container.margin as EdgeInsetsDirectional;
@@ -206,16 +206,16 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.vertical(
+            body: VelocityDivider.vertical(
               indent: customIndent,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       final container = tester.widget<Container>(find.descendant(
-        of: find.byType(ZephyrDivider),
+        of: find.byType(VelocityDivider),
         matching: find.byType(Container),
       ));
       final margin = container.margin as EdgeInsetsDirectional;
@@ -230,16 +230,16 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.vertical(
+            body: VelocityDivider.vertical(
               endIndent: customEndIndent,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       final container = tester.widget<Container>(find.descendant(
-        of: find.byType(ZephyrDivider),
+        of: find.byType(VelocityDivider),
         matching: find.byType(Container),
       ));
       final margin = container.margin as EdgeInsetsDirectional;
@@ -254,14 +254,14 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.horizontal(
+            body: VelocityDivider.horizontal(
               height: customHeight,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       final sizedBox = tester.widget<SizedBox>(find.byType(SizedBox));
       expect(sizedBox.height, customHeight);
     });
@@ -274,21 +274,21 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.vertical(
+            body: VelocityDivider.vertical(
               width: customWidth,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       final sizedBox = tester.widget<SizedBox>(find.byType(SizedBox));
       expect(sizedBox.width, customWidth);
     });
 
     testWidgets('applies custom theme to horizontal divider',
         (WidgetTester tester) async {
-      const customTheme = ZephyrDividerTheme(
+      const customTheme = VelocityDividerTheme(
         color: Colors.purple,
         thickness: 2.0,
         indent: 10.0,
@@ -299,16 +299,16 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.horizontal(
+            body: VelocityDivider.horizontal(
               theme: customTheme,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       final container = tester.widget<Container>(find.descendant(
-        of: find.byType(ZephyrDivider),
+        of: find.byType(VelocityDivider),
         matching: find.byType(Container),
       ));
       final decoration = container.decoration as BoxDecoration;
@@ -318,7 +318,7 @@ void main() {
 
     testWidgets('applies custom theme to vertical divider',
         (WidgetTester tester) async {
-      const customTheme = ZephyrDividerTheme(
+      const customTheme = VelocityDividerTheme(
         color: Colors.green,
         thickness: 4.0,
         indent: 5.0,
@@ -329,16 +329,16 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.vertical(
+            body: VelocityDivider.vertical(
               theme: customTheme,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       final container = tester.widget<Container>(find.descendant(
-        of: find.byType(ZephyrDivider),
+        of: find.byType(VelocityDivider),
         matching: find.byType(Container),
       ));
       final decoration = container.decoration as BoxDecoration;
@@ -352,16 +352,16 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.horizontal(
+            body: VelocityDivider.horizontal(
               thickness: 0.0,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       final container = tester.widget<Container>(find.descendant(
-        of: find.byType(ZephyrDivider),
+        of: find.byType(VelocityDivider),
         matching: find.byType(Container),
       ));
       expect(container.constraints?.minHeight, 0.0);
@@ -373,16 +373,16 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.vertical(
+            body: VelocityDivider.vertical(
               thickness: 0.0,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       final container = tester.widget<Container>(find.descendant(
-        of: find.byType(ZephyrDivider),
+        of: find.byType(VelocityDivider),
         matching: find.byType(Container),
       ));
       expect(container.constraints?.minWidth, 0.0);
@@ -394,7 +394,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.horizontal(
+            body: VelocityDivider.horizontal(
               indent: 0.0,
               endIndent: 0.0,
             ),
@@ -402,9 +402,9 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       final container = tester.widget<Container>(find.descendant(
-        of: find.byType(ZephyrDivider),
+        of: find.byType(VelocityDivider),
         matching: find.byType(Container),
       ));
       final margin = container.margin as EdgeInsetsDirectional;
@@ -419,16 +419,16 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.horizontal(
+            body: VelocityDivider.horizontal(
               thickness: largeThickness,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       final container = tester.widget<Container>(find.descendant(
-        of: find.byType(ZephyrDivider),
+        of: find.byType(VelocityDivider),
         matching: find.byType(Container),
       ));
       expect(container.constraints?.minHeight, largeThickness);
@@ -440,17 +440,17 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.horizontal(
+            body: VelocityDivider.horizontal(
               thickness: 0.1,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       expect(
           find.descendant(
-            of: find.byType(ZephyrDivider),
+            of: find.byType(VelocityDivider),
             matching: find.byType(Container),
           ),
           findsOneWidget);
@@ -462,7 +462,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.horizontal(
+            body: VelocityDivider.horizontal(
               color: null,
               thickness: null,
               indent: null,
@@ -474,10 +474,10 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       expect(
           find.descendant(
-            of: find.byType(ZephyrDivider),
+            of: find.byType(VelocityDivider),
             matching: find.byType(Container),
           ),
           findsOneWidget);
@@ -492,9 +492,9 @@ void main() {
             body: Column(
               children: [
                 Text('Content 1'),
-                ZephyrDivider.horizontal(),
+                VelocityDivider.horizontal(),
                 Text('Content 2'),
-                ZephyrDivider.horizontal(),
+                VelocityDivider.horizontal(),
                 Text('Content 3'),
               ],
             ),
@@ -502,10 +502,10 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsNWidgets(2));
+      expect(find.byType(VelocityDivider), findsNWidgets(2));
       expect(
           find.descendant(
-            of: find.byType(ZephyrDivider),
+            of: find.byType(VelocityDivider),
             matching: find.byType(Container),
           ),
           findsNWidgets(2));
@@ -520,7 +520,7 @@ void main() {
             body: Row(
               children: [
                 Text('Left'),
-                ZephyrDivider.vertical(),
+                VelocityDivider.vertical(),
                 Text('Right'),
               ],
             ),
@@ -528,10 +528,10 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       expect(
           find.descendant(
-            of: find.byType(ZephyrDivider),
+            of: find.byType(VelocityDivider),
             matching: find.byType(Container),
           ),
           findsOneWidget);
@@ -543,7 +543,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.horizontal(
+            body: VelocityDivider.horizontal(
               color: Colors.orange,
               thickness: 3.0,
               indent: 20.0,
@@ -554,12 +554,12 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       final sizedBox = tester.widget<SizedBox>(find.byType(SizedBox));
       expect(sizedBox.height, 40.0);
 
       final container = tester.widget<Container>(find.descendant(
-        of: find.byType(ZephyrDivider),
+        of: find.byType(VelocityDivider),
         matching: find.byType(Container),
       ));
       final decoration = container.decoration as BoxDecoration;
@@ -580,19 +580,19 @@ void main() {
               children: [
                 Container(
                   padding: const EdgeInsets.all(16.0),
-                  child: const ZephyrDivider.horizontal(),
+                  child: const VelocityDivider.horizontal(),
                 ),
                 const SizedBox(height: 20),
                 const Row(
                   children: [
                     Text('Item 1'),
-                    ZephyrDivider.vertical(),
+                    VelocityDivider.vertical(),
                     Text('Item 2'),
                   ],
                 ),
                 const SizedBox(height: 20),
                 const Card(
-                  child: ZephyrDivider.horizontal(),
+                  child: VelocityDivider.horizontal(),
                 ),
               ],
             ),
@@ -600,10 +600,10 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsNWidgets(3));
+      expect(find.byType(VelocityDivider), findsNWidgets(3));
       expect(
           find.descendant(
-            of: find.byType(ZephyrDivider),
+            of: find.byType(VelocityDivider),
             matching: find.byType(Container),
           ),
           findsNWidgets(3));
@@ -617,13 +617,13 @@ void main() {
           home: Scaffold(
             body: Semantics(
               label: 'Section divider',
-              child: const ZephyrDivider.horizontal(),
+              child: const VelocityDivider.horizontal(),
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       expect(find.bySemanticsLabel('Section divider'), findsOneWidget);
     });
 
@@ -633,16 +633,16 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.horizontal(
+            body: VelocityDivider.horizontal(
               color: Colors.transparent,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       final container = tester.widget<Container>(find.descendant(
-        of: find.byType(ZephyrDivider),
+        of: find.byType(VelocityDivider),
         matching: find.byType(Container),
       ));
       final decoration = container.decoration as BoxDecoration;
@@ -651,7 +651,7 @@ void main() {
 
     testWidgets('handles divider with theme override',
         (WidgetTester tester) async {
-      const customTheme = ZephyrDividerTheme(
+      const customTheme = VelocityDividerTheme(
         color: Colors.cyan,
         thickness: 2.0,
         indent: 5.0,
@@ -662,7 +662,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.horizontal(
+            body: VelocityDivider.horizontal(
               theme: customTheme,
               color: Colors.red, // This should override the theme color
               thickness: 4.0, // This should override the theme thickness
@@ -671,9 +671,9 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       final container = tester.widget<Container>(find.descendant(
-        of: find.byType(ZephyrDivider),
+        of: find.byType(VelocityDivider),
         matching: find.byType(Container),
       ));
       final decoration = container.decoration as BoxDecoration;
@@ -684,7 +684,7 @@ void main() {
 
     testWidgets('handles divider with spacing values',
         (WidgetTester tester) async {
-      const customTheme = ZephyrDividerTheme(
+      const customTheme = VelocityDividerTheme(
         color: Colors.brown,
         thickness: 1.0,
         verticalSpacing: 20.0,
@@ -695,14 +695,14 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.horizontal(
+            body: VelocityDivider.horizontal(
               theme: customTheme,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       // The divider should use spacing values for overall size calculation
       final sizedBox = tester.widget<SizedBox>(find.byType(SizedBox));
       expect(sizedBox.height, greaterThan(0));
@@ -717,9 +717,9 @@ void main() {
             body: ListView(
               children: [
                 Container(height: 100, color: Colors.red),
-                const ZephyrDivider.horizontal(),
+                const VelocityDivider.horizontal(),
                 Container(height: 100, color: Colors.blue),
-                const ZephyrDivider.horizontal(),
+                const VelocityDivider.horizontal(),
                 Container(height: 100, color: Colors.green),
               ],
             ),
@@ -727,10 +727,10 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsNWidgets(2));
+      expect(find.byType(VelocityDivider), findsNWidgets(2));
       expect(
           find.descendant(
-            of: find.byType(ZephyrDivider),
+            of: find.byType(VelocityDivider),
             matching: find.byType(Container),
           ),
           findsNWidgets(2));
@@ -742,7 +742,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrDivider.horizontal(
+            body: VelocityDivider.horizontal(
               indent: 25.0,
               endIndent: 35.0,
               thickness: 2.5,
@@ -751,9 +751,9 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrDivider), findsOneWidget);
+      expect(find.byType(VelocityDivider), findsOneWidget);
       final container = tester.widget<Container>(find.descendant(
-        of: find.byType(ZephyrDivider),
+        of: find.byType(VelocityDivider),
         matching: find.byType(Container),
       ));
       final margin = container.margin as EdgeInsetsDirectional;

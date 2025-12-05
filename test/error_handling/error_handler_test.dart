@@ -2,45 +2,45 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 // TODO: 重新导入错误处理相关的文件
-// import 'package:zephyr_ui/src/core/error_handling/error_handler.dart';
-// import 'package:zephyr_ui/src/core/error_handling/error_types.dart';
-import 'package:zephyr_ui/src/core/internationalization/error_messages.dart';
+// import 'package:velocity_ui/src/core/error_handling/error_handler.dart';
+// import 'package:velocity_ui/src/core/error_handling/error_types.dart';
+import 'package:velocity_ui/src/core/internationalization/error_messages.dart';
 
 // 临时定义错误处理相关的类
-class ZephyrErrorLogger {
+class VelocityErrorLogger {
   Future<void> logError(dynamic error) async {}
 }
 
-class ZephyrErrorReporter {
+class VelocityErrorReporter {
   Future<void> reportError(dynamic error) async {}
 }
 
-class ZephyrErrorHandler {
-  static final ZephyrErrorHandler instance = ZephyrErrorHandler._internal();
+class VelocityErrorHandler {
   
-  ZephyrErrorHandler._internal();
+  VelocityErrorHandler._internal();
+  static final VelocityErrorHandler instance = VelocityErrorHandler._internal();
 
-  void init(ZephyrErrorHandlerConfig config) {}
+  void init(VelocityErrorHandlerConfig config) {}
 
   Future<void> handleError(dynamic error, {BuildContext? context, dynamic strategy}) async {}
 }
 
-class ZephyrErrorHandlerConfig {
-  final dynamic defaultStrategy;
+class VelocityErrorHandlerConfig {
   
-  const ZephyrErrorHandlerConfig({this.defaultStrategy});
+  const VelocityErrorHandlerConfig({this.defaultStrategy});
+  final dynamic defaultStrategy;
 }
 
 // Mock classes
 class MockBuildContext extends Mock implements BuildContext {}
 
-class MockErrorLogger extends Mock implements ZephyrErrorLogger {}
+class MockErrorLogger extends Mock implements VelocityErrorLogger {}
 
-class MockErrorReporter extends Mock implements ZephyrErrorReporter {}
+class MockErrorReporter extends Mock implements VelocityErrorReporter {}
 
 void main() {
-  group('ZephyrErrorHandler', () {
-    late ZephyrErrorHandler handler;
+  group('VelocityErrorHandler', () {
+    late VelocityErrorHandler handler;
     late MockErrorLogger mockLogger;
     late MockErrorReporter mockReporter;
     late MockBuildContext mockContext;
@@ -54,7 +54,7 @@ void main() {
       when(() => mockLogger.logError(any())).thenAnswer((_) async {});
       when(() => mockReporter.reportError(any())).thenAnswer((_) async {});
       
-      handler = ZephyrErrorHandler.instance;
+      handler = VelocityErrorHandler.instance;
     });
 
     tearDown(() {
@@ -65,14 +65,14 @@ void main() {
 
     group('Initialization', () {
       test('should initialize with default config', () async {
-        final config = ZephyrErrorHandlerConfig();
+        const config = VelocityErrorHandlerConfig();
         handler.init(config);
         
         expect(handler, isNotNull);
       });
 
       test('should set Flutter error callback', () async {
-        final config = ZephyrErrorHandlerConfig();
+        const config = VelocityErrorHandlerConfig();
         handler.init(config);
         
         // Verify FlutterError.onError is set
@@ -82,12 +82,12 @@ void main() {
 
     group('Error Handling', () {
       test('should handle error with logOnly strategy', () async {
-        final config = ZephyrErrorHandlerConfig(
-          defaultStrategy: ZephyrErrorHandlingStrategy.logOnly,
+        final config = VelocityErrorHandlerConfig(
+          defaultStrategy: VelocityErrorHandlingStrategy.logOnly,
         );
         handler.init(config);
         
-        final error = ZephyrError(
+        final error = VelocityError(
           code: 'TEST_ERROR',
           message: 'Test error message',
         );
@@ -99,12 +99,12 @@ void main() {
       });
 
       test('should handle error with showUserMessage strategy', () async {
-        final config = ZephyrErrorHandlerConfig(
-          defaultStrategy: ZephyrErrorHandlingStrategy.showUserMessage,
+        final config = VelocityErrorHandlerConfig(
+          defaultStrategy: VelocityErrorHandlingStrategy.showUserMessage,
         );
         handler.init(config);
         
-        final error = ZephyrError(
+        final error = VelocityError(
           code: 'TEST_ERROR',
           message: 'Test error message',
         );
@@ -116,13 +116,13 @@ void main() {
       });
 
       test('should handle error with autoRecover strategy', () async {
-        final config = ZephyrErrorHandlerConfig(
-          defaultStrategy: ZephyrErrorHandlingStrategy.autoRecover,
+        final config = VelocityErrorHandlerConfig(
+          defaultStrategy: VelocityErrorHandlingStrategy.autoRecover,
           enableAutoRecovery: true,
         );
         handler.init(config);
         
-        final error = ZephyrError(
+        final error = VelocityError(
           code: 'TEST_ERROR',
           message: 'Test error message',
           isRecoverable: true,
@@ -140,7 +140,7 @@ void main() {
       });
 
       test('should handle Flutter framework error', () async {
-        final config = ZephyrErrorHandlerConfig();
+        const config = VelocityErrorHandlerConfig();
         handler.init(config);
         
         final exception = Exception('Flutter error');
@@ -152,8 +152,8 @@ void main() {
         ));
         
         verify(() => mockLogger.logError(argThat(
-          isA<ZephyrError>()
-            .having((e) => e.code, 'code', ZephyrErrorCodes.internalError)
+          isA<VelocityError>()
+            .having((e) => e.code, 'code', VelocityErrorCodes.internalError)
             .having((e) => e.originalException, 'originalException', exception)
             .having((e) => e.stackTrace, 'stackTrace', stackTrace),
         ))).called(1);
@@ -162,7 +162,7 @@ void main() {
 
     group('Error Recovery', () {
       test('should register and call recoverer', () async {
-        final config = ZephyrErrorHandlerConfig();
+        const config = VelocityErrorHandlerConfig();
         handler.init(config);
         
         var recovererCalled = false;
@@ -172,7 +172,7 @@ void main() {
           return null;
         });
         
-        final error = ZephyrError(
+        final error = VelocityError(
           code: 'TEST_ERROR',
           message: 'Test error message',
           isRecoverable: true,
@@ -181,14 +181,14 @@ void main() {
         await handler.handleError(
           error,
           context: mockContext,
-          strategy: ZephyrErrorHandlingStrategy.autoRecover,
+          strategy: VelocityErrorHandlingStrategy.autoRecover,
         );
         
         expect(recovererCalled, isTrue);
       });
 
       test('should unregister recoverer', () async {
-        final config = ZephyrErrorHandlerConfig();
+        const config = VelocityErrorHandlerConfig();
         handler.init(config);
         
         handler.registerRecoverer('TEST_ERROR', (error) async {
@@ -200,13 +200,13 @@ void main() {
         // Should not throw when trying to recover with unregistered recoverer
         await expectLater(
           () => handler.handleError(
-            ZephyrError(
+            VelocityError(
               code: 'TEST_ERROR',
               message: 'Test error message',
               isRecoverable: true,
             ),
             context: mockContext,
-            strategy: ZephyrErrorHandlingStrategy.autoRecover,
+            strategy: VelocityErrorHandlingStrategy.autoRecover,
           ),
           returnsNormally,
         );
@@ -215,18 +215,18 @@ void main() {
 
     group('Error Listeners', () {
       test('should notify error listeners', () async {
-        final config = ZephyrErrorHandlerConfig();
+        const config = VelocityErrorHandlerConfig();
         handler.init(config);
         
         var listenerCalled = false;
-        ZephyrError? receivedError;
+        VelocityError? receivedError;
         
         handler.addErrorListener((error) {
           listenerCalled = true;
           receivedError = error;
         });
         
-        final error = ZephyrError(
+        final error = VelocityError(
           code: 'TEST_ERROR',
           message: 'Test error message',
         );
@@ -238,19 +238,19 @@ void main() {
       });
 
       test('should remove error listener', () async {
-        final config = ZephyrErrorHandlerConfig();
+        const config = VelocityErrorHandlerConfig();
         handler.init(config);
         
         var listenerCalled = false;
         
-        void listener(ZephyrError error) {
+        void listener(VelocityError error) {
           listenerCalled = true;
         }
         
         handler.addErrorListener(listener);
         handler.removeErrorListener(listener);
         
-        final error = ZephyrError(
+        final error = VelocityError(
           code: 'TEST_ERROR',
           message: 'Test error message',
         );
@@ -263,7 +263,7 @@ void main() {
 
     group('Safe Execution', () {
       test('should execute function safely', () async {
-        final config = ZephyrErrorHandlerConfig();
+        const config = VelocityErrorHandlerConfig();
         handler.init(config);
         
         final result = await handler.safeExecute(() async {
@@ -274,7 +274,7 @@ void main() {
       });
 
       test('should handle function error', () async {
-        final config = ZephyrErrorHandlerConfig();
+        const config = VelocityErrorHandlerConfig();
         handler.init(config);
         
         expect(
@@ -286,7 +286,7 @@ void main() {
       });
 
       test('should handle async error', () async {
-        final config = ZephyrErrorHandlerConfig();
+        const config = VelocityErrorHandlerConfig();
         handler.init(config);
         
         final future = Future.error(Exception('Async error'));
@@ -298,15 +298,15 @@ void main() {
         await Future.delayed(Duration.zero);
         
         verify(() => mockLogger.logError(argThat(
-          isA<ZephyrError>()
-            .having((e) => e.code, 'code', ZephyrErrorCodes.operationFailed),
+          isA<VelocityError>()
+            .having((e) => e.code, 'code', VelocityErrorCodes.operationFailed),
         ))).called(1);
       });
     });
 
     group('Error Types', () {
       test('should create component error', () {
-        final error = ZephyrComponentError(
+        final error = VelocityComponentError(
           componentName: 'TestComponent',
           code: 'COMPONENT_ERROR',
           message: 'Component error message',
@@ -318,7 +318,7 @@ void main() {
       });
 
       test('should create theme error', () {
-        final error = ZephyrThemeError(
+        final error = VelocityThemeError(
           themeName: 'TestTheme',
           code: 'THEME_ERROR',
           message: 'Theme error message',
@@ -330,7 +330,7 @@ void main() {
       });
 
       test('should create network error', () {
-        final error = ZephyrNetworkError(
+        final error = VelocityNetworkError(
           statusCode: 404,
           url: 'https://example.com',
           code: 'NETWORK_ERROR',
@@ -344,7 +344,7 @@ void main() {
       });
 
       test('should create validation error', () {
-        final error = ZephyrValidationError(
+        final error = VelocityValidationError(
           field: 'email',
           value: 'invalid-email',
           code: 'VALIDATION_ERROR',
@@ -358,7 +358,7 @@ void main() {
       });
 
       test('should create accessibility error', () {
-        final error = ZephyrAccessibilityError(
+        final error = VelocityAccessibilityError(
           checkItem: 'color_contrast',
           wcagGuideline: '1.4.3',
           code: 'ACCESSIBILITY_ERROR',
@@ -374,35 +374,35 @@ void main() {
 
     group('Error Codes', () {
       test('should have all required error codes', () {
-        expect(ZephyrErrorCodes.unknownError, equals('UNKNOWN_ERROR'));
-        expect(ZephyrErrorCodes.internalError, equals('INTERNAL_ERROR'));
-        expect(ZephyrErrorCodes.invalidArgument, equals('INVALID_ARGUMENT'));
-        expect(ZephyrErrorCodes.operationFailed, equals('OPERATION_FAILED'));
-        expect(ZephyrErrorCodes.networkError, equals('NETWORK_ERROR'));
-        expect(ZephyrErrorCodes.validationError, equals('VALIDATION_ERROR'));
-        expect(ZephyrErrorCodes.accessibilityError, equals('ACCESSIBILITY_ERROR'));
+        expect(VelocityErrorCodes.unknownError, equals('UNKNOWN_ERROR'));
+        expect(VelocityErrorCodes.internalError, equals('INTERNAL_ERROR'));
+        expect(VelocityErrorCodes.invalidArgument, equals('INVALID_ARGUMENT'));
+        expect(VelocityErrorCodes.operationFailed, equals('OPERATION_FAILED'));
+        expect(VelocityErrorCodes.networkError, equals('NETWORK_ERROR'));
+        expect(VelocityErrorCodes.validationError, equals('VALIDATION_ERROR'));
+        expect(VelocityErrorCodes.accessibilityError, equals('ACCESSIBILITY_ERROR'));
       });
     });
 
     group('Error Levels', () {
       test('should map error levels correctly', () {
-        expect(ZephyrErrorLevel.debug.index, equals(0));
-        expect(ZephyrErrorLevel.info.index, equals(1));
-        expect(ZephyrErrorLevel.warning.index, equals(2));
-        expect(ZephyrErrorLevel.error.index, equals(3));
-        expect(ZephyrErrorLevel.critical.index, equals(4));
-        expect(ZephyrErrorLevel.fatal.index, equals(5));
+        expect(VelocityErrorLevel.debug.index, equals(0));
+        expect(VelocityErrorLevel.info.index, equals(1));
+        expect(VelocityErrorLevel.warning.index, equals(2));
+        expect(VelocityErrorLevel.error.index, equals(3));
+        expect(VelocityErrorLevel.critical.index, equals(4));
+        expect(VelocityErrorLevel.fatal.index, equals(5));
       });
     });
 
     group('Error Handling Strategies', () {
       test('should have all required strategies', () {
-        expect(ZephyrErrorHandlingStrategy.values, contains(ZephyrErrorHandlingStrategy.logOnly));
-        expect(ZephyrErrorHandlingStrategy.values, contains(ZephyrErrorHandlingStrategy.showUserMessage));
-        expect(ZephyrErrorHandlingStrategy.values, contains(ZephyrErrorHandlingStrategy.showDetailedDialog));
-        expect(ZephyrErrorHandlingStrategy.values, contains(ZephyrErrorHandlingStrategy.autoRecover));
-        expect(ZephyrErrorHandlingStrategy.values, contains(ZephyrErrorHandlingStrategy.navigateToErrorPage));
-        expect(ZephyrErrorHandlingStrategy.values, contains(ZephyrErrorHandlingStrategy.restartApp));
+        expect(VelocityErrorHandlingStrategy.values, contains(VelocityErrorHandlingStrategy.logOnly));
+        expect(VelocityErrorHandlingStrategy.values, contains(VelocityErrorHandlingStrategy.showUserMessage));
+        expect(VelocityErrorHandlingStrategy.values, contains(VelocityErrorHandlingStrategy.showDetailedDialog));
+        expect(VelocityErrorHandlingStrategy.values, contains(VelocityErrorHandlingStrategy.autoRecover));
+        expect(VelocityErrorHandlingStrategy.values, contains(VelocityErrorHandlingStrategy.navigateToErrorPage));
+        expect(VelocityErrorHandlingStrategy.values, contains(VelocityErrorHandlingStrategy.restartApp));
       });
     });
   });

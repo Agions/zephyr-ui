@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/feedback/tour/tour.dart';
-import 'package:zephyr_ui/src/components/feedback/tour/tour_theme.dart';
+import 'package:velocity_ui/src/components/feedback/tour/tour.dart';
+import 'package:velocity_ui/src/components/feedback/tour/tour_theme.dart';
 
 void main() {
-  group('ZephyrTour', () {
-    late List<ZephyrTourStep> sampleSteps;
+  group('VelocityTour', () {
+    late List<VelocityTourStep> sampleSteps;
     late GlobalKey targetKey;
 
     setUp(() {
       targetKey = GlobalKey();
       sampleSteps = [
-        ZephyrTourStep(
+        const VelocityTourStep(
           id: 'step1',
           title: 'Welcome',
           content: 'Welcome to our app!',
           order: 0,
         ),
-        ZephyrTourStep(
+        VelocityTourStep(
           id: 'step2',
           title: 'Features',
           content: 'Check out our features',
           order: 1,
           targetKey: targetKey,
         ),
-        ZephyrTourStep(
+        const VelocityTourStep(
           id: 'step3',
           title: 'Complete',
           content: 'Tour completed!',
@@ -39,8 +39,8 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                Container(key: targetKey, child: Text('Target')),
-                ZephyrTour(
+                Container(key: targetKey, child: const Text('Target')),
+                VelocityTour(
                   steps: sampleSteps,
                 ),
               ],
@@ -49,19 +49,19 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrTour), findsOneWidget);
+      expect(find.byType(VelocityTour), findsOneWidget);
     });
 
     testWidgets('should auto start tour when enabled', (WidgetTester tester) async {
-      bool tourStarted = false;
+      var tourStarted = false;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: Column(
               children: [
-                Container(key: targetKey, child: Text('Target')),
-                ZephyrTour(
+                Container(key: targetKey, child: const Text('Target')),
+                VelocityTour(
                   steps: sampleSteps,
                   autoStart: true,
                   onTourStart: () {
@@ -85,8 +85,8 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                Container(key: targetKey, child: Text('Target')),
-                ZephyrTour(
+                Container(key: targetKey, child: const Text('Target')),
+                VelocityTour(
                   steps: sampleSteps,
                   autoStart: true,
                 ),
@@ -104,7 +104,7 @@ void main() {
     });
 
     testWidgets('should navigate between steps', (WidgetTester tester) async {
-      int stepChangeCount = 0;
+      var stepChangeCount = 0;
       String? currentStepId;
 
       await tester.pumpWidget(
@@ -112,8 +112,8 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                Container(key: targetKey, child: Text('Target')),
-                ZephyrTour(
+                Container(key: targetKey, child: const Text('Target')),
+                VelocityTour(
                   steps: sampleSteps,
                   autoStart: true,
                   onStepChange: (step) {
@@ -139,15 +139,15 @@ void main() {
     });
 
     testWidgets('should complete tour', (WidgetTester tester) async {
-      bool tourCompleted = false;
+      var tourCompleted = false;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: Column(
               children: [
-                Container(key: targetKey, child: Text('Target')),
-                ZephyrTour(
+                Container(key: targetKey, child: const Text('Target')),
+                VelocityTour(
                   steps: sampleSteps,
                   autoStart: true,
                   onTourComplete: () {
@@ -176,15 +176,15 @@ void main() {
     });
 
     testWidgets('should skip tour', (WidgetTester tester) async {
-      bool tourSkipped = false;
+      var tourSkipped = false;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: Column(
               children: [
-                Container(key: targetKey, child: Text('Target')),
-                ZephyrTour(
+                Container(key: targetKey, child: const Text('Target')),
+                VelocityTour(
                   steps: sampleSteps,
                   autoStart: true,
                   onTourSkip: () {
@@ -212,8 +212,8 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                Container(key: targetKey, child: Text('Target')),
-                ZephyrTour(
+                Container(key: targetKey, child: const Text('Target')),
+                VelocityTour(
                   steps: sampleSteps,
                   autoStart: true,
                   showProgress: true,
@@ -235,8 +235,8 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                Container(key: targetKey, child: Text('Target')),
-                ZephyrTour(
+                Container(key: targetKey, child: const Text('Target')),
+                VelocityTour(
                   steps: sampleSteps,
                   autoStart: true,
                   showStepNumbers: true,
@@ -258,8 +258,8 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                Container(key: targetKey, child: Text('Target')),
-                ZephyrTour(
+                Container(key: targetKey, child: const Text('Target')),
+                VelocityTour(
                   steps: sampleSteps,
                   autoStart: true,
                   allowSkip: false,
@@ -276,9 +276,9 @@ void main() {
     });
   });
 
-  group('ZephyrTourStep', () {
+  group('VelocityTourStep', () {
     test('should create step with required parameters', () {
-      final step = ZephyrTourStep(
+      const step = VelocityTourStep(
         id: 'test',
         title: 'Test Step',
         content: 'Test Content',
@@ -292,7 +292,7 @@ void main() {
     });
 
     test('should copy step with modifications', () {
-      final step = ZephyrTourStep(
+      const step = VelocityTourStep(
         id: 'test',
         title: 'Test Step',
         content: 'Test Content',
@@ -309,7 +309,7 @@ void main() {
     });
 
     test('should handle optional parameters', () {
-      final step = ZephyrTourStep(
+      const step = VelocityTourStep(
         id: 'test',
         title: 'Test Step',
         content: 'Test Content',
@@ -328,17 +328,17 @@ void main() {
     });
   });
 
-  group('ZephyrTourController', () {
-    late List<ZephyrTourStep> sampleSteps;
-    late ZephyrTourController controller;
+  group('VelocityTourController', () {
+    late List<VelocityTourStep> sampleSteps;
+    late VelocityTourController controller;
 
     setUp(() {
       sampleSteps = [
-        ZephyrTourStep(id: '1', title: 'Step 1', content: 'Content 1'),
-        ZephyrTourStep(id: '2', title: 'Step 2', content: 'Content 2'),
-        ZephyrTourStep(id: '3', title: 'Step 3', content: 'Content 3'),
+        const VelocityTourStep(id: '1', title: 'Step 1', content: 'Content 1'),
+        const VelocityTourStep(id: '2', title: 'Step 2', content: 'Content 2'),
+        const VelocityTourStep(id: '3', title: 'Step 3', content: 'Content 3'),
       ];
-      controller = ZephyrTourController(sampleSteps);
+      controller = VelocityTourController(sampleSteps);
     });
 
     test('should start tour', () {
@@ -390,21 +390,21 @@ void main() {
     });
   });
 
-  group('ZephyrTourTheme', () {
+  group('VelocityTourTheme', () {
     test('should create light theme', () {
-      final theme = ZephyrTourTheme.light();
+      final theme = VelocityTourTheme.light();
       expect(theme.headerColor, equals(const Color(0xFF2196F3)));
       expect(theme.backgroundColor, equals(Colors.white));
     });
 
     test('should create dark theme', () {
-      final theme = ZephyrTourTheme.dark();
+      final theme = VelocityTourTheme.dark();
       expect(theme.headerColor, equals(const Color(0xFF1976D2)));
       expect(theme.backgroundColor, equals(const Color(0xFF1E1E1E)));
     });
 
     test('should copy theme with modifications', () {
-      final theme = ZephyrTourTheme.light();
+      final theme = VelocityTourTheme.light();
       final modifiedTheme = theme.copyWith(
         headerColor: Colors.red,
         backgroundColor: Colors.green,
@@ -416,7 +416,7 @@ void main() {
     });
 
     test('should have default button text', () {
-      final theme = ZephyrTourTheme.light();
+      final theme = VelocityTourTheme.light();
       expect(theme.nextButtonText, equals('Next'));
       expect(theme.previousButtonText, equals('Previous'));
       expect(theme.skipButtonText, equals('Skip'));
@@ -424,17 +424,17 @@ void main() {
     });
   });
 
-  group('ZephyrTourPersistence', () {
+  group('VelocityTourPersistence', () {
     test('should have none mode', () {
-      expect(ZephyrTourPersistence.none, isNotNull);
+      expect(VelocityTourPersistence.none, isNotNull);
     });
 
     test('should have sharedPreferences mode', () {
-      expect(ZephyrTourPersistence.sharedPreferences, isNotNull);
+      expect(VelocityTourPersistence.sharedPreferences, isNotNull);
     });
 
     test('should have memory mode', () {
-      expect(ZephyrTourPersistence.memory, isNotNull);
+      expect(VelocityTourPersistence.memory, isNotNull);
     });
   });
 }

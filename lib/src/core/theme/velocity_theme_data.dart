@@ -1,0 +1,466 @@
+/// VelocityUI 主题数据
+///
+/// 包含完整的主题配置，支持亮色和暗色主题。
+library velocity_theme_data;
+
+import 'package:flutter/material.dart';
+import 'velocity_colors.dart';
+import 'velocity_typography.dart';
+
+/// VelocityUI 主题数据
+class VelocityThemeData {
+  const VelocityThemeData({
+    required this.colorScheme,
+    required this.textTheme,
+    this.brightness = Brightness.light,
+    this.primaryColor,
+    this.scaffoldBackgroundColor,
+    this.cardColor,
+    this.dividerColor,
+    this.shadowColor,
+    this.splashColor,
+    this.highlightColor,
+    this.hoverColor,
+    this.focusColor,
+    this.disabledColor,
+    this.buttonTheme,
+    this.inputTheme,
+    this.cardTheme,
+    this.dialogTheme,
+    this.borderRadius,
+    this.spacing,
+    this.elevation,
+  });
+
+  /// 颜色方案
+  final VelocityColorScheme colorScheme;
+  
+  /// 文本主题
+  final VelocityTextTheme textTheme;
+  
+  /// 亮度模式
+  final Brightness brightness;
+  
+  /// 主色
+  final Color? primaryColor;
+  
+  /// 脚手架背景色
+  final Color? scaffoldBackgroundColor;
+  
+  /// 卡片颜色
+  final Color? cardColor;
+  
+  /// 分隔线颜色
+  final Color? dividerColor;
+  
+  /// 阴影颜色
+  final Color? shadowColor;
+  
+  /// 水波纹颜色
+  final Color? splashColor;
+  
+  /// 高亮颜色
+  final Color? highlightColor;
+  
+  /// 悬停颜色
+  final Color? hoverColor;
+  
+  /// 焦点颜色
+  final Color? focusColor;
+  
+  /// 禁用颜色
+  final Color? disabledColor;
+  
+  /// 按钮主题
+  final VelocityButtonThemeData? buttonTheme;
+  
+  /// 输入框主题
+  final VelocityInputThemeData? inputTheme;
+  
+  /// 卡片主题
+  final VelocityCardThemeData? cardTheme;
+  
+  /// 对话框主题
+  final VelocityDialogThemeData? dialogTheme;
+  
+  /// 圆角配置
+  final VelocityBorderRadiusData? borderRadius;
+  
+  /// 间距配置
+  final VelocitySpacingData? spacing;
+  
+  /// 阴影配置
+  final VelocityElevationData? elevation;
+
+  /// 创建亮色主题
+  factory VelocityThemeData.light({
+    Color? primaryColor,
+    Color? secondaryColor,
+    String? fontFamily,
+  }) {
+    final colorScheme = VelocityColorScheme.light;
+    final textTheme = VelocityTextTheme.light(fontFamily: fontFamily);
+    
+    return VelocityThemeData(
+      colorScheme: colorScheme,
+      textTheme: textTheme,
+      brightness: Brightness.light,
+      primaryColor: primaryColor ?? colorScheme.primary,
+      scaffoldBackgroundColor: colorScheme.background,
+      cardColor: VelocityColors.cardLight,
+      dividerColor: colorScheme.outline,
+      shadowColor: VelocityColors.withOpacity(VelocityColors.black, 0.1),
+      splashColor: VelocityColors.withOpacity(colorScheme.primary, 0.12),
+      highlightColor: VelocityColors.withOpacity(colorScheme.primary, 0.08),
+      hoverColor: VelocityColors.withOpacity(colorScheme.primary, 0.04),
+      focusColor: VelocityColors.withOpacity(colorScheme.primary, 0.12),
+      disabledColor: VelocityColors.gray400,
+      buttonTheme: VelocityButtonThemeData.light(),
+      inputTheme: VelocityInputThemeData.light(),
+      cardTheme: VelocityCardThemeData.light(),
+      dialogTheme: VelocityDialogThemeData.light(),
+      borderRadius: const VelocityBorderRadiusData(),
+      spacing: const VelocitySpacingData(),
+      elevation: const VelocityElevationData(),
+    );
+  }
+
+  /// 创建暗色主题
+  factory VelocityThemeData.dark({
+    Color? primaryColor,
+    Color? secondaryColor,
+    String? fontFamily,
+  }) {
+    final colorScheme = VelocityColorScheme.dark;
+    final textTheme = VelocityTextTheme.dark(fontFamily: fontFamily);
+    
+    return VelocityThemeData(
+      colorScheme: colorScheme,
+      textTheme: textTheme,
+      brightness: Brightness.dark,
+      primaryColor: primaryColor ?? colorScheme.primary,
+      scaffoldBackgroundColor: colorScheme.background,
+      cardColor: VelocityColors.cardDark,
+      dividerColor: colorScheme.outline,
+      shadowColor: VelocityColors.withOpacity(VelocityColors.black, 0.3),
+      splashColor: VelocityColors.withOpacity(colorScheme.primary, 0.24),
+      highlightColor: VelocityColors.withOpacity(colorScheme.primary, 0.16),
+      hoverColor: VelocityColors.withOpacity(colorScheme.primary, 0.08),
+      focusColor: VelocityColors.withOpacity(colorScheme.primary, 0.24),
+      disabledColor: VelocityColors.gray600,
+      buttonTheme: VelocityButtonThemeData.dark(),
+      inputTheme: VelocityInputThemeData.dark(),
+      cardTheme: VelocityCardThemeData.dark(),
+      dialogTheme: VelocityDialogThemeData.dark(),
+      borderRadius: const VelocityBorderRadiusData(),
+      spacing: const VelocitySpacingData(),
+      elevation: const VelocityElevationData(),
+    );
+  }
+
+  /// 转换为 Material ThemeData
+  ThemeData toThemeData() {
+    return ThemeData(
+      useMaterial3: true,
+      brightness: brightness,
+      colorScheme: colorScheme.toColorScheme(),
+      textTheme: textTheme.toTextTheme(),
+      primaryColor: primaryColor,
+      scaffoldBackgroundColor: scaffoldBackgroundColor,
+      cardColor: cardColor,
+      dividerColor: dividerColor,
+      shadowColor: shadowColor,
+      splashColor: splashColor,
+      highlightColor: highlightColor,
+      hoverColor: hoverColor,
+      focusColor: focusColor,
+      disabledColor: disabledColor,
+    );
+  }
+
+  /// 复制并修改
+  VelocityThemeData copyWith({
+    VelocityColorScheme? colorScheme,
+    VelocityTextTheme? textTheme,
+    Brightness? brightness,
+    Color? primaryColor,
+    Color? scaffoldBackgroundColor,
+    Color? cardColor,
+    Color? dividerColor,
+    Color? shadowColor,
+    Color? splashColor,
+    Color? highlightColor,
+    Color? hoverColor,
+    Color? focusColor,
+    Color? disabledColor,
+    VelocityButtonThemeData? buttonTheme,
+    VelocityInputThemeData? inputTheme,
+    VelocityCardThemeData? cardTheme,
+    VelocityDialogThemeData? dialogTheme,
+    VelocityBorderRadiusData? borderRadius,
+    VelocitySpacingData? spacing,
+    VelocityElevationData? elevation,
+  }) {
+    return VelocityThemeData(
+      colorScheme: colorScheme ?? this.colorScheme,
+      textTheme: textTheme ?? this.textTheme,
+      brightness: brightness ?? this.brightness,
+      primaryColor: primaryColor ?? this.primaryColor,
+      scaffoldBackgroundColor: scaffoldBackgroundColor ?? this.scaffoldBackgroundColor,
+      cardColor: cardColor ?? this.cardColor,
+      dividerColor: dividerColor ?? this.dividerColor,
+      shadowColor: shadowColor ?? this.shadowColor,
+      splashColor: splashColor ?? this.splashColor,
+      highlightColor: highlightColor ?? this.highlightColor,
+      hoverColor: hoverColor ?? this.hoverColor,
+      focusColor: focusColor ?? this.focusColor,
+      disabledColor: disabledColor ?? this.disabledColor,
+      buttonTheme: buttonTheme ?? this.buttonTheme,
+      inputTheme: inputTheme ?? this.inputTheme,
+      cardTheme: cardTheme ?? this.cardTheme,
+      dialogTheme: dialogTheme ?? this.dialogTheme,
+      borderRadius: borderRadius ?? this.borderRadius,
+      spacing: spacing ?? this.spacing,
+      elevation: elevation ?? this.elevation,
+    );
+  }
+}
+
+/// 按钮主题数据
+class VelocityButtonThemeData {
+  const VelocityButtonThemeData({
+    this.backgroundColor,
+    this.foregroundColor,
+    this.disabledBackgroundColor,
+    this.disabledForegroundColor,
+    this.borderRadius,
+    this.padding,
+    this.elevation,
+    this.textStyle,
+  });
+
+  final Color? backgroundColor;
+  final Color? foregroundColor;
+  final Color? disabledBackgroundColor;
+  final Color? disabledForegroundColor;
+  final BorderRadius? borderRadius;
+  final EdgeInsets? padding;
+  final double? elevation;
+  final TextStyle? textStyle;
+
+  factory VelocityButtonThemeData.light() {
+    return VelocityButtonThemeData(
+      backgroundColor: VelocityColors.primary,
+      foregroundColor: VelocityColors.white,
+      disabledBackgroundColor: VelocityColors.gray300,
+      disabledForegroundColor: VelocityColors.gray500,
+      borderRadius: BorderRadius.circular(8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      elevation: 0,
+    );
+  }
+
+  factory VelocityButtonThemeData.dark() {
+    return VelocityButtonThemeData(
+      backgroundColor: VelocityColors.primaryLight,
+      foregroundColor: VelocityColors.white,
+      disabledBackgroundColor: VelocityColors.gray700,
+      disabledForegroundColor: VelocityColors.gray500,
+      borderRadius: BorderRadius.circular(8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      elevation: 0,
+    );
+  }
+}
+
+/// 输入框主题数据
+class VelocityInputThemeData {
+  const VelocityInputThemeData({
+    this.fillColor,
+    this.borderColor,
+    this.focusedBorderColor,
+    this.errorBorderColor,
+    this.textColor,
+    this.hintColor,
+    this.borderRadius,
+    this.padding,
+  });
+
+  final Color? fillColor;
+  final Color? borderColor;
+  final Color? focusedBorderColor;
+  final Color? errorBorderColor;
+  final Color? textColor;
+  final Color? hintColor;
+  final BorderRadius? borderRadius;
+  final EdgeInsets? padding;
+
+  factory VelocityInputThemeData.light() {
+    return VelocityInputThemeData(
+      fillColor: VelocityColors.white,
+      borderColor: VelocityColors.gray300,
+      focusedBorderColor: VelocityColors.primary,
+      errorBorderColor: VelocityColors.error,
+      textColor: VelocityColors.textPrimaryLight,
+      hintColor: VelocityColors.gray400,
+      borderRadius: BorderRadius.circular(8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+    );
+  }
+
+  factory VelocityInputThemeData.dark() {
+    return VelocityInputThemeData(
+      fillColor: VelocityColors.gray800,
+      borderColor: VelocityColors.gray600,
+      focusedBorderColor: VelocityColors.primaryLight,
+      errorBorderColor: VelocityColors.errorLight,
+      textColor: VelocityColors.textPrimaryDark,
+      hintColor: VelocityColors.gray500,
+      borderRadius: BorderRadius.circular(8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+    );
+  }
+}
+
+/// 卡片主题数据
+class VelocityCardThemeData {
+  const VelocityCardThemeData({
+    this.backgroundColor,
+    this.borderColor,
+    this.shadowColor,
+    this.borderRadius,
+    this.padding,
+    this.elevation,
+  });
+
+  final Color? backgroundColor;
+  final Color? borderColor;
+  final Color? shadowColor;
+  final BorderRadius? borderRadius;
+  final EdgeInsets? padding;
+  final double? elevation;
+
+  factory VelocityCardThemeData.light() {
+    return VelocityCardThemeData(
+      backgroundColor: VelocityColors.white,
+      borderColor: VelocityColors.gray200,
+      shadowColor: VelocityColors.withOpacity(VelocityColors.black, 0.08),
+      borderRadius: BorderRadius.circular(12),
+      padding: const EdgeInsets.all(16),
+      elevation: 1,
+    );
+  }
+
+  factory VelocityCardThemeData.dark() {
+    return VelocityCardThemeData(
+      backgroundColor: VelocityColors.gray800,
+      borderColor: VelocityColors.gray700,
+      shadowColor: VelocityColors.withOpacity(VelocityColors.black, 0.3),
+      borderRadius: BorderRadius.circular(12),
+      padding: const EdgeInsets.all(16),
+      elevation: 1,
+    );
+  }
+}
+
+/// 对话框主题数据
+class VelocityDialogThemeData {
+  const VelocityDialogThemeData({
+    this.backgroundColor,
+    this.titleColor,
+    this.contentColor,
+    this.borderRadius,
+    this.padding,
+    this.elevation,
+  });
+
+  final Color? backgroundColor;
+  final Color? titleColor;
+  final Color? contentColor;
+  final BorderRadius? borderRadius;
+  final EdgeInsets? padding;
+  final double? elevation;
+
+  factory VelocityDialogThemeData.light() {
+    return VelocityDialogThemeData(
+      backgroundColor: VelocityColors.white,
+      titleColor: VelocityColors.textPrimaryLight,
+      contentColor: VelocityColors.textSecondaryLight,
+      borderRadius: BorderRadius.circular(16),
+      padding: const EdgeInsets.all(24),
+      elevation: 8,
+    );
+  }
+
+  factory VelocityDialogThemeData.dark() {
+    return VelocityDialogThemeData(
+      backgroundColor: VelocityColors.gray800,
+      titleColor: VelocityColors.textPrimaryDark,
+      contentColor: VelocityColors.textSecondaryDark,
+      borderRadius: BorderRadius.circular(16),
+      padding: const EdgeInsets.all(24),
+      elevation: 8,
+    );
+  }
+}
+
+/// 圆角配置
+class VelocityBorderRadiusData {
+  const VelocityBorderRadiusData({
+    this.none = 0,
+    this.sm = 4,
+    this.md = 8,
+    this.lg = 12,
+    this.xl = 16,
+    this.xxl = 24,
+    this.full = 9999,
+  });
+
+  final double none;
+  final double sm;
+  final double md;
+  final double lg;
+  final double xl;
+  final double xxl;
+  final double full;
+}
+
+/// 间距配置
+class VelocitySpacingData {
+  const VelocitySpacingData({
+    this.none = 0,
+    this.xs = 4,
+    this.sm = 8,
+    this.md = 16,
+    this.lg = 24,
+    this.xl = 32,
+    this.xxl = 48,
+  });
+
+  final double none;
+  final double xs;
+  final double sm;
+  final double md;
+  final double lg;
+  final double xl;
+  final double xxl;
+}
+
+/// 阴影配置
+class VelocityElevationData {
+  const VelocityElevationData({
+    this.none = 0,
+    this.sm = 1,
+    this.md = 2,
+    this.lg = 4,
+    this.xl = 8,
+    this.xxl = 16,
+  });
+
+  final double none;
+  final double sm;
+  final double md;
+  final double lg;
+  final double xl;
+  final double xxl;
+}

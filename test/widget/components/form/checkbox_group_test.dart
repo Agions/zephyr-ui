@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/forms/checkbox_group/checkbox_group.dart';
-import 'package:zephyr_ui/src/components/forms/checkbox_group/checkbox_group_theme.dart';
-import 'package:zephyr_ui/src/core/theme/theme_data.dart';
+import 'package:velocity_ui/src/components/forms/checkbox_group/checkbox_group.dart';
+import 'package:velocity_ui/src/components/forms/checkbox_group/checkbox_group_theme.dart';
+import 'package:velocity_ui/src/core/theme/theme_data.dart';
 
 void main() {
-  group('ZephyrCheckboxGroup Widget Tests', () {
+  group('VelocityCheckboxGroup Widget Tests', () {
     late final ThemeData theme;
 
     setUpAll(() {
-      final zephyrTheme = ZephyrThemeData.light();
+      final velocityTheme = VelocityThemeData.light();
       theme = ThemeData(
-        brightness: zephyrTheme.brightness,
-        primaryColor: zephyrTheme.primaryColor,
+        brightness: velocityTheme.brightness,
+        primaryColor: velocityTheme.primaryColor,
       );
     });
 
     testWidgets('renders checkbox group with default properties',
         (WidgetTester tester) async {
       final items = [
-        const ZephyrCheckboxItem(value: '1', label: 'Option 1'),
-        const ZephyrCheckboxItem(value: '2', label: 'Option 2'),
-        const ZephyrCheckboxItem(value: '3', label: 'Option 3'),
+        const VelocityCheckboxItem(value: '1', label: 'Option 1'),
+        const VelocityCheckboxItem(value: '2', label: 'Option 2'),
+        const VelocityCheckboxItem(value: '3', label: 'Option 3'),
       ];
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCheckboxGroup(
+            body: VelocityCheckboxGroup(
               items: items,
               value: const ['1'],
             ),
@@ -36,7 +36,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrCheckboxGroup), findsOneWidget);
+      expect(find.byType(VelocityCheckboxGroup), findsOneWidget);
       expect(find.byType(Checkbox), findsNWidgets(3));
       expect(find.text('Option 1'), findsOneWidget);
       expect(find.text('Option 2'), findsOneWidget);
@@ -46,16 +46,16 @@ void main() {
     testWidgets('renders checkbox group with multiple selected values',
         (WidgetTester tester) async {
       final items = [
-        const ZephyrCheckboxItem(value: '1', label: 'Option 1'),
-        const ZephyrCheckboxItem(value: '2', label: 'Option 2'),
-        const ZephyrCheckboxItem(value: '3', label: 'Option 3'),
+        const VelocityCheckboxItem(value: '1', label: 'Option 1'),
+        const VelocityCheckboxItem(value: '2', label: 'Option 2'),
+        const VelocityCheckboxItem(value: '3', label: 'Option 3'),
       ];
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCheckboxGroup(
+            body: VelocityCheckboxGroup(
               items: items,
               value: const ['1', '3'],
             ),
@@ -63,22 +63,22 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrCheckboxGroup), findsOneWidget);
+      expect(find.byType(VelocityCheckboxGroup), findsOneWidget);
       expect(find.byType(Checkbox), findsNWidgets(3));
     });
 
     testWidgets('renders checkbox group with horizontal layout',
         (WidgetTester tester) async {
       final items = [
-        const ZephyrCheckboxItem(value: '1', label: 'Option 1'),
-        const ZephyrCheckboxItem(value: '2', label: 'Option 2'),
+        const VelocityCheckboxItem(value: '1', label: 'Option 1'),
+        const VelocityCheckboxItem(value: '2', label: 'Option 2'),
       ];
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCheckboxGroup(
+            body: VelocityCheckboxGroup(
               items: items,
               value: const ['1'],
               direction: Axis.horizontal,
@@ -87,7 +87,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrCheckboxGroup), findsOneWidget);
+      expect(find.byType(VelocityCheckboxGroup), findsOneWidget);
       expect(find.byType(Checkbox), findsNWidgets(2));
       expect(find.text('Option 1'), findsOneWidget);
       expect(find.text('Option 2'), findsOneWidget);
@@ -96,8 +96,8 @@ void main() {
     testWidgets('handles checkbox selection callback',
         (WidgetTester tester) async {
       final items = [
-        const ZephyrCheckboxItem(value: '1', label: 'Option 1'),
-        const ZephyrCheckboxItem(value: '2', label: 'Option 2'),
+        const VelocityCheckboxItem(value: '1', label: 'Option 1'),
+        const VelocityCheckboxItem(value: '2', label: 'Option 2'),
       ];
 
       List<String>? selectedValues;
@@ -106,7 +106,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCheckboxGroup(
+            body: VelocityCheckboxGroup(
               items: items,
               value: const ['1'],
               onChanged: (values) => selectedValues = values,
@@ -115,7 +115,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrCheckboxGroup), findsOneWidget);
+      expect(find.byType(VelocityCheckboxGroup), findsOneWidget);
       expect(selectedValues, isNull);
 
       // Tap the second checkbox
@@ -131,8 +131,8 @@ void main() {
     testWidgets('handles checkbox deselection callback',
         (WidgetTester tester) async {
       final items = [
-        const ZephyrCheckboxItem(value: '1', label: 'Option 1'),
-        const ZephyrCheckboxItem(value: '2', label: 'Option 2'),
+        const VelocityCheckboxItem(value: '1', label: 'Option 1'),
+        const VelocityCheckboxItem(value: '2', label: 'Option 2'),
       ];
 
       List<String>? selectedValues;
@@ -141,7 +141,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCheckboxGroup(
+            body: VelocityCheckboxGroup(
               items: items,
               value: const ['1', '2'],
               onChanged: (values) => selectedValues = values,
@@ -150,7 +150,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrCheckboxGroup), findsOneWidget);
+      expect(find.byType(VelocityCheckboxGroup), findsOneWidget);
       expect(selectedValues, isNull);
 
       // Tap the first checkbox to deselect it
@@ -165,8 +165,8 @@ void main() {
 
     testWidgets('handles disabled checkbox group', (WidgetTester tester) async {
       final items = [
-        const ZephyrCheckboxItem(value: '1', label: 'Option 1'),
-        const ZephyrCheckboxItem(value: '2', label: 'Option 2'),
+        const VelocityCheckboxItem(value: '1', label: 'Option 1'),
+        const VelocityCheckboxItem(value: '2', label: 'Option 2'),
       ];
 
       List<String>? selectedValues;
@@ -175,7 +175,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCheckboxGroup(
+            body: VelocityCheckboxGroup(
               items: items,
               value: const ['1'],
               disabled: true,
@@ -185,7 +185,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrCheckboxGroup), findsOneWidget);
+      expect(find.byType(VelocityCheckboxGroup), findsOneWidget);
       expect(selectedValues, isNull);
 
       // Try to tap the second checkbox (should not trigger callback)
@@ -198,9 +198,9 @@ void main() {
     testWidgets('handles individual disabled checkbox items',
         (WidgetTester tester) async {
       final items = [
-        const ZephyrCheckboxItem(value: '1', label: 'Option 1'),
-        const ZephyrCheckboxItem(value: '2', label: 'Option 2', disabled: true),
-        const ZephyrCheckboxItem(value: '3', label: 'Option 3'),
+        const VelocityCheckboxItem(value: '1', label: 'Option 1'),
+        const VelocityCheckboxItem(value: '2', label: 'Option 2', disabled: true),
+        const VelocityCheckboxItem(value: '3', label: 'Option 3'),
       ];
 
       List<String>? selectedValues;
@@ -209,7 +209,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCheckboxGroup(
+            body: VelocityCheckboxGroup(
               items: items,
               value: const ['1'],
               onChanged: (values) => selectedValues = values,
@@ -218,7 +218,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrCheckboxGroup), findsOneWidget);
+      expect(find.byType(VelocityCheckboxGroup), findsOneWidget);
       expect(selectedValues, isNull);
 
       // Try to tap the disabled checkbox (should not trigger callback)
@@ -239,15 +239,15 @@ void main() {
 
     testWidgets('handles custom spacing', (WidgetTester tester) async {
       final items = [
-        const ZephyrCheckboxItem(value: '1', label: 'Option 1'),
-        const ZephyrCheckboxItem(value: '2', label: 'Option 2'),
+        const VelocityCheckboxItem(value: '1', label: 'Option 1'),
+        const VelocityCheckboxItem(value: '2', label: 'Option 2'),
       ];
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCheckboxGroup(
+            body: VelocityCheckboxGroup(
               items: items,
               value: const ['1'],
               spacing: 16.0,
@@ -256,7 +256,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrCheckboxGroup), findsOneWidget);
+      expect(find.byType(VelocityCheckboxGroup), findsOneWidget);
       expect(find.byType(Checkbox), findsNWidgets(2));
     });
 
@@ -265,7 +265,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrCheckboxGroup(
+            body: VelocityCheckboxGroup(
               items: [],
               value: [],
             ),
@@ -273,20 +273,20 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrCheckboxGroup), findsOneWidget);
+      expect(find.byType(VelocityCheckboxGroup), findsOneWidget);
       expect(find.byType(Checkbox), findsNothing);
     });
 
     testWidgets('handles single item', (WidgetTester tester) async {
       final items = [
-        const ZephyrCheckboxItem(value: '1', label: 'Single Option'),
+        const VelocityCheckboxItem(value: '1', label: 'Single Option'),
       ];
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCheckboxGroup(
+            body: VelocityCheckboxGroup(
               items: items,
               value: const ['1'],
             ),
@@ -294,18 +294,18 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrCheckboxGroup), findsOneWidget);
+      expect(find.byType(VelocityCheckboxGroup), findsOneWidget);
       expect(find.byType(Checkbox), findsOneWidget);
       expect(find.text('Single Option'), findsOneWidget);
     });
 
     testWidgets('handles custom theme', (WidgetTester tester) async {
       final items = [
-        const ZephyrCheckboxItem(value: '1', label: 'Option 1'),
-        const ZephyrCheckboxItem(value: '2', label: 'Option 2'),
+        const VelocityCheckboxItem(value: '1', label: 'Option 1'),
+        const VelocityCheckboxItem(value: '2', label: 'Option 2'),
       ];
 
-      const customTheme = ZephyrCheckboxGroupTheme(
+      const customTheme = VelocityCheckboxGroupTheme(
         activeColor: Colors.purple,
         checkColor: Colors.white,
         borderColor: Colors.grey,
@@ -320,7 +320,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCheckboxGroup(
+            body: VelocityCheckboxGroup(
               items: items,
               value: const ['1'],
               theme: customTheme,
@@ -329,18 +329,18 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrCheckboxGroup), findsOneWidget);
+      expect(find.byType(VelocityCheckboxGroup), findsOneWidget);
       expect(find.byType(Checkbox), findsNWidgets(2));
     });
 
     testWidgets('handles value updates from parent',
         (WidgetTester tester) async {
       final items = [
-        const ZephyrCheckboxItem(value: '1', label: 'Option 1'),
-        const ZephyrCheckboxItem(value: '2', label: 'Option 2'),
+        const VelocityCheckboxItem(value: '1', label: 'Option 1'),
+        const VelocityCheckboxItem(value: '2', label: 'Option 2'),
       ];
 
-      List<String> values = ['1'];
+      var values = <String>['1'];
 
       await tester.pumpWidget(
         MaterialApp(
@@ -350,7 +350,7 @@ void main() {
               builder: (context, setState) {
                 return Column(
                   children: [
-                    ZephyrCheckboxGroup(
+                    VelocityCheckboxGroup(
                       items: items,
                       value: values,
                       onChanged: (newValues) {
@@ -375,7 +375,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrCheckboxGroup), findsOneWidget);
+      expect(find.byType(VelocityCheckboxGroup), findsOneWidget);
 
       // Initially, first option should be selected
       final firstCheckbox =
@@ -395,19 +395,19 @@ void main() {
 
     testWidgets('handles long labels', (WidgetTester tester) async {
       final items = [
-        const ZephyrCheckboxItem(
+        const VelocityCheckboxItem(
           value: '1',
           label:
               'This is a very long label that should wrap properly without causing any layout issues',
         ),
-        const ZephyrCheckboxItem(value: '2', label: 'Short label'),
+        const VelocityCheckboxItem(value: '2', label: 'Short label'),
       ];
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCheckboxGroup(
+            body: VelocityCheckboxGroup(
               items: items,
               value: const ['1'],
             ),
@@ -415,7 +415,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrCheckboxGroup), findsOneWidget);
+      expect(find.byType(VelocityCheckboxGroup), findsOneWidget);
       expect(find.byType(Checkbox), findsNWidgets(2));
       expect(
           find.text(
@@ -426,15 +426,15 @@ void main() {
     testWidgets('handles special characters in labels',
         (WidgetTester tester) async {
       final items = [
-        const ZephyrCheckboxItem(value: '1', label: 'Option with émojis 🔥'),
-        const ZephyrCheckboxItem(value: '2', label: 'Spëcial Chärs'),
+        const VelocityCheckboxItem(value: '1', label: 'Option with émojis 🔥'),
+        const VelocityCheckboxItem(value: '2', label: 'Spëcial Chärs'),
       ];
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCheckboxGroup(
+            body: VelocityCheckboxGroup(
               items: items,
               value: const ['1'],
             ),
@@ -442,7 +442,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrCheckboxGroup), findsOneWidget);
+      expect(find.byType(VelocityCheckboxGroup), findsOneWidget);
       expect(find.byType(Checkbox), findsNWidgets(2));
       expect(find.text('Option with émojis 🔥'), findsOneWidget);
       expect(find.text('Spëcial Chärs'), findsOneWidget);
@@ -452,7 +452,7 @@ void main() {
         (WidgetTester tester) async {
       final items = List.generate(
         10,
-        (index) => ZephyrCheckboxItem(
+        (index) => VelocityCheckboxItem(
           value: index.toString(),
           label: 'Option $index',
         ),
@@ -463,7 +463,7 @@ void main() {
           theme: theme,
           home: Scaffold(
             body: SingleChildScrollView(
-              child: ZephyrCheckboxGroup(
+              child: VelocityCheckboxGroup(
                 items: items,
                 value: const ['0', '5'],
               ),
@@ -472,20 +472,20 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrCheckboxGroup), findsOneWidget);
+      expect(find.byType(VelocityCheckboxGroup), findsOneWidget);
       expect(find.byType(Checkbox), findsNWidgets(10));
     });
 
     testWidgets('handles multiple checkbox groups in same screen',
         (WidgetTester tester) async {
       final items1 = [
-        const ZephyrCheckboxItem(value: '1', label: 'Group 1 Option 1'),
-        const ZephyrCheckboxItem(value: '2', label: 'Group 1 Option 2'),
+        const VelocityCheckboxItem(value: '1', label: 'Group 1 Option 1'),
+        const VelocityCheckboxItem(value: '2', label: 'Group 1 Option 2'),
       ];
 
       final items2 = [
-        const ZephyrCheckboxItem(value: 'a', label: 'Group 2 Option A'),
-        const ZephyrCheckboxItem(value: 'b', label: 'Group 2 Option B'),
+        const VelocityCheckboxItem(value: 'a', label: 'Group 2 Option A'),
+        const VelocityCheckboxItem(value: 'b', label: 'Group 2 Option B'),
       ];
 
       await tester.pumpWidget(
@@ -494,12 +494,12 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                ZephyrCheckboxGroup(
+                VelocityCheckboxGroup(
                   items: items1,
                   value: const ['1'],
                 ),
                 const SizedBox(height: 20),
-                ZephyrCheckboxGroup(
+                VelocityCheckboxGroup(
                   items: items2,
                   value: const ['a'],
                   direction: Axis.horizontal,
@@ -510,22 +510,22 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrCheckboxGroup), findsNWidgets(2));
+      expect(find.byType(VelocityCheckboxGroup), findsNWidgets(2));
       expect(find.byType(Checkbox), findsNWidgets(4));
     });
 
     testWidgets('handles checkbox group with null callback',
         (WidgetTester tester) async {
       final items = [
-        const ZephyrCheckboxItem(value: '1', label: 'Option 1'),
-        const ZephyrCheckboxItem(value: '2', label: 'Option 2'),
+        const VelocityCheckboxItem(value: '1', label: 'Option 1'),
+        const VelocityCheckboxItem(value: '2', label: 'Option 2'),
       ];
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCheckboxGroup(
+            body: VelocityCheckboxGroup(
               items: items,
               value: const ['1'],
               onChanged: null,
@@ -534,17 +534,17 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrCheckboxGroup), findsOneWidget);
+      expect(find.byType(VelocityCheckboxGroup), findsOneWidget);
       expect(find.byType(Checkbox), findsNWidgets(2));
     });
 
     testWidgets('handles checkbox group with mixed disabled states',
         (WidgetTester tester) async {
       final items = [
-        const ZephyrCheckboxItem(value: '1', label: 'Enabled Option'),
-        const ZephyrCheckboxItem(
+        const VelocityCheckboxItem(value: '1', label: 'Enabled Option'),
+        const VelocityCheckboxItem(
             value: '2', label: 'Disabled Option', disabled: true),
-        const ZephyrCheckboxItem(value: '3', label: 'Another Enabled Option'),
+        const VelocityCheckboxItem(value: '3', label: 'Another Enabled Option'),
       ];
 
       List<String>? selectedValues;
@@ -553,7 +553,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCheckboxGroup(
+            body: VelocityCheckboxGroup(
               items: items,
               value: const ['1'],
               onChanged: (values) => selectedValues = values,
@@ -562,7 +562,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrCheckboxGroup), findsOneWidget);
+      expect(find.byType(VelocityCheckboxGroup), findsOneWidget);
       expect(selectedValues, isNull);
 
       // Should be able to select enabled options

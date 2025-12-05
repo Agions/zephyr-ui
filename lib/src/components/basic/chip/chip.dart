@@ -1,384 +1,102 @@
+/// VelocityUI Chip组件
+library velocity_chip;
+
 import 'package:flutter/material.dart';
+import 'chip_style.dart';
 
-import 'chip_theme.dart';
+export 'chip_style.dart';
 
-/// 标签组件变体
-enum ZephyrChipVariant {
-  /// 默认标签
-  standard,
+/// Chip类型
+enum VelocityChipType { filled, outlined, tonal }
 
-  /// 可选择标签
-  choice,
-
-  /// 过滤标签
-  filter,
-
-  /// 输入标签
-  input,
-
-  /// 操作标签
-  action,
-}
-
-/// ZephyrUI 标签组件
-///
-/// 一个多功能的标签组件，支持多种变体和交互模式。
-///
-/// 示例用法:
-/// ```dart
-/// ZephyrChip(
-///   label: 'Flutter',
-///   onPressed: () => debugPrint('Chip pressed'),
-/// )
-///
-/// ZephyrChip.choice(
-///   label: '前端开发',
-///   selected: true,
-///   onSelected: (selected) => debugPrint('Selected: $selected'),
-/// )
-///
-/// ZephyrChip.filter(
-///   label: '已完成',
-///   selected: false,
-///   onSelected: (selected) => debugPrint('Filter: $selected'),
-/// )
-/// ```
-class ZephyrChip extends StatelessWidget {
-  /// 创建一个标准标签
-  const ZephyrChip({
-    required this.label,
+/// VelocityUI Chip
+class VelocityChip extends StatelessWidget {
+  const VelocityChip({
     super.key,
+    required this.label,
     this.avatar,
+    this.icon,
     this.deleteIcon,
-    this.onPressed,
-    this.onDeleted,
+    this.onTap,
+    this.onDelete,
     this.selected = false,
-    this.enabled = true,
-    this.variant = ZephyrChipVariant.standard,
-    this.theme,
-  }) : onSelected = null;
+    this.disabled = false,
+    this.type = VelocityChipType.filled,
+    this.style,
+  });
 
-  /// 创建一个可选择标签
-  const ZephyrChip.choice({
-    required this.label,
-    super.key,
-    this.avatar,
-    this.selected = false,
-    this.enabled = true,
-    this.onSelected,
-    this.theme,
-  })  : variant = ZephyrChipVariant.choice,
-        deleteIcon = null,
-        onPressed = null,
-        onDeleted = null;
-
-  /// 创建一个过滤标签
-  const ZephyrChip.filter({
-    required this.label,
-    super.key,
-    this.avatar,
-    this.selected = false,
-    this.enabled = true,
-    this.onSelected,
-    this.theme,
-  })  : variant = ZephyrChipVariant.filter,
-        deleteIcon = null,
-        onPressed = null,
-        onDeleted = null;
-
-  /// 创建一个输入标签
-  const ZephyrChip.input({
-    required this.label,
-    super.key,
-    this.avatar,
-    this.deleteIcon,
-    this.enabled = true,
-    this.onDeleted,
-    this.theme,
-  })  : variant = ZephyrChipVariant.input,
-        selected = false,
-        onPressed = null,
-        onSelected = null;
-
-  /// 创建一个操作标签
-  const ZephyrChip.action({
-    required this.label,
-    super.key,
-    this.avatar,
-    this.enabled = true,
-    this.onPressed,
-    this.theme,
-  })  : variant = ZephyrChipVariant.action,
-        deleteIcon = null,
-        selected = false,
-        onDeleted = null,
-        onSelected = null;
-
-  /// 标签文本
   final String label;
-
-  /// 头像组件
   final Widget? avatar;
-
-  /// 删除图标
-  final Widget? deleteIcon;
-
-  /// 是否选中
+  final IconData? icon;
+  final IconData? deleteIcon;
+  final VoidCallback? onTap;
+  final VoidCallback? onDelete;
   final bool selected;
-
-  /// 是否启用
-  final bool enabled;
-
-  /// 标签变体
-  final ZephyrChipVariant variant;
-
-  /// 点击回调
-  final VoidCallback? onPressed;
-
-  /// 选择状态变更回调
-  final ValueChanged<bool>? onSelected;
-
-  /// 删除回调
-  final VoidCallback? onDeleted;
-
-  /// 自定义主题
-  final ZephyrChipTheme? theme;
+  final bool disabled;
+  final VelocityChipType type;
+  final VelocityChipStyle? style;
 
   @override
   Widget build(BuildContext context) {
-    final theme = this.theme ??
-        Theme.of(context).extension<ZephyrChipTheme>() ??
-        ZephyrChipTheme.fallback(context);
-
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: enabled ? _handleTap : null,
-        borderRadius: theme.borderRadius,
-        child: Container(
-          height: theme.height,
-          decoration: BoxDecoration(
-            color: _getBackgroundColor(theme),
-            border: Border.all(
-              color: _getBorderColor(theme),
-              width: theme.borderWidth ?? 1.0,
-            ),
-            borderRadius: theme.borderRadius,
-          ),
-          padding: theme.padding,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (avatar != null) ...[
-                SizedBox(
-                  width: theme.iconSize,
-                  height: theme.iconSize,
-                  child: avatar,
-                ),
-                SizedBox(width: theme.spacing),
-              ],
-              if (variant == ZephyrChipVariant.filter && selected) ...[
-                Icon(
-                  Icons.check,
-                  size: theme.iconSize,
-                  color: _getTextColor(theme),
-                ),
-                SizedBox(width: theme.spacing),
-              ],
-              Flexible(
-                child: Text(
-                  label,
-                  style: theme.textStyle?.copyWith(
-                        color: _getTextColor(theme),
-                      ) ??
-                      TextStyle(color: _getTextColor(theme)),
-                  overflow: TextOverflow.ellipsis,
-                ),
+    final effectiveStyle = style ?? VelocityChipStyle.fromType(type, selected: selected);
+    
+    return GestureDetector(
+      onTap: disabled ? null : onTap,
+      child: Container(
+        padding: effectiveStyle.padding,
+        decoration: BoxDecoration(
+          color: disabled ? effectiveStyle.disabledBackgroundColor : effectiveStyle.backgroundColor,
+          borderRadius: effectiveStyle.borderRadius,
+          border: effectiveStyle.border,
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (avatar != null) ...[avatar!, SizedBox(width: effectiveStyle.spacing)],
+            if (icon != null) ...[Icon(icon, size: effectiveStyle.iconSize, color: effectiveStyle.foregroundColor), SizedBox(width: effectiveStyle.spacing)],
+            Text(label, style: effectiveStyle.labelStyle.copyWith(color: disabled ? effectiveStyle.disabledForegroundColor : effectiveStyle.foregroundColor)),
+            if (onDelete != null) ...[
+              SizedBox(width: effectiveStyle.spacing),
+              GestureDetector(
+                onTap: disabled ? null : onDelete,
+                child: Icon(deleteIcon ?? Icons.close, size: effectiveStyle.iconSize, color: effectiveStyle.foregroundColor),
               ),
-              if (onDeleted != null) ...[
-                SizedBox(width: theme.spacing),
-                GestureDetector(
-                  onTap: enabled ? onDeleted : null,
-                  child: deleteIcon ??
-                      Icon(
-                        Icons.close,
-                        size: theme.iconSize,
-                        color: enabled
-                            ? theme.deleteIconColor
-                            : theme.disabledTextColor,
-                      ),
-                ),
-              ],
             ],
-          ),
+          ],
         ),
       ),
     );
   }
-
-  void _handleTap() {
-    if (onPressed != null) {
-      onPressed!();
-    } else if (onSelected != null) {
-      onSelected!(!selected);
-    }
-  }
-
-  Color _getBackgroundColor(ZephyrChipTheme theme) {
-    if (!enabled) {
-      return theme.disabledBackgroundColor ??
-          theme.backgroundColor ??
-          Colors.grey.shade200;
-    }
-
-    if (selected) {
-      return theme.selectedBackgroundColor ??
-          theme.backgroundColor ??
-          Colors.blue.shade100;
-    }
-
-    return theme.backgroundColor ?? Colors.grey.shade100;
-  }
-
-  Color _getBorderColor(ZephyrChipTheme theme) {
-    if (!enabled) {
-      return theme.disabledBorderColor ??
-          theme.borderColor ??
-          Colors.transparent;
-    }
-
-    if (selected) {
-      return theme.selectedBorderColor ??
-          theme.borderColor ??
-          Colors.transparent;
-    }
-
-    return theme.borderColor ?? Colors.transparent;
-  }
-
-  Color _getTextColor(ZephyrChipTheme theme) {
-    if (!enabled) {
-      return theme.disabledTextColor ?? theme.textColor ?? Colors.black54;
-    }
-
-    if (selected) {
-      return theme.selectedTextColor ?? theme.textColor ?? Colors.black87;
-    }
-
-    return theme.textColor ?? Colors.black87;
-  }
 }
 
-/// 标签组
-class ZephyrChipGroup extends StatefulWidget {
-  /// 创建一个标签组
-  const ZephyrChipGroup({
-    required this.chips,
+/// VelocityUI 选择Chip
+class VelocityChoiceChip extends StatelessWidget {
+  const VelocityChoiceChip({
     super.key,
-    this.selectedChips = const [],
-    this.multiSelect = false,
-    this.onSelectionChanged,
-    this.spacing = 8.0,
-    this.runSpacing = 8.0,
-    this.theme,
+    required this.label,
+    required this.selected,
+    required this.onSelected,
+    this.avatar,
+    this.disabled = false,
+    this.style,
   });
 
-  /// 标签列表
-  final List<ZephyrChipData> chips;
-
-  /// 选中的标签索引列表
-  final List<int> selectedChips;
-
-  /// 是否支持多选
-  final bool multiSelect;
-
-  /// 选择变更回调
-  final ValueChanged<List<int>>? onSelectionChanged;
-
-  /// 水平间距
-  final double spacing;
-
-  /// 垂直间距
-  final double runSpacing;
-
-  /// 自定义主题
-  final ZephyrChipTheme? theme;
-
-  @override
-  State<ZephyrChipGroup> createState() => _ZephyrChipGroupState();
-}
-
-class _ZephyrChipGroupState extends State<ZephyrChipGroup> {
-  late List<int> _selectedChips;
-
-  @override
-  void initState() {
-    super.initState();
-    _selectedChips = List.from(widget.selectedChips);
-  }
-
-  @override
-  void didUpdateWidget(ZephyrChipGroup oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.selectedChips != widget.selectedChips) {
-      _selectedChips = List.from(widget.selectedChips);
-    }
-  }
-
-  void _handleChipSelected(int index, bool selected) {
-    setState(() {
-      if (widget.multiSelect) {
-        if (selected && !_selectedChips.contains(index)) {
-          _selectedChips.add(index);
-        } else if (!selected && _selectedChips.contains(index)) {
-          _selectedChips.remove(index);
-        }
-      } else {
-        _selectedChips = selected ? [index] : [];
-      }
-    });
-
-    widget.onSelectionChanged?.call(_selectedChips);
-  }
+  final String label;
+  final bool selected;
+  final ValueChanged<bool> onSelected;
+  final Widget? avatar;
+  final bool disabled;
+  final VelocityChipStyle? style;
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      spacing: widget.spacing,
-      runSpacing: widget.runSpacing,
-      children: widget.chips.asMap().entries.map((entry) {
-        final index = entry.key;
-        final chipData = entry.value;
-        final isSelected = _selectedChips.contains(index);
-
-        return ZephyrChip.choice(
-          label: chipData.label,
-          avatar: chipData.avatar,
-          selected: isSelected,
-          enabled: chipData.enabled,
-          onSelected: (selected) => _handleChipSelected(index, selected),
-          theme: widget.theme,
-        );
-      }).toList(),
+    return VelocityChip(
+      label: label,
+      avatar: avatar,
+      selected: selected,
+      disabled: disabled,
+      onTap: () => onSelected(!selected),
+      style: style,
     );
   }
-}
-
-/// 标签数据
-class ZephyrChipData {
-  /// 创建标签数据
-  const ZephyrChipData({
-    required this.label,
-    this.avatar,
-    this.enabled = true,
-  });
-
-  /// 标签文本
-  final String label;
-
-  /// 头像组件
-  final Widget? avatar;
-
-  /// 是否启用
-  final bool enabled;
 }

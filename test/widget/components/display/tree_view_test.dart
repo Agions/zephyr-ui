@@ -1,55 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/data_display/tree_view/index.dart';
-import 'package:zephyr_ui/zephyr_ui.dart';
+import 'package:velocity_ui/src/components/data_display/tree_view/index.dart';
+import 'package:velocity_ui/velocity_ui.dart';
 
 void main() {
-  group('ZephyrTreeView Widget Tests', () {
-    late List<ZephyrTreeNode<String>> testNodes;
+  group('VelocityTreeView Widget Tests', () {
+    late List<VelocityTreeNode<String>> testNodes;
 
     setUp(() {
       testNodes = [
-        ZephyrTreeNode<String>(
+        const VelocityTreeNode<String>(
           id: 'root1',
           label: '根节点 1',
           children: [
-            ZephyrTreeNode<String>(
+            VelocityTreeNode<String>(
               id: 'child1',
               label: '子节点 1',
               children: [
-                ZephyrTreeNode<String>(
+                VelocityTreeNode<String>(
                   id: 'grandchild1',
                   label: '孙节点 1',
                 ),
-                ZephyrTreeNode<String>(
+                VelocityTreeNode<String>(
                   id: 'grandchild2',
                   label: '孙节点 2',
                 ),
               ],
             ),
-            ZephyrTreeNode<String>(
+            VelocityTreeNode<String>(
               id: 'child2',
               label: '子节点 2',
             ),
           ],
         ),
-        ZephyrTreeNode<String>(
+        const VelocityTreeNode<String>(
           id: 'root2',
           label: '根节点 2',
           initiallyExpanded: true,
           children: [
-            ZephyrTreeNode<String>(
+            VelocityTreeNode<String>(
               id: 'child3',
               label: '子节点 3',
             ),
           ],
         ),
-        ZephyrTreeNode<String>(
+        const VelocityTreeNode<String>(
           id: 'root3',
           label: '禁用节点',
           disabled: true,
           children: [
-            ZephyrTreeNode<String>(
+            VelocityTreeNode<String>(
               id: 'child4',
               label: '子节点 4',
             ),
@@ -63,18 +63,18 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrTreeViewTheme.light(),
+              VelocityTreeViewTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrTreeView<String>(
+            body: VelocityTreeView<String>(
               nodes: testNodes,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrTreeView<String>), findsOneWidget);
+      expect(find.byType(VelocityTreeView<String>), findsOneWidget);
       expect(find.text('根节点 1'), findsOneWidget);
       expect(find.text('根节点 2'), findsOneWidget);
       expect(find.text('禁用节点'), findsOneWidget);
@@ -85,11 +85,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrTreeViewTheme.light(),
+              VelocityTreeViewTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrTreeView<String>(
+            body: VelocityTreeView<String>(
               nodes: testNodes,
             ),
           ),
@@ -108,13 +108,13 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrTreeViewTheme.light(),
+              VelocityTreeViewTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrTreeView<String>(
+            body: VelocityTreeView<String>(
               nodes: testNodes,
-              expandMode: ZephyrTreeExpandMode.click,
+              expandMode: VelocityTreeExpandMode.click,
             ),
           ),
         ),
@@ -145,11 +145,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrTreeViewTheme.light(),
+              VelocityTreeViewTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrTreeView<String>(
+            body: VelocityTreeView<String>(
               nodes: testNodes,
               onNodeExpand: (node) {
                 expandedNodeId = node.id;
@@ -172,11 +172,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrTreeViewTheme.light(),
+              VelocityTreeViewTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrTreeView<String>(
+            body: VelocityTreeView<String>(
               nodes: testNodes,
               expandedNodes: ['root1'],
               onNodeCollapse: (node) {
@@ -200,11 +200,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrTreeViewTheme.light(),
+              VelocityTreeViewTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrTreeView<String>(
+            body: VelocityTreeView<String>(
               nodes: testNodes,
               onNodeTap: (node) {
                 tappedNodeId = node.id;
@@ -221,19 +221,19 @@ void main() {
     });
 
     testWidgets('supports single selection mode', (WidgetTester tester) async {
-      List<String> selectedNodes = [];
+      var selectedNodes = <String>[];
 
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrTreeViewTheme.light(),
+              VelocityTreeViewTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrTreeView<String>(
+            body: VelocityTreeView<String>(
               nodes: testNodes,
-              selectionMode: ZephyrTreeSelectionMode.single,
+              selectionMode: VelocityTreeSelectionMode.single,
               onSelectionChange: (nodes) {
                 selectedNodes = nodes;
               },
@@ -256,19 +256,19 @@ void main() {
     });
 
     testWidgets('supports multiple selection mode', (WidgetTester tester) async {
-      List<String> selectedNodes = [];
+      var selectedNodes = <String>[];
 
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrTreeViewTheme.light(),
+              VelocityTreeViewTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrTreeView<String>(
+            body: VelocityTreeView<String>(
               nodes: testNodes,
-              selectionMode: ZephyrTreeSelectionMode.multiple,
+              selectionMode: VelocityTreeSelectionMode.multiple,
               onSelectionChange: (nodes) {
                 selectedNodes = nodes;
               },
@@ -298,11 +298,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrTreeViewTheme.light(),
+              VelocityTreeViewTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrTreeView<String>(
+            body: VelocityTreeView<String>(
               nodes: testNodes,
               onNodeTap: (node) {
                 tappedNodeId = node.id;
@@ -324,11 +324,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrTreeViewTheme.light(),
+              VelocityTreeViewTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrTreeView<String>(
+            body: VelocityTreeView<String>(
               nodes: testNodes,
               showIcons: false,
             ),
@@ -345,11 +345,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrTreeViewTheme.light(),
+              VelocityTreeViewTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrTreeView<String>(
+            body: VelocityTreeView<String>(
               nodes: testNodes,
             ),
           ),
@@ -366,11 +366,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrTreeViewTheme.light(),
+              VelocityTreeViewTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrTreeView<String>(
+            body: VelocityTreeView<String>(
               nodes: testNodes,
               showLines: true,
               expandedNodes: ['root1'],
@@ -380,7 +380,7 @@ void main() {
       );
 
       // Should show connecting lines
-      expect(find.byType(ZephyrTreeView<String>), findsOneWidget);
+      expect(find.byType(VelocityTreeView<String>), findsOneWidget);
     });
 
     testWidgets('respects showIcons property', (WidgetTester tester) async {
@@ -388,11 +388,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrTreeViewTheme.light(),
+              VelocityTreeViewTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrTreeView<String>(
+            body: VelocityTreeView<String>(
               nodes: testNodes,
               showIcons: false,
             ),
@@ -410,11 +410,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrTreeViewTheme.light(),
+              VelocityTreeViewTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrTreeView<String>(
+            body: VelocityTreeView<String>(
               nodes: testNodes,
               nodeBuilder: (context, node, level, isSelected, isExpanded) {
                 return Container(
@@ -438,11 +438,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrTreeViewTheme.light(),
+              VelocityTreeViewTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrTreeView<String>(
+            body: VelocityTreeView<String>(
               nodes: testNodes,
               iconBuilder: (context, node, isExpanded) {
                 return Icon(
@@ -462,17 +462,17 @@ void main() {
 
     testWidgets('loads async children when node expanded', (WidgetTester tester) async {
       final asyncNodes = [
-        ZephyrTreeNode<String>(
+        VelocityTreeNode<String>(
           id: 'async_root',
           label: '异步加载节点',
           asyncLoad: true,
           asyncLoader: () async {
             return [
-              ZephyrTreeNode<String>(
+              const VelocityTreeNode<String>(
                 id: 'async_child1',
                 label: '异步子节点 1',
               ),
-              ZephyrTreeNode<String>(
+              const VelocityTreeNode<String>(
                 id: 'async_child2',
                 label: '异步子节点 2',
               ),
@@ -485,11 +485,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrTreeViewTheme.light(),
+              VelocityTreeViewTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrTreeView<String>(
+            body: VelocityTreeView<String>(
               nodes: asyncNodes,
             ),
           ),
@@ -519,11 +519,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrTreeViewTheme.light(),
+              VelocityTreeViewTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrTreeView<String>(
+            body: VelocityTreeView<String>(
               nodes: testNodes,
               draggable: true,
               droppable: true,
@@ -533,7 +533,7 @@ void main() {
       );
 
       // Should be able to drag nodes
-      expect(find.byType(LongPressDraggable<ZephyrTreeNode<String>>), findsNWidgets(4)); // 3 root nodes + 1 disabled
+      expect(find.byType(LongPressDraggable<VelocityTreeNode<String>>), findsNWidgets(4)); // 3 root nodes + 1 disabled
     });
 
     testWidgets('calls onNodeDragStart when drag begins', (WidgetTester tester) async {
@@ -543,11 +543,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrTreeViewTheme.light(),
+              VelocityTreeViewTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrTreeView<String>(
+            body: VelocityTreeView<String>(
               nodes: testNodes,
               draggable: true,
               onNodeDragStart: (node) {
@@ -572,11 +572,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrTreeViewTheme.light(),
+              VelocityTreeViewTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrTreeView<String>(
+            body: VelocityTreeView<String>(
               nodes: testNodes,
               expandedNodes: ['root1'],
               indentation: 40.0,
@@ -586,11 +586,11 @@ void main() {
       );
 
       // Should respect custom indentation
-      expect(find.byType(ZephyrTreeView<String>), findsOneWidget);
+      expect(find.byType(VelocityTreeView<String>), findsOneWidget);
     });
 
     testWidgets('applies custom theme', (WidgetTester tester) async {
-      final customTheme = ZephyrTreeViewTheme.light().copyWith(
+      final customTheme = VelocityTreeViewTheme.light().copyWith(
         nodeHeight: 50.0,
         nodeTextStyle: const TextStyle(fontSize: 18, color: Colors.red),
       );
@@ -601,7 +601,7 @@ void main() {
             extensions: [customTheme],
           ),
           home: Scaffold(
-            body: ZephyrTreeView<String>(
+            body: VelocityTreeView<String>(
               nodes: testNodes,
             ),
           ),
@@ -609,7 +609,7 @@ void main() {
       );
 
       // Should apply custom theme
-      expect(find.byType(ZephyrTreeView<String>), findsOneWidget);
+      expect(find.byType(VelocityTreeView<String>), findsOneWidget);
     });
   });
 }

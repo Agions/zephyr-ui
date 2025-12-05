@@ -1,21 +1,21 @@
-name: zephyr_ui_example
-description: Example app for ZephyrUI component library
-version: 0.1.0
-publish_to: 'none'
+name: velocity_ui_example
+description: VelocityUI library usage examples
+version: 1.0.0+1
+publish_to: 'none'  # Prevent accidental publishing
 
 environment:
-  sdk: ">=2.17.0 <4.0.0"
-  flutter: ">=3.0.0"
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: '>=3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_quill: ^10.8.4
+  velocity_ui:
+    path: ../
   provider: ^6.0.5
   shared_preferences: ^2.2.0
-  zephyr_ui:
-    path: ../
 
+  flutter_quill: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

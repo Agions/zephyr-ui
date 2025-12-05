@@ -1,2 +1,3 @@
+library empty;
 export 'empty.dart';
-export 'empty_theme.dart';
+export 'empty_style.dart';

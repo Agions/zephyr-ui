@@ -1,5 +1,5 @@
-/// ZephyrUI 输入组件导出
-library input_exports;
+/// VelocityUI 输入框组件
+library input;
 
 export 'input.dart';
-export 'input_theme.dart';
+export 'input_style.dart';

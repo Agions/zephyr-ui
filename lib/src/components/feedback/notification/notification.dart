@@ -1,194 +1,105 @@
-/// ZephyrUI 通知提醒组件
-///
-/// 提供通知提醒功能。
-library notification;
+/// VelocityUI 通知组件
+library velocity_notification;
 
 import 'package:flutter/material.dart';
-import 'package:zephyr_ui/zephyr_ui.dart';
+import 'notification_style.dart';
 
-/// ZephyrUI 通知提醒组件
-///
-/// 用于显示通知提醒，通常出现在页面右上角。
-///
-/// 示例用法:
-/// ```dart
-/// ZephyrNotification.success(
-///   title: '成功',
-///   message: '操作已成功完成',
-///   duration: Duration(seconds: 4),
-/// )
-/// ```
-class ZephyrNotification extends StatefulWidget {
-  /// 创建一个通知提醒组件
-  const ZephyrNotification({
-    required this.title,
-    super.key,
-    this.message,
-    this.type = ZephyrVariant.info,
-    this.duration = const Duration(seconds: 4),
-    this.onClose,
-    this.closable = true,
-    this.icon,
-    this.avatar,
-    this.actions,
-    this.theme,
-    this.position = ZephyrNotificationPosition.topRight,
-  });
+export 'notification_style.dart';
 
-  /// 创建成功通知
-  const ZephyrNotification.success({
-    required this.title,
-    super.key,
-    this.message,
-    this.duration = const Duration(seconds: 4),
-    this.onClose,
-    this.closable = true,
-    this.icon,
-    this.avatar,
-    this.actions,
-    this.theme,
-    this.position = ZephyrNotificationPosition.topRight,
-  }) : type = ZephyrVariant.success;
+/// 通知类型
+enum VelocityNotificationType { info, success, warning, error }
 
-  /// 创建错误通知
-  const ZephyrNotification.error({
-    required this.title,
-    super.key,
-    this.message,
-    this.duration = const Duration(seconds: 6),
-    this.onClose,
-    this.closable = true,
-    this.icon,
-    this.avatar,
-    this.actions,
-    this.theme,
-    this.position = ZephyrNotificationPosition.topRight,
-  }) : type = ZephyrVariant.error;
+/// 通知位置
+enum VelocityNotificationPosition { top, bottom }
 
-  /// 创建警告通知
-  const ZephyrNotification.warning({
-    required this.title,
-    super.key,
-    this.message,
-    this.duration = const Duration(seconds: 4),
-    this.onClose,
-    this.closable = true,
-    this.icon,
-    this.avatar,
-    this.actions,
-    this.theme,
-    this.position = ZephyrNotificationPosition.topRight,
-  }) : type = ZephyrVariant.warning;
+/// VelocityUI 通知
+class VelocityNotification {
+  static OverlayEntry? _currentEntry;
 
-  /// 创建信息通知
-  const ZephyrNotification.info({
-    required this.title,
-    super.key,
-    this.message,
-    this.duration = const Duration(seconds: 4),
-    this.onClose,
-    this.closable = true,
-    this.icon,
-    this.avatar,
-    this.actions,
-    this.theme,
-    this.position = ZephyrNotificationPosition.topRight,
-  }) : type = ZephyrVariant.info;
-
-  /// 通知标题
-  final String title;
-
-  /// 通知内容
-  final String? message;
-
-  /// 通知类型
-  final ZephyrVariant type;
-
-  /// 显示时长
-  final Duration duration;
-
-  /// 关闭回调
-  final VoidCallback? onClose;
-
-  /// 是否可关闭
-  final bool closable;
-
-  /// 自定义图标
-  final Widget? icon;
-
-  /// 头像
-  final Widget? avatar;
-
-  /// 操作按钮
-  final List<Widget>? actions;
-
-  /// 自定义主题
-  final ZephyrNotificationTheme? theme;
-
-  /// 显示位置
-  final ZephyrNotificationPosition position;
-
-  /// 显示通知
-  static void show(
-    BuildContext context, {
+  static void show({
+    required BuildContext context,
     required String title,
     String? message,
-    ZephyrVariant type = ZephyrVariant.info,
+    VelocityNotificationType type = VelocityNotificationType.info,
+    VelocityNotificationPosition position = VelocityNotificationPosition.top,
     Duration duration = const Duration(seconds: 4),
-    VoidCallback? onClose,
-    bool closable = true,
-    Widget? icon,
-    Widget? avatar,
-    List<Widget>? actions,
-    ZephyrNotificationTheme? theme,
-    ZephyrNotificationPosition position = ZephyrNotificationPosition.topRight,
+    VoidCallback? onTap,
+    bool showClose = true,
+    VelocityNotificationStyle? style,
   }) {
+    dismiss();
+    final effectiveStyle = style ?? const VelocityNotificationStyle();
     final overlay = Overlay.of(context);
-    final overlayEntry = OverlayEntry(
-      builder: (context) => ZephyrNotification(
+
+    _currentEntry = OverlayEntry(
+      builder: (context) => _VelocityNotificationWidget(
         title: title,
         message: message,
         type: type,
-        duration: duration,
-        onClose: onClose,
-        closable: closable,
-        icon: icon,
-        avatar: avatar,
-        actions: actions,
-        theme: theme,
         position: position,
+        duration: duration,
+        onTap: onTap,
+        showClose: showClose,
+        style: effectiveStyle,
+        onDismiss: dismiss,
       ),
     );
-    overlay.insert(overlayEntry);
 
-    // 自动关闭
-    Future.delayed(duration, () {
-      overlayEntry.remove();
-      onClose?.call();
-    });
+    overlay.insert(_currentEntry!);
   }
 
-  @override
-  State<ZephyrNotification> createState() => _ZephyrNotificationState();
+  static void dismiss() {
+    _currentEntry?.remove();
+    _currentEntry = null;
+  }
 }
 
-class _ZephyrNotificationState extends State<ZephyrNotification>
-    with SingleTickerProviderStateMixin {
+class _VelocityNotificationWidget extends StatefulWidget {
+  const _VelocityNotificationWidget({
+    required this.title,
+    this.message,
+    required this.type,
+    required this.position,
+    required this.duration,
+    this.onTap,
+    required this.showClose,
+    required this.style,
+    required this.onDismiss,
+  });
+
+  final String title;
+  final String? message;
+  final VelocityNotificationType type;
+  final VelocityNotificationPosition position;
+  final Duration duration;
+  final VoidCallback? onTap;
+  final bool showClose;
+  final VelocityNotificationStyle style;
+  final VoidCallback onDismiss;
+
+  @override
+  State<_VelocityNotificationWidget> createState() => _VelocityNotificationWidgetState();
+}
+
+class _VelocityNotificationWidgetState extends State<_VelocityNotificationWidget> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  late Animation<double> _animation;
+  late Animation<Offset> _slideAnimation;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 300),
-      vsync: this,
-    );
-    _animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    );
+    _controller = AnimationController(duration: const Duration(milliseconds: 300), vsync: this);
+    _slideAnimation = Tween<Offset>(
+      begin: Offset(0, widget.position == VelocityNotificationPosition.top ? -1 : 1),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
     _controller.forward();
+    Future.delayed(widget.duration, _dismiss);
+  }
+
+  void _dismiss() {
+    if (!mounted) return;
+    _controller.reverse().then((_) => widget.onDismiss());
   }
 
   @override
@@ -197,148 +108,74 @@ class _ZephyrNotificationState extends State<ZephyrNotification>
     super.dispose();
   }
 
+  Color get _typeColor {
+    switch (widget.type) {
+      case VelocityNotificationType.success: return widget.style.successColor;
+      case VelocityNotificationType.warning: return widget.style.warningColor;
+      case VelocityNotificationType.error: return widget.style.errorColor;
+      default: return widget.style.infoColor;
+    }
+  }
+
+  IconData get _typeIcon {
+    switch (widget.type) {
+      case VelocityNotificationType.success: return Icons.check_circle;
+      case VelocityNotificationType.warning: return Icons.warning;
+      case VelocityNotificationType.error: return Icons.cancel;
+      default: return Icons.info;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final theme =
-        widget.theme ?? ZephyrNotificationTheme.fromTheme(Theme.of(context));
-
     return Positioned(
-      top: widget.position == ZephyrNotificationPosition.topRight ||
-              widget.position == ZephyrNotificationPosition.topLeft
-          ? 20.0
-          : null,
-      bottom: widget.position == ZephyrNotificationPosition.bottomRight ||
-              widget.position == ZephyrNotificationPosition.bottomLeft
-          ? 20.0
-          : null,
-      left: widget.position == ZephyrNotificationPosition.topLeft ||
-              widget.position == ZephyrNotificationPosition.bottomLeft
-          ? 20.0
-          : null,
-      right: widget.position == ZephyrNotificationPosition.topRight ||
-              widget.position == ZephyrNotificationPosition.bottomRight
-          ? 20.0
-          : null,
-      child: FadeTransition(
-        opacity: _animation,
-        child: SlideTransition(
-          position: Tween<Offset>(
-            begin: widget.position == ZephyrNotificationPosition.topRight ||
-                    widget.position == ZephyrNotificationPosition.topLeft
-                ? const Offset(1, -1)
-                : const Offset(1, 1),
-            end: Offset.zero,
-          ).animate(_animation),
+      top: widget.position == VelocityNotificationPosition.top ? MediaQuery.of(context).padding.top + 16 : null,
+      bottom: widget.position == VelocityNotificationPosition.bottom ? MediaQuery.of(context).padding.bottom + 16 : null,
+      left: 16,
+      right: 16,
+      child: SlideTransition(
+        position: _slideAnimation,
+        child: GestureDetector(
+          onTap: widget.onTap,
           child: Material(
             color: Colors.transparent,
             child: Container(
-              width: 320,
-              padding: theme.padding,
+              padding: widget.style.padding,
               decoration: BoxDecoration(
-                color: theme.backgroundColor,
-                borderRadius: theme.borderRadius,
-                border: theme.border,
-                boxShadow: theme.boxShadow,
+                color: widget.style.backgroundColor,
+                borderRadius: widget.style.borderRadius,
+                boxShadow: widget.style.boxShadow,
+                border: Border(left: BorderSide(color: _typeColor, width: 4)),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Row(
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (widget.avatar != null) ...[
-                        widget.avatar!,
-                        const SizedBox(width: 12),
-                      ],
-                      if (widget.icon != null) ...[
-                        widget.icon!,
-                        const SizedBox(width: 12),
-                      ] else
-                        _buildTypeIcon(),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.title,
-                              style: theme.titleStyle,
-                            ),
-                            if (widget.message != null) ...[
-                              const SizedBox(height: 4),
-                              Text(
-                                widget.message!,
-                                style: theme.messageStyle,
-                              ),
-                            ],
-                          ],
-                        ),
-                      ),
-                      if (widget.closable) ...[
-                        const SizedBox(width: 8),
-                        GestureDetector(
-                          onTap: () {
-                            widget.onClose?.call();
-                            if (mounted) {
-                              Navigator.of(context).pop();
-                            }
-                          },
-                          child: Icon(
-                            Icons.close,
-                            color: theme.closeIconColor,
-                            size: 16,
-                          ),
+                  Icon(_typeIcon, color: _typeColor, size: widget.style.iconSize),
+                  SizedBox(width: widget.style.iconSpacing),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(widget.title, style: widget.style.titleStyle),
+                        if (widget.message != null) Padding(
+                          padding: const EdgeInsets.only(top: 4),
+                          child: Text(widget.message!, style: widget.style.messageStyle),
                         ),
                       ],
-                    ],
-                  ),
-                  if (widget.actions != null) ...[
-                    const SizedBox(height: 12),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: widget.actions!,
                     ),
-                  ],
+                  ),
+                  if (widget.showClose) IconButton(
+                    onPressed: _dismiss,
+                    icon: Icon(Icons.close, size: 18, color: widget.style.closeColor),
+                    constraints: const BoxConstraints(),
+                    padding: EdgeInsets.zero,
+                  ),
                 ],
               ),
             ),
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildTypeIcon() {
-    final theme =
-        widget.theme ?? ZephyrNotificationTheme.fromTheme(Theme.of(context));
-    IconData iconData;
-    Color iconColor;
-
-    switch (widget.type) {
-      case ZephyrVariant.success:
-        iconData = Icons.check_circle;
-        iconColor = theme.successIconColor;
-        break;
-      case ZephyrVariant.error:
-        iconData = Icons.error;
-        iconColor = theme.errorIconColor;
-        break;
-      case ZephyrVariant.warning:
-        iconData = Icons.warning;
-        iconColor = theme.warningIconColor;
-        break;
-      case ZephyrVariant.info:
-        iconData = Icons.info;
-        iconColor = theme.infoIconColor;
-        break;
-      default:
-        iconData = Icons.info;
-        iconColor = theme.infoIconColor;
-    }
-
-    return Icon(
-      iconData,
-      color: iconColor,
-      size: 20,
     );
   }
 }

@@ -3,11 +3,9 @@
 /// 提供性能测试相关的工具和方法
 library test_performance;
 
-import 'dart:async';
 import 'dart:developer' as developer;
 import 'dart:io';
 import 'dart:math' as math;
-import 'dart:convert' as json;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:benchmark_harness/benchmark_harness.dart';
@@ -22,14 +20,14 @@ class PerformanceTestUtils {
     int measureCount = 10,
   }) async {
     // 预热
-    for (int i = 0; i < warmUpCount; i++) {
+    for (var i = 0; i < warmUpCount; i++) {
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
     }
     
     // 测量
     final stopwatch = Stopwatch()..start();
-    for (int i = 0; i < measureCount; i++) {
+    for (var i = 0; i < measureCount; i++) {
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
     }
@@ -49,14 +47,14 @@ class PerformanceTestUtils {
     await tester.pumpAndSettle();
     
     // 预热
-    for (int i = 0; i < warmUpCount; i++) {
+    for (var i = 0; i < warmUpCount; i++) {
       await tester.binding.reassembleApplication();
       await tester.pumpAndSettle();
     }
     
     // 测量
     final stopwatch = Stopwatch()..start();
-    for (int i = 0; i < measureCount; i++) {
+    for (var i = 0; i < measureCount; i++) {
       await tester.binding.reassembleApplication();
       await tester.pumpAndSettle();
     }
@@ -76,14 +74,14 @@ class PerformanceTestUtils {
     await tester.pumpAndSettle();
     
     // 预热
-    for (int i = 0; i < warmUpCount; i++) {
+    for (var i = 0; i < warmUpCount; i++) {
       await tester.binding.reassembleApplication();
       await tester.pumpAndSettle();
     }
     
     // 测量
     final stopwatch = Stopwatch()..start();
-    for (int i = 0; i < measureCount; i++) {
+    for (var i = 0; i < measureCount; i++) {
       await tester.binding.reassembleApplication();
       await tester.pumpAndSettle();
     }
@@ -99,7 +97,7 @@ class PerformanceTestUtils {
     int warmUpCount = 5,
   }) async {
     // 预热
-    for (int i = 0; i < warmUpCount; i++) {
+    for (var i = 0; i < warmUpCount; i++) {
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
     }
@@ -152,7 +150,7 @@ class PerformanceTestUtils {
     await tester.pumpWidget(widget);
     await tester.pumpAndSettle();
     
-    int rebuildCount = 0;
+    var rebuildCount = 0;
     final subscription = tester.binding.addPostFrameCallback((_) {
       rebuildCount++;
     });
@@ -325,7 +323,7 @@ class PerformanceTestUtils {
 
 /// 性能基准测试基类
 abstract class PerformanceBenchmarkBase extends BenchmarkBase {
-  PerformanceBenchmarkBase(String name) : super(name);
+  PerformanceBenchmarkBase(super.name);
   
   @override
   Future<void> run() async {
@@ -337,14 +335,14 @@ abstract class PerformanceBenchmarkBase extends BenchmarkBase {
 
 /// 组件构建性能基准测试
 class WidgetBuildBenchmark extends PerformanceBenchmarkBase {
-  final Widget Function() widgetBuilder;
-  final WidgetTester tester;
   
   WidgetBuildBenchmark(
-    String name,
+    super.name,
     this.widgetBuilder,
     this.tester,
-  ) : super(name);
+  );
+  final Widget Function() widgetBuilder;
+  final WidgetTester tester;
   
   @override
   Future<void> runTest() async {
@@ -357,14 +355,14 @@ class WidgetBuildBenchmark extends PerformanceBenchmarkBase {
 
 /// 组件布局性能基准测试
 class WidgetLayoutBenchmark extends PerformanceBenchmarkBase {
-  final Widget Function() widgetBuilder;
-  final WidgetTester tester;
   
   WidgetLayoutBenchmark(
-    String name,
+    super.name,
     this.widgetBuilder,
     this.tester,
-  ) : super(name);
+  );
+  final Widget Function() widgetBuilder;
+  final WidgetTester tester;
   
   @override
   Future<void> runTest() async {
@@ -377,14 +375,14 @@ class WidgetLayoutBenchmark extends PerformanceBenchmarkBase {
 
 /// 组件绘制性能基准测试
 class WidgetPaintBenchmark extends PerformanceBenchmarkBase {
-  final Widget Function() widgetBuilder;
-  final WidgetTester tester;
   
   WidgetPaintBenchmark(
-    String name,
+    super.name,
     this.widgetBuilder,
     this.tester,
-  ) : super(name);
+  );
+  final Widget Function() widgetBuilder;
+  final WidgetTester tester;
   
   @override
   Future<void> runTest() async {
@@ -397,14 +395,14 @@ class WidgetPaintBenchmark extends PerformanceBenchmarkBase {
 
 /// 内存使用基准测试
 class MemoryUsageBenchmark extends PerformanceBenchmarkBase {
-  final Widget Function() widgetBuilder;
-  final WidgetTester tester;
   
   MemoryUsageBenchmark(
-    String name,
+    super.name,
     this.widgetBuilder,
     this.tester,
-  ) : super(name);
+  );
+  final Widget Function() widgetBuilder;
+  final WidgetTester tester;
   
   @override
   Future<void> runTest() async {
@@ -417,14 +415,14 @@ class MemoryUsageBenchmark extends PerformanceBenchmarkBase {
 
 /// 帧率基准测试
 class FrameRateBenchmark extends PerformanceBenchmarkBase {
-  final Widget Function() widgetBuilder;
-  final WidgetTester tester;
   
   FrameRateBenchmark(
-    String name,
+    super.name,
     this.widgetBuilder,
     this.tester,
-  ) : super(name);
+  );
+  final Widget Function() widgetBuilder;
+  final WidgetTester tester;
   
   @override
   Future<void> runTest() async {
@@ -437,17 +435,6 @@ class FrameRateBenchmark extends PerformanceBenchmarkBase {
 
 /// 性能测试配置
 class PerformanceTestConfig {
-  static const Duration defaultTimeout = Duration(minutes: 5);
-  static const int defaultWarmUpCount = 5;
-  static const int defaultMeasureCount = 10;
-  static const Duration defaultMeasureDuration = Duration(seconds: 5);
-  static const double defaultTolerance = 0.1;
-  
-  final Duration timeout;
-  final int warmUpCount;
-  final int measureCount;
-  final Duration measureDuration;
-  final double tolerance;
   
   const PerformanceTestConfig({
     this.timeout = defaultTimeout,
@@ -486,17 +473,21 @@ class PerformanceTestConfig {
     measureDuration: measureDuration,
     tolerance: tolerance,
   );
+  static const Duration defaultTimeout = Duration(minutes: 5);
+  static const int defaultWarmUpCount = 5;
+  static const int defaultMeasureCount = 10;
+  static const Duration defaultMeasureDuration = Duration(seconds: 5);
+  static const double defaultTolerance = 0.1;
+  
+  final Duration timeout;
+  final int warmUpCount;
+  final int measureCount;
+  final Duration measureDuration;
+  final double tolerance;
 }
 
 /// 性能测试结果
 class PerformanceTestResult {
-  final String testName;
-  final Duration buildTime;
-  final Map<String, dynamic> memoryUsage;
-  final double frameRate;
-  final int rebuildCount;
-  final DateTime timestamp;
-  final Map<String, dynamic>? metadata;
   
   PerformanceTestResult({
     required this.testName,
@@ -507,6 +498,13 @@ class PerformanceTestResult {
     required this.timestamp,
     this.metadata,
   });
+  final String testName;
+  final Duration buildTime;
+  final Map<String, dynamic> memoryUsage;
+  final double frameRate;
+  final int rebuildCount;
+  final DateTime timestamp;
+  final Map<String, dynamic>? metadata;
   
   Map<String, dynamic> toJson() {
     return {
@@ -660,7 +658,7 @@ class PerformanceTestTools {
   /// 强制垃圾回收
   static Future<void> forceGC() async {
     // 强制垃圾回收
-    await Future.delayed(Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 100));
   }
   
   /// 获取内存信息

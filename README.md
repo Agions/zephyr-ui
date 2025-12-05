@@ -1,23 +1,23 @@
-# ZephyrUI
+# VelocityUI
 
 <div align="center">
 
-![ZephyrUI Logo](https://raw.githubusercontent.com/Agions/zephyr-ui/main/assets/images/logo.png)
+![VelocityUI Logo](https://raw.githubusercontent.com/Agions/velocity-ui/main/assets/images/logo.png)
 
-**企业级 Flutter UI 组件库**
+**高性能企业级 Flutter UI 组件库**
 
 ![Flutter](https://img.shields.io/badge/Flutter-3.0+-02569B?style=for-the-badge&logo=flutter&logoColor=white)
 ![Dart](https://img.shields.io/badge/Dart-3.0+-0175C2?style=for-the-badge&logo=dart&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-28A745?style=for-the-badge)
-![Version](https://img.shields.io/badge/Version-0.3.0-FF6B6B?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-0.4.0-FF6B6B?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/Platform-iOS%20%7C%20Android%20%7C%20Web-4A90E2?style=for-the-badge)
 
-[![Stars](https://img.shields.io/github/stars/Agions/zephyr-ui?style=for-the-badge&logo=github)](https://github.com/Agions/zephyr-ui)
-[![Forks](https://img.shields.io/github/forks/Agions/zephyr-ui?style=for-the-badge&logo=github)](https://github.com/Agions/zephyr-ui)
-[![Issues](https://img.shields.io/github/issues/Agions/zephyr-ui?style=for-the-badge&logo=github)](https://github.com/Agions/zephyr-ui/issues)
-[![PRs](https://img.shields.io/github/issues-pr/Agions/zephyr-ui?style=for-the-badge&logo=github)](https://github.com/Agions/zephyr-ui/pulls)
+[![Stars](https://img.shields.io/github/stars/Agions/velocity-ui?style=for-the-badge&logo=github)](https://github.com/Agions/velocity-ui)
+[![Forks](https://img.shields.io/github/forks/Agions/velocity-ui?style=for-the-badge&logo=github)](https://github.com/Agions/velocity-ui)
+[![Issues](https://img.shields.io/github/issues/Agions/velocity-ui?style=for-the-badge&logo=github)](https://github.com/Agions/velocity-ui/issues)
+[![PRs](https://img.shields.io/github/issues-pr/Agions/velocity-ui?style=for-the-badge&logo=github)](https://github.com/Agions/velocity-ui/pulls)
 
-**🚀 60+ 专业组件 • 🎨 设计系统 • 📱 响应式 • ♿ 无障碍 • ⚡ 高性能**
+**🚀 60+ 专业组件 • ⚡ 高性能 • 🎨 设计系统 • 📱 响应式 • ♿ 无障碍**
 
 </div>
 
@@ -79,19 +79,19 @@
 dependencies:
   flutter:
     sdk: flutter
-  zephyr_ui: ^0.3.0
+  velocity_ui: ^0.4.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  zephyr_ui_dev_tools: ^0.3.0
+  velocity_ui_dev_tools: ^0.4.0
 ```
 
 ### 2. 基础配置
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:zephyr_ui/zephyr_ui.dart';
+import 'package:velocity_ui/velocity_ui.dart';
 
 void main() {
   runApp(const MyApp());
@@ -102,10 +102,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ZephyrApp(
-      title: 'ZephyrUI 应用',
-      theme: ZephyrTheme.light(),
-      darkTheme: ZephyrTheme.dark(),
+    return VelocityApp(
+      title: 'VelocityUI 应用',
+      theme: VelocityTheme.light(),
+      darkTheme: VelocityTheme.dark(),
       themeMode: ThemeMode.system,
       home: const HomeScreen(),
     );
@@ -123,7 +123,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ZephyrUI 演示'),
+        title: const Text('VelocityUI 演示'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
@@ -132,7 +132,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             // 标题区域
             const Text(
-              '欢迎使用 ZephyrUI',
+              '欢迎使用 VelocityUI',
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
@@ -153,20 +153,20 @@ class HomeScreen extends StatelessWidget {
               spacing: 12,
               runSpacing: 12,
               children: [
-                ZephyrButton(
+                VelocityButton(
                   text: '主要操作',
                   onPressed: () => print('Primary action'),
-                  type: ZephyrButtonType.primary,
+                  type: VelocityButtonType.primary,
                 ),
-                ZephyrButton(
+                VelocityButton(
                   text: '次要操作',
                   onPressed: () => print('Secondary action'),
-                  type: ZephyrButtonType.secondary,
+                  type: VelocityButtonType.secondary,
                 ),
-                ZephyrButton(
+                VelocityButton(
                   text: '边框操作',
                   onPressed: () => print('Outlined action'),
-                  type: ZephyrButtonType.outlined,
+                  type: VelocityButtonType.outlined,
                 ),
               ],
             ),
@@ -174,7 +174,7 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 32),
 
             // 表单组件演示
-            ZephyrInput(
+            VelocityInput(
               label: '邮箱地址',
               placeholder: '请输入您的邮箱',
               prefixIcon: const Icon(Icons.email_outlined),
@@ -192,23 +192,23 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 24),
 
             // 卡片组件演示
-            ZephyrCard(
+            VelocityCard(
               title: '专业 UI 组件',
               subtitle: '为企业级应用精心设计',
               content: const Text(
-                'ZephyrUI 提供了超过 60 个高质量、无障碍且完全可定制的 Flutter 组件，'
+                'VelocityUI 提供了超过 60 个高质量、无障碍且完全可定制的 Flutter 组件，'
                 '帮助开发者快速构建现代化的用户界面。',
               ),
               actions: [
-                ZephyrButton(
+                VelocityButton(
                   text: '查看文档',
                   onPressed: () => print('View documentation'),
-                  type: ZephyrButtonType.text,
+                  type: VelocityButtonType.text,
                 ),
-                ZephyrButton(
+                VelocityButton(
                   text: '立即开始',
                   onPressed: () => print('Get started'),
-                  type: ZephyrButtonType.primary,
+                  type: VelocityButtonType.primary,
                 ),
               ],
             ),
@@ -277,7 +277,7 @@ flutter analyze
 ### 📈 **性能监控**
 
 ```dart
-class ZephyrPerformanceMetrics {
+class VelocityPerformanceMetrics {
   static const Duration targetFrameTime = Duration(milliseconds: 16);
   static const Duration maxBuildTime = Duration(milliseconds: 2);
   static const int maxMemoryUsage = 100; // MB
@@ -293,7 +293,7 @@ class ZephyrPerformanceMetrics {
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    ZephyrUI 架构                            │
+│                    VelocityUI 架构                            │
 ├─────────────────────────────────────────────────────────────┤
 │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────┐  │
 │  │   表现层        │  │   组件层        │  │  工具层     │  │
@@ -329,44 +329,44 @@ class ZephyrPerformanceMetrics {
 
 | 组件 | 功能 | 状态 |
 |------|------|------|
-| `ZephyrInput` | 文本输入框 | ✅ |
-| `ZephyrSelect` | 下拉选择器 | ✅ |
-| `ZephyrDatePicker` | 日期选择器 | ✅ |
-| `ZephyrCheckbox` | 复选框 | ✅ |
-| `ZephyrRadio` | 单选按钮 | ✅ |
-| `ZephyrSwitch` | 开关切换 | ✅ |
-| `ZephyrSlider` | 滑块组件 | ✅ |
-| `ZephyrRating` | 评分组件 | ✅ |
-| `ZephyrTimePicker` | 时间选择器 | ✅ |
-| `ZephyrTextArea` | 多行文本输入 | ✅ |
-| `ZephyrCheckboxGroup` | 复选框组 | ✅ |
-| `ZephyrRadioGroup` | 单选框组 | ✅ |
+| `VelocityInput` | 文本输入框 | ✅ |
+| `VelocitySelect` | 下拉选择器 | ✅ |
+| `VelocityDatePicker` | 日期选择器 | ✅ |
+| `VelocityCheckbox` | 复选框 | ✅ |
+| `VelocityRadio` | 单选按钮 | ✅ |
+| `VelocitySwitch` | 开关切换 | ✅ |
+| `VelocitySlider` | 滑块组件 | ✅ |
+| `VelocityRating` | 评分组件 | ✅ |
+| `VelocityTimePicker` | 时间选择器 | ✅ |
+| `VelocityTextArea` | 多行文本输入 | ✅ |
+| `VelocityCheckboxGroup` | 复选框组 | ✅ |
+| `VelocityRadioGroup` | 单选框组 | ✅ |
 
 ### 🎯 基础组件
 
 | 组件 | 功能 | 状态 |
 |------|------|------|
-| `ZephyrButton` | 多样式按钮 | ✅ |
-| `ZephyrAvatar` | 头像组件 | ✅ |
-| `ZephyrBadge` | 徽章指示器 | ✅ |
-| `ZephyrCard` | 卡片组件 | ✅ |
-| `ZephyrChip` | 标签选择器 | ✅ |
-| `ZephyrIcon` | 图标组件 | ✅ |
-| `ZephyrText` | 文本组件 | ✅ |
-| `ZephyrDivider` | 分割线组件 | ✅ |
+| `VelocityButton` | 多样式按钮 | ✅ |
+| `VelocityAvatar` | 头像组件 | ✅ |
+| `VelocityBadge` | 徽章指示器 | ✅ |
+| `VelocityCard` | 卡片组件 | ✅ |
+| `VelocityChip` | 标签选择器 | ✅ |
+| `VelocityIcon` | 图标组件 | ✅ |
+| `VelocityText` | 文本组件 | ✅ |
+| `VelocityDivider` | 分割线组件 | ✅ |
 
 ### 🧭 导航组件
 
 | 组件 | 功能 | 状态 |
 |------|------|------|
-| `ZephyrTabs` | 选项卡导航 | ✅ |
-| `ZephyrStepper` | 步骤器 | ✅ |
-| `ZephyrBreadcrumb` | 面包屑导航 | ✅ |
-| `ZephyrPagination` | 分页组件 | ✅ |
-| `ZephyrBottomNavigationBar` | 底部导航栏 | ✅ |
-| `ZephyrSideMenu` | 侧边菜单 | ✅ |
-| `ZephyrNavigationRail` | 导航栏 | ✅ |
-| `ZephyrTour` | 引导游览 | ✅ |
+| `VelocityTabs` | 选项卡导航 | ✅ |
+| `VelocityStepper` | 步骤器 | ✅ |
+| `VelocityBreadcrumb` | 面包屑导航 | ✅ |
+| `VelocityPagination` | 分页组件 | ✅ |
+| `VelocityBottomNavigationBar` | 底部导航栏 | ✅ |
+| `VelocitySideMenu` | 侧边菜单 | ✅ |
+| `VelocityNavigationRail` | 导航栏 | ✅ |
+| `VelocityTour` | 引导游览 | ✅ |
 
 ---
 

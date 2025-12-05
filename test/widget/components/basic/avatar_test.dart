@@ -1,9 +1,9 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/basic/avatar/avatar.dart';
-import 'package:zephyr_ui/src/components/basic/avatar/avatar_theme.dart';
-import 'package:zephyr_ui/src/core/theme/theme_data.dart';
+import 'package:velocity_ui/src/components/basic/avatar/avatar.dart';
+import 'package:velocity_ui/src/components/basic/avatar/avatar_theme.dart';
+import 'package:velocity_ui/src/core/theme/theme_data.dart';
 
 // Test image provider that doesn't require network calls
 class TestImageProvider extends ImageProvider<TestImageProvider> {
@@ -42,14 +42,14 @@ class TestImageProvider extends ImageProvider<TestImageProvider> {
 }
 
 void main() {
-  group('ZephyrAvatar Widget Tests', () {
+  group('VelocityAvatar Widget Tests', () {
     late ThemeData theme;
 
     setUpAll(() {
-      final zephyrTheme = ZephyrThemeData.light();
+      final velocityTheme = VelocityThemeData.light();
       theme = ThemeData(
-        brightness: zephyrTheme.brightness,
-        primaryColor: zephyrTheme.primaryColor,
+        brightness: velocityTheme.brightness,
+        primaryColor: velocityTheme.primaryColor,
       );
     });
 
@@ -59,14 +59,14 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               child: Icon(Icons.person),
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrAvatar), findsOneWidget);
+      expect(find.byType(VelocityAvatar), findsOneWidget);
       expect(find.byType(Icon), findsOneWidget);
       expect(find.byIcon(Icons.person), findsOneWidget);
     });
@@ -78,14 +78,14 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               image: testImage,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrAvatar), findsOneWidget);
+      expect(find.byType(VelocityAvatar), findsOneWidget);
       expect(find.byType(Image), findsOneWidget);
     });
 
@@ -94,14 +94,14 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               text: 'John Doe',
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrAvatar), findsOneWidget);
+      expect(find.byType(VelocityAvatar), findsOneWidget);
       expect(find.byType(Text), findsOneWidget);
       expect(find.text('JO'), findsOneWidget); // First 2 characters, uppercase
     });
@@ -112,14 +112,14 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               text: 'A',
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrAvatar), findsOneWidget);
+      expect(find.byType(VelocityAvatar), findsOneWidget);
       expect(find.byType(Text), findsOneWidget);
       expect(find.text('A'), findsOneWidget);
     });
@@ -132,14 +132,14 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrAvatar.image(
+            body: VelocityAvatar.image(
               image: testImage,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrAvatar), findsOneWidget);
+      expect(find.byType(VelocityAvatar), findsOneWidget);
       expect(find.byType(Image), findsOneWidget);
     });
 
@@ -149,14 +149,14 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrAvatar.text(
+            body: VelocityAvatar.text(
               text: 'Alice',
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrAvatar), findsOneWidget);
+      expect(find.byType(VelocityAvatar), findsOneWidget);
       expect(find.byType(Text), findsOneWidget);
       expect(find.text('AL'), findsOneWidget);
     });
@@ -167,14 +167,14 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrAvatar.icon(
+            body: VelocityAvatar.icon(
               icon: Icons.star,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrAvatar), findsOneWidget);
+      expect(find.byType(VelocityAvatar), findsOneWidget);
       expect(find.byType(Icon), findsOneWidget);
       expect(find.byIcon(Icons.star), findsOneWidget);
     });
@@ -184,19 +184,19 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrAvatar(
-              size: ZephyrAvatarSize.large,
+            body: VelocityAvatar(
+              size: VelocityAvatarSize.large,
               child: Icon(Icons.person),
             ),
           ),
         ),
       );
 
-      final avatarFinder = find.byType(ZephyrAvatar);
+      final avatarFinder = find.byType(VelocityAvatar);
       expect(avatarFinder, findsOneWidget);
 
-      final avatar = tester.widget<ZephyrAvatar>(avatarFinder);
-      expect(avatar.size, equals(ZephyrAvatarSize.large));
+      final avatar = tester.widget<VelocityAvatar>(avatarFinder);
+      expect(avatar.size, equals(VelocityAvatarSize.large));
     });
 
     testWidgets('handles circle shape', (WidgetTester tester) async {
@@ -204,19 +204,19 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrAvatar(
-              shape: ZephyrAvatarShape.circle,
+            body: VelocityAvatar(
+              shape: VelocityAvatarShape.circle,
               child: Icon(Icons.person),
             ),
           ),
         ),
       );
 
-      final avatarFinder = find.byType(ZephyrAvatar);
+      final avatarFinder = find.byType(VelocityAvatar);
       expect(avatarFinder, findsOneWidget);
 
-      final avatar = tester.widget<ZephyrAvatar>(avatarFinder);
-      expect(avatar.shape, equals(ZephyrAvatarShape.circle));
+      final avatar = tester.widget<VelocityAvatar>(avatarFinder);
+      expect(avatar.shape, equals(VelocityAvatarShape.circle));
     });
 
     testWidgets('handles square shape', (WidgetTester tester) async {
@@ -224,19 +224,19 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrAvatar(
-              shape: ZephyrAvatarShape.square,
+            body: VelocityAvatar(
+              shape: VelocityAvatarShape.square,
               child: Icon(Icons.person),
             ),
           ),
         ),
       );
 
-      final avatarFinder = find.byType(ZephyrAvatar);
+      final avatarFinder = find.byType(VelocityAvatar);
       expect(avatarFinder, findsOneWidget);
 
-      final avatar = tester.widget<ZephyrAvatar>(avatarFinder);
-      expect(avatar.shape, equals(ZephyrAvatarShape.square));
+      final avatar = tester.widget<VelocityAvatar>(avatarFinder);
+      expect(avatar.shape, equals(VelocityAvatarShape.square));
     });
 
     testWidgets('handles custom backgroundColor', (WidgetTester tester) async {
@@ -246,7 +246,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               backgroundColor: customBackgroundColor,
               child: Icon(Icons.person),
             ),
@@ -254,10 +254,10 @@ void main() {
         ),
       );
 
-      final avatarFinder = find.byType(ZephyrAvatar);
+      final avatarFinder = find.byType(VelocityAvatar);
       expect(avatarFinder, findsOneWidget);
 
-      final avatar = tester.widget<ZephyrAvatar>(avatarFinder);
+      final avatar = tester.widget<VelocityAvatar>(avatarFinder);
       expect(avatar.backgroundColor, equals(customBackgroundColor));
     });
 
@@ -268,7 +268,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               foregroundColor: customForegroundColor,
               child: Icon(Icons.person),
             ),
@@ -276,10 +276,10 @@ void main() {
         ),
       );
 
-      final avatarFinder = find.byType(ZephyrAvatar);
+      final avatarFinder = find.byType(VelocityAvatar);
       expect(avatarFinder, findsOneWidget);
 
-      final avatar = tester.widget<ZephyrAvatar>(avatarFinder);
+      final avatar = tester.widget<VelocityAvatar>(avatarFinder);
       expect(avatar.foregroundColor, equals(customForegroundColor));
     });
 
@@ -291,7 +291,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               borderWidth: customBorderWidth,
               borderColor: customBorderColor,
               child: Icon(Icons.person),
@@ -300,10 +300,10 @@ void main() {
         ),
       );
 
-      final avatarFinder = find.byType(ZephyrAvatar);
+      final avatarFinder = find.byType(VelocityAvatar);
       expect(avatarFinder, findsOneWidget);
 
-      final avatar = tester.widget<ZephyrAvatar>(avatarFinder);
+      final avatar = tester.widget<VelocityAvatar>(avatarFinder);
       expect(avatar.borderWidth, equals(customBorderWidth));
       expect(avatar.borderColor, equals(customBorderColor));
     });
@@ -315,7 +315,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               elevation: customElevation,
               child: Icon(Icons.person),
             ),
@@ -323,10 +323,10 @@ void main() {
         ),
       );
 
-      final avatarFinder = find.byType(ZephyrAvatar);
+      final avatarFinder = find.byType(VelocityAvatar);
       expect(avatarFinder, findsOneWidget);
 
-      final avatar = tester.widget<ZephyrAvatar>(avatarFinder);
+      final avatar = tester.widget<VelocityAvatar>(avatarFinder);
       expect(avatar.elevation, equals(customElevation));
     });
 
@@ -337,7 +337,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               shadowColor: customShadowColor,
               child: Icon(Icons.person),
             ),
@@ -345,21 +345,21 @@ void main() {
         ),
       );
 
-      final avatarFinder = find.byType(ZephyrAvatar);
+      final avatarFinder = find.byType(VelocityAvatar);
       expect(avatarFinder, findsOneWidget);
 
-      final avatar = tester.widget<ZephyrAvatar>(avatarFinder);
+      final avatar = tester.widget<VelocityAvatar>(avatarFinder);
       expect(avatar.shadowColor, equals(customShadowColor));
     });
 
     testWidgets('handles onTap callback', (WidgetTester tester) async {
-      bool tapped = false;
+      var tapped = false;
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               onTap: () {
                 tapped = true;
               },
@@ -371,7 +371,7 @@ void main() {
 
       expect(tapped, isFalse);
 
-      await tester.tap(find.byType(ZephyrAvatar));
+      await tester.tap(find.byType(VelocityAvatar));
       await tester.pump();
 
       expect(tapped, isTrue);
@@ -385,24 +385,24 @@ void main() {
           home: const Scaffold(
             body: Column(
               children: [
-                ZephyrAvatar(
-                  size: ZephyrAvatarSize.extraSmall,
+                VelocityAvatar(
+                  size: VelocityAvatarSize.extraSmall,
                   child: Icon(Icons.person),
                 ),
-                ZephyrAvatar(
-                  size: ZephyrAvatarSize.small,
+                VelocityAvatar(
+                  size: VelocityAvatarSize.small,
                   child: Icon(Icons.person),
                 ),
-                ZephyrAvatar(
-                  size: ZephyrAvatarSize.medium,
+                VelocityAvatar(
+                  size: VelocityAvatarSize.medium,
                   child: Icon(Icons.person),
                 ),
-                ZephyrAvatar(
-                  size: ZephyrAvatarSize.large,
+                VelocityAvatar(
+                  size: VelocityAvatarSize.large,
                   child: Icon(Icons.person),
                 ),
-                ZephyrAvatar(
-                  size: ZephyrAvatarSize.extraLarge,
+                VelocityAvatar(
+                  size: VelocityAvatarSize.extraLarge,
                   child: Icon(Icons.person),
                 ),
               ],
@@ -411,7 +411,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrAvatar), findsNWidgets(5));
+      expect(find.byType(VelocityAvatar), findsNWidgets(5));
       expect(find.byIcon(Icons.person), findsNWidgets(5));
     });
 
@@ -421,12 +421,12 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrAvatar(),
+            body: VelocityAvatar(),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrAvatar), findsOneWidget);
+      expect(find.byType(VelocityAvatar), findsOneWidget);
       expect(find.byType(SizedBox), findsOneWidget);
     });
 
@@ -436,7 +436,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               text: 'Test',
               backgroundColor: Colors.red,
               foregroundColor: Colors.white,
@@ -445,7 +445,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrAvatar), findsOneWidget);
+      expect(find.byType(VelocityAvatar), findsOneWidget);
       expect(find.text('TE'), findsOneWidget);
     });
 
@@ -457,10 +457,10 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               image: testImage,
-              size: ZephyrAvatarSize.large,
-              shape: ZephyrAvatarShape.square,
+              size: VelocityAvatarSize.large,
+              shape: VelocityAvatarShape.square,
               borderWidth: 3.0,
               borderColor: Colors.green,
               elevation: 6.0,
@@ -469,7 +469,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrAvatar), findsOneWidget);
+      expect(find.byType(VelocityAvatar), findsOneWidget);
       expect(find.byType(Image), findsOneWidget);
     });
 
@@ -479,19 +479,19 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrAvatar.icon(
+            body: VelocityAvatar.icon(
               icon: Icons.favorite,
               backgroundColor: Colors.pink,
               foregroundColor: Colors.white,
-              size: ZephyrAvatarSize.extraLarge,
-              shape: ZephyrAvatarShape.circle,
+              size: VelocityAvatarSize.extraLarge,
+              shape: VelocityAvatarShape.circle,
               onTap: () {},
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrAvatar), findsOneWidget);
+      expect(find.byType(VelocityAvatar), findsOneWidget);
       expect(find.byIcon(Icons.favorite), findsOneWidget);
     });
 
@@ -500,7 +500,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               text: 'JD',
               onTap: () {},
             ),
@@ -508,7 +508,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrAvatar), findsOneWidget);
+      expect(find.byType(VelocityAvatar), findsOneWidget);
       // Avatar should be tappable for accessibility
       expect(find.byType(InkWell), findsOneWidget);
     });
@@ -516,7 +516,7 @@ void main() {
     testWidgets('handles theme inheritance', (WidgetTester tester) async {
       final customTheme = ThemeData(
         extensions: const <ThemeExtension<dynamic>>[
-          ZephyrAvatarTheme(
+          VelocityAvatarTheme(
             backgroundColor: Colors.orange,
             foregroundColor: Colors.white,
             borderWidth: 2.0,
@@ -532,14 +532,14 @@ void main() {
         MaterialApp(
           theme: customTheme,
           home: const Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               child: Icon(Icons.person),
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrAvatar), findsOneWidget);
+      expect(find.byType(VelocityAvatar), findsOneWidget);
       expect(find.byIcon(Icons.person), findsOneWidget);
     });
 
@@ -549,26 +549,26 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               text: 'Very Long Name That Should Be Truncated',
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrAvatar), findsOneWidget);
+      expect(find.byType(VelocityAvatar), findsOneWidget);
       expect(find.text('VE'), findsOneWidget); // First 2 characters only
     });
 
     testWidgets('handles interactive states correctly',
         (WidgetTester tester) async {
-      int tapCount = 0;
+      var tapCount = 0;
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               onTap: () {
                 tapCount++;
               },
@@ -579,10 +579,10 @@ void main() {
       );
 
       // Test multiple taps
-      await tester.tap(find.byType(ZephyrAvatar));
+      await tester.tap(find.byType(VelocityAvatar));
       await tester.pump();
 
-      await tester.tap(find.byType(ZephyrAvatar));
+      await tester.tap(find.byType(VelocityAvatar));
       await tester.pump();
 
       expect(tapCount, equals(2));
@@ -593,7 +593,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               borderWidth: 0.0,
               child: Icon(Icons.person),
             ),
@@ -601,7 +601,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrAvatar), findsOneWidget);
+      expect(find.byType(VelocityAvatar), findsOneWidget);
       expect(find.byIcon(Icons.person), findsOneWidget);
     });
 
@@ -611,7 +611,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               elevation: 0.0,
               child: Icon(Icons.person),
             ),
@@ -619,7 +619,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrAvatar), findsOneWidget);
+      expect(find.byType(VelocityAvatar), findsOneWidget);
       expect(find.byIcon(Icons.person), findsOneWidget);
     });
 
@@ -631,14 +631,14 @@ void main() {
         MaterialApp(
           theme: ThemeData(), // Empty theme
           home: Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               image: testImage,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrAvatar), findsOneWidget);
+      expect(find.byType(VelocityAvatar), findsOneWidget);
       expect(find.byType(Image), findsOneWidget);
     });
 
@@ -652,17 +652,17 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                const ZephyrAvatar(child: Icon(Icons.person)),
-                ZephyrAvatar.image(image: testImage),
-                ZephyrAvatar.text(text: 'John'),
-                ZephyrAvatar.icon(icon: Icons.star),
+                const VelocityAvatar(child: Icon(Icons.person)),
+                VelocityAvatar.image(image: testImage),
+                VelocityAvatar.text(text: 'John'),
+                VelocityAvatar.icon(icon: Icons.star),
               ],
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrAvatar), findsNWidgets(4));
+      expect(find.byType(VelocityAvatar), findsNWidgets(4));
       expect(find.byIcon(Icons.person), findsOneWidget);
       expect(find.byType(Image), findsOneWidget);
       expect(find.text('JO'), findsOneWidget);
@@ -676,50 +676,50 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               child: Icon(Icons.person),
             ),
           ),
         ),
       );
-      expect(find.byType(ZephyrAvatar), findsOneWidget);
+      expect(find.byType(VelocityAvatar), findsOneWidget);
 
       // This should work (only image provided)
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               image: TestImageProvider(),
             ),
           ),
         ),
       );
-      expect(find.byType(ZephyrAvatar), findsOneWidget);
+      expect(find.byType(VelocityAvatar), findsOneWidget);
 
       // This should work (only text provided)
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrAvatar(
+            body: VelocityAvatar(
               text: 'Test',
             ),
           ),
         ),
       );
-      expect(find.byType(ZephyrAvatar), findsOneWidget);
+      expect(find.byType(VelocityAvatar), findsOneWidget);
 
       // This should work (none provided)
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrAvatar(),
+            body: VelocityAvatar(),
           ),
         ),
       );
-      expect(find.byType(ZephyrAvatar), findsOneWidget);
+      expect(find.byType(VelocityAvatar), findsOneWidget);
     });
   });
 }

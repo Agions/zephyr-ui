@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/forms/slider/slider.dart';
+import 'package:velocity_ui/src/components/forms/slider/slider.dart';
 
 void main() {
-  group('ZephyrSlider Widget Tests', () {
+  group('VelocitySlider Widget Tests', () {
     testWidgets('renders slider with default properties',
         (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrSlider(
+            body: VelocitySlider(
               value: 0.5,
             ),
           ),
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrSlider),
+      expect(find.byWidgetPredicate((widget) => widget is VelocitySlider),
           findsOneWidget);
       expect(find.byType(Slider), findsOneWidget);
     });
@@ -26,7 +26,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrSlider(
+            body: VelocitySlider(
               value: 50.0,
               min: 0.0,
               max: 100.0,
@@ -35,7 +35,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrSlider),
+      expect(find.byWidgetPredicate((widget) => widget is VelocitySlider),
           findsOneWidget);
       expect(find.byType(Slider), findsOneWidget);
     });
@@ -44,18 +44,18 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrSlider(
+            body: VelocitySlider(
               value: 2.0,
               min: 0.0,
               max: 5.0,
-              type: ZephyrSliderType.discrete,
+              type: VelocitySliderType.discrete,
               divisions: 5,
             ),
           ),
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrSlider),
+      expect(find.byWidgetPredicate((widget) => widget is VelocitySlider),
           findsOneWidget);
       expect(find.byType(Slider), findsOneWidget);
     });
@@ -64,16 +64,16 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrSlider(
+            body: VelocitySlider(
               value: 0.7,
-              type: ZephyrSliderType.indicator,
+              type: VelocitySliderType.indicator,
               label: 'Volume',
             ),
           ),
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrSlider),
+      expect(find.byWidgetPredicate((widget) => widget is VelocitySlider),
           findsOneWidget);
       expect(find.byType(Slider), findsOneWidget);
     });
@@ -82,7 +82,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrSlider(
+            body: VelocitySlider(
               value: 0.5,
               disabled: true,
             ),
@@ -90,7 +90,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrSlider),
+      expect(find.byWidgetPredicate((widget) => widget is VelocitySlider),
           findsOneWidget);
       expect(find.byType(Slider), findsOneWidget);
     });
@@ -101,7 +101,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrSlider(
+            body: VelocitySlider(
               value: 0.5,
               onChanged: (value) => changedValue = value,
             ),
@@ -109,7 +109,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrSlider),
+      expect(find.byWidgetPredicate((widget) => widget is VelocitySlider),
           findsOneWidget);
       expect(changedValue, isNull);
     });
@@ -120,7 +120,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrSlider(
+            body: VelocitySlider(
               value: 0.5,
               onChangeStart: (value) => startValue = value,
             ),
@@ -128,7 +128,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrSlider),
+      expect(find.byWidgetPredicate((widget) => widget is VelocitySlider),
           findsOneWidget);
       expect(startValue, isNull);
     });
@@ -139,7 +139,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrSlider(
+            body: VelocitySlider(
               value: 0.5,
               onChangeEnd: (value) => endValue = value,
             ),
@@ -147,7 +147,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrSlider),
+      expect(find.byWidgetPredicate((widget) => widget is VelocitySlider),
           findsOneWidget);
       expect(endValue, isNull);
     });
@@ -156,7 +156,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrSlider(
+            body: VelocitySlider(
               value: 0.0,
               min: 0.0,
               max: 1.0,
@@ -165,7 +165,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrSlider),
+      expect(find.byWidgetPredicate((widget) => widget is VelocitySlider),
           findsOneWidget);
       expect(find.byType(Slider), findsOneWidget);
     });
@@ -174,7 +174,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrSlider(
+            body: VelocitySlider(
               value: 1.0,
               min: 0.0,
               max: 1.0,
@@ -183,7 +183,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrSlider),
+      expect(find.byWidgetPredicate((widget) => widget is VelocitySlider),
           findsOneWidget);
       expect(find.byType(Slider), findsOneWidget);
     });
@@ -193,7 +193,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrSlider(
+            body: VelocitySlider(
               value: -0.5,
               min: -1.0,
               max: 0.0,
@@ -202,7 +202,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrSlider),
+      expect(find.byWidgetPredicate((widget) => widget is VelocitySlider),
           findsOneWidget);
       expect(find.byType(Slider), findsOneWidget);
     });
@@ -214,23 +214,23 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                ZephyrSlider(
+                VelocitySlider(
                   value: 0.3,
                   label: 'Volume',
                 ),
                 SizedBox(height: 32),
-                ZephyrSlider(
+                VelocitySlider(
                   value: 0.7,
                   min: 0.0,
                   max: 100.0,
                   label: 'Brightness',
                 ),
                 SizedBox(height: 32),
-                ZephyrSlider(
+                VelocitySlider(
                   value: 2.0,
                   min: 0.0,
                   max: 5.0,
-                  type: ZephyrSliderType.discrete,
+                  type: VelocitySliderType.discrete,
                   divisions: 5,
                   label: 'Contrast',
                 ),
@@ -240,7 +240,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrSlider),
+      expect(find.byWidgetPredicate((widget) => widget is VelocitySlider),
           findsNWidgets(3));
       expect(find.byType(Slider), findsNWidgets(3));
     });
@@ -250,7 +250,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrSlider(
+            body: VelocitySlider(
               value: 0.5,
               onChanged: null,
               onChangeStart: null,
@@ -261,7 +261,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrSlider),
+      expect(find.byWidgetPredicate((widget) => widget is VelocitySlider),
           findsOneWidget);
       expect(find.byType(Slider), findsOneWidget);
     });
@@ -271,7 +271,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrSlider(
+            body: VelocitySlider(
               value: 0.5,
               label: 'Volume Control',
             ),
@@ -279,7 +279,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrSlider),
+      expect(find.byWidgetPredicate((widget) => widget is VelocitySlider),
           findsOneWidget);
       expect(find.byType(Slider), findsOneWidget);
     });
@@ -293,7 +293,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrSlider(
+            body: VelocitySlider(
               value: 0.5,
               disabled: true,
               onChanged: (value) => changedValue = value,
@@ -304,7 +304,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrSlider),
+      expect(find.byWidgetPredicate((widget) => widget is VelocitySlider),
           findsOneWidget);
       expect(find.byType(Slider), findsOneWidget);
       expect(changedValue, isNull);
@@ -314,7 +314,7 @@ void main() {
 
     testWidgets('handles slider with value updates from parent',
         (WidgetTester tester) async {
-      double sliderValue = 0.5;
+      var sliderValue = 0.5;
 
       await tester.pumpWidget(
         MaterialApp(
@@ -323,7 +323,7 @@ void main() {
               builder: (context, setState) {
                 return Column(
                   children: [
-                    ZephyrSlider(
+                    VelocitySlider(
                       value: sliderValue,
                       onChanged: (value) {
                         setState(() {
@@ -347,7 +347,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrSlider),
+      expect(find.byWidgetPredicate((widget) => widget is VelocitySlider),
           findsOneWidget);
       expect(find.byType(Slider), findsOneWidget);
     });
@@ -361,7 +361,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrSlider(
+            body: VelocitySlider(
               value: 0.5,
               onChanged: (value) => changedValue = value,
               onChangeStart: (value) => startValue = value,
@@ -371,7 +371,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrSlider),
+      expect(find.byWidgetPredicate((widget) => widget is VelocitySlider),
           findsOneWidget);
       expect(find.byType(Slider), findsOneWidget);
       expect(changedValue, isNull);

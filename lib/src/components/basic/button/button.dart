@@ -1,314 +1,245 @@
+/// VelocityUI 按钮组件
+///
+/// 提供多种样式的按钮组件，支持主题定制。
+library velocity_button;
+
 import 'package:flutter/material.dart';
-import 'package:zephyr_ui/zephyr_ui.dart';
+import 'button_style.dart';
 
-/// 遵循Zephyr设计规范的按钮组件
-///
-/// 用于触发用户交互的操作。支持多种样式、尺寸和状态。
-///
-/// 示例用法:
-/// ```dart
-/// ZephyrButton.primary(
-///   text: '提交',
-///   onPressed: () => debugPrint('按钮点击'),
-/// )
-/// ```
-class ZephyrButton extends StatelessWidget {
-  /// 创建一个主要按钮，带有默认样式
-  ///
-  /// [text] 参数是必需的
-  const ZephyrButton.primary({
-    required this.text,
+export 'button_style.dart';
+
+/// 按钮类型
+enum VelocityButtonType {
+  primary, secondary, outline, text, danger, success, warning
+}
+
+/// 按钮尺寸
+enum VelocityButtonSize { small, medium, large }
+
+/// 图标位置
+enum VelocityIconPosition { left, right }
+
+/// VelocityUI 按钮组件
+class VelocityButton extends StatelessWidget {
+  /// 创建一个按钮
+  const VelocityButton({
     super.key,
-    VoidCallback? onPressed,
-    this.icon,
-    this.size = ZephyrButtonSize.medium,
-    this.isFullWidth = false,
-    this.isLoading = false,
-    this.isDisabled = false,
-    this.theme,
-  })  : onPressed = (isLoading || isDisabled) ? null : onPressed,
-        _type = ZephyrButtonType.filled;
-
-  /// 创建一个次要按钮，带有默认样式
-  const ZephyrButton.secondary({
-    required this.text,
-    super.key,
-    VoidCallback? onPressed,
-    this.icon,
-    this.size = ZephyrButtonSize.medium,
-    this.isFullWidth = false,
-    this.isLoading = false,
-    this.isDisabled = false,
-    this.theme,
-  })  : onPressed = (isLoading || isDisabled) ? null : onPressed,
-        _type = ZephyrButtonType.outlined;
-
-  /// 创建一个轮廓按钮，带有默认样式
-  const ZephyrButton.outline({
-    required this.text,
-    super.key,
-    VoidCallback? onPressed,
-    this.icon,
-    this.size = ZephyrButtonSize.medium,
-    this.isFullWidth = false,
-    this.isLoading = false,
-    this.isDisabled = false,
-    this.theme,
-  })  : onPressed = (isLoading || isDisabled) ? null : onPressed,
-        _type = ZephyrButtonType.outlined;
-
-  /// 创建一个文本按钮，带有默认样式
-  const ZephyrButton.text({
-    required this.text,
-    super.key,
-    VoidCallback? onPressed,
-    this.icon,
-    this.size = ZephyrButtonSize.medium,
-    this.isFullWidth = false,
-    this.isLoading = false,
-    this.isDisabled = false,
-    this.theme,
-  })  : onPressed = (isLoading || isDisabled) ? null : onPressed,
-        _type = ZephyrButtonType.text;
-
-  /// 创建图标按钮
-  factory ZephyrButton.icon({
-    required IconData icon,
-    required VoidCallback? onPressed,
-    Key? key,
-    ZephyrButtonType type = ZephyrButtonType.filled,
-    ZephyrButtonSize size = ZephyrButtonSize.medium,
-    bool isLoading = false,
-    bool isDisabled = false,
-    ZephyrButtonTheme? theme,
-  }) {
-    return ZephyrButton._internal(
-      text: '', // 空文本
-      type: type,
-      size: size,
-      isFullWidth: false,
-      isLoading: isLoading,
-      isDisabled: isDisabled,
-      key: key,
-      theme: theme,
-      onPressed: (isLoading || isDisabled) ? null : onPressed,
-      icon: icon,
-    );
-  }
-
-  /// 内部构造函数
-  const ZephyrButton._internal({
-    required this.text,
-    required ZephyrButtonType type,
-    required this.size,
-    required this.isFullWidth,
-    required this.isLoading,
-    required this.isDisabled,
-    super.key,
-    this.theme,
+    required this.child,
     this.onPressed,
-    this.icon,
-  }) : _type = type;
+    this.onLongPress,
+    this.type = VelocityButtonType.primary,
+    this.size = VelocityButtonSize.medium,
+    this.loading = false,
+    this.disabled = false,
+    this.fullWidth = false,
+    this.style,
+  }) : _text = null, _icon = null, _iconPosition = VelocityIconPosition.left;
 
-  /// 按钮显示的文本
-  final String text;
+  /// 创建一个带文本的按钮
+  const VelocityButton.text({
+    super.key,
+    required String text,
+    this.onPressed,
+    this.onLongPress,
+    this.type = VelocityButtonType.primary,
+    this.size = VelocityButtonSize.medium,
+    this.loading = false,
+    this.disabled = false,
+    this.fullWidth = false,
+    this.style,
+  }) : child = null, _text = text, _icon = null, _iconPosition = VelocityIconPosition.left;
 
-  /// 点击按钮时的回调
+  /// 创建一个带图标的按钮
+  const VelocityButton.icon({
+    super.key,
+    required String text,
+    required IconData icon,
+    VelocityIconPosition iconPosition = VelocityIconPosition.left,
+    this.onPressed,
+    this.onLongPress,
+    this.type = VelocityButtonType.primary,
+    this.size = VelocityButtonSize.medium,
+    this.loading = false,
+    this.disabled = false,
+    this.fullWidth = false,
+    this.style,
+  }) : child = null, _text = text, _icon = icon, _iconPosition = iconPosition;
+
+  final Widget? child;
   final VoidCallback? onPressed;
+  final VoidCallback? onLongPress;
+  final VelocityButtonType type;
+  final VelocityButtonSize size;
+  final bool loading;
+  final bool disabled;
+  final bool fullWidth;
+  final VelocityButtonStyle? style;
 
-  /// 可选的图标
-  final IconData? icon;
-
-  /// 按钮尺寸
-  final ZephyrButtonSize size;
-
-  /// 是否占据全宽
-  final bool isFullWidth;
-
-  /// 是否处于加载状态
-  final bool isLoading;
-
-  /// 是否禁用
-  final bool isDisabled;
-
-  /// 按钮主题
-  final ZephyrButtonTheme? theme;
-
-  /// 内部按钮类型
-  final ZephyrButtonType _type;
+  final String? _text;
+  final IconData? _icon;
+  final VelocityIconPosition _iconPosition;
 
   @override
   Widget build(BuildContext context) {
-    return _buildButton(context);
+    final effectiveStyle = VelocityButtonStyle.resolve(type: type, size: size, customStyle: style);
+    final effectiveDisabled = disabled || loading;
+    
+    Widget content = _buildContent(effectiveStyle);
+    
+    final bgColor = effectiveDisabled 
+        ? (effectiveStyle.disabledBackgroundColor ?? Colors.grey) 
+        : (effectiveStyle.backgroundColor ?? Colors.blue);
+    
+    Widget button = Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: effectiveDisabled ? null : onPressed,
+        onLongPress: effectiveDisabled ? null : onLongPress,
+        borderRadius: effectiveStyle.borderRadius,
+        splashColor: effectiveStyle.splashColor,
+        highlightColor: effectiveStyle.highlightColor,
+        child: Container(
+          padding: effectiveStyle.padding,
+          decoration: BoxDecoration(
+            color: bgColor,
+            borderRadius: effectiveStyle.borderRadius,
+            border: effectiveStyle.border,
+            boxShadow: effectiveStyle.boxShadow,
+          ),
+          child: content,
+        ),
+      ),
+    );
+    
+    if (fullWidth) {
+      button = SizedBox(width: double.infinity, child: button);
+    }
+    
+    return button;
   }
 
-  Widget _buildButton(BuildContext context) {
-    final effectiveTheme = ZephyrButtonTheme.resolve(
-      context,
-      theme,
-    );
-
-    // 提取重复使用的 borderRadius
-    final borderRadius = BorderRadius.circular(effectiveTheme.borderRadius!);
-    final isDisabled = onPressed == null;
-
-    // 根据按钮类型和状态确定样式
-    late final Color backgroundColor;
-    late final Color textColor;
-    late final Color? overlayColor;
-    late final BoxBorder? border;
-    late final double elevation;
-
-    if (isDisabled) {
-      // 禁用状态下的样式
-      backgroundColor = effectiveTheme.disabledBackgroundColor!;
-      textColor = effectiveTheme.disabledTextColor!;
-      elevation = effectiveTheme.disabledElevation!;
-      border = null;
-      overlayColor = null;
-    } else {
-      // 正常状态下的样式
-      switch (_type) {
-        case ZephyrButtonType.filled:
-          backgroundColor = effectiveTheme.primaryBackgroundColor!;
-          textColor = effectiveTheme.primaryTextColor!;
-          overlayColor = effectiveTheme.splashColor;
-          elevation = effectiveTheme.elevation!;
-          border = null;
-          break;
-        case ZephyrButtonType.outlined:
-          backgroundColor = Colors.transparent;
-          textColor = effectiveTheme.outlineTextColor!;
-          border = Border.all(
-            color: effectiveTheme.outlineColor!,
-            width: 1.0,
-          );
-          elevation = 0.0;
-          overlayColor = null;
-          break;
-        case ZephyrButtonType.text:
-          backgroundColor = Colors.transparent;
-          textColor = effectiveTheme.textButtonColor!;
-          elevation = 0.0;
-          border = null;
-          overlayColor = null;
-          break;
-        case ZephyrButtonType.icon:
-          backgroundColor = Colors.transparent;
-          textColor = effectiveTheme.primaryTextColor!;
-          elevation = 0.0;
-          border = null;
-          overlayColor = null;
-          break;
-        case ZephyrButtonType.fab:
-          backgroundColor = effectiveTheme.primaryBackgroundColor!;
-          textColor = effectiveTheme.primaryTextColor!;
-          overlayColor = effectiveTheme.splashColor;
-          elevation = effectiveTheme.elevation!;
-          border = null;
-          break;
-      }
-    }
-
-    // 确定内边距和文本样式
-    late final EdgeInsetsGeometry padding;
-    late final TextStyle textStyle;
-
-    switch (size) {
-      case ZephyrButtonSize.small:
-        padding = effectiveTheme.smallPadding!;
-        textStyle = effectiveTheme.smallTextStyle!;
-        break;
-      case ZephyrButtonSize.medium:
-        padding = effectiveTheme.mediumPadding!;
-        textStyle = effectiveTheme.mediumTextStyle!;
-        break;
-      case ZephyrButtonSize.large:
-        padding = effectiveTheme.largePadding!;
-        textStyle = effectiveTheme.largeTextStyle!;
-        break;
-    }
-
-    // 预计算文本样式，避免重复创建
-    final effectiveTextStyle = textStyle.copyWith(color: textColor);
-
-    // 构建图标部分
-    final List<Widget> contentChildren = [];
-    if (icon != null && !isLoading) {
-      contentChildren
-        ..add(Icon(icon, color: textColor, size: 16))
-        ..add(const SizedBox(width: 8));
-    }
-    if (isLoading) {
-      contentChildren
-        ..add(SizedBox(
-          width: 16,
-          height: 16,
-          child: CircularProgressIndicator(
-            strokeWidth: 2,
-            valueColor: AlwaysStoppedAnimation<Color>(
-              effectiveTheme.loadingColor!,
+  Widget _buildContent(VelocityButtonStyle effectiveStyle) {
+    final effectiveDisabled = disabled || loading;
+    final foregroundColor = effectiveDisabled 
+        ? (effectiveStyle.disabledForegroundColor ?? Colors.grey) 
+        : (effectiveStyle.foregroundColor ?? Colors.white);
+    
+    if (loading) {
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: effectiveStyle.iconSize ?? 18,
+            height: effectiveStyle.iconSize ?? 18,
+            child: CircularProgressIndicator(
+              strokeWidth: 2,
+              valueColor: AlwaysStoppedAnimation<Color>(foregroundColor),
             ),
           ),
-        ))
-        ..add(const SizedBox(width: 8));
-    }
-    // 添加文本
-    contentChildren.add(Text(
-      text,
-      style: effectiveTextStyle,
-    ));
-
-    // 内容布局
-    Widget content = Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: contentChildren,
-    );
-
-    // 全宽模式下进行包装
-    if (isFullWidth) {
-      content = SizedBox(
-        width: double.infinity,
-        child: Center(child: content),
+          if (_text != null) ...[
+            SizedBox(width: effectiveStyle.iconSpacing ?? 8),
+            Text(_text!, style: effectiveStyle.textStyle?.copyWith(color: foregroundColor)),
+          ],
+        ],
       );
     }
+    
+    if (child != null) return child!;
+    
+    if (_icon != null && _text != null) {
+      final iconWidget = Icon(_icon, size: effectiveStyle.iconSize ?? 18, color: foregroundColor);
+      final textWidget = Text(_text!, style: effectiveStyle.textStyle?.copyWith(color: foregroundColor));
+      
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: _iconPosition == VelocityIconPosition.left
+            ? [iconWidget, SizedBox(width: effectiveStyle.iconSpacing ?? 8), textWidget]
+            : [textWidget, SizedBox(width: effectiveStyle.iconSpacing ?? 8), iconWidget],
+      );
+    }
+    
+    if (_text != null) {
+      return Text(_text!, style: effectiveStyle.textStyle?.copyWith(color: foregroundColor));
+    }
+    
+    return const SizedBox.shrink();
+  }
+}
 
-    // 优化：减少不必要的嵌套，使用更高效的布局
-    return Semantics(
-      button: true,
-      enabled: !isDisabled,
-      label: text,
-      child: Material(
-        color: backgroundColor,
-        elevation: elevation,
-        borderRadius: borderRadius,
-        child: InkWell(
-          onTap: onPressed,
-          borderRadius: borderRadius,
-          splashColor: overlayColor,
-          child: Container(
-            padding: padding,
-            decoration: BoxDecoration(
-              borderRadius: borderRadius,
-              border: border,
-            ),
-            child: content,
+/// VelocityUI 图标按钮组件
+class VelocityIconButton extends StatelessWidget {
+  const VelocityIconButton({
+    super.key,
+    required this.icon,
+    this.onPressed,
+    this.size = 40,
+    this.iconSize = 20,
+    this.style,
+    this.disabled = false,
+    this.loading = false,
+    this.tooltip,
+  });
+
+  final IconData icon;
+  final VoidCallback? onPressed;
+  final double size;
+  final double iconSize;
+  final VelocityIconButtonStyle? style;
+  final bool disabled;
+  final bool loading;
+  final String? tooltip;
+
+  @override
+  Widget build(BuildContext context) {
+    final effectiveStyle = style ?? VelocityIconButtonStyle.defaults();
+    final effectiveDisabled = disabled || loading;
+    
+    final effectiveBackgroundColor = effectiveDisabled 
+        ? (effectiveStyle.disabledBackgroundColor ?? Colors.grey.shade200)
+        : (effectiveStyle.backgroundColor ?? Colors.transparent);
+    final effectiveIconColor = effectiveDisabled 
+        ? (effectiveStyle.disabledIconColor ?? Colors.grey)
+        : (effectiveStyle.iconColor ?? Colors.grey.shade700);
+    
+    Widget button = Material(
+      color: effectiveBackgroundColor,
+      borderRadius: effectiveStyle.borderRadius ?? BorderRadius.circular(size / 2),
+      child: InkWell(
+        onTap: effectiveDisabled ? null : onPressed,
+        borderRadius: effectiveStyle.borderRadius ?? BorderRadius.circular(size / 2),
+        splashColor: effectiveStyle.splashColor,
+        highlightColor: effectiveStyle.highlightColor,
+        child: Container(
+          width: size,
+          height: size,
+          decoration: effectiveStyle.border != null
+              ? BoxDecoration(
+                  borderRadius: effectiveStyle.borderRadius ?? BorderRadius.circular(size / 2),
+                  border: effectiveStyle.border,
+                )
+              : null,
+          child: Center(
+            child: loading
+                ? SizedBox(
+                    width: iconSize,
+                    height: iconSize,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation<Color>(effectiveIconColor),
+                    ),
+                  )
+                : Icon(icon, size: iconSize, color: effectiveIconColor),
           ),
         ),
       ),
     );
+    
+    if (tooltip != null) {
+      button = Tooltip(message: tooltip!, child: button);
+    }
+    
+    return button;
   }
-}
-
-/// 按钮尺寸变体
-enum ZephyrButtonSize {
-  /// 小型按钮
-  small,
-
-  /// 中型按钮 (默认)
-  medium,
-
-  /// 大型按钮
-  large,
 }

@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/forms/dropdown/index.dart';
-import 'package:zephyr_ui/zephyr_ui.dart';
+import 'package:velocity_ui/src/components/forms/dropdown/index.dart';
+import 'package:velocity_ui/velocity_ui.dart';
 
 void main() {
-  group('ZephyrDropdown Widget Tests', () {
-    late List<ZephyrDropdownOption<String>> testOptions;
-    late List<ZephyrDropdownGroup<String>> testGroups;
+  group('VelocityDropdown Widget Tests', () {
+    late List<VelocityDropdownOption<String>> testOptions;
+    late List<VelocityDropdownGroup<String>> testGroups;
 
     setUp(() {
       testOptions = [
-        const ZephyrDropdownOption(
+        const VelocityDropdownOption(
           value: 'option1',
           label: '选项 1',
           description: '这是选项1的描述',
         ),
-        const ZephyrDropdownOption(
+        const VelocityDropdownOption(
           value: 'option2',
           label: '选项 2',
           description: '这是选项2的描述',
         ),
-        const ZephyrDropdownOption(
+        const VelocityDropdownOption(
           value: 'option3',
           label: '选项 3',
           disabled: true,
@@ -28,18 +28,18 @@ void main() {
       ];
 
       testGroups = [
-        ZephyrDropdownGroup(
+        VelocityDropdownGroup(
           title: '分组 1',
           options: [
-            const ZephyrDropdownOption(value: 'group1_option1', label: '分组1选项1'),
-            const ZephyrDropdownOption(value: 'group1_option2', label: '分组1选项2'),
+            const VelocityDropdownOption(value: 'group1_option1', label: '分组1选项1'),
+            const VelocityDropdownOption(value: 'group1_option2', label: '分组1选项2'),
           ],
         ),
-        ZephyrDropdownGroup(
+        VelocityDropdownGroup(
           title: '分组 2',
           options: [
-            const ZephyrDropdownOption(value: 'group2_option1', label: '分组2选项1'),
-            const ZephyrDropdownOption(value: 'group2_option2', label: '分组2选项2'),
+            const VelocityDropdownOption(value: 'group2_option1', label: '分组2选项1'),
+            const VelocityDropdownOption(value: 'group2_option2', label: '分组2选项2'),
           ],
         ),
       ];
@@ -50,11 +50,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDropdownTheme.light(),
+              VelocityDropdownTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDropdown<String>(
+            body: VelocityDropdown<String>(
               options: testOptions,
               onChanged: (value) {},
             ),
@@ -63,7 +63,7 @@ void main() {
       );
 
       expect(find.text('请选择'), findsOneWidget);
-      expect(find.byType(ZephyrDropdown<String>), findsOneWidget);
+      expect(find.byType(VelocityDropdown<String>), findsOneWidget);
     });
 
     testWidgets('shows placeholder when no value selected', (WidgetTester tester) async {
@@ -71,11 +71,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDropdownTheme.light(),
+              VelocityDropdownTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDropdown<String>(
+            body: VelocityDropdown<String>(
               options: testOptions,
               placeholder: '请选择一个选项',
               onChanged: (value) {},
@@ -92,11 +92,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDropdownTheme.light(),
+              VelocityDropdownTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDropdown<String>(
+            body: VelocityDropdown<String>(
               options: testOptions,
               value: 'option1',
               onChanged: (value) {},
@@ -113,11 +113,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDropdownTheme.light(),
+              VelocityDropdownTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDropdown<String>(
+            body: VelocityDropdown<String>(
               options: testOptions,
               onChanged: (value) {},
             ),
@@ -125,7 +125,7 @@ void main() {
         ),
       );
 
-      await tester.tap(find.byType(ZephyrDropdown<String>));
+      await tester.tap(find.byType(VelocityDropdown<String>));
       await tester.pump();
 
       // Dropdown should be open
@@ -140,11 +140,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDropdownTheme.light(),
+              VelocityDropdownTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDropdown<String>(
+            body: VelocityDropdown<String>(
               options: testOptions,
               onChanged: (value) {
                 selectedValue = value;
@@ -154,7 +154,7 @@ void main() {
         ),
       );
 
-      await tester.tap(find.byType(ZephyrDropdown<String>));
+      await tester.tap(find.byType(VelocityDropdown<String>));
       await tester.pump();
 
       await tester.tap(find.text('选项 1'));
@@ -164,19 +164,19 @@ void main() {
     });
 
     testWidgets('supports multiple selection', (WidgetTester tester) async {
-      List<String?> selectedValues = [];
+      var selectedValues = <String?>[];
       
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDropdownTheme.light(),
+              VelocityDropdownTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDropdown<String>(
+            body: VelocityDropdown<String>(
               options: testOptions,
-              type: ZephyrDropdownType.multiple,
+              type: VelocityDropdownType.multiple,
               onChanged: (values) {
                 selectedValues = values as List<String?>;
               },
@@ -185,7 +185,7 @@ void main() {
         ),
       );
 
-      await tester.tap(find.byType(ZephyrDropdown<String>));
+      await tester.tap(find.byType(VelocityDropdown<String>));
       await tester.pump();
 
       await tester.tap(find.text('选项 1'));
@@ -203,11 +203,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDropdownTheme.light(),
+              VelocityDropdownTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDropdown<String>(
+            body: VelocityDropdown<String>(
               options: testOptions,
               searchable: true,
               onChanged: (value) {},
@@ -216,7 +216,7 @@ void main() {
         ),
       );
 
-      await tester.tap(find.byType(ZephyrDropdown<String>));
+      await tester.tap(find.byType(VelocityDropdown<String>));
       await tester.pump();
 
       expect(find.byType(TextField), findsOneWidget);
@@ -228,11 +228,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDropdownTheme.light(),
+              VelocityDropdownTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDropdown<String>(
+            body: VelocityDropdown<String>(
               options: testOptions,
               searchable: true,
               onChanged: (value) {},
@@ -241,7 +241,7 @@ void main() {
         ),
       );
 
-      await tester.tap(find.byType(ZephyrDropdown<String>));
+      await tester.tap(find.byType(VelocityDropdown<String>));
       await tester.pump();
 
       await tester.enterText(find.byType(TextField), '选项 1');
@@ -256,12 +256,12 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDropdownTheme.light(),
+              VelocityDropdownTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDropdown<String>(
-              options: [],
+            body: VelocityDropdown<String>(
+              options: const [],
               grouped: true,
               groups: testGroups,
               onChanged: (value) {},
@@ -270,7 +270,7 @@ void main() {
         ),
       );
 
-      await tester.tap(find.byType(ZephyrDropdown<String>));
+      await tester.tap(find.byType(VelocityDropdown<String>));
       await tester.pump();
 
       expect(find.text('分组 1'), findsOneWidget);
@@ -283,11 +283,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDropdownTheme.light(),
+              VelocityDropdownTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDropdown<String>(
+            body: VelocityDropdown<String>(
               options: testOptions,
               value: 'option1',
               clearable: true,
@@ -307,11 +307,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDropdownTheme.light(),
+              VelocityDropdownTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDropdown<String>(
+            body: VelocityDropdown<String>(
               options: testOptions,
               value: selectedValue,
               clearable: true,
@@ -334,11 +334,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDropdownTheme.light(),
+              VelocityDropdownTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDropdown<String>(
+            body: VelocityDropdown<String>(
               options: testOptions,
               disabled: true,
               onChanged: (value) {},
@@ -347,7 +347,7 @@ void main() {
         ),
       );
 
-      await tester.tap(find.byType(ZephyrDropdown<String>));
+      await tester.tap(find.byType(VelocityDropdown<String>));
       await tester.pump();
 
       // Dropdown should not open
@@ -359,11 +359,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDropdownTheme.light(),
+              VelocityDropdownTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDropdown<String>(
+            body: VelocityDropdown<String>(
               options: testOptions,
               label: '选择一个选项',
               onChanged: (value) {},
@@ -380,11 +380,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDropdownTheme.light(),
+              VelocityDropdownTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDropdown<String>(
+            body: VelocityDropdown<String>(
               options: testOptions,
               label: '必填选项',
               required: true,
@@ -402,11 +402,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDropdownTheme.light(),
+              VelocityDropdownTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDropdown<String>(
+            body: VelocityDropdown<String>(
               options: testOptions,
               label: '必填选项',
               required: true,
@@ -424,7 +424,7 @@ void main() {
       expect(find.text('请选择一个选项'), findsOneWidget);
 
       // Select an option
-      await tester.tap(find.byType(ZephyrDropdown<String>));
+      await tester.tap(find.byType(VelocityDropdown<String>));
       await tester.pump();
 
       await tester.tap(find.text('选项 1'));
@@ -439,11 +439,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDropdownTheme.light(),
+              VelocityDropdownTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDropdown<String>(
+            body: VelocityDropdown<String>(
               options: testOptions,
               helperText: '请选择一个合适的选项',
               onChanged: (value) {},
@@ -460,11 +460,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDropdownTheme.light(),
+              VelocityDropdownTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDropdown<String>(
+            body: VelocityDropdown<String>(
               options: testOptions,
               errorText: '选择无效',
               onChanged: (value) {},
@@ -477,19 +477,19 @@ void main() {
     });
 
     testWidgets('respects max selected items limit', (WidgetTester tester) async {
-      List<String?> selectedValues = [];
+      var selectedValues = <String?>[];
       
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDropdownTheme.light(),
+              VelocityDropdownTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDropdown<String>(
+            body: VelocityDropdown<String>(
               options: testOptions,
-              type: ZephyrDropdownType.multiple,
+              type: VelocityDropdownType.multiple,
               maxSelectedItems: 1,
               onChanged: (values) {
                 selectedValues = values as List<String?>;
@@ -499,7 +499,7 @@ void main() {
         ),
       );
 
-      await tester.tap(find.byType(ZephyrDropdown<String>));
+      await tester.tap(find.byType(VelocityDropdown<String>));
       await tester.pump();
 
       await tester.tap(find.text('选项 1'));

@@ -361,8 +361,7 @@ class TestHelpers {
       data: MediaQueryData(
         size: size,
         devicePixelRatio: devicePixelRatio,
-        platformBrightness: brightness,
-        textScaleFactor: textScaleFactor.scale,
+        platformBrightness: brightness, textScaler: TextScaler.linear(textScaleFactor.scale),
       ),
       child: child,
     );
@@ -371,9 +370,9 @@ class TestHelpers {
 
 /// 测试异常类
 class TestException implements Exception {
-  final String message;
   
   TestException(this.message);
+  final String message;
   
   @override
   String toString() => 'TestException: $message';
@@ -381,9 +380,9 @@ class TestException implements Exception {
 
 /// 超时异常
 class TimeoutException implements Exception {
-  final String message;
   
   TimeoutException(this.message);
+  final String message;
   
   @override
   String toString() => 'TimeoutException: $message';
@@ -391,9 +390,9 @@ class TimeoutException implements Exception {
 
 /// 测试失败异常
 class TestFailureException implements Exception {
-  final String message;
   
   TestFailureException(this.message);
+  final String message;
   
   @override
   String toString() => 'TestFailureException: $message';

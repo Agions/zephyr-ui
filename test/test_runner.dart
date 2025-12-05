@@ -191,7 +191,7 @@ class TestReportGenerator {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZephyrUI 测试报告</title>
+    <title>VelocityUI 测试报告</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -284,7 +284,7 @@ class TestReportGenerator {
 </head>
 <body>
     <div class="container">
-        <h1>🚀 ZephyrUI 测试报告</h1>
+        <h1>🚀 VelocityUI 测试报告</h1>
         
         <div class="summary">
             <div class="card">

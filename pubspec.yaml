@@ -1,10 +1,9 @@
-name: zephyr_ui
-description: A lightweight, modular Flutter UI component library with essential components for building beautiful applications.
-version: 0.4.0
-homepage: https://github.com/agions/zephyr-ui
-repository: https://github.com/agions/zephyr-ui
-issue_tracker: https://github.com/agions/zephyr-ui/issues
-documentation: https://github.com/agions/zephyr-ui/blob/main/doc/README.md
+name: velocity_ui
+description: A high-performance, modern Flutter UI component library with clean architecture and comprehensive theming support.
+version: 1.0.0
+homepage: https://github.com/agions/velocity-ui
+repository: https://github.com/agions/velocity-ui
+issue_tracker: https://github.com/agions/velocity-ui/issues
 
 topics:
   - ui
@@ -14,48 +13,17 @@ topics:
   - flutter
 
 environment:
-  sdk: ">=2.17.0 <4.0.0"
-  flutter: ">=3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  # 核心依赖
-  provider: ^6.0.5      # 状态管理
-  intl: ^0.19.0         # 国际化支持
-  vector_graphics: ^1.1.7  # SVG图标支持
-  collection: ^1.17.1   # 集合工具
-  path: ^1.9.1         # 路径处理
-  meta: ^1.9.1         # 元数据注解
-  video_player: ^2.9.5
-  image_picker: ^1.0.4  # 图片选择器
-  table_calendar: ^3.1.2  # 日历组件
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.2  # Code quality
-  build_runner: ^2.4.6   # Code generation
-  mocktail: ^1.0.2       # Lightweight mocking
-  args: ^2.4.2           # Command line argument parsing
-
-  # Testing
-  test: ^1.24.3          # Core testing framework
-  integration_test:
-    sdk: flutter           # Integration testing
-
-  # Documentation
-  dartdoc: ^8.3.2        # API documentation generation
+  flutter_lints: ^3.0.0
 
 flutter:
   uses-material-design: true
-
-  assets:
-    - assets/images/
-    - assets/icons/
-
-  fonts:
-    - family: ZephyrIcons
-      fonts:
-        - asset: assets/fonts/ZephyrIcons.ttf

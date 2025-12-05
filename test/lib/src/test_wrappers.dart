@@ -5,20 +5,11 @@ library test_wrappers;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/core/constants/design_tokens.dart';
-import 'package:zephyr_ui/src/core/constants/enums.dart';
+import 'package:velocity_ui/src/core/constants/design_tokens.dart';
+import 'package:velocity_ui/src/core/constants/enums.dart';
 
 /// 测试包装器基类
 abstract class TestWrapper {
-  final Widget child;
-  final ThemeMode themeMode;
-  final Brightness brightness;
-  final Locale? locale;
-  final List<LocalizationsDelegate>? localizationsDelegates;
-  final List<NavigatorObserver>? navigatorObservers;
-  final Size size;
-  final double devicePixelRatio;
-  final TextScalingFactor textScaleFactor;
   
   const TestWrapper({
     required this.child,
@@ -31,6 +22,15 @@ abstract class TestWrapper {
     this.devicePixelRatio = 2.0,
     this.textScaleFactor = TextScalingFactor.noScaling,
   });
+  final Widget child;
+  final ThemeMode themeMode;
+  final Brightness brightness;
+  final Locale? locale;
+  final List<LocalizationsDelegate>? localizationsDelegates;
+  final List<NavigatorObserver>? navigatorObservers;
+  final Size size;
+  final double devicePixelRatio;
+  final TextScalingFactor textScaleFactor;
   
   Widget build();
 }
@@ -62,8 +62,7 @@ class BasicTestWrapper extends TestWrapper {
         data: MediaQueryData(
           size: size,
           devicePixelRatio: devicePixelRatio,
-          platformBrightness: brightness,
-          textScaleFactor: textScaleFactor.scale,
+          platformBrightness: brightness, textScaler: TextScaler.linear(textScaleFactor.scale),
         ),
         child: Material(
           color: brightness == Brightness.dark ? Colors.black : Colors.white,
@@ -76,8 +75,6 @@ class BasicTestWrapper extends TestWrapper {
 
 /// 主题测试包装器
 class ThemeTestWrapper extends TestWrapper {
-  final ThemeData? theme;
-  final ThemeData? darkTheme;
   
   const ThemeTestWrapper({
     required super.child,
@@ -92,6 +89,8 @@ class ThemeTestWrapper extends TestWrapper {
     super.devicePixelRatio,
     super.textScaleFactor,
   });
+  final ThemeData? theme;
+  final ThemeData? darkTheme;
   
   @override
   Widget build() {
@@ -106,8 +105,7 @@ class ThemeTestWrapper extends TestWrapper {
         data: MediaQueryData(
           size: size,
           devicePixelRatio: devicePixelRatio,
-          platformBrightness: brightness,
-          textScaleFactor: textScaleFactor.scale,
+          platformBrightness: brightness, textScaler: TextScaler.linear(textScaleFactor.scale),
         ),
         child: Material(
           color: brightness == Brightness.dark ? Colors.black : Colors.white,
@@ -120,15 +118,6 @@ class ThemeTestWrapper extends TestWrapper {
 
 /// Scaffold 测试包装器
 class ScaffoldTestWrapper extends TestWrapper {
-  final PreferredSizeWidget? appBar;
-  final Widget? floatingActionButton;
-  final Widget? drawer;
-  final Widget? endDrawer;
-  final Widget? bottomNavigationBar;
-  final Widget? persistentFooterButtons;
-  final Color? backgroundColor;
-  final bool? resizeToAvoidBottomInset;
-  final bool? primary;
   
   const ScaffoldTestWrapper({
     required super.child,
@@ -150,6 +139,15 @@ class ScaffoldTestWrapper extends TestWrapper {
     super.devicePixelRatio,
     super.textScaleFactor,
   });
+  final PreferredSizeWidget? appBar;
+  final Widget? floatingActionButton;
+  final Widget? drawer;
+  final Widget? endDrawer;
+  final Widget? bottomNavigationBar;
+  final Widget? persistentFooterButtons;
+  final Color? backgroundColor;
+  final bool? resizeToAvoidBottomInset;
+  final bool? primary;
   
   @override
   Widget build() {
@@ -164,8 +162,7 @@ class ScaffoldTestWrapper extends TestWrapper {
         data: MediaQueryData(
           size: size,
           devicePixelRatio: devicePixelRatio,
-          platformBrightness: brightness,
-          textScaleFactor: textScaleFactor.scale,
+          platformBrightness: brightness, textScaler: TextScaler.linear(textScaleFactor.scale),
         ),
         child: Scaffold(
           appBar: appBar,
@@ -186,10 +183,6 @@ class ScaffoldTestWrapper extends TestWrapper {
 
 /// 对话框测试包装器
 class DialogTestWrapper extends TestWrapper {
-  final Widget? dialog;
-  final Widget? alertDialog;
-  final Widget? bottomSheet;
-  final Widget? modalBottomSheet;
   
   const DialogTestWrapper({
     required super.child,
@@ -206,6 +199,10 @@ class DialogTestWrapper extends TestWrapper {
     super.devicePixelRatio,
     super.textScaleFactor,
   });
+  final Widget? dialog;
+  final Widget? alertDialog;
+  final Widget? bottomSheet;
+  final Widget? modalBottomSheet;
   
   @override
   Widget build() {
@@ -220,8 +217,7 @@ class DialogTestWrapper extends TestWrapper {
         data: MediaQueryData(
           size: size,
           devicePixelRatio: devicePixelRatio,
-          platformBrightness: brightness,
-          textScaleFactor: textScaleFactor.scale,
+          platformBrightness: brightness, textScaler: TextScaler.linear(textScaleFactor.scale),
         ),
         child: Builder(
           builder: (context) {
@@ -252,11 +248,6 @@ class DialogTestWrapper extends TestWrapper {
 
 /// 导航测试包装器
 class NavigationTestWrapper extends TestWrapper {
-  final Map<String, WidgetBuilder>? routes;
-  final String? initialRoute;
-  final Route<dynamic>? Function(RouteSettings)? onGenerateRoute;
-  final Route<dynamic>? Function(RouteSettings)? onUnknownRoute;
-  final List<Route<dynamic>> Function(String)? onGenerateInitialRoutes;
   
   const NavigationTestWrapper({
     required super.child,
@@ -274,6 +265,11 @@ class NavigationTestWrapper extends TestWrapper {
     super.devicePixelRatio,
     super.textScaleFactor,
   });
+  final Map<String, WidgetBuilder>? routes;
+  final String? initialRoute;
+  final Route<dynamic>? Function(RouteSettings)? onGenerateRoute;
+  final Route<dynamic>? Function(RouteSettings)? onUnknownRoute;
+  final List<Route<dynamic>> Function(String)? onGenerateInitialRoutes;
   
   @override
   Widget build() {
@@ -295,12 +291,6 @@ class NavigationTestWrapper extends TestWrapper {
 
 /// 滚动测试包装器
 class ScrollTestWrapper extends TestWrapper {
-  final ScrollController? controller;
-  final ScrollPhysics? physics;
-  final EdgeInsetsGeometry? padding;
-  final bool? reverse;
-  final bool? primary;
-  final Axis? scrollDirection;
   
   const ScrollTestWrapper({
     required super.child,
@@ -319,6 +309,12 @@ class ScrollTestWrapper extends TestWrapper {
     super.devicePixelRatio,
     super.textScaleFactor,
   });
+  final ScrollController? controller;
+  final ScrollPhysics? physics;
+  final EdgeInsetsGeometry? padding;
+  final bool? reverse;
+  final bool? primary;
+  final Axis? scrollDirection;
   
   @override
   Widget build() {
@@ -333,8 +329,7 @@ class ScrollTestWrapper extends TestWrapper {
         data: MediaQueryData(
           size: size,
           devicePixelRatio: devicePixelRatio,
-          platformBrightness: brightness,
-          textScaleFactor: textScaleFactor.scale,
+          platformBrightness: brightness, textScaler: TextScaler.linear(textScaleFactor.scale),
         ),
         child: SingleChildScrollView(
           controller: controller,
@@ -355,8 +350,6 @@ class ScrollTestWrapper extends TestWrapper {
 
 /// 响应式测试包装器
 class ResponsiveTestWrapper extends TestWrapper {
-  final List<Size> breakpoints;
-  final Widget Function(BuildContext, Size)? responsiveBuilder;
   
   const ResponsiveTestWrapper({
     required super.child,
@@ -375,6 +368,8 @@ class ResponsiveTestWrapper extends TestWrapper {
     super.devicePixelRatio,
     super.textScaleFactor,
   }) : super(size: breakpoints.first);
+  final List<Size> breakpoints;
+  final Widget Function(BuildContext, Size)? responsiveBuilder;
   
   @override
   Widget build() {
@@ -392,8 +387,7 @@ class ResponsiveTestWrapper extends TestWrapper {
             data: MediaQueryData(
               size: currentSize,
               devicePixelRatio: devicePixelRatio,
-              platformBrightness: brightness,
-              textScaleFactor: textScaleFactor.scale,
+              platformBrightness: brightness, textScaler: TextScaler.linear(textScaleFactor.scale),
             ),
             child: Material(
               color: brightness == Brightness.dark ? Colors.black : Colors.white,
@@ -409,13 +403,12 @@ class ResponsiveTestWrapper extends TestWrapper {
   static Future<void> testBreakpoints(
     WidgetTester tester,
     Widget Function(BuildContext) widgetBuilder, {
-    List<Size> breakpoints = const [
+    required Future<void> Function(WidgetTester, Size) testCallback, List<Size> breakpoints = const [
       Size(320, 568),   // Mobile
       Size(768, 1024),  // Tablet
       Size(1024, 768), // Desktop
       Size(1440, 900), // Large Desktop
     ],
-    required Future<void> Function(WidgetTester, Size) testCallback,
   }) async {
     for (final breakpoint in breakpoints) {
       await tester.pumpWidget(
@@ -434,10 +427,6 @@ class ResponsiveTestWrapper extends TestWrapper {
 
 /// 动画测试包装器
 class AnimationTestWrapper extends TestWrapper {
-  final Duration? duration;
-  final Curve? curve;
-  final AnimationController? controller;
-  final Widget Function(AnimationController)? animationBuilder;
   
   const AnimationTestWrapper({
     required super.child,
@@ -454,6 +443,10 @@ class AnimationTestWrapper extends TestWrapper {
     super.devicePixelRatio,
     super.textScaleFactor,
   });
+  final Duration? duration;
+  final Curve? curve;
+  final AnimationController? controller;
+  final Widget Function(AnimationController)? animationBuilder;
   
   @override
   Widget build() {
@@ -468,8 +461,7 @@ class AnimationTestWrapper extends TestWrapper {
         data: MediaQueryData(
           size: size,
           devicePixelRatio: devicePixelRatio,
-          platformBrightness: brightness,
-          textScaleFactor: textScaleFactor.scale,
+          platformBrightness: brightness, textScaler: TextScaler.linear(textScaleFactor.scale),
         ),
         child: Material(
           color: brightness == Brightness.dark ? Colors.black : Colors.white,
@@ -500,9 +492,6 @@ class AnimationTestWrapper extends TestWrapper {
 
 /// 状态管理测试包装器
 class StateManagementTestWrapper extends TestWrapper {
-  final Widget Function(BuildContext)? stateBuilder;
-  final Object? state;
-  final Function(Object?)? onStateChanged;
   
   const StateManagementTestWrapper({
     required super.child,
@@ -518,6 +507,9 @@ class StateManagementTestWrapper extends TestWrapper {
     super.devicePixelRatio,
     super.textScaleFactor,
   });
+  final Widget Function(BuildContext)? stateBuilder;
+  final Object? state;
+  final Function(Object?)? onStateChanged;
   
   @override
   Widget build() {
@@ -532,8 +524,7 @@ class StateManagementTestWrapper extends TestWrapper {
         data: MediaQueryData(
           size: size,
           devicePixelRatio: devicePixelRatio,
-          platformBrightness: brightness,
-          textScaleFactor: textScaleFactor.scale,
+          platformBrightness: brightness, textScaler: TextScaler.linear(textScaleFactor.scale),
         ),
         child: Material(
           color: brightness == Brightness.dark ? Colors.black : Colors.white,
@@ -546,9 +537,6 @@ class StateManagementTestWrapper extends TestWrapper {
 
 /// 表单测试包装器
 class FormTestWrapper extends TestWrapper {
-  final GlobalKey<FormState>? formKey;
-  final bool autovalidateMode;
-  final Widget Function(BuildContext)? formBuilder;
   
   const FormTestWrapper({
     required super.child,
@@ -564,6 +552,9 @@ class FormTestWrapper extends TestWrapper {
     super.devicePixelRatio,
     super.textScaleFactor,
   });
+  final GlobalKey<FormState>? formKey;
+  final bool autovalidateMode;
+  final Widget Function(BuildContext)? formBuilder;
   
   @override
   Widget build() {
@@ -578,8 +569,7 @@ class FormTestWrapper extends TestWrapper {
         data: MediaQueryData(
           size: size,
           devicePixelRatio: devicePixelRatio,
-          platformBrightness: brightness,
-          textScaleFactor: textScaleFactor.scale,
+          platformBrightness: brightness, textScaler: TextScaler.linear(textScaleFactor.scale),
         ),
         child: Material(
           color: brightness == Brightness.dark ? Colors.black : Colors.white,

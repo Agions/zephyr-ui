@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/data_display/data_table/index.dart';
-import 'package:zephyr_ui/zephyr_ui.dart';
+import 'package:velocity_ui/src/components/data_display/data_table/index.dart';
+import 'package:velocity_ui/velocity_ui.dart';
 
 void main() {
-  group('ZephyrDataTable Widget Tests', () {
-    late List<ZephyrTableColumn<Map<String, dynamic>>> testColumns;
+  group('VelocityDataTable Widget Tests', () {
+    late List<VelocityTableColumn<Map<String, dynamic>>> testColumns;
     late List<Map<String, dynamic>> testData;
 
     setUp(() {
       testColumns = [
-        const ZephyrTableColumn<Map<String, dynamic>>(
+        const VelocityTableColumn<Map<String, dynamic>>(
           label: '姓名',
           field: 'name',
           sortable: true,
           width: 100,
         ),
-        const ZephyrTableColumn<Map<String, dynamic>>(
+        const VelocityTableColumn<Map<String, dynamic>>(
           label: '年龄',
           field: 'age',
           sortable: true,
           width: 80,
           alignment: Alignment.center,
         ),
-        const ZephyrTableColumn<Map<String, dynamic>>(
+        const VelocityTableColumn<Map<String, dynamic>>(
           label: '邮箱',
           field: 'email',
           width: 200,
         ),
-        const ZephyrTableColumn<Map<String, dynamic>>(
+        const VelocityTableColumn<Map<String, dynamic>>(
           label: '状态',
           field: 'status',
           filterable: true,
@@ -49,11 +49,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: testColumns,
               data: testData,
             ),
@@ -61,7 +61,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrDataTable<Map<String, dynamic>>), findsOneWidget);
+      expect(find.byType(VelocityDataTable<Map<String, dynamic>>), findsOneWidget);
       expect(find.text('姓名'), findsOneWidget);
       expect(find.text('年龄'), findsOneWidget);
       expect(find.text('邮箱'), findsOneWidget);
@@ -73,11 +73,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: testColumns,
               data: testData,
             ),
@@ -95,11 +95,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: testColumns,
               data: [],
             ),
@@ -115,11 +115,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: testColumns,
               data: testData,
               loading: true,
@@ -137,11 +137,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: testColumns,
               data: [],
               emptyWidget: const Text('自定义空状态'),
@@ -159,11 +159,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: testColumns,
               data: testData,
               loading: true,
@@ -182,11 +182,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: testColumns,
               data: testData,
               headerWidget: Container(
@@ -207,11 +207,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: testColumns,
               data: testData,
               footerWidget: Container(
@@ -232,11 +232,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: testColumns,
               data: testData,
             ),
@@ -248,18 +248,18 @@ void main() {
     });
 
     testWidgets('calls onSort when sortable column tapped', (WidgetTester tester) async {
-      ZephyrTableColumn<Map<String, dynamic>>? sortedColumn;
-      ZephyrSortDirection? sortDirection;
+      VelocityTableColumn<Map<String, dynamic>>? sortedColumn;
+      VelocitySortDirection? sortDirection;
 
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: testColumns,
               data: testData,
               onSort: (column, direction) {
@@ -276,7 +276,7 @@ void main() {
       await tester.pump();
 
       expect(sortedColumn, equals(testColumns[0]));
-      expect(sortDirection, equals(ZephyrSortDirection.ascending));
+      expect(sortDirection, equals(VelocitySortDirection.ascending));
     });
 
     testWidgets('shows filter icons for filterable columns', (WidgetTester tester) async {
@@ -284,11 +284,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: testColumns,
               data: testData,
             ),
@@ -304,14 +304,14 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: testColumns,
               data: testData,
-              paginationState: const ZephyrTablePaginationState(
+              paginationState: const VelocityTablePaginationState(
                 currentPage: 1,
                 pageSize: 10,
                 total: 25,
@@ -334,14 +334,14 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: testColumns,
               data: testData,
-              paginationState: const ZephyrTablePaginationState(
+              paginationState: const VelocityTablePaginationState(
                 currentPage: 1,
                 pageSize: 10,
                 total: 25,
@@ -367,11 +367,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: testColumns,
               data: testData,
               selectable: true,
@@ -384,17 +384,17 @@ void main() {
     });
 
     testWidgets('calls onSelectionChange when row selected', (WidgetTester tester) async {
-      List<int> selectedRows = [];
+      var selectedRows = <int>[];
 
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: testColumns,
               data: testData,
               selectable: true,
@@ -421,11 +421,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: testColumns,
               data: testData,
               onRowTap: (index, data) {
@@ -450,11 +450,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: testColumns,
               data: testData,
               striped: true,
@@ -465,7 +465,7 @@ void main() {
 
       // Check that rows have different background colors
       // This is a visual test, so we just verify the widget renders
-      expect(find.byType(ZephyrDataTable<Map<String, dynamic>>), findsOneWidget);
+      expect(find.byType(VelocityDataTable<Map<String, dynamic>>), findsOneWidget);
     });
 
     testWidgets('shows borders when bordered is true', (WidgetTester tester) async {
@@ -473,11 +473,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: testColumns,
               data: testData,
               bordered: true,
@@ -487,13 +487,13 @@ void main() {
       );
 
       // Check that table has borders
-      expect(find.byType(ZephyrDataTable<Map<String, dynamic>>), findsOneWidget);
+      expect(find.byType(VelocityDataTable<Map<String, dynamic>>), findsOneWidget);
     });
 
     testWidgets('hides column when hidden is true', (WidgetTester tester) async {
       final hiddenColumns = [
         ...testColumns,
-        const ZephyrTableColumn<Map<String, dynamic>>(
+        const VelocityTableColumn<Map<String, dynamic>>(
           label: '隐藏列',
           field: 'hidden',
           hidden: true,
@@ -504,11 +504,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: hiddenColumns,
               data: testData,
             ),
@@ -524,11 +524,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: testColumns,
               data: testData,
               rowBuilder: (context, index, data) {
@@ -554,11 +554,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: testColumns,
               data: testData,
               cellBuilder: (context, index, data, column) {
@@ -578,11 +578,11 @@ void main() {
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrDataTableTheme.light(),
+              VelocityDataTableTheme.light(),
             ],
           ),
           home: Scaffold(
-            body: ZephyrDataTable<Map<String, dynamic>>(
+            body: VelocityDataTable<Map<String, dynamic>>(
               columns: testColumns,
               data: testData,
               headerCellBuilder: (context, column) {

@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/navigation/tree/tree.dart';
-import 'package:zephyr_ui/src/components/navigation/tree/tree_theme.dart';
+import 'package:velocity_ui/src/components/navigation/tree/tree.dart';
+import 'package:velocity_ui/src/components/navigation/tree/tree_theme.dart';
 
 void main() {
-  group('ZephyrTree', () {
-    late List<ZephyrTreeNode<String>> sampleNodes;
+  group('VelocityTree', () {
+    late List<VelocityTreeNode<String>> sampleNodes;
 
     setUp(() {
       sampleNodes = [
-        ZephyrTreeNode(
+        const VelocityTreeNode(
           id: '1',
           label: 'Root 1',
           children: [
-            ZephyrTreeNode(
+            VelocityTreeNode(
               id: '1-1',
               label: 'Child 1-1',
               children: [
-                ZephyrTreeNode(id: '1-1-1', label: 'Grandchild 1-1-1'),
-                ZephyrTreeNode(id: '1-1-2', label: 'Grandchild 1-1-2'),
+                VelocityTreeNode(id: '1-1-1', label: 'Grandchild 1-1-1'),
+                VelocityTreeNode(id: '1-1-2', label: 'Grandchild 1-1-2'),
               ],
             ),
-            ZephyrTreeNode(id: '1-2', label: 'Child 1-2'),
+            VelocityTreeNode(id: '1-2', label: 'Child 1-2'),
           ],
         ),
-        ZephyrTreeNode(
+        const VelocityTreeNode(
           id: '2',
           label: 'Root 2',
           children: [
-            ZephyrTreeNode(id: '2-1', label: 'Child 2-1'),
+            VelocityTreeNode(id: '2-1', label: 'Child 2-1'),
           ],
         ),
       ];
@@ -38,14 +38,14 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrTree<String>(
+            body: VelocityTree<String>(
               nodes: sampleNodes,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrTree<String>), findsOneWidget);
+      expect(find.byType(VelocityTree<String>), findsOneWidget);
       expect(find.text('Root 1'), findsOneWidget);
       expect(find.text('Root 2'), findsOneWidget);
     });
@@ -54,9 +54,9 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrTree<String>(
+            body: VelocityTree<String>(
               nodes: sampleNodes,
-              initialExpandedNodes: ['1'],
+              initialExpandedNodes: const ['1'],
             ),
           ),
         ),
@@ -73,7 +73,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrTree<String>(
+            body: VelocityTree<String>(
               nodes: sampleNodes,
               onNodeSelect: (node) {
                 selectedNodeId = node.id;
@@ -96,7 +96,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrTree<String>(
+            body: VelocityTree<String>(
               nodes: sampleNodes,
               allowMultipleSelection: true,
               onNodeSelect: (node) {
@@ -121,7 +121,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrTree<String>(
+            body: VelocityTree<String>(
               nodes: sampleNodes,
               searchQuery: 'Root 1',
             ),
@@ -135,15 +135,15 @@ void main() {
 
     testWidgets('should respect disabled nodes', (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
-            body: ZephyrTree<String>(
+            body: VelocityTree<String>(
               nodes: [
-                ZephyrTreeNode(
+                VelocityTreeNode(
                   id: '1',
                   label: 'Enabled Node',
                 ),
-                ZephyrTreeNode(
+                VelocityTreeNode(
                   id: '2',
                   label: 'Disabled Node',
                   isDisabled: true,
@@ -162,9 +162,9 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrTree<String>(
+            body: VelocityTree<String>(
               nodes: [
-                ZephyrTreeNode(
+                VelocityTreeNode(
                   id: '1',
                   label: 'Custom Node',
                   customWidget: Container(
@@ -184,11 +184,11 @@ void main() {
 
     testWidgets('should show badges', (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
-            body: ZephyrTree<String>(
+            body: VelocityTree<String>(
               nodes: [
-                ZephyrTreeNode(
+                VelocityTreeNode(
                   id: '1',
                   label: 'Node with Badge',
                   metadata: {'badge': '5'},
@@ -203,22 +203,22 @@ void main() {
     });
   });
 
-  group('ZephyrTreeController', () {
-    late List<ZephyrTreeNode<String>> sampleNodes;
-    late ZephyrTreeController<String> controller;
+  group('VelocityTreeController', () {
+    late List<VelocityTreeNode<String>> sampleNodes;
+    late VelocityTreeController<String> controller;
 
     setUp(() {
       sampleNodes = [
-        ZephyrTreeNode(
+        const VelocityTreeNode(
           id: '1',
           label: 'Node 1',
           children: [
-            ZephyrTreeNode(id: '1-1', label: 'Child 1'),
+            VelocityTreeNode(id: '1-1', label: 'Child 1'),
           ],
         ),
-        ZephyrTreeNode(id: '2', label: 'Node 2'),
+        const VelocityTreeNode(id: '2', label: 'Node 2'),
       ];
-      controller = ZephyrTreeController<String>(sampleNodes);
+      controller = VelocityTreeController<String>(sampleNodes);
     });
 
     test('should expand and collapse nodes', () {
@@ -262,21 +262,21 @@ void main() {
     });
   });
 
-  group('ZephyrTreeTheme', () {
+  group('VelocityTreeTheme', () {
     test('should create light theme', () {
-      final theme = ZephyrTreeTheme.light();
+      final theme = VelocityTreeTheme.light();
       expect(theme.selectedColor, equals(const Color(0xFF2196F3)));
       expect(theme.textColor, equals(const Color(0xFF212121)));
     });
 
     test('should create dark theme', () {
-      final theme = ZephyrTreeTheme.dark();
+      final theme = VelocityTreeTheme.dark();
       expect(theme.selectedColor, equals(const Color(0xFF64B5F6)));
       expect(theme.textColor, equals(const Color(0xFFE0E0E0)));
     });
 
     test('should copy theme with modifications', () {
-      final theme = ZephyrTreeTheme.light();
+      final theme = VelocityTreeTheme.light();
       final modifiedTheme = theme.copyWith(
         selectedColor: Colors.red,
         textColor: Colors.green,

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/utils/performance/performance_monitor.dart';
-import 'package:zephyr_ui/src/components/basic/button/button.dart';
+import 'package:velocity_ui/src/utils/performance/performance_monitor.dart';
+import 'package:velocity_ui/src/components/basic/button/button.dart';
 
 // Import with prefix to avoid name conflicts
-import 'package:zephyr_ui/src/utils/performance/performance_monitor.dart' as perf;
+import 'package:velocity_ui/src/utils/performance/performance_monitor.dart' as perf;
 
 void main() {
-  group('ZephyrPerformanceMonitor Tests', () {
-    late ZephyrPerformanceMonitor monitor;
+  group('VelocityPerformanceMonitor Tests', () {
+    late VelocityPerformanceMonitor monitor;
 
     setUp(() {
-      monitor = ZephyrPerformanceMonitor.instance;
+      monitor = VelocityPerformanceMonitor.instance;
       monitor.clearMetrics();
     });
 
@@ -84,7 +84,7 @@ void main() {
             enabled: true,
             child: Scaffold(
               body: Center(
-                child: ZephyrButton.primary(
+                child: VelocityButton.primary(
                   text: 'Test Button',
                   onPressed: () {},
                 ),
@@ -149,7 +149,7 @@ void main() {
             enabled: true,
             child: Scaffold(
               body: Center(
-                child: ZephyrButton.primary(
+                child: VelocityButton.primary(
                   text: 'Increment',
                   onPressed: () {
                     buttonPressCount++;
@@ -168,7 +168,7 @@ void main() {
       expect(find.text('Performance Monitor'), findsOneWidget);
       
       // Press button multiple times
-      for (int i = 0; i < 5; i++) {
+      for (var i = 0; i < 5; i++) {
         await tester.tap(find.text('Increment'));
         await tester.pumpAndSettle();
       }

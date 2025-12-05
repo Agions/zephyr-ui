@@ -1,8 +1,7 @@
-/// button组件模块
+/// VelocityUI 按钮组件
 ///
-/// 提供了多种样式和尺寸的按钮组件
+/// 导出按钮相关的所有公开 API。
 library button;
 
 export 'button.dart';
-export 'button_theme.dart';
-export 'button_example.dart';
+export 'button_style.dart';

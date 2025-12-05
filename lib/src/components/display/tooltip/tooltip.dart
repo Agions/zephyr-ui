@@ -1,251 +1,126 @@
-import 'dart:async';
-import 'package:flutter/material.dart';
-import 'tooltip_theme.dart';
+/// VelocityUI 提示框组件
+library velocity_tooltip;
 
-class ZephyrTooltip extends StatefulWidget {
-  const ZephyrTooltip({
-    required this.child,
-    required this.message,
+import 'package:flutter/material.dart';
+import 'tooltip_style.dart';
+
+export 'tooltip_style.dart';
+
+/// 提示位置
+enum VelocityTooltipPosition { top, bottom, left, right }
+
+/// VelocityUI 提示框
+class VelocityTooltip extends StatelessWidget {
+  const VelocityTooltip({
     super.key,
-    this.theme,
-    this.placement = ZephyrTooltipPlacement.top,
-    this.trigger = ZephyrTooltipTrigger.hover,
-    this.duration = const Duration(milliseconds: 200),
-    this.showDelay = const Duration(milliseconds: 500),
-    this.hideDelay = const Duration(milliseconds: 100),
-    this.disabled = false,
-    this.overlay = true,
-    this.arrow = true,
-    this.maxWidth = 350,
+    required this.message,
+    required this.child,
+    this.position = VelocityTooltipPosition.top,
+    this.richMessage,
+    this.style,
   });
 
-  final Widget child;
   final String message;
-  final ZephyrTooltipTheme? theme;
-  final ZephyrTooltipPlacement placement;
-  final ZephyrTooltipTrigger trigger;
-  final Duration duration;
-  final Duration showDelay;
-  final Duration hideDelay;
-  final bool disabled;
-  final bool overlay;
-  final bool arrow;
-  final double maxWidth;
+  final Widget child;
+  final VelocityTooltipPosition position;
+  final InlineSpan? richMessage;
+  final VelocityTooltipStyle? style;
 
   @override
-  State<ZephyrTooltip> createState() => _ZephyrTooltipState();
+  Widget build(BuildContext context) {
+    final effectiveStyle = style ?? const VelocityTooltipStyle();
+    
+    return Tooltip(
+      message: richMessage == null ? message : '',
+      richMessage: richMessage,
+      preferBelow: position == VelocityTooltipPosition.bottom,
+      verticalOffset: effectiveStyle.verticalOffset,
+      padding: effectiveStyle.padding,
+      margin: effectiveStyle.margin,
+      decoration: BoxDecoration(color: effectiveStyle.backgroundColor, borderRadius: effectiveStyle.borderRadius, boxShadow: effectiveStyle.boxShadow),
+      textStyle: effectiveStyle.textStyle,
+      waitDuration: effectiveStyle.waitDuration,
+      showDuration: effectiveStyle.showDuration,
+      child: child,
+    );
+  }
 }
 
-class _ZephyrTooltipState extends State<ZephyrTooltip> {
-  bool _isShowing = false;
-  Timer? _showTimer;
-  Timer? _hideTimer;
+/// VelocityUI Popover 气泡
+class VelocityPopover extends StatefulWidget {
+  const VelocityPopover({
+    super.key,
+    required this.content,
+    required this.child,
+    this.position = VelocityTooltipPosition.bottom,
+    this.trigger = VelocityPopoverTrigger.tap,
+    this.style,
+  });
+
+  final Widget content;
+  final Widget child;
+  final VelocityTooltipPosition position;
+  final VelocityPopoverTrigger trigger;
+  final VelocityTooltipStyle? style;
+
+  @override
+  State<VelocityPopover> createState() => _VelocityPopoverState();
+}
+
+enum VelocityPopoverTrigger { tap, longPress }
+
+class _VelocityPopoverState extends State<VelocityPopover> {
+  final _layerLink = LayerLink();
+  OverlayEntry? _overlayEntry;
+
+  void _show() {
+    final effectiveStyle = widget.style ?? const VelocityTooltipStyle();
+    _overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        child: CompositedTransformFollower(
+          link: _layerLink,
+          showWhenUnlinked: false,
+          offset: Offset(0, widget.position == VelocityTooltipPosition.bottom ? 8 : -8),
+          targetAnchor: widget.position == VelocityTooltipPosition.bottom ? Alignment.bottomCenter : Alignment.topCenter,
+          followerAnchor: widget.position == VelocityTooltipPosition.bottom ? Alignment.topCenter : Alignment.bottomCenter,
+          child: Material(
+            color: Colors.transparent,
+            child: GestureDetector(
+              onTap: _hide,
+              behavior: HitTestBehavior.opaque,
+              child: Container(
+                padding: effectiveStyle.padding,
+                decoration: BoxDecoration(color: effectiveStyle.backgroundColor, borderRadius: effectiveStyle.borderRadius, boxShadow: effectiveStyle.boxShadow),
+                child: widget.content,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    Overlay.of(context).insert(_overlayEntry!);
+  }
+
+  void _hide() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+  }
 
   @override
   void dispose() {
-    _showTimer?.cancel();
-    _hideTimer?.cancel();
+    _hide();
     super.dispose();
   }
 
-  void _showTooltip() {
-    if (widget.disabled) return;
-
-    _hideTimer?.cancel();
-    _showTimer?.cancel();
-
-    _showTimer = Timer(widget.showDelay, () {
-      setState(() {
-        _isShowing = true;
-      });
-    });
-  }
-
-  void _hideTooltip() {
-    _showTimer?.cancel();
-
-    _hideTimer = Timer(widget.hideDelay, () {
-      setState(() {
-        _isShowing = false;
-      });
-    });
-  }
-
-  Widget _buildTooltipContent(
-      BuildContext context, ZephyrTooltipTheme themeData) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-        maxWidth: widget.maxWidth,
-      ),
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 8,
-        ),
-        decoration: BoxDecoration(
-          color: themeData.backgroundColor,
-          borderRadius: BorderRadius.circular(themeData.borderRadius ?? 6),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.15),
-              blurRadius: 6,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Text(
-          widget.message,
-          style: themeData.textStyle,
-          textAlign: TextAlign.center,
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (widget.disabled) {
-      return widget.child;
-    }
-
-    return Tooltip(
-      message: widget.message,
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.inverseSurface,
-        borderRadius: BorderRadius.circular(6),
-      ),
-      textStyle: TextStyle(
-        color: Theme.of(context).colorScheme.onInverseSurface,
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      preferBelow: widget.placement == ZephyrTooltipPlacement.bottom,
-      verticalOffset: widget.placement == ZephyrTooltipPlacement.top ? -20 : 20,
-      child: widget.child,
-    );
-  }
-}
-
-class ZephyrRichTooltip extends StatefulWidget {
-  const ZephyrRichTooltip({
-    required this.child,
-    required this.title,
-    super.key,
-    this.content,
-    this.actions,
-    this.theme,
-    this.placement = ZephyrTooltipPlacement.top,
-    this.trigger = ZephyrTooltipTrigger.click,
-    this.width = 300,
-    this.disabled = false,
-    this.closeOnClickOutside = true,
-  });
-
-  final Widget child;
-  final String title;
-  final Widget? content;
-  final List<Widget>? actions;
-  final ZephyrTooltipTheme? theme;
-  final ZephyrTooltipPlacement placement;
-  final ZephyrTooltipTrigger trigger;
-  final double width;
-  final bool disabled;
-  final bool closeOnClickOutside;
-
-  @override
-  State<ZephyrRichTooltip> createState() => _ZephyrRichTooltipState();
-}
-
-class _ZephyrRichTooltipState extends State<ZephyrRichTooltip> {
-  bool _isShowing = false;
-  final LayerLink _link = LayerLink();
-
-  void _toggleTooltip() {
-    if (widget.disabled) return;
-
-    setState(() {
-      _isShowing = !_isShowing;
-    });
-  }
-
-  void _hideTooltip() {
-    setState(() {
-      _isShowing = false;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final themeData = widget.theme ?? ZephyrTooltipTheme.of(context);
-
     return CompositedTransformTarget(
-      link: _link,
+      link: _layerLink,
       child: GestureDetector(
-        onTap: widget.trigger == ZephyrTooltipTrigger.click
-            ? _toggleTooltip
-            : null,
-        child: MouseRegion(
-          onEnter: widget.trigger == ZephyrTooltipTrigger.hover
-              ? (_) => _toggleTooltip()
-              : null,
-          onExit: widget.trigger == ZephyrTooltipTrigger.hover
-              ? (_) => _hideTooltip()
-              : null,
-          child: widget.child,
-        ),
+        onTap: widget.trigger == VelocityPopoverTrigger.tap ? () { _overlayEntry == null ? _show() : _hide(); } : null,
+        onLongPress: widget.trigger == VelocityPopoverTrigger.longPress ? _show : null,
+        child: widget.child,
       ),
     );
   }
-}
-
-class ZephyrTooltipGroup extends StatelessWidget {
-  const ZephyrTooltipGroup({
-    required this.children,
-    super.key,
-    this.theme,
-    this.placement = ZephyrTooltipPlacement.top,
-    this.trigger = ZephyrTooltipTrigger.hover,
-  });
-
-  final List<ZephyrTooltip> children;
-  final ZephyrTooltipTheme? theme;
-  final ZephyrTooltipPlacement placement;
-  final ZephyrTooltipTrigger trigger;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: children.map((child) {
-        return ZephyrTooltip(
-          message: child.message,
-          theme: theme ?? child.theme,
-          placement: placement,
-          trigger: trigger,
-          child: child.child,
-        );
-      }).toList(),
-    );
-  }
-}
-
-enum ZephyrTooltipPlacement {
-  top,
-  bottom,
-  left,
-  right,
-  topLeft,
-  topRight,
-  bottomLeft,
-  bottomRight,
-  leftTop,
-  leftBottom,
-  rightTop,
-  rightBottom,
-}
-
-enum ZephyrTooltipTrigger {
-  hover,
-  click,
-  focus,
-  manual,
 }

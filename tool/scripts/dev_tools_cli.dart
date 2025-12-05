@@ -1,11 +1,13 @@
 #!/usr/bin/env dart
 
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 import 'dart:convert';
 import 'package:args/args.dart';
 import 'package:path/path.dart' as path;
 
-/// ZephyrUI 开发工具链命令行界面
+/// VelocityUI 开发工具链命令行界面
 /// 
 /// 功能：
 /// - 组件代码生成
@@ -84,7 +86,7 @@ class DevToolsCLI {
       }
       
       if (results['version'] as bool) {
-        print('ZephyrUI DevTools CLI v$version');
+        print('VelocityUI DevTools CLI v$version');
         return;
       }
       
@@ -345,7 +347,7 @@ class DevToolsCLI {
     }
     
     // 生成组件文件
-    final componentFile = File(path.join(componentDir.path, '${name}.dart'));
+    final componentFile = File(path.join(componentDir.path, '$name.dart'));
     await componentFile.writeAsString(_generateComponentCode(name, type));
     
     if (withTest) {
@@ -354,7 +356,7 @@ class DevToolsCLI {
     }
     
     if (withDoc) {
-      final docFile = File(path.join(componentDir.path, '${name}.md'));
+      final docFile = File(path.join(componentDir.path, '$name.md'));
       await docFile.writeAsString(_generateComponentDocumentation(name, type));
     }
     
@@ -367,9 +369,8 @@ class DevToolsCLI {
   Future<void> _generateTheme({
     required String name,
     required String base,
-    String? primaryColor,
+    required String output, String? primaryColor,
     String? secondaryColor,
-    required String output,
   }) async {
     // 模拟主题生成过程
     final themeDir = Directory(output);
@@ -408,9 +409,7 @@ class DevToolsCLI {
   
   Future<void> _runCodeQualityCheck({
     required String path,
-    String? rules,
-    required bool fix,
-    required bool strict,
+    required bool fix, required bool strict, String? rules,
   }) async {
     // 模拟代码质量检查过程
     print('检查路径: $path');
@@ -436,10 +435,7 @@ class DevToolsCLI {
   
   Future<void> _runOptimizedBuild({
     required String target,
-    String? flavor,
-    required bool obfuscate,
-    required bool splitPerAbi,
-    required bool shrink,
+    required bool obfuscate, required bool splitPerAbi, required bool shrink, String? flavor,
   }) async {
     // 模拟构建过程
     print('构建目标: $target');
@@ -464,13 +460,10 @@ class DevToolsCLI {
   }
   
   Future<void> _runTests({
-    String? coverage,
-    required String reporter,
-    required bool integration,
-    required bool widget,
+    required String reporter, required bool integration, required bool widget, String? coverage,
   }) async {
     // 模拟测试过程
-    final testCommand = 'flutter test';
+    const testCommand = 'flutter test';
     final args = <String>[];
     
     if (coverage != null) args.add('--coverage');
@@ -535,7 +528,7 @@ class ${_toPascalCase(name)} extends StatelessWidget {
   String _generateTestCode(String name) {
     return '''
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/zephyr_ui.dart';
+import 'package:velocity_ui/velocity_ui.dart';
 
 void main() {
   testWidgets('$name renders correctly', (WidgetTester tester) async {
@@ -578,7 +571,7 @@ ${_toPascalCase(name)}()
   String _generateExampleCode(String name) {
     return '''
 import 'package:flutter/material.dart';
-import 'package:zephyr_ui/zephyr_ui.dart';
+import 'package:velocity_ui/velocity_ui.dart';
 
 class ${_toPascalCase(name)}Example extends StatelessWidget {
   @override
@@ -678,7 +671,7 @@ class ${_toPascalCase(name)}Theme {
   }
   
   void _printHelp() {
-    print('ZephyrUI DevTools CLI - 开发工具链');
+    print('VelocityUI DevTools CLI - 开发工具链');
     print('');
     print('使用方法: dart dev_tools_cli.dart <command> [options]');
     print('');

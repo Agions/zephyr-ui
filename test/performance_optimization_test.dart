@@ -1,22 +1,22 @@
-/// ZephyrUI 性能优化测试
+/// VelocityUI 性能优化测试
 ///
 /// 全面测试所有性能优化功能
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/zephyr_ui.dart';
+import 'package:velocity_ui/velocity_ui.dart';
 
 void main() {
-  group('ZephyrUI Performance Optimization Tests', () {
-    late ZephyrEnhancedPerformanceMonitor performanceMonitor;
-    late ZephyrMemoryOptimizer memoryOptimizer;
-    late ZephyrBuildOptimizer buildOptimizer;
-    late ZephyrLazyComponentLoader lazyLoader;
+  group('VelocityUI Performance Optimization Tests', () {
+    late VelocityEnhancedPerformanceMonitor performanceMonitor;
+    late VelocityMemoryOptimizer memoryOptimizer;
+    late VelocityBuildOptimizer buildOptimizer;
+    late VelocityLazyComponentLoader lazyLoader;
 
     setUp(() {
-      performanceMonitor = ZephyrEnhancedPerformanceMonitor.instance;
-      memoryOptimizer = ZephyrMemoryOptimizer.instance;
-      buildOptimizer = ZephyrBuildOptimizer.instance;
-      lazyLoader = ZephyrLazyComponentLoader.instance;
+      performanceMonitor = VelocityEnhancedPerformanceMonitor.instance;
+      memoryOptimizer = VelocityMemoryOptimizer.instance;
+      buildOptimizer = VelocityBuildOptimizer.instance;
+      lazyLoader = VelocityLazyComponentLoader.instance;
     });
 
     tearDown(() {
@@ -27,7 +27,7 @@ void main() {
 
     group('Theme Optimization', () {
       test('Theme data builder creates correct theme', () {
-        final theme = ZephyrThemeDataBuilder()
+        final theme = VelocityThemeDataBuilder()
             .brightness(Brightness.light)
             .primaryColor(Colors.blue)
             .spacing(16.0)
@@ -39,14 +39,14 @@ void main() {
       });
 
       test('Optimized theme data with caching', () {
-        final theme1 = ZephyrOptimizedThemeData.light();
-        final theme2 = ZephyrOptimizedThemeData.light();
+        final theme1 = VelocityOptimizedThemeData.light();
+        final theme2 = VelocityOptimizedThemeData.light();
 
         expect(theme1, same(theme2)); // Should be same instance due to caching
       });
 
       test('Theme config with variants', () {
-        final config = ZephyrOptimizedThemeConfig.instance;
+        final config = VelocityOptimizedThemeConfig.instance;
         
         final enterpriseTheme = config.getThemeConfig(
           brightness: Brightness.light,
@@ -57,7 +57,7 @@ void main() {
       });
 
       test('Theme cache statistics', () {
-        final config = ZephyrOptimizedThemeConfig.instance;
+        final config = VelocityOptimizedThemeConfig.instance;
         
         // Generate some cache activity
         config.getThemeConfig(brightness: Brightness.light);
@@ -106,7 +106,7 @@ void main() {
         buildOptimizer.startBuildTimer('test_build');
         
         // Simulate some work
-        Future.delayed(Duration(milliseconds: 100));
+        Future.delayed(const Duration(milliseconds: 100));
         
         final duration = buildOptimizer.stopBuildTimer('test_build');
         expect(duration.inMilliseconds, greaterThanOrEqualTo(0));
@@ -121,7 +121,7 @@ void main() {
 
       test('Build statistics recording', () {
         buildOptimizer.recordBuildStats(
-          totalTime: Duration(milliseconds: 1500),
+          totalTime: const Duration(milliseconds: 1500),
           widgetCount: 50,
           rebuildCount: 20,
           cacheHits: 30,
@@ -137,7 +137,7 @@ void main() {
 
       test('Build performance report', () {
         buildOptimizer.recordBuildStats(
-          totalTime: Duration(milliseconds: 2000),
+          totalTime: const Duration(milliseconds: 2000),
           widgetCount: 100,
           rebuildCount: 30,
           cacheHits: 40,
@@ -220,7 +220,7 @@ void main() {
       testWidgets('Performance overlay widget test', (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
-            home: ZephyrPerformanceOverlay(
+            home: VelocityPerformanceOverlay(
               enabled: true,
               level: PerformanceLevel.medium,
               child: Container(),
@@ -228,13 +228,13 @@ void main() {
           ),
         );
         
-        expect(find.byType(ZephyrPerformanceOverlay), findsOneWidget);
+        expect(find.byType(VelocityPerformanceOverlay), findsOneWidget);
       });
 
       testWidgets('Memory monitor widget test', (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
-            home: ZephyrMemoryMonitor(
+            home: VelocityMemoryMonitor(
               enabled: true,
               strategy: MemoryOptimizationStrategy.balanced,
               child: Container(),
@@ -242,13 +242,13 @@ void main() {
           ),
         );
         
-        expect(find.byType(ZephyrMemoryMonitor), findsOneWidget);
+        expect(find.byType(VelocityMemoryMonitor), findsOneWidget);
       });
 
       testWidgets('Build timer widget test', (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
-            home: ZephyrBuildTimer(
+            home: VelocityBuildTimer(
               name: 'test_widget',
               enabled: true,
               child: Container(),
@@ -256,7 +256,7 @@ void main() {
           ),
         );
         
-        expect(find.byType(ZephyrBuildTimer), findsOneWidget);
+        expect(find.byType(VelocityBuildTimer), findsOneWidget);
       });
 
       testWidgets('Lazy component widget test', (WidgetTester tester) async {
@@ -269,15 +269,15 @@ void main() {
 
         await tester.pumpWidget(
           MaterialApp(
-            home: ZephyrLazyComponent(
+            home: VelocityLazyComponent(
               componentName: 'lazy_test_component',
-              placeholder: CircularProgressIndicator(),
-              errorWidget: Text('Error'),
+              placeholder: const CircularProgressIndicator(),
+              errorWidget: const Text('Error'),
             ),
           ),
         );
         
-        expect(find.byType(ZephyrLazyComponent), findsOneWidget);
+        expect(find.byType(VelocityLazyComponent), findsOneWidget);
       });
     });
 
@@ -285,8 +285,8 @@ void main() {
       test('Theme creation benchmark', () {
         final stopwatch = Stopwatch()..start();
         
-        for (int i = 0; i < 100; i++) {
-          ZephyrOptimizedThemeData.light();
+        for (var i = 0; i < 100; i++) {
+          VelocityOptimizedThemeData.light();
         }
         
         stopwatch.stop();
@@ -299,7 +299,7 @@ void main() {
       test('Memory operations benchmark', () {
         final stopwatch = Stopwatch()..start();
         
-        for (int i = 0; i < 1000; i++) {
+        for (var i = 0; i < 1000; i++) {
           memoryOptimizer.addToCache('key_$i', 'value_$i');
           memoryOptimizer.getFromCache('key_$i');
         }
@@ -314,7 +314,7 @@ void main() {
       test('Build cache benchmark', () {
         final stopwatch = Stopwatch()..start();
         
-        for (int i = 0; i < 500; i++) {
+        for (var i = 0; i < 500; i++) {
           buildOptimizer.addToBuildCache('build_key_$i', 'build_value_$i');
           buildOptimizer.getFromBuildCache('build_key_$i');
         }

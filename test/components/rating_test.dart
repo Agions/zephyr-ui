@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/forms/rating/rating.dart';
-import 'package:zephyr_ui/src/components/forms/rating/rating_theme.dart';
+import 'package:velocity_ui/src/components/forms/rating/rating.dart';
+import 'package:velocity_ui/src/components/forms/rating/rating_theme.dart';
 
 void main() {
-  group('ZephyrRating', () {
+  group('VelocityRating', () {
     testWidgets('should display rating with default value', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: 3.0,
               onChanged: (value) {},
             ),
@@ -17,17 +17,17 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrRating), findsOneWidget);
+      expect(find.byType(VelocityRating), findsOneWidget);
       expect(find.byType(Icon), findsNWidgets(5));
     });
 
     testWidgets('should handle rating change', (WidgetTester tester) async {
-      double ratingValue = 0.0;
+      var ratingValue = 0.0;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: ratingValue,
               onChanged: (value) {
                 ratingValue = value;
@@ -45,12 +45,12 @@ void main() {
     });
 
     testWidgets('should support half ratings', (WidgetTester tester) async {
-      double ratingValue = 0.0;
+      var ratingValue = 0.0;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: ratingValue,
               allowHalfRating: true,
               onChanged: (value) {
@@ -73,12 +73,12 @@ void main() {
     });
 
     testWidgets('should respect readOnly mode', (WidgetTester tester) async {
-      double ratingValue = 0.0;
+      var ratingValue = 0.0;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: ratingValue,
               readOnly: true,
               onChanged: (value) {
@@ -97,12 +97,12 @@ void main() {
     });
 
     testWidgets('should respect disabled state', (WidgetTester tester) async {
-      double ratingValue = 0.0;
+      var ratingValue = 0.0;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: ratingValue,
               disabled: true,
               onChanged: (value) {
@@ -124,7 +124,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: 3.0,
               showLabels: true,
               onChanged: (value) {},
@@ -144,7 +144,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: 3.0,
               customIcons: [Icons.favorite, Icons.favorite_border],
               onChanged: (value) {},
@@ -161,7 +161,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: 3.0,
               selectedColor: Colors.red,
               unselectedColor: Colors.grey,
@@ -171,17 +171,17 @@ void main() {
         ),
       );
 
-      final ratingFinder = find.byType(ZephyrRating);
+      final ratingFinder = find.byType(VelocityRating);
       expect(ratingFinder, findsOneWidget);
     });
 
     testWidgets('should handle hover state', (WidgetTester tester) async {
-      double hoverValue = 0.0;
+      var hoverValue = 0.0;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: 3.0,
               onHover: (value) {
                 hoverValue = value;
@@ -204,7 +204,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: 3.0,
               direction: Axis.vertical,
               onChanged: (value) {},
@@ -213,16 +213,16 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrRating), findsOneWidget);
+      expect(find.byType(VelocityRating), findsOneWidget);
     });
 
     testWidgets('should handle allowClear functionality', (WidgetTester tester) async {
-      double ratingValue = 4.0;
+      var ratingValue = 4.0;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: ratingValue,
               allowClear: true,
               onChanged: (value) {
@@ -244,7 +244,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: 3.0,
               itemCount: 7,
               maxValue: 10,
@@ -261,7 +261,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: 3.0,
               showTooltip: true,
               tooltipPrefix: 'Rate',
@@ -278,7 +278,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: 3.0,
               animationDuration: const Duration(milliseconds: 500),
               onChanged: (value) {},
@@ -287,16 +287,16 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrRating), findsOneWidget);
+      expect(find.byType(VelocityRating), findsOneWidget);
     });
 
     testWidgets('should handle value clamping', (WidgetTester tester) async {
-      double ratingValue = 0.0;
+      var ratingValue = 0.0;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: 10.0, // Above maxValue
               maxValue: 5.0,
               onChanged: (value) {
@@ -315,7 +315,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: 3.0,
               alignment: WrapAlignment.center,
               onChanged: (value) {},
@@ -324,14 +324,14 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrRating), findsOneWidget);
+      expect(find.byType(VelocityRating), findsOneWidget);
     });
 
     testWidgets('should handle spacing configuration', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: 3.0,
               spacing: 8.0,
               onChanged: (value) {},
@@ -340,14 +340,14 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrRating), findsOneWidget);
+      expect(find.byType(VelocityRating), findsOneWidget);
     });
 
     testWidgets('should handle size configuration', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: 3.0,
               size: 32.0,
               onChanged: (value) {},
@@ -356,16 +356,16 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrRating), findsOneWidget);
+      expect(find.byType(VelocityRating), findsOneWidget);
     });
   });
 
-  group('ZephyrRatingDisplay', () {
+  group('VelocityRatingDisplay', () {
     testWidgets('should display rating in read-only mode', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRatingDisplay(
+            body: VelocityRatingDisplay(
               value: 4.5,
               allowHalfRating: true,
             ),
@@ -373,14 +373,14 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrRatingDisplay), findsOneWidget);
+      expect(find.byType(VelocityRatingDisplay), findsOneWidget);
     });
 
     testWidgets('should not allow interaction', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRatingDisplay(
+            body: VelocityRatingDisplay(
               value: 3.0,
             ),
           ),
@@ -392,14 +392,14 @@ void main() {
       await tester.pump();
 
       // Should not cause any errors and value should remain the same
-      expect(find.byType(ZephyrRatingDisplay), findsOneWidget);
+      expect(find.byType(VelocityRatingDisplay), findsOneWidget);
     });
 
     testWidgets('should show numeric value when enabled', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRatingDisplay(
+            body: VelocityRatingDisplay(
               value: 4.5,
               showValue: true,
               allowHalfRating: true,
@@ -415,10 +415,10 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRatingDisplay(
+            body: VelocityRatingDisplay(
               value: 4.5,
               showValue: true,
-              valueStyle: TextStyle(
+              valueStyle: const TextStyle(
                 color: Colors.red,
                 fontWeight: FontWeight.bold,
               ),
@@ -434,7 +434,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRatingDisplay(
+            body: VelocityRatingDisplay(
               value: 3.0,
               direction: Axis.vertical,
             ),
@@ -442,14 +442,14 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrRatingDisplay), findsOneWidget);
+      expect(find.byType(VelocityRatingDisplay), findsOneWidget);
     });
 
     testWidgets('should handle custom itemCount', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRatingDisplay(
+            body: VelocityRatingDisplay(
               value: 3.0,
               itemCount: 7,
               maxValue: 10,
@@ -462,21 +462,21 @@ void main() {
     });
   });
 
-  group('ZephyrRatingTheme', () {
+  group('VelocityRatingTheme', () {
     test('should create light theme', () {
-      final theme = ZephyrRatingTheme.light();
+      final theme = VelocityRatingTheme.light();
       expect(theme.selectedColor, equals(const Color(0xFFFFC107)));
       expect(theme.unselectedColor, equals(const Color(0xFFE0E0E0)));
     });
 
     test('should create dark theme', () {
-      final theme = ZephyrRatingTheme.dark();
+      final theme = VelocityRatingTheme.dark();
       expect(theme.selectedColor, equals(const Color(0xFFFFC107)));
       expect(theme.unselectedColor, equals(const Color(0xFF424242)));
     });
 
     test('should copy theme with modifications', () {
-      final theme = ZephyrRatingTheme.light();
+      final theme = VelocityRatingTheme.light();
       final modifiedTheme = theme.copyWith(
         selectedColor: Colors.red,
         unselectedColor: Colors.grey,
@@ -488,7 +488,7 @@ void main() {
     });
 
     test('should handle null values in copyWith', () {
-      final theme = ZephyrRatingTheme.light();
+      final theme = VelocityRatingTheme.light();
       final modifiedTheme = theme.copyWith();
 
       expect(modifiedTheme.selectedColor, equals(theme.selectedColor));
@@ -497,7 +497,7 @@ void main() {
     });
 
     test('should support custom animation duration', () {
-      final theme = ZephyrRatingTheme.light();
+      final theme = VelocityRatingTheme.light();
       final modifiedTheme = theme.copyWith(
         animationDuration: const Duration(milliseconds: 500),
       );
@@ -506,8 +506,8 @@ void main() {
     });
 
     test('should support custom label style', () {
-      final theme = ZephyrRatingTheme.light();
-      final customStyle = TextStyle(fontSize: 12, color: Colors.blue);
+      final theme = VelocityRatingTheme.light();
+      const customStyle = TextStyle(fontSize: 12, color: Colors.blue);
       final modifiedTheme = theme.copyWith(
         labelStyle: customStyle,
       );
@@ -521,7 +521,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: 3.0,
               semanticLabel: 'Product rating',
               onChanged: (value) {},
@@ -537,7 +537,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: 3.0,
               enableAccessibilityFeatures: false,
               onChanged: (value) {},
@@ -546,7 +546,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrRating), findsOneWidget);
+      expect(find.byType(VelocityRating), findsOneWidget);
     });
   });
 
@@ -555,7 +555,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: 0.0,
               onChanged: (value) {},
             ),
@@ -563,14 +563,14 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrRating), findsOneWidget);
+      expect(find.byType(VelocityRating), findsOneWidget);
     });
 
     testWidgets('should handle negative value', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: -1.0,
               onChanged: (value) {},
             ),
@@ -578,14 +578,14 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrRating), findsOneWidget);
+      expect(find.byType(VelocityRating), findsOneWidget);
     });
 
     testWidgets('should handle very large value', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: 1000.0,
               maxValue: 5.0,
               onChanged: (value) {},
@@ -594,14 +594,14 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrRating), findsOneWidget);
+      expect(find.byType(VelocityRating), findsOneWidget);
     });
 
     testWidgets('should handle zero maxValue', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: 3.0,
               maxValue: 0.0,
               onChanged: (value) {},
@@ -610,14 +610,14 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrRating), findsOneWidget);
+      expect(find.byType(VelocityRating), findsOneWidget);
     });
 
     testWidgets('should handle negative maxValue', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrRating(
+            body: VelocityRating(
               value: 3.0,
               maxValue: -1.0,
               onChanged: (value) {},
@@ -626,7 +626,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrRating), findsOneWidget);
+      expect(find.byType(VelocityRating), findsOneWidget);
     });
   });
 }

@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/forms/radio_group/radio_group.dart';
-import 'package:zephyr_ui/src/components/forms/radio_group/radio_group_theme.dart';
-import 'package:zephyr_ui/src/core/theme/theme_data.dart';
+import 'package:velocity_ui/src/components/forms/radio_group/radio_group.dart';
+import 'package:velocity_ui/src/components/forms/radio_group/radio_group_theme.dart';
+import 'package:velocity_ui/src/core/theme/theme_data.dart';
 
 void main() {
-  group('ZephyrRadioGroup Widget Tests', () {
+  group('VelocityRadioGroup Widget Tests', () {
     late final ThemeData theme;
 
     setUpAll(() {
-      final zephyrTheme = ZephyrThemeData.light();
+      final velocityTheme = VelocityThemeData.light();
       theme = ThemeData(
-        brightness: zephyrTheme.brightness,
-        primaryColor: zephyrTheme.primaryColor,
+        brightness: velocityTheme.brightness,
+        primaryColor: velocityTheme.primaryColor,
       );
     });
 
     testWidgets('renders radio group with default properties',
         (WidgetTester tester) async {
       final items = [
-        const ZephyrRadioItem(value: '1', label: 'Option 1'),
-        const ZephyrRadioItem(value: '2', label: 'Option 2'),
-        const ZephyrRadioItem(value: '3', label: 'Option 3'),
+        const VelocityRadioItem(value: '1', label: 'Option 1'),
+        const VelocityRadioItem(value: '2', label: 'Option 2'),
+        const VelocityRadioItem(value: '3', label: 'Option 3'),
       ];
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrRadioGroup<String>(
+            body: VelocityRadioGroup<String>(
               items: items,
               value: '1',
             ),
@@ -36,7 +36,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrRadioGroup),
+      expect(find.byWidgetPredicate((widget) => widget is VelocityRadioGroup),
           findsOneWidget);
       expect(find.text('Option 1'), findsOneWidget);
       expect(find.text('Option 2'), findsOneWidget);
@@ -46,24 +46,24 @@ void main() {
     testWidgets('renders radio group with horizontal layout',
         (WidgetTester tester) async {
       final items = [
-        const ZephyrRadioItem(value: '1', label: 'Option 1'),
-        const ZephyrRadioItem(value: '2', label: 'Option 2'),
+        const VelocityRadioItem(value: '1', label: 'Option 1'),
+        const VelocityRadioItem(value: '2', label: 'Option 2'),
       ];
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrRadioGroup(
+            body: VelocityRadioGroup(
               items: items,
               value: '1',
-              direction: ZephyrRadioDirection.horizontal,
+              direction: VelocityRadioDirection.horizontal,
             ),
           ),
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrRadioGroup),
+      expect(find.byWidgetPredicate((widget) => widget is VelocityRadioGroup),
           findsOneWidget);
       expect(find.text('Option 1'), findsOneWidget);
       expect(find.text('Option 2'), findsOneWidget);
@@ -72,8 +72,8 @@ void main() {
     testWidgets('handles radio selection callback',
         (WidgetTester tester) async {
       final items = [
-        const ZephyrRadioItem(value: '1', label: 'Option 1'),
-        const ZephyrRadioItem(value: '2', label: 'Option 2'),
+        const VelocityRadioItem(value: '1', label: 'Option 1'),
+        const VelocityRadioItem(value: '2', label: 'Option 2'),
       ];
 
       String? selectedValue;
@@ -82,7 +82,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrRadioGroup<String>(
+            body: VelocityRadioGroup<String>(
               items: items,
               value: '1',
               onChanged: (value) => selectedValue = value,
@@ -91,7 +91,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrRadioGroup),
+      expect(find.byWidgetPredicate((widget) => widget is VelocityRadioGroup),
           findsOneWidget);
       expect(selectedValue, isNull);
 
@@ -106,8 +106,8 @@ void main() {
     testWidgets('handles radio reselection callback',
         (WidgetTester tester) async {
       final items = [
-        const ZephyrRadioItem(value: '1', label: 'Option 1'),
-        const ZephyrRadioItem(value: '2', label: 'Option 2'),
+        const VelocityRadioItem(value: '1', label: 'Option 1'),
+        const VelocityRadioItem(value: '2', label: 'Option 2'),
       ];
 
       String? selectedValue;
@@ -116,7 +116,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrRadioGroup<String>(
+            body: VelocityRadioGroup<String>(
               items: items,
               value: '1',
               onChanged: (value) => selectedValue = value,
@@ -125,7 +125,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrRadioGroup),
+      expect(find.byWidgetPredicate((widget) => widget is VelocityRadioGroup),
           findsOneWidget);
       expect(selectedValue, isNull);
 
@@ -139,8 +139,8 @@ void main() {
 
     testWidgets('handles disabled radio group', (WidgetTester tester) async {
       final items = [
-        const ZephyrRadioItem(value: '1', label: 'Option 1'),
-        const ZephyrRadioItem(value: '2', label: 'Option 2'),
+        const VelocityRadioItem(value: '1', label: 'Option 1'),
+        const VelocityRadioItem(value: '2', label: 'Option 2'),
       ];
 
       String? selectedValue;
@@ -149,7 +149,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrRadioGroup<String>(
+            body: VelocityRadioGroup<String>(
               items: items,
               value: '1',
               disabled: true,
@@ -159,7 +159,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrRadioGroup),
+      expect(find.byWidgetPredicate((widget) => widget is VelocityRadioGroup),
           findsOneWidget);
       expect(selectedValue, isNull);
 
@@ -173,9 +173,9 @@ void main() {
     testWidgets('handles individual disabled radio items',
         (WidgetTester tester) async {
       final items = [
-        const ZephyrRadioItem(value: '1', label: 'Option 1'),
-        const ZephyrRadioItem(value: '2', label: 'Option 2', disabled: true),
-        const ZephyrRadioItem(value: '3', label: 'Option 3'),
+        const VelocityRadioItem(value: '1', label: 'Option 1'),
+        const VelocityRadioItem(value: '2', label: 'Option 2', disabled: true),
+        const VelocityRadioItem(value: '3', label: 'Option 3'),
       ];
 
       String? selectedValue;
@@ -184,7 +184,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrRadioGroup<String>(
+            body: VelocityRadioGroup<String>(
               items: items,
               value: '1',
               onChanged: (value) => selectedValue = value,
@@ -193,7 +193,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrRadioGroup),
+      expect(find.byWidgetPredicate((widget) => widget is VelocityRadioGroup),
           findsOneWidget);
       expect(selectedValue, isNull);
 
@@ -216,7 +216,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrRadioGroup<String>(
+            body: VelocityRadioGroup<String>(
               items: [],
               value: null,
             ),
@@ -224,21 +224,21 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrRadioGroup),
+      expect(find.byWidgetPredicate((widget) => widget is VelocityRadioGroup),
           findsOneWidget);
       expect(find.text('Option'), findsNothing);
     });
 
     testWidgets('handles single item', (WidgetTester tester) async {
       final items = [
-        const ZephyrRadioItem(value: '1', label: 'Single Option'),
+        const VelocityRadioItem(value: '1', label: 'Single Option'),
       ];
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrRadioGroup<String>(
+            body: VelocityRadioGroup<String>(
               items: items,
               value: '1',
             ),
@@ -246,18 +246,18 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrRadioGroup),
+      expect(find.byWidgetPredicate((widget) => widget is VelocityRadioGroup),
           findsOneWidget);
       expect(find.text('Single Option'), findsOneWidget);
     });
 
     testWidgets('handles custom theme', (WidgetTester tester) async {
       final items = [
-        const ZephyrRadioItem(value: '1', label: 'Option 1'),
-        const ZephyrRadioItem(value: '2', label: 'Option 2'),
+        const VelocityRadioItem(value: '1', label: 'Option 1'),
+        const VelocityRadioItem(value: '2', label: 'Option 2'),
       ];
 
-      const customTheme = ZephyrRadioGroupTheme(
+      const customTheme = VelocityRadioGroupTheme(
         activeColor: Colors.purple,
         borderColor: Colors.grey,
         disabledBorderColor: Colors.grey,
@@ -273,7 +273,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrRadioGroup<String>(
+            body: VelocityRadioGroup<String>(
               items: items,
               value: '1',
               theme: customTheme,
@@ -282,7 +282,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrRadioGroup),
+      expect(find.byWidgetPredicate((widget) => widget is VelocityRadioGroup),
           findsOneWidget);
       expect(find.text('Option 1'), findsOneWidget);
       expect(find.text('Option 2'), findsOneWidget);
@@ -291,11 +291,11 @@ void main() {
     testWidgets('handles value updates from parent',
         (WidgetTester tester) async {
       final items = [
-        const ZephyrRadioItem(value: '1', label: 'Option 1'),
-        const ZephyrRadioItem(value: '2', label: 'Option 2'),
+        const VelocityRadioItem(value: '1', label: 'Option 1'),
+        const VelocityRadioItem(value: '2', label: 'Option 2'),
       ];
 
-      String value = '1';
+      var value = '1';
 
       await tester.pumpWidget(
         MaterialApp(
@@ -305,7 +305,7 @@ void main() {
               builder: (context, setState) {
                 return Column(
                   children: [
-                    ZephyrRadioGroup<String>(
+                    VelocityRadioGroup<String>(
                       items: items,
                       value: value,
                       onChanged: (newValue) {
@@ -330,7 +330,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrRadioGroup),
+      expect(find.byWidgetPredicate((widget) => widget is VelocityRadioGroup),
           findsOneWidget);
 
       // Initially, first option should be selected
@@ -349,15 +349,15 @@ void main() {
     testWidgets('handles special characters in labels',
         (WidgetTester tester) async {
       final items = [
-        const ZephyrRadioItem(value: '1', label: 'Option with émojis 🔥'),
-        const ZephyrRadioItem(value: '2', label: 'Spëcial Chärs'),
+        const VelocityRadioItem(value: '1', label: 'Option with émojis 🔥'),
+        const VelocityRadioItem(value: '2', label: 'Spëcial Chärs'),
       ];
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrRadioGroup<String>(
+            body: VelocityRadioGroup<String>(
               items: items,
               value: '1',
             ),
@@ -365,7 +365,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrRadioGroup),
+      expect(find.byWidgetPredicate((widget) => widget is VelocityRadioGroup),
           findsOneWidget);
       expect(find.text('Option with émojis 🔥'), findsOneWidget);
       expect(find.text('Spëcial Chärs'), findsOneWidget);
@@ -375,7 +375,7 @@ void main() {
         (WidgetTester tester) async {
       final items = List.generate(
         10,
-        (index) => ZephyrRadioItem(
+        (index) => VelocityRadioItem(
           value: index.toString(),
           label: 'Option $index',
         ),
@@ -386,7 +386,7 @@ void main() {
           theme: theme,
           home: Scaffold(
             body: SingleChildScrollView(
-              child: ZephyrRadioGroup(
+              child: VelocityRadioGroup(
                 items: items,
                 value: '5',
               ),
@@ -395,7 +395,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrRadioGroup),
+      expect(find.byWidgetPredicate((widget) => widget is VelocityRadioGroup),
           findsOneWidget);
       expect(find.text('Option 0'), findsOneWidget);
       expect(find.text('Option 5'), findsOneWidget);
@@ -405,13 +405,13 @@ void main() {
     testWidgets('handles multiple radio groups in same screen',
         (WidgetTester tester) async {
       final items1 = [
-        const ZephyrRadioItem(value: '1', label: 'Group 1 Option 1'),
-        const ZephyrRadioItem(value: '2', label: 'Group 1 Option 2'),
+        const VelocityRadioItem(value: '1', label: 'Group 1 Option 1'),
+        const VelocityRadioItem(value: '2', label: 'Group 1 Option 2'),
       ];
 
       final items2 = [
-        const ZephyrRadioItem(value: 'a', label: 'Group 2 Option A'),
-        const ZephyrRadioItem(value: 'b', label: 'Group 2 Option B'),
+        const VelocityRadioItem(value: 'a', label: 'Group 2 Option A'),
+        const VelocityRadioItem(value: 'b', label: 'Group 2 Option B'),
       ];
 
       await tester.pumpWidget(
@@ -420,15 +420,15 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                ZephyrRadioGroup<String>(
+                VelocityRadioGroup<String>(
                   items: items1,
                   value: '1',
                 ),
                 const SizedBox(height: 20),
-                ZephyrRadioGroup<String>(
+                VelocityRadioGroup<String>(
                   items: items2,
                   value: 'a',
-                  direction: ZephyrRadioDirection.horizontal,
+                  direction: VelocityRadioDirection.horizontal,
                 ),
               ],
             ),
@@ -436,7 +436,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrRadioGroup),
+      expect(find.byWidgetPredicate((widget) => widget is VelocityRadioGroup),
           findsNWidgets(2));
       expect(find.text('Group 1 Option 1'), findsOneWidget);
       expect(find.text('Group 1 Option 2'), findsOneWidget);
@@ -447,15 +447,15 @@ void main() {
     testWidgets('handles radio group with null callback',
         (WidgetTester tester) async {
       final items = [
-        const ZephyrRadioItem(value: '1', label: 'Option 1'),
-        const ZephyrRadioItem(value: '2', label: 'Option 2'),
+        const VelocityRadioItem(value: '1', label: 'Option 1'),
+        const VelocityRadioItem(value: '2', label: 'Option 2'),
       ];
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrRadioGroup<String>(
+            body: VelocityRadioGroup<String>(
               items: items,
               value: '1',
               onChanged: null,
@@ -464,7 +464,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrRadioGroup),
+      expect(find.byWidgetPredicate((widget) => widget is VelocityRadioGroup),
           findsOneWidget);
       expect(find.text('Option 1'), findsOneWidget);
       expect(find.text('Option 2'), findsOneWidget);
@@ -473,10 +473,10 @@ void main() {
     testWidgets('handles radio group with mixed disabled states',
         (WidgetTester tester) async {
       final items = [
-        const ZephyrRadioItem(value: '1', label: 'Enabled Option'),
-        const ZephyrRadioItem(
+        const VelocityRadioItem(value: '1', label: 'Enabled Option'),
+        const VelocityRadioItem(
             value: '2', label: 'Disabled Option', disabled: true),
-        const ZephyrRadioItem(value: '3', label: 'Another Enabled Option'),
+        const VelocityRadioItem(value: '3', label: 'Another Enabled Option'),
       ];
 
       String? selectedValue;
@@ -485,7 +485,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrRadioGroup<String>(
+            body: VelocityRadioGroup<String>(
               items: items,
               value: '1',
               onChanged: (value) => selectedValue = value,
@@ -494,7 +494,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrRadioGroup),
+      expect(find.byWidgetPredicate((widget) => widget is VelocityRadioGroup),
           findsOneWidget);
       expect(selectedValue, isNull);
 
@@ -515,8 +515,8 @@ void main() {
     testWidgets('handles radio group with null initial value',
         (WidgetTester tester) async {
       final items = [
-        const ZephyrRadioItem(value: '1', label: 'Option 1'),
-        const ZephyrRadioItem(value: '2', label: 'Option 2'),
+        const VelocityRadioItem(value: '1', label: 'Option 1'),
+        const VelocityRadioItem(value: '2', label: 'Option 2'),
       ];
 
       String? selectedValue;
@@ -525,7 +525,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrRadioGroup<String>(
+            body: VelocityRadioGroup<String>(
               items: items,
               value: null,
               onChanged: (value) => selectedValue = value,
@@ -534,7 +534,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrRadioGroup),
+      expect(find.byWidgetPredicate((widget) => widget is VelocityRadioGroup),
           findsOneWidget);
       expect(selectedValue, isNull);
 
@@ -549,8 +549,8 @@ void main() {
     testWidgets('handles radio group with integer values',
         (WidgetTester tester) async {
       final items = [
-        const ZephyrRadioItem(value: 1, label: 'Option 1'),
-        const ZephyrRadioItem(value: 2, label: 'Option 2'),
+        const VelocityRadioItem(value: 1, label: 'Option 1'),
+        const VelocityRadioItem(value: 2, label: 'Option 2'),
       ];
 
       int? selectedValue;
@@ -559,7 +559,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrRadioGroup<int>(
+            body: VelocityRadioGroup<int>(
               items: items,
               value: 1,
               onChanged: (value) => selectedValue = value,
@@ -568,7 +568,7 @@ void main() {
         ),
       );
 
-      expect(find.byWidgetPredicate((widget) => widget is ZephyrRadioGroup),
+      expect(find.byWidgetPredicate((widget) => widget is VelocityRadioGroup),
           findsOneWidget);
       expect(selectedValue, isNull);
 

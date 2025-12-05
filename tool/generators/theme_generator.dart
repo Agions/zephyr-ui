@@ -1,5 +1,8 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:io';
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
 
 /// ZephyrUI 主题生成器
@@ -10,9 +13,9 @@ import 'package:path/path.dart' as path;
 /// - 主题样式定制
 /// - 主题导出
 class ThemeGenerator {
-  final String _outputDir;
   
   ThemeGenerator({required String outputDir}) : _outputDir = outputDir;
+  final String _outputDir;
   
   /// 生成主题文件
   Future<void> generateTheme({
@@ -82,35 +85,35 @@ class ThemeGenerator {
     final themeData = {
       'name': themeName,
       'colors': {
-        'primary': baseTheme.primaryColor.value,
-        'primaryVariant': baseTheme.primaryColorDark.value,
+        'primary': baseTheme.colorScheme.primary.value,
+        'primaryContainer': baseTheme.colorScheme.primaryContainer.value,
         'secondary': baseTheme.colorScheme.secondary.value,
-        'secondaryVariant': baseTheme.colorScheme.secondaryVariant.value,
-        'background': baseTheme.backgroundColor.value,
+        'secondaryContainer': baseTheme.colorScheme.secondaryContainer.value,
         'surface': baseTheme.colorScheme.surface.value,
         'error': baseTheme.colorScheme.error.value,
         'onPrimary': baseTheme.colorScheme.onPrimary.value,
         'onSecondary': baseTheme.colorScheme.onSecondary.value,
-        'onBackground': baseTheme.colorScheme.onBackground.value,
         'onSurface': baseTheme.colorScheme.onSurface.value,
         'onError': baseTheme.colorScheme.onError.value,
         ...customColors,
       },
       'styles': {
         'textTheme': {
-          'headline1': _textStyleToMap(baseTheme.textTheme.headline1),
-          'headline2': _textStyleToMap(baseTheme.textTheme.headline2),
-          'headline3': _textStyleToMap(baseTheme.textTheme.headline3),
-          'headline4': _textStyleToMap(baseTheme.textTheme.headline4),
-          'headline5': _textStyleToMap(baseTheme.textTheme.headline5),
-          'headline6': _textStyleToMap(baseTheme.textTheme.headline6),
-          'bodyText1': _textStyleToMap(baseTheme.textTheme.bodyText1),
-          'bodyText2': _textStyleToMap(baseTheme.textTheme.bodyText2),
-          'subtitle1': _textStyleToMap(baseTheme.textTheme.subtitle1),
-          'subtitle2': _textStyleToMap(baseTheme.textTheme.subtitle2),
-          'caption': _textStyleToMap(baseTheme.textTheme.caption),
-          'button': _textStyleToMap(baseTheme.textTheme.button),
-          'overline': _textStyleToMap(baseTheme.textTheme.overline),
+          'displayLarge': _textStyleToMap(baseTheme.textTheme.displayLarge),
+          'displayMedium': _textStyleToMap(baseTheme.textTheme.displayMedium),
+          'displaySmall': _textStyleToMap(baseTheme.textTheme.displaySmall),
+          'headlineLarge': _textStyleToMap(baseTheme.textTheme.headlineLarge),
+          'headlineMedium': _textStyleToMap(baseTheme.textTheme.headlineMedium),
+          'headlineSmall': _textStyleToMap(baseTheme.textTheme.headlineSmall),
+          'titleLarge': _textStyleToMap(baseTheme.textTheme.titleLarge),
+          'titleMedium': _textStyleToMap(baseTheme.textTheme.titleMedium),
+          'titleSmall': _textStyleToMap(baseTheme.textTheme.titleSmall),
+          'bodyLarge': _textStyleToMap(baseTheme.textTheme.bodyLarge),
+          'bodyMedium': _textStyleToMap(baseTheme.textTheme.bodyMedium),
+          'bodySmall': _textStyleToMap(baseTheme.textTheme.bodySmall),
+          'labelLarge': _textStyleToMap(baseTheme.textTheme.labelLarge),
+          'labelMedium': _textStyleToMap(baseTheme.textTheme.labelMedium),
+          'labelSmall': _textStyleToMap(baseTheme.textTheme.labelSmall),
         },
         'elevatedButtonTheme': {
           'style': _buttonStyleToMap(baseTheme.elevatedButtonTheme.style),
@@ -143,6 +146,7 @@ class ThemeGenerator {
   
   String _generateThemeContent(String themeName, Map<String, dynamic> themeData) {
     final colors = themeData['colors'] as Map<String, dynamic>;
+    // ignore: unused_local_variable
     final styles = themeData['styles'] as Map<String, dynamic>;
     
     return '''
@@ -156,15 +160,13 @@ class ${_toPascalCase(themeName)}Theme {
   
   // 颜色定义
   static const Color primary = Color(${colors['primary']});
-  static const Color primaryVariant = Color(${colors['primaryVariant']});
+  static const Color primaryContainer = Color(${colors['primaryContainer']});
   static const Color secondary = Color(${colors['secondary']});
-  static const Color secondaryVariant = Color(${colors['secondaryVariant']});
-  static const Color background = Color(${colors['background']});
+  static const Color secondaryContainer = Color(${colors['secondaryContainer']});
   static const Color surface = Color(${colors['surface']});
   static const Color error = Color(${colors['error']});
   static const Color onPrimary = Color(${colors['onPrimary']});
   static const Color onSecondary = Color(${colors['onSecondary']});
-  static const Color onBackground = Color(${colors['onBackground']});
   static const Color onSurface = Color(${colors['onSurface']});
   static const Color onError = Color(${colors['onError']});
   
@@ -176,15 +178,13 @@ ${_generateCustomColors(colors)}
     useMaterial3: true,
     colorScheme: ColorScheme(
       primary: primary,
-      primaryVariant: primaryVariant,
+      primaryContainer: primaryContainer,
       secondary: secondary,
-      secondaryVariant: secondaryVariant,
-      background: background,
+      secondaryContainer: secondaryContainer,
       surface: surface,
       error: error,
       onPrimary: onPrimary,
       onSecondary: onSecondary,
-      onBackground: onBackground,
       onSurface: onSurface,
       onError: onError,
       brightness: Brightness.light,
@@ -225,71 +225,81 @@ ${_generateCustomColors(colors)}
   );
   
   static TextTheme _buildTextTheme() {
-    return TextTheme(
-      headline1: TextStyle(
-        fontSize: 96,
-        fontWeight: FontWeight.w300,
-        color: onBackground,
-      ),
-      headline2: TextStyle(
-        fontSize: 60,
-        fontWeight: FontWeight.w300,
-        color: onBackground,
-      ),
-      headline3: TextStyle(
-        fontSize: 48,
+    return const TextTheme(
+      displayLarge: TextStyle(
+        fontSize: 57,
         fontWeight: FontWeight.w400,
-        color: onBackground,
+        color: onSurface,
       ),
-      headline4: TextStyle(
-        fontSize: 34,
+      displayMedium: TextStyle(
+        fontSize: 45,
         fontWeight: FontWeight.w400,
-        color: onBackground,
+        color: onSurface,
       ),
-      headline5: TextStyle(
+      displaySmall: TextStyle(
+        fontSize: 36,
+        fontWeight: FontWeight.w400,
+        color: onSurface,
+      ),
+      headlineLarge: TextStyle(
+        fontSize: 32,
+        fontWeight: FontWeight.w400,
+        color: onSurface,
+      ),
+      headlineMedium: TextStyle(
+        fontSize: 28,
+        fontWeight: FontWeight.w400,
+        color: onSurface,
+      ),
+      headlineSmall: TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.w400,
-        color: onBackground,
+        color: onSurface,
       ),
-      headline6: TextStyle(
-        fontSize: 20,
+      titleLarge: TextStyle(
+        fontSize: 22,
+        fontWeight: FontWeight.w400,
+        color: onSurface,
+      ),
+      titleMedium: TextStyle(
+        fontSize: 16,
         fontWeight: FontWeight.w500,
-        color: onBackground,
+        color: onSurface,
       ),
-      bodyText1: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-        color: onBackground,
-      ),
-      bodyText2: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-        color: onBackground,
-      ),
-      subtitle1: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-        color: onBackground,
-      ),
-      subtitle2: TextStyle(
+      titleSmall: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w500,
-        color: onBackground,
+        color: onSurface,
       ),
-      caption: TextStyle(
+      bodyLarge: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        color: onSurface,
+      ),
+      bodyMedium: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        color: onSurface,
+      ),
+      bodySmall: TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w400,
-        color: onBackground,
+        color: onSurface,
       ),
-      button: TextStyle(
+      labelLarge: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w500,
-        color: onPrimary,
+        color: onSurface,
       ),
-      overline: TextStyle(
-        fontSize: 10,
-        fontWeight: FontWeight.w400,
-        color: onBackground,
+      labelMedium: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        color: onSurface,
+      ),
+      labelSmall: TextStyle(
+        fontSize: 11,
+        fontWeight: FontWeight.w500,
+        color: onSurface,
       ),
     );
   }
@@ -513,8 +523,8 @@ class ${_toPascalCase(themeName)}ThemePreview extends StatelessWidget {
         'type': 'outline',
         'borderRadius': border.borderRadius.toString(),
         'borderSide': {
-          'color': border borderSide.color.value,
-          'width': border borderSide.width,
+          'color': border.borderSide.color.value,
+          'width': border.borderSide.width,
         },
       };
     }
@@ -529,11 +539,6 @@ class ${_toPascalCase(themeName)}ThemePreview extends StatelessWidget {
 
 /// 主题配置
 class ThemeConfig {
-  final String name;
-  final ThemeData baseTheme;
-  final Map<String, dynamic> customColors;
-  final Map<String, dynamic> customStyles;
-  final Map<String, dynamic> config;
   
   ThemeConfig({
     required this.name,
@@ -542,4 +547,9 @@ class ThemeConfig {
     this.customStyles = const {},
     this.config = const {},
   });
+  final String name;
+  final ThemeData baseTheme;
+  final Map<String, dynamic> customColors;
+  final Map<String, dynamic> customStyles;
+  final Map<String, dynamic> config;
 }

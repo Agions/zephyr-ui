@@ -5,7 +5,7 @@ library test_assertions;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/core/constants/design_tokens.dart';
+import 'package:velocity_ui/src/core/constants/design_tokens.dart';
 
 /// 测试断言工具类
 class TestAssertions {
@@ -104,7 +104,7 @@ class TestAssertions {
   }) {
     expect(actual.length, expected.length, reason: reason);
     
-    for (int i = 0; i < expected.length; i++) {
+    for (var i = 0; i < expected.length; i++) {
       expectColor(actual[i].color, expected[i].color, reason: reason);
       expect(actual[i].blurRadius, closeTo(expected[i].blurRadius, tolerance), reason: reason);
       expect(actual[i].spreadRadius, closeTo(expected[i].spreadRadius, tolerance), reason: reason);
@@ -163,13 +163,13 @@ class TestAssertions {
     expect(actual.end, expected.end, reason: reason);
     expect(actual.colors.length, expected.colors.length, reason: reason);
     
-    for (int i = 0; i < expected.colors.length; i++) {
+    for (var i = 0; i < expected.colors.length; i++) {
       expectColor(actual.colors[i], expected.colors[i], reason: reason);
     }
     
     if (expected.stops != null) {
       expect(actual.stops?.length, expected.stops?.length, reason: reason);
-      for (int i = 0; i < expected.stops!.length; i++) {
+      for (var i = 0; i < expected.stops!.length; i++) {
         expect(actual.stops![i], closeTo(expected.stops![i], 0.01), reason: reason);
       }
     }
@@ -188,13 +188,13 @@ class TestAssertions {
     expect(actual.radius, closeTo(expected.radius, 0.01), reason: reason);
     expect(actual.colors.length, expected.colors.length, reason: reason);
     
-    for (int i = 0; i < expected.colors.length; i++) {
+    for (var i = 0; i < expected.colors.length; i++) {
       expectColor(actual.colors[i], expected.colors[i], reason: reason);
     }
     
     if (expected.stops != null) {
       expect(actual.stops?.length, expected.stops?.length, reason: reason);
-      for (int i = 0; i < expected.stops!.length; i++) {
+      for (var i = 0; i < expected.stops!.length; i++) {
         expect(actual.stops![i], closeTo(expected.stops![i], 0.01), reason: reason);
       }
     }
@@ -216,13 +216,13 @@ class TestAssertions {
     expect(actual.endAngle, closeTo(expected.endAngle, 0.01), reason: reason);
     expect(actual.colors.length, expected.colors.length, reason: reason);
     
-    for (int i = 0; i < expected.colors.length; i++) {
+    for (var i = 0; i < expected.colors.length; i++) {
       expectColor(actual.colors[i], expected.colors[i], reason: reason);
     }
     
     if (expected.stops != null) {
       expect(actual.stops?.length, expected.stops?.length, reason: reason);
-      for (int i = 0; i < expected.stops!.length; i++) {
+      for (var i = 0; i < expected.stops!.length; i++) {
         expect(actual.stops![i], closeTo(expected.stops![i], 0.01), reason: reason);
       }
     }
@@ -238,7 +238,7 @@ class TestAssertions {
     String? reason,
     double tolerance = 0.01,
   }) {
-    for (int i = 0; i < 16; i++) {
+    for (var i = 0; i < 16; i++) {
       expect(actual.storage[i], closeTo(expected.storage[i], tolerance), reason: reason);
     }
   }
@@ -262,7 +262,7 @@ class TestAssertions {
     int samplePoints = 100,
     double tolerance = 0.01,
   }) {
-    for (int i = 0; i <= samplePoints; i++) {
+    for (var i = 0; i <= samplePoints; i++) {
       final t = i / samplePoints;
       expect(actual.transform(t), closeTo(expected.transform(t), tolerance), reason: reason);
     }
@@ -280,7 +280,7 @@ class TestAssertions {
     
     expect(actualMetrics.length, expectedMetrics.length, reason: reason);
     
-    for (int i = 0; i < expectedMetrics.length; i++) {
+    for (var i = 0; i < expectedMetrics.length; i++) {
       final actualMetric = actualMetrics.elementAt(i);
       final expectedMetric = expectedMetrics.elementAt(i);
       
@@ -300,26 +300,26 @@ class TestAssertions {
     expect(actual.brightness, expected.brightness, reason: reason);
     expect(actual.primaryColor, expected.primaryColor, reason: reason);
     expect(actual.secondaryHeaderColor, expected.secondaryHeaderColor, reason: reason);
-    expect(actual.backgroundColor, expected.backgroundColor, reason: reason);
+    expect(actual.colorScheme.surface, expected.colorScheme.surface, reason: reason);
     expect(actual.dividerColor, expected.dividerColor, reason: reason);
     expect(actual.focusColor, expected.focusColor, reason: reason);
     expect(actual.hoverColor, expected.hoverColor, reason: reason);
     expect(actual.splashColor, expected.splashColor, reason: reason);
     expect(actual.highlightColor, expected.highlightColor, reason: reason);
     expect(actual.disabledColor, expected.disabledColor, reason: reason);
-    expect(actual.errorColor, expected.errorColor, reason: reason);
+    expect(actual.colorScheme.error, expected.colorScheme.error, reason: reason);
     
     if (deepCompare) {
       expectColor(actual.primaryColor, expected.primaryColor, reason: reason);
       expectColor(actual.secondaryHeaderColor, expected.secondaryHeaderColor, reason: reason);
-      expectColor(actual.backgroundColor, expected.backgroundColor, reason: reason);
+      expectColor(actual.colorScheme.surface, expected.colorScheme.surface, reason: reason);
       expectColor(actual.dividerColor, expected.dividerColor, reason: reason);
       expectColor(actual.focusColor, expected.focusColor, reason: reason);
       expectColor(actual.hoverColor, expected.hoverColor, reason: reason);
       expectColor(actual.splashColor, expected.splashColor, reason: reason);
       expectColor(actual.highlightColor, expected.highlightColor, reason: reason);
       expectColor(actual.disabledColor, expected.disabledColor, reason: reason);
-      expectColor(actual.errorColor, expected.errorColor, reason: reason);
+      expectColor(actual.colorScheme.error, expected.colorScheme.error, reason: reason);
     }
   }
   
@@ -567,7 +567,7 @@ class TestAssertions {
     
     expect(actual.length, expected.length, reason: reason);
     
-    for (int i = 0; i < expected.length; i++) {
+    for (var i = 0; i < expected.length; i++) {
       expectColor(actual[i].color, expected[i].color, reason: reason);
       expect(actual[i].blurRadius, closeTo(expected[i].blurRadius, tolerance), reason: reason);
       expect(actual[i].spreadRadius, closeTo(expected[i].spreadRadius, tolerance), reason: reason);
@@ -785,7 +785,7 @@ class TestAssertions {
       final actualOrder = widget.children;
       expect(actualOrder.length, expectedOrder.length, reason: reason);
       
-      for (int i = 0; i < expectedOrder.length; i++) {
+      for (var i = 0; i < expectedOrder.length; i++) {
         expect(actualOrder[i].runtimeType, expectedOrder[i].runtimeType, reason: reason);
       }
     } else {

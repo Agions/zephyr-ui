@@ -1,14 +1,14 @@
 /// Button组件基础测试
 ///
-/// 测试ZephyrButton组件的基本功能
+/// 测试VelocityButton组件的基本功能
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/basic/button/button.dart';
-import 'package:zephyr_ui/src/components/basic/button/button_theme.dart';
-import 'package:zephyr_ui/src/core/constants/enums.dart';
+import 'package:velocity_ui/src/components/basic/button/button.dart';
+import 'package:velocity_ui/src/components/basic/button/button_theme.dart';
+import 'package:velocity_ui/src/core/constants/enums.dart';
 
 void main() {
-  group('ZephyrButton', () {
+  group('VelocityButton', () {
     late VoidCallback? onPressed;
 
     setUp(() {
@@ -19,26 +19,26 @@ void main() {
       testWidgets('应该正确渲染主要按钮', (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
-            home: ZephyrButton.primary(
+            home: VelocityButton.primary(
               text: 'Primary Button',
               onPressed: onPressed,
             ),
           ),
         );
 
-        expect(find.byType(ZephyrButton), findsOneWidget);
+        expect(find.byType(VelocityButton), findsOneWidget);
         expect(find.text('Primary Button'), findsOneWidget);
         expect(find.byType(Material), findsWidgets);
       });
 
       testWidgets('应该正确处理点击事件', (WidgetTester tester) async {
-        bool clicked = false;
+        var clicked = false;
         void callback() => clicked = true;
 
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrButton.primary(
+              child: VelocityButton.primary(
                 text: 'Click Me',
                 onPressed: callback,
               ),
@@ -46,19 +46,19 @@ void main() {
           ),
         );
 
-        await tester.tap(find.byType(ZephyrButton));
+        await tester.tap(find.byType(VelocityButton));
         await tester.pumpAndSettle();
 
         expect(clicked, isTrue);
       });
 
       testWidgets('禁用状态不应该响应点击', (WidgetTester tester) async {
-        bool clicked = false;
+        var clicked = false;
 
         await tester.pumpWidget(
           const MaterialApp(
             home: Material(
-              child: ZephyrButton.primary(
+              child: VelocityButton.primary(
                 text: 'Disabled',
                 onPressed: null,
               ),
@@ -66,7 +66,7 @@ void main() {
           ),
         );
 
-        await tester.tap(find.byType(ZephyrButton));
+        await tester.tap(find.byType(VelocityButton));
         await tester.pumpAndSettle();
 
         expect(clicked, isFalse);
@@ -78,7 +78,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrButton.secondary(
+              child: VelocityButton.secondary(
                 text: 'Secondary Button',
                 onPressed: onPressed,
               ),
@@ -86,7 +86,7 @@ void main() {
           ),
         );
 
-        expect(find.byType(ZephyrButton), findsOneWidget);
+        expect(find.byType(VelocityButton), findsOneWidget);
         expect(find.text('Secondary Button'), findsOneWidget);
       });
     });
@@ -96,7 +96,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrButton.outline(
+              child: VelocityButton.outline(
                 text: 'Outline Button',
                 onPressed: onPressed,
               ),
@@ -104,7 +104,7 @@ void main() {
           ),
         );
 
-        expect(find.byType(ZephyrButton), findsOneWidget);
+        expect(find.byType(VelocityButton), findsOneWidget);
         expect(find.text('Outline Button'), findsOneWidget);
       });
     });
@@ -114,7 +114,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrButton.text(
+              child: VelocityButton.text(
                 text: 'Text Button',
                 onPressed: onPressed,
               ),
@@ -122,7 +122,7 @@ void main() {
           ),
         );
 
-        expect(find.byType(ZephyrButton), findsOneWidget);
+        expect(find.byType(VelocityButton), findsOneWidget);
         expect(find.text('Text Button'), findsOneWidget);
       });
     });
@@ -132,7 +132,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrButton.icon(
+              child: VelocityButton.icon(
                 icon: Icons.add,
                 onPressed: onPressed,
               ),
@@ -140,16 +140,16 @@ void main() {
           ),
         );
 
-        expect(find.byType(ZephyrButton), findsOneWidget);
+        expect(find.byType(VelocityButton), findsOneWidget);
         expect(find.byIcon(Icons.add), findsOneWidget);
       });
 
       testWidgets('应该支持不同类型的图标按钮', (WidgetTester tester) async {
-        for (final type in ZephyrButtonType.values) {
+        for (final type in VelocityButtonType.values) {
           await tester.pumpWidget(
             MaterialApp(
               home: Material(
-                child: ZephyrButton.icon(
+                child: VelocityButton.icon(
                   icon: Icons.star,
                   onPressed: onPressed,
                   type: type,
@@ -158,7 +158,7 @@ void main() {
             ),
           );
 
-          expect(find.byType(ZephyrButton), findsOneWidget);
+          expect(find.byType(VelocityButton), findsOneWidget);
           expect(find.byIcon(Icons.star), findsOneWidget);
         }
       });
@@ -166,11 +166,11 @@ void main() {
 
     group('sizes', () {
       testWidgets('应该支持不同尺寸', (WidgetTester tester) async {
-        for (final size in ZephyrButtonSize.values) {
+        for (final size in VelocityButtonSize.values) {
           await tester.pumpWidget(
             MaterialApp(
               home: Material(
-                child: ZephyrButton.primary(
+                child: VelocityButton.primary(
                   text: 'Size Test',
                   onPressed: onPressed,
                   size: size,
@@ -179,7 +179,7 @@ void main() {
             ),
           );
 
-          expect(find.byType(ZephyrButton), findsOneWidget);
+          expect(find.byType(VelocityButton), findsOneWidget);
           expect(find.text('Size Test'), findsOneWidget);
         }
       });
@@ -190,7 +190,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrButton.primary(
+              child: VelocityButton.primary(
                 text: 'Loading',
                 onPressed: onPressed,
                 isLoading: true,
@@ -199,19 +199,19 @@ void main() {
           ),
         );
 
-        expect(find.byType(ZephyrButton), findsOneWidget);
+        expect(find.byType(VelocityButton), findsOneWidget);
         expect(find.byType(CircularProgressIndicator), findsOneWidget);
         expect(find.text('Loading'), findsOneWidget);
       });
 
       testWidgets('加载状态应该禁用按钮', (WidgetTester tester) async {
-        bool clicked = false;
+        var clicked = false;
         void callback() => clicked = true;
 
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrButton.primary(
+              child: VelocityButton.primary(
                 text: 'Loading',
                 onPressed: callback,
                 isLoading: true,
@@ -220,7 +220,7 @@ void main() {
           ),
         );
 
-        await tester.tap(find.byType(ZephyrButton));
+        await tester.tap(find.byType(VelocityButton));
         await tester.pump();
 
         expect(clicked, isFalse);
@@ -232,7 +232,7 @@ void main() {
         await tester.pumpWidget(
           const MaterialApp(
             home: Material(
-              child: ZephyrButton.primary(
+              child: VelocityButton.primary(
                 text: 'Disabled',
                 onPressed: null,
                 isDisabled: true,
@@ -241,7 +241,7 @@ void main() {
           ),
         );
 
-        expect(find.byType(ZephyrButton), findsOneWidget);
+        expect(find.byType(VelocityButton), findsOneWidget);
         expect(find.text('Disabled'), findsOneWidget);
       });
     });
@@ -251,7 +251,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrButton.primary(
+              body: VelocityButton.primary(
                 text: 'Full Width',
                 onPressed: onPressed,
                 isFullWidth: true,
@@ -260,7 +260,7 @@ void main() {
           ),
         );
 
-        expect(find.byType(ZephyrButton), findsOneWidget);
+        expect(find.byType(VelocityButton), findsOneWidget);
         expect(find.text('Full Width'), findsOneWidget);
       });
     });
@@ -270,7 +270,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrButton.primary(
+              child: VelocityButton.primary(
                 text: 'With Icon',
                 onPressed: onPressed,
                 icon: Icons.star,
@@ -279,7 +279,7 @@ void main() {
           ),
         );
 
-        expect(find.byType(ZephyrButton), findsOneWidget);
+        expect(find.byType(VelocityButton), findsOneWidget);
         expect(find.text('With Icon'), findsOneWidget);
         expect(find.byIcon(Icons.star), findsOneWidget);
       });
@@ -288,7 +288,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrButton.primary(
+              child: VelocityButton.primary(
                 text: 'Loading',
                 onPressed: onPressed,
                 icon: Icons.star,
@@ -298,7 +298,7 @@ void main() {
           ),
         );
 
-        expect(find.byType(ZephyrButton), findsOneWidget);
+        expect(find.byType(VelocityButton), findsOneWidget);
         expect(find.byType(CircularProgressIndicator), findsOneWidget);
         expect(find.byIcon(Icons.star), findsNothing);
       });
@@ -306,7 +306,7 @@ void main() {
 
     group('custom theme', () {
       testWidgets('应该支持自定义主题', (WidgetTester tester) async {
-        final customTheme = ZephyrButtonTheme(
+        final customTheme = VelocityButtonTheme(
           primaryBackgroundColor: Colors.purple,
           primaryTextColor: Colors.white,
           secondaryBackgroundColor: Colors.orange,
@@ -332,7 +332,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrButton.primary(
+              child: VelocityButton.primary(
                 text: 'Custom Theme',
                 onPressed: onPressed,
                 theme: customTheme,
@@ -341,7 +341,7 @@ void main() {
           ),
         );
 
-        expect(find.byType(ZephyrButton), findsOneWidget);
+        expect(find.byType(VelocityButton), findsOneWidget);
         expect(find.text('Custom Theme'), findsOneWidget);
       });
     });
@@ -351,7 +351,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrButton.primary(
+              child: VelocityButton.primary(
                 text: 'Semantic Button',
                 onPressed: onPressed,
               ),

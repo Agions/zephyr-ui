@@ -5,8 +5,8 @@ library test_themes;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/core/constants/design_tokens.dart';
-import 'package:zephyr_ui/src/core/constants/enums.dart';
+import 'package:velocity_ui/src/core/constants/design_tokens.dart';
+import 'package:velocity_ui/src/core/constants/enums.dart';
 
 /// 主题测试工具类
 class ThemeTestUtils {
@@ -18,11 +18,11 @@ class ThemeTestUtils {
   
   /// 创建自定义主题
   static ThemeData createTheme({
-    Color primaryColor = ZephyrColors.primary500,
-    Color secondaryColor = ZephyrColors.secondary500,
-    Color backgroundColor = ZephyrColors.neutral50,
+    Color primaryColor = VelocityColors.primary500,
+    Color secondaryColor = VelocityColors.secondary500,
+    Color backgroundColor = VelocityColors.neutral50,
     Color surfaceColor = Colors.white,
-    Color errorColor = ZephyrColors.error500,
+    Color errorColor = VelocityColors.error500,
     Brightness brightness = Brightness.light,
   }) {
     return ThemeData(
@@ -84,7 +84,7 @@ class ThemeTestUtils {
     expect(scheme1.brightness, scheme2.brightness, reason: reason);
     expect(scheme1.primary, scheme2.primary, reason: reason);
     expect(scheme1.secondary, scheme2.secondary, reason: reason);
-    expect(scheme1.background, scheme2.background, reason: reason);
+    expect(scheme1.surface, scheme2.surface, reason: reason);
     expect(scheme1.surface, scheme2.surface, reason: reason);
     expect(scheme1.error, scheme2.error, reason: reason);
   }
@@ -145,11 +145,10 @@ class ThemeTestUtils {
   static Future<void> testWithThemes(
     WidgetTester tester,
     Widget Function() widgetBuilder, {
-    List<ThemeData> themes = const [
+    required Future<void> Function(WidgetTester, ThemeData) testCallback, List<ThemeData> themes = const [
       ThemeData.light(),
       ThemeData.dark(),
     ],
-    required Future<void> Function(WidgetTester, ThemeData) testCallback,
   }) async {
     for (final theme in themes) {
       await tester.pumpWidget(
@@ -169,11 +168,10 @@ class ThemeTestUtils {
   static Future<void> testWithBrightness(
     WidgetTester tester,
     Widget Function() widgetBuilder, {
-    List<Brightness> brightnesses = const [
+    required Future<void> Function(WidgetTester, Brightness) testCallback, List<Brightness> brightnesses = const [
       Brightness.light,
       Brightness.dark,
     ],
-    required Future<void> Function(WidgetTester, Brightness) testCallback,
   }) async {
     for (final brightness in brightnesses) {
       await tester.pumpWidget(
@@ -199,13 +197,12 @@ class ThemeTestUtils {
   static Future<void> testWithColorSchemes(
     WidgetTester tester,
     Widget Function() widgetBuilder, {
-    List<ColorScheme> colorSchemes = const [
+    required Future<void> Function(WidgetTester, ColorScheme) testCallback, List<ColorScheme> colorSchemes = const [
       ColorScheme.light(),
       ColorScheme.dark(),
       ColorScheme.highContrastLight(),
       ColorScheme.highContrastDark(),
     ],
-    required Future<void> Function(WidgetTester, ColorScheme) testCallback,
   }) async {
     for (final colorScheme in colorSchemes) {
       await tester.pumpWidget(
@@ -337,7 +334,7 @@ class ThemeTestUtils {
       case 'secondaryHeaderColor':
         return theme.secondaryHeaderColor as T;
       case 'backgroundColor':
-        return theme.backgroundColor as T;
+        return theme.colorScheme.surface as T;
       case 'scaffoldBackgroundColor':
         return theme.scaffoldBackgroundColor as T;
       case 'cardColor':
@@ -355,7 +352,7 @@ class ThemeTestUtils {
       case 'disabledColor':
         return theme.disabledColor as T;
       case 'errorColor':
-        return theme.errorColor as T;
+        return theme.colorScheme.error as T;
       default:
         throw ArgumentError('Unknown theme property: $propertyName');
     }
@@ -375,7 +372,7 @@ class ThemeTestUtils {
       case 'secondaryHeaderColor':
         return theme.copyWith(secondaryHeaderColor: value as Color);
       case 'backgroundColor':
-        return theme.copyWith(backgroundColor: value as Color);
+        return theme.copyWith(colorScheme: ColorScheme(surface: value as Color));
       case 'scaffoldBackgroundColor':
         return theme.copyWith(scaffoldBackgroundColor: value as Color);
       case 'cardColor':
@@ -393,7 +390,7 @@ class ThemeTestUtils {
       case 'disabledColor':
         return theme.copyWith(disabledColor: value as Color);
       case 'errorColor':
-        return theme.copyWith(errorColor: value as Color);
+        return theme.copyWith(colorScheme: ColorScheme(error: value as Color));
       default:
         throw ArgumentError('Unknown theme property: $propertyName');
     }
@@ -405,7 +402,7 @@ class ThemeTestUtils {
     expect(theme.brightness, isNotNull);
     expect(theme.primaryColor, isNotNull);
     expect(theme.secondaryHeaderColor, isNotNull);
-    expect(theme.backgroundColor, isNotNull);
+    expect(theme.colorScheme.surface, isNotNull);
     expect(theme.scaffoldBackgroundColor, isNotNull);
     expect(theme.cardColor, isNotNull);
     expect(theme.dividerColor, isNotNull);
@@ -414,7 +411,7 @@ class ThemeTestUtils {
     expect(theme.splashColor, isNotNull);
     expect(theme.highlightColor, isNotNull);
     expect(theme.disabledColor, isNotNull);
-    expect(theme.errorColor, isNotNull);
+    expect(theme.colorScheme.error, isNotNull);
   }
   
   /// 测试主题数据默认值
@@ -464,7 +461,7 @@ class ThemeTestUtils {
     final sw = Stopwatch()..start();
     
     // 测试主题创建性能
-    for (int i = 0; i < 1000; i++) {
+    for (var i = 0; i < 1000; i++) {
       ThemeData();
     }
     
@@ -474,7 +471,7 @@ class ThemeTestUtils {
     // 测试主题复制性能
     sw.reset();
     final theme = ThemeData();
-    for (int i = 0; i < 1000; i++) {
+    for (var i = 0; i < 1000; i++) {
       theme.copyWith();
     }
     sw.stop();
@@ -597,7 +594,7 @@ class ThemeTestAssertions {
     
     // 验证错误颜色对比度
     expectColorContrast(
-      theme.errorColor,
+      theme.colorScheme.error,
       theme.scaffoldBackgroundColor,
       minimumRatio: 3.0,
       reason: reason,

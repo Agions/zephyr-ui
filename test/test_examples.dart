@@ -3,12 +3,12 @@
 /// 展示如何使用测试框架编写测试用例
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/core/constants/design_tokens.dart';
-import 'package:zephyr_ui/test/lib/test_architecture.dart';
-import 'package:zephyr_ui/test/lib/test_fixtures.dart';
+import 'package:velocity_ui/src/core/constants/design_tokens.dart';
+import 'package:velocity_ui/test/lib/test_architecture.dart';
+import 'package:velocity_ui/test/lib/test_fixtures.dart';
 
 void main() {
-  group('ZephyrUI 测试示例', () {
+  group('VelocityUI 测试示例', () {
     group('基础组件测试', () {
       testWidgets('按钮应该正确渲染', (WidgetTester tester) async {
         await tester.pumpWidget(
@@ -29,7 +29,7 @@ void main() {
       });
       
       testWidgets('按钮应该响应点击', (WidgetTester tester) async {
-        bool wasPressed = false;
+        var wasPressed = false;
         
         await tester.pumpWidget(
           MaterialApp(
@@ -81,7 +81,7 @@ void main() {
             theme: ThemeData.light(),
             home: Scaffold(
               body: Container(
-                color: ZephyrColors.primary500,
+                color: VelocityColors.primary500,
                 child: const Text('主题测试'),
               ),
             ),
@@ -97,7 +97,7 @@ void main() {
             theme: ThemeData.dark(),
             home: Scaffold(
               body: Container(
-                color: ZephyrColors.primary500,
+                color: VelocityColors.primary500,
                 child: const Text('主题测试'),
               ),
             ),
@@ -113,12 +113,12 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: MediaQuery(
-              data: MediaQueryData(size: const Size(320, 568)),
+              data: const MediaQueryData(size: Size(320, 568)),
               child: Scaffold(
                 body: Container(
                   width: 100,
                   height: 100,
-                  color: ZephyrColors.primary500,
+                  color: VelocityColors.primary500,
                   child: const Text('响应式测试'),
                 ),
               ),
@@ -133,12 +133,12 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: MediaQuery(
-              data: MediaQueryData(size: const Size(1024, 768)),
+              data: const MediaQueryData(size: Size(1024, 768)),
               child: Scaffold(
                 body: Container(
                   width: 100,
                   height: 100,
-                  color: ZephyrColors.primary500,
+                  color: VelocityColors.primary500,
                   child: const Text('响应式测试'),
                 ),
               ),
@@ -158,7 +158,7 @@ void main() {
               body: Center(
                 child: StatefulBuilder(
                   builder: (context, setState) {
-                    int count = 0;
+                    var count = 0;
                     return Column(
                       children: [
                         Text('计数: $count'),
@@ -245,7 +245,7 @@ void main() {
                   duration: const Duration(milliseconds: 300),
                   width: 100,
                   height: 100,
-                  color: ZephyrColors.primary500,
+                  color: VelocityColors.primary500,
                   child: const Text('动画测试'),
                 ),
               ),
@@ -473,10 +473,10 @@ class CustomTestSuite {
     group('自定义组件测试', () {
       testWidgets('计数器应该正确初始化', (WidgetTester tester) async {
         await tester.pumpWidget(
-          MaterialApp(
+          const MaterialApp(
             home: Scaffold(
               body: Center(
-                child: const TestCounterWidget(),
+                child: TestCounterWidget(),
               ),
             ),
           ),
@@ -487,10 +487,10 @@ class CustomTestSuite {
       
       testWidgets('计数器应该增加', (WidgetTester tester) async {
         await tester.pumpWidget(
-          MaterialApp(
+          const MaterialApp(
             home: Scaffold(
               body: Center(
-                child: const TestCounterWidget(),
+                child: TestCounterWidget(),
               ),
             ),
           ),
@@ -504,10 +504,10 @@ class CustomTestSuite {
       
       testWidgets('计数器应该减少', (WidgetTester tester) async {
         await tester.pumpWidget(
-          MaterialApp(
+          const MaterialApp(
             home: Scaffold(
               body: Center(
-                child: const TestCounterWidget(),
+                child: TestCounterWidget(),
               ),
             ),
           ),

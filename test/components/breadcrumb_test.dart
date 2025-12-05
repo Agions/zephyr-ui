@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/components/navigation/breadcrumb/index.dart';
+import 'package:velocity_ui/components/navigation/breadcrumb/index.dart';
 
 void main() {
-  group('ZephyrBreadcrumb Widget Tests', () {
-    late List<ZephyrBreadcrumbItem> testItems;
+  group('VelocityBreadcrumb Widget Tests', () {
+    late List<VelocityBreadcrumbItem> testItems;
 
     setUp(() {
       testItems = [
-        const ZephyrBreadcrumbItem(
+        const VelocityBreadcrumbItem(
           title: 'Home',
           icon: Icons.home,
           route: '/home',
         ),
-        const ZephyrBreadcrumbItem(
+        const VelocityBreadcrumbItem(
           title: 'Products',
           icon: Icons.inventory_2,
           route: '/products',
         ),
-        const ZephyrBreadcrumbItem(
+        const VelocityBreadcrumbItem(
           title: 'Electronics',
           icon: Icons.devices,
           route: '/products/electronics',
@@ -31,15 +31,15 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrBreadcrumb(
+            body: VelocityBreadcrumb(
               items: testItems,
-              theme: ZephyrBreadcrumbTheme.light(),
+              theme: VelocityBreadcrumbTheme.light(),
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrBreadcrumb), findsOneWidget);
+      expect(find.byType(VelocityBreadcrumb), findsOneWidget);
       expect(find.text('Home'), findsOneWidget);
       expect(find.text('Products'), findsOneWidget);
       expect(find.text('Electronics'), findsOneWidget);
@@ -49,10 +49,10 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrBreadcrumb(
+            body: VelocityBreadcrumb(
               items: testItems,
               showIcons: true,
-              theme: ZephyrBreadcrumbTheme.light(),
+              theme: VelocityBreadcrumbTheme.light(),
             ),
           ),
         ),
@@ -67,10 +67,10 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrBreadcrumb(
+            body: VelocityBreadcrumb(
               items: testItems,
               showIcons: false,
-              theme: ZephyrBreadcrumbTheme.light(),
+              theme: VelocityBreadcrumbTheme.light(),
             ),
           ),
         ),
@@ -85,10 +85,10 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrBreadcrumb(
+            body: VelocityBreadcrumb(
               items: testItems,
               separator: const Text('>'),
-              theme: ZephyrBreadcrumbTheme.light(),
+              theme: VelocityBreadcrumbTheme.light(),
             ),
           ),
         ),
@@ -100,18 +100,18 @@ void main() {
     testWidgets('Breadcrumb auto-collapses when items exceed maxItems', (WidgetTester tester) async {
       final longItems = [
         ...testItems,
-        const ZephyrBreadcrumbItem(title: 'Smartphones', route: '/products/electronics/smartphones'),
-        const ZephyrBreadcrumbItem(title: 'iPhone', route: '/products/electronics/smartphones/iphone', isCurrent: true),
+        const VelocityBreadcrumbItem(title: 'Smartphones', route: '/products/electronics/smartphones'),
+        const VelocityBreadcrumbItem(title: 'iPhone', route: '/products/electronics/smartphones/iphone', isCurrent: true),
       ];
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrBreadcrumb(
+            body: VelocityBreadcrumb(
               items: longItems,
               maxItems: 4,
               autoCollapse: true,
-              theme: ZephyrBreadcrumbTheme.light(),
+              theme: VelocityBreadcrumbTheme.light(),
             ),
           ),
         ),
@@ -127,10 +127,10 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrBreadcrumb(
+            body: VelocityBreadcrumb(
               items: testItems,
               showCurrent: true,
-              theme: ZephyrBreadcrumbTheme.light(),
+              theme: VelocityBreadcrumbTheme.light(),
             ),
           ),
         ),
@@ -140,21 +140,21 @@ void main() {
       expect(currentTextFinder, findsOneWidget);
       
       // Check if the current item styling is applied by verifying the theme
-      final theme = ZephyrBreadcrumbTheme.light();
+      final theme = VelocityBreadcrumbTheme.light();
       expect(theme.currentItemStyle?.fontWeight, equals(FontWeight.w500));
     });
 
     testWidgets('Breadcrumb handles item taps', (WidgetTester tester) async {
-      bool wasTapped = false;
+      var wasTapped = false;
       
       final tapItems = [
-        ZephyrBreadcrumbItem(
+        VelocityBreadcrumbItem(
           title: 'Home',
           onTap: () {
             wasTapped = true;
           },
         ),
-        const ZephyrBreadcrumbItem(
+        const VelocityBreadcrumbItem(
           title: 'Current',
           isCurrent: true,
         ),
@@ -163,9 +163,9 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrBreadcrumb(
+            body: VelocityBreadcrumb(
               items: tapItems,
-              theme: ZephyrBreadcrumbTheme.light(),
+              theme: VelocityBreadcrumbTheme.light(),
             ),
           ),
         ),
@@ -178,7 +178,7 @@ void main() {
     });
 
     testWidgets('Breadcrumb applies custom theme', (WidgetTester tester) async {
-      final customTheme = ZephyrBreadcrumbTheme.custom(
+      final customTheme = VelocityBreadcrumbTheme.custom(
         itemStyle: const TextStyle(
           fontSize: 18,
           color: Colors.red,
@@ -188,7 +188,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrBreadcrumb(
+            body: VelocityBreadcrumb(
               items: testItems,
               theme: customTheme,
             ),
@@ -210,17 +210,17 @@ void main() {
           home: Scaffold(
             body: SizedBox(
               width: 200,
-              child: ZephyrBreadcrumb(
+              child: VelocityBreadcrumb(
                 items: testItems,
                 wrapContent: true,
-                theme: ZephyrBreadcrumbTheme.light(),
+                theme: VelocityBreadcrumbTheme.light(),
               ),
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrBreadcrumb), findsOneWidget);
+      expect(find.byType(VelocityBreadcrumb), findsOneWidget);
       // Should wrap instead of overflow
     });
 
@@ -228,10 +228,10 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrBreadcrumb(
+            body: VelocityBreadcrumb(
               items: testItems,
               showTooltip: true,
-              theme: ZephyrBreadcrumbTheme.light(),
+              theme: VelocityBreadcrumbTheme.light(),
             ),
           ),
         ),
@@ -244,11 +244,11 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrBreadcrumb(
+            body: VelocityBreadcrumb(
               items: testItems,
               margin: const EdgeInsets.all(16),
               padding: const EdgeInsets.all(8),
-              theme: ZephyrBreadcrumbTheme.light(),
+              theme: VelocityBreadcrumbTheme.light(),
             ),
           ),
         ),
@@ -260,9 +260,9 @@ void main() {
     });
   });
 
-  group('ZephyrBreadcrumbTheme Tests', () {
+  group('VelocityBreadcrumbTheme Tests', () {
     testWidgets('Light theme creates correct styling', (WidgetTester tester) async {
-      final theme = ZephyrBreadcrumbTheme.light();
+      final theme = VelocityBreadcrumbTheme.light();
       
       expect(theme.backgroundColor, equals(const Color(0xFFFFFFFF)));
       expect(theme.itemStyle?.color, equals(const Color(0xFF6B7280)));
@@ -270,7 +270,7 @@ void main() {
     });
 
     testWidgets('Dark theme creates correct styling', (WidgetTester tester) async {
-      final theme = ZephyrBreadcrumbTheme.dark();
+      final theme = VelocityBreadcrumbTheme.dark();
       
       expect(theme.backgroundColor, equals(const Color(0xFF1F2937)));
       expect(theme.itemStyle?.color, equals(const Color(0xFF9CA3AF)));
@@ -278,7 +278,7 @@ void main() {
     });
 
     testWidgets('Custom theme overrides default values', (WidgetTester tester) async {
-      final customTheme = ZephyrBreadcrumbTheme.custom(
+      final customTheme = VelocityBreadcrumbTheme.custom(
         itemStyle: const TextStyle(fontSize: 20, color: Colors.purple),
         iconSize: 24,
       );
@@ -289,9 +289,9 @@ void main() {
     });
   });
 
-  group('ZephyrBreadcrumbUtils Tests', () {
+  group('VelocityBreadcrumbUtils Tests', () {
     test('generateFromPath creates correct breadcrumb structure', () {
-      final result = ZephyrBreadcrumbUtils.generateFromPath('/dashboard/products/electronics');
+      final result = VelocityBreadcrumbUtils.generateFromPath('/dashboard/products/electronics');
       
       expect(result.length, equals(4)); // Home + 3 segments
       expect(result[0]['title'], equals('Home'));
@@ -306,7 +306,7 @@ void main() {
         {'title': 'Products', 'isCurrent': true},
       ];
       
-      expect(ZephyrBreadcrumbUtils.validateItems(validItems), isTrue);
+      expect(VelocityBreadcrumbUtils.validateItems(validItems), isTrue);
     });
 
     test('validateItems returns false for invalid breadcrumb', () {
@@ -315,7 +315,7 @@ void main() {
         {'title': 'Products', 'isCurrent': false}, // No current item
       ];
       
-      expect(ZephyrBreadcrumbUtils.validateItems(invalidItems), isFalse);
+      expect(VelocityBreadcrumbUtils.validateItems(invalidItems), isFalse);
     });
 
     test('getCurrentItem returns correct current item', () {
@@ -324,13 +324,13 @@ void main() {
         {'title': 'Products', 'isCurrent': true},
       ];
       
-      final current = ZephyrBreadcrumbUtils.getCurrentItem(items);
+      final current = VelocityBreadcrumbUtils.getCurrentItem(items);
       expect(current?['title'], equals('Products'));
     });
 
     test('truncateItems reduces item count correctly', () {
       final items = List.generate(8, (i) => {'title': 'Item $i', 'isCurrent': i == 7});
-      final truncated = ZephyrBreadcrumbUtils.truncateItems(items, maxItems: 5);
+      final truncated = VelocityBreadcrumbUtils.truncateItems(items, maxItems: 5);
       
       expect(truncated.length, equals(5));
       expect(truncated[0]['title'], equals('Item 0'));
@@ -340,16 +340,16 @@ void main() {
 
     test('formatSegmentTitle converts kebab-case to Title Case', () {
       // This is a private method, so we test it indirectly through generateFromPath
-      final result = ZephyrBreadcrumbUtils.generateFromPath('/user-profile/settings');
+      final result = VelocityBreadcrumbUtils.generateFromPath('/user-profile/settings');
       
       expect(result[1]['title'], equals('User Profile'));
       expect(result[2]['title'], equals('Settings'));
     });
   });
 
-  group('ZephyrBreadcrumbItem Tests', () {
+  group('VelocityBreadcrumbItem Tests', () {
     test('BreadcrumbItem creates with default values', () {
-      const item = ZephyrBreadcrumbItem(
+      const item = VelocityBreadcrumbItem(
         title: 'Test Item',
       );
 
@@ -360,7 +360,7 @@ void main() {
     });
 
     test('BreadcrumbItem creates with custom values', () {
-      const item = ZephyrBreadcrumbItem(
+      const item = VelocityBreadcrumbItem(
         title: 'Test Item',
         route: '/test',
         icon: Icons.star,

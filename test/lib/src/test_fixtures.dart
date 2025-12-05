@@ -5,7 +5,7 @@ library test_fixtures;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/core/constants/design_tokens.dart';
+import 'package:velocity_ui/src/core/constants/design_tokens.dart';
 
 /// 测试用例模板基类
 abstract class TestFixtureTemplate {
@@ -23,15 +23,15 @@ abstract class TestFixtureTemplate {
 
 /// 基础组件测试模板
 class BasicWidgetTestFixture extends TestFixtureTemplate {
-  final String testName;
-  final Widget Function() widgetBuilder;
-  final Widget Function(Widget)? wrapperBuilder;
   
   const BasicWidgetTestFixture({
     required this.testName,
     required this.widgetBuilder,
     this.wrapperBuilder,
   });
+  final String testName;
+  final Widget Function() widgetBuilder;
+  final Widget Function(Widget)? wrapperBuilder;
   
   @override
   Widget getTestWidget() => widgetBuilder();
@@ -65,9 +65,6 @@ class BasicWidgetTestFixture extends TestFixtureTemplate {
 
 /// 主题测试模板
 class ThemeTestFixture extends TestFixtureTemplate {
-  final String testName;
-  final Widget Function() widgetBuilder;
-  final List<ThemeData> themes;
   
   const ThemeTestFixture({
     required this.testName,
@@ -77,6 +74,9 @@ class ThemeTestFixture extends TestFixtureTemplate {
       ThemeData.dark(),
     ],
   });
+  final String testName;
+  final Widget Function() widgetBuilder;
+  final List<ThemeData> themes;
   
   @override
   Widget getTestWidget() => widgetBuilder();
@@ -127,9 +127,6 @@ class ThemeTestFixture extends TestFixtureTemplate {
 
 /// 响应式测试模板
 class ResponsiveTestFixture extends TestFixtureTemplate {
-  final String testName;
-  final Widget Function() widgetBuilder;
-  final List<Size> screenSizes;
   
   const ResponsiveTestFixture({
     required this.testName,
@@ -140,6 +137,9 @@ class ResponsiveTestFixture extends TestFixtureTemplate {
       Size(1024, 768), // Desktop
     ],
   });
+  final String testName;
+  final Widget Function() widgetBuilder;
+  final List<Size> screenSizes;
   
   @override
   Widget getTestWidget() => widgetBuilder();
@@ -192,15 +192,15 @@ class ResponsiveTestFixture extends TestFixtureTemplate {
 
 /// 状态管理测试模板
 class StateManagementTestFixture extends TestFixtureTemplate {
-  final String testName;
-  final Widget Function() widgetBuilder;
-  final void Function(WidgetTester)? stateModifier;
   
   const StateManagementTestFixture({
     required this.testName,
     required this.widgetBuilder,
     this.stateModifier,
   });
+  final String testName;
+  final Widget Function() widgetBuilder;
+  final void Function(WidgetTester)? stateModifier;
   
   @override
   Widget getTestWidget() => widgetBuilder();
@@ -241,15 +241,15 @@ class StateManagementTestFixture extends TestFixtureTemplate {
 
 /// 交互测试模板
 class InteractionTestFixture extends TestFixtureTemplate {
-  final String testName;
-  final Widget Function() widgetBuilder;
-  final List<void Function(WidgetTester)> interactions;
   
   const InteractionTestFixture({
     required this.testName,
     required this.widgetBuilder,
     required this.interactions,
   });
+  final String testName;
+  final Widget Function() widgetBuilder;
+  final List<void Function(WidgetTester)> interactions;
   
   @override
   Widget getTestWidget() => widgetBuilder();
@@ -275,15 +275,15 @@ class InteractionTestFixture extends TestFixtureTemplate {
 
 /// 动画测试模板
 class AnimationTestFixture extends TestFixtureTemplate {
-  final String testName;
-  final Widget Function() widgetBuilder;
-  final Duration animationDuration;
   
   const AnimationTestFixture({
     required this.testName,
     required this.widgetBuilder,
     this.animationDuration = const Duration(milliseconds: 300),
   });
+  final String testName;
+  final Widget Function() widgetBuilder;
+  final Duration animationDuration;
   
   @override
   Widget getTestWidget() => widgetBuilder();
@@ -322,10 +322,6 @@ class AnimationTestFixture extends TestFixtureTemplate {
 
 /// 表单测试模板
 class FormTestFixture extends TestFixtureTemplate {
-  final String testName;
-  final Widget Function() widgetBuilder;
-  final Map<String, dynamic> formData;
-  final Map<String, String> validationErrors;
   
   const FormTestFixture({
     required this.testName,
@@ -333,6 +329,10 @@ class FormTestFixture extends TestFixtureTemplate {
     required this.formData,
     required this.validationErrors,
   });
+  final String testName;
+  final Widget Function() widgetBuilder;
+  final Map<String, dynamic> formData;
+  final Map<String, String> validationErrors;
   
   @override
   Widget getTestWidget() => widgetBuilder();
@@ -381,15 +381,15 @@ class FormTestFixture extends TestFixtureTemplate {
 
 /// 导航测试模板
 class NavigationTestFixture extends TestFixtureTemplate {
-  final String testName;
-  final Widget Function() widgetBuilder;
-  final Map<String, WidgetBuilder> routes;
   
   const NavigationTestFixture({
     required this.testName,
     required this.widgetBuilder,
     required this.routes,
   });
+  final String testName;
+  final Widget Function() widgetBuilder;
+  final Map<String, WidgetBuilder> routes;
   
   @override
   Widget getTestWidget() => widgetBuilder();
@@ -609,8 +609,8 @@ class CommonTestFixtures {
   /// 卡片测试
   static final cardTest = TestFixtureFactory.createBasicWidgetTest(
     testName: 'Card',
-    widgetBuilder: () => Card(
-      child: const Padding(
+    widgetBuilder: () => const Card(
+      child: Padding(
         padding: EdgeInsets.all(16.0),
         child: Text('Test Card'),
       ),
@@ -631,7 +631,7 @@ class CommonTestFixtures {
   static final themeTest = TestFixtureFactory.createThemeTest(
     testName: 'Theme',
     widgetBuilder: () => Container(
-      color: ZephyrColors.primary500,
+      color: VelocityColors.primary500,
       child: const Text('Theme Test'),
     ),
   );
@@ -642,7 +642,7 @@ class CommonTestFixtures {
     widgetBuilder: () => Container(
       width: 100,
       height: 100,
-      color: ZephyrColors.primary500,
+      color: VelocityColors.primary500,
       child: const Text('Responsive Test'),
     ),
   );
@@ -688,7 +688,7 @@ class CommonTestFixtures {
     testName: 'Animation',
     widgetBuilder: () => AnimatedContainer(
       duration: const Duration(milliseconds: 300),
-      color: ZephyrColors.primary500,
+      color: VelocityColors.primary500,
       child: const Text('Animation Test'),
     ),
   );

@@ -1,7 +1,5 @@
-/// 复选框组件模块
-///
-/// 提供单个复选框功能，支持多种状态和主题定制。
+/// VelocityUI 复选框组件
 library checkbox;
 
 export 'checkbox.dart';
-export 'checkbox_theme.dart';
+export 'checkbox_style.dart';

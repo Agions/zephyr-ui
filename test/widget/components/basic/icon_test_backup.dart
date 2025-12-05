@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/basic/icon/icon.dart';
-import 'package:zephyr_ui/src/components/basic/icon/icon_theme.dart';
-import 'package:zephyr_ui/src/core/theme/theme.dart';
-import 'package:zephyr_ui/src/core/theme/theme_data.dart';
+import 'package:velocity_ui/src/components/basic/icon/icon.dart';
+import 'package:velocity_ui/src/components/basic/icon/icon_theme.dart';
+import 'package:velocity_ui/src/core/theme/theme.dart';
+import 'package:velocity_ui/src/core/theme/theme_data.dart';
 
 void main() {
-  group('ZephyrIcon Widget Tests', () {
+  group('VelocityIcon Widget Tests', () {
     late final ThemeData theme;
 
     setUpAll(() {
-      final zephyrTheme = ZephyrThemeData.light();
+      final velocityTheme = VelocityThemeData.light();
       theme = ThemeData(
-        brightness: zephyrTheme.brightness,
-        primaryColor: zephyrTheme.primaryColor,
+        brightness: velocityTheme.brightness,
+        primaryColor: velocityTheme.primaryColor,
       );
     });
 
@@ -22,16 +22,16 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
-          home: ZephyrTheme(
-            data: ZephyrThemeData.light(),
+          home: VelocityTheme(
+            data: VelocityThemeData.light(),
             child: const Scaffold(
-              body: ZephyrIcon(Icons.home),
+              body: VelocityIcon(Icons.home),
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       expect(find.byType(Icon), findsOneWidget);
       expect(find.byIcon(Icons.home), findsOneWidget);
     });
@@ -41,17 +41,17 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
-          home: ZephyrTheme(
-            data: ZephyrThemeData.light(),
+          home: VelocityTheme(
+            data: VelocityThemeData.light(),
             child: Scaffold(
-              body: ZephyrIcon.small(Icons.star),
+              body: VelocityIcon.small(Icons.star),
             ),
           ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       expect(find.byType(Icon), findsOneWidget);
       expect(find.byIcon(Icons.star), findsOneWidget);
     });
@@ -61,16 +61,16 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
-          home: ZephyrTheme(
-            data: ZephyrThemeData.light(),
+          home: VelocityTheme(
+            data: VelocityThemeData.light(),
             child: Scaffold(
-            body: ZephyrIcon.medium(Icons.favorite),
+            body: VelocityIcon.medium(Icons.favorite),
           ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       expect(find.byType(Icon), findsOneWidget);
       expect(find.byIcon(Icons.favorite), findsOneWidget);
     });
@@ -80,16 +80,16 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
-          home: ZephyrTheme(
-            data: ZephyrThemeData.light(),
+          home: VelocityTheme(
+            data: VelocityThemeData.light(),
             child: Scaffold(
-            body: ZephyrIcon.large(Icons.settings),
+            body: VelocityIcon.large(Icons.settings),
           ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       expect(find.byType(Icon), findsOneWidget);
       expect(find.byIcon(Icons.settings), findsOneWidget);
     });
@@ -99,16 +99,16 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
-          home: ZephyrTheme(
-            data: ZephyrThemeData.light(),
+          home: VelocityTheme(
+            data: VelocityThemeData.light(),
             child: Scaffold(
-            body: ZephyrIcon.primary(Icons.check_circle),
+            body: VelocityIcon.primary(Icons.check_circle),
           ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       expect(find.byType(Icon), findsOneWidget);
       expect(find.byIcon(Icons.check_circle), findsOneWidget);
     });
@@ -118,16 +118,16 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
-          home: ZephyrTheme(
-            data: ZephyrThemeData.light(),
+          home: VelocityTheme(
+            data: VelocityThemeData.light(),
             child: Scaffold(
-            body: ZephyrIcon.secondary(Icons.info),
+            body: VelocityIcon.secondary(Icons.info),
           ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       expect(find.byType(Icon), findsOneWidget);
       expect(find.byIcon(Icons.info), findsOneWidget);
     });
@@ -137,16 +137,16 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
-          home: ZephyrTheme(
-            data: ZephyrThemeData.light(),
+          home: VelocityTheme(
+            data: VelocityThemeData.light(),
             child: Scaffold(
-            body: ZephyrIcon.error(Icons.error),
+            body: VelocityIcon.error(Icons.error),
           ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       expect(find.byType(Icon), findsOneWidget);
       expect(find.byIcon(Icons.error), findsOneWidget);
     });
@@ -156,16 +156,16 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
-          home: ZephyrTheme(
-            data: ZephyrThemeData.light(),
+          home: VelocityTheme(
+            data: VelocityThemeData.light(),
             child: Scaffold(
-            body: ZephyrIcon.warning(Icons.warning),
+            body: VelocityIcon.warning(Icons.warning),
           ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       expect(find.byType(Icon), findsOneWidget);
       expect(find.byIcon(Icons.warning), findsOneWidget);
     });
@@ -175,16 +175,16 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
-          home: ZephyrTheme(
-            data: ZephyrThemeData.light(),
+          home: VelocityTheme(
+            data: VelocityThemeData.light(),
             child: Scaffold(
-            body: ZephyrIcon.success(Icons.check),
+            body: VelocityIcon.success(Icons.check),
           ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       expect(find.byType(Icon), findsOneWidget);
       expect(find.byIcon(Icons.check), findsOneWidget);
     });
@@ -194,16 +194,16 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
-          home: ZephyrTheme(
-            data: ZephyrThemeData.light(),
+          home: VelocityTheme(
+            data: VelocityThemeData.light(),
             child: Scaffold(
-            body: ZephyrIcon.info(Icons.info_outline),
+            body: VelocityIcon.info(Icons.info_outline),
           ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       expect(find.byType(Icon), findsOneWidget);
       expect(find.byIcon(Icons.info_outline), findsOneWidget);
     });
@@ -213,16 +213,16 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
-          home: ZephyrTheme(
-            data: ZephyrThemeData.light(),
+          home: VelocityTheme(
+            data: VelocityThemeData.light(),
             child: Scaffold(
-            body: ZephyrIcon.disabled(Icons.block),
+            body: VelocityIcon.disabled(Icons.block),
           ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       expect(find.byType(Icon), findsOneWidget);
       expect(find.byIcon(Icons.block), findsOneWidget);
     });
@@ -234,7 +234,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrIcon(
+            body: VelocityIcon(
               Icons.home,
               color: customColor,
             ),
@@ -243,7 +243,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       final icon = tester.widget<Icon>(find.byType(Icon));
       expect(icon.color, customColor);
     });
@@ -255,7 +255,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrIcon(
+            body: VelocityIcon(
               Icons.home,
               customSize: customSize,
             ),
@@ -264,7 +264,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       final icon = tester.widget<Icon>(find.byType(Icon));
       expect(icon.size, customSize);
     });
@@ -276,7 +276,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrIcon(
+            body: VelocityIcon(
               Icons.home,
               semanticLabel: semanticLabel,
             ),
@@ -285,12 +285,12 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       expect(find.bySemanticsLabel(semanticLabel), findsOneWidget);
     });
 
     testWidgets('applies custom theme to icon', (WidgetTester tester) async {
-      const customTheme = ZephyrIconTheme(
+      const customTheme = VelocityIconTheme(
         defaultColor: Colors.purple,
         primaryColor: Colors.deepPurple,
         secondaryColor: Colors.indigo,
@@ -309,7 +309,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrIcon(
+            body: VelocityIcon(
               Icons.home,
               theme: customTheme,
             ),
@@ -318,7 +318,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       expect(find.byType(Icon), findsOneWidget);
     });
 
@@ -329,27 +329,27 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrIcon(
+            body: VelocityIcon(
               Icons.home,
-              size: ZephyrIconSize.small,
+              size: VelocityIconSize.small,
             ),
           ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       final smallIcon = tester.widget<Icon>(find.byType(Icon));
       expect(smallIcon.size, 16.0);
 
       // Test medium size
-      await tester.pumpWidget(
+      await tester.void pumpWidget(
         MaterialApp(
-          theme: theme,
-          home: const Scaffold(
-            body: ZephyrIcon(
+          theme = theme,
+          home = const Scaffold(
+            body: VelocityIcon(
               Icons.home,
-              size: ZephyrIconSize.medium,
+              size: VelocityIconSize.medium,
             ),
           ),
           ),
@@ -360,13 +360,13 @@ void main() {
       expect(mediumIcon.size, 24.0);
 
       // Test large size
-      await tester.pumpWidget(
+      await tester.void pumpWidget(
         MaterialApp(
-          theme: theme,
-          home: const Scaffold(
-            body: ZephyrIcon(
+          theme = theme,
+          home = const Scaffold(
+            body: VelocityIcon(
               Icons.home,
-              size: ZephyrIconSize.large,
+              size: VelocityIconSize.large,
             ),
           ),
           ),
@@ -383,26 +383,26 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrIcon(
+            body: VelocityIcon(
               Icons.home,
-              status: ZephyrIconStatus.normal,
+              status: VelocityIconStatus.normal,
             ),
           ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       final normalIcon = tester.widget<Icon>(find.byType(Icon));
 
       // Test primary status
-      await tester.pumpWidget(
+      await tester.void pumpWidget(
         MaterialApp(
-          theme: theme,
-          home: const Scaffold(
-            body: ZephyrIcon(
+          theme = theme,
+          home = const Scaffold(
+            body: VelocityIcon(
               Icons.home,
-              status: ZephyrIconStatus.primary,
+              status: VelocityIconStatus.primary,
             ),
           ),
           ),
@@ -410,16 +410,16 @@ void main() {
       );
 
       final primaryIcon = tester.widget<Icon>(find.byType(Icon));
-      expect(primaryIcon.color, isNot(normalIcon.color));
+      expect(primaryIcon.color, Function(normalIcon.color) isNot);
 
       // Test error status
-      await tester.pumpWidget(
+      await tester.void pumpWidget(
         MaterialApp(
-          theme: theme,
-          home: const Scaffold(
-            body: ZephyrIcon(
+          theme = theme,
+          home = const Scaffold(
+            body: VelocityIcon(
               Icons.home,
-              status: ZephyrIconStatus.error,
+              status: VelocityIconStatus.error,
             ),
           ),
           ),
@@ -427,8 +427,8 @@ void main() {
       );
 
       final errorIcon = tester.widget<Icon>(find.byType(Icon));
-      expect(errorIcon.color, isNot(normalIcon.color));
-      expect(errorIcon.color, isNot(primaryIcon.color));
+      expect(errorIcon.color, Function(normalIcon.color) isNot);
+      expect(errorIcon.color, Function(primaryIcon.color) isNot);
     });
 
     testWidgets('handles custom size overriding theme size',
@@ -439,9 +439,9 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrIcon(
+            body: VelocityIcon(
               Icons.home,
-              size: ZephyrIconSize.large,
+              size: VelocityIconSize.large,
               customSize: customSize,
             ),
           ),
@@ -449,7 +449,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       final icon = tester.widget<Icon>(find.byType(Icon));
       expect(icon.size, customSize);
     });
@@ -462,9 +462,9 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrIcon(
+            body: VelocityIcon(
               Icons.home,
-              status: ZephyrIconStatus.primary,
+              status: VelocityIconStatus.primary,
               color: customColor,
             ),
           ),
@@ -472,7 +472,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       final icon = tester.widget<Icon>(find.byType(Icon));
       expect(icon.color, customColor);
     });
@@ -483,7 +483,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrIcon(
+            body: VelocityIcon(
               Icons.home,
               color: null,
               customSize: null,
@@ -495,7 +495,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       expect(find.byType(Icon), findsOneWidget);
       expect(find.byIcon(Icons.home), findsOneWidget);
     });
@@ -508,9 +508,9 @@ void main() {
           home: const Scaffold(
             body: Row(
               children: [
-                ZephyrIcon(Icons.home),
-                ZephyrIcon(Icons.star),
-                ZephyrIcon(Icons.settings),
+                VelocityIcon(Icons.home),
+                VelocityIcon(Icons.star),
+                VelocityIcon(Icons.settings),
               ],
             ),
           ),
@@ -518,7 +518,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsNWidgets(3));
+      expect(find.byType(VelocityIcon), findsNWidgets(3));
       expect(find.byType(Icon), findsNWidgets(3));
       expect(find.byIcon(Icons.home), findsOneWidget);
       expect(find.byIcon(Icons.star), findsOneWidget);
@@ -530,22 +530,22 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
-          home: ZephyrTheme(
-            data: ZephyrThemeData.light(),
+          home: VelocityTheme(
+            data: VelocityThemeData.light(),
             child: Scaffold(
             body: Column(
               children: [
                 Container(
                   padding: const EdgeInsets.all(16.0),
-                  child: const ZephyrIcon(Icons.home),
+                  child: const VelocityIcon(Icons.home),
                 ),
                 const SizedBox(height: 20),
                 const Card(
-                  child: ZephyrIcon(Icons.star),
+                  child: VelocityIcon(Icons.star),
                 ),
                 const SizedBox(height: 20),
                 const ListTile(
-                  leading: ZephyrIcon(Icons.settings),
+                  leading: VelocityIcon(Icons.settings),
                   title: Text('Settings'),
                 ),
               ],
@@ -555,7 +555,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsNWidgets(3));
+      expect(find.byType(VelocityIcon), findsNWidgets(3));
       expect(find.byType(Icon), findsNWidgets(3));
     });
 
@@ -565,7 +565,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrIcon(
+            body: VelocityIcon(
               Icons.home,
               customSize: 0.0,
             ),
@@ -574,7 +574,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       final icon = tester.widget<Icon>(find.byType(Icon));
       expect(icon.size, 0.0);
     });
@@ -587,7 +587,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrIcon(
+            body: VelocityIcon(
               Icons.home,
               customSize: largeSize,
             ),
@@ -596,7 +596,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       final icon = tester.widget<Icon>(find.byType(Icon));
       expect(icon.size, largeSize);
     });
@@ -607,10 +607,10 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrIcon(
+            body: VelocityIcon(
               Icons.home,
-              size: ZephyrIconSize.large,
-              status: ZephyrIconStatus.success,
+              size: VelocityIconSize.large,
+              status: VelocityIconStatus.success,
               customSize: 40.0,
               semanticLabel: 'Home button',
             ),
@@ -619,7 +619,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       expect(find.byType(Icon), findsOneWidget);
       expect(find.bySemanticsLabel('Home button'), findsOneWidget);
       final icon = tester.widget<Icon>(find.byType(Icon));
@@ -632,7 +632,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrIcon(
+            body: VelocityIcon(
               Icons.home,
               color: Colors.transparent,
             ),
@@ -641,14 +641,14 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       final icon = tester.widget<Icon>(find.byType(Icon));
       expect(icon.color, Colors.transparent);
     });
 
     testWidgets('handles icon with theme override',
         (WidgetTester tester) async {
-      const customTheme = ZephyrIconTheme(
+      const customTheme = VelocityIconTheme(
         defaultColor: Colors.cyan,
         primaryColor: Colors.blue,
         secondaryColor: Colors.teal,
@@ -667,7 +667,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrIcon(
+            body: VelocityIcon(
               Icons.home,
               theme: customTheme,
               color: Colors.red, // This should override the theme color
@@ -678,7 +678,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       final icon = tester.widget<Icon>(find.byType(Icon));
       expect(icon.color, Colors.red); // Override should take precedence
       expect(icon.size, 50.0); // Override should take precedence
@@ -690,7 +690,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrIcon(
+            body: VelocityIcon(
               Icons.home,
               semanticLabel: '',
             ),
@@ -699,7 +699,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       expect(find.byType(Icon), findsOneWidget);
     });
 
@@ -708,15 +708,15 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
-          home: ZephyrTheme(
-            data: ZephyrThemeData.light(),
+          home: VelocityTheme(
+            data: VelocityThemeData.light(),
             child: Scaffold(
             body: ListView(
               children: const [
                 SizedBox(height: 100, child: ColoredBox(color: Colors.red)),
-                ZephyrIcon(Icons.home),
+                VelocityIcon(Icons.home),
                 SizedBox(height: 100, child: ColoredBox(color: Colors.blue)),
-                ZephyrIcon(Icons.star),
+                VelocityIcon(Icons.star),
                 SizedBox(height: 100, child: ColoredBox(color: Colors.green)),
               ],
             ),
@@ -725,7 +725,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsNWidgets(2));
+      expect(find.byType(VelocityIcon), findsNWidgets(2));
       expect(find.byType(Icon), findsNWidgets(2));
     });
 
@@ -737,15 +737,15 @@ void main() {
           home: const Scaffold(
             body: Column(
               children: [
-                ZephyrIcon(Icons.home, size: ZephyrIconSize.small),
-                ZephyrIcon(Icons.star, size: ZephyrIconSize.medium),
-                ZephyrIcon(Icons.settings, size: ZephyrIconSize.large),
-                ZephyrIcon(Icons.favorite, status: ZephyrIconStatus.primary),
-                ZephyrIcon(Icons.error, status: ZephyrIconStatus.error),
-                ZephyrIcon(Icons.warning, status: ZephyrIconStatus.warning),
-                ZephyrIcon(Icons.check, status: ZephyrIconStatus.success),
-                ZephyrIcon(Icons.info, status: ZephyrIconStatus.info),
-                ZephyrIcon(Icons.block, status: ZephyrIconStatus.disabled),
+                VelocityIcon(Icons.home, size: VelocityIconSize.small),
+                VelocityIcon(Icons.star, size: VelocityIconSize.medium),
+                VelocityIcon(Icons.settings, size: VelocityIconSize.large),
+                VelocityIcon(Icons.favorite, status: VelocityIconStatus.primary),
+                VelocityIcon(Icons.error, status: VelocityIconStatus.error),
+                VelocityIcon(Icons.warning, status: VelocityIconStatus.warning),
+                VelocityIcon(Icons.check, status: VelocityIconStatus.success),
+                VelocityIcon(Icons.info, status: VelocityIconStatus.info),
+                VelocityIcon(Icons.block, status: VelocityIconStatus.disabled),
               ],
             ),
           ),
@@ -753,13 +753,13 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsNWidgets(9));
+      expect(find.byType(VelocityIcon), findsNWidgets(9));
       expect(find.byType(Icon), findsNWidgets(9));
     });
 
     testWidgets('handles icon with complex theme combinations',
         (WidgetTester tester) async {
-      const customTheme = ZephyrIconTheme(
+      const customTheme = VelocityIconTheme(
         defaultColor: Colors.purple,
         primaryColor: Colors.deepPurple,
         secondaryColor: Colors.indigo,
@@ -778,18 +778,18 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrIcon(
+            body: VelocityIcon(
               Icons.home,
               theme: customTheme,
-              size: ZephyrIconSize.large,
-              status: ZephyrIconStatus.primary,
+              size: VelocityIconSize.large,
+              status: VelocityIconStatus.primary,
             ),
           ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       expect(find.byType(Icon), findsOneWidget);
       final icon = tester.widget<Icon>(find.byType(Icon));
       expect(icon.size, 48.0);

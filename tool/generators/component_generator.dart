@@ -10,14 +10,14 @@ import 'package:path/path.dart' as path;
 /// - 生成文档
 /// - 生成示例代码
 class ComponentGenerator {
-  final String _templateDir;
-  final String _outputDir;
   
   ComponentGenerator({
     required String templateDir,
     required String outputDir,
   }) : _templateDir = templateDir,
        _outputDir = outputDir;
+  final String _templateDir;
+  final String _outputDir;
   
   /// 生成新组件
   Future<void> generateComponent({
@@ -198,7 +198,7 @@ class ComponentGenerator {
       await docDir.create(recursive: true);
     }
     
-    final file = File(path.join(docDir.path, '${componentName}.md'));
+    final file = File(path.join(docDir.path, '$componentName.md'));
     await file.writeAsString(generatedFiles['README.md'] ?? '');
   }
   
@@ -237,24 +237,24 @@ class ComponentGenerator {
 
 /// 组件配置
 class ComponentConfig {
-  final String name;
-  final String type;
-  final Map<String, dynamic> options;
   
   ComponentConfig({
     required this.name,
     required this.type,
     this.options = const {},
   });
+  final String name;
+  final String type;
+  final Map<String, dynamic> options;
 }
 
 /// 模板管理器
 class TemplateManager {
-  final Map<String, Map<String, dynamic>> _templates = {};
   
   TemplateManager() {
     _initializeTemplates();
   }
+  final Map<String, Map<String, dynamic>> _templates = {};
   
   void _initializeTemplates() {
     // 基础组件模板

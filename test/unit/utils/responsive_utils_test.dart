@@ -3,12 +3,12 @@
 /// 测试响应式工具类的功能。
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/utils/responsive/responsive_utils.dart';
-import 'package:zephyr_ui/src/core/constants/enums.dart';
-import 'package:zephyr_ui/src/core/constants/design_tokens.dart';
+import 'package:velocity_ui/src/utils/responsive/responsive_utils.dart';
+import 'package:velocity_ui/src/core/constants/enums.dart';
+import 'package:velocity_ui/src/core/constants/design_tokens.dart';
 
 void main() {
-  group('ZephyrResponsiveUtils', () {
+  group('VelocityResponsiveUtils', () {
     testWidgets('getBreakpoint should return correct breakpoint', (tester) async {
       // 测试不同屏幕宽度对应的断点
       await tester.pumpWidget(
@@ -17,8 +17,8 @@ void main() {
             data: const MediaQueryData(size: Size(400, 800)),
             child: Builder(
               builder: (context) {
-                final breakpoint = ZephyrResponsiveUtils.getBreakpoint(context);
-                expect(breakpoint, ZephyrBreakpoint.xs);
+                final breakpoint = VelocityResponsiveUtils.getBreakpoint(context);
+                expect(breakpoint, VelocityBreakpoint.xs);
                 return Container();
               },
             ),
@@ -33,8 +33,8 @@ void main() {
             data: const MediaQueryData(size: Size(600, 800)),
             child: Builder(
               builder: (context) {
-                final breakpoint = ZephyrResponsiveUtils.getBreakpoint(context);
-                expect(breakpoint, ZephyrBreakpoint.sm);
+                final breakpoint = VelocityResponsiveUtils.getBreakpoint(context);
+                expect(breakpoint, VelocityBreakpoint.sm);
                 return Container();
               },
             ),
@@ -49,8 +49,8 @@ void main() {
             data: const MediaQueryData(size: Size(800, 600)),
             child: Builder(
               builder: (context) {
-                final breakpoint = ZephyrResponsiveUtils.getBreakpoint(context);
-                expect(breakpoint, ZephyrBreakpoint.md);
+                final breakpoint = VelocityResponsiveUtils.getBreakpoint(context);
+                expect(breakpoint, VelocityBreakpoint.md);
                 return Container();
               },
             ),
@@ -65,8 +65,8 @@ void main() {
             data: const MediaQueryData(size: Size(1000, 600)),
             child: Builder(
               builder: (context) {
-                final breakpoint = ZephyrResponsiveUtils.getBreakpoint(context);
-                expect(breakpoint, ZephyrBreakpoint.lg);
+                final breakpoint = VelocityResponsiveUtils.getBreakpoint(context);
+                expect(breakpoint, VelocityBreakpoint.lg);
                 return Container();
               },
             ),
@@ -81,8 +81,8 @@ void main() {
             data: const MediaQueryData(size: Size(1300, 600)),
             child: Builder(
               builder: (context) {
-                final breakpoint = ZephyrResponsiveUtils.getBreakpoint(context);
-                expect(breakpoint, ZephyrBreakpoint.xl);
+                final breakpoint = VelocityResponsiveUtils.getBreakpoint(context);
+                expect(breakpoint, VelocityBreakpoint.xl);
                 return Container();
               },
             ),
@@ -97,8 +97,8 @@ void main() {
             data: const MediaQueryData(size: Size(1500, 600)),
             child: Builder(
               builder: (context) {
-                final breakpoint = ZephyrResponsiveUtils.getBreakpoint(context);
-                expect(breakpoint, ZephyrBreakpoint.xxl);
+                final breakpoint = VelocityResponsiveUtils.getBreakpoint(context);
+                expect(breakpoint, VelocityBreakpoint.xxl);
                 return Container();
               },
             ),
@@ -115,7 +115,7 @@ void main() {
             data: const MediaQueryData(size: Size(400, 800)),
             child: Builder(
               builder: (context) {
-                expect(ZephyrResponsiveUtils.isMobile(context), true);
+                expect(VelocityResponsiveUtils.isMobile(context), true);
                 return Container();
               },
             ),
@@ -130,7 +130,7 @@ void main() {
             data: const MediaQueryData(size: Size(800, 600)),
             child: Builder(
               builder: (context) {
-                expect(ZephyrResponsiveUtils.isMobile(context), false);
+                expect(VelocityResponsiveUtils.isMobile(context), false);
                 return Container();
               },
             ),
@@ -147,7 +147,7 @@ void main() {
             data: const MediaQueryData(size: Size(800, 600)),
             child: Builder(
               builder: (context) {
-                expect(ZephyrResponsiveUtils.isTablet(context), true);
+                expect(VelocityResponsiveUtils.isTablet(context), true);
                 return Container();
               },
             ),
@@ -162,7 +162,7 @@ void main() {
             data: const MediaQueryData(size: Size(400, 800)),
             child: Builder(
               builder: (context) {
-                expect(ZephyrResponsiveUtils.isTablet(context), false);
+                expect(VelocityResponsiveUtils.isTablet(context), false);
                 return Container();
               },
             ),
@@ -179,7 +179,7 @@ void main() {
             data: const MediaQueryData(size: Size(1200, 800)),
             child: Builder(
               builder: (context) {
-                expect(ZephyrResponsiveUtils.isDesktop(context), true);
+                expect(VelocityResponsiveUtils.isDesktop(context), true);
                 return Container();
               },
             ),
@@ -194,7 +194,7 @@ void main() {
             data: const MediaQueryData(size: Size(600, 800)),
             child: Builder(
               builder: (context) {
-                expect(ZephyrResponsiveUtils.isDesktop(context), false);
+                expect(VelocityResponsiveUtils.isDesktop(context), false);
                 return Container();
               },
             ),
@@ -211,7 +211,7 @@ void main() {
             data: const MediaQueryData(size: Size(400, 800)),
             child: Builder(
               builder: (context) {
-                final result = ZephyrResponsiveUtils.responsive<String>(
+                final result = VelocityResponsiveUtils.responsive<String>(
                   context,
                   xs: 'xs',
                   sm: 'sm',
@@ -236,7 +236,7 @@ void main() {
             data: const MediaQueryData(size: Size(600, 800)),
             child: Builder(
               builder: (context) {
-                final result = ZephyrResponsiveUtils.responsive<String>(
+                final result = VelocityResponsiveUtils.responsive<String>(
                   context,
                   sm: 'sm',
                   md: 'md',
@@ -260,7 +260,7 @@ void main() {
             data: const MediaQueryData(size: Size(400, 800)),
             child: Builder(
               builder: (context) {
-                final columns = ZephyrResponsiveUtils.getColumns(context);
+                final columns = VelocityResponsiveUtils.getColumns(context);
                 expect(columns, 1); // xs default
                 return Container();
               },
@@ -276,7 +276,7 @@ void main() {
             data: const MediaQueryData(size: Size(600, 800)),
             child: Builder(
               builder: (context) {
-                final columns = ZephyrResponsiveUtils.getColumns(context);
+                final columns = VelocityResponsiveUtils.getColumns(context);
                 expect(columns, 2); // sm default
                 return Container();
               },
@@ -294,8 +294,8 @@ void main() {
             data: const MediaQueryData(size: Size(400, 800)),
             child: Builder(
               builder: (context) {
-                final spacing = ZephyrResponsiveUtils.getSpacing(context);
-                expect(spacing, ZephyrSpacing.sm); // xs default
+                final spacing = VelocityResponsiveUtils.getSpacing(context);
+                expect(spacing, VelocitySpacing.sm); // xs default
                 return Container();
               },
             ),
@@ -310,8 +310,8 @@ void main() {
             data: const MediaQueryData(size: Size(600, 800)),
             child: Builder(
               builder: (context) {
-                final spacing = ZephyrResponsiveUtils.getSpacing(context);
-                expect(spacing, ZephyrSpacing.md); // sm default
+                final spacing = VelocityResponsiveUtils.getSpacing(context);
+                expect(spacing, VelocitySpacing.md); // sm default
                 return Container();
               },
             ),
@@ -328,8 +328,8 @@ void main() {
             data: const MediaQueryData(size: Size(400, 800)),
             child: Builder(
               builder: (context) {
-                final fontSize = ZephyrResponsiveUtils.getFontSize(context);
-                expect(fontSize, ZephyrTypography.fontSize14); // xs default
+                final fontSize = VelocityResponsiveUtils.getFontSize(context);
+                expect(fontSize, VelocityFontTokens.fontSize14); // xs default
                 return Container();
               },
             ),
@@ -344,8 +344,8 @@ void main() {
             data: const MediaQueryData(size: Size(600, 800)),
             child: Builder(
               builder: (context) {
-                final fontSize = ZephyrResponsiveUtils.getFontSize(context);
-                expect(fontSize, ZephyrTypography.fontSize16); // sm default
+                final fontSize = VelocityResponsiveUtils.getFontSize(context);
+                expect(fontSize, VelocityFontTokens.fontSize16); // sm default
                 return Container();
               },
             ),
@@ -362,7 +362,7 @@ void main() {
             data: const MediaQueryData(size: Size(400, 800)),
             child: Builder(
               builder: (context) {
-                final size = ZephyrResponsiveUtils.getMinTouchTargetSize(context);
+                final size = VelocityResponsiveUtils.getMinTouchTargetSize(context);
                 expect(size, 44.0); // mobile
                 return Container();
               },
@@ -378,7 +378,7 @@ void main() {
             data: const MediaQueryData(size: Size(1200, 800)),
             child: Builder(
               builder: (context) {
-                final size = ZephyrResponsiveUtils.getMinTouchTargetSize(context);
+                final size = VelocityResponsiveUtils.getMinTouchTargetSize(context);
                 expect(size, 32.0); // desktop
                 return Container();
               },
@@ -390,13 +390,13 @@ void main() {
     });
   });
 
-  group('ZephyrResponsiveBuilder', () {
+  group('VelocityResponsiveBuilder', () {
     testWidgets('should build correct widget based on breakpoint', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: MediaQuery(
             data: const MediaQueryData(size: Size(400, 800)),
-            child: ZephyrResponsiveBuilder(
+            child: VelocityResponsiveBuilder(
               xs: (context) => const Text('XS'),
               sm: (context) => const Text('SM'),
               md: (context) => const Text('MD'),
@@ -417,7 +417,7 @@ void main() {
         MaterialApp(
           home: MediaQuery(
             data: const MediaQueryData(size: Size(600, 800)),
-            child: ZephyrResponsiveBuilder(
+            child: VelocityResponsiveBuilder(
               xs: (context) => const Text('XS'),
               sm: (context) => const Text('SM'),
               md: (context) => const Text('MD'),
@@ -440,7 +440,7 @@ void main() {
         MaterialApp(
           home: MediaQuery(
             data: const MediaQueryData(size: Size(800, 600)),
-            child: ZephyrResponsiveBuilder(
+            child: VelocityResponsiveBuilder(
               xs: (context) => const Text('XS'),
               lg: (context) => const Text('LG'),
               builder: (context) => const Text('Default'),
@@ -460,7 +460,7 @@ void main() {
         MaterialApp(
           home: MediaQuery(
             data: const MediaQueryData(size: Size(400, 800)),
-            child: ZephyrResponsiveBuilder(
+            child: VelocityResponsiveBuilder(
               lg: (context) => const Text('LG'),
               builder: (context) => const Text('Default'),
             ),

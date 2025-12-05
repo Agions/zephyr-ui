@@ -5,7 +5,7 @@ library test_accessibility;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/core/constants/design_tokens.dart';
+import 'package:velocity_ui/src/core/constants/design_tokens.dart';
 
 /// 无障碍测试工具类
 class AccessibilityTestUtils {

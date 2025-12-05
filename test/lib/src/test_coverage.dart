@@ -175,12 +175,12 @@ ${_generateRecommendations(summary)}
   
   /// 计算覆盖率摘要
   static Map<String, dynamic> _calculateSummary(Map<String, dynamic> coverageData) {
-    int totalLines = 0;
-    int hitLines = 0;
-    int totalFunctions = 0;
-    int hitFunctions = 0;
-    int totalBranches = 0;
-    int hitBranches = 0;
+    var totalLines = 0;
+    var hitLines = 0;
+    var totalFunctions = 0;
+    var hitFunctions = 0;
+    var totalBranches = 0;
+    var hitBranches = 0;
     
     for (final fileData in coverageData.values) {
       totalLines += fileData['totalLines'] ?? 0;
@@ -338,15 +338,15 @@ ${_generateRecommendations(summary)}
     final hitLines = fileData['hitLines'] ?? 0;
     final lineCoverage = totalLines > 0 ? (hitLines / totalLines * 100).round() : 0;
     
-    int totalFunctions = 0;
-    int hitFunctions = 0;
+    var totalFunctions = 0;
+    var hitFunctions = 0;
     for (final funcData in fileData['functions'].values) {
       totalFunctions++;
       if (funcData['hit']) hitFunctions++;
     }
     
-    int totalBranches = 0;
-    int hitBranches = 0;
+    var totalBranches = 0;
+    var hitBranches = 0;
     for (final branchHit in fileData['branches'].values) {
       totalBranches++;
       if (branchHit) hitBranches++;
@@ -457,17 +457,6 @@ ${_generateRecommendations(summary)}
 
 /// 测试覆盖率配置
 class TestCoverageConfig {
-  static const double defaultMinTotalCoverage = 85.0;
-  static const double defaultMinLineCoverage = 80.0;
-  static const double defaultMinFunctionCoverage = 80.0;
-  static const double defaultMinBranchCoverage = 70.0;
-  static const double defaultTolerance = 5.0;
-  
-  final double minTotalCoverage;
-  final double minLineCoverage;
-  final double minFunctionCoverage;
-  final double minBranchCoverage;
-  final double tolerance;
   
   const TestCoverageConfig({
     this.minTotalCoverage = defaultMinTotalCoverage,
@@ -506,6 +495,17 @@ class TestCoverageConfig {
     minBranchCoverage: minBranchCoverage,
     tolerance: tolerance,
   );
+  static const double defaultMinTotalCoverage = 85.0;
+  static const double defaultMinLineCoverage = 80.0;
+  static const double defaultMinFunctionCoverage = 80.0;
+  static const double defaultMinBranchCoverage = 70.0;
+  static const double defaultTolerance = 5.0;
+  
+  final double minTotalCoverage;
+  final double minLineCoverage;
+  final double minFunctionCoverage;
+  final double minBranchCoverage;
+  final double tolerance;
 }
 
 /// 测试覆盖率报告生成器
@@ -730,16 +730,16 @@ class TestCoverageReportGenerator {
       final hitLines = fileData['hitLines'] ?? 0;
       final lineCoverage = totalLines > 0 ? (hitLines / totalLines * 100).round() : 0;
       
-      int totalFunctions = 0;
-      int hitFunctions = 0;
+      var totalFunctions = 0;
+      var hitFunctions = 0;
       for (final funcData in fileData['functions'].values) {
         totalFunctions++;
         if (funcData['hit']) hitFunctions++;
       }
       final functionCoverage = totalFunctions > 0 ? (hitFunctions / totalFunctions * 100).round() : 0;
       
-      int totalBranches = 0;
-      int hitBranches = 0;
+      var totalBranches = 0;
+      var hitBranches = 0;
       for (final branchHit in fileData['branches'].values) {
         totalBranches++;
         if (branchHit) hitBranches++;
@@ -752,9 +752,9 @@ class TestCoverageReportGenerator {
       buffer.writeln('''
                 <tr>
                     <td class="file-path">${path.basename(filePath)}</td>
-                    <td>${lineCoverage}%</td>
-                    <td>${functionCoverage}%</td>
-                    <td>${branchCoverage}%</td>
+                    <td>$lineCoverage%</td>
+                    <td>$functionCoverage%</td>
+                    <td>$branchCoverage%</td>
                     <td><span class="coverage-badge $coverageClass">${_getCoverageLabel(averageCoverage)}</span></td>
                 </tr>
 ''');

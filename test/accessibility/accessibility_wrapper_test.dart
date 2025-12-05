@@ -1,36 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/accessibility/accessibility_wrapper.dart';
-import 'package:zephyr_ui/src/core/accessibility/accessibility_types.dart';
+import 'package:velocity_ui/src/components/accessibility/accessibility_wrapper.dart';
+import 'package:velocity_ui/src/core/accessibility/accessibility_types.dart';
 
 void main() {
-  group('ZephyrAccessibilityWrapper', () {
+  group('VelocityAccessibilityWrapper', () {
     testWidgets('should create wrapper with default config', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibilityWrapper(
-            child: Container(key: Key('test-child')),
+          home: VelocityAccessibilityWrapper(
+            child: Container(key: const Key('test-child')),
           ),
         ),
       );
 
-      expect(find.byKey(Key('test-child')), findsOneWidget);
+      expect(find.byKey(const Key('test-child')), findsOneWidget);
     });
 
     testWidgets('should apply text scaling', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibilityWrapper(
-            config: ZephyrAccessibilityWrapperConfig(
+          home: VelocityAccessibilityWrapper(
+            config: VelocityAccessibilityWrapperConfig(
               enableTextScaling: true,
               textScaleFactor: 2.0,
             ),
-            child: Text('Test Text', key: Key('test-text')),
+            child: const Text('Test Text', key: Key('test-text')),
           ),
         ),
       );
 
-      final textFinder = find.byKey(Key('test-text'));
+      final textFinder = find.byKey(const Key('test-text'));
       expect(textFinder, findsOneWidget);
 
       final textWidget = tester.widget<Text>(textFinder);
@@ -41,18 +41,18 @@ void main() {
     testWidgets('should apply touch target size for interactive components', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibilityWrapper(
-            config: ZephyrAccessibilityWrapperConfig(
+          home: VelocityAccessibilityWrapper(
+            config: VelocityAccessibilityWrapperConfig(
               enableTouchTargetSize: true,
               minTouchTargetSize: 60.0,
             ),
             isInteractive: true,
-            child: Container(key: Key('interactive-child')),
+            child: Container(key: const Key('interactive-child')),
           ),
         ),
       );
 
-      final containerFinder = find.byKey(Key('interactive-child'));
+      final containerFinder = find.byKey(const Key('interactive-child'));
       expect(containerFinder, findsOneWidget);
 
       final container = tester.widget<Container>(containerFinder);
@@ -64,18 +64,18 @@ void main() {
     testWidgets('should not apply touch target size for non-interactive components', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibilityWrapper(
-            config: ZephyrAccessibilityWrapperConfig(
+          home: VelocityAccessibilityWrapper(
+            config: VelocityAccessibilityWrapperConfig(
               enableTouchTargetSize: true,
               minTouchTargetSize: 60.0,
             ),
             isInteractive: false,
-            child: Container(key: Key('non-interactive-child')),
+            child: Container(key: const Key('non-interactive-child')),
           ),
         ),
       );
 
-      final containerFinder = find.byKey(Key('non-interactive-child'));
+      final containerFinder = find.byKey(const Key('non-interactive-child'));
       expect(containerFinder, findsOneWidget);
 
       final container = tester.widget<Container>(containerFinder);
@@ -85,19 +85,19 @@ void main() {
     testWidgets('should apply focus indicator for interactive components', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibilityWrapper(
-            config: ZephyrAccessibilityWrapperConfig(
+          home: VelocityAccessibilityWrapper(
+            config: VelocityAccessibilityWrapperConfig(
               enableFocusIndicator: true,
               focusColor: Colors.red,
               focusBorderWidth: 3.0,
             ),
             isInteractive: true,
-            child: Container(key: Key('focus-child')),
+            child: Container(key: const Key('focus-child')),
           ),
         ),
       );
 
-      final containerFinder = find.byKey(Key('focus-child'));
+      final containerFinder = find.byKey(const Key('focus-child'));
       expect(containerFinder, findsOneWidget);
 
       // Should be wrapped in Focus widget
@@ -110,8 +110,8 @@ void main() {
       
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibilityWrapper(
-            config: ZephyrAccessibilityWrapperConfig(
+          home: VelocityAccessibilityWrapper(
+            config: VelocityAccessibilityWrapperConfig(
               enableKeyboardNavigation: true,
             ),
             isInteractive: true,
@@ -120,12 +120,12 @@ void main() {
                 enterPressed = true;
               },
             },
-            child: Container(key: Key('keyboard-child')),
+            child: Container(key: const Key('keyboard-child')),
           ),
         ),
       );
 
-      final containerFinder = find.byKey(Key('keyboard-child'));
+      final containerFinder = find.byKey(const Key('keyboard-child'));
       expect(containerFinder, findsOneWidget);
 
       // Should be wrapped in Focus widget
@@ -146,13 +146,13 @@ void main() {
     testWidgets('should apply semantics for button component', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibilityWrapper(
-            config: ZephyrAccessibilityWrapperConfig(
+          home: VelocityAccessibilityWrapper(
+            config: VelocityAccessibilityWrapperConfig(
               enableSemantics: true,
             ),
             componentType: 'button',
             isInteractive: true,
-            child: Container(key: Key('button-child')),
+            child: Container(key: const Key('button-child')),
           ),
         ),
       );
@@ -167,13 +167,13 @@ void main() {
     testWidgets('should apply semantics for header component', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibilityWrapper(
-            config: ZephyrAccessibilityWrapperConfig(
+          home: VelocityAccessibilityWrapper(
+            config: VelocityAccessibilityWrapperConfig(
               enableSemantics: true,
             ),
             componentType: 'header',
             isInteractive: false,
-            child: Container(key: Key('header-child')),
+            child: Container(key: const Key('header-child')),
           ),
         ),
       );
@@ -188,13 +188,13 @@ void main() {
     testWidgets('should apply semantics for image component', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibilityWrapper(
-            config: ZephyrAccessibilityWrapperConfig(
+          home: VelocityAccessibilityWrapper(
+            config: VelocityAccessibilityWrapperConfig(
               enableSemantics: true,
             ),
             componentType: 'image',
             isInteractive: false,
-            child: Container(key: Key('image-child')),
+            child: Container(key: const Key('image-child')),
           ),
         ),
       );
@@ -209,14 +209,14 @@ void main() {
     testWidgets('should apply semantics for text field component', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibilityWrapper(
-            config: ZephyrAccessibilityWrapperConfig(
+          home: VelocityAccessibilityWrapper(
+            config: VelocityAccessibilityWrapperConfig(
               enableSemantics: true,
             ),
             componentType: 'textfield',
             isForm: true,
             isInteractive: true,
-            child: Container(key: Key('textfield-child')),
+            child: Container(key: const Key('textfield-child')),
           ),
         ),
       );
@@ -231,10 +231,10 @@ void main() {
     testWidgets('should apply custom semantic data', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibilityWrapper(
-            config: ZephyrAccessibilityWrapperConfig(
+          home: VelocityAccessibilityWrapper(
+            config: VelocityAccessibilityWrapperConfig(
               enableSemantics: true,
-              semanticData: ZephyrSemanticData(
+              semanticData: VelocitySemanticData(
                 label: 'Custom Label',
                 hint: 'Custom Hint',
                 value: 'Custom Value',
@@ -243,7 +243,7 @@ void main() {
                 disabled: false,
               ),
             ),
-            child: Container(key: Key('custom-semantics-child')),
+            child: Container(key: const Key('custom-semantics-child')),
           ),
         ),
       );
@@ -261,13 +261,13 @@ void main() {
     });
   });
 
-  group('ZephyrAccessibleButton', () {
+  group('VelocityAccessibleButton', () {
     testWidgets('should create accessible button with text', (WidgetTester tester) async {
       var buttonPressed = false;
 
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibleButton(
+          home: VelocityAccessibleButton(
             text: 'Test Button',
             onPressed: () {
               buttonPressed = true;
@@ -290,7 +290,7 @@ void main() {
 
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibleButton(
+          home: VelocityAccessibleButton(
             text: 'Icon Button',
             icon: Icons.star,
             onPressed: () {
@@ -315,7 +315,7 @@ void main() {
 
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibleButton(
+          home: VelocityAccessibleButton(
             text: 'Disabled Button',
             onPressed: () {
               buttonPressed = true;
@@ -337,7 +337,7 @@ void main() {
     testWidgets('should handle loading button', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibleButton(
+          home: VelocityAccessibleButton(
             text: 'Loading Button',
             onPressed: () {},
             isLoading: true,
@@ -353,7 +353,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrAccessibleButton(
+            body: VelocityAccessibleButton(
               text: 'Full Width Button',
               onPressed: () {},
               isFullWidth: true,
@@ -372,7 +372,7 @@ void main() {
     testWidgets('should apply custom semantic label', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibleButton(
+          home: VelocityAccessibleButton(
             text: 'Button Text',
             onPressed: () {},
             semanticLabel: 'Custom Semantic Label',
@@ -392,7 +392,7 @@ void main() {
 
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibleButton(
+          home: VelocityAccessibleButton(
             text: 'Keyboard Button',
             onPressed: () {
               buttonPressed = true;
@@ -422,13 +422,13 @@ void main() {
     });
   });
 
-  group('ZephyrAccessibleTextField', () {
+  group('VelocityAccessibleTextField', () {
     testWidgets('should create accessible text field', (WidgetTester tester) async {
       final controller = TextEditingController();
 
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibleTextField(
+          home: VelocityAccessibleTextField(
             controller: controller,
             label: 'Test Label',
             hint: 'Test Hint',
@@ -449,7 +449,7 @@ void main() {
 
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibleTextField(
+          home: VelocityAccessibleTextField(
             controller: controller,
             label: 'Required Field',
             isRequired: true,
@@ -469,7 +469,7 @@ void main() {
 
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibleTextField(
+          home: VelocityAccessibleTextField(
             controller: controller,
             label: 'Error Field',
             errorText: 'This field is required',
@@ -489,7 +489,7 @@ void main() {
 
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibleTextField(
+          home: VelocityAccessibleTextField(
             controller: controller,
             label: 'Password',
             isObscured: true,
@@ -513,7 +513,7 @@ void main() {
 
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibleTextField(
+          home: VelocityAccessibleTextField(
             controller: controller,
             label: 'Input Field',
             onChanged: (value) {
@@ -540,7 +540,7 @@ void main() {
 
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibleTextField(
+          home: VelocityAccessibleTextField(
             controller: controller,
             label: 'Input Field',
             onSubmitted: (value) {
@@ -570,7 +570,7 @@ void main() {
 
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibleTextField(
+          home: VelocityAccessibleTextField(
             controller: controller,
             label: 'Input Field',
             onSubmitted: (value) {
@@ -595,13 +595,13 @@ void main() {
     });
   });
 
-  group('ZephyrAccessibleCheckbox', () {
+  group('VelocityAccessibleCheckbox', () {
     testWidgets('should create accessible checkbox', (WidgetTester tester) async {
       var checkboxValue = false;
 
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibleCheckbox(
+          home: VelocityAccessibleCheckbox(
             value: checkboxValue,
             label: 'Test Checkbox',
             onChanged: (value) {
@@ -626,7 +626,7 @@ void main() {
 
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibleCheckbox(
+          home: VelocityAccessibleCheckbox(
             value: checkboxValue,
             label: 'Disabled Checkbox',
             onChanged: (value) {
@@ -651,7 +651,7 @@ void main() {
 
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibleCheckbox(
+          home: VelocityAccessibleCheckbox(
             value: checkboxValue,
             label: 'Keyboard Checkbox',
             onChanged: (value) {
@@ -679,13 +679,13 @@ void main() {
     });
   });
 
-  group('ZephyrAccessibleSwitch', () {
+  group('VelocityAccessibleSwitch', () {
     testWidgets('should create accessible switch', (WidgetTester tester) async {
       var switchValue = false;
 
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibleSwitch(
+          home: VelocityAccessibleSwitch(
             value: switchValue,
             label: 'Test Switch',
             onChanged: (value) {
@@ -710,7 +710,7 @@ void main() {
 
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibleSwitch(
+          home: VelocityAccessibleSwitch(
             value: switchValue,
             label: 'Disabled Switch',
             onChanged: (value) {
@@ -735,7 +735,7 @@ void main() {
 
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrAccessibleSwitch(
+          home: VelocityAccessibleSwitch(
             value: switchValue,
             label: 'Keyboard Switch',
             onChanged: (value) {

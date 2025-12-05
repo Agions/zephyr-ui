@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/input_advanced/file_upload/upload.dart';
-import 'package:zephyr_ui/src/components/input_advanced/file_upload/upload_utils.dart';
-import 'package:zephyr_ui/src/components/input_advanced/file_upload/upload_theme.dart';
-import 'package:zephyr_ui/src/components/input_advanced/file_upload/upload_item.dart';
+import 'package:velocity_ui/src/components/input_advanced/file_upload/upload.dart';
+import 'package:velocity_ui/src/components/input_advanced/file_upload/upload_utils.dart';
+import 'package:velocity_ui/src/components/input_advanced/file_upload/upload_theme.dart';
+import 'package:velocity_ui/src/components/input_advanced/file_upload/upload_item.dart';
 import 'dart:io';
 
 void main() {
-  group('ZephyrUpload', () {
+  group('VelocityUpload', () {
     testWidgets('renders upload area', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrUpload(
+            body: VelocityUpload(
               onUpload: (files) async {},
             ),
           ),
@@ -28,7 +28,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrUpload(
+            body: VelocityUpload(
               onUpload: (files) async {},
             ),
           ),
@@ -42,7 +42,7 @@ void main() {
     });
 
     testWidgets('applies custom theme', (WidgetTester tester) async {
-      final customTheme = ZephyrUploadTheme.custom(
+      final customTheme = VelocityUploadTheme.custom(
         backgroundColor: Colors.red,
         iconColor: Colors.white,
       );
@@ -50,7 +50,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrUpload(
+            body: VelocityUpload(
               onUpload: (files) async {},
               theme: customTheme,
             ),
@@ -65,7 +65,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrUpload(
+            body: VelocityUpload(
               onUpload: (files) async {},
               errorBuilder: (message) => Text('Custom Error: $message'),
             ),
@@ -80,7 +80,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrUpload(
+            body: VelocityUpload(
               onUpload: (files) async {},
               maxFiles: 1,
             ),
@@ -95,7 +95,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrUpload(
+            body: VelocityUpload(
               onUpload: (files) async {},
               maxSize: 1024, // 1KB
             ),
@@ -110,7 +110,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrUpload(
+            body: VelocityUpload(
               onUpload: (files) async {},
               allowedTypes: const ['image/jpeg', 'image/png'],
             ),
@@ -125,7 +125,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrUpload(
+            body: VelocityUpload(
               onUpload: (files) async {},
               multiple: true,
             ),
@@ -142,7 +142,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrUpload(
+            body: VelocityUpload(
               onUpload: (files) async {},
               autoUpload: false,
             ),
@@ -160,7 +160,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrUpload(
+            body: VelocityUpload(
               onUpload: (files) async {},
               showFileList: false,
             ),
@@ -175,7 +175,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrUpload(
+            body: VelocityUpload(
               onUpload: (files) async {},
               showProgress: false,
             ),
@@ -190,7 +190,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrUpload(
+            body: VelocityUpload(
               onUpload: (files) async {},
               enableDragAndDrop: true,
             ),
@@ -205,7 +205,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrUpload(
+            body: VelocityUpload(
               onUpload: (files) async {},
               enableDragAndDrop: false,
             ),
@@ -217,23 +217,23 @@ void main() {
     });
   });
 
-  group('ZephyrUploadItem', () {
+  group('VelocityUploadItem', () {
     test('creates upload item with required parameters', () {
       final file = File('/test/file.txt');
-      final item = ZephyrUploadItem(
+      final item = VelocityUploadItem(
         file: file,
         name: 'test.txt',
       );
 
       expect(item.file, equals(file));
       expect(item.name, equals('test.txt'));
-      expect(item.status, equals(ZephyrUploadStatus.pending));
+      expect(item.status, equals(VelocityUploadStatus.pending));
       expect(item.progress, equals(0.0));
     });
 
     test('creates upload item with all parameters', () {
       final file = File('/test/file.txt');
-      final item = ZephyrUploadItem(
+      final item = VelocityUploadItem(
         file: file,
         name: 'test.txt',
         size: 1024,
@@ -241,7 +241,7 @@ void main() {
         mimeType: 'text/plain',
         url: 'https://example.com/file.txt',
         progress: 0.5,
-        status: ZephyrUploadStatus.uploading,
+        status: VelocityUploadStatus.uploading,
         error: 'Upload failed',
         data: {'key': 'value'},
       );
@@ -253,47 +253,47 @@ void main() {
       expect(item.mimeType, equals('text/plain'));
       expect(item.url, equals('https://example.com/file.txt'));
       expect(item.progress, equals(0.5));
-      expect(item.status, equals(ZephyrUploadStatus.uploading));
+      expect(item.status, equals(VelocityUploadStatus.uploading));
       expect(item.error, equals('Upload failed'));
       expect(item.data, equals({'key': 'value'}));
     });
 
     test('copies upload item with modifications', () {
       final file = File('/test/file.txt');
-      final item = ZephyrUploadItem(
+      final item = VelocityUploadItem(
         file: file,
         name: 'test.txt',
-        status: ZephyrUploadStatus.pending,
+        status: VelocityUploadStatus.pending,
       );
 
       final modified = item.copyWith(
-        status: ZephyrUploadStatus.success,
+        status: VelocityUploadStatus.success,
         progress: 1.0,
       );
 
-      expect(modified.status, equals(ZephyrUploadStatus.success));
+      expect(modified.status, equals(VelocityUploadStatus.success));
       expect(modified.progress, equals(1.0));
       expect(modified.name, equals('test.txt'));
     });
 
     test('sets uploading status', () {
       final file = File('/test/file.txt');
-      final item = ZephyrUploadItem(
+      final item = VelocityUploadItem(
         file: file,
         name: 'test.txt',
-        status: ZephyrUploadStatus.pending,
+        status: VelocityUploadStatus.pending,
       );
 
       final uploading = item.uploading();
 
-      expect(uploading.status, equals(ZephyrUploadStatus.uploading));
+      expect(uploading.status, equals(VelocityUploadStatus.uploading));
       expect(uploading.progress, equals(0.0));
       expect(uploading.error, isNull);
     });
 
     test('updates progress', () {
       final file = File('/test/file.txt');
-      final item = ZephyrUploadItem(
+      final item = VelocityUploadItem(
         file: file,
         name: 'test.txt',
         progress: 0.0,
@@ -306,15 +306,15 @@ void main() {
 
     test('sets success status', () {
       final file = File('/test/file.txt');
-      final item = ZephyrUploadItem(
+      final item = VelocityUploadItem(
         file: file,
         name: 'test.txt',
-        status: ZephyrUploadStatus.uploading,
+        status: VelocityUploadStatus.uploading,
       );
 
       final success = item.success(url: 'https://example.com/file.txt');
 
-      expect(success.status, equals(ZephyrUploadStatus.success));
+      expect(success.status, equals(VelocityUploadStatus.success));
       expect(success.progress, equals(1.0));
       expect(success.url, equals('https://example.com/file.txt'));
       expect(success.error, isNull);
@@ -322,31 +322,31 @@ void main() {
 
     test('sets failed status', () {
       final file = File('/test/file.txt');
-      final item = ZephyrUploadItem(
+      final item = VelocityUploadItem(
         file: file,
         name: 'test.txt',
-        status: ZephyrUploadStatus.uploading,
+        status: VelocityUploadStatus.uploading,
       );
 
       final failed = item.failed('Network error');
 
-      expect(failed.status, equals(ZephyrUploadStatus.failed));
+      expect(failed.status, equals(VelocityUploadStatus.failed));
       expect(failed.error, equals('Network error'));
     });
 
     test('resets to pending status', () {
       final file = File('/test/file.txt');
-      final item = ZephyrUploadItem(
+      final item = VelocityUploadItem(
         file: file,
         name: 'test.txt',
-        status: ZephyrUploadStatus.failed,
+        status: VelocityUploadStatus.failed,
         progress: 1.0,
         error: 'Error',
       );
 
       final reset = item.reset();
 
-      expect(reset.status, equals(ZephyrUploadStatus.pending));
+      expect(reset.status, equals(VelocityUploadStatus.pending));
       expect(reset.progress, equals(0.0));
       expect(reset.error, equals('')); // Empty string instead of null based on implementation
       expect(reset.url, isNull);
@@ -354,7 +354,7 @@ void main() {
 
     test('identifies image files', () {
       final file = File('/test/image.jpg');
-      final item = ZephyrUploadItem(
+      final item = VelocityUploadItem(
         file: file,
         name: 'image.jpg',
         type: 'jpg',
@@ -367,7 +367,7 @@ void main() {
 
     test('identifies video files', () {
       final file = File('/test/video.mp4');
-      final item = ZephyrUploadItem(
+      final item = VelocityUploadItem(
         file: file,
         name: 'video.mp4',
         type: 'mp4',
@@ -380,7 +380,7 @@ void main() {
 
     test('identifies audio files', () {
       final file = File('/test/audio.mp3');
-      final item = ZephyrUploadItem(
+      final item = VelocityUploadItem(
         file: file,
         name: 'audio.mp3',
         type: 'mp3',
@@ -394,28 +394,28 @@ void main() {
     test('checks completion status', () {
       final file = File('/test/file.txt');
       
-      final pendingItem = ZephyrUploadItem(
+      final pendingItem = VelocityUploadItem(
         file: file,
         name: 'file.txt',
-        status: ZephyrUploadStatus.pending,
+        status: VelocityUploadStatus.pending,
       );
       
-      final uploadingItem = ZephyrUploadItem(
+      final uploadingItem = VelocityUploadItem(
         file: file,
         name: 'file.txt',
-        status: ZephyrUploadStatus.uploading,
+        status: VelocityUploadStatus.uploading,
       );
       
-      final successItem = ZephyrUploadItem(
+      final successItem = VelocityUploadItem(
         file: file,
         name: 'file.txt',
-        status: ZephyrUploadStatus.success,
+        status: VelocityUploadStatus.success,
       );
       
-      final failedItem = ZephyrUploadItem(
+      final failedItem = VelocityUploadItem(
         file: file,
         name: 'file.txt',
-        status: ZephyrUploadStatus.failed,
+        status: VelocityUploadStatus.failed,
       );
 
       expect(pendingItem.isCompleted, isFalse);
@@ -440,23 +440,23 @@ void main() {
     });
   });
 
-  group('ZephyrUploadTheme', () {
+  group('VelocityUploadTheme', () {
     test('creates light theme', () {
-      final theme = ZephyrUploadTheme.light();
+      final theme = VelocityUploadTheme.light();
       expect(theme.backgroundColor, equals(const Color(0xFFF9FAFB)));
       expect(theme.borderColor, equals(const Color(0xFFE5E7EB)));
       expect(theme.iconColor, equals(const Color(0xFF6B7280)));
     });
 
     test('creates dark theme', () {
-      final theme = ZephyrUploadTheme.dark();
+      final theme = VelocityUploadTheme.dark();
       expect(theme.backgroundColor, equals(const Color(0xFF1F2937)));
       expect(theme.borderColor, equals(const Color(0xFF374151)));
       expect(theme.iconColor, equals(const Color(0xFF9CA3AF)));
     });
 
     test('creates custom theme', () {
-      final theme = ZephyrUploadTheme.custom(
+      final theme = VelocityUploadTheme.custom(
         backgroundColor: Colors.red,
         iconColor: Colors.white,
       );
@@ -466,7 +466,7 @@ void main() {
     });
 
     test('copies theme with modifications', () {
-      final theme = ZephyrUploadTheme.light();
+      final theme = VelocityUploadTheme.light();
       final modified = theme.copyWith(backgroundColor: Colors.blue);
 
       expect(modified.backgroundColor, equals(Colors.blue));
@@ -474,8 +474,8 @@ void main() {
     });
 
     test('merges themes', () {
-      final theme1 = ZephyrUploadTheme.light();
-      final theme2 = ZephyrUploadTheme.custom(backgroundColor: Colors.red);
+      final theme1 = VelocityUploadTheme.light();
+      final theme2 = VelocityUploadTheme.custom(backgroundColor: Colors.red);
       final merged = theme1.merge(theme2);
 
       expect(merged.backgroundColor, equals(Colors.red));
@@ -483,90 +483,90 @@ void main() {
     });
 
     test('compares themes for equality', () {
-      final theme1 = ZephyrUploadTheme.light();
-      final theme2 = ZephyrUploadTheme.light();
+      final theme1 = VelocityUploadTheme.light();
+      final theme2 = VelocityUploadTheme.light();
       expect(theme1, equals(theme2));
     });
 
     test('computes hash code', () {
-      final theme = ZephyrUploadTheme.light();
+      final theme = VelocityUploadTheme.light();
       expect(theme.hashCode, isA<int>());
     });
   });
 
-  group('ZephyrUploadUtils', () {
+  group('VelocityUploadUtils', () {
     test('formats file size', () {
-      expect(ZephyrUploadUtils.formatFileSize(500), equals('500 B'));
-      expect(ZephyrUploadUtils.formatFileSize(1024), equals('1.0 KB'));
-      expect(ZephyrUploadUtils.formatFileSize(1024 * 1024), equals('1.0 MB'));
-      expect(ZephyrUploadUtils.formatFileSize(1024 * 1024 * 1024), equals('1.0 GB'));
+      expect(VelocityUploadUtils.formatFileSize(500), equals('500 B'));
+      expect(VelocityUploadUtils.formatFileSize(1024), equals('1.0 KB'));
+      expect(VelocityUploadUtils.formatFileSize(1024 * 1024), equals('1.0 MB'));
+      expect(VelocityUploadUtils.formatFileSize(1024 * 1024 * 1024), equals('1.0 GB'));
     });
 
     test('gets file extension', () {
-      expect(ZephyrUploadUtils.getFileExtension('file.txt'), equals('txt'));
-      expect(ZephyrUploadUtils.getFileExtension('file.TXT'), equals('txt'));
-      expect(ZephyrUploadUtils.getFileExtension('file'), equals(''));
-      expect(ZephyrUploadUtils.getFileExtension('file.tar.gz'), equals('gz'));
+      expect(VelocityUploadUtils.getFileExtension('file.txt'), equals('txt'));
+      expect(VelocityUploadUtils.getFileExtension('file.TXT'), equals('txt'));
+      expect(VelocityUploadUtils.getFileExtension('file'), equals(''));
+      expect(VelocityUploadUtils.getFileExtension('file.tar.gz'), equals('gz'));
     });
 
     test('gets file name without extension', () {
-      expect(ZephyrUploadUtils.getFileNameWithoutExtension('file.txt'), equals('file'));
-      expect(ZephyrUploadUtils.getFileNameWithoutExtension('file'), equals('file'));
-      expect(ZephyrUploadUtils.getFileNameWithoutExtension('/path/to/file.txt'), equals('file'));
+      expect(VelocityUploadUtils.getFileNameWithoutExtension('file.txt'), equals('file'));
+      expect(VelocityUploadUtils.getFileNameWithoutExtension('file'), equals('file'));
+      expect(VelocityUploadUtils.getFileNameWithoutExtension('/path/to/file.txt'), equals('file'));
     });
 
     test('gets file name', () {
-      expect(ZephyrUploadUtils.getFileName('file.txt'), equals('file.txt'));
-      expect(ZephyrUploadUtils.getFileName('/path/to/file.txt'), equals('file.txt'));
-      expect(ZephyrUploadUtils.getFileName('file'), equals('file'));
+      expect(VelocityUploadUtils.getFileName('file.txt'), equals('file.txt'));
+      expect(VelocityUploadUtils.getFileName('/path/to/file.txt'), equals('file.txt'));
+      expect(VelocityUploadUtils.getFileName('file'), equals('file'));
     });
 
     test('validates file type', () {
-      expect(ZephyrUploadUtils.isFileTypeAllowed('file.jpg', ['image/jpeg']), isTrue);
-      expect(ZephyrUploadUtils.isFileTypeAllowed('file.jpg', ['image/*']), isTrue);
-      expect(ZephyrUploadUtils.isFileTypeAllowed('file.txt', ['image/jpeg']), isFalse);
-      expect(ZephyrUploadUtils.isFileTypeAllowed('file.jpg', []), isTrue);
+      expect(VelocityUploadUtils.isFileTypeAllowed('file.jpg', ['image/jpeg']), isTrue);
+      expect(VelocityUploadUtils.isFileTypeAllowed('file.jpg', ['image/*']), isTrue);
+      expect(VelocityUploadUtils.isFileTypeAllowed('file.txt', ['image/jpeg']), isFalse);
+      expect(VelocityUploadUtils.isFileTypeAllowed('file.jpg', []), isTrue);
     });
 
     test('validates file size', () {
-      expect(ZephyrUploadUtils.isFileSizeValid(1024, 2048), isTrue);
-      expect(ZephyrUploadUtils.isFileSizeValid(2048, 1024), isFalse);
+      expect(VelocityUploadUtils.isFileSizeValid(1024, 2048), isTrue);
+      expect(VelocityUploadUtils.isFileSizeValid(2048, 1024), isFalse);
     });
 
     test('validates file name', () {
-      expect(ZephyrUploadUtils.isFileNameValid('file.txt'), isTrue);
-      expect(ZephyrUploadUtils.isFileNameValid('file/name.txt'), isFalse);
-      expect(ZephyrUploadUtils.isFileNameValid('file*.txt'), isFalse);
+      expect(VelocityUploadUtils.isFileNameValid('file.txt'), isTrue);
+      expect(VelocityUploadUtils.isFileNameValid('file/name.txt'), isFalse);
+      expect(VelocityUploadUtils.isFileNameValid('file*.txt'), isFalse);
     });
 
     test('sanitizes file name', () {
-      expect(ZephyrUploadUtils.sanitizeFileName('file/name.txt'), equals('file_name.txt'));
-      expect(ZephyrUploadUtils.sanitizeFileName('file*.txt'), equals('file_.txt'));
-      expect(ZephyrUploadUtils.sanitizeFileName('file.txt'), equals('file.txt'));
+      expect(VelocityUploadUtils.sanitizeFileName('file/name.txt'), equals('file_name.txt'));
+      expect(VelocityUploadUtils.sanitizeFileName('file*.txt'), equals('file_.txt'));
+      expect(VelocityUploadUtils.sanitizeFileName('file.txt'), equals('file.txt'));
     });
 
     test('calculates progress', () {
-      expect(ZephyrUploadUtils.calculateProgress(512, 1024), equals(0.5));
-      expect(ZephyrUploadUtils.calculateProgress(0, 1024), equals(0.0));
-      expect(ZephyrUploadUtils.calculateProgress(1024, 1024), equals(1.0));
+      expect(VelocityUploadUtils.calculateProgress(512, 1024), equals(0.5));
+      expect(VelocityUploadUtils.calculateProgress(0, 1024), equals(0.0));
+      expect(VelocityUploadUtils.calculateProgress(1024, 1024), equals(1.0));
     });
 
     test('estimates remaining time', () {
-      final duration = ZephyrUploadUtils.estimateRemainingTime(512, 1024, 256);
+      final duration = VelocityUploadUtils.estimateRemainingTime(512, 1024, 256);
       expect(duration.inSeconds, equals(2));
     });
 
     test('formats duration', () {
-      expect(ZephyrUploadUtils.formatDuration(const Duration(seconds: 30)), equals('30秒'));
-      expect(ZephyrUploadUtils.formatDuration(const Duration(minutes: 5)), equals('5分钟 0秒'));
-      expect(ZephyrUploadUtils.formatDuration(const Duration(hours: 2)), equals('2小时 0分钟'));
-      expect(ZephyrUploadUtils.formatDuration(const Duration(days: 1)), equals('1天 0小时'));
+      expect(VelocityUploadUtils.formatDuration(const Duration(seconds: 30)), equals('30秒'));
+      expect(VelocityUploadUtils.formatDuration(const Duration(minutes: 5)), equals('5分钟 0秒'));
+      expect(VelocityUploadUtils.formatDuration(const Duration(hours: 2)), equals('2小时 0分钟'));
+      expect(VelocityUploadUtils.formatDuration(const Duration(days: 1)), equals('1天 0小时'));
     });
 
     test('formats upload speed', () {
-      expect(ZephyrUploadUtils.formatUploadSpeed(512), equals('512.0 B/s'));
-      expect(ZephyrUploadUtils.formatUploadSpeed(1024), equals('1.0 KB/s'));
-      expect(ZephyrUploadUtils.formatUploadSpeed(1024 * 1024), equals('1.0 MB/s'));
+      expect(VelocityUploadUtils.formatUploadSpeed(512), equals('512.0 B/s'));
+      expect(VelocityUploadUtils.formatUploadSpeed(1024), equals('1.0 KB/s'));
+      expect(VelocityUploadUtils.formatUploadSpeed(1024 * 1024), equals('1.0 MB/s'));
     });
 
     test('groups files by type', () {
@@ -579,7 +579,7 @@ void main() {
         'file6.pdf',
       ];
 
-      final groups = ZephyrUploadUtils.groupFilesByType(files);
+      final groups = VelocityUploadUtils.groupFilesByType(files);
 
       expect(groups['图片'], hasLength(2));
       expect(groups['音频'], hasLength(1));
@@ -588,7 +588,7 @@ void main() {
     });
 
     test('generates unique file name', () {
-      final name = ZephyrUploadUtils.generateUniqueFileName('file.txt');
+      final name = VelocityUploadUtils.generateUniqueFileName('file.txt');
       expect(name, startsWith('file_'));
       expect(name, endsWith('.txt'));
       expect(name, contains('_'));

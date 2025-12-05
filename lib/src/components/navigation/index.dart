@@ -1,10 +1,11 @@
-// navigation 组件库
-// 导航组件
+/// VelocityUI 导航组件
+library navigation;
 
-export 'bottom_navigation_bar/index.dart';
-export 'navigation_rail/index.dart';
-export 'pagination/index.dart';
-export 'side_menu/index.dart';
-export 'stepper/index.dart';
 export 'tabs/index.dart';
-export 'tree/index.dart';
+export 'navbar/index.dart';
+export 'drawer/index.dart';
+export 'bottom_sheet/index.dart';
+export 'stepper/index.dart';
+export 'menu/index.dart';
+export 'pagination/index.dart';
+export 'segmented/index.dart';

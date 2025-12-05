@@ -1,6 +1,5 @@
-/// text组件模块
-///。
+/// VelocityUI 文本组件
 library text;
 
 export 'text.dart';
-export 'text_theme.dart';
+export 'text_style.dart';

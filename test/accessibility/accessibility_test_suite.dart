@@ -1,16 +1,16 @@
-/// ZephyrUI 无障碍测试套件
+/// VelocityUI 无障碍测试套件
 ///
 /// 提供完整的无障碍测试用例和验证工具
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/zephyr_ui.dart';
-import '../../lib/src/core/accessibility/accessibility_test_tools.dart';
-import '../../lib/src/components/accessibility/enhanced_input.dart';
-import '../../lib/src/components/accessibility/accessibility_wrapper.dart';
+import 'package:velocity_ui/velocity_ui.dart';
+import 'package:velocity_ui/src/core/accessibility/accessibility_test_tools.dart';
+import 'package:velocity_ui/src/components/accessibility/enhanced_input.dart';
+import 'package:velocity_ui/src/components/accessibility/accessibility_wrapper.dart';
 
 void main() {
-  group('ZephyrUI 无障碍测试套件', () {
+  group('VelocityUI 无障碍测试套件', () {
     late WidgetTester tester;
 
     setUp(() {
@@ -22,7 +22,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrAccessibleInput(
+              body: VelocityAccessibleInput(
                 labelText: '用户名',
                 placeholder: '请输入用户名',
                 helperText: '用户名长度应为3-20个字符',
@@ -43,7 +43,7 @@ void main() {
         );
 
         // 验证组件存在
-        expect(find.byType(ZephyrAccessibleInput), findsOneWidget);
+        expect(find.byType(VelocityAccessibleInput), findsOneWidget);
         expect(find.text('用户名'), findsOneWidget);
         expect(find.text('请输入用户名'), findsOneWidget);
         expect(find.text('用户名长度应为3-20个字符'), findsOneWidget);
@@ -56,7 +56,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrAccessibleInput(
+              body: VelocityAccessibleInput(
                 labelText: '邮箱',
                 placeholder: '请输入邮箱地址',
                 required: true,
@@ -94,7 +94,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrAccessibleInput(
+              body: VelocityAccessibleInput(
                 labelText: '测试输入',
                 onChanged: (value) {},
               ),
@@ -115,7 +115,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrAccessibleInput(
+              body: VelocityAccessibleInput(
                 labelText: '用户名',
                 placeholder: '请输入用户名',
                 onChanged: (value) {},
@@ -126,7 +126,7 @@ void main() {
 
         // 验证语义化属性
         await tester.expectAccessibility(
-          widget: find.byType(ZephyrAccessibleInput),
+          widget: find.byType(VelocityAccessibleInput),
           label: '用户名',
           hint: '请输入用户名',
           isTextField: true,
@@ -137,12 +137,12 @@ void main() {
 
     group('无障碍按钮组件测试', () {
       testWidgets('应该正确渲染无障碍按钮', (WidgetTester tester) async {
-        bool wasPressed = false;
+        var wasPressed = false;
 
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrAccessibleButton(
+              body: VelocityAccessibleButton(
                 text: '点击我',
                 onPressed: () {
                   wasPressed = true;
@@ -153,11 +153,11 @@ void main() {
         );
 
         // 验证组件存在
-        expect(find.byType(ZephyrAccessibleButton), findsOneWidget);
+        expect(find.byType(VelocityAccessibleButton), findsOneWidget);
         expect(find.text('点击我'), findsOneWidget);
 
         // 测试点击
-        await tester.tap(find.byType(ZephyrAccessibleButton));
+        await tester.tap(find.byType(VelocityAccessibleButton));
         await tester.pumpAndSettle();
 
         // 验证回调被调用
@@ -165,12 +165,12 @@ void main() {
       });
 
       testWidgets('应该支持键盘操作', (WidgetTester tester) async {
-        bool wasPressed = false;
+        var wasPressed = false;
 
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrAccessibleButton(
+              body: VelocityAccessibleButton(
                 text: '测试按钮',
                 onPressed: () {
                   wasPressed = true;
@@ -196,7 +196,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrAccessibleButton(
+              body: VelocityAccessibleButton(
                 text: '提交',
                 onPressed: () {},
               ),
@@ -206,7 +206,7 @@ void main() {
 
         // 验证语义化属性
         await tester.expectAccessibility(
-          widget: find.byType(ZephyrAccessibleButton),
+          widget: find.byType(VelocityAccessibleButton),
           label: '提交',
           isButton: true,
           isEnabled: true,
@@ -215,12 +215,12 @@ void main() {
       });
 
       testWidgets('应该正确处理禁用状态', (WidgetTester tester) async {
-        bool wasPressed = false;
+        var wasPressed = false;
 
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrAccessibleButton(
+              body: VelocityAccessibleButton(
                 text: '禁用按钮',
                 onPressed: () {
                   wasPressed = true;
@@ -236,7 +236,7 @@ void main() {
         expect(button.onPressed, isNull);
 
         // 测试点击（应该没有反应）
-        await tester.tap(find.byType(ZephyrAccessibleButton));
+        await tester.tap(find.byType(VelocityAccessibleButton));
         await tester.pumpAndSettle();
 
         // 验证回调没有被调用
@@ -251,7 +251,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrAccessibleTextField(
+              body: VelocityAccessibleTextField(
                 controller: controller,
                 label: '密码',
                 hint: '请输入密码',
@@ -263,7 +263,7 @@ void main() {
         );
 
         // 验证组件存在
-        expect(find.byType(ZephyrAccessibleTextField), findsOneWidget);
+        expect(find.byType(VelocityAccessibleTextField), findsOneWidget);
         expect(find.text('密码'), findsOneWidget);
         expect(find.text('请输入密码'), findsOneWidget);
         expect(find.byIcon(Icons.visibility_off), findsOneWidget);
@@ -275,7 +275,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrAccessibleTextField(
+              body: VelocityAccessibleTextField(
                 controller: controller,
                 label: '密码',
                 isObscured: true,
@@ -306,7 +306,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrAccessibleTextField(
+              body: VelocityAccessibleTextField(
                 controller: controller,
                 label: '用户名',
                 hint: '请输入用户名',
@@ -317,7 +317,7 @@ void main() {
 
         // 验证语义化属性
         await tester.expectAccessibility(
-          widget: find.byType(ZephyrAccessibleTextField),
+          widget: find.byType(VelocityAccessibleTextField),
           label: '用户名',
           hint: '请输入用户名',
           isTextField: true,
@@ -331,12 +331,12 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrAccessibilityWrapper(
-                config: ZephyrAccessibilityWrapperConfig(
+              body: VelocityAccessibilityWrapper(
+                config: const VelocityAccessibilityWrapperConfig(
                   enableSemantics: true,
                   enableKeyboardNavigation: true,
                   enableFocusIndicator: true,
-                  semanticData: ZephyrSemanticData(
+                  semanticData: VelocitySemanticData(
                     label: '测试组件',
                   ),
                 ),
@@ -351,7 +351,7 @@ void main() {
         );
 
         // 验证包装器存在
-        expect(find.byType(ZephyrAccessibilityWrapper), findsOneWidget);
+        expect(find.byType(VelocityAccessibilityWrapper), findsOneWidget);
         expect(find.byType(Container), findsOneWidget);
       });
 
@@ -359,9 +359,9 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrAccessibilityWrapper(
-                config: ZephyrAccessibilityWrapperConfig(
-                  semanticData: ZephyrSemanticData(
+              body: VelocityAccessibilityWrapper(
+                config: const VelocityAccessibilityWrapperConfig(
+                  semanticData: VelocitySemanticData(
                     label: '可点击区域',
                     hint: '点击此区域执行操作',
                   ),
@@ -392,8 +392,8 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrAccessibilityWrapper(
-                config: ZephyrAccessibilityWrapperConfig(
+              body: VelocityAccessibilityWrapper(
+                config: const VelocityAccessibilityWrapperConfig(
                   minTouchTargetSize: 44.0,
                 ),
                 isInteractive: true,
@@ -422,13 +422,13 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                ZephyrAccessibleInput(
+                VelocityAccessibleInput(
                   labelText: '用户名',
                   placeholder: '请输入用户名',
                   onChanged: (value) {},
                 ),
                 const SizedBox(height: 16),
-                ZephyrAccessibleButton(
+                VelocityAccessibleButton(
                   text: '提交',
                   onPressed: () {},
                 ),
@@ -438,7 +438,7 @@ void main() {
         );
 
         // 运行完整无障碍测试
-        final result = await ZephyrAccessibilityTestTools.runFullAccessibilityTest(
+        final result = await VelocityAccessibilityTestTools.runFullAccessibilityTest(
           tester,
           testWidget,
           componentName: 'TestForm',
@@ -446,17 +446,17 @@ void main() {
 
         // 验证测试结果
         expect(result.score, greaterThanOrEqualTo(80.0));
-        expect(result.complianceStatus, ZephyrAccessibilityComplianceStatus.fullyCompliant);
+        expect(result.complianceStatus, VelocityAccessibilityComplianceStatus.fullyCompliant);
       });
 
       testWidgets('应该生成详细的测试报告', (WidgetTester tester) async {
-        final results = <ZephyrAccessibilityTestResult>[];
+        final results = <VelocityAccessibilityTestResult>[];
 
         // 测试多个组件
         final testWidgets = [
           MaterialApp(
             home: Scaffold(
-              body: ZephyrAccessibleInput(
+              body: VelocityAccessibleInput(
                 labelText: '用户名',
                 onChanged: (value) {},
               ),
@@ -464,7 +464,7 @@ void main() {
           ),
           MaterialApp(
             home: Scaffold(
-              body: ZephyrAccessibleButton(
+              body: VelocityAccessibleButton(
                 text: '提交',
                 onPressed: () {},
               ),
@@ -473,7 +473,7 @@ void main() {
         ];
 
         for (final widget in testWidgets) {
-          final result = await ZephyrAccessibilityTestTools.runFullAccessibilityTest(
+          final result = await VelocityAccessibilityTestTools.runFullAccessibilityTest(
             tester,
             widget,
             componentName: 'TestComponent',
@@ -482,7 +482,7 @@ void main() {
         }
 
         // 生成测试报告
-        final report = ZephyrAccessibilityTestTools.generateTestReport(results);
+        final report = VelocityAccessibilityTestTools.generateTestReport(results);
 
         // 验证报告结构
         expect(report['summary'], isNotNull);
@@ -503,14 +503,14 @@ void main() {
           ),
         );
 
-        final result = await ZephyrAccessibilityTestTools.runFullAccessibilityTest(
+        final result = await VelocityAccessibilityTestTools.runFullAccessibilityTest(
           tester,
           problematicWidget,
           componentName: 'ProblematicComponent',
         );
 
         // 获取改进建议
-        final suggestions = ZephyrAccessibilityTestTools.getImprovementSuggestions([result]);
+        final suggestions = VelocityAccessibilityTestTools.getImprovementSuggestions([result]);
 
         // 验证建议存在
         expect(suggestions, isNotEmpty);
@@ -521,7 +521,7 @@ void main() {
     group('颜色对比度测试', () {
       testWidgets('应该检查文本颜色对比度', (WidgetTester tester) async {
         await tester.pumpWidget(
-          MaterialApp(
+          const MaterialApp(
             home: Scaffold(
               body: Text(
                 '测试文本',
@@ -535,9 +535,9 @@ void main() {
         );
 
         // 运行颜色对比度检查
-        final result = await ZephyrAccessibilityTestTools.runFullAccessibilityTest(
+        final result = await VelocityAccessibilityTestTools.runFullAccessibilityTest(
           tester,
-          MaterialApp(
+          const MaterialApp(
             home: Scaffold(
               body: Text(
                 '测试文本',
@@ -552,7 +552,7 @@ void main() {
         );
 
         // 白色文本在黑色背景上应该有足够的对比度
-        expect(result.violations.where((v) => v.check == ZephyrAccessibilityCheck.colorContrast), isEmpty);
+        expect(result.violations.where((v) => v.check == VelocityAccessibilityCheck.colorContrast), isEmpty);
       });
     });
 
@@ -563,15 +563,15 @@ void main() {
             home: Scaffold(
               body: Column(
                 children: [
-                  ZephyrAccessibleInput(
+                  VelocityAccessibleInput(
                     labelText: '字段1',
                     onChanged: (value) {},
                   ),
-                  ZephyrAccessibleInput(
+                  VelocityAccessibleInput(
                     labelText: '字段2',
                     onChanged: (value) {},
                   ),
-                  ZephyrAccessibleButton(
+                  VelocityAccessibleButton(
                     text: '提交',
                     onPressed: () {},
                   ),
@@ -600,13 +600,13 @@ void main() {
         await tester.pumpAndSettle();
 
         // 验证按钮获得焦点
-        expect(find.byType(ZephyrAccessibleButton), findsOneWidget);
+        expect(find.byType(VelocityAccessibleButton), findsOneWidget);
       });
     });
 
     group('屏幕阅读器支持测试', () {
       testWidgets('应该支持屏幕阅读器公告', (WidgetTester tester) async {
-        bool wasAnnounced = false;
+        var wasAnnounced = false;
 
         // 模拟屏幕阅读器
         tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
@@ -623,10 +623,10 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrAccessibleInput(
+              body: VelocityAccessibleInput(
                 labelText: '用户名',
                 onChanged: (value) {},
-                accessibilityConfig: ZephyrAccessibleInputConfig(
+                accessibilityConfig: const VelocityAccessibleInputConfig(
                   enableScreenReaderAnnouncement: true,
                 ),
               ),

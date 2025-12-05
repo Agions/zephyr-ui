@@ -3,13 +3,13 @@
 /// 测试性能工具类的功能，包括性能监控、优化和调试工具。
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/utils/performance/performance_utils.dart';
+import 'package:velocity_ui/src/utils/performance/performance_utils.dart';
 
 void main() {
-  group('ZephyrPerformanceUtils', () {
+  group('VelocityPerformanceUtils', () {
     group('measureTime', () {
       test('应该正确测量同步函数执行时间', () {
-        final result = ZephyrPerformanceUtils.measureTime('test', () {
+        final result = VelocityPerformanceUtils.measureTime('test', () {
           return 42;
         });
 
@@ -17,14 +17,14 @@ void main() {
       });
 
       test('应该处理空函数', () {
-        final result = ZephyrPerformanceUtils.measureTime('test', () {});
+        final result = VelocityPerformanceUtils.measureTime('test', () {});
         expect(result, isNull);
       });
     });
 
     group('measureTimeAsync', () {
       test('应该正确测量异步函数执行时间', () async {
-        final result = await ZephyrPerformanceUtils.measureTimeAsync('test', () async {
+        final result = await VelocityPerformanceUtils.measureTimeAsync('test', () async {
           await Future.delayed(const Duration(milliseconds: 10));
           return 42;
         });
@@ -35,34 +35,34 @@ void main() {
 
     group('shouldRebuild', () {
       test('相同值不应该重建', () {
-        expect(ZephyrPerformanceUtils.shouldRebuild(42, 42), isFalse);
-        expect(ZephyrPerformanceUtils.shouldRebuild('test', 'test'), isFalse);
-        expect(ZephyrPerformanceUtils.shouldRebuild(true, true), isFalse);
+        expect(VelocityPerformanceUtils.shouldRebuild(42, 42), isFalse);
+        expect(VelocityPerformanceUtils.shouldRebuild('test', 'test'), isFalse);
+        expect(VelocityPerformanceUtils.shouldRebuild(true, true), isFalse);
       });
 
       test('不同值应该重建', () {
-        expect(ZephyrPerformanceUtils.shouldRebuild(42, 43), isTrue);
-        expect(ZephyrPerformanceUtils.shouldRebuild('test', 'other'), isTrue);
-        expect(ZephyrPerformanceUtils.shouldRebuild(true, false), isTrue);
+        expect(VelocityPerformanceUtils.shouldRebuild(42, 43), isTrue);
+        expect(VelocityPerformanceUtils.shouldRebuild('test', 'other'), isTrue);
+        expect(VelocityPerformanceUtils.shouldRebuild(true, false), isTrue);
       });
 
       test('数值差异很小时不应该重建', () {
-        expect(ZephyrPerformanceUtils.shouldRebuild(1.0, 1.0001), isFalse);
+        expect(VelocityPerformanceUtils.shouldRebuild(1.0, 1.0001), isFalse);
       });
 
       test('数值差异很大时应该重建', () {
-        expect(ZephyrPerformanceUtils.shouldRebuild(1.0, 1.1), isTrue);
+        expect(VelocityPerformanceUtils.shouldRebuild(1.0, 1.1), isTrue);
       });
     });
 
     group('debounce', () {
       test('应该正确防抖函数调用', () async {
-        int callCount = 0;
+        var callCount = 0;
         void callback() {
           callCount++;
         }
 
-        final debounced = ZephyrPerformanceUtils.debounce(callback, const Duration(milliseconds: 50));
+        final debounced = VelocityPerformanceUtils.debounce(callback, const Duration(milliseconds: 50));
 
         // 快速多次调用
         debounced();
@@ -79,12 +79,12 @@ void main() {
 
     group('throttle', () {
       test('应该正确节流函数调用', () async {
-        int callCount = 0;
+        var callCount = 0;
         void callback() {
           callCount++;
         }
 
-        final throttled = ZephyrPerformanceUtils.throttle(callback, const Duration(milliseconds: 50));
+        final throttled = VelocityPerformanceUtils.throttle(callback, const Duration(milliseconds: 50));
 
         // 快速多次调用
         throttled();
@@ -102,9 +102,9 @@ void main() {
 
     group('batchUpdate', () {
       test('应该批量执行更新', () async {
-        bool updated = false;
+        var updated = false;
         
-        ZephyrPerformanceUtils.batchUpdate(() {
+        VelocityPerformanceUtils.batchUpdate(() {
           updated = true;
         });
 
@@ -119,9 +119,9 @@ void main() {
 
     group('defer', () {
       test('应该延迟执行回调', () async {
-        bool executed = false;
+        var executed = false;
         
-        ZephyrPerformanceUtils.defer(() {
+        VelocityPerformanceUtils.defer(() {
           executed = true;
         });
 
@@ -136,7 +136,7 @@ void main() {
 
     group('getMemoryInfo', () {
       test('应该返回内存信息结构', () {
-        final info = ZephyrPerformanceUtils.getMemoryInfo();
+        final info = VelocityPerformanceUtils.getMemoryInfo();
         
         expect(info, isA<Map<String, dynamic>>());
         expect(info['runtimeType'], 'MemoryInfo');
@@ -148,17 +148,17 @@ void main() {
     group('performance monitoring', () {
       test('应该能够记录和获取性能指标', () {
         // 清除之前的指标
-        ZephyrPerformanceUtils.clearMetrics();
+        VelocityPerformanceUtils.clearMetrics();
 
         // 开始监控
-        ZephyrPerformanceUtils.startMonitoring();
+        VelocityPerformanceUtils.startMonitoring();
 
         // 记录一些指标
-        ZephyrPerformanceUtils.recordMetric('test_metric', 10.0);
-        ZephyrPerformanceUtils.recordMetric('test_metric', 20.0);
-        ZephyrPerformanceUtils.recordMetric('test_metric', 30.0);
+        VelocityPerformanceUtils.recordMetric('test_metric', 10.0);
+        VelocityPerformanceUtils.recordMetric('test_metric', 20.0);
+        VelocityPerformanceUtils.recordMetric('test_metric', 30.0);
 
-        final report = ZephyrPerformanceUtils.getPerformanceReport();
+        final report = VelocityPerformanceUtils.getPerformanceReport();
         
         expect(report['isMonitoring'], isA<bool>());
         expect(report['metrics'], isA<Map>());
@@ -175,15 +175,15 @@ void main() {
       });
 
       test('应该限制指标数据点数量', () {
-        ZephyrPerformanceUtils.clearMetrics();
-        ZephyrPerformanceUtils.startMonitoring();
+        VelocityPerformanceUtils.clearMetrics();
+        VelocityPerformanceUtils.startMonitoring();
 
         // 记录超过100个数据点
-        for (int i = 0; i < 150; i++) {
-          ZephyrPerformanceUtils.recordMetric('test_metric', i.toDouble());
+        for (var i = 0; i < 150; i++) {
+          VelocityPerformanceUtils.recordMetric('test_metric', i.toDouble());
         }
 
-        final report = ZephyrPerformanceUtils.getPerformanceReport();
+        final report = VelocityPerformanceUtils.getPerformanceReport();
         final metric = report['metrics']['test_metric'];
         
         expect(metric['count'], 100); // 应该只保留最近的100个
@@ -192,17 +192,17 @@ void main() {
 
     group('frame rate monitoring', () {
       test('应该能够监控帧率', () async {
-        ZephyrPerformanceUtils.clearMetrics();
+        VelocityPerformanceUtils.clearMetrics();
         
         // 测试启动和停止帧率监控不抛出异常
-        ZephyrPerformanceUtils.startFrameRateMonitoring();
+        VelocityPerformanceUtils.startFrameRateMonitoring();
         
         // 等待一些帧
         await Future.delayed(const Duration(milliseconds: 100));
         
-        ZephyrPerformanceUtils.stopFrameRateMonitoring();
+        VelocityPerformanceUtils.stopFrameRateMonitoring();
         
-        final report = ZephyrPerformanceUtils.getPerformanceReport();
+        final report = VelocityPerformanceUtils.getPerformanceReport();
         
         // 在测试环境中，帧率监控可能无法获取真实数据
         // 我们主要验证监控功能能够正常启动和停止而不抛出异常
@@ -212,8 +212,8 @@ void main() {
     });
 
     group('optimized widgets', () {
-      testWidgets('ZephyrOptimizedWidget 应该测量构建时间', (tester) async {
-        int buildCount = 0;
+      testWidgets('VelocityOptimizedWidget 应该测量构建时间', (tester) async {
+        var buildCount = 0;
         
         await tester.pumpWidget(
           MaterialApp(
@@ -229,30 +229,30 @@ void main() {
         expect(find.byType(_TestOptimizedWidget), findsOneWidget);
       });
 
-      testWidgets('ZephyrPerformanceMonitor 应该正确显示性能覆盖层', (tester) async {
+      testWidgets('VelocityPerformanceMonitor 应该正确显示性能覆盖层', (tester) async {
         await tester.pumpWidget(
           MaterialApp(
-            home: ZephyrPerformanceMonitor(
+            home: VelocityPerformanceMonitor(
               showOverlay: true,
               child: Container(),
             ),
           ),
         );
 
-        expect(find.byType(ZephyrPerformanceMonitor), findsOneWidget);
+        expect(find.byType(VelocityPerformanceMonitor), findsOneWidget);
       });
     });
   });
 }
 
 /// 测试用的优化组件
-class _TestOptimizedWidget extends ZephyrOptimizedWidget {
-  final VoidCallback onBuild;
+class _TestOptimizedWidget extends VelocityOptimizedWidget {
 
   const _TestOptimizedWidget({
     required this.onBuild,
     Key? key,
   }) : super(key: key);
+  final VoidCallback onBuild;
 
   @override
   Widget buildOptimized(BuildContext context) {

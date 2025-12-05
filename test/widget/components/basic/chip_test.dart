@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/basic/chip/chip.dart';
-import 'package:zephyr_ui/src/components/basic/chip/chip_theme.dart';
-import 'package:zephyr_ui/src/core/theme/theme_data.dart';
+import 'package:velocity_ui/src/components/basic/chip/chip.dart';
+import 'package:velocity_ui/src/components/basic/chip/chip_theme.dart';
+import 'package:velocity_ui/src/core/theme/theme_data.dart';
 
 void main() {
-  group('ZephyrChip Widget Tests', () {
+  group('VelocityChip Widget Tests', () {
     late final ThemeData theme;
 
     setUpAll(() {
-      final zephyrTheme = ZephyrThemeData.light();
+      final velocityTheme = VelocityThemeData.light();
       theme = ThemeData(
-        brightness: zephyrTheme.brightness,
-        primaryColor: zephyrTheme.primaryColor,
+        brightness: velocityTheme.brightness,
+        primaryColor: velocityTheme.primaryColor,
       );
     });
 
@@ -22,14 +22,14 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrChip(
+            body: VelocityChip(
               label: 'Standard Chip',
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(find.text('Standard Chip'), findsOneWidget);
     });
 
@@ -39,7 +39,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrChip.choice(
+            body: VelocityChip.choice(
               label: 'Choice Chip',
               selected: true,
             ),
@@ -47,7 +47,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(find.text('Choice Chip'), findsOneWidget);
     });
 
@@ -57,7 +57,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrChip.filter(
+            body: VelocityChip.filter(
               label: 'Filter Chip',
               selected: true,
             ),
@@ -65,7 +65,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(find.text('Filter Chip'), findsOneWidget);
       expect(find.byIcon(Icons.check), findsOneWidget);
     });
@@ -76,7 +76,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrChip.input(
+            body: VelocityChip.input(
               label: 'Input Chip',
               onDeleted: () {},
             ),
@@ -84,7 +84,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(find.text('Input Chip'), findsOneWidget);
       expect(find.byIcon(Icons.close), findsOneWidget);
     });
@@ -94,14 +94,14 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrChip.action(
+            body: VelocityChip.action(
               label: 'Action Chip',
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(find.text('Action Chip'), findsOneWidget);
     });
 
@@ -110,7 +110,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrChip(
+            body: VelocityChip(
               label: 'With Avatar',
               avatar: CircleAvatar(
                 backgroundColor: Colors.blue,
@@ -121,7 +121,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(find.text('With Avatar'), findsOneWidget);
       expect(find.byType(CircleAvatar), findsOneWidget);
     });
@@ -132,7 +132,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrChip.input(
+            body: VelocityChip.input(
               label: 'Custom Delete',
               deleteIcon: const Icon(Icons.clear),
               onDeleted: () {},
@@ -141,7 +141,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(find.text('Custom Delete'), findsOneWidget);
       expect(find.byIcon(Icons.clear), findsOneWidget);
     });
@@ -151,7 +151,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrChip(
+            body: VelocityChip(
               label: 'Disabled',
               enabled: false,
             ),
@@ -159,18 +159,18 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(find.text('Disabled'), findsOneWidget);
     });
 
     testWidgets('handles chip press callback', (WidgetTester tester) async {
-      bool pressed = false;
+      var pressed = false;
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrChip(
+            body: VelocityChip(
               label: 'Press Me',
               onPressed: () {
                 pressed = true;
@@ -180,10 +180,10 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(pressed, isFalse);
 
-      await tester.tap(find.byType(ZephyrChip));
+      await tester.tap(find.byType(VelocityChip));
       await tester.pump();
 
       expect(pressed, isTrue);
@@ -197,7 +197,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrChip.choice(
+            body: VelocityChip.choice(
               label: 'Choice',
               onSelected: (value) {
                 selected = value;
@@ -207,10 +207,10 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(selected, isNull);
 
-      await tester.tap(find.byType(ZephyrChip));
+      await tester.tap(find.byType(VelocityChip));
       await tester.pump();
 
       expect(selected, isTrue);
@@ -224,7 +224,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrChip.filter(
+            body: VelocityChip.filter(
               label: 'Filter',
               onSelected: (value) {
                 selected = value;
@@ -234,10 +234,10 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(selected, isNull);
 
-      await tester.tap(find.byType(ZephyrChip));
+      await tester.tap(find.byType(VelocityChip));
       await tester.pump();
 
       expect(selected, isTrue);
@@ -245,13 +245,13 @@ void main() {
 
     testWidgets('handles input chip delete callback',
         (WidgetTester tester) async {
-      bool deleted = false;
+      var deleted = false;
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrChip.input(
+            body: VelocityChip.input(
               label: 'Input',
               onDeleted: () {
                 deleted = true;
@@ -261,7 +261,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(deleted, isFalse);
 
       await tester.tap(find.byIcon(Icons.close));
@@ -272,13 +272,13 @@ void main() {
 
     testWidgets('handles action chip press callback',
         (WidgetTester tester) async {
-      bool pressed = false;
+      var pressed = false;
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrChip.action(
+            body: VelocityChip.action(
               label: 'Action',
               onPressed: () {
                 pressed = true;
@@ -288,10 +288,10 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(pressed, isFalse);
 
-      await tester.tap(find.byType(ZephyrChip));
+      await tester.tap(find.byType(VelocityChip));
       await tester.pump();
 
       expect(pressed, isTrue);
@@ -299,9 +299,9 @@ void main() {
 
     testWidgets('does not trigger callbacks when disabled',
         (WidgetTester tester) async {
-      bool pressed = false;
+      var pressed = false;
       bool? selected;
-      bool deleted = false;
+      var deleted = false;
 
       await tester.pumpWidget(
         MaterialApp(
@@ -309,21 +309,21 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                ZephyrChip(
+                VelocityChip(
                   label: 'Disabled Standard',
                   enabled: false,
                   onPressed: () {
                     pressed = true;
                   },
                 ),
-                ZephyrChip.choice(
+                VelocityChip.choice(
                   label: 'Disabled Choice',
                   enabled: false,
                   onSelected: (value) {
                     selected = value;
                   },
                 ),
-                ZephyrChip.input(
+                VelocityChip.input(
                   label: 'Disabled Input',
                   enabled: false,
                   onDeleted: () {
@@ -336,7 +336,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsNWidgets(3));
+      expect(find.byType(VelocityChip), findsNWidgets(3));
 
       await tester.tap(find.text('Disabled Standard'));
       await tester.pump();
@@ -358,7 +358,7 @@ void main() {
           home: const Scaffold(
             body: SizedBox(
               width: 100,
-              child: ZephyrChip(
+              child: VelocityChip(
                 label:
                     'This is a very long chip label that should be truncated',
               ),
@@ -367,7 +367,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(
           find.text('This is a very long chip label that should be truncated'),
           findsOneWidget);
@@ -379,14 +379,14 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrChip(
+            body: VelocityChip(
               label: '🔥 Hot & Spicy!',
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(find.text('🔥 Hot & Spicy!'), findsOneWidget);
     });
 
@@ -395,14 +395,14 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrChip(
+            body: VelocityChip(
               label: '',
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(find.text(''), findsOneWidget);
     });
 
@@ -414,21 +414,21 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                const ZephyrChip(label: 'Standard'),
-                const ZephyrChip.choice(label: 'Choice'),
-                const ZephyrChip.filter(label: 'Filter'),
-                ZephyrChip.input(
+                const VelocityChip(label: 'Standard'),
+                const VelocityChip.choice(label: 'Choice'),
+                const VelocityChip.filter(label: 'Filter'),
+                VelocityChip.input(
                   label: 'Input',
                   onDeleted: () {},
                 ),
-                const ZephyrChip.action(label: 'Action'),
+                const VelocityChip.action(label: 'Action'),
               ],
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsNWidgets(5));
+      expect(find.byType(VelocityChip), findsNWidgets(5));
       expect(find.text('Standard'), findsOneWidget);
       expect(find.text('Choice'), findsOneWidget);
       expect(find.text('Filter'), findsOneWidget);
@@ -437,7 +437,7 @@ void main() {
     });
 
     testWidgets('handles chip with custom theme', (WidgetTester tester) async {
-      final customTheme = ZephyrChipTheme(
+      final customTheme = VelocityChipTheme(
         backgroundColor: Colors.purple,
         selectedBackgroundColor: Colors.deepPurple,
         disabledBackgroundColor: Colors.grey,
@@ -461,7 +461,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrChip(
+            body: VelocityChip(
               label: 'Custom Theme',
               theme: customTheme,
             ),
@@ -469,7 +469,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(find.text('Custom Theme'), findsOneWidget);
     });
 
@@ -479,7 +479,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrChip(
+            body: VelocityChip(
               label: 'Null Values',
               avatar: null,
               deleteIcon: null,
@@ -491,7 +491,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(find.text('Null Values'), findsOneWidget);
     });
 
@@ -501,7 +501,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrChip(
+            body: VelocityChip(
               label: 'Mixed',
               avatar: const Icon(Icons.star),
               selected: true,
@@ -512,7 +512,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(find.text('Mixed'), findsOneWidget);
       expect(find.byIcon(Icons.star), findsOneWidget);
     });
@@ -528,7 +528,7 @@ void main() {
                 const Row(
                   children: [
                     Text('Tags: '),
-                    ZephyrChip(label: 'Flutter'),
+                    VelocityChip(label: 'Flutter'),
                   ],
                 ),
                 Container(
@@ -536,12 +536,12 @@ void main() {
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  child: const ZephyrChip.choice(label: 'Selected'),
+                  child: const VelocityChip.choice(label: 'Selected'),
                 ),
                 const Wrap(
                   children: [
-                    ZephyrChip.filter(label: 'Option 1'),
-                    ZephyrChip.filter(label: 'Option 2'),
+                    VelocityChip.filter(label: 'Option 1'),
+                    VelocityChip.filter(label: 'Option 2'),
                   ],
                 ),
               ],
@@ -550,7 +550,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsNWidgets(4));
+      expect(find.byType(VelocityChip), findsNWidgets(4));
       expect(find.text('Flutter'), findsOneWidget);
       expect(find.text('Selected'), findsOneWidget);
       expect(find.text('Option 1'), findsOneWidget);
@@ -565,7 +565,7 @@ void main() {
           home: Scaffold(
             body: Semantics(
               label: 'Technology tag',
-              child: const ZephyrChip(
+              child: const VelocityChip(
                 label: 'Flutter',
               ),
             ),
@@ -573,12 +573,12 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(find.text('Flutter'), findsOneWidget);
     });
 
     testWidgets('handles chip with zero spacing', (WidgetTester tester) async {
-      final customTheme = ZephyrChipTheme(
+      final customTheme = VelocityChipTheme(
         backgroundColor: Colors.blue,
         selectedBackgroundColor: Colors.blue,
         disabledBackgroundColor: Colors.grey,
@@ -602,7 +602,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrChip(
+            body: VelocityChip(
               label: 'No Spacing',
               avatar: const Icon(Icons.star),
               theme: customTheme,
@@ -611,14 +611,14 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(find.text('No Spacing'), findsOneWidget);
       expect(find.byIcon(Icons.star), findsOneWidget);
     });
 
     testWidgets('handles chip with rectangular border radius',
         (WidgetTester tester) async {
-      const customTheme = ZephyrChipTheme(
+      const customTheme = VelocityChipTheme(
         backgroundColor: Colors.green,
         selectedBackgroundColor: Colors.green,
         disabledBackgroundColor: Colors.grey,
@@ -642,7 +642,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrChip(
+            body: VelocityChip(
               label: 'Square',
               theme: customTheme,
             ),
@@ -650,43 +650,43 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(find.text('Square'), findsOneWidget);
     });
   });
 
-  group('ZephyrChipGroup Widget Tests', () {
+  group('VelocityChipGroup Widget Tests', () {
     late final ThemeData theme;
 
     setUpAll(() {
-      final zephyrTheme = ZephyrThemeData.light();
+      final velocityTheme = VelocityThemeData.light();
       theme = ThemeData(
-        brightness: zephyrTheme.brightness,
-        primaryColor: zephyrTheme.primaryColor,
+        brightness: velocityTheme.brightness,
+        primaryColor: velocityTheme.primaryColor,
       );
     });
 
     testWidgets('renders chip group with multiple chips',
         (WidgetTester tester) async {
       final chips = [
-        const ZephyrChipData(label: 'Option 1'),
-        const ZephyrChipData(label: 'Option 2'),
-        const ZephyrChipData(label: 'Option 3'),
+        const VelocityChipData(label: 'Option 1'),
+        const VelocityChipData(label: 'Option 2'),
+        const VelocityChipData(label: 'Option 3'),
       ];
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrChipGroup(
+            body: VelocityChipGroup(
               chips: chips,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrChipGroup), findsOneWidget);
-      expect(find.byType(ZephyrChip), findsNWidgets(3));
+      expect(find.byType(VelocityChipGroup), findsOneWidget);
+      expect(find.byType(VelocityChip), findsNWidgets(3));
       expect(find.text('Option 1'), findsOneWidget);
       expect(find.text('Option 2'), findsOneWidget);
       expect(find.text('Option 3'), findsOneWidget);
@@ -695,16 +695,16 @@ void main() {
     testWidgets('handles chip group with pre-selected chips',
         (WidgetTester tester) async {
       final chips = [
-        const ZephyrChipData(label: 'Option 1'),
-        const ZephyrChipData(label: 'Option 2'),
-        const ZephyrChipData(label: 'Option 3'),
+        const VelocityChipData(label: 'Option 1'),
+        const VelocityChipData(label: 'Option 2'),
+        const VelocityChipData(label: 'Option 3'),
       ];
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrChipGroup(
+            body: VelocityChipGroup(
               chips: chips,
               selectedChips: const [0, 2],
             ),
@@ -712,16 +712,16 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChipGroup), findsOneWidget);
-      expect(find.byType(ZephyrChip), findsNWidgets(3));
+      expect(find.byType(VelocityChipGroup), findsOneWidget);
+      expect(find.byType(VelocityChip), findsNWidgets(3));
     });
 
     testWidgets('handles chip group selection callback',
         (WidgetTester tester) async {
       final chips = [
-        const ZephyrChipData(label: 'Option 1'),
-        const ZephyrChipData(label: 'Option 2'),
-        const ZephyrChipData(label: 'Option 3'),
+        const VelocityChipData(label: 'Option 1'),
+        const VelocityChipData(label: 'Option 2'),
+        const VelocityChipData(label: 'Option 3'),
       ];
 
       List<int>? selectedChips;
@@ -730,7 +730,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrChipGroup(
+            body: VelocityChipGroup(
               chips: chips,
               onSelectionChanged: (selection) {
                 selectedChips = selection;
@@ -740,7 +740,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChipGroup), findsOneWidget);
+      expect(find.byType(VelocityChipGroup), findsOneWidget);
       expect(selectedChips, isNull);
 
       await tester.tap(find.text('Option 1'));
@@ -754,9 +754,9 @@ void main() {
     testWidgets('handles chip group with multi-select',
         (WidgetTester tester) async {
       final chips = [
-        const ZephyrChipData(label: 'Option 1'),
-        const ZephyrChipData(label: 'Option 2'),
-        const ZephyrChipData(label: 'Option 3'),
+        const VelocityChipData(label: 'Option 1'),
+        const VelocityChipData(label: 'Option 2'),
+        const VelocityChipData(label: 'Option 3'),
       ];
 
       List<int>? selectedChips;
@@ -765,7 +765,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrChipGroup(
+            body: VelocityChipGroup(
               chips: chips,
               multiSelect: true,
               onSelectionChanged: (selection) {
@@ -776,7 +776,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChipGroup), findsOneWidget);
+      expect(find.byType(VelocityChipGroup), findsOneWidget);
       expect(selectedChips, isNull);
 
       await tester.tap(find.text('Option 1'));
@@ -797,9 +797,9 @@ void main() {
     testWidgets('handles chip group with single select',
         (WidgetTester tester) async {
       final chips = [
-        const ZephyrChipData(label: 'Option 1'),
-        const ZephyrChipData(label: 'Option 2'),
-        const ZephyrChipData(label: 'Option 3'),
+        const VelocityChipData(label: 'Option 1'),
+        const VelocityChipData(label: 'Option 2'),
+        const VelocityChipData(label: 'Option 3'),
       ];
 
       List<int>? selectedChips;
@@ -808,7 +808,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrChipGroup(
+            body: VelocityChipGroup(
               chips: chips,
               multiSelect: false,
               onSelectionChanged: (selection) {
@@ -819,7 +819,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChipGroup), findsOneWidget);
+      expect(find.byType(VelocityChipGroup), findsOneWidget);
       expect(selectedChips, isNull);
 
       await tester.tap(find.text('Option 1'));
@@ -839,9 +839,9 @@ void main() {
     testWidgets('handles chip group with disabled chips',
         (WidgetTester tester) async {
       final chips = [
-        const ZephyrChipData(label: 'Enabled'),
-        const ZephyrChipData(label: 'Disabled', enabled: false),
-        const ZephyrChipData(label: 'Enabled'),
+        const VelocityChipData(label: 'Enabled'),
+        const VelocityChipData(label: 'Disabled', enabled: false),
+        const VelocityChipData(label: 'Enabled'),
       ];
 
       List<int>? selectedChips;
@@ -850,7 +850,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrChipGroup(
+            body: VelocityChipGroup(
               chips: chips,
               onSelectionChanged: (selection) {
                 selectedChips = selection;
@@ -860,7 +860,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChipGroup), findsOneWidget);
+      expect(find.byType(VelocityChipGroup), findsOneWidget);
       expect(selectedChips, isNull);
 
       await tester.tap(find.text('Disabled').first);
@@ -878,44 +878,44 @@ void main() {
 
     testWidgets('handles chip group with avatars', (WidgetTester tester) async {
       final chips = [
-        const ZephyrChipData(
+        const VelocityChipData(
           label: 'With Avatar',
           avatar: CircleAvatar(
             backgroundColor: Colors.blue,
             child: Text('A'),
           ),
         ),
-        const ZephyrChipData(label: 'Without Avatar'),
+        const VelocityChipData(label: 'Without Avatar'),
       ];
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrChipGroup(
+            body: VelocityChipGroup(
               chips: chips,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrChipGroup), findsOneWidget);
-      expect(find.byType(ZephyrChip), findsNWidgets(2));
+      expect(find.byType(VelocityChipGroup), findsOneWidget);
+      expect(find.byType(VelocityChip), findsNWidgets(2));
       expect(find.byType(CircleAvatar), findsOneWidget);
     });
 
     testWidgets('handles chip group with custom spacing',
         (WidgetTester tester) async {
       final chips = [
-        const ZephyrChipData(label: 'Chip 1'),
-        const ZephyrChipData(label: 'Chip 2'),
+        const VelocityChipData(label: 'Chip 1'),
+        const VelocityChipData(label: 'Chip 2'),
       ];
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrChipGroup(
+            body: VelocityChipGroup(
               chips: chips,
               spacing: 16.0,
               runSpacing: 12.0,
@@ -924,17 +924,17 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChipGroup), findsOneWidget);
-      expect(find.byType(ZephyrChip), findsNWidgets(2));
+      expect(find.byType(VelocityChipGroup), findsOneWidget);
+      expect(find.byType(VelocityChip), findsNWidgets(2));
     });
 
     testWidgets('handles chip group with custom theme',
         (WidgetTester tester) async {
       final chips = [
-        const ZephyrChipData(label: 'Custom'),
+        const VelocityChipData(label: 'Custom'),
       ];
 
-      final customTheme = ZephyrChipTheme(
+      final customTheme = VelocityChipTheme(
         backgroundColor: Colors.purple,
         selectedBackgroundColor: Colors.deepPurple,
         disabledBackgroundColor: Colors.grey,
@@ -958,7 +958,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrChipGroup(
+            body: VelocityChipGroup(
               chips: chips,
               theme: customTheme,
             ),
@@ -966,8 +966,8 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChipGroup), findsOneWidget);
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChipGroup), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(find.text('Custom'), findsOneWidget);
     });
 
@@ -977,28 +977,28 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrChipGroup(
+            body: VelocityChipGroup(
               chips: [],
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrChipGroup), findsOneWidget);
-      expect(find.byType(ZephyrChip), findsNothing);
+      expect(find.byType(VelocityChipGroup), findsOneWidget);
+      expect(find.byType(VelocityChip), findsNothing);
     });
 
     testWidgets('handles chip group with null values',
         (WidgetTester tester) async {
       final chips = [
-        const ZephyrChipData(label: 'Test'),
+        const VelocityChipData(label: 'Test'),
       ];
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrChipGroup(
+            body: VelocityChipGroup(
               chips: chips,
               selectedChips: const [],
               multiSelect: false,
@@ -1009,8 +1009,8 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrChipGroup), findsOneWidget);
-      expect(find.byType(ZephyrChip), findsOneWidget);
+      expect(find.byType(VelocityChipGroup), findsOneWidget);
+      expect(find.byType(VelocityChip), findsOneWidget);
       expect(find.text('Test'), findsOneWidget);
     });
   });

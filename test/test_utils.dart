@@ -246,14 +246,14 @@ class PerformanceTest {
     int measuredRuns = 10,
   }) async {
     // 预热
-    for (int i = 0; i < warmupRuns; i++) {
+    for (var i = 0; i < warmupRuns; i++) {
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
     }
 
     // 测量
     final stopwatch = Stopwatch()..start();
-    for (int i = 0; i < measuredRuns; i++) {
+    for (var i = 0; i < measuredRuns; i++) {
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
     }

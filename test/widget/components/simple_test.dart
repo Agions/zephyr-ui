@@ -8,7 +8,7 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: Container(
-            child: Text('Test'),
+            child: const Text('Test'),
           ),
         ),
       ),

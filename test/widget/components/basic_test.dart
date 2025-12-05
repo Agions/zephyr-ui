@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/zephyr_ui.dart';
+import 'package:velocity_ui/velocity_ui.dart';
 
 void main() {
-  group('ZephyrUI Basic Components Test', () {
-    testWidgets('ZephyrTheme loads correctly', (WidgetTester tester) async {
+  group('VelocityUI Basic Components Test', () {
+    testWidgets('VelocityTheme loads correctly', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrThemeData.light(),
+              VelocityThemeData.light(),
             ],
           ),
           home: const Scaffold(
@@ -23,17 +23,17 @@ void main() {
       expect(find.text('Test Theme'), findsOneWidget);
     });
 
-    testWidgets('ZephyrButton renders', (WidgetTester tester) async {
+    testWidgets('VelocityButton renders', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData(
             extensions: [
-              ZephyrThemeData.light(),
+              VelocityThemeData.light(),
             ],
           ),
           home: const Scaffold(
             body: Center(
-              child: ZephyrButton(
+              child: VelocityButton(
                 onPressed: () {},
                 child: Text('Test Button'),
               ),

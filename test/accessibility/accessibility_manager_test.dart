@@ -1,37 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:zephyr_ui/src/core/accessibility/accessibility_manager.dart';
-import 'package:zephyr_ui/src/core/accessibility/accessibility_types.dart';
-import 'package:zephyr_ui/src/core/accessibility/accessibility_checker.dart';
-import 'package:zephyr_ui/src/core/accessibility/accessibility_utils.dart';
+import 'package:velocity_ui/src/core/accessibility/accessibility_manager.dart';
+import 'package:velocity_ui/src/core/accessibility/accessibility_types.dart';
+import 'package:velocity_ui/src/core/accessibility/accessibility_checker.dart';
+import 'package:velocity_ui/src/core/accessibility/accessibility_utils.dart';
 
 // Mock classes
-class MockAccessibilityChecker extends Mock implements ZephyrAccessibilityChecker {}
+class MockAccessibilityChecker extends Mock implements VelocityAccessibilityChecker {}
 
 class MockBuildContext extends Mock implements BuildContext {}
 
 void main() {
-  group('ZephyrAccessibilityManager', () {
-    late ZephyrAccessibilityManager manager;
+  group('VelocityAccessibilityManager', () {
+    late VelocityAccessibilityManager manager;
     late MockAccessibilityChecker mockChecker;
-    late ZephyrAccessibilityManagerConfig defaultConfig;
+    late VelocityAccessibilityManagerConfig defaultConfig;
 
     setUp(() {
       mockChecker = MockAccessibilityChecker();
-      defaultConfig = ZephyrAccessibilityManagerConfig(
-        defaultConfig: ZephyrAccessibilityConfig(),
+      defaultConfig = VelocityAccessibilityManagerConfig(
+        defaultConfig: VelocityAccessibilityConfig(),
       );
       
       // Mock the checker methods
       when(() => mockChecker.checkComponent(any(), componentName: any(named: 'componentName')))
-          .thenAnswer((_) async => ZephyrAccessibilityTestResult(
+          .thenAnswer((_) async => VelocityAccessibilityTestResult(
                 testedAt: DateTime.now(),
                 component: 'TestComponent',
-                passedChecks: [ZephyrAccessibilityCheck.semanticLabel],
+                passedChecks: [VelocityAccessibilityCheck.semanticLabel],
                 violations: [],
                 score: 1.0,
-                complianceStatus: ZephyrAccessibilityComplianceStatus.fullyCompliant,
+                complianceStatus: VelocityAccessibilityComplianceStatus.fullyCompliant,
               ));
       
       when(() => mockChecker.checkApp(any()))
@@ -43,7 +43,7 @@ void main() {
       when(() => mockChecker.getRecommendations(any()))
           .thenReturn([]);
       
-      manager = ZephyrAccessibilityManager.instance;
+      manager = VelocityAccessibilityManager.instance;
     });
 
     tearDown(() {
@@ -59,13 +59,13 @@ void main() {
       });
 
       test('should initialize with custom config', () async {
-        final customConfig = ZephyrAccessibilityConfig(
+        final customConfig = VelocityAccessibilityConfig(
           enabled: false,
           textScaleFactor: 1.5,
           highContrast: true,
         );
         
-        final config = ZephyrAccessibilityManagerConfig(
+        final config = VelocityAccessibilityManagerConfig(
           defaultConfig: customConfig,
         );
         
@@ -83,13 +83,13 @@ void main() {
       });
 
       test('should update configuration', () {
-        final newConfig = ZephyrAccessibilityConfig(
+        final newConfig = VelocityAccessibilityConfig(
           enabled: false,
           textScaleFactor: 2.0,
         );
         
         var configUpdated = false;
-        ZephyrAccessibilityConfig? receivedConfig;
+        VelocityAccessibilityConfig? receivedConfig;
         
         manager.addConfigListener((config) {
           configUpdated = true;
@@ -104,32 +104,32 @@ void main() {
       });
 
       test('should enable feature', () {
-        manager.enableFeature(ZephyrAccessibilityFeature.screenReader);
+        manager.enableFeature(VelocityAccessibilityFeature.screenReader);
         
-        expect(manager.isFeatureEnabled(ZephyrAccessibilityFeature.screenReader), isTrue);
+        expect(manager.isFeatureEnabled(VelocityAccessibilityFeature.screenReader), isTrue);
       });
 
       test('should disable feature', () {
-        manager.enableFeature(ZephyrAccessibilityFeature.screenReader);
-        manager.disableFeature(ZephyrAccessibilityFeature.screenReader);
+        manager.enableFeature(VelocityAccessibilityFeature.screenReader);
+        manager.disableFeature(VelocityAccessibilityFeature.screenReader);
         
-        expect(manager.isFeatureEnabled(ZephyrAccessibilityFeature.screenReader), isFalse);
+        expect(manager.isFeatureEnabled(VelocityAccessibilityFeature.screenReader), isFalse);
       });
 
       test('should check feature enabled state', () {
-        expect(manager.isFeatureEnabled(ZephyrAccessibilityFeature.screenReader), isFalse);
+        expect(manager.isFeatureEnabled(VelocityAccessibilityFeature.screenReader), isFalse);
         
-        manager.enableFeature(ZephyrAccessibilityFeature.screenReader);
-        expect(manager.isFeatureEnabled(ZephyrAccessibilityFeature.screenReader), isTrue);
+        manager.enableFeature(VelocityAccessibilityFeature.screenReader);
+        expect(manager.isFeatureEnabled(VelocityAccessibilityFeature.screenReader), isTrue);
         
-        manager.disableFeature(ZephyrAccessibilityFeature.screenReader);
-        expect(manager.isFeatureEnabled(ZephyrAccessibilityFeature.screenReader), isFalse);
+        manager.disableFeature(VelocityAccessibilityFeature.screenReader);
+        expect(manager.isFeatureEnabled(VelocityAccessibilityFeature.screenReader), isFalse);
       });
 
       test('should reset to defaults', () {
         final originalConfig = manager.currentConfig;
         
-        manager.updateConfig(ZephyrAccessibilityConfig(
+        manager.updateConfig(VelocityAccessibilityConfig(
           enabled: false,
           textScaleFactor: 2.0,
         ));
@@ -156,14 +156,14 @@ void main() {
         expect(result.passedChecks, isNotEmpty);
         expect(result.violations, isEmpty);
         expect(result.score, equals(1.0));
-        expect(result.complianceStatus, equals(ZephyrAccessibilityComplianceStatus.fullyCompliant));
+        expect(result.complianceStatus, equals(VelocityAccessibilityComplianceStatus.fullyCompliant));
       });
 
       test('should check app accessibility', () async {
         final context = MockBuildContext();
         final results = await manager.checkApp(context);
         
-        expect(results, isA<List<ZephyrAccessibilityTestResult>>());
+        expect(results, isA<List<VelocityAccessibilityTestResult>>());
       });
 
       test('should generate accessibility report', () async {
@@ -186,14 +186,14 @@ void main() {
 
       test('should notify config listeners', () {
         var listenerCalled = false;
-        ZephyrAccessibilityConfig? receivedConfig;
+        VelocityAccessibilityConfig? receivedConfig;
         
         manager.addConfigListener((config) {
           listenerCalled = true;
           receivedConfig = config;
         });
         
-        final newConfig = ZephyrAccessibilityConfig(
+        final newConfig = VelocityAccessibilityConfig(
           enabled: false,
         );
         
@@ -206,14 +206,14 @@ void main() {
       test('should remove config listener', () {
         var listenerCalled = false;
         
-        void listener(ZephyrAccessibilityConfig config) {
+        void listener(VelocityAccessibilityConfig config) {
           listenerCalled = true;
         }
         
         manager.addConfigListener(listener);
         manager.removeConfigListener(listener);
         
-        manager.updateConfig(ZephyrAccessibilityConfig(
+        manager.updateConfig(VelocityAccessibilityConfig(
           enabled: false,
         ));
         
@@ -309,10 +309,10 @@ void main() {
         expect(manager.currentConfig.textScaleFactor, equals(2.0));
         expect(manager.currentConfig.highContrast, equals(true));
         expect(manager.currentConfig.reduceMotion, equals(true));
-        expect(manager.currentConfig.enabledFeatures, contains(ZephyrAccessibilityFeature.screenReader));
-        expect(manager.currentConfig.enabledFeatures, contains(ZephyrAccessibilityFeature.keyboardNavigation));
-        expect(manager.currentConfig.disabledChecks, contains(ZephyrAccessibilityCheck.semanticLabel));
-        expect(manager.currentConfig.keyboardNavigationMode, equals(ZephyrKeyboardNavigationMode.fullKeyboard));
+        expect(manager.currentConfig.enabledFeatures, contains(VelocityAccessibilityFeature.screenReader));
+        expect(manager.currentConfig.enabledFeatures, contains(VelocityAccessibilityFeature.keyboardNavigation));
+        expect(manager.currentConfig.disabledChecks, contains(VelocityAccessibilityCheck.semanticLabel));
+        expect(manager.currentConfig.keyboardNavigationMode, equals(VelocityKeyboardNavigationMode.fullKeyboard));
       });
 
       test('should handle invalid import data', () {
@@ -337,7 +337,7 @@ void main() {
 
       test('should apply accessibility to theme', () {
         final theme = ThemeData.light();
-        final accessibilityConfig = ZephyrAccessibilityConfig(
+        final accessibilityConfig = VelocityAccessibilityConfig(
           highContrast: true,
           textScaleFactor: 1.5,
           reduceMotion: true,
@@ -407,106 +407,106 @@ void main() {
 
     group('Accessibility Types', () {
       test('should have all required features', () {
-        expect(ZephyrAccessibilityFeature.values, contains(ZephyrAccessibilityFeature.screenReader));
-        expect(ZephyrAccessibilityFeature.values, contains(ZephyrAccessibilityFeature.keyboardNavigation));
-        expect(ZephyrAccessibilityFeature.values, contains(ZephyrAccessibilityFeature.highContrast));
-        expect(ZephyrAccessibilityFeature.values, contains(ZephyrAccessibilityFeature.textScaling));
-        expect(ZephyrAccessibilityFeature.values, contains(ZephyrAccessibilityFeature.colorBlind));
-        expect(ZephyrAccessibilityFeature.values, contains(ZephyrAccessibilityFeature.reduceMotion));
-        expect(ZephyrAccessibilityFeature.values, contains(ZephyrAccessibilityFeature.largeText));
-        expect(ZephyrAccessibilityFeature.values, contains(ZephyrAccessibilityFeature.voiceControl));
-        expect(ZephyrAccessibilityFeature.values, contains(ZephyrAccessibilityFeature.switchControl));
-        expect(ZephyrAccessibilityFeature.values, contains(ZephyrAccessibilityFeature.fontAdjustment));
+        expect(VelocityAccessibilityFeature.values, contains(VelocityAccessibilityFeature.screenReader));
+        expect(VelocityAccessibilityFeature.values, contains(VelocityAccessibilityFeature.keyboardNavigation));
+        expect(VelocityAccessibilityFeature.values, contains(VelocityAccessibilityFeature.highContrast));
+        expect(VelocityAccessibilityFeature.values, contains(VelocityAccessibilityFeature.textScaling));
+        expect(VelocityAccessibilityFeature.values, contains(VelocityAccessibilityFeature.colorBlind));
+        expect(VelocityAccessibilityFeature.values, contains(VelocityAccessibilityFeature.reduceMotion));
+        expect(VelocityAccessibilityFeature.values, contains(VelocityAccessibilityFeature.largeText));
+        expect(VelocityAccessibilityFeature.values, contains(VelocityAccessibilityFeature.voiceControl));
+        expect(VelocityAccessibilityFeature.values, contains(VelocityAccessibilityFeature.switchControl));
+        expect(VelocityAccessibilityFeature.values, contains(VelocityAccessibilityFeature.fontAdjustment));
       });
 
       test('should have all required checks', () {
-        expect(ZephyrAccessibilityCheck.values, contains(ZephyrAccessibilityCheck.semanticLabel));
-        expect(ZephyrAccessibilityCheck.values, contains(ZephyrAccessibilityCheck.focusManagement));
-        expect(ZephyrAccessibilityCheck.values, contains(ZephyrAccessibilityCheck.keyboardNavigation));
-        expect(ZephyrAccessibilityCheck.values, contains(ZephyrAccessibilityCheck.colorContrast));
-        expect(ZephyrAccessibilityCheck.values, contains(ZephyrAccessibilityCheck.textReadability));
-        expect(ZephyrAccessibilityCheck.values, contains(ZephyrAccessibilityCheck.interactiveElementSize));
-        expect(ZephyrAccessibilityCheck.values, contains(ZephyrAccessibilityCheck.animationAccessibility));
-        expect(ZephyrAccessibilityCheck.values, contains(ZephyrAccessibilityCheck.formLabels));
-        expect(ZephyrAccessibilityCheck.values, contains(ZephyrAccessibilityCheck.errorMessage));
-        expect(ZephyrAccessibilityCheck.values, contains(ZephyrAccessibilityCheck.stateChangeNotification));
-        expect(ZephyrAccessibilityCheck.values, contains(ZephyrAccessibilityCheck.orientationAwareness));
-        expect(ZephyrAccessibilityCheck.values, contains(ZephyrAccessibilityCheck.touchTargetSize));
+        expect(VelocityAccessibilityCheck.values, contains(VelocityAccessibilityCheck.semanticLabel));
+        expect(VelocityAccessibilityCheck.values, contains(VelocityAccessibilityCheck.focusManagement));
+        expect(VelocityAccessibilityCheck.values, contains(VelocityAccessibilityCheck.keyboardNavigation));
+        expect(VelocityAccessibilityCheck.values, contains(VelocityAccessibilityCheck.colorContrast));
+        expect(VelocityAccessibilityCheck.values, contains(VelocityAccessibilityCheck.textReadability));
+        expect(VelocityAccessibilityCheck.values, contains(VelocityAccessibilityCheck.interactiveElementSize));
+        expect(VelocityAccessibilityCheck.values, contains(VelocityAccessibilityCheck.animationAccessibility));
+        expect(VelocityAccessibilityCheck.values, contains(VelocityAccessibilityCheck.formLabels));
+        expect(VelocityAccessibilityCheck.values, contains(VelocityAccessibilityCheck.errorMessage));
+        expect(VelocityAccessibilityCheck.values, contains(VelocityAccessibilityCheck.stateChangeNotification));
+        expect(VelocityAccessibilityCheck.values, contains(VelocityAccessibilityCheck.orientationAwareness));
+        expect(VelocityAccessibilityCheck.values, contains(VelocityAccessibilityCheck.touchTargetSize));
       });
 
       test('should have all required compliance statuses', () {
-        expect(ZephyrAccessibilityComplianceStatus.values, contains(ZephyrAccessibilityComplianceStatus.fullyCompliant));
-        expect(ZephyrAccessibilityComplianceStatus.values, contains(ZephyrAccessibilityComplianceStatus.partiallyCompliant));
-        expect(ZephyrAccessibilityComplianceStatus.values, contains(ZephyrAccessibilityComplianceStatus.nonCompliant));
-        expect(ZephyrAccessibilityComplianceStatus.values, contains(ZephyrAccessibilityComplianceStatus.needsImprovement));
+        expect(VelocityAccessibilityComplianceStatus.values, contains(VelocityAccessibilityComplianceStatus.fullyCompliant));
+        expect(VelocityAccessibilityComplianceStatus.values, contains(VelocityAccessibilityComplianceStatus.partiallyCompliant));
+        expect(VelocityAccessibilityComplianceStatus.values, contains(VelocityAccessibilityComplianceStatus.nonCompliant));
+        expect(VelocityAccessibilityComplianceStatus.values, contains(VelocityAccessibilityComplianceStatus.needsImprovement));
       });
 
       test('should have all required severity levels', () {
-        expect(ZephyrAccessibilitySeverity.values, contains(ZephyrAccessibilitySeverity.minor));
-        expect(ZephyrAccessibilitySeverity.values, contains(ZephyrAccessibilitySeverity.moderate));
-        expect(ZephyrAccessibilitySeverity.values, contains(ZephyrAccessibilitySeverity.serious));
-        expect(ZephyrAccessibilitySeverity.values, contains(ZephyrAccessibilitySeverity.blocker));
+        expect(VelocityAccessibilitySeverity.values, contains(VelocityAccessibilitySeverity.minor));
+        expect(VelocityAccessibilitySeverity.values, contains(VelocityAccessibilitySeverity.moderate));
+        expect(VelocityAccessibilitySeverity.values, contains(VelocityAccessibilitySeverity.serious));
+        expect(VelocityAccessibilitySeverity.values, contains(VelocityAccessibilitySeverity.blocker));
       });
 
       test('should have all required keyboard navigation modes', () {
-        expect(ZephyrKeyboardNavigationMode.values, contains(ZephyrKeyboardNavigationMode.auto));
-        expect(ZephyrKeyboardNavigationMode.values, contains(ZephyrKeyboardNavigationMode.tabOnly));
-        expect(ZephyrKeyboardNavigationMode.values, contains(ZephyrKeyboardNavigationMode.directional));
-        expect(ZephyrKeyboardNavigationMode.values, contains(ZephyrKeyboardNavigationMode.fullKeyboard));
+        expect(VelocityKeyboardNavigationMode.values, contains(VelocityKeyboardNavigationMode.auto));
+        expect(VelocityKeyboardNavigationMode.values, contains(VelocityKeyboardNavigationMode.tabOnly));
+        expect(VelocityKeyboardNavigationMode.values, contains(VelocityKeyboardNavigationMode.directional));
+        expect(VelocityKeyboardNavigationMode.values, contains(VelocityKeyboardNavigationMode.fullKeyboard));
       });
     });
 
     group('WCAG Standards', () {
       test('should have all required WCAG guidelines', () {
-        expect(ZephyrWCAGGuideline.values, contains(ZephyrWCAGGuideline.perceivable));
-        expect(ZephyrWCAGGuideline.values, contains(ZephyrWCAGGuideline.operable));
-        expect(ZephyrWCAGGuideline.values, contains(ZephyrWCAGGuideline.understandable));
-        expect(ZephyrWCAGGuideline.values, contains(ZephyrWCAGGuideline.robust));
+        expect(VelocityWCAGGuideline.values, contains(VelocityWCAGGuideline.perceivable));
+        expect(VelocityWCAGGuideline.values, contains(VelocityWCAGGuideline.operable));
+        expect(VelocityWCAGGuideline.values, contains(VelocityWCAGGuideline.understandable));
+        expect(VelocityWCAGGuideline.values, contains(VelocityWCAGGuideline.robust));
       });
 
       test('should have all required WCAG levels', () {
-        expect(ZephyrWCAGLevel.values, contains(ZephyrWCAGLevel.a));
-        expect(ZephyrWCAGLevel.values, contains(ZephyrWCAGLevel.aa));
-        expect(ZephyrWCAGLevel.values, contains(ZephyrWCAGLevel.aaa));
+        expect(VelocityWCAGLevel.values, contains(VelocityWCAGLevel.a));
+        expect(VelocityWCAGLevel.values, contains(VelocityWCAGLevel.aa));
+        expect(VelocityWCAGLevel.values, contains(VelocityWCAGLevel.aaa));
       });
 
       test('should have perceivable standards', () {
-        expect(ZephyrWCAGStandards.perceivableStandards, isNotEmpty);
-        expect(ZephyrWCAGStandards.perceivableStandards.length, greaterThan(0));
+        expect(VelocityWCAGStandards.perceivableStandards, isNotEmpty);
+        expect(VelocityWCAGStandards.perceivableStandards.length, greaterThan(0));
       });
 
       test('should have operable standards', () {
-        expect(ZephyrWCAGStandards.operableStandards, isNotEmpty);
-        expect(ZephyrWCAGStandards.operableStandards.length, greaterThan(0));
+        expect(VelocityWCAGStandards.operableStandards, isNotEmpty);
+        expect(VelocityWCAGStandards.operableStandards.length, greaterThan(0));
       });
 
       test('should have understandable standards', () {
-        expect(ZephyrWCAGStandards.understandableStandards, isNotEmpty);
-        expect(ZephyrWCAGStandards.understandableStandards.length, greaterThan(0));
+        expect(VelocityWCAGStandards.understandableStandards, isNotEmpty);
+        expect(VelocityWCAGStandards.understandableStandards.length, greaterThan(0));
       });
 
       test('should have robust standards', () {
-        expect(ZephyrWCAGStandards.robustStandards, isNotEmpty);
-        expect(ZephyrWCAGStandards.robustStandards.length, greaterThan(0));
+        expect(VelocityWCAGStandards.robustStandards, isNotEmpty);
+        expect(VelocityWCAGStandards.robustStandards.length, greaterThan(0));
       });
 
       test('should find standard by ID', () {
-        final standard = ZephyrWCAGStandards.findById('1.4.3');
+        final standard = VelocityWCAGStandards.findById('1.4.3');
         expect(standard, isNotNull);
         expect(standard!.id, equals('1.4.3'));
-        expect(standard.level, equals(ZephyrWCAGLevel.aa));
-        expect(standard.guideline, equals(ZephyrWCAGGuideline.perceivable));
+        expect(standard.level, equals(VelocityWCAGLevel.aa));
+        expect(standard.guideline, equals(VelocityWCAGGuideline.perceivable));
       });
 
       test('should return null for non-existent standard ID', () {
-        final standard = ZephyrWCAGStandards.findById('non.existent');
+        final standard = VelocityWCAGStandards.findById('non.existent');
         expect(standard, isNull);
       });
     });
 
     group('Semantic Data', () {
       test('should create semantic data with default values', () {
-        final semanticData = ZephyrSemanticData();
+        final semanticData = VelocitySemanticData();
         
         expect(semanticData.label, isNull);
         expect(semanticData.hint, isNull);
@@ -517,7 +517,7 @@ void main() {
       });
 
       test('should create semantic data with custom values', () {
-        final semanticData = ZephyrSemanticData(
+        final semanticData = VelocitySemanticData(
           label: 'Test Label',
           hint: 'Test Hint',
           value: 'Test Value',
@@ -535,7 +535,7 @@ void main() {
       });
 
       test('should convert to semantic properties', () {
-        final semanticData = ZephyrSemanticData(
+        final semanticData = VelocitySemanticData(
           label: 'Test Label',
           hint: 'Test Hint',
           value: 'Test Value',
@@ -557,32 +557,32 @@ void main() {
 
     group('Accessibility Violation', () {
       test('should create violation with required fields', () {
-        final violation = ZephyrAccessibilityViolation(
-          check: ZephyrAccessibilityCheck.semanticLabel,
-          severity: ZephyrAccessibilitySeverity.serious,
+        final violation = VelocityAccessibilityViolation(
+          check: VelocityAccessibilityCheck.semanticLabel,
+          severity: VelocityAccessibilitySeverity.serious,
           message: 'Missing semantic label',
         );
         
-        expect(violation.check, equals(ZephyrAccessibilityCheck.semanticLabel));
-        expect(violation.severity, equals(ZephyrAccessibilitySeverity.serious));
+        expect(violation.check, equals(VelocityAccessibilityCheck.semanticLabel));
+        expect(violation.severity, equals(VelocityAccessibilitySeverity.serious));
         expect(violation.message, equals('Missing semantic label'));
       });
 
       test('should create violation with all fields', () {
-        final criterion = ZephyrWCAGStandards.findById('1.3.1')!;
-        final violation = ZephyrAccessibilityViolation(
-          check: ZephyrAccessibilityCheck.semanticLabel,
+        final criterion = VelocityWCAGStandards.findById('1.3.1')!;
+        final violation = VelocityAccessibilityViolation(
+          check: VelocityAccessibilityCheck.semanticLabel,
           criterion: criterion,
-          severity: ZephyrAccessibilitySeverity.serious,
+          severity: VelocityAccessibilitySeverity.serious,
           message: 'Missing semantic label',
           fixSuggestion: 'Add semantic label to the element',
           affectedElement: 'Button',
           location: {'x': 100, 'y': 200},
         );
         
-        expect(violation.check, equals(ZephyrAccessibilityCheck.semanticLabel));
+        expect(violation.check, equals(VelocityAccessibilityCheck.semanticLabel));
         expect(violation.criterion, equals(criterion));
-        expect(violation.severity, equals(ZephyrAccessibilitySeverity.serious));
+        expect(violation.severity, equals(VelocityAccessibilitySeverity.serious));
         expect(violation.message, equals('Missing semantic label'));
         expect(violation.fixSuggestion, equals('Add semantic label to the element'));
         expect(violation.affectedElement, equals('Button'));
@@ -590,9 +590,9 @@ void main() {
       });
 
       test('should convert violation to JSON', () {
-        final violation = ZephyrAccessibilityViolation(
-          check: ZephyrAccessibilityCheck.semanticLabel,
-          severity: ZephyrAccessibilitySeverity.serious,
+        final violation = VelocityAccessibilityViolation(
+          check: VelocityAccessibilityCheck.semanticLabel,
+          severity: VelocityAccessibilitySeverity.serious,
           message: 'Missing semantic label',
         );
         
@@ -607,30 +607,30 @@ void main() {
 
     group('Accessibility Test Result', () {
       test('should create test result with required fields', () {
-        final result = ZephyrAccessibilityTestResult(
+        final result = VelocityAccessibilityTestResult(
           testedAt: DateTime.now(),
           component: 'TestComponent',
-          passedChecks: [ZephyrAccessibilityCheck.semanticLabel],
+          passedChecks: [VelocityAccessibilityCheck.semanticLabel],
           violations: [],
           score: 1.0,
-          complianceStatus: ZephyrAccessibilityComplianceStatus.fullyCompliant,
+          complianceStatus: VelocityAccessibilityComplianceStatus.fullyCompliant,
         );
         
         expect(result.component, equals('TestComponent'));
-        expect(result.passedChecks, contains(ZephyrAccessibilityCheck.semanticLabel));
+        expect(result.passedChecks, contains(VelocityAccessibilityCheck.semanticLabel));
         expect(result.violations, isEmpty);
         expect(result.score, equals(1.0));
-        expect(result.complianceStatus, equals(ZephyrAccessibilityComplianceStatus.fullyCompliant));
+        expect(result.complianceStatus, equals(VelocityAccessibilityComplianceStatus.fullyCompliant));
       });
 
       test('should convert test result to JSON', () {
-        final result = ZephyrAccessibilityTestResult(
+        final result = VelocityAccessibilityTestResult(
           testedAt: DateTime(2023, 1, 1),
           component: 'TestComponent',
-          passedChecks: [ZephyrAccessibilityCheck.semanticLabel],
+          passedChecks: [VelocityAccessibilityCheck.semanticLabel],
           violations: [],
           score: 1.0,
-          complianceStatus: ZephyrAccessibilityComplianceStatus.fullyCompliant,
+          complianceStatus: VelocityAccessibilityComplianceStatus.fullyCompliant,
         );
         
         final json = result.toJson();

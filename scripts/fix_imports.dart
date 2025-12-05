@@ -20,8 +20,8 @@ void main() async {
   final dartFiles = await _findDartFiles(libDir);
   print('📁 找到 ${dartFiles.length} 个 Dart 文件\n');
 
-  int totalChanges = 0;
-  int filesChanged = 0;
+  var totalChanges = 0;
+  var filesChanged = 0;
 
   for (final file in dartFiles) {
     final changes = await _fixImportsInFile(file);
@@ -53,9 +53,9 @@ Future<List<File>> _findDartFiles(Directory directory) async {
 Future<int> _fixImportsInFile(File file) async {
   final content = await file.readAsString();
   final lines = content.split('\n');
-  int changes = 0;
+  var changes = 0;
 
-  for (int i = 0; i < lines.length; i++) {
+  for (var i = 0; i < lines.length; i++) {
     final line = lines[i];
     final newLine = _fixImportLine(line, file.path);
     
@@ -88,7 +88,7 @@ String _fixImportLine(String line, String filePath) {
   final quoteIndex1 = line.indexOf("'");
   final quoteIndex2 = line.indexOf('"');
   
-  int quoteStart = -1;
+  var quoteStart = -1;
   if (quoteIndex1 != -1 && quoteIndex2 != -1) {
     quoteStart = quoteIndex1 < quoteIndex2 ? quoteIndex1 : quoteIndex2;
   } else if (quoteIndex1 != -1) {
@@ -119,7 +119,7 @@ String _fixImportLine(String line, String filePath) {
   final absolutePath = _convertRelativeToAbsolute(relativePath, filePath);
   
   // 构建新的导入语句
-  String newImport = "import '$absolutePath'";
+  var newImport = "import '$absolutePath'";
   if (alias != null) {
     newImport += ' as $alias';
   }
@@ -140,7 +140,7 @@ String _convertRelativeToAbsolute(String relativePath, String currentFilePath) {
   final currentDir = currentRelativePath.substring(0, currentRelativePath.lastIndexOf('/'));
   
   // 处理相对路径
-  List<String> pathParts = currentDir.split('/');
+  var pathParts = currentDir.split('/');
   final relativeParts = relativePath.split('/');
   
   for (final part in relativeParts) {

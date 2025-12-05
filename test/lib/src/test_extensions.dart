@@ -456,7 +456,7 @@ extension WidgetTesterExtensions on WidgetTester {
     
     expect(actual.length, expected.length, reason: reason);
     
-    for (int i = 0; i < expected.length; i++) {
+    for (var i = 0; i < expected.length; i++) {
       expect(actual[i].color, expected[i].color, reason: reason);
       expect(actual[i].blurRadius, closeTo(expected[i].blurRadius, tolerance), reason: reason);
       expect(actual[i].spreadRadius, closeTo(expected[i].spreadRadius, tolerance), reason: reason);
@@ -588,32 +588,32 @@ extension TestWidgetsFlutterBindingExtensions on TestWidgetsFlutterBinding {
 
 /// 测试属性注解
 class TestProperty {
-  final String name;
-  final dynamic value;
   
   const TestProperty(this.name, this.value);
+  final String name;
+  final dynamic value;
 }
 
 /// 测试方法注解
 class TestMethod {
-  final String description;
-  final List<String> tags;
   
   const TestMethod(this.description, [this.tags = const []]);
+  final String description;
+  final List<String> tags;
 }
 
 /// 测试类注解
 class TestClass {
-  final String description;
-  final List<String> tags;
   
   const TestClass(this.description, [this.tags = const []]);
+  final String description;
+  final List<String> tags;
 }
 
 /// 测试分组注解
 class TestGroup {
-  final String name;
-  final List<String> tags;
   
   const TestGroup(this.name, [this.tags = const []]);
+  final String name;
+  final List<String> tags;
 }

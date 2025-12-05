@@ -20,8 +20,8 @@ void main() async {
   final dartFiles = await _findDartFiles(libDir);
   print('📁 检查 ${dartFiles.length} 个 Dart 文件\n');
 
-  int relativeImportCount = 0;
-  int packageImportCount = 0;
+  var relativeImportCount = 0;
+  var packageImportCount = 0;
   final filesWithRelativeImports = <String>[];
 
   for (final file in dartFiles) {

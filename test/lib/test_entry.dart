@@ -36,12 +36,12 @@ class TestConfiguration {
 
 /// 测试套件基类
 abstract class TestSuite {
+  
+  TestSuite(this.name);
   final String name;
   final List<VoidCallback> setUpCallbacks = [];
   final List<VoidCallback> tearDownCallbacks = [];
   final List<VoidCallback> testCallbacks = [];
-  
-  TestSuite(this.name);
   
   /// 添加设置回调
   void addSetUp(VoidCallback callback) {

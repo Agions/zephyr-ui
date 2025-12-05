@@ -1,14 +1,14 @@
 /// Switch组件基础测试
 ///
-/// 测试ZephyrSwitch组件的基本功能
+/// 测试VelocitySwitch组件的基本功能
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/forms/switch/switch.dart';
-import 'package:zephyr_ui/src/components/forms/switch/switch_theme.dart';
-import 'package:zephyr_ui/src/core/constants/enums.dart';
+import 'package:velocity_ui/src/components/forms/switch/switch.dart';
+import 'package:velocity_ui/src/components/forms/switch/switch_theme.dart';
+import 'package:velocity_ui/src/core/constants/enums.dart';
 
 void main() {
-  group('ZephyrSwitch', () {
+  group('VelocitySwitch', () {
     late bool switchValue;
     late ValueChanged<bool>? onChanged;
 
@@ -23,7 +23,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Material(
-            child: ZephyrSwitch(
+            child: VelocitySwitch(
               value: false,
               onChanged: onChanged,
             ),
@@ -31,7 +31,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrSwitch), findsOneWidget);
+      expect(find.byType(VelocitySwitch), findsOneWidget);
       expect(find.byType(GestureDetector), findsOneWidget);
     });
 
@@ -39,7 +39,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Material(
-            child: ZephyrSwitch(
+            child: VelocitySwitch(
               value: false,
               onChanged: onChanged,
             ),
@@ -49,11 +49,11 @@ void main() {
 
       expect(switchValue, isFalse);
 
-      await tester.tap(find.byType(ZephyrSwitch));
+      await tester.tap(find.byType(VelocitySwitch));
       await tester.pumpAndSettle();
       expect(switchValue, isTrue);
 
-      await tester.tap(find.byType(ZephyrSwitch));
+      await tester.tap(find.byType(VelocitySwitch));
       await tester.pumpAndSettle();
       expect(switchValue, isFalse);
     });
@@ -62,7 +62,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Material(
-            child: ZephyrSwitch(
+            child: VelocitySwitch(
               value: false,
               onChanged: null,
             ),
@@ -72,18 +72,18 @@ void main() {
 
       expect(switchValue, isFalse);
 
-      await tester.tap(find.byType(ZephyrSwitch));
+      await tester.tap(find.byType(VelocitySwitch));
       await tester.pumpAndSettle();
 
       expect(switchValue, isFalse);
     });
 
     testWidgets('应该支持不同尺寸', (WidgetTester tester) async {
-      for (final size in ZephyrSize.values) {
+      for (final size in VelocitySize.values) {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrSwitch(
+              child: VelocitySwitch(
                 value: false,
                 onChanged: onChanged,
                 size: size,
@@ -92,16 +92,16 @@ void main() {
           ),
         );
 
-        expect(find.byType(ZephyrSwitch), findsOneWidget);
+        expect(find.byType(VelocitySwitch), findsOneWidget);
       }
     });
 
     testWidgets('应该支持不同变体', (WidgetTester tester) async {
-      for (final variant in ZephyrVariant.values) {
+      for (final variant in VelocityVariant.values) {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrSwitch(
+              child: VelocitySwitch(
                 value: false,
                 onChanged: onChanged,
                 variant: variant,
@@ -110,7 +110,7 @@ void main() {
           ),
         );
 
-        expect(find.byType(ZephyrSwitch), findsOneWidget);
+        expect(find.byType(VelocitySwitch), findsOneWidget);
       }
     });
 
@@ -120,7 +120,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Material(
-            child: ZephyrSwitch(
+            child: VelocitySwitch(
               value: true,
               onChanged: onChanged,
               activeColor: customColor,
@@ -130,11 +130,11 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrSwitch), findsOneWidget);
+      expect(find.byType(VelocitySwitch), findsOneWidget);
     });
 
     testWidgets('应该支持自定义主题', (WidgetTester tester) async {
-      final customTheme = ZephyrSwitchTheme(
+      final customTheme = VelocitySwitchTheme(
         activeColor: Colors.red,
         inactiveColor: Colors.blue,
         thumbColor: Colors.green,
@@ -154,7 +154,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Material(
-            child: ZephyrSwitch(
+            child: VelocitySwitch(
               value: false,
               onChanged: onChanged,
               theme: customTheme,
@@ -163,7 +163,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrSwitch), findsOneWidget);
+      expect(find.byType(VelocitySwitch), findsOneWidget);
     });
 
     testWidgets('应该正确处理焦点', (WidgetTester tester) async {
@@ -172,7 +172,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Material(
-            child: ZephyrSwitch(
+            child: VelocitySwitch(
               value: false,
               onChanged: onChanged,
               focusNode: focusNode,
@@ -193,7 +193,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Material(
-            child: ZephyrSwitch(
+            child: VelocitySwitch(
               value: false,
               onChanged: onChanged,
               focusNode: focusNode,
@@ -212,7 +212,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Material(
-            child: ZephyrSwitch(
+            child: VelocitySwitch(
               value: false,
               onChanged: onChanged,
             ),
@@ -224,7 +224,7 @@ void main() {
       expect(switchValue, isFalse);
 
       // 点击切换状态
-      await tester.tap(find.byType(ZephyrSwitch));
+      await tester.tap(find.byType(VelocitySwitch));
       await tester.pumpAndSettle();
 
       expect(switchValue, isTrue);
@@ -234,12 +234,12 @@ void main() {
     });
   });
 
-  group('ZephyrLabeledSwitch', () {
+  group('VelocityLabeledSwitch', () {
     testWidgets('应该正确渲染带标签的开关', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Material(
-            child: ZephyrLabeledSwitch(
+            child: VelocityLabeledSwitch(
               value: false,
               onChanged: (value) {},
               label: 'Test Label',
@@ -249,18 +249,18 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrLabeledSwitch), findsOneWidget);
+      expect(find.byType(VelocityLabeledSwitch), findsOneWidget);
       expect(find.text('Test Label'), findsOneWidget);
       expect(find.text('Test Description'), findsOneWidget);
-      expect(find.byType(ZephyrSwitch), findsOneWidget);
+      expect(find.byType(VelocitySwitch), findsOneWidget);
     });
 
     testWidgets('应该支持不同的标签位置', (WidgetTester tester) async {
-      for (final position in ZephyrPosition.values) {
+      for (final position in VelocityPosition.values) {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrLabeledSwitch(
+              child: VelocityLabeledSwitch(
                 value: false,
                 onChanged: (value) {},
                 label: 'Test Label',
@@ -270,7 +270,7 @@ void main() {
           ),
         );
 
-        expect(find.byType(ZephyrLabeledSwitch), findsOneWidget);
+        expect(find.byType(VelocityLabeledSwitch), findsOneWidget);
         expect(find.text('Test Label'), findsOneWidget);
       }
     });
@@ -279,7 +279,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Material(
-            child: ZephyrLabeledSwitch(
+            child: VelocityLabeledSwitch(
               value: false,
               onChanged: (value) {},
             ),
@@ -287,8 +287,8 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrLabeledSwitch), findsOneWidget);
-      expect(find.byType(ZephyrSwitch), findsOneWidget);
+      expect(find.byType(VelocityLabeledSwitch), findsOneWidget);
+      expect(find.byType(VelocitySwitch), findsOneWidget);
     });
   });
 }

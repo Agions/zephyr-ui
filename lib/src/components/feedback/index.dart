@@ -1,15 +1,12 @@
-/// 反馈组件模块
-///
-/// 包含各种反馈相关组件，如警告、进度条、对话框、通知等。
+/// VelocityUI 反馈组件
 library feedback;
 
-export 'alert/index.dart';
-export 'modal/index.dart';
-export 'progress/index.dart';
+export 'loading/index.dart';
 export 'toast/index.dart';
-export 'tour/index.dart';
-export 'message/index.dart';
+export 'dialog/index.dart';
+export 'progress/index.dart';
+export 'skeleton/index.dart';
+export 'result/index.dart';
+export 'action_sheet/index.dart';
 export 'notification/index.dart';
 export 'popconfirm/index.dart';
-export 'spin/index.dart';
-export 'backtop/index.dart';

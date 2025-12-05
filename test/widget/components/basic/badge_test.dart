@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/basic/badge/badge.dart';
-import 'package:zephyr_ui/src/core/theme/theme_data.dart';
+import 'package:velocity_ui/src/components/basic/badge/badge.dart';
+import 'package:velocity_ui/src/core/theme/theme_data.dart';
 
 void main() {
-  group('ZephyrBadge Widget Tests', () {
+  group('VelocityBadge Widget Tests', () {
     late ThemeData theme;
 
     setUpAll(() {
-      final zephyrTheme = ZephyrThemeData.light();
+      final velocityTheme = VelocityThemeData.light();
       theme = ThemeData(
-        brightness: zephyrTheme.brightness,
-        primaryColor: zephyrTheme.primaryColor,
+        brightness: velocityTheme.brightness,
+        primaryColor: velocityTheme.primaryColor,
       );
     });
 
@@ -21,14 +21,14 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge(
+            body: VelocityBadge(
               content: 'New',
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsOneWidget);
+      expect(find.byType(VelocityBadge), findsOneWidget);
       expect(find.text('New'), findsOneWidget);
     });
 
@@ -38,14 +38,14 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge.count(
+            body: VelocityBadge.count(
               count: 5,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsOneWidget);
+      expect(find.byType(VelocityBadge), findsOneWidget);
       expect(find.text('5'), findsOneWidget);
     });
 
@@ -55,7 +55,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge.count(
+            body: VelocityBadge.count(
               count: 15,
               maxCount: 9,
             ),
@@ -63,7 +63,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsOneWidget);
+      expect(find.byType(VelocityBadge), findsOneWidget);
       expect(find.text('9+'), findsOneWidget);
     });
 
@@ -72,12 +72,12 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge.dot(),
+            body: VelocityBadge.dot(),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsOneWidget);
+      expect(find.byType(VelocityBadge), findsOneWidget);
       expect(find.byType(SizedBox), findsOneWidget);
     });
 
@@ -88,7 +88,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge(
+            body: VelocityBadge(
               content: 'Custom',
               backgroundColor: customBackgroundColor,
             ),
@@ -96,10 +96,10 @@ void main() {
         ),
       );
 
-      final badgeFinder = find.byType(ZephyrBadge);
+      final badgeFinder = find.byType(VelocityBadge);
       expect(badgeFinder, findsOneWidget);
 
-      final badge = tester.widget<ZephyrBadge>(badgeFinder);
+      final badge = tester.widget<VelocityBadge>(badgeFinder);
       expect(badge.backgroundColor, equals(customBackgroundColor));
     });
 
@@ -110,7 +110,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge(
+            body: VelocityBadge(
               content: 'Custom',
               textColor: customTextColor,
             ),
@@ -118,10 +118,10 @@ void main() {
         ),
       );
 
-      final badgeFinder = find.byType(ZephyrBadge);
+      final badgeFinder = find.byType(VelocityBadge);
       expect(badgeFinder, findsOneWidget);
 
-      final badge = tester.widget<ZephyrBadge>(badgeFinder);
+      final badge = tester.widget<VelocityBadge>(badgeFinder);
       expect(badge.textColor, equals(customTextColor));
     });
 
@@ -132,7 +132,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge(
+            body: VelocityBadge(
               content: 'Custom',
               borderRadius: customBorderRadius,
             ),
@@ -140,10 +140,10 @@ void main() {
         ),
       );
 
-      final badgeFinder = find.byType(ZephyrBadge);
+      final badgeFinder = find.byType(VelocityBadge);
       expect(badgeFinder, findsOneWidget);
 
-      final badge = tester.widget<ZephyrBadge>(badgeFinder);
+      final badge = tester.widget<VelocityBadge>(badgeFinder);
       expect(badge.borderRadius, equals(customBorderRadius));
     });
 
@@ -154,7 +154,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge(
+            body: VelocityBadge(
               content: 'Custom',
               padding: customPadding,
             ),
@@ -162,10 +162,10 @@ void main() {
         ),
       );
 
-      final badgeFinder = find.byType(ZephyrBadge);
+      final badgeFinder = find.byType(VelocityBadge);
       expect(badgeFinder, findsOneWidget);
 
-      final badge = tester.widget<ZephyrBadge>(badgeFinder);
+      final badge = tester.widget<VelocityBadge>(badgeFinder);
       expect(badge.padding, equals(customPadding));
     });
 
@@ -177,7 +177,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge(
+            body: VelocityBadge(
               content: 'Custom',
               borderWidth: customBorderWidth,
               borderColor: customBorderColor,
@@ -186,10 +186,10 @@ void main() {
         ),
       );
 
-      final badgeFinder = find.byType(ZephyrBadge);
+      final badgeFinder = find.byType(VelocityBadge);
       expect(badgeFinder, findsOneWidget);
 
-      final badge = tester.widget<ZephyrBadge>(badgeFinder);
+      final badge = tester.widget<VelocityBadge>(badgeFinder);
       expect(badge.borderWidth, equals(customBorderWidth));
       expect(badge.borderColor, equals(customBorderColor));
     });
@@ -200,14 +200,14 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge.count(
+            body: VelocityBadge.count(
               count: 0,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsOneWidget);
+      expect(find.byType(VelocityBadge), findsOneWidget);
       expect(find.text('0'), findsOneWidget);
     });
 
@@ -217,14 +217,14 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge.count(
+            body: VelocityBadge.count(
               count: -5,
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsOneWidget);
+      expect(find.byType(VelocityBadge), findsOneWidget);
       expect(find.text('-5'), findsOneWidget);
     });
 
@@ -234,7 +234,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge.count(
+            body: VelocityBadge.count(
               count: 9,
               maxCount: 9,
             ),
@@ -242,7 +242,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsOneWidget);
+      expect(find.byType(VelocityBadge), findsOneWidget);
       expect(
           find.text('9'), findsOneWidget); // Should show exact count, not max+
     });
@@ -253,7 +253,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge.count(
+            body: VelocityBadge.count(
               count: 9999,
               maxCount: null,
             ),
@@ -261,7 +261,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsOneWidget);
+      expect(find.byType(VelocityBadge), findsOneWidget);
       expect(find.text('9999'), findsOneWidget);
     });
 
@@ -273,17 +273,17 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge.dot(
+            body: VelocityBadge.dot(
               backgroundColor: customBackgroundColor,
             ),
           ),
         ),
       );
 
-      final badgeFinder = find.byType(ZephyrBadge);
+      final badgeFinder = find.byType(VelocityBadge);
       expect(badgeFinder, findsOneWidget);
 
-      final badge = tester.widget<ZephyrBadge>(badgeFinder);
+      final badge = tester.widget<VelocityBadge>(badgeFinder);
       expect(badge.backgroundColor, equals(customBackgroundColor));
     });
 
@@ -296,7 +296,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge.dot(
+            body: VelocityBadge.dot(
               borderWidth: customBorderWidth,
               borderColor: customBorderColor,
             ),
@@ -304,10 +304,10 @@ void main() {
         ),
       );
 
-      final badgeFinder = find.byType(ZephyrBadge);
+      final badgeFinder = find.byType(VelocityBadge);
       expect(badgeFinder, findsOneWidget);
 
-      final badge = tester.widget<ZephyrBadge>(badgeFinder);
+      final badge = tester.widget<VelocityBadge>(badgeFinder);
       expect(badge.borderWidth, equals(customBorderWidth));
       expect(badge.borderColor, equals(customBorderColor));
     });
@@ -317,14 +317,14 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge(
+            body: VelocityBadge(
               content: '',
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsOneWidget);
+      expect(find.byType(VelocityBadge), findsOneWidget);
       expect(find.text(''), findsOneWidget);
     });
 
@@ -333,14 +333,14 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge(
+            body: VelocityBadge(
               content: 'Very Long Badge Text',
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsOneWidget);
+      expect(find.byType(VelocityBadge), findsOneWidget);
       expect(find.text('Very Long Badge Text'), findsOneWidget);
     });
 
@@ -350,14 +350,14 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge(
+            body: VelocityBadge(
               content: '🔥 Hot!',
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsOneWidget);
+      expect(find.byType(VelocityBadge), findsOneWidget);
       expect(find.text('🔥 Hot!'), findsOneWidget);
     });
 
@@ -367,7 +367,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge.count(
+            body: VelocityBadge.count(
               count: 999999,
               maxCount: 99,
             ),
@@ -375,7 +375,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsOneWidget);
+      expect(find.byType(VelocityBadge), findsOneWidget);
       expect(find.text('99+'), findsOneWidget);
     });
 
@@ -384,7 +384,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge(
+            body: VelocityBadge(
               content: 'Themed',
               backgroundColor: Colors.orange,
               textColor: Colors.white,
@@ -397,7 +397,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsOneWidget);
+      expect(find.byType(VelocityBadge), findsOneWidget);
       expect(find.text('Themed'), findsOneWidget);
     });
 
@@ -409,16 +409,16 @@ void main() {
           home: const Scaffold(
             body: Column(
               children: [
-                ZephyrBadge(content: 'Text'),
-                ZephyrBadge.count(count: 5),
-                ZephyrBadge.dot(),
+                VelocityBadge(content: 'Text'),
+                VelocityBadge.count(count: 5),
+                VelocityBadge.dot(),
               ],
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsNWidgets(3));
+      expect(find.byType(VelocityBadge), findsNWidgets(3));
       expect(find.text('Text'), findsOneWidget);
       expect(find.text('5'), findsOneWidget);
       expect(find.byType(SizedBox), findsOneWidget);
@@ -430,7 +430,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge(
+            body: VelocityBadge(
               content: 'No Border',
               borderWidth: 0.0,
             ),
@@ -438,7 +438,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsOneWidget);
+      expect(find.byType(VelocityBadge), findsOneWidget);
       expect(find.text('No Border'), findsOneWidget);
     });
 
@@ -447,7 +447,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge(
+            body: VelocityBadge(
               content: 'No Padding',
               padding: EdgeInsets.zero,
             ),
@@ -455,7 +455,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsOneWidget);
+      expect(find.byType(VelocityBadge), findsOneWidget);
       expect(find.text('No Padding'), findsOneWidget);
     });
 
@@ -467,7 +467,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge(
+            body: VelocityBadge(
               content: 'Square',
               borderRadius: rectangularBorderRadius,
             ),
@@ -475,10 +475,10 @@ void main() {
         ),
       );
 
-      final badgeFinder = find.byType(ZephyrBadge);
+      final badgeFinder = find.byType(VelocityBadge);
       expect(badgeFinder, findsOneWidget);
 
-      final badge = tester.widget<ZephyrBadge>(badgeFinder);
+      final badge = tester.widget<VelocityBadge>(badgeFinder);
       expect(badge.borderRadius, equals(rectangularBorderRadius));
     });
 
@@ -488,7 +488,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge(
+            body: VelocityBadge(
               content: 'Mixed',
               backgroundColor: Colors.purple,
               textColor: Colors.yellow,
@@ -501,7 +501,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsOneWidget);
+      expect(find.byType(VelocityBadge), findsOneWidget);
       expect(find.text('Mixed'), findsOneWidget);
     });
 
@@ -511,7 +511,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge.count(
+            body: VelocityBadge.count(
               count: 42,
               maxCount: 50,
               backgroundColor: Colors.teal,
@@ -525,7 +525,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsOneWidget);
+      expect(find.byType(VelocityBadge), findsOneWidget);
       expect(find.text('42'), findsOneWidget);
     });
 
@@ -535,7 +535,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge.dot(
+            body: VelocityBadge.dot(
               backgroundColor: Colors.red,
               borderRadius: BorderRadius.all(Radius.circular(8.0)),
               borderWidth: 1.0,
@@ -545,7 +545,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsOneWidget);
+      expect(find.byType(VelocityBadge), findsOneWidget);
       expect(find.byType(SizedBox), findsOneWidget);
     });
 
@@ -556,7 +556,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrBadge.count(
+            body: VelocityBadge.count(
               count: 1,
               maxCount: null,
               backgroundColor: null,
@@ -570,7 +570,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsOneWidget);
+      expect(find.byType(VelocityBadge), findsOneWidget);
       expect(find.text('1'), findsOneWidget);
     });
 
@@ -582,7 +582,7 @@ void main() {
           home: Scaffold(
             body: Semantics(
               label: 'New notifications badge',
-              child: const ZephyrBadge.count(
+              child: const VelocityBadge.count(
                 count: 3,
               ),
             ),
@@ -590,7 +590,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsOneWidget);
+      expect(find.byType(VelocityBadge), findsOneWidget);
       expect(find.text('3'), findsOneWidget);
     });
 
@@ -605,7 +605,7 @@ void main() {
                 const Row(
                   children: [
                     Text('Label: '),
-                    ZephyrBadge(content: 'Hot'),
+                    VelocityBadge(content: 'Hot'),
                   ],
                 ),
                 Container(
@@ -613,7 +613,7 @@ void main() {
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  child: const ZephyrBadge.count(count: 2),
+                  child: const VelocityBadge.count(count: 2),
                 ),
                 const Stack(
                   children: [
@@ -621,7 +621,7 @@ void main() {
                     Positioned(
                       right: 0,
                       top: 0,
-                      child: ZephyrBadge.dot(),
+                      child: VelocityBadge.dot(),
                     ),
                   ],
                 ),
@@ -631,7 +631,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrBadge), findsNWidgets(3));
+      expect(find.byType(VelocityBadge), findsNWidgets(3));
       expect(find.text('Hot'), findsOneWidget);
       expect(find.text('2'), findsOneWidget);
 

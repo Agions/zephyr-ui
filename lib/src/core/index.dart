@@ -1,8 +1,4 @@
-/// 核心模块导出
-library zephyr_core;
+/// VelocityUI 核心导出
+library core;
 
-// 错误处理相关
-export 'error_handler.dart';
-
-// 可访问性相关
-export 'accessibility_manager.dart';
+export 'theme/index.dart';

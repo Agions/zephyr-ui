@@ -1,112 +1,104 @@
-/// ZephyrUI 错误处理测试套件
+/// VelocityUI 错误处理测试套件
 ///
 /// 提供完整的错误处理测试用例和验证工具
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/zephyr_ui.dart';
+import 'package:velocity_ui/velocity_ui.dart';
 // TODO: 重新导入错误处理相关的文件
 // import '../../lib/src/core/error_handling/error_handler.dart';
 // import '../../lib/src/core/error_handling/error_types.dart';
-import '../../lib/src/components/error_handling/error_boundary.dart';
+import 'package:velocity_ui/src/components/error_handling/error_boundary.dart';
 
 // 临时定义测试所需的额外类
-class ZephyrComponentError extends ZephyrError {
-  final String componentName;
-  final String componentType;
+class VelocityComponentError extends VelocityError {
 
-  ZephyrComponentError({
+  VelocityComponentError({
     required this.componentName,
     required this.componentType,
     required String code,
-    required String message,
-    ZephyrErrorLevel level = ZephyrErrorLevel.error,
+    required super.message,
+    super.level,
   }) : super(
           code: code,
-          message: message,
-          level: level,
         );
+  final String componentName;
+  final String componentType;
 }
 
-class ZephyrNetworkError extends ZephyrError {
-  final int statusCode;
-  final String url;
-  final String method;
+class VelocityNetworkError extends VelocityError {
 
-  ZephyrNetworkError({
+  VelocityNetworkError({
     required this.statusCode,
     required this.url,
     required this.method,
     required String code,
-    required String message,
-    ZephyrErrorLevel level = ZephyrErrorLevel.error,
+    required super.message,
+    super.level,
   }) : super(
           code: code,
-          message: message,
-          level: level,
         );
+  final int statusCode;
+  final String url;
+  final String method;
 }
 
-class ZephyrValidationError extends ZephyrError {
-  final String field;
-  final String value;
-  final String validationRule;
+class VelocityValidationError extends VelocityError {
 
-  ZephyrValidationError({
+  VelocityValidationError({
     required this.field,
     required this.value,
     required this.validationRule,
     required String code,
-    required String message,
-    ZephyrErrorLevel level = ZephyrErrorLevel.error,
+    required super.message,
+    super.level,
   }) : super(
           code: code,
-          message: message,
-          level: level,
         );
+  final String field;
+  final String value;
+  final String validationRule;
 }
 
-enum ZephyrAccessibilitySeverity {
+enum VelocityAccessibilitySeverity {
   minor,
   moderate,
   serious,
   critical,
 }
 
-class ZephyrAccessibilityError extends ZephyrError {
-  final String checkItem;
-  final String wcagGuideline;
-  final ZephyrAccessibilitySeverity severity;
+class VelocityAccessibilityError extends VelocityError {
 
-  ZephyrAccessibilityError({
+  VelocityAccessibilityError({
     required this.checkItem,
     required this.wcagGuideline,
     required this.severity,
     required String code,
-    required String message,
-    ZephyrErrorLevel level = ZephyrErrorLevel.error,
+    required super.message,
+    super.level,
   }) : super(
           code: code,
-          message: message,
-          level: level,
         );
+  final String checkItem;
+  final String wcagGuideline;
+  final VelocityAccessibilitySeverity severity;
 }
 
-class ZephyrAsyncErrorBoundary extends StatefulWidget {
+class VelocityAsyncErrorBoundary extends StatefulWidget {
+
+  const VelocityAsyncErrorBoundary({
+    required this.asyncBuilder,
+    this.loadingWidget,
+    super.key,
+  });
   final Future<Widget> Function(BuildContext context) asyncBuilder;
   final Widget? loadingWidget;
 
-  const ZephyrAsyncErrorBoundary({
-    required this.asyncBuilder,
-    this.loadingWidget,
-    Key? key,
-  }) : super(key: key);
-
   @override
-  State<ZephyrAsyncErrorBoundary> createState() => _ZephyrAsyncErrorBoundaryState();
+  State<VelocityAsyncErrorBoundary> createState() => _VelocityAsyncErrorBoundaryState();
 }
 
-class _ZephyrAsyncErrorBoundaryState extends State<ZephyrAsyncErrorBoundary> {
+class _VelocityAsyncErrorBoundaryState extends State<VelocityAsyncErrorBoundary> {
   Widget? _child;
   Object? _error;
 
@@ -147,46 +139,46 @@ class _ZephyrAsyncErrorBoundaryState extends State<ZephyrAsyncErrorBoundary> {
 }
 
 void main() {
-  group('ZephyrUI 错误处理测试套件', () {
+  group('VelocityUI 错误处理测试套件', () {
     late WidgetTester tester;
 
     setUp(() {
       tester = WidgetTester(WidgetTesterBinding.instance);
       
       // 初始化错误处理器
-      ZephyrErrorHandler.instance.init(const ZephyrErrorHandlerConfig());
+      VelocityErrorHandler.instance.init(const VelocityErrorHandlerConfig());
     });
 
     group('错误处理器测试', () {
       test('应该正确创建错误对象', () {
-        final error = ZephyrError(
-          code: ZephyrErrorCodes.unknownError,
+        final error = VelocityError(
+          code: VelocityErrorCodes.unknownError,
           message: '测试错误',
-          level: ZephyrErrorLevel.error,
+          level: VelocityErrorLevel.error,
         );
 
-        expect(error.code, ZephyrErrorCodes.unknownError);
+        expect(error.code, VelocityErrorCodes.unknownError);
         expect(error.message, '测试错误');
-        expect(error.level, ZephyrErrorLevel.error);
+        expect(error.level, VelocityErrorLevel.error);
         expect(error.timestamp, isNotNull);
       });
 
       test('应该正确处理组件错误', () {
-        final error = ZephyrComponentError(
+        final error = VelocityComponentError(
           componentName: 'TestComponent',
-          code: ZephyrErrorCodes.componentNotFound,
+          code: VelocityErrorCodes.componentNotFound,
           message: '组件未找到',
           componentType: 'Button',
         );
 
         expect(error.componentName, 'TestComponent');
         expect(error.componentType, 'Button');
-        expect(error.code, ZephyrErrorCodes.componentNotFound);
+        expect(error.code, VelocityErrorCodes.componentNotFound);
       });
 
       test('应该正确处理网络错误', () {
-        final error = ZephyrNetworkError(
-          code: ZephyrErrorCodes.networkError,
+        final error = VelocityNetworkError(
+          code: VelocityErrorCodes.networkError,
           message: '网络连接失败',
           statusCode: 500,
           url: 'https://api.example.com/test',
@@ -199,8 +191,8 @@ void main() {
       });
 
       test('应该正确处理验证错误', () {
-        final error = ZephyrValidationError(
-          code: ZephyrErrorCodes.validationError,
+        final error = VelocityValidationError(
+          code: VelocityErrorCodes.validationError,
           message: '验证失败',
           field: 'email',
           value: 'invalid-email',
@@ -213,17 +205,17 @@ void main() {
       });
 
       test('应该正确处理无障碍错误', () {
-        final error = ZephyrAccessibilityError(
-          code: ZephyrErrorCodes.missingSemantics,
+        final error = VelocityAccessibilityError(
+          code: VelocityErrorCodes.missingSemantics,
           message: '缺少语义化标记',
           checkItem: 'semantic_label',
           wcagGuideline: '1.1.1',
-          severity: ZephyrAccessibilitySeverity.serious,
+          severity: VelocityAccessibilitySeverity.serious,
         );
 
         expect(error.checkItem, 'semantic_label');
         expect(error.wcagGuideline, '1.1.1');
-        expect(error.severity, ZephyrAccessibilitySeverity.serious);
+        expect(error.severity, VelocityAccessibilitySeverity.serious);
       });
     });
 
@@ -234,7 +226,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrErrorBoundary(
+              body: VelocityErrorBoundary(
                 key: errorKey,
                 child: _ErrorProneWidget(),
               ),
@@ -252,13 +244,13 @@ void main() {
       });
 
       testWidgets('应该支持错误恢复', (WidgetTester tester) async {
-        int retryCount = 0;
+        var retryCount = 0;
         
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrErrorBoundary(
-                config: ZephyrErrorBoundaryConfig(
+              body: VelocityErrorBoundary(
+                config: VelocityErrorBoundaryConfig(
                   enableAutoRecovery: true,
                   onRecover: (error) async {
                     retryCount++;
@@ -290,8 +282,8 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrErrorBoundary(
-                config: ZephyrErrorBoundaryConfig(
+              body: VelocityErrorBoundary(
+                config: VelocityErrorBoundaryConfig(
                   errorBuilder: (error) => Container(
                     padding: const EdgeInsets.all(16),
                     color: Colors.red,
@@ -317,9 +309,9 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrErrorBoundary(
-                config: ZephyrErrorBoundaryConfig(
-                  strategy: ZephyrErrorHandlingStrategy.showDetailedDialog,
+              body: VelocityErrorBoundary(
+                config: VelocityErrorBoundaryConfig(
+                  strategy: VelocityErrorHandlingStrategy.showDetailedDialog,
                 ),
                 child: _ErrorProneWidget(),
               ),
@@ -338,8 +330,8 @@ void main() {
 
     group('安全执行测试', () {
       testWidgets('应该安全执行异步操作', (WidgetTester tester) async {
-        bool wasCalled = false;
-        bool wasHandled = false;
+        var wasCalled = false;
+        var wasHandled = false;
 
         await tester.pumpWidget(
           MaterialApp(
@@ -348,7 +340,7 @@ void main() {
                 builder: (context) {
                   return ElevatedButton(
                     onPressed: () async {
-                      await ZephyrErrorBoundary.safeExecute(
+                      await VelocityErrorBoundary.safeExecute(
                         () async {
                           wasCalled = true;
                           throw Exception('测试错误');
@@ -378,7 +370,7 @@ void main() {
       });
 
       testWidgets('应该处理同步操作错误', (WidgetTester tester) async {
-        bool wasHandled = false;
+        var wasHandled = false;
 
         await tester.pumpWidget(
           MaterialApp(
@@ -388,7 +380,7 @@ void main() {
                   return ElevatedButton(
                     onPressed: () {
                       try {
-                        ZephyrErrorBoundary.safeExecute(
+                        VelocityErrorBoundary.safeExecute(
                           () {
                             throw Exception('同步错误');
                           },
@@ -422,17 +414,17 @@ void main() {
 
     group('错误页面测试', () {
       testWidgets('应该正确显示错误页面', (WidgetTester tester) async {
-        final error = ZephyrError(
-          code: ZephyrErrorCodes.unknownError,
+        final error = VelocityError(
+          code: VelocityErrorCodes.unknownError,
           message: '测试错误',
           details: '错误详细信息',
-          level: ZephyrErrorLevel.error,
+          level: VelocityErrorLevel.error,
           recoverySuggestion: '建议重启应用',
         );
 
         await tester.pumpWidget(
           MaterialApp(
-            home: ZephyrErrorPage(
+            home: VelocityErrorPage(
               error: error,
               showBackButton: true,
             ),
@@ -448,24 +440,24 @@ void main() {
 
       testWidgets('应该显示错误级别图标', (WidgetTester tester) async {
         final levels = [
-          ZephyrErrorLevel.debug,
-          ZephyrErrorLevel.info,
-          ZephyrErrorLevel.warning,
-          ZephyrErrorLevel.error,
-          ZephyrErrorLevel.critical,
-          ZephyrErrorLevel.fatal,
+          VelocityErrorLevel.debug,
+          VelocityErrorLevel.info,
+          VelocityErrorLevel.warning,
+          VelocityErrorLevel.error,
+          VelocityErrorLevel.critical,
+          VelocityErrorLevel.fatal,
         ];
 
         for (final level in levels) {
-          final error = ZephyrError(
-            code: ZephyrErrorCodes.unknownError,
+          final error = VelocityError(
+            code: VelocityErrorCodes.unknownError,
             message: '测试错误',
             level: level,
           );
 
           await tester.pumpWidget(
             MaterialApp(
-              home: ZephyrErrorPage(error: error),
+              home: VelocityErrorPage(error: error),
             ),
           );
 
@@ -480,10 +472,10 @@ void main() {
 
     group('错误处理集成测试', () {
       testWidgets('应该在整个应用中正确处理错误', (WidgetTester tester) async {
-        int globalErrorCount = 0;
+        var globalErrorCount = 0;
 
         // 设置全局错误监听器
-        ZephyrErrorHandler.instance.addErrorListener((error) {
+        VelocityErrorHandler.instance.addErrorListener((error) {
           globalErrorCount++;
         });
 
@@ -492,10 +484,10 @@ void main() {
             home: Scaffold(
               body: Column(
                 children: [
-                  ZephyrErrorBoundary(
+                  VelocityErrorBoundary(
                     child: _ErrorProneWidget(),
                   ),
-                  ZephyrErrorBoundary(
+                  VelocityErrorBoundary(
                     child: _AnotherErrorProneWidget(),
                   ),
                 ],
@@ -520,7 +512,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrAsyncErrorBoundary(
+              body: VelocityAsyncErrorBoundary(
                 asyncBuilder: (context) async {
                   await Future.delayed(const Duration(milliseconds: 100));
                   throw Exception('异步错误');
@@ -544,14 +536,14 @@ void main() {
 
     group('错误恢复测试', () {
       testWidgets('应该支持错误恢复机制', (WidgetTester tester) async {
-        int recoveryAttempt = 0;
-        bool shouldRecover = false;
+        var recoveryAttempt = 0;
+        var shouldRecover = false;
 
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: ZephyrErrorBoundary(
-                config: ZephyrErrorBoundaryConfig(
+              body: VelocityErrorBoundary(
+                config: VelocityErrorBoundaryConfig(
                   enableAutoRecovery: true,
                   onRecover: (error) async {
                     recoveryAttempt++;
@@ -592,32 +584,32 @@ void main() {
 
     group('错误日志和报告测试', () {
       test('应该正确记录错误日志', () async {
-        final error = ZephyrError(
-          code: ZephyrErrorCodes.unknownError,
+        final error = VelocityError(
+          code: VelocityErrorCodes.unknownError,
           message: '日志测试错误',
-          level: ZephyrErrorLevel.error,
+          level: VelocityErrorLevel.error,
         );
 
         // 这里应该验证错误日志记录
         // 由于实际的日志记录可能涉及文件系统或网络，
         // 我们主要验证错误对象的结构
-        expect(error.code, ZephyrErrorCodes.unknownError);
+        expect(error.code, VelocityErrorCodes.unknownError);
         expect(error.message, '日志测试错误');
-        expect(error.level, ZephyrErrorLevel.error);
+        expect(error.level, VelocityErrorLevel.error);
         expect(error.timestamp, isNotNull);
       });
 
       test('应该生成错误报告', () {
         final errors = [
-          ZephyrError(
-            code: ZephyrErrorCodes.unknownError,
+          VelocityError(
+            code: VelocityErrorCodes.unknownError,
             message: '错误1',
-            level: ZephyrErrorLevel.error,
+            level: VelocityErrorLevel.error,
           ),
-          ZephyrError(
-            code: ZephyrErrorCodes.networkError,
+          VelocityError(
+            code: VelocityErrorCodes.networkError,
             message: '错误2',
-            level: ZephyrErrorLevel.warning,
+            level: VelocityErrorLevel.warning,
           ),
         ];
 
@@ -625,8 +617,8 @@ void main() {
         // 由于实际的报告生成可能涉及复杂的逻辑，
         // 我们主要验证错误列表的结构
         expect(errors.length, 2);
-        expect(errors[0].code, ZephyrErrorCodes.unknownError);
-        expect(errors[1].code, ZephyrErrorCodes.networkError);
+        expect(errors[0].code, VelocityErrorCodes.unknownError);
+        expect(errors[1].code, VelocityErrorCodes.networkError);
       });
     });
   });

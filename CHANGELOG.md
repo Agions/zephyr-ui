@@ -131,7 +131,7 @@
 
 ### 新增
 
-- ZephyrUI 首次发布
+- VelocityUI 首次发布
 - 60+ 个企业级 Flutter UI 组件
 - 基于 Material Design 3 的完整主题系统
 - 内置断点的响应式设计

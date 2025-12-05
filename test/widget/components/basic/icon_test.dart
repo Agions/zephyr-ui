@@ -1,58 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/zephyr_ui.dart';
+import 'package:velocity_ui/velocity_ui.dart';
 
 void main() {
-  group('ZephyrIcon Tests', () {
+  group('VelocityIcon Tests', () {
     testWidgets('displays icon correctly', (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: ZephyrIcon(Icons.home),
+        const MaterialApp(
+          home: VelocityIcon(Icons.home),
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
       expect(find.byType(Icon), findsOneWidget);
     });
 
     testWidgets('handles different sizes', (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Column(
-            children: const [
-              ZephyrIcon(Icons.home, size: 16),
-              ZephyrIcon(Icons.star, size: 24),
-              ZephyrIcon(Icons.settings, size: 32),
+            children: [
+              VelocityIcon(Icons.home, size: 16),
+              VelocityIcon(Icons.star, size: 24),
+              VelocityIcon(Icons.settings, size: 32),
             ],
           ),
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsNWidgets(3));
+      expect(find.byType(VelocityIcon), findsNWidgets(3));
     });
 
     testWidgets('handles different colors', (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Column(
-            children: const [
-              ZephyrIcon(Icons.home, color: Colors.red),
-              ZephyrIcon(Icons.star, color: Colors.blue),
-              ZephyrIcon(Icons.settings, color: Colors.green),
+            children: [
+              VelocityIcon(Icons.home, color: Colors.red),
+              VelocityIcon(Icons.star, color: Colors.blue),
+              VelocityIcon(Icons.settings, color: Colors.green),
             ],
           ),
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsNWidgets(3));
+      expect(find.byType(VelocityIcon), findsNWidgets(3));
     });
 
     testWidgets('handles onPressed callback', (WidgetTester tester) async {
-      bool wasPressed = false;
+      var wasPressed = false;
       
       await tester.pumpWidget(
         MaterialApp(
-          home: ZephyrIcon(
+          home: VelocityIcon(
             Icons.home,
             onPressed: () {
               wasPressed = true;
@@ -61,7 +61,7 @@ void main() {
         ),
       );
 
-      await tester.tap(find.byType(ZephyrIcon));
+      await tester.tap(find.byType(VelocityIcon));
       await tester.pump();
 
       expect(wasPressed, isTrue);
@@ -69,21 +69,21 @@ void main() {
 
     testWidgets('handles disabled state', (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: ZephyrIcon(
+        const MaterialApp(
+          home: VelocityIcon(
             Icons.home,
             onPressed: null,
           ),
         ),
       );
 
-      expect(find.byType(ZephyrIcon), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
     });
 
     testWidgets('handles semantic label', (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: ZephyrIcon(
+        const MaterialApp(
+          home: VelocityIcon(
             Icons.home,
             semanticLabel: 'Home icon',
           ),
@@ -95,8 +95,8 @@ void main() {
 
     testWidgets('shows tooltip when provided', (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: ZephyrIcon(
+        const MaterialApp(
+          home: VelocityIcon(
             Icons.home,
             tooltip: 'Go to home',
           ),

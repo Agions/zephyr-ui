@@ -6,7 +6,7 @@ library test_mocks;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:zephyr_ui/src/core/constants/enums.dart';
+import 'package:velocity_ui/src/core/constants/enums.dart';
 
 /// Mock NavigatorObserver
 class MockNavigatorObserver extends Mock implements NavigatorObserver {
@@ -233,8 +233,8 @@ class MockAnimationController extends Mock implements AnimationController {
 
 /// Mock PageController
 class MockPageController extends Mock implements PageController {
-  int _initialPage = 0;
-  double _viewportFraction = 1.0;
+  final int _initialPage = 0;
+  final double _viewportFraction = 1.0;
   
   @override
   int get initialPage => _initialPage;
@@ -274,7 +274,7 @@ class MockPageController extends Mock implements PageController {
 
 /// Mock TabController
 class MockTabController extends Mock implements TabController {
-  int _length = 0;
+  final int _length = 0;
   int _index = 0;
   final ValueNotifier<int> _indexNotifier = ValueNotifier<int>(0);
   
@@ -302,7 +302,7 @@ class MockTabController extends Mock implements TabController {
 
 /// Mock ValueNotifier
 class MockValueNotifier<T> extends ValueNotifier<T> {
-  MockValueNotifier(T value) : super(value);
+  MockValueNotifier(super.value);
 }
 
 /// Mock StreamController
@@ -446,14 +446,14 @@ class MockStreamSubscription<T> extends Mock implements StreamSubscription<T> {
 
 /// Mock Future
 class MockFuture<T> extends Mock implements Future<T> {
-  T? _value;
-  Object? _error;
-  StackTrace? _stackTrace;
   
   MockFuture.value(T value) : _value = value;
   
   MockFuture.error(Object error, [StackTrace? stackTrace]) 
       : _error = error, _stackTrace = stackTrace;
+  T? _value;
+  Object? _error;
+  StackTrace? _stackTrace;
   
   @override
   Future<T> then<R>(FutureOr<R> Function(T) onValue, {Function? onError}) {
@@ -510,10 +510,10 @@ class MockFuture<T> extends Mock implements Future<T> {
 
 /// Mock Timer
 class MockTimer extends Mock implements Timer {
-  bool _isActive = true;
-  Duration _duration = Duration.zero;
   
   MockTimer(Duration duration) : _duration = duration;
+  bool _isActive = true;
+  final Duration _duration = Duration.zero;
   
   @override
   bool get isActive => _isActive;
@@ -570,11 +570,11 @@ class MockHttpClient extends Mock implements HttpClient {
 
 /// Mock HttpClientRequest
 class MockHttpClientRequest extends Mock implements HttpClientRequest {
+  
+  MockHttpClientRequest(this._url);
   final Uri _url;
   final Map<String, String> _headers = {};
   final List<int> _body = [];
-  
-  MockHttpClientRequest(this._url);
   
   @override
   Uri get url => _url;
@@ -605,10 +605,6 @@ class MockHttpClientRequest extends Mock implements HttpClientRequest {
 
 /// Mock HttpClientResponse
 class MockHttpClientResponse extends Mock implements HttpClientResponse {
-  int _statusCode = 200;
-  String _reasonPhrase = 'OK';
-  final Map<String, String> _headers = {};
-  final List<int> _body = [];
   
   MockHttpClientResponse({
     int statusCode = 200,
@@ -619,6 +615,10 @@ class MockHttpClientResponse extends Mock implements HttpClientResponse {
        _reasonPhrase = reasonPhrase,
        _headers = headers ?? {},
        _body = body ?? [];
+  final int _statusCode = 200;
+  final String _reasonPhrase = 'OK';
+  final Map<String, String> _headers = {};
+  final List<int> _body = [];
   
   @override
   int get statusCode => _statusCode;
@@ -939,11 +939,6 @@ class MockDioException extends Mock implements DioException {
 
 /// Mock Platform
 class MockPlatform extends Mock implements Platform {
-  String _operatingSystem = 'android';
-  String _localHostname = 'mock';
-  int _numberOfProcessors = 4;
-  String _pathSeparator = '/';
-  String _locale = 'en_US';
   
   MockPlatform({
     String operatingSystem = 'android',
@@ -956,6 +951,11 @@ class MockPlatform extends Mock implements Platform {
        _numberOfProcessors = numberOfProcessors,
        _pathSeparator = pathSeparator,
        _locale = locale;
+  final String _operatingSystem = 'android';
+  final String _localHostname = 'mock';
+  final int _numberOfProcessors = 4;
+  final String _pathSeparator = '/';
+  final String _locale = 'en_US';
   
   @override
   String get operatingSystem => _operatingSystem;
@@ -1176,7 +1176,7 @@ class MockBuildContext extends Mock implements BuildContext {
   Size get size => const Size(100, 100);
   
   @override
-  MediaQueryData get mediaQuery => MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+  MediaQueryData get mediaQuery => MediaQueryData.fromView(WidgetsBinding.instance.window);
   
   @override
   ThemeMode get themeMode => ThemeMode.system;
@@ -1509,11 +1509,11 @@ class MockRoute<T> extends Mock implements Route<T> {
 
 /// Mock Ticker
 class MockTicker extends Mock implements Ticker {
+  
+  MockTicker(this._onTick);
   final TickerCallback _onTick;
   bool _isActive = false;
   bool _isTicking = false;
-  
-  MockTicker(this._onTick);
   
   @override
   bool get isActive => _isActive;
@@ -1550,8 +1550,8 @@ class MockTicker extends Mock implements Ticker {
 
 /// Mock Animation
 class MockAnimation<T> extends Mock implements Animation<T> {
-  T _value = 0 as T;
-  AnimationStatus _status = AnimationStatus.dismissed;
+  final T _value = 0 as T;
+  final AnimationStatus _status = AnimationStatus.dismissed;
   
   @override
   T get value => _value;
@@ -1597,7 +1597,7 @@ class MockScaffoldState extends Mock implements ScaffoldState {
   BuildContext get context => MockBuildContext();
   
   @override
-  Widget get widget => Scaffold();
+  Widget get widget => const Scaffold();
   
   @override
   bool get mounted => true;
@@ -1668,7 +1668,7 @@ class MockScaffoldMessengerState extends Mock implements ScaffoldMessengerState 
 /// Mock MediaQuery
 class MockMediaQuery extends Mock implements MediaQuery {
   @override
-  MediaQueryData get data => MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+  MediaQueryData get data => MediaQueryData.fromView(WidgetsBinding.instance.window);
   
   @override
   Widget get widget => Container();
@@ -1840,17 +1840,17 @@ class MockManager {
   static void resetAll() {
     for (final mock in _mocks.values) {
       if (mock is MockNavigatorObserver) {
-        (mock as MockNavigatorObserver).reset();
+        mock.reset();
       } else if (mock is MockSharedPreferences) {
-        (mock as MockSharedPreferences).reset();
+        mock.reset();
       } else if (mock is MockDio) {
-        (mock as MockDio).reset();
+        mock.reset();
       } else if (mock is MockMethodChannel) {
-        (mock as MockMethodChannel).reset();
+        mock.reset();
       } else if (mock is MockEventChannel) {
-        (mock as MockEventChannel).reset();
+        mock.reset();
       } else if (mock is MockAssetBundle) {
-        (mock as MockAssetBundle).reset();
+        mock.reset();
       } else {
         reset(mocktail: mock);
       }

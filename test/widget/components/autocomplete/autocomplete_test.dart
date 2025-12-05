@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/input_advanced/auto_complete/index.dart';
+import 'package:velocity_ui/src/components/input_advanced/auto_complete/index.dart';
 
 void main() {
-  group('ZephyrAutoCompleteTheme', () {
+  group('VelocityAutoCompleteTheme', () {
     test('creates light theme', () {
-      final theme = ZephyrAutoCompleteTheme.light();
+      final theme = VelocityAutoCompleteTheme.light();
       expect(theme.backgroundColor, equals(Colors.white));
       expect(theme.borderColor, equals(const Color(0xFFD1D5DB)));
       expect(theme.focusedBorderColor, equals(const Color(0xFF3B82F6)));
     });
 
     test('creates dark theme', () {
-      final theme = ZephyrAutoCompleteTheme.dark();
+      final theme = VelocityAutoCompleteTheme.dark();
       expect(theme.backgroundColor, equals(const Color(0xFF1F2937)));
       expect(theme.textColor, equals(const Color(0xFFF9FAFB)));
       expect(theme.suggestionBackgroundColor, equals(const Color(0xFF1F2937)));
     });
 
     test('creates custom theme', () {
-      final theme = ZephyrAutoCompleteTheme.custom(
+      final theme = VelocityAutoCompleteTheme.custom(
         backgroundColor: Colors.red,
         borderColor: Colors.blue,
         focusedBorderColor: Colors.green,
@@ -32,7 +32,7 @@ void main() {
     });
 
     test('copies theme with modifications', () {
-      final theme = ZephyrAutoCompleteTheme.light();
+      final theme = VelocityAutoCompleteTheme.light();
       final modified = theme.copyWith(backgroundColor: Colors.purple);
 
       expect(modified.backgroundColor, equals(Colors.purple));
@@ -40,8 +40,8 @@ void main() {
     });
 
     test('merges themes', () {
-      final theme1 = ZephyrAutoCompleteTheme.light();
-      final theme2 = ZephyrAutoCompleteTheme.custom(backgroundColor: Colors.orange);
+      final theme1 = VelocityAutoCompleteTheme.light();
+      final theme2 = VelocityAutoCompleteTheme.custom(backgroundColor: Colors.orange);
       final merged = theme1.merge(theme2);
 
       expect(merged.backgroundColor, equals(Colors.orange));
@@ -49,23 +49,23 @@ void main() {
     });
 
     test('compares themes for equality', () {
-      final theme1 = ZephyrAutoCompleteTheme.light();
-      final theme2 = ZephyrAutoCompleteTheme.light();
+      final theme1 = VelocityAutoCompleteTheme.light();
+      final theme2 = VelocityAutoCompleteTheme.light();
       expect(theme1, equals(theme2));
     });
 
     test('computes hash code', () {
-      final theme = ZephyrAutoCompleteTheme.light();
+      final theme = VelocityAutoCompleteTheme.light();
       expect(theme.hashCode, isA<int>());
     });
   });
 
-  group('ZephyrAutoCompleteUtils', () {
+  group('VelocityAutoCompleteUtils', () {
     final items = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry'];
     String displayString(String item) => item;
 
     test('filters items by query', () {
-      final filtered = ZephyrAutoCompleteUtils.filterItems(
+      final filtered = VelocityAutoCompleteUtils.filterItems(
         items, 'a', displayString,
       );
       expect(filtered, contains('Apple'));
@@ -75,21 +75,21 @@ void main() {
     });
 
     test('filters items with exact match', () {
-      final filtered = ZephyrAutoCompleteUtils.filterItemsAdvanced(
+      final filtered = VelocityAutoCompleteUtils.filterItemsAdvanced(
         items, 'Apple', displayString, exactMatch: true,
       );
       expect(filtered, equals(['Apple']));
     });
 
     test('filters items with fuzzy search', () {
-      final filtered = ZephyrAutoCompleteUtils.filterItemsAdvanced(
+      final filtered = VelocityAutoCompleteUtils.filterItemsAdvanced(
         items, 'aple', displayString, fuzzySearch: true,
       );
       expect(filtered, isNotEmpty);
     });
 
     test('sorts items by relevance', () {
-      final sorted = ZephyrAutoCompleteUtils.sortByRelevance(
+      final sorted = VelocityAutoCompleteUtils.sortByRelevance(
         items, 'app', displayString,
       );
       expect(sorted.first, equals('Apple'));
@@ -102,7 +102,7 @@ void main() {
         {'name': 'Banana', 'category': 'Fruit'},
       ];
       
-      final grouped = ZephyrAutoCompleteUtils.groupItems(
+      final grouped = VelocityAutoCompleteUtils.groupItems(
         fruits, (item) => (item as Map<String, dynamic>)['category'] as String,
       );
       
@@ -113,14 +113,14 @@ void main() {
 
     test('gets recent items from history', () {
       final history = ['Cherry', 'Apple', 'Banana'];
-      final recent = ZephyrAutoCompleteUtils.getRecentItems(
+      final recent = VelocityAutoCompleteUtils.getRecentItems(
         items, history, 2,
       );
       expect(recent, equals(['Cherry', 'Apple']));
     });
 
     test('highlights search term in text', () {
-      final spans = ZephyrAutoCompleteUtils.highlightSearchTerm(
+      final spans = VelocityAutoCompleteUtils.highlightSearchTerm(
         'Hello World', 'World',
         const TextStyle(), const TextStyle(fontWeight: FontWeight.bold),
       );
@@ -128,19 +128,19 @@ void main() {
     });
 
     test('validates search query', () {
-      expect(ZephyrAutoCompleteUtils.isValidQuery('test'), isTrue);
-      expect(ZephyrAutoCompleteUtils.isValidQuery(''), isFalse);
-      expect(ZephyrAutoCompleteUtils.isValidQuery('a'), isFalse);
+      expect(VelocityAutoCompleteUtils.isValidQuery('test'), isTrue);
+      expect(VelocityAutoCompleteUtils.isValidQuery(''), isFalse);
+      expect(VelocityAutoCompleteUtils.isValidQuery('a'), isFalse);
     });
 
     test('sanitizes search query', () {
-      final sanitized = ZephyrAutoCompleteUtils.sanitizeQuery('  Hello  World!  ');
+      final sanitized = VelocityAutoCompleteUtils.sanitizeQuery('  Hello  World!  ');
       expect(sanitized, equals('Hello World'));
     });
 
     test('creates search suggestions', () {
       final suggestions = ['Apple', 'Banana', 'Cherry'];
-      final result = ZephyrAutoCompleteUtils.createSuggestions(
+      final result = VelocityAutoCompleteUtils.createSuggestions(
         'a', suggestions, 2,
       );
       expect(result, hasLength(2));
@@ -148,27 +148,27 @@ void main() {
     });
 
     test('formats item count', () {
-      expect(ZephyrAutoCompleteUtils.formatItemCount(1), equals('1 item'));
-      expect(ZephyrAutoCompleteUtils.formatItemCount(2), equals('2 items'));
+      expect(VelocityAutoCompleteUtils.formatItemCount(1), equals('1 item'));
+      expect(VelocityAutoCompleteUtils.formatItemCount(2), equals('2 items'));
     });
 
     test('calculates typing speed', () {
       final start = DateTime.now();
       final end = start.add(const Duration(seconds: 30));
-      final speed = ZephyrAutoCompleteUtils.calculateTypingSpeed(
+      final speed = VelocityAutoCompleteUtils.calculateTypingSpeed(
         'Hello World', start, end,
       );
       expect(speed, greaterThan(0));
     });
 
     test('gets keyboard shortcuts', () {
-      final shortcuts = ZephyrAutoCompleteUtils.getKeyboardShortcuts();
+      final shortcuts = VelocityAutoCompleteUtils.getKeyboardShortcuts();
       expect(shortcuts, contains('ArrowUp'));
       expect(shortcuts, contains('Enter'));
     });
 
     test('creates search metadata', () {
-      final metadata = ZephyrAutoCompleteUtils.createSearchMetadata(
+      final metadata = VelocityAutoCompleteUtils.createSearchMetadata(
         query: 'test',
         resultCount: 5,
         searchDuration: const Duration(milliseconds: 100),
@@ -184,15 +184,15 @@ void main() {
         {'query': 'test', 'timestamp': '2023-01-01', 'resultCount': 5},
       ];
       
-      final exported = ZephyrAutoCompleteUtils.exportSearchHistory(history);
-      final imported = ZephyrAutoCompleteUtils.importSearchHistory(exported);
+      final exported = VelocityAutoCompleteUtils.exportSearchHistory(history);
+      final imported = VelocityAutoCompleteUtils.importSearchHistory(exported);
       
       expect(imported, hasLength(1));
       expect(imported.first['query'], equals('test'));
     });
   });
 
-  group('ZephyrAutoComplete Widget', () {
+  group('VelocityAutoComplete Widget', () {
     late TextEditingController controller;
     final items = ['Apple', 'Banana', 'Cherry', 'Date'];
 
@@ -208,7 +208,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrAutoComplete<String>(
+            body: VelocityAutoComplete<String>(
               items: items,
               controller: controller,
               placeholder: 'Search fruits...',
@@ -217,7 +217,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrAutoComplete<String>), findsOneWidget);
+      expect(find.byType(VelocityAutoComplete<String>), findsOneWidget);
       expect(find.text('Search fruits...'), findsOneWidget);
     });
 
@@ -225,7 +225,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrAutoComplete<String>(
+            body: VelocityAutoComplete<String>(
               items: items,
               controller: controller,
             ),
@@ -244,7 +244,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrAutoComplete<String>(
+            body: VelocityAutoComplete<String>(
               items: items,
               controller: controller,
             ),
@@ -269,7 +269,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrAutoComplete<String>(
+            body: VelocityAutoComplete<String>(
               items: items,
               controller: controller,
               onSelected: (value) {
@@ -296,7 +296,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrAutoComplete<String>(
+            body: VelocityAutoComplete<String>(
               items: items,
               controller: controller,
               multiSelect: true,
@@ -329,7 +329,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrAutoComplete<String>(
+            body: VelocityAutoComplete<String>(
               items: const [],
               controller: controller,
               asyncItems: (query) async {
@@ -357,7 +357,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrAutoComplete<String>(
+            body: VelocityAutoComplete<String>(
               items: items,
               controller: controller,
               showClearButton: true,
@@ -378,7 +378,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrAutoComplete<String>(
+            body: VelocityAutoComplete<String>(
               items: items,
               controller: controller,
               showClearButton: true,
@@ -400,7 +400,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrAutoComplete<String>(
+            body: VelocityAutoComplete<String>(
               items: items,
               controller: controller,
             ),
@@ -421,7 +421,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrAutoComplete<String>(
+            body: VelocityAutoComplete<String>(
               items: items,
               controller: controller,
               enabled: false,
@@ -438,7 +438,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrAutoComplete<String>(
+            body: VelocityAutoComplete<String>(
               items: items,
               controller: controller,
               readOnly: true,
@@ -455,7 +455,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrAutoComplete<String>(
+            body: VelocityAutoComplete<String>(
               items: items,
               controller: controller,
               errorText: 'This field is required',
@@ -471,7 +471,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrAutoComplete<String>(
+            body: VelocityAutoComplete<String>(
               items: items,
               controller: controller,
               helperText: 'Start typing to search',
@@ -487,7 +487,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrAutoComplete<String>(
+            body: VelocityAutoComplete<String>(
               items: items,
               controller: controller,
               itemBuilder: (context, item, isSelected) {
@@ -513,7 +513,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrAutoComplete<String>(
+            body: VelocityAutoComplete<String>(
               items: items,
               controller: controller,
               onSelected: (value) {
@@ -540,7 +540,7 @@ void main() {
     });
 
     testWidgets('applies custom theme', (tester) async {
-      final customTheme = ZephyrAutoCompleteTheme.custom(
+      final customTheme = VelocityAutoCompleteTheme.custom(
         backgroundColor: Colors.red,
         borderColor: Colors.blue,
       );
@@ -548,7 +548,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrAutoComplete<String>(
+            body: VelocityAutoComplete<String>(
               items: items,
               controller: controller,
               theme: customTheme,

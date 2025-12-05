@@ -1,2 +1,3 @@
+library statistic;
 export 'statistic.dart';
-export 'statistic_theme.dart';
+export 'statistic_style.dart';

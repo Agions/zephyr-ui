@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/basic/card/card.dart';
-import 'package:zephyr_ui/src/core/theme/theme_data.dart';
+import 'package:velocity_ui/src/components/basic/card/card.dart';
+import 'package:velocity_ui/src/core/theme/theme_data.dart';
 
 void main() {
-  group('ZephyrCard Widget Tests', () {
+  group('VelocityCard Widget Tests', () {
     late ThemeData theme;
 
     setUpAll(() {
-      final zephyrTheme = ZephyrThemeData.light();
+      final velocityTheme = VelocityThemeData.light();
       theme = ThemeData(
-        brightness: zephyrTheme.brightness,
-        primaryColor: zephyrTheme.primaryColor,
+        brightness: velocityTheme.brightness,
+        primaryColor: velocityTheme.primaryColor,
         cardTheme: CardTheme(
-          color: zephyrTheme.backgroundColor,
+          color: velocityTheme.backgroundColor,
           elevation: 1.0,
           margin: const EdgeInsets.all(8.0),
         ),
@@ -26,7 +26,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               child: SizedBox(
                 height: 100,
                 child: Text('Test Card'),
@@ -37,7 +37,7 @@ void main() {
       );
 
       expect(find.text('Test Card'), findsOneWidget);
-      expect(find.byType(ZephyrCard), findsOneWidget);
+      expect(find.byType(VelocityCard), findsOneWidget);
       expect(find.byType(SizedBox), findsOneWidget);
     });
 
@@ -46,7 +46,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCard.flat(
+            body: VelocityCard.flat(
               child: const Text('Flat Card'),
             ),
           ),
@@ -54,7 +54,7 @@ void main() {
       );
 
       expect(find.text('Flat Card'), findsOneWidget);
-      expect(find.byType(ZephyrCard), findsOneWidget);
+      expect(find.byType(VelocityCard), findsOneWidget);
     });
 
     testWidgets('renders elevated card variant', (WidgetTester tester) async {
@@ -62,7 +62,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCard.elevated(
+            body: VelocityCard.elevated(
               child: const Text('Elevated Card'),
             ),
           ),
@@ -70,7 +70,7 @@ void main() {
       );
 
       expect(find.text('Elevated Card'), findsOneWidget);
-      expect(find.byType(ZephyrCard), findsOneWidget);
+      expect(find.byType(VelocityCard), findsOneWidget);
     });
 
     testWidgets('renders filled card variant', (WidgetTester tester) async {
@@ -78,7 +78,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCard.filled(
+            body: VelocityCard.filled(
               child: const Text('Filled Card'),
             ),
           ),
@@ -86,7 +86,7 @@ void main() {
       );
 
       expect(find.text('Filled Card'), findsOneWidget);
-      expect(find.byType(ZephyrCard), findsOneWidget);
+      expect(find.byType(VelocityCard), findsOneWidget);
     });
 
     testWidgets('renders outlined card variant', (WidgetTester tester) async {
@@ -94,7 +94,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCard.outlined(
+            body: VelocityCard.outlined(
               child: const Text('Outlined Card'),
             ),
           ),
@@ -102,7 +102,7 @@ void main() {
       );
 
       expect(find.text('Outlined Card'), findsOneWidget);
-      expect(find.byType(ZephyrCard), findsOneWidget);
+      expect(find.byType(VelocityCard), findsOneWidget);
     });
 
     testWidgets('handles custom margin', (WidgetTester tester) async {
@@ -112,7 +112,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               margin: customMargin,
               child: Text('Card with Margin'),
             ),
@@ -120,10 +120,10 @@ void main() {
         ),
       );
 
-      final cardFinder = find.byType(ZephyrCard);
+      final cardFinder = find.byType(VelocityCard);
       expect(cardFinder, findsOneWidget);
 
-      final card = tester.widget<ZephyrCard>(cardFinder);
+      final card = tester.widget<VelocityCard>(cardFinder);
       expect(card.margin, equals(customMargin));
     });
 
@@ -134,7 +134,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               padding: customPadding,
               child: Text('Card with Padding'),
             ),
@@ -142,10 +142,10 @@ void main() {
         ),
       );
 
-      final cardFinder = find.byType(ZephyrCard);
+      final cardFinder = find.byType(VelocityCard);
       expect(cardFinder, findsOneWidget);
 
-      final card = tester.widget<ZephyrCard>(cardFinder);
+      final card = tester.widget<VelocityCard>(cardFinder);
       expect(card.padding, equals(customPadding));
     });
 
@@ -156,7 +156,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               width: customWidth,
               child: Text('Card with Width'),
             ),
@@ -164,10 +164,10 @@ void main() {
         ),
       );
 
-      final cardFinder = find.byType(ZephyrCard);
+      final cardFinder = find.byType(VelocityCard);
       expect(cardFinder, findsOneWidget);
 
-      final card = tester.widget<ZephyrCard>(cardFinder);
+      final card = tester.widget<VelocityCard>(cardFinder);
       expect(card.width, equals(customWidth));
     });
 
@@ -178,7 +178,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               height: customHeight,
               child: Text('Card with Height'),
             ),
@@ -186,10 +186,10 @@ void main() {
         ),
       );
 
-      final cardFinder = find.byType(ZephyrCard);
+      final cardFinder = find.byType(VelocityCard);
       expect(cardFinder, findsOneWidget);
 
-      final card = tester.widget<ZephyrCard>(cardFinder);
+      final card = tester.widget<VelocityCard>(cardFinder);
       expect(card.height, equals(customHeight));
     });
 
@@ -200,7 +200,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               backgroundColor: customBackgroundColor,
               child: Text('Card with Background Color'),
             ),
@@ -208,10 +208,10 @@ void main() {
         ),
       );
 
-      final cardFinder = find.byType(ZephyrCard);
+      final cardFinder = find.byType(VelocityCard);
       expect(cardFinder, findsOneWidget);
 
-      final card = tester.widget<ZephyrCard>(cardFinder);
+      final card = tester.widget<VelocityCard>(cardFinder);
       expect(card.backgroundColor, equals(customBackgroundColor));
     });
 
@@ -222,7 +222,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               elevation: customElevation,
               child: Text('Card with Elevation'),
             ),
@@ -230,10 +230,10 @@ void main() {
         ),
       );
 
-      final cardFinder = find.byType(ZephyrCard);
+      final cardFinder = find.byType(VelocityCard);
       expect(cardFinder, findsOneWidget);
 
-      final card = tester.widget<ZephyrCard>(cardFinder);
+      final card = tester.widget<VelocityCard>(cardFinder);
       expect(card.elevation, equals(customElevation));
     });
 
@@ -244,7 +244,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               borderRadius: customBorderRadius,
               child: Text('Card with Border Radius'),
             ),
@@ -252,10 +252,10 @@ void main() {
         ),
       );
 
-      final cardFinder = find.byType(ZephyrCard);
+      final cardFinder = find.byType(VelocityCard);
       expect(cardFinder, findsOneWidget);
 
-      final card = tester.widget<ZephyrCard>(cardFinder);
+      final card = tester.widget<VelocityCard>(cardFinder);
       expect(card.borderRadius, equals(customBorderRadius));
     });
 
@@ -267,7 +267,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               borderColor: customBorderColor,
               borderWidth: customBorderWidth,
               child: Text('Card with Border'),
@@ -276,22 +276,22 @@ void main() {
         ),
       );
 
-      final cardFinder = find.byType(ZephyrCard);
+      final cardFinder = find.byType(VelocityCard);
       expect(cardFinder, findsOneWidget);
 
-      final card = tester.widget<ZephyrCard>(cardFinder);
+      final card = tester.widget<VelocityCard>(cardFinder);
       expect(card.borderColor, equals(customBorderColor));
       expect(card.borderWidth, equals(customBorderWidth));
     });
 
     testWidgets('handles onTap callback', (WidgetTester tester) async {
-      bool tapped = false;
+      var tapped = false;
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               onTap: () {
                 tapped = true;
               },
@@ -303,20 +303,20 @@ void main() {
 
       expect(tapped, isFalse);
 
-      await tester.tap(find.byType(ZephyrCard));
+      await tester.tap(find.byType(VelocityCard));
       await tester.pump();
 
       expect(tapped, isTrue);
     });
 
     testWidgets('handles onLongPress callback', (WidgetTester tester) async {
-      bool longPressed = false;
+      var longPressed = false;
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               onLongPress: () {
                 longPressed = true;
               },
@@ -328,7 +328,7 @@ void main() {
 
       expect(longPressed, isFalse);
 
-      await tester.longPress(find.byType(ZephyrCard));
+      await tester.longPress(find.byType(VelocityCard));
       await tester.pump();
 
       expect(longPressed, isTrue);
@@ -341,7 +341,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               semanticLabel: semanticLabel,
               child: Text('Card with Semantic Label'),
             ),
@@ -349,10 +349,10 @@ void main() {
         ),
       );
 
-      final cardFinder = find.byType(ZephyrCard);
+      final cardFinder = find.byType(VelocityCard);
       expect(cardFinder, findsOneWidget);
 
-      final card = tester.widget<ZephyrCard>(cardFinder);
+      final card = tester.widget<VelocityCard>(cardFinder);
       expect(card.semanticLabel, equals(semanticLabel));
     });
 
@@ -361,7 +361,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               enabled: false,
               onTap: () {},
               child: const Text('Disabled Card'),
@@ -370,10 +370,10 @@ void main() {
         ),
       );
 
-      final cardFinder = find.byType(ZephyrCard);
+      final cardFinder = find.byType(VelocityCard);
       expect(cardFinder, findsOneWidget);
 
-      final card = tester.widget<ZephyrCard>(cardFinder);
+      final card = tester.widget<VelocityCard>(cardFinder);
       expect(card.enabled, isFalse);
     });
 
@@ -382,7 +382,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -411,7 +411,7 @@ void main() {
       expect(find.text('Title'), findsOneWidget);
       expect(find.text('Description text goes here...'), findsOneWidget);
       expect(find.text('Action'), findsOneWidget);
-      expect(find.byType(ZephyrCard), findsOneWidget);
+      expect(find.byType(VelocityCard), findsOneWidget);
     });
 
     testWidgets('handles edge case with empty child',
@@ -420,14 +420,14 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               child: SizedBox(),
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrCard), findsOneWidget);
+      expect(find.byType(VelocityCard), findsOneWidget);
       expect(find.byType(SizedBox), findsOneWidget);
     });
 
@@ -437,12 +437,12 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrCard(),
+            body: VelocityCard(),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrCard), findsOneWidget);
+      expect(find.byType(VelocityCard), findsOneWidget);
     });
 
     testWidgets('handles edge case with zero dimensions',
@@ -451,7 +451,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               width: 0,
               height: 0,
               child: Text('Zero Size Card'),
@@ -461,7 +461,7 @@ void main() {
       );
 
       expect(find.text('Zero Size Card'), findsOneWidget);
-      expect(find.byType(ZephyrCard), findsOneWidget);
+      expect(find.byType(VelocityCard), findsOneWidget);
     });
 
     testWidgets('handles theme inheritance', (WidgetTester tester) async {
@@ -477,7 +477,7 @@ void main() {
         MaterialApp(
           theme: customTheme,
           home: const Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               child: Text('Themed Card'),
             ),
           ),
@@ -485,18 +485,18 @@ void main() {
       );
 
       expect(find.text('Themed Card'), findsOneWidget);
-      expect(find.byType(ZephyrCard), findsOneWidget);
+      expect(find.byType(VelocityCard), findsOneWidget);
     });
 
     testWidgets('handles interactive states correctly',
         (WidgetTester tester) async {
-      int tapCount = 0;
+      var tapCount = 0;
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               onTap: () {
                 tapCount++;
               },
@@ -507,10 +507,10 @@ void main() {
       );
 
       // Test multiple taps
-      await tester.tap(find.byType(ZephyrCard));
+      await tester.tap(find.byType(VelocityCard));
       await tester.pump();
 
-      await tester.tap(find.byType(ZephyrCard));
+      await tester.tap(find.byType(VelocityCard));
       await tester.pump();
 
       expect(tapCount, equals(2));
@@ -522,7 +522,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               semanticLabel: 'Important Card',
               child: Text('Accessible Card'),
             ),
@@ -530,10 +530,10 @@ void main() {
         ),
       );
 
-      final cardFinder = find.byType(ZephyrCard);
+      final cardFinder = find.byType(VelocityCard);
       expect(cardFinder, findsOneWidget);
 
-      final card = tester.widget<ZephyrCard>(cardFinder);
+      final card = tester.widget<VelocityCard>(cardFinder);
       expect(card.semanticLabel, equals('Important Card'));
     });
 
@@ -545,10 +545,10 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                ZephyrCard.flat(child: const Text('Flat')),
-                ZephyrCard.elevated(child: const Text('Elevated')),
-                ZephyrCard.filled(child: const Text('Filled')),
-                ZephyrCard.outlined(child: const Text('Outlined')),
+                VelocityCard.flat(child: const Text('Flat')),
+                VelocityCard.elevated(child: const Text('Elevated')),
+                VelocityCard.filled(child: const Text('Filled')),
+                VelocityCard.outlined(child: const Text('Outlined')),
               ],
             ),
           ),
@@ -559,7 +559,7 @@ void main() {
       expect(find.text('Elevated'), findsOneWidget);
       expect(find.text('Filled'), findsOneWidget);
       expect(find.text('Outlined'), findsOneWidget);
-      expect(find.byType(ZephyrCard), findsNWidgets(4));
+      expect(find.byType(VelocityCard), findsNWidgets(4));
     });
 
     testWidgets('handles custom colors', (WidgetTester tester) async {
@@ -571,7 +571,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               foregroundColor: customForegroundColor,
               shadowColor: customShadowColor,
               surfaceTintColor: customSurfaceTintColor,
@@ -581,23 +581,23 @@ void main() {
         ),
       );
 
-      final cardFinder = find.byType(ZephyrCard);
+      final cardFinder = find.byType(VelocityCard);
       expect(cardFinder, findsOneWidget);
 
-      final card = tester.widget<ZephyrCard>(cardFinder);
+      final card = tester.widget<VelocityCard>(cardFinder);
       expect(card.foregroundColor, equals(customForegroundColor));
       expect(card.shadowColor, equals(customShadowColor));
       expect(card.surfaceTintColor, equals(customSurfaceTintColor));
     });
 
     testWidgets('handles hover callback', (WidgetTester tester) async {
-      bool hovered = false;
+      var hovered = false;
 
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               onHover: (isHovered) {
                 hovered = isHovered;
               },
@@ -622,7 +622,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               focusNode: focusNode,
               autofocus: true,
               child: const Text('Focusable Card'),
@@ -631,10 +631,10 @@ void main() {
         ),
       );
 
-      final cardFinder = find.byType(ZephyrCard);
+      final cardFinder = find.byType(VelocityCard);
       expect(cardFinder, findsOneWidget);
 
-      final card = tester.widget<ZephyrCard>(cardFinder);
+      final card = tester.widget<VelocityCard>(cardFinder);
       expect(card.focusNode, equals(focusNode));
       expect(card.autofocus, isTrue);
 
@@ -646,7 +646,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               clipBehavior: Clip.hardEdge,
               child: Text('Card with Clip'),
             ),
@@ -654,10 +654,10 @@ void main() {
         ),
       );
 
-      final cardFinder = find.byType(ZephyrCard);
+      final cardFinder = find.byType(VelocityCard);
       expect(cardFinder, findsOneWidget);
 
-      final card = tester.widget<ZephyrCard>(cardFinder);
+      final card = tester.widget<VelocityCard>(cardFinder);
       expect(card.clipBehavior, equals(Clip.hardEdge));
     });
 
@@ -670,7 +670,7 @@ void main() {
         MaterialApp(
           theme: theme,
           home: Scaffold(
-            body: ZephyrCard(
+            body: VelocityCard(
               splashColor: customSplashColor,
               highlightColor: customHighlightColor,
               onTap: () {},
@@ -680,10 +680,10 @@ void main() {
         ),
       );
 
-      final cardFinder = find.byType(ZephyrCard);
+      final cardFinder = find.byType(VelocityCard);
       expect(cardFinder, findsOneWidget);
 
-      final card = tester.widget<ZephyrCard>(cardFinder);
+      final card = tester.widget<VelocityCard>(cardFinder);
       expect(card.splashColor, equals(customSplashColor));
       expect(card.highlightColor, equals(customHighlightColor));
     });

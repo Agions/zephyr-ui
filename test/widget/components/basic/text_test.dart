@@ -1,17 +1,17 @@
 /// Text组件基础测试
 ///
-/// 测试ZephyrText组件的基本功能
+/// 测试VelocityText组件的基本功能
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/basic/text/text.dart';
-import 'package:zephyr_ui/src/components/basic/text/text_theme.dart';
-import 'package:zephyr_ui/src/core/theme/theme_config.dart';
+import 'package:velocity_ui/src/components/basic/text/text.dart';
+import 'package:velocity_ui/src/components/basic/text/text_theme.dart';
+import 'package:velocity_ui/src/core/theme/theme_config.dart';
 
 void main() {
-  group('ZephyrText', () {
+  group('VelocityText', () {
     setUp(() {
       // 设置主题
-      ZephyrThemeConfig.createLightTheme();
+      VelocityThemeConfig.createLightTheme();
     });
 
     group('constructor', () {
@@ -19,12 +19,12 @@ void main() {
         await tester.pumpWidget(
           const MaterialApp(
             home: Material(
-              child: ZephyrText('Test Text'),
+              child: VelocityText('Test Text'),
             ),
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text('Test Text'), findsOneWidget);
         expect(find.byType(Text), findsOneWidget);
       });
@@ -39,7 +39,7 @@ void main() {
         await tester.pumpWidget(
           const MaterialApp(
             home: Material(
-              child: ZephyrText(
+              child: VelocityText(
                 'Custom Style',
                 style: customStyle,
               ),
@@ -47,7 +47,7 @@ void main() {
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text('Custom Style'), findsOneWidget);
 
         final textWidget = tester.widget<Text>(find.byType(Text));
@@ -60,7 +60,7 @@ void main() {
         await tester.pumpWidget(
           const MaterialApp(
             home: Material(
-              child: ZephyrText(
+              child: VelocityText(
                 'Colored Text',
                 color: Colors.blue,
               ),
@@ -68,7 +68,7 @@ void main() {
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text('Colored Text'), findsOneWidget);
 
         final textWidget = tester.widget<Text>(find.byType(Text));
@@ -79,7 +79,7 @@ void main() {
         await tester.pumpWidget(
           const MaterialApp(
             home: Material(
-              child: ZephyrText(
+              child: VelocityText(
                 'Aligned Text',
                 textAlign: TextAlign.center,
               ),
@@ -87,7 +87,7 @@ void main() {
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text('Aligned Text'), findsOneWidget);
 
         final textWidget = tester.widget<Text>(find.byType(Text));
@@ -98,7 +98,7 @@ void main() {
         await tester.pumpWidget(
           const MaterialApp(
             home: Material(
-              child: ZephyrText(
+              child: VelocityText(
                 'Long text that should be truncated',
                 maxLines: 2,
               ),
@@ -106,7 +106,7 @@ void main() {
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text('Long text that should be truncated'), findsOneWidget);
 
         final textWidget = tester.widget<Text>(find.byType(Text));
@@ -117,7 +117,7 @@ void main() {
         await tester.pumpWidget(
           const MaterialApp(
             home: Material(
-              child: ZephyrText(
+              child: VelocityText(
                 'Very long text that will overflow',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -126,7 +126,7 @@ void main() {
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text('Very long text that will overflow'), findsOneWidget);
 
         final textWidget = tester.widget<Text>(find.byType(Text));
@@ -137,7 +137,7 @@ void main() {
         await tester.pumpWidget(
           const MaterialApp(
             home: Material(
-              child: ZephyrText(
+              child: VelocityText(
                 'Soft wrap text',
                 softWrap: true,
               ),
@@ -145,7 +145,7 @@ void main() {
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text('Soft wrap text'), findsOneWidget);
 
         final textWidget = tester.widget<Text>(find.byType(Text));
@@ -156,7 +156,7 @@ void main() {
         await tester.pumpWidget(
           const MaterialApp(
             home: Material(
-              child: ZephyrText(
+              child: VelocityText(
                 'Scaled text',
                 textScaleFactor: 1.5,
               ),
@@ -164,7 +164,7 @@ void main() {
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text('Scaled text'), findsOneWidget);
 
         final textWidget = tester.widget<Text>(find.byType(Text));
@@ -177,12 +177,12 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrText.headlineLarge('Headline Large'),
+              child: VelocityText.headlineLarge('Headline Large'),
             ),
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text('Headline Large'), findsOneWidget);
       });
 
@@ -190,12 +190,12 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrText.headlineMedium('Headline Medium'),
+              child: VelocityText.headlineMedium('Headline Medium'),
             ),
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text('Headline Medium'), findsOneWidget);
       });
 
@@ -203,12 +203,12 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrText.headlineSmall('Headline Small'),
+              child: VelocityText.headlineSmall('Headline Small'),
             ),
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text('Headline Small'), findsOneWidget);
       });
     });
@@ -218,12 +218,12 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrText.titleLarge('Title Large'),
+              child: VelocityText.titleLarge('Title Large'),
             ),
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text('Title Large'), findsOneWidget);
       });
 
@@ -231,12 +231,12 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrText.titleMedium('Title Medium'),
+              child: VelocityText.titleMedium('Title Medium'),
             ),
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text('Title Medium'), findsOneWidget);
       });
 
@@ -244,12 +244,12 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrText.titleSmall('Title Small'),
+              child: VelocityText.titleSmall('Title Small'),
             ),
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text('Title Small'), findsOneWidget);
       });
     });
@@ -259,12 +259,12 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrText.bodyLarge('Body Large'),
+              child: VelocityText.bodyLarge('Body Large'),
             ),
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text('Body Large'), findsOneWidget);
       });
 
@@ -272,12 +272,12 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrText.bodyMedium('Body Medium'),
+              child: VelocityText.bodyMedium('Body Medium'),
             ),
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text('Body Medium'), findsOneWidget);
       });
 
@@ -285,12 +285,12 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrText.bodySmall('Body Small'),
+              child: VelocityText.bodySmall('Body Small'),
             ),
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text('Body Small'), findsOneWidget);
       });
     });
@@ -300,12 +300,12 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrText.labelLarge('Label Large'),
+              child: VelocityText.labelLarge('Label Large'),
             ),
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text('Label Large'), findsOneWidget);
       });
 
@@ -313,12 +313,12 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrText.labelMedium('Label Medium'),
+              child: VelocityText.labelMedium('Label Medium'),
             ),
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text('Label Medium'), findsOneWidget);
       });
 
@@ -326,19 +326,19 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrText.labelSmall('Label Small'),
+              child: VelocityText.labelSmall('Label Small'),
             ),
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text('Label Small'), findsOneWidget);
       });
     });
 
     group('custom theme', () {
       testWidgets('应该支持自定义主题', (WidgetTester tester) async {
-        const customTheme = ZephyrTextTheme(
+        const customTheme = VelocityTextTheme(
           primaryColor: Colors.purple,
           secondaryColor: Colors.orange,
           errorColor: Colors.red,
@@ -369,7 +369,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrText.headlineLarge(
+              child: VelocityText.headlineLarge(
                 'Custom Theme',
                 theme: customTheme,
               ),
@@ -377,7 +377,7 @@ void main() {
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text('Custom Theme'), findsOneWidget);
       });
     });
@@ -385,18 +385,18 @@ void main() {
     group('all variants', () {
       testWidgets('应该支持所有文本变体', (WidgetTester tester) async {
         final variants = [
-          () => ZephyrText.headlineLarge('Test'),
-          () => ZephyrText.headlineMedium('Test'),
-          () => ZephyrText.headlineSmall('Test'),
-          () => ZephyrText.titleLarge('Test'),
-          () => ZephyrText.titleMedium('Test'),
-          () => ZephyrText.titleSmall('Test'),
-          () => ZephyrText.bodyLarge('Test'),
-          () => ZephyrText.bodyMedium('Test'),
-          () => ZephyrText.bodySmall('Test'),
-          () => ZephyrText.labelLarge('Test'),
-          () => ZephyrText.labelMedium('Test'),
-          () => ZephyrText.labelSmall('Test'),
+          () => VelocityText.headlineLarge('Test'),
+          () => VelocityText.headlineMedium('Test'),
+          () => VelocityText.headlineSmall('Test'),
+          () => VelocityText.titleLarge('Test'),
+          () => VelocityText.titleMedium('Test'),
+          () => VelocityText.titleSmall('Test'),
+          () => VelocityText.bodyLarge('Test'),
+          () => VelocityText.bodyMedium('Test'),
+          () => VelocityText.bodySmall('Test'),
+          () => VelocityText.labelLarge('Test'),
+          () => VelocityText.labelMedium('Test'),
+          () => VelocityText.labelSmall('Test'),
         ];
 
         for (final variantBuilder in variants) {
@@ -408,7 +408,7 @@ void main() {
             ),
           );
 
-          expect(find.byType(ZephyrText), findsOneWidget);
+          expect(find.byType(VelocityText), findsOneWidget);
           expect(find.text('Test'), findsOneWidget);
 
           // 清理widget树
@@ -422,12 +422,12 @@ void main() {
         await tester.pumpWidget(
           const MaterialApp(
             home: Material(
-              child: ZephyrText(''),
+              child: VelocityText(''),
             ),
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text(''), findsOneWidget);
       });
 
@@ -439,27 +439,27 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: ZephyrText(longText),
+              child: VelocityText(longText),
             ),
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text(longText), findsOneWidget);
       });
 
       testWidgets('应该处理特殊字符', (WidgetTester tester) async {
-        const specialText = 'Special chars: @#\$%^&*()_+-=[]{}|;:,.<>?';
+        const specialText = r'Special chars: @#$%^&*()_+-=[]{}|;:,.<>?';
 
         await tester.pumpWidget(
           const MaterialApp(
             home: Material(
-              child: ZephyrText(specialText),
+              child: VelocityText(specialText),
             ),
           ),
         );
 
-        expect(find.byType(ZephyrText), findsOneWidget);
+        expect(find.byType(VelocityText), findsOneWidget);
         expect(find.text(specialText), findsOneWidget);
       });
     });

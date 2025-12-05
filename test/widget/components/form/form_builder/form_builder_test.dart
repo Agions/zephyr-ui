@@ -1,35 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/form/form_builder/form_builder.dart';
-import 'package:zephyr_ui/src/components/form/form_builder/form_field.dart';
-import 'package:zephyr_ui/src/components/form/form_builder/form_validator.dart';
-import 'package:zephyr_ui/src/components/form/form_builder/form_builder_theme.dart';
+import 'package:velocity_ui/src/components/form/form_builder/form_builder.dart';
+import 'package:velocity_ui/src/components/form/form_builder/form_field.dart';
+import 'package:velocity_ui/src/components/form/form_builder/form_validator.dart';
+import 'package:velocity_ui/src/components/form/form_builder/form_builder_theme.dart';
 
 void main() {
-  group('ZephyrFormBuilder', () {
-    late List<ZephyrFormField> testFields;
+  group('VelocityFormBuilder', () {
+    late List<VelocityFormField> testFields;
 
     setUp(() {
       testFields = [
-        const ZephyrFormField(
+        const VelocityFormField(
           name: 'username',
           label: '用户名',
-          type: ZephyrFormFieldType.text,
+          type: VelocityFormFieldType.text,
           required: true,
           validators: [
-            ZephyrLengthValidator(minLength: 3, maxLength: 20),
+            VelocityLengthValidator(minLength: 3, maxLength: 20),
           ],
         ),
-        const ZephyrFormField(
+        const VelocityFormField(
           name: 'email',
           label: '邮箱',
-          type: ZephyrFormFieldType.email,
+          type: VelocityFormFieldType.email,
           required: true,
         ),
-        const ZephyrFormField(
+        const VelocityFormField(
           name: 'age',
           label: '年龄',
-          type: ZephyrFormFieldType.number,
+          type: VelocityFormFieldType.number,
           defaultValue: 18,
         ),
       ];
@@ -39,7 +39,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrFormBuilder(
+            body: VelocityFormBuilder(
               fields: testFields,
               onSubmit: (values) {},
               onChange: (values) {},
@@ -61,7 +61,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrFormBuilder(
+            body: VelocityFormBuilder(
               fields: testFields,
               onSubmit: (values) {},
               onChange: (values) {
@@ -82,13 +82,13 @@ void main() {
     });
 
     testWidgets('validates required fields', (WidgetTester tester) async {
-      bool isValid = false;
+      var isValid = false;
       Map<String, String?>? errors;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrFormBuilder(
+            body: VelocityFormBuilder(
               fields: testFields,
               onSubmit: (values) {},
               onChange: (values) {},
@@ -117,7 +117,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrFormBuilder(
+            body: VelocityFormBuilder(
               fields: testFields,
               onSubmit: (values) {},
               onChange: (values) {},
@@ -146,7 +146,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrFormBuilder(
+            body: VelocityFormBuilder(
               fields: testFields,
               onSubmit: (values) {},
               onChange: (values) {},
@@ -171,13 +171,13 @@ void main() {
     });
 
     testWidgets('handles form submission', (WidgetTester tester) async {
-      bool submitted = false;
+      var submitted = false;
       Map<String, dynamic>? submittedValues;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrFormBuilder(
+            body: VelocityFormBuilder(
               fields: testFields,
               onSubmit: (values) {
                 submitted = true;
@@ -216,7 +216,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrFormBuilder(
+            body: VelocityFormBuilder(
               fields: testFields,
               onSubmit: (values) {},
               onChange: (values) {
@@ -245,7 +245,7 @@ void main() {
     });
 
     testWidgets('applies custom theme', (WidgetTester tester) async {
-      final customTheme = ZephyrFormBuilderTheme.custom(
+      final customTheme = VelocityFormBuilderTheme.custom(
         primaryColor: Colors.red,
         labelStyle: const TextStyle(fontSize: 16),
       );
@@ -253,7 +253,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrFormBuilder(
+            body: VelocityFormBuilder(
               fields: testFields,
               onSubmit: (values) {},
               onChange: (values) {},
@@ -270,39 +270,39 @@ void main() {
 
     testWidgets('supports different field types', (WidgetTester tester) async {
       final fields = [
-        const ZephyrFormField(
+        const VelocityFormField(
           name: 'text',
           label: '文本',
-          type: ZephyrFormFieldType.text,
+          type: VelocityFormFieldType.text,
         ),
-        const ZephyrFormField(
+        const VelocityFormField(
           name: 'textarea',
           label: '多行文本',
-          type: ZephyrFormFieldType.textarea,
+          type: VelocityFormFieldType.textarea,
         ),
-        const ZephyrFormField(
+        const VelocityFormField(
           name: 'password',
           label: '密码',
-          type: ZephyrFormFieldType.password,
+          type: VelocityFormFieldType.password,
         ),
-        const ZephyrFormField(
+        const VelocityFormField(
           name: 'select',
           label: '选择',
-          type: ZephyrFormFieldType.select,
+          type: VelocityFormFieldType.select,
           options: [
-            ZephyrFormFieldOption(value: 'option1', label: '选项1'),
-            ZephyrFormFieldOption(value: 'option2', label: '选项2'),
+            VelocityFormFieldOption(value: 'option1', label: '选项1'),
+            VelocityFormFieldOption(value: 'option2', label: '选项2'),
           ],
         ),
-        const ZephyrFormField(
+        const VelocityFormField(
           name: 'switch',
           label: '开关',
-          type: ZephyrFormFieldType.switchField,
+          type: VelocityFormFieldType.switchField,
         ),
-        const ZephyrFormField(
+        const VelocityFormField(
           name: 'slider',
           label: '滑块',
-          type: ZephyrFormFieldType.slider,
+          type: VelocityFormFieldType.slider,
         ),
       ];
 
@@ -310,7 +310,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: SingleChildScrollView(
-              child: ZephyrFormBuilder(
+              child: VelocityFormBuilder(
                 fields: fields,
                 onSubmit: (values) {},
                 onChange: (values) {},
@@ -331,16 +331,16 @@ void main() {
     });
   });
 
-  group('ZephyrFormValidator', () {
+  group('VelocityFormValidator', () {
     test('required validator validates empty values', () {
-      const validator = ZephyrRequiredValidator();
+      const validator = VelocityRequiredValidator();
       expect(validator.validate(null), isNotNull);
       expect(validator.validate(''), isNotNull);
       expect(validator.validate('test'), isNull);
     });
 
     test('length validator validates string length', () {
-      const validator = ZephyrLengthValidator(minLength: 3, maxLength: 10);
+      const validator = VelocityLengthValidator(minLength: 3, maxLength: 10);
       expect(validator.validate('ab'), isNotNull);
       expect(validator.validate('abcdefghijk'), isNotNull);
       expect(validator.validate('abc'), isNull);
@@ -348,13 +348,13 @@ void main() {
     });
 
     test('email validator validates email format', () {
-      const validator = ZephyrEmailValidator();
+      const validator = VelocityEmailValidator();
       expect(validator.validate('invalid-email'), isNotNull);
       expect(validator.validate('test@example.com'), isNull);
     });
 
     test('number validator validates numeric values', () {
-      const validator = ZephyrNumberValidator(minValue: 0, maxValue: 100);
+      const validator = VelocityNumberValidator(minValue: 0, maxValue: 100);
       expect(validator.validate('abc'), isNotNull);
       expect(validator.validate('-1'), isNotNull);
       expect(validator.validate('101'), isNotNull);
@@ -362,15 +362,15 @@ void main() {
     });
 
     test('regex validator validates pattern', () {
-      final validator = ZephyrRegexValidator(RegExp(r'^[A-Z]+$'));
+      final validator = VelocityRegexValidator(RegExp(r'^[A-Z]+$'));
       expect(validator.validate('abc'), isNotNull);
       expect(validator.validate('ABC'), isNull);
     });
 
     test('composite validator validates with multiple validators', () {
-      const validator = ZephyrCompositeValidator([
-        ZephyrRequiredValidator(),
-        ZephyrLengthValidator(minLength: 3),
+      const validator = VelocityCompositeValidator([
+        VelocityRequiredValidator(),
+        VelocityLengthValidator(minLength: 3),
       ]);
       expect(validator.validate(null), isNotNull);
       expect(validator.validate('ab'), isNotNull);
@@ -378,30 +378,30 @@ void main() {
     });
   });
 
-  group('ZephyrFormField', () {
+  group('VelocityFormField', () {
     test('creates field with required parameters', () {
-      const field = ZephyrFormField(
+      const field = VelocityFormField(
         name: 'test',
         label: 'Test Field',
-        type: ZephyrFormFieldType.text,
+        type: VelocityFormFieldType.text,
       );
       expect(field.name, equals('test'));
       expect(field.label, equals('Test Field'));
-      expect(field.type, equals(ZephyrFormFieldType.text));
+      expect(field.type, equals(VelocityFormFieldType.text));
       expect(field.required, isFalse);
     });
 
     test('creates field with all parameters', () {
-      const field = ZephyrFormField(
+      const field = VelocityFormField(
         name: 'test',
         label: 'Test Field',
-        type: ZephyrFormFieldType.text,
+        type: VelocityFormFieldType.text,
         required: true,
         placeholder: 'Enter value',
         helpText: 'This is a test field',
         description: 'Test field description',
         defaultValue: 'default',
-        validators: [ZephyrRequiredValidator()],
+        validators: [VelocityRequiredValidator()],
       );
       expect(field.name, equals('test'));
       expect(field.label, equals('Test Field'));
@@ -414,13 +414,13 @@ void main() {
     });
 
     test('validates field value', () {
-      const field = ZephyrFormField(
+      const field = VelocityFormField(
         name: 'test',
         label: 'Test Field',
-        type: ZephyrFormFieldType.text,
+        type: VelocityFormFieldType.text,
         required: true,
         validators: [
-          ZephyrLengthValidator(minLength: 3),
+          VelocityLengthValidator(minLength: 3),
         ],
       );
       expect(field.validate(null), isNotNull);
@@ -429,10 +429,10 @@ void main() {
     });
 
     test('checks field visibility', () {
-      final field = ZephyrFormField(
+      final field = VelocityFormField(
         name: 'test',
         label: 'Test Field',
-        type: ZephyrFormFieldType.text,
+        type: VelocityFormFieldType.text,
         visible: (values) => values['show'] == true,
       );
       expect(field.isVisible({'show': true}), isTrue);
@@ -440,10 +440,10 @@ void main() {
     });
 
     test('checks field enabled state', () {
-      final field = ZephyrFormField(
+      final field = VelocityFormField(
         name: 'test',
         label: 'Test Field',
-        type: ZephyrFormFieldType.text,
+        type: VelocityFormFieldType.text,
         enabled: (values) => values['enable'] == true,
       );
       expect(field.isEnabled({'enable': true}), isTrue);
@@ -451,9 +451,9 @@ void main() {
     });
   });
 
-  group('ZephyrFormFieldOption', () {
+  group('VelocityFormFieldOption', () {
     test('creates option with required parameters', () {
-      const option = ZephyrFormFieldOption(
+      const option = VelocityFormFieldOption(
         value: 'test',
         label: 'Test Option',
       );
@@ -463,7 +463,7 @@ void main() {
     });
 
     test('creates option with all parameters', () {
-      const option = ZephyrFormFieldOption(
+      const option = VelocityFormFieldOption(
         value: 'test',
         label: 'Test Option',
         description: 'Test option description',
@@ -478,21 +478,21 @@ void main() {
     });
   });
 
-  group('ZephyrFormBuilderTheme', () {
+  group('VelocityFormBuilderTheme', () {
     test('creates light theme', () {
-      final theme = ZephyrFormBuilderTheme.light();
+      final theme = VelocityFormBuilderTheme.light();
       expect(theme.backgroundColor, equals(Colors.white));
       expect(theme.primaryColor, equals(const Color(0xFF3B82F6)));
     });
 
     test('creates dark theme', () {
-      final theme = ZephyrFormBuilderTheme.dark();
+      final theme = VelocityFormBuilderTheme.dark();
       expect(theme.backgroundColor, equals(const Color(0xFF1F2937)));
       expect(theme.primaryColor, equals(const Color(0xFF60A5FA)));
     });
 
     test('creates custom theme', () {
-      final theme = ZephyrFormBuilderTheme.custom(
+      final theme = VelocityFormBuilderTheme.custom(
         primaryColor: Colors.red,
         labelStyle: const TextStyle(fontSize: 16),
       );
@@ -501,43 +501,43 @@ void main() {
     });
 
     test('copies theme with modifications', () {
-      final theme = ZephyrFormBuilderTheme.light();
+      final theme = VelocityFormBuilderTheme.light();
       final modified = theme.copyWith(primaryColor: Colors.blue);
       expect(modified.primaryColor, equals(Colors.blue));
       expect(modified.backgroundColor, equals(theme.backgroundColor));
     });
 
     test('merges themes', () {
-      final theme1 = ZephyrFormBuilderTheme.light();
-      final theme2 = ZephyrFormBuilderTheme.custom(primaryColor: Colors.red);
+      final theme1 = VelocityFormBuilderTheme.light();
+      final theme2 = VelocityFormBuilderTheme.custom(primaryColor: Colors.red);
       final merged = theme1.merge(theme2);
       expect(merged.primaryColor, equals(Colors.red));
       expect(merged.backgroundColor, equals(theme1.backgroundColor));
     });
 
     test('compares themes for equality', () {
-      final theme1 = ZephyrFormBuilderTheme.light();
-      final theme2 = ZephyrFormBuilderTheme.light();
+      final theme1 = VelocityFormBuilderTheme.light();
+      final theme2 = VelocityFormBuilderTheme.light();
       expect(theme1, equals(theme2));
     });
 
     test('computes hash code', () {
-      final theme = ZephyrFormBuilderTheme.light();
+      final theme = VelocityFormBuilderTheme.light();
       expect(theme.hashCode, isA<int>());
     });
   });
 
-  group('ZephyrFormState', () {
+  group('VelocityFormState', () {
     test('creates initial state', () {
       final fields = [
-        const ZephyrFormField(
+        const VelocityFormField(
           name: 'test',
           label: 'Test',
-          type: ZephyrFormFieldType.text,
+          type: VelocityFormFieldType.text,
           defaultValue: 'default',
         ),
       ];
-      final state = ZephyrFormState.initial(fields);
+      final state = VelocityFormState.initial(fields);
       expect(state.values['test'], equals('default'));
       expect(state.isValid, isTrue);
       expect(state.isSubmitting, isFalse);
@@ -545,13 +545,13 @@ void main() {
 
     test('copies state with modifications', () {
       final fields = [
-        const ZephyrFormField(
+        const VelocityFormField(
           name: 'test',
           label: 'Test',
-          type: ZephyrFormFieldType.text,
+          type: VelocityFormFieldType.text,
         ),
       ];
-      final state = ZephyrFormState.initial(fields);
+      final state = VelocityFormState.initial(fields);
       final modified = state.copyWith(
         values: {'test': 'modified'},
         isValid: false,

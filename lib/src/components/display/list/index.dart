@@ -1,2 +1,3 @@
+library list;
 export 'list.dart';
-export 'list_theme.dart';
+export 'list_style.dart';

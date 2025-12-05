@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/src/components/form/input/input.dart';
+import 'package:velocity_ui/src/components/form/input/input.dart';
 
 void main() {
-  group('ZephyrInput Widget Tests', () {
+  group('VelocityInput Widget Tests', () {
     testWidgets('renders input with default properties',
         (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrInput(
+            body: VelocityInput(
               label: 'Username',
               placeholder: 'Enter your username',
             ),
@@ -17,7 +17,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrInput), findsOneWidget);
+      expect(find.byType(VelocityInput), findsOneWidget);
       expect(find.byType(TextFormField), findsOneWidget);
     });
 
@@ -27,7 +27,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrInput(
+            body: VelocityInput(
               controller: controller,
               label: 'Test',
             ),
@@ -35,7 +35,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrInput), findsOneWidget);
+      expect(find.byType(VelocityInput), findsOneWidget);
       expect(find.byType(TextFormField), findsOneWidget);
 
       controller.dispose();
@@ -46,7 +46,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrInput(
+            body: VelocityInput(
               initialValue: 'Hello World',
               label: 'Test',
             ),
@@ -54,7 +54,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrInput), findsOneWidget);
+      expect(find.byType(VelocityInput), findsOneWidget);
       expect(find.byType(TextFormField), findsOneWidget);
     });
 
@@ -63,7 +63,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrInput.password(
+            body: VelocityInput.password(
               label: 'Password',
               placeholder: 'Enter your password',
             ),
@@ -71,7 +71,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrInput), findsOneWidget);
+      expect(find.byType(VelocityInput), findsOneWidget);
       expect(find.byType(TextFormField), findsOneWidget);
       expect(find.byIcon(Icons.visibility), findsOneWidget);
     });
@@ -81,7 +81,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrInput.email(
+            body: VelocityInput.email(
               label: 'Email',
               placeholder: 'Enter your email',
             ),
@@ -89,7 +89,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrInput), findsOneWidget);
+      expect(find.byType(VelocityInput), findsOneWidget);
       expect(find.byType(TextFormField), findsOneWidget);
     });
 
@@ -98,7 +98,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrInput.textarea(
+            body: VelocityInput.textarea(
               label: 'Description',
               placeholder: 'Enter your description',
             ),
@@ -106,7 +106,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrInput), findsOneWidget);
+      expect(find.byType(VelocityInput), findsOneWidget);
       expect(find.byType(TextFormField), findsOneWidget);
     });
 
@@ -114,7 +114,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrInput(
+            body: VelocityInput(
               label: 'Email',
               prefixIcon: Icon(Icons.email),
             ),
@@ -122,7 +122,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrInput), findsOneWidget);
+      expect(find.byType(VelocityInput), findsOneWidget);
       expect(find.byIcon(Icons.email), findsOneWidget);
     });
 
@@ -130,7 +130,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrInput(
+            body: VelocityInput(
               label: 'Search',
               suffixIcon: Icon(Icons.search),
             ),
@@ -138,7 +138,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrInput), findsOneWidget);
+      expect(find.byType(VelocityInput), findsOneWidget);
       expect(find.byIcon(Icons.search), findsOneWidget);
     });
 
@@ -147,16 +147,16 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrInput(
+            body: VelocityInput(
               label: 'Amount',
-              prefix: Text('\$'),
+              prefix: Text(r'$'),
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrInput), findsOneWidget);
-      expect(find.text('\$'), findsOneWidget);
+      expect(find.byType(VelocityInput), findsOneWidget);
+      expect(find.text(r'$'), findsOneWidget);
     });
 
     testWidgets('handles input with suffix widget',
@@ -164,7 +164,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrInput(
+            body: VelocityInput(
               label: 'Price',
               suffix: Text('USD'),
             ),
@@ -172,7 +172,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrInput), findsOneWidget);
+      expect(find.byType(VelocityInput), findsOneWidget);
       expect(find.text('USD'), findsOneWidget);
     });
 
@@ -180,7 +180,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrInput(
+            body: VelocityInput(
               label: 'Disabled',
               enabled: false,
             ),
@@ -188,7 +188,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrInput), findsOneWidget);
+      expect(find.byType(VelocityInput), findsOneWidget);
       expect(find.byType(TextFormField), findsOneWidget);
     });
 
@@ -196,7 +196,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrInput(
+            body: VelocityInput(
               label: 'Read-only',
               readOnly: true,
             ),
@@ -204,7 +204,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrInput), findsOneWidget);
+      expect(find.byType(VelocityInput), findsOneWidget);
       expect(find.byType(TextFormField), findsOneWidget);
     });
 
@@ -212,7 +212,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrInput(
+            body: VelocityInput(
               label: 'Limited',
               maxLength: 10,
             ),
@@ -220,7 +220,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrInput), findsOneWidget);
+      expect(find.byType(VelocityInput), findsOneWidget);
       expect(find.byType(TextFormField), findsOneWidget);
     });
 
@@ -229,14 +229,14 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrInput.password(
+            body: VelocityInput.password(
               label: 'Password',
             ),
           ),
         ),
       );
 
-      expect(find.byType(ZephyrInput), findsOneWidget);
+      expect(find.byType(VelocityInput), findsOneWidget);
       expect(find.byIcon(Icons.visibility), findsOneWidget);
 
       // Tap the visibility toggle
@@ -247,12 +247,12 @@ void main() {
     });
 
     testWidgets('handles input callbacks', (WidgetTester tester) async {
-      bool tapped = false;
+      var tapped = false;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrInput(
+            body: VelocityInput(
               label: 'Callbacks',
               onTap: () => tapped = true,
             ),
@@ -260,7 +260,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrInput), findsOneWidget);
+      expect(find.byType(VelocityInput), findsOneWidget);
       expect(find.byType(TextFormField), findsOneWidget);
 
       // Test tap callback
@@ -274,7 +274,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrInput(
+            body: VelocityInput(
               label: 'Null Values',
               controller: null,
               initialValue: null,
@@ -299,7 +299,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrInput), findsOneWidget);
+      expect(find.byType(VelocityInput), findsOneWidget);
     });
 
     testWidgets('handles multiple inputs in same screen',
@@ -309,17 +309,17 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                ZephyrInput(
+                VelocityInput(
                   label: 'First Name',
                   placeholder: 'Enter first name',
                 ),
                 SizedBox(height: 16),
-                ZephyrInput(
+                VelocityInput(
                   label: 'Last Name',
                   placeholder: 'Enter last name',
                 ),
                 SizedBox(height: 16),
-                ZephyrInput.email(
+                VelocityInput.email(
                   label: 'Email',
                   placeholder: 'Enter email',
                 ),
@@ -329,7 +329,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrInput), findsNWidgets(3));
+      expect(find.byType(VelocityInput), findsNWidgets(3));
     });
 
     testWidgets('handles input with empty strings',
@@ -337,7 +337,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrInput(
+            body: VelocityInput(
               label: '',
               placeholder: '',
             ),
@@ -345,7 +345,7 @@ void main() {
         ),
       );
 
-      expect(find.byType(ZephyrInput), findsOneWidget);
+      expect(find.byType(VelocityInput), findsOneWidget);
       expect(find.byType(TextFormField), findsOneWidget);
     });
   });

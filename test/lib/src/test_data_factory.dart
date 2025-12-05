@@ -4,8 +4,8 @@
 library test_data_factory;
 
 import 'package:flutter/material.dart';
-import 'package:zephyr_ui/src/core/constants/design_tokens.dart';
-import 'package:zephyr_ui/src/core/constants/enums.dart';
+import 'package:velocity_ui/src/core/constants/design_tokens.dart';
+import 'package:velocity_ui/src/core/constants/enums.dart';
 
 /// 测试数据工厂基类
 abstract class TestDataFactory<T> {
@@ -283,26 +283,21 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
   @override
   ThemeData create() {
     return ThemeData(
-      primarySwatch: Colors.blue,
       brightness: Brightness.light,
-      primaryColor: ZephyrColors.primary500,
-      scaffoldBackgroundColor: ZephyrColors.neutral50,
+      primaryColor: VelocityColors.primary500,
+      scaffoldBackgroundColor: VelocityColors.neutral50,
       cardColor: Colors.white,
-      dividerColor: ZephyrColors.neutral200,
-      focusColor: ZephyrColors.primary500,
-      hoverColor: ZephyrColors.primary100,
-      splashColor: ZephyrColors.primary200,
-      highlightColor: ZephyrColors.primary100,
-      disabledColor: ZephyrColors.neutral300,
-      errorColor: ZephyrColors.error500,
-      backgroundColor: ZephyrColors.neutral50,
-      dialogBackgroundColor: Colors.white,
-      indicatorColor: ZephyrColors.primary500,
-      hintColor: ZephyrColors.neutral400,
+      dividerColor: VelocityColors.neutral200,
+      focusColor: VelocityColors.primary500,
+      hoverColor: VelocityColors.primary100,
+      splashColor: VelocityColors.primary200,
+      highlightColor: VelocityColors.primary100,
+      disabledColor: VelocityColors.neutral300,
+      indicatorColor: VelocityColors.primary500,
+      hintColor: VelocityColors.neutral400,
       shadowColor: Colors.black.withOpacity(0.1),
-      selectedRowColor: ZephyrColors.primary100,
-      unselectedWidgetColor: ZephyrColors.neutral400,
-      secondaryHeaderColor: ZephyrColors.neutral100,
+      unselectedWidgetColor: VelocityColors.neutral400,
+      secondaryHeaderColor: VelocityColors.neutral100,
       textTheme: _createTextTheme(),
       iconTheme: _createIconTheme(),
       appBarTheme: _createAppBarTheme(),
@@ -338,7 +333,7 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
       sliderThemeData: _createSliderThemeData(),
       tabBarThemeData: _createTabBarThemeData(),
       chipThemeData: _createChipThemeData(),
-      inputDecorationThemeData: _createInputDecorationThemeData(),
+      inputDecorationThemeData: _createInputDecorationThemeData(), colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue).copyWith(surface: VelocityColors.neutral50).copyWith(error: VelocityColors.error500),
     );
   }
   
@@ -361,106 +356,106 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
   TextTheme _createTextTheme() {
     return TextTheme(
       displayLarge: TextStyle(
-        fontSize: ZephyrTypography.fontSize48,
-        fontWeight: ZephyrTypography.fontWeightBold,
-        color: ZephyrColors.neutral900,
+        fontSize: VelocityTypography.fontSize48,
+        fontWeight: VelocityTypography.fontWeightBold,
+        color: VelocityColors.neutral900,
       ),
       displayMedium: TextStyle(
-        fontSize: ZephyrTypography.fontSize36,
-        fontWeight: ZephyrTypography.fontWeightBold,
-        color: ZephyrColors.neutral900,
+        fontSize: VelocityTypography.fontSize36,
+        fontWeight: VelocityTypography.fontWeightBold,
+        color: VelocityColors.neutral900,
       ),
       displaySmall: TextStyle(
-        fontSize: ZephyrTypography.fontSize32,
-        fontWeight: ZephyrTypography.fontWeightBold,
-        color: ZephyrColors.neutral900,
+        fontSize: VelocityTypography.fontSize32,
+        fontWeight: VelocityTypography.fontWeightBold,
+        color: VelocityColors.neutral900,
       ),
       headlineLarge: TextStyle(
-        fontSize: ZephyrTypography.fontSize28,
-        fontWeight: ZephyrTypography.fontWeightSemiBold,
-        color: ZephyrColors.neutral900,
+        fontSize: VelocityTypography.fontSize28,
+        fontWeight: VelocityTypography.fontWeightSemiBold,
+        color: VelocityColors.neutral900,
       ),
       headlineMedium: TextStyle(
-        fontSize: ZephyrTypography.fontSize24,
-        fontWeight: ZephyrTypography.fontWeightSemiBold,
-        color: ZephyrColors.neutral900,
+        fontSize: VelocityTypography.fontSize24,
+        fontWeight: VelocityTypography.fontWeightSemiBold,
+        color: VelocityColors.neutral900,
       ),
       headlineSmall: TextStyle(
-        fontSize: ZephyrTypography.fontSize20,
-        fontWeight: ZephyrTypography.fontWeightSemiBold,
-        color: ZephyrColors.neutral900,
+        fontSize: VelocityTypography.fontSize20,
+        fontWeight: VelocityTypography.fontWeightSemiBold,
+        color: VelocityColors.neutral900,
       ),
       titleLarge: TextStyle(
-        fontSize: ZephyrTypography.fontSize18,
-        fontWeight: ZephyrTypography.fontWeightMedium,
-        color: ZephyrColors.neutral900,
+        fontSize: VelocityTypography.fontSize18,
+        fontWeight: VelocityTypography.fontWeightMedium,
+        color: VelocityColors.neutral900,
       ),
       titleMedium: TextStyle(
-        fontSize: ZephyrTypography.fontSize16,
-        fontWeight: ZephyrTypography.fontWeightMedium,
-        color: ZephyrColors.neutral900,
+        fontSize: VelocityTypography.fontSize16,
+        fontWeight: VelocityTypography.fontWeightMedium,
+        color: VelocityColors.neutral900,
       ),
       titleSmall: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightMedium,
-        color: ZephyrColors.neutral900,
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightMedium,
+        color: VelocityColors.neutral900,
       ),
       bodyLarge: TextStyle(
-        fontSize: ZephyrTypography.fontSize16,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral800,
+        fontSize: VelocityTypography.fontSize16,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral800,
       ),
       bodyMedium: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral800,
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral800,
       ),
       bodySmall: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral600,
+        fontSize: VelocityTypography.fontSize12,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral600,
       ),
       labelLarge: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightMedium,
-        color: ZephyrColors.neutral700,
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightMedium,
+        color: VelocityColors.neutral700,
       ),
       labelMedium: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightMedium,
-        color: ZephyrColors.neutral700,
+        fontSize: VelocityTypography.fontSize12,
+        fontWeight: VelocityTypography.fontWeightMedium,
+        color: VelocityColors.neutral700,
       ),
       labelSmall: TextStyle(
-        fontSize: ZephyrTypography.fontSize10,
-        fontWeight: ZephyrTypography.fontWeightMedium,
-        color: ZephyrColors.neutral700,
+        fontSize: VelocityTypography.fontSize10,
+        fontWeight: VelocityTypography.fontWeightMedium,
+        color: VelocityColors.neutral700,
       ),
     );
   }
   
   IconThemeData _createIconTheme() {
-    return IconThemeData(
-      color: ZephyrColors.neutral700,
+    return const IconThemeData(
+      color: VelocityColors.neutral700,
       size: 24.0,
     );
   }
   
   AppBarTheme _createAppBarTheme() {
     return AppBarTheme(
-      backgroundColor: ZephyrColors.primary500,
+      backgroundColor: VelocityColors.primary500,
       foregroundColor: Colors.white,
       elevation: 0,
       centerTitle: true,
       titleTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize18,
-        fontWeight: ZephyrTypography.fontWeightMedium,
+        fontSize: VelocityTypography.fontSize18,
+        fontWeight: VelocityTypography.fontWeightMedium,
         color: Colors.white,
       ),
-      iconTheme: IconThemeData(
+      iconTheme: const IconThemeData(
         color: Colors.white,
         size: 24.0,
       ),
-      actionsIconTheme: IconThemeData(
+      actionsIconTheme: const IconThemeData(
         color: Colors.white,
         size: 24.0,
       ),
@@ -469,19 +464,19 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
   
   ButtonThemeData _createButtonTheme() {
     return ButtonThemeData(
-      buttonColor: ZephyrColors.primary500,
-      disabledColor: ZephyrColors.neutral300,
-      highlightColor: ZephyrColors.primary200,
-      splashColor: ZephyrColors.primary100,
-      focusColor: ZephyrColors.primary500,
-      hoverColor: ZephyrColors.primary100,
+      buttonColor: VelocityColors.primary500,
+      disabledColor: VelocityColors.neutral300,
+      highlightColor: VelocityColors.primary200,
+      splashColor: VelocityColors.primary100,
+      focusColor: VelocityColors.primary500,
+      hoverColor: VelocityColors.primary100,
       textTheme: ButtonTextTheme.primary,
-      padding: EdgeInsets.symmetric(
-        horizontal: ZephyrSpacing.md,
-        vertical: ZephyrSpacing.sm,
+      padding: const EdgeInsets.symmetric(
+        horizontal: VelocitySpacing.md,
+        vertical: VelocitySpacing.sm,
       ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(ZephyrRadius.md),
+        borderRadius: BorderRadius.circular(VelocityRadius.md),
       ),
       elevation: 0,
       focusElevation: 2,
@@ -496,11 +491,11 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
   CardTheme _createCardTheme() {
     return CardTheme(
       elevation: 2,
-      shadowColor: ZephyrColors.neutral200,
+      shadowColor: VelocityColors.neutral200,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(ZephyrRadius.md),
+        borderRadius: BorderRadius.circular(VelocityRadius.md),
       ),
-      margin: EdgeInsets.all(ZephyrSpacing.sm),
+      margin: const EdgeInsets.all(VelocitySpacing.sm),
       clipBehavior: Clip.antiAlias,
       color: Colors.white,
     );
@@ -508,38 +503,38 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
   
   ChipThemeData _createChipTheme() {
     return ChipThemeData(
-      backgroundColor: ZephyrColors.neutral100,
-      disabledColor: ZephyrColors.neutral300,
-      selectedColor: ZephyrColors.primary100,
-      secondarySelectedColor: ZephyrColors.primary200,
-      shadowColor: ZephyrColors.neutral200,
-      selectedShadowColor: ZephyrColors.neutral200,
-      checkmarkColor: ZephyrColors.primary500,
+      backgroundColor: VelocityColors.neutral100,
+      disabledColor: VelocityColors.neutral300,
+      selectedColor: VelocityColors.primary100,
+      secondarySelectedColor: VelocityColors.primary200,
+      shadowColor: VelocityColors.neutral200,
+      selectedShadowColor: VelocityColors.neutral200,
+      checkmarkColor: VelocityColors.primary500,
       labelStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightMedium,
-        color: ZephyrColors.neutral700,
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightMedium,
+        color: VelocityColors.neutral700,
       ),
       secondaryLabelStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightMedium,
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightMedium,
         color: Colors.white,
       ),
       brightness: Brightness.light,
       elevation: 0,
       pressElevation: 2,
-      padding: EdgeInsets.symmetric(
-        horizontal: ZephyrSpacing.sm,
-        vertical: ZephyrSpacing.xs,
+      padding: const EdgeInsets.symmetric(
+        horizontal: VelocitySpacing.sm,
+        vertical: VelocitySpacing.xs,
       ),
-      labelPadding: EdgeInsets.symmetric(
-        horizontal: ZephyrSpacing.xs,
+      labelPadding: const EdgeInsets.symmetric(
+        horizontal: VelocitySpacing.xs,
       ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(ZephyrRadius.sm),
+        borderRadius: BorderRadius.circular(VelocityRadius.sm),
       ),
-      side: BorderSide(
-        color: ZephyrColors.neutral300,
+      side: const BorderSide(
+        color: VelocityColors.neutral300,
         width: 1.0,
       ),
     );
@@ -549,41 +544,41 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
     return DialogTheme(
       backgroundColor: Colors.white,
       elevation: 24,
-      shadowColor: ZephyrColors.neutral200,
+      shadowColor: VelocityColors.neutral200,
       surfaceTintColor: Colors.transparent,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(ZephyrRadius.lg),
+        borderRadius: BorderRadius.circular(VelocityRadius.lg),
       ),
       alignment: Alignment.center,
-      actionsPadding: EdgeInsets.symmetric(
-        horizontal: ZephyrSpacing.md,
-        vertical: ZephyrSpacing.sm,
+      actionsPadding: const EdgeInsets.symmetric(
+        horizontal: VelocitySpacing.md,
+        vertical: VelocitySpacing.sm,
       ),
       titleTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize20,
-        fontWeight: ZephyrTypography.fontWeightSemiBold,
-        color: ZephyrColors.neutral900,
+        fontSize: VelocityTypography.fontSize20,
+        fontWeight: VelocityTypography.fontWeightSemiBold,
+        color: VelocityColors.neutral900,
       ),
       contentTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize16,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral700,
+        fontSize: VelocityTypography.fontSize16,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral700,
       ),
     );
   }
   
   FloatingActionButtonThemeData _createFloatingActionButtonTheme() {
-    return FloatingActionButtonThemeData(
-      backgroundColor: ZephyrColors.primary500,
+    return const FloatingActionButtonThemeData(
+      backgroundColor: VelocityColors.primary500,
       foregroundColor: Colors.white,
       elevation: 4,
       focusElevation: 6,
       hoverElevation: 6,
       highlightElevation: 8,
       disabledElevation: 0,
-      shape: const CircleBorder(),
+      shape: CircleBorder(),
       iconSize: 24.0,
-      sizeConstraints: const BoxConstraints(
+      sizeConstraints: BoxConstraints(
         minWidth: 56.0,
         minHeight: 56.0,
         maxWidth: 56.0,
@@ -595,72 +590,72 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
   InputDecorationTheme _createInputDecorationTheme() {
     return InputDecorationTheme(
       filled: true,
-      fillColor: ZephyrColors.neutral50,
+      fillColor: VelocityColors.neutral50,
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(ZephyrRadius.md),
-        borderSide: BorderSide(
-          color: ZephyrColors.neutral300,
+        borderRadius: BorderRadius.circular(VelocityRadius.md),
+        borderSide: const BorderSide(
+          color: VelocityColors.neutral300,
           width: 1.0,
         ),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(ZephyrRadius.md),
-        borderSide: BorderSide(
-          color: ZephyrColors.neutral300,
+        borderRadius: BorderRadius.circular(VelocityRadius.md),
+        borderSide: const BorderSide(
+          color: VelocityColors.neutral300,
           width: 1.0,
         ),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(ZephyrRadius.md),
-        borderSide: BorderSide(
-          color: ZephyrColors.primary500,
+        borderRadius: BorderRadius.circular(VelocityRadius.md),
+        borderSide: const BorderSide(
+          color: VelocityColors.primary500,
           width: 2.0,
         ),
       ),
       errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(ZephyrRadius.md),
-        borderSide: BorderSide(
-          color: ZephyrColors.error500,
+        borderRadius: BorderRadius.circular(VelocityRadius.md),
+        borderSide: const BorderSide(
+          color: VelocityColors.error500,
           width: 1.0,
         ),
       ),
       focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(ZephyrRadius.md),
-        borderSide: BorderSide(
-          color: ZephyrColors.error500,
+        borderRadius: BorderRadius.circular(VelocityRadius.md),
+        borderSide: const BorderSide(
+          color: VelocityColors.error500,
           width: 2.0,
         ),
       ),
       disabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(ZephyrRadius.md),
-        borderSide: BorderSide(
-          color: ZephyrColors.neutral200,
+        borderRadius: BorderRadius.circular(VelocityRadius.md),
+        borderSide: const BorderSide(
+          color: VelocityColors.neutral200,
           width: 1.0,
         ),
       ),
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: ZephyrSpacing.md,
-        vertical: ZephyrSpacing.md,
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: VelocitySpacing.md,
+        vertical: VelocitySpacing.md,
       ),
       hintStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral400,
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral400,
       ),
       errorStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.error500,
+        fontSize: VelocityTypography.fontSize12,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.error500,
       ),
       helperStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral600,
+        fontSize: VelocityTypography.fontSize12,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral600,
       ),
       counterStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral600,
+        fontSize: VelocityTypography.fontSize12,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral600,
       ),
       floatingLabelBehavior: FloatingLabelBehavior.auto,
       alignLabelWithHint: false,
@@ -670,80 +665,80 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
   
   SliderThemeData _createSliderTheme() {
     return SliderThemeData(
-      activeTrackColor: ZephyrColors.primary500,
-      inactiveTrackColor: ZephyrColors.neutral200,
-      thumbColor: ZephyrColors.primary500,
-      overlayColor: ZephyrColors.primary100,
-      valueIndicatorColor: ZephyrColors.primary500,
+      activeTrackColor: VelocityColors.primary500,
+      inactiveTrackColor: VelocityColors.neutral200,
+      thumbColor: VelocityColors.primary500,
+      overlayColor: VelocityColors.primary100,
+      valueIndicatorColor: VelocityColors.primary500,
       valueIndicatorTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightMedium,
+        fontSize: VelocityTypography.fontSize12,
+        fontWeight: VelocityTypography.fontWeightMedium,
         color: Colors.white,
       ),
-      disabledActiveTrackColor: ZephyrColors.neutral300,
-      disabledInactiveTrackColor: ZephyrColors.neutral100,
-      disabledThumbColor: ZephyrColors.neutral300,
-      disabledSecondaryActiveTrackColor: ZephyrColors.neutral300,
+      disabledActiveTrackColor: VelocityColors.neutral300,
+      disabledInactiveTrackColor: VelocityColors.neutral100,
+      disabledThumbColor: VelocityColors.neutral300,
+      disabledSecondaryActiveTrackColor: VelocityColors.neutral300,
       overlappingShapeStrokeColor: Colors.white,
-      mouseCursor: MaterialStateProperty.all(SystemMouseCursors.click),
+      mouseCursor: WidgetStateProperty.all(SystemMouseCursors.click),
     );
   }
   
   TabBarTheme _createTabBarTheme() {
     return TabBarTheme(
-      labelColor: ZephyrColors.primary500,
-      unselectedLabelColor: ZephyrColors.neutral600,
+      labelColor: VelocityColors.primary500,
+      unselectedLabelColor: VelocityColors.neutral600,
       labelStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightMedium,
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightMedium,
       ),
       unselectedLabelStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightRegular,
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightRegular,
       ),
-      indicator: UnderlineTabIndicator(
+      indicator: const UnderlineTabIndicator(
         borderSide: BorderSide(
-          color: ZephyrColors.primary500,
+          color: VelocityColors.primary500,
           width: 2.0,
         ),
       ),
       indicatorSize: TabBarIndicatorSize.label,
-      dividerColor: ZephyrColors.neutral200,
-      overlayColor: MaterialStateProperty.resolveWith<Color?>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.hovered)) {
-            return ZephyrColors.primary100;
+      dividerColor: VelocityColors.neutral200,
+      overlayColor: WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.hovered)) {
+            return VelocityColors.primary100;
           }
-          if (states.contains(MaterialState.focused)) {
-            return ZephyrColors.primary100;
+          if (states.contains(WidgetState.focused)) {
+            return VelocityColors.primary100;
           }
-          if (states.contains(MaterialState.pressed)) {
-            return ZephyrColors.primary200;
+          if (states.contains(WidgetState.pressed)) {
+            return VelocityColors.primary200;
           }
           return null;
         },
       ),
       splashFactory: InkRipple.splashFactory,
-      mouseCursor: MaterialStateProperty.all(SystemMouseCursors.click),
+      mouseCursor: WidgetStateProperty.all(SystemMouseCursors.click),
     );
   }
   
   TooltipThemeData _createTooltipTheme() {
     return TooltipThemeData(
       decoration: BoxDecoration(
-        color: ZephyrColors.neutral800,
-        borderRadius: BorderRadius.circular(ZephyrRadius.sm),
+        color: VelocityColors.neutral800,
+        borderRadius: BorderRadius.circular(VelocityRadius.sm),
       ),
       textStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightRegular,
+        fontSize: VelocityTypography.fontSize12,
+        fontWeight: VelocityTypography.fontWeightRegular,
         color: Colors.white,
       ),
-      padding: EdgeInsets.symmetric(
-        horizontal: ZephyrSpacing.sm,
-        vertical: ZephyrSpacing.xs,
+      padding: const EdgeInsets.symmetric(
+        horizontal: VelocitySpacing.sm,
+        vertical: VelocitySpacing.xs,
       ),
-      margin: EdgeInsets.all(ZephyrSpacing.xs),
+      margin: const EdgeInsets.all(VelocitySpacing.xs),
       preferBelow: true,
       verticalOffset: 24.0,
       waitDuration: const Duration(milliseconds: 500),
@@ -755,18 +750,18 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
   
   BadgeThemeData _createBadgeTheme() {
     return BadgeThemeData(
-      backgroundColor: ZephyrColors.error500,
+      backgroundColor: VelocityColors.error500,
       textColor: Colors.white,
       smallSize: 8.0,
       largeSize: 16.0,
       textStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize10,
-        fontWeight: ZephyrTypography.fontWeightBold,
+        fontSize: VelocityTypography.fontSize10,
+        fontWeight: VelocityTypography.fontWeightBold,
         color: Colors.white,
       ),
-      padding: EdgeInsets.symmetric(
-        horizontal: ZephyrSpacing.xs,
-        vertical: ZephyrSpacing.xs / 2,
+      padding: const EdgeInsets.symmetric(
+        horizontal: VelocitySpacing.xs,
+        vertical: VelocitySpacing.xs / 2,
       ),
       alignment: AlignmentDirectional.topEnd,
       offset: const Offset(-4, 4),
@@ -776,21 +771,21 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
   BottomNavigationBarThemeData _createBottomNavigationBarTheme() {
     return BottomNavigationBarThemeData(
       backgroundColor: Colors.white,
-      selectedItemColor: ZephyrColors.primary500,
-      unselectedItemColor: ZephyrColors.neutral600,
+      selectedItemColor: VelocityColors.primary500,
+      unselectedItemColor: VelocityColors.neutral600,
       elevation: 8,
       type: BottomNavigationBarType.fixed,
       selectedLabelStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightMedium,
+        fontSize: VelocityTypography.fontSize12,
+        fontWeight: VelocityTypography.fontWeightMedium,
       ),
       unselectedLabelStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightRegular,
+        fontSize: VelocityTypography.fontSize12,
+        fontWeight: VelocityTypography.fontWeightRegular,
       ),
       showSelectedLabels: true,
       showUnselectedLabels: true,
-      mouseCursor: MaterialStateProperty.all(SystemMouseCursors.click),
+      mouseCursor: WidgetStateProperty.all(SystemMouseCursors.click),
     );
   }
   
@@ -798,19 +793,19 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
     return NavigationRailThemeData(
       backgroundColor: Colors.white,
       elevation: 4,
-      unselectedItemColor: ZephyrColors.neutral600,
-      selectedItemColor: ZephyrColors.primary500,
-      indicatorColor: ZephyrColors.primary100,
+      unselectedItemColor: VelocityColors.neutral600,
+      selectedItemColor: VelocityColors.primary500,
+      indicatorColor: VelocityColors.primary100,
       labelType: NavigationRailLabelType.all,
       unselectedLabelTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral600,
+        fontSize: VelocityTypography.fontSize12,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral600,
       ),
       selectedLabelTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightMedium,
-        color: ZephyrColors.primary500,
+        fontSize: VelocityTypography.fontSize12,
+        fontWeight: VelocityTypography.fontWeightMedium,
+        color: VelocityColors.primary500,
       ),
       minWidth: 72.0,
       minExtendedWidth: 256.0,
@@ -821,40 +816,40 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
   
   ListTileThemeData _createListTileTheme() {
     return ListTileThemeData(
-      iconColor: ZephyrColors.neutral600,
-      textColor: ZephyrColors.neutral800,
+      iconColor: VelocityColors.neutral600,
+      textColor: VelocityColors.neutral800,
       tileColor: Colors.transparent,
-      selectedTileColor: ZephyrColors.primary100,
+      selectedTileColor: VelocityColors.primary100,
       shape: const RoundedRectangleBorder(),
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: ZephyrSpacing.md,
-        vertical: ZephyrSpacing.sm,
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: VelocitySpacing.md,
+        vertical: VelocitySpacing.sm,
       ),
       horizontalTitleGap: 16.0,
       minVerticalPadding: 8.0,
       enableFeedback: true,
       visualDensity: VisualDensity.standard,
       titleTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize16,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral800,
+        fontSize: VelocityTypography.fontSize16,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral800,
       ),
       subtitleTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral600,
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral600,
       ),
       leadingAndTrailingTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral600,
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral600,
       ),
     );
   }
   
   DividerThemeData _createDividerTheme() {
-    return DividerThemeData(
-      color: ZephyrColors.neutral200,
+    return const DividerThemeData(
+      color: VelocityColors.neutral200,
       thickness: 1.0,
       indent: 0.0,
       endIndent: 0.0,
@@ -863,9 +858,9 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
   }
   
   ProgressIndicatorThemeData _createProgressIndicatorTheme() {
-    return ProgressIndicatorThemeData(
-      color: ZephyrColors.primary500,
-      linearTrackColor: ZephyrColors.neutral200,
+    return const ProgressIndicatorThemeData(
+      color: VelocityColors.primary500,
+      linearTrackColor: VelocityColors.neutral200,
       linearMinHeight: 4.0,
       refreshBackgroundColor: Colors.white,
     );
@@ -873,41 +868,41 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
   
   SnackBarThemeData _createSnackBarTheme() {
     return SnackBarThemeData(
-      backgroundColor: ZephyrColors.neutral800,
+      backgroundColor: VelocityColors.neutral800,
       contentTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightRegular,
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightRegular,
         color: Colors.white,
       ),
       elevation: 6,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(ZephyrRadius.sm),
+        borderRadius: BorderRadius.circular(VelocityRadius.sm),
       ),
       behavior: SnackBarBehavior.floating,
       width: 560.0,
-      insetPadding: EdgeInsets.symmetric(
-        horizontal: ZephyrSpacing.md,
-        vertical: ZephyrSpacing.md,
+      insetPadding: const EdgeInsets.symmetric(
+        horizontal: VelocitySpacing.md,
+        vertical: VelocitySpacing.md,
       ),
       showCloseIcon: false,
       closeIconColor: Colors.white,
-      disabledActionTextColor: ZephyrColors.neutral400,
-      actionTextColor: ZephyrColors.primary200,
+      disabledActionTextColor: VelocityColors.neutral400,
+      actionTextColor: VelocityColors.primary200,
     );
   }
   
   BottomSheetThemeData _createBottomSheetTheme() {
-    return BottomSheetThemeData(
+    return const BottomSheetThemeData(
       backgroundColor: Colors.white,
       elevation: 24,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(16.0),
         ),
       ),
       clipBehavior: Clip.antiAlias,
-      dragHandleColor: ZephyrColors.neutral300,
-      dragHandleSize: const Size(40.0, 4.0),
+      dragHandleColor: VelocityColors.neutral300,
+      dragHandleSize: Size(40.0, 4.0),
       modalBackgroundColor: Colors.white,
       modalElevation: 24,
       showDragHandle: true,
@@ -918,61 +913,61 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
     return PopupMenuThemeData(
       color: Colors.white,
       elevation: 8,
-      shadowColor: ZephyrColors.neutral200,
+      shadowColor: VelocityColors.neutral200,
       surfaceTintColor: Colors.transparent,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(ZephyrRadius.md),
+        borderRadius: BorderRadius.circular(VelocityRadius.md),
       ),
       textStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral800,
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral800,
       ),
       enableFeedback: true,
-      mouseCursor: MaterialStateProperty.all(SystemMouseCursors.click),
+      mouseCursor: WidgetStateProperty.all(SystemMouseCursors.click),
     );
   }
   
   ExpansionTileThemeData _createExpansionTileTheme() {
-    return ExpansionTileThemeData(
+    return const ExpansionTileThemeData(
       backgroundColor: Colors.transparent,
       collapsedBackgroundColor: Colors.transparent,
       tilePadding: EdgeInsets.symmetric(
-        horizontal: ZephyrSpacing.md,
-        vertical: ZephyrSpacing.sm,
+        horizontal: VelocitySpacing.md,
+        vertical: VelocitySpacing.sm,
       ),
       expandedAlignment: Alignment.centerLeft,
-      collapsedTextColor: ZephyrColors.neutral800,
-      textColor: ZephyrColors.primary500,
-      iconColor: ZephyrColors.neutral600,
-      collapsedIconColor: ZephyrColors.neutral600,
+      collapsedTextColor: VelocityColors.neutral800,
+      textColor: VelocityColors.primary500,
+      iconColor: VelocityColors.neutral600,
+      collapsedIconColor: VelocityColors.neutral600,
       childrenPadding: EdgeInsets.symmetric(
-        horizontal: ZephyrSpacing.md,
-        vertical: ZephyrSpacing.sm,
+        horizontal: VelocitySpacing.md,
+        vertical: VelocitySpacing.sm,
       ),
-      shape: const Border(),
-      collapsedShape: const Border(),
+      shape: Border(),
+      collapsedShape: Border(),
       controlAffinity: ListTileControlAffinity.platform,
-      dividerColor: ZephyrColors.neutral200,
+      dividerColor: VelocityColors.neutral200,
     );
   }
   
   DataTableThemeData _createDataTableTheme() {
     return DataTableThemeData(
-      dataRowColor: MaterialStateProperty.all(Colors.transparent),
+      dataRowColor: WidgetStateProperty.all(Colors.transparent),
       dataRowMinHeight: 48.0,
       dataRowMaxHeight: double.infinity,
       dataTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral800,
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral800,
       ),
-      headingRowColor: MaterialStateProperty.all(ZephyrColors.neutral50),
+      headingRowColor: WidgetStateProperty.all(VelocityColors.neutral50),
       headingRowHeight: 56.0,
       headingTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightSemiBold,
-        color: ZephyrColors.neutral900,
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightSemiBold,
+        color: VelocityColors.neutral900,
       ),
       horizontalMargin: 24.0,
       columnSpacing: 56.0,
@@ -983,31 +978,31 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
   
   SearchBarThemeData _createSearchBarTheme() {
     return SearchBarThemeData(
-      backgroundColor: MaterialStateProperty.all(ZephyrColors.neutral50),
-      surfaceTintColor: MaterialStateProperty.all(Colors.transparent),
-      overlayColor: MaterialStateProperty.all(ZephyrColors.neutral100),
-      shadowColor: MaterialStateProperty.all(ZephyrColors.neutral200),
-      elevation: MaterialStateProperty.all(0.0),
-      side: MaterialStateProperty.all(BorderSide(
-        color: ZephyrColors.neutral300,
+      backgroundColor: WidgetStateProperty.all(VelocityColors.neutral50),
+      surfaceTintColor: WidgetStateProperty.all(Colors.transparent),
+      overlayColor: WidgetStateProperty.all(VelocityColors.neutral100),
+      shadowColor: WidgetStateProperty.all(VelocityColors.neutral200),
+      elevation: WidgetStateProperty.all(0.0),
+      side: WidgetStateProperty.all(const BorderSide(
+        color: VelocityColors.neutral300,
         width: 1.0,
       )),
-      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(ZephyrRadius.md),
+      shape: WidgetStateProperty.all(RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(VelocityRadius.md),
       )),
-      padding: MaterialStateProperty.all(EdgeInsets.symmetric(
-        horizontal: ZephyrSpacing.md,
-        vertical: ZephyrSpacing.sm,
+      padding: WidgetStateProperty.all(const EdgeInsets.symmetric(
+        horizontal: VelocitySpacing.md,
+        vertical: VelocitySpacing.sm,
       )),
-      textStyle: MaterialStateProperty.all(TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral800,
+      textStyle: WidgetStateProperty.all(TextStyle(
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral800,
       )),
-      hintStyle: MaterialStateProperty.all(TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral400,
+      hintStyle: WidgetStateProperty.all(TextStyle(
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral400,
       )),
       constraints: const BoxConstraints(
         minHeight: 56.0,
@@ -1021,8 +1016,8 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
       backgroundColor: Colors.white,
       surfaceTintColor: Colors.transparent,
       elevation: 4.0,
-      side: BorderSide(
-        color: ZephyrColors.neutral300,
+      side: const BorderSide(
+        color: VelocityColors.neutral300,
         width: 1.0,
       ),
       shape: const RoundedRectangleBorder(
@@ -1031,16 +1026,16 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
         ),
       ),
       headerTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral800,
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral800,
       ),
       headerHintStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral400,
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral400,
       ),
-      dividerColor: ZephyrColors.neutral200,
+      dividerColor: VelocityColors.neutral200,
     );
   }
   
@@ -1048,21 +1043,21 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
     return TimePickerThemeData(
       backgroundColor: Colors.white,
       surfaceTintColor: Colors.transparent,
-      hourMinuteColor: ZephyrColors.primary100,
-      hourMinuteTextColor: ZephyrColors.primary500,
-      dialHandColor: ZephyrColors.primary500,
-      dialTextColor: ZephyrColors.neutral800,
-      entryModeIconColor: ZephyrColors.primary500,
+      hourMinuteColor: VelocityColors.primary100,
+      hourMinuteTextColor: VelocityColors.primary500,
+      dialHandColor: VelocityColors.primary500,
+      dialTextColor: VelocityColors.neutral800,
+      entryModeIconColor: VelocityColors.primary500,
       helpTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral600,
+        fontSize: VelocityTypography.fontSize12,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral600,
       ),
       inputDecorationTheme: _createInputDecorationTheme(),
-      dayPeriodColor: ZephyrColors.primary100,
-      dayPeriodTextColor: ZephyrColors.primary500,
+      dayPeriodColor: VelocityColors.primary100,
+      dayPeriodTextColor: VelocityColors.primary500,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(ZephyrRadius.lg),
+        borderRadius: BorderRadius.circular(VelocityRadius.lg),
       ),
     );
   }
@@ -1072,58 +1067,58 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
       backgroundColor: Colors.white,
       surfaceTintColor: Colors.transparent,
       elevation: 24,
-      shadowColor: ZephyrColors.neutral200,
+      shadowColor: VelocityColors.neutral200,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(ZephyrRadius.lg),
+        borderRadius: BorderRadius.circular(VelocityRadius.lg),
       ),
-      headerBackgroundColor: ZephyrColors.primary500,
+      headerBackgroundColor: VelocityColors.primary500,
       headerForegroundColor: Colors.white,
       headerHeadlineStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize32,
-        fontWeight: ZephyrTypography.fontWeightBold,
+        fontSize: VelocityTypography.fontSize32,
+        fontWeight: VelocityTypography.fontWeightBold,
         color: Colors.white,
       ),
       headerHelpStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightRegular,
+        fontSize: VelocityTypography.fontSize12,
+        fontWeight: VelocityTypography.fontWeightRegular,
         color: Colors.white,
       ),
       weekdayStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightMedium,
-        color: ZephyrColors.neutral600,
+        fontSize: VelocityTypography.fontSize12,
+        fontWeight: VelocityTypography.fontWeightMedium,
+        color: VelocityColors.neutral600,
       ),
       dayStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral800,
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral800,
       ),
-      dayForegroundColor: MaterialStateProperty.all(ZephyrColors.neutral800),
-      dayBackgroundColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.selected)) {
-            return ZephyrColors.primary500;
+      dayForegroundColor: WidgetStateProperty.all(VelocityColors.neutral800),
+      dayBackgroundColor: WidgetStateProperty.resolveWith<Color>(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.selected)) {
+            return VelocityColors.primary500;
           }
-          if (states.contains(MaterialState.disabled)) {
-            return ZephyrColors.neutral100;
+          if (states.contains(WidgetState.disabled)) {
+            return VelocityColors.neutral100;
           }
           return Colors.transparent;
         },
       ),
-      todayForegroundColor: MaterialStateProperty.all(ZephyrColors.primary500),
-      todayBackgroundColor: MaterialStateProperty.all(ZephyrColors.primary100),
-      rangeSelectionBackgroundColor: ZephyrColors.primary100,
-      rangeSelectionOverlayColor: MaterialStateProperty.all(ZephyrColors.primary500),
+      todayForegroundColor: WidgetStateProperty.all(VelocityColors.primary500),
+      todayBackgroundColor: WidgetStateProperty.all(VelocityColors.primary100),
+      rangeSelectionBackgroundColor: VelocityColors.primary100,
+      rangeSelectionOverlayColor: WidgetStateProperty.all(VelocityColors.primary500),
       yearStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral800,
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral800,
       ),
-      yearForegroundColor: MaterialStateProperty.all(ZephyrColors.neutral800),
-      yearBackgroundColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.selected)) {
-            return ZephyrColors.primary500;
+      yearForegroundColor: WidgetStateProperty.all(VelocityColors.neutral800),
+      yearBackgroundColor: WidgetStateProperty.resolveWith<Color>(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.selected)) {
+            return VelocityColors.primary500;
           }
           return Colors.transparent;
         },
@@ -1131,32 +1126,32 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
       rangePickerBackgroundColor: Colors.white,
       rangePickerElevation: 24,
       rangePickerShape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(ZephyrRadius.lg),
+        borderRadius: BorderRadius.circular(VelocityRadius.lg),
       ),
-      rangePickerHeaderBackgroundColor: ZephyrColors.primary500,
+      rangePickerHeaderBackgroundColor: VelocityColors.primary500,
       rangePickerHeaderForegroundColor: Colors.white,
       rangePickerHeaderHeadlineStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize32,
-        fontWeight: ZephyrTypography.fontWeightBold,
+        fontSize: VelocityTypography.fontSize32,
+        fontWeight: VelocityTypography.fontWeightBold,
         color: Colors.white,
       ),
       rangePickerHeaderHelpStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightRegular,
+        fontSize: VelocityTypography.fontSize12,
+        fontWeight: VelocityTypography.fontWeightRegular,
         color: Colors.white,
       ),
       confirmButtonStyle: TextButton.styleFrom(
-        foregroundColor: ZephyrColors.primary500,
+        foregroundColor: VelocityColors.primary500,
         textStyle: TextStyle(
-          fontSize: ZephyrTypography.fontSize14,
-          fontWeight: ZephyrTypography.fontWeightMedium,
+          fontSize: VelocityTypography.fontSize14,
+          fontWeight: VelocityTypography.fontWeightMedium,
         ),
       ),
       cancelButtonStyle: TextButton.styleFrom(
-        foregroundColor: ZephyrColors.neutral600,
+        foregroundColor: VelocityColors.neutral600,
         textStyle: TextStyle(
-          fontSize: ZephyrTypography.fontSize14,
-          fontWeight: ZephyrTypography.fontWeightMedium,
+          fontSize: VelocityTypography.fontSize14,
+          fontWeight: VelocityTypography.fontWeightMedium,
         ),
       ),
     );
@@ -1164,11 +1159,11 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
   
   BannerThemeData _createBannerTheme() {
     return BannerThemeData(
-      backgroundColor: ZephyrColors.warning500,
+      backgroundColor: VelocityColors.warning500,
       textColor: Colors.white,
       textStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize12,
-        fontWeight: ZephyrTypography.fontWeightMedium,
+        fontSize: VelocityTypography.fontSize12,
+        fontWeight: VelocityTypography.fontWeightMedium,
         color: Colors.white,
       ),
       layoutDirection: TextDirection.ltr,
@@ -1178,110 +1173,110 @@ class ThemeDataFactory extends TestDataFactory<ThemeData> {
   
   StepperThemeData _createStepperTheme() {
     return StepperThemeData(
-      color: ZephyrColors.primary500,
+      color: VelocityColors.primary500,
       backgroundColor: Colors.transparent,
       elevation: 0,
       shape: const RoundedRectangleBorder(),
-      margin: EdgeInsets.all(ZephyrSpacing.md),
-      padding: EdgeInsets.all(ZephyrSpacing.md),
-      connectorColor: ZephyrColors.neutral300,
+      margin: const EdgeInsets.all(VelocitySpacing.md),
+      padding: const EdgeInsets.all(VelocitySpacing.md),
+      connectorColor: VelocityColors.neutral300,
       connectorThickness: 1.0,
-      controlsColor: ZephyrColors.primary500,
-      iconColor: ZephyrColors.primary500,
-      disabledColor: ZephyrColors.neutral300,
-      errorColor: ZephyrColors.error500,
+      controlsColor: VelocityColors.primary500,
+      iconColor: VelocityColors.primary500,
+      disabledColor: VelocityColors.neutral300,
+      errorColor: VelocityColors.error500,
       titleTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize16,
-        fontWeight: ZephyrTypography.fontWeightMedium,
-        color: ZephyrColors.neutral800,
+        fontSize: VelocityTypography.fontSize16,
+        fontWeight: VelocityTypography.fontWeightMedium,
+        color: VelocityColors.neutral800,
       ),
       subtitleTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral600,
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral600,
       ),
       contentTextStyle: TextStyle(
-        fontSize: ZephyrTypography.fontSize14,
-        fontWeight: ZephyrTypography.fontWeightRegular,
-        color: ZephyrColors.neutral700,
+        fontSize: VelocityTypography.fontSize14,
+        fontWeight: VelocityTypography.fontWeightRegular,
+        color: VelocityColors.neutral700,
       ),
     );
   }
   
   SwitchThemeData _createSwitchTheme() {
     return SwitchThemeData(
-      thumbColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return ZephyrColors.neutral300;
+      thumbColor: WidgetStateProperty.resolveWith<Color>(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            return VelocityColors.neutral300;
           }
-          if (states.contains(MaterialState.selected)) {
-            return ZephyrColors.primary500;
+          if (states.contains(WidgetState.selected)) {
+            return VelocityColors.primary500;
           }
-          return ZephyrColors.neutral400;
+          return VelocityColors.neutral400;
         },
       ),
-      trackColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return ZephyrColors.neutral200;
+      trackColor: WidgetStateProperty.resolveWith<Color>(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            return VelocityColors.neutral200;
           }
-          if (states.contains(MaterialState.selected)) {
-            return ZephyrColors.primary200;
+          if (states.contains(WidgetState.selected)) {
+            return VelocityColors.primary200;
           }
-          return ZephyrColors.neutral300;
+          return VelocityColors.neutral300;
         },
       ),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      mouseCursor: MaterialStateProperty.all(SystemMouseCursors.click),
+      mouseCursor: WidgetStateProperty.all(SystemMouseCursors.click),
     );
   }
   
   CheckboxThemeData _createCheckboxTheme() {
     return CheckboxThemeData(
-      checkColor: MaterialStateProperty.all(Colors.white),
-      fillColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return ZephyrColors.neutral300;
+      checkColor: WidgetStateProperty.all(Colors.white),
+      fillColor: WidgetStateProperty.resolveWith<Color>(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            return VelocityColors.neutral300;
           }
-          if (states.contains(MaterialState.selected)) {
-            return ZephyrColors.primary500;
+          if (states.contains(WidgetState.selected)) {
+            return VelocityColors.primary500;
           }
           return Colors.transparent;
         },
       ),
-      overlayColor: MaterialStateProperty.all(ZephyrColors.primary100),
+      overlayColor: WidgetStateProperty.all(VelocityColors.primary100),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(ZephyrRadius.xs),
+        borderRadius: BorderRadius.circular(VelocityRadius.xs),
       ),
-      side: BorderSide(
-        color: ZephyrColors.neutral400,
+      side: const BorderSide(
+        color: VelocityColors.neutral400,
         width: 2.0,
       ),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       visualDensity: VisualDensity.standard,
-      mouseCursor: MaterialStateProperty.all(SystemMouseCursors.click),
+      mouseCursor: WidgetStateProperty.all(SystemMouseCursors.click),
     );
   }
   
   RadioThemeData _createRadioTheme() {
     return RadioThemeData(
-      fillColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
-            return ZephyrColors.neutral300;
+      fillColor: WidgetStateProperty.resolveWith<Color>(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
+            return VelocityColors.neutral300;
           }
-          if (states.contains(MaterialState.selected)) {
-            return ZephyrColors.primary500;
+          if (states.contains(WidgetState.selected)) {
+            return VelocityColors.primary500;
           }
           return Colors.transparent;
         },
       ),
-      overlayColor: MaterialStateProperty.all(ZephyrColors.primary100),
+      overlayColor: WidgetStateProperty.all(VelocityColors.primary100),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       visualDensity: VisualDensity.standard,
-      mouseCursor: MaterialStateProperty.all(SystemMouseCursors.click),
+      mouseCursor: WidgetStateProperty.all(SystemMouseCursors.click),
     );
   }
   
@@ -1372,10 +1367,10 @@ class TestDataFactoryManager {
 
 /// 测试数据构建器
 class TestDataBuilder<T> {
-  final T Function() _creator;
-  final List<void Function(T)> _modifiers = [];
   
   TestDataBuilder(this._creator);
+  final T Function() _creator;
+  final List<void Function(T)> _modifiers = [];
   
   /// 修改数据
   TestDataBuilder<T> modify(void Function(T) modifier) {

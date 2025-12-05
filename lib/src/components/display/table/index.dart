@@ -1,5 +1,3 @@
-library zephyr_table;
-
+library table;
 export 'table.dart';
-export 'table_theme.dart';
-export 'table_example.dart';
+export 'table_style.dart';

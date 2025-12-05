@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zephyr_ui/zephyr_ui.dart';
+import 'package:velocity_ui/velocity_ui.dart';
 
 void main() {
-  group('ZephyrStatistic', () {
+  group('VelocityStatistic', () {
     testWidgets('renders statistic with basic content', (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrStatistic(
+            body: VelocityStatistic(
               title: '总收入',
               value: '¥125,430',
             ),
@@ -24,12 +24,12 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrStatistic(
+            body: VelocityStatistic(
               title: '总收入',
               value: '¥125,430',
               description: '较上月增长',
               trendValue: '12.5%',
-              trend: ZephyrStatisticTrend.up,
+              trend: VelocityStatisticTrend.up,
             ),
           ),
         ),
@@ -47,25 +47,25 @@ void main() {
           home: Scaffold(
             body: Column(
               children: [
-                ZephyrStatistic(
+                VelocityStatistic(
                   title: 'Primary',
                   value: '100',
-                  type: ZephyrStatisticType.primary,
+                  type: VelocityStatisticType.primary,
                 ),
-                ZephyrStatistic(
+                VelocityStatistic(
                   title: 'Success',
                   value: '200',
-                  type: ZephyrStatisticType.success,
+                  type: VelocityStatisticType.success,
                 ),
-                ZephyrStatistic(
+                VelocityStatistic(
                   title: 'Warning',
                   value: '300',
-                  type: ZephyrStatisticType.warning,
+                  type: VelocityStatisticType.warning,
                 ),
-                ZephyrStatistic(
+                VelocityStatistic(
                   title: 'Error',
                   value: '400',
-                  type: ZephyrStatisticType.error,
+                  type: VelocityStatisticType.error,
                 ),
               ],
             ),
@@ -80,13 +80,13 @@ void main() {
     });
 
     testWidgets('handles tap callback', (WidgetTester tester) async {
-      bool tapped = false;
+      var tapped = false;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: Center(
-              child: ZephyrStatistic(
+              child: VelocityStatistic(
                 title: 'Test',
                 value: '100',
                 onTap: () {
@@ -101,7 +101,7 @@ void main() {
       // Wait for animation to complete
       await tester.pumpAndSettle();
 
-      final gesture = await tester.startGesture(tester.getCenter(find.byType(ZephyrStatistic)));
+      final gesture = await tester.startGesture(tester.getCenter(find.byType(VelocityStatistic)));
       await gesture.up();
       await tester.pump();
 
@@ -112,7 +112,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrStatistic(
+            body: VelocityStatistic(
               title: 'Test',
               value: '100',
               loading: true,
@@ -128,7 +128,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrStatistic(
+            body: VelocityStatistic(
               title: 'Test',
               value: '100',
               showIcon: false,
@@ -144,11 +144,11 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ZephyrStatistic(
+            body: VelocityStatistic(
               title: 'Test',
               value: '100',
               trendValue: '12.5%',
-              trend: ZephyrStatisticTrend.up,
+              trend: VelocityStatisticTrend.up,
               showTrend: false,
             ),
           ),
@@ -159,7 +159,7 @@ void main() {
     });
 
     testWidgets('applies custom theme', (WidgetTester tester) async {
-      final customTheme = ZephyrStatisticTheme.custom(
+      final customTheme = VelocityStatisticTheme.custom(
         primaryColor: Colors.red,
         titleStyle: const TextStyle(fontSize: 20),
       );
@@ -167,7 +167,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrStatistic(
+            body: VelocityStatistic(
               title: 'Test',
               value: '100',
               theme: customTheme,
@@ -180,22 +180,22 @@ void main() {
     });
   });
 
-  group('ZephyrStatisticGroup', () {
+  group('VelocityStatisticGroup', () {
     testWidgets('renders multiple statistics in grid', (WidgetTester tester) async {
       final statistics = [
-        const ZephyrStatistic(
+        const VelocityStatistic(
           title: 'Stat 1',
           value: '100',
         ),
-        const ZephyrStatistic(
+        const VelocityStatistic(
           title: 'Stat 2',
           value: '200',
         ),
-        const ZephyrStatistic(
+        const VelocityStatistic(
           title: 'Stat 3',
           value: '300',
         ),
-        const ZephyrStatistic(
+        const VelocityStatistic(
           title: 'Stat 4',
           value: '400',
         ),
@@ -204,7 +204,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ZephyrStatisticGroup(
+            body: VelocityStatisticGroup(
               statistics: statistics,
             ),
           ),
@@ -218,21 +218,21 @@ void main() {
     });
   });
 
-  group('ZephyrStatisticTheme', () {
+  group('VelocityStatisticTheme', () {
     test('creates light theme', () {
-      final theme = ZephyrStatisticTheme.light();
+      final theme = VelocityStatisticTheme.light();
       expect(theme.backgroundColor, equals(Colors.white));
       expect(theme.primaryColor, equals(const Color(0xFF3B82F6)));
     });
 
     test('creates dark theme', () {
-      final theme = ZephyrStatisticTheme.dark();
+      final theme = VelocityStatisticTheme.dark();
       expect(theme.backgroundColor, equals(const Color(0xFF1F2937)));
       expect(theme.primaryColor, equals(const Color(0xFF60A5FA)));
     });
 
     test('creates custom theme', () {
-      final theme = ZephyrStatisticTheme.custom(
+      final theme = VelocityStatisticTheme.custom(
         primaryColor: Colors.red,
         titleStyle: const TextStyle(fontSize: 20),
       );
@@ -241,35 +241,35 @@ void main() {
     });
 
     test('copies theme with modifications', () {
-      final theme = ZephyrStatisticTheme.light();
+      final theme = VelocityStatisticTheme.light();
       final modified = theme.copyWith(primaryColor: Colors.blue);
       expect(modified.primaryColor, equals(Colors.blue));
       expect(modified.backgroundColor, equals(theme.backgroundColor));
     });
 
     test('merges themes', () {
-      final theme1 = ZephyrStatisticTheme.light();
-      final theme2 = ZephyrStatisticTheme.custom(primaryColor: Colors.red);
+      final theme1 = VelocityStatisticTheme.light();
+      final theme2 = VelocityStatisticTheme.custom(primaryColor: Colors.red);
       final merged = theme1.merge(theme2);
       expect(merged.primaryColor, equals(Colors.red));
       expect(merged.backgroundColor, equals(theme1.backgroundColor));
     });
 
     test('compares themes for equality', () {
-      final theme1 = ZephyrStatisticTheme.light();
-      final theme2 = ZephyrStatisticTheme.light();
+      final theme1 = VelocityStatisticTheme.light();
+      final theme2 = VelocityStatisticTheme.light();
       expect(theme1, equals(theme2));
     });
 
     test('computes hash code', () {
-      final theme = ZephyrStatisticTheme.light();
+      final theme = VelocityStatisticTheme.light();
       expect(theme.hashCode, isA<int>());
     });
   });
 
-  group('ZephyrStatisticData', () {
+  group('VelocityStatisticData', () {
     test('creates data with required parameters', () {
-      const data = ZephyrStatisticData(
+      const data = VelocityStatisticData(
         title: 'Test Statistic',
         value: '100',
       );
@@ -281,19 +281,19 @@ void main() {
     });
 
     test('creates data with all parameters', () {
-      const data = ZephyrStatisticData(
+      const data = VelocityStatisticData(
         title: 'Test Statistic',
         value: '100',
         description: 'Test Description',
         trendValue: '12.5%',
-        trend: ZephyrStatisticTrend.up,
+        trend: VelocityStatisticTrend.up,
         icon: Icon(Icons.trending_up),
       );
       expect(data.title, equals('Test Statistic'));
       expect(data.value, equals('100'));
       expect(data.description, equals('Test Description'));
       expect(data.trendValue, equals('12.5%'));
-      expect(data.trend, equals(ZephyrStatisticTrend.up));
+      expect(data.trend, equals(VelocityStatisticTrend.up));
       expect(data.icon, isNotNull);
     });
   });
