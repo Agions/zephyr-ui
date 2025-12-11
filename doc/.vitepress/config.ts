@@ -62,6 +62,7 @@ export default defineConfig({
           { text: 'Menu 菜单', link: '/components/navigation/menu' },
           { text: 'Pagination 分页', link: '/components/navigation/pagination' },
           { text: 'Segmented 分段器', link: '/components/navigation/segmented' },
+          { text: 'Breadcrumb 面包屑', link: '/components/navigation/breadcrumb' },
         ],
       },
       {
@@ -76,6 +77,8 @@ export default defineConfig({
           { text: 'Switch 开关', link: '/components/form/switch' },
           { text: 'Slider 滑块', link: '/components/form/slider' },
           { text: 'Rate 评分', link: '/components/form/rate' },
+          { text: 'DatePicker 日期选择器', link: '/components/form/date_picker' },
+          { text: 'Upload 上传', link: '/components/form/upload' },
           { text: 'FormField 表单字段', link: '/components/form/form_field' },
         ],
       },

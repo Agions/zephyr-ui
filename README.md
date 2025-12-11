@@ -79,7 +79,7 @@
 dependencies:
   flutter:
     sdk: flutter
-  velocity_ui: ^0.4.0
+  velocity_ui: ^1.0.2
 
 dev_dependencies:
   flutter_test:
@@ -235,8 +235,8 @@ class HomeScreen extends StatelessWidget {
 
 ```bash
 # 1. 克隆仓库
-git clone https://github.com/Agions/zephyr-ui.git
-cd zephyr-ui
+git clone https://github.com/Agions/velocity-ui.git
+cd velocity-ui
 
 # 2. 安装依赖
 flutter pub get
@@ -408,11 +408,11 @@ class VelocityPerformanceMetrics {
 ```bash
 # 1. Fork 仓库
 # 2. 克隆到本地
-git clone https://github.com/YOUR_USERNAME/zephyr-ui.git
-cd zephyr-ui
+git clone https://github.com/YOUR_USERNAME/velocity-ui.git
+cd velocity-ui
 
 # 3. 添加上游仓库
-git remote add upstream https://github.com/Agions/zephyr-ui.git
+git remote add upstream https://github.com/Agions/velocity-ui.git
 
 # 4. 创建功能分支
 git checkout -b feature/your-feature-name
@@ -453,7 +453,7 @@ git commit -m "test: 添加单元测试"
 
 1. **文档**：从 [完整文档](doc/README.md) 开始
 2. **示例**：查看 [示例应用](example/)
-3. **问题报告**：[GitHub Issues](https://github.com/Agions/zephyr-ui/issues)
+3. **问题报告**：[GitHub Issues](https://github.com/Agions/velocity-ui/issues)
 
 ### 💼 企业支持
 

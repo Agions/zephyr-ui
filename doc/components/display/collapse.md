@@ -62,6 +62,6 @@ VelocityAccordion(
 
 | 属性 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
-| items | ZephyrList<VelocityAccordionItem> | - | 面板项列表 (必填) |
+| items | List<VelocityAccordionItem> | - | 面板项列表 (必填) |
 | allowMultiple | bool | false | 是否允许同时展开多个 |
 | style | VelocityCollapseStyle? | - | 自定义样式 |

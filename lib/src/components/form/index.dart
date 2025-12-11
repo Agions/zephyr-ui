@@ -10,5 +10,6 @@ export 'rate/index.dart';
 export 'select/index.dart';
 export 'search/index.dart';
 export 'counter/index.dart';
+export 'date_picker/index.dart';
 export 'form_field/index.dart';
 export 'upload/index.dart';

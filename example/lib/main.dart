@@ -34,6 +34,7 @@ import 'form/search_example.dart';
 import 'form/switch_example.dart';
 import 'form/slider_example.dart';
 import 'form/select_example.dart';
+import 'form/upload_example.dart';
 
 // Navigation examples
 import 'navigation/bottom_sheet_example.dart';
@@ -199,6 +200,7 @@ class ShowcaseHomePage extends StatelessWidget {
               _ComponentItem('Slider 滑块', const SliderExample()),
               _ComponentItem('Rate 评分', const RateExample()),
               _ComponentItem('FormField 表单字段', const FormFieldExample()),
+              _ComponentItem('Upload 上传', const UploadExample()),
             ],
           ),
           const SizedBox(height: 16),

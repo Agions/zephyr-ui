@@ -9,3 +9,4 @@ export 'stepper/index.dart';
 export 'menu/index.dart';
 export 'pagination/index.dart';
 export 'segmented/index.dart';
+export 'breadcrumb/index.dart';
