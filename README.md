@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![VelocityUI Logo](https://raw.githubusercontent.com/Agions/velocity-ui/main/assets/images/logo.png)
+![VelocityUI Logo](assets/images/logo.svg)
 
 **高性能企业级 Flutter UI 组件库**
 
