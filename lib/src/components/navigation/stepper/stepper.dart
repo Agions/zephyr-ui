@@ -15,12 +15,12 @@ enum VelocityStepStatus { wait, process, finish, error }
 /// VelocityUI 步骤条
 class VelocityStepper extends StatelessWidget {
   const VelocityStepper({
-    super.key,
     required this.steps,
     required this.currentStep,
     this.direction = VelocityStepperDirection.horizontal,
     this.onStepTap,
     this.style,
+    super.key,
   });
 
   final List<VelocityStep> steps;

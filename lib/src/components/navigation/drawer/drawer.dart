@@ -9,13 +9,12 @@ export 'drawer_style.dart';
 /// VelocityUI 抽屉
 class VelocityDrawer extends StatelessWidget {
   const VelocityDrawer({
-    super.key,
-    this.header,
-    required this.items,
+    required this.items, this.header,
     this.footer,
     this.selectedIndex,
     this.onItemTap,
     this.style,
+    super.key,
   });
 
   final Widget? header;

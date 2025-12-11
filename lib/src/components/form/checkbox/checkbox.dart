@@ -9,9 +9,7 @@ export 'checkbox_style.dart';
 /// VelocityUI 复选框
 class VelocityCheckbox extends StatelessWidget {
   const VelocityCheckbox({
-    super.key,
-    required this.value,
-    required this.onChanged,
+    required this.value, required this.onChanged, super.key,
     this.label,
     this.disabled = false,
     this.style,

@@ -9,8 +9,7 @@ export 'link_style.dart';
 /// VelocityUI 链接
 class VelocityLink extends StatelessWidget {
   const VelocityLink({
-    super.key,
-    required this.text,
+    required this.text, super.key,
     this.onTap,
     this.icon,
     this.underline = false,

@@ -60,7 +60,7 @@ class ActionSheetExample extends StatelessWidget {
             VelocityActionSheetItem(label: '选项二', onTap: () => print('选中选项二')),
             VelocityActionSheetItem(label: '选项三', onTap: () => print('选中选项三')),
           ],
-          cancelAction: VelocityActionSheetItem(label: '取消'),
+          cancelAction: const VelocityActionSheetItem(label: '取消'),
         );
       },
     );
@@ -75,10 +75,10 @@ class ActionSheetExample extends StatelessWidget {
           title: '上传图片',
           message: '请选择图片来源',
           actions: [
-            VelocityActionSheetItem(label: '从相册选择'),
-            VelocityActionSheetItem(label: '拍照'),
+            const VelocityActionSheetItem(label: '从相册选择'),
+            const VelocityActionSheetItem(label: '拍照'),
           ],
-          cancelAction: VelocityActionSheetItem(label: '取消'),
+          cancelAction: const VelocityActionSheetItem(label: '取消'),
         );
       },
     );
@@ -99,7 +99,7 @@ class ActionSheetExample extends StatelessWidget {
               onTap: () => print('删除'),
             ),
           ],
-          cancelAction: VelocityActionSheetItem(label: '取消'),
+          cancelAction: const VelocityActionSheetItem(label: '取消'),
         );
       },
     );

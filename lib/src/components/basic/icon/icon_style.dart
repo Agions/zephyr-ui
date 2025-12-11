@@ -14,6 +14,13 @@ class VelocityIconStyle {
     this.borderRadius,
   });
 
+  /// 默认样式
+  factory VelocityIconStyle.defaults() {
+    return const VelocityIconStyle(
+      color: VelocityColors.gray700,
+    );
+  }
+
   /// 图标颜色
   final Color? color;
 
@@ -25,13 +32,6 @@ class VelocityIconStyle {
 
   /// 圆角
   final BorderRadius? borderRadius;
-
-  /// 默认样式
-  factory VelocityIconStyle.defaults() {
-    return const VelocityIconStyle(
-      color: VelocityColors.gray700,
-    );
-  }
 
   /// 复制并修改
   VelocityIconStyle copyWith({

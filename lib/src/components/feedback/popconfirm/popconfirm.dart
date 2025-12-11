@@ -34,7 +34,6 @@ class VelocityPopconfirm extends StatefulWidget {
 }
 
 class _VelocityPopconfirmState extends State<VelocityPopconfirm> {
-  final _layerLink = LayerLink();
   OverlayEntry? _overlayEntry;
 
   void _show() {

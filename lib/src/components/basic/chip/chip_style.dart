@@ -18,17 +18,6 @@ class VelocityChipStyle {
     this.spacing = 6,
   });
 
-  final Color backgroundColor;
-  final Color foregroundColor;
-  final Color disabledBackgroundColor;
-  final Color disabledForegroundColor;
-  final BorderRadius borderRadius;
-  final Border? border;
-  final EdgeInsets padding;
-  final TextStyle labelStyle;
-  final double iconSize;
-  final double spacing;
-
   factory VelocityChipStyle.fromType(dynamic type, {bool selected = false}) {
     final typeName = type.toString().split('.').last;
     switch (typeName) {
@@ -56,4 +45,15 @@ class VelocityChipStyle {
         );
     }
   }
+
+  final Color backgroundColor;
+  final Color foregroundColor;
+  final Color disabledBackgroundColor;
+  final Color disabledForegroundColor;
+  final BorderRadius borderRadius;
+  final Border? border;
+  final EdgeInsets padding;
+  final TextStyle labelStyle;
+  final double iconSize;
+  final double spacing;
 }

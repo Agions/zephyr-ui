@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 /// VelocityUI 层叠布局
 class VelocityStack extends StatelessWidget {
   const VelocityStack({
-    super.key,
     required this.children,
     this.alignment = AlignmentDirectional.topStart,
     this.fit = StackFit.loose,
     this.clipBehavior = Clip.hardEdge,
+    super.key,
   });
 
   final List<Widget> children;
@@ -31,7 +31,6 @@ class VelocityStack extends StatelessWidget {
 /// VelocityUI 定位组件
 class VelocityPositioned extends StatelessWidget {
   const VelocityPositioned({
-    super.key,
     required this.child,
     this.left,
     this.top,
@@ -39,9 +38,10 @@ class VelocityPositioned extends StatelessWidget {
     this.bottom,
     this.width,
     this.height,
+    super.key,
   });
 
-  const VelocityPositioned.fill({super.key, required this.child})
+  const VelocityPositioned.fill({required this.child, super.key})
       : left = 0,
         top = 0,
         right = 0,
@@ -49,7 +49,7 @@ class VelocityPositioned extends StatelessWidget {
         width = null,
         height = null;
 
-  const VelocityPositioned.center({super.key, required this.child})
+  const VelocityPositioned.center({required this.child, super.key})
       : left = null,
         top = null,
         right = null,

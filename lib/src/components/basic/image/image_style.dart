@@ -17,6 +17,16 @@ class VelocityImageStyle {
     this.errorIconColor,
   });
 
+  /// 默认样式
+  factory VelocityImageStyle.defaults() {
+    return const VelocityImageStyle(
+      placeholderColor: VelocityColors.gray100,
+      placeholderIconColor: VelocityColors.gray400,
+      errorColor: VelocityColors.gray100,
+      errorIconColor: VelocityColors.gray400,
+    );
+  }
+
   /// 圆角
   final BorderRadius? borderRadius;
 
@@ -37,16 +47,6 @@ class VelocityImageStyle {
 
   /// 错误图标色
   final Color? errorIconColor;
-
-  /// 默认样式
-  factory VelocityImageStyle.defaults() {
-    return const VelocityImageStyle(
-      placeholderColor: VelocityColors.gray100,
-      placeholderIconColor: VelocityColors.gray400,
-      errorColor: VelocityColors.gray100,
-      errorIconColor: VelocityColors.gray400,
-    );
-  }
 
   /// 复制并修改
   VelocityImageStyle copyWith({

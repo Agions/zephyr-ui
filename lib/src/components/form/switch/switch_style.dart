@@ -14,21 +14,21 @@ class VelocitySwitchStyle {
     this.labelSpacing,
   });
 
+  factory VelocitySwitchStyle.defaults() {
+    return const VelocitySwitchStyle(
+      activeTrackColor: VelocityColors.primary,
+      inactiveTrackColor: VelocityColors.gray300,
+      thumbColor: VelocityColors.white,
+      labelStyle: TextStyle(fontSize: 14, color: VelocityColors.gray700),
+      disabledLabelColor: VelocityColors.gray400,
+      labelSpacing: 8,
+    );
+  }
+
   final Color? activeTrackColor;
   final Color? inactiveTrackColor;
   final Color? thumbColor;
   final TextStyle? labelStyle;
   final Color? disabledLabelColor;
   final double? labelSpacing;
-
-  factory VelocitySwitchStyle.defaults() {
-    return VelocitySwitchStyle(
-      activeTrackColor: VelocityColors.primary,
-      inactiveTrackColor: VelocityColors.gray300,
-      thumbColor: VelocityColors.white,
-      labelStyle: const TextStyle(fontSize: 14, color: VelocityColors.gray700),
-      disabledLabelColor: VelocityColors.gray400,
-      labelSpacing: 8,
-    );
-  }
 }

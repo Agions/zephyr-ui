@@ -13,8 +13,7 @@ enum VelocityTagType { primary, success, warning, error, info, default_ }
 class VelocityTag extends StatelessWidget {
   /// 创建标签组件
   const VelocityTag({
-    super.key,
-    required this.text,
+    required this.text, super.key,
     this.type = VelocityTagType.default_,
     this.closable = false,
     this.onClose,

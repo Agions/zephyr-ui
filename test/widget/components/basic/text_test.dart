@@ -6,7 +6,6 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:velocity_ui/src/components/basic/text/text.dart';
-import 'package:velocity_ui/src/components/basic/text/text_style.dart';
 
 void main() {
   group('VelocityText', () {

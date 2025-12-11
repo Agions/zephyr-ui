@@ -12,8 +12,7 @@ enum VelocityChipType { filled, outlined, tonal }
 /// VelocityUI Chip
 class VelocityChip extends StatelessWidget {
   const VelocityChip({
-    super.key,
-    required this.label,
+    required this.label, super.key,
     this.avatar,
     this.icon,
     this.deleteIcon,
@@ -89,10 +88,7 @@ class VelocityChip extends StatelessWidget {
 /// VelocityUI 选择Chip
 class VelocityChoiceChip extends StatelessWidget {
   const VelocityChoiceChip({
-    super.key,
-    required this.label,
-    required this.selected,
-    required this.onSelected,
+    required this.label, required this.selected, required this.onSelected, super.key,
     this.avatar,
     this.disabled = false,
     this.style,

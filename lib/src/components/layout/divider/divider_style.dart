@@ -7,10 +7,6 @@ import '../../../core/theme/velocity_colors.dart';
 class VelocityDividerStyle {
   const VelocityDividerStyle(
       {this.color, this.thickness, this.length, this.margin});
-  final Color? color;
-  final double? thickness;
-  final double? length;
-  final EdgeInsets? margin;
 
   factory VelocityDividerStyle.defaults() {
     return const VelocityDividerStyle(
@@ -18,4 +14,8 @@ class VelocityDividerStyle {
         thickness: 1,
         margin: EdgeInsets.symmetric(vertical: 8));
   }
+  final Color? color;
+  final double? thickness;
+  final double? length;
+  final EdgeInsets? margin;
 }

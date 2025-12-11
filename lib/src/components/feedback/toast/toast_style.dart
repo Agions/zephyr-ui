@@ -15,15 +15,6 @@ class VelocityToastStyle {
       this.iconSize,
       this.iconColor,
       this.iconSpacing});
-  final Color? backgroundColor;
-  final TextStyle? textStyle;
-  final EdgeInsets? padding;
-  final BorderRadius? borderRadius;
-  final List<BoxShadow>? boxShadow;
-  final IconData? icon;
-  final double? iconSize;
-  final Color? iconColor;
-  final double? iconSpacing;
 
   factory VelocityToastStyle.fromType(dynamic type) {
     final typeName = type.toString().split('.').last;
@@ -63,4 +54,13 @@ class VelocityToastStyle {
       iconSpacing: 8,
     );
   }
+  final Color? backgroundColor;
+  final TextStyle? textStyle;
+  final EdgeInsets? padding;
+  final BorderRadius? borderRadius;
+  final List<BoxShadow>? boxShadow;
+  final IconData? icon;
+  final double? iconSize;
+  final Color? iconColor;
+  final double? iconSpacing;
 }

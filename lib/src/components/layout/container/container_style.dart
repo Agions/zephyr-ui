@@ -12,6 +12,8 @@ class VelocityContainerStyle {
       this.border,
       this.boxShadow,
       this.clipBehavior});
+
+  factory VelocityContainerStyle.defaults() => const VelocityContainerStyle();
   final EdgeInsets? padding;
   final EdgeInsets? margin;
   final Color? backgroundColor;
@@ -19,6 +21,4 @@ class VelocityContainerStyle {
   final Border? border;
   final List<BoxShadow>? boxShadow;
   final Clip? clipBehavior;
-
-  factory VelocityContainerStyle.defaults() => const VelocityContainerStyle();
 }

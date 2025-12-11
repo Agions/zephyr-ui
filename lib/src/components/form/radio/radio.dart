@@ -9,10 +9,7 @@ export 'radio_style.dart';
 /// VelocityUI 单选框
 class VelocityRadio<T> extends StatelessWidget {
   const VelocityRadio({
-    super.key,
-    required this.value,
-    required this.groupValue,
-    required this.onChanged,
+    required this.value, required this.groupValue, required this.onChanged, super.key,
     this.label,
     this.disabled = false,
     this.style,
@@ -35,10 +32,12 @@ class VelocityRadio<T> extends StatelessWidget {
       onChanged: disabled ? null : onChanged,
       activeColor: effectiveStyle.activeColor,
       fillColor: WidgetStateProperty.resolveWith((states) {
-        if (states.contains(WidgetState.disabled))
+        if (states.contains(WidgetState.disabled)) {
           return effectiveStyle.disabledColor;
-        if (states.contains(WidgetState.selected))
+        }
+        if (states.contains(WidgetState.selected)) {
           return effectiveStyle.activeColor;
+        }
         return effectiveStyle.inactiveColor;
       }),
     );

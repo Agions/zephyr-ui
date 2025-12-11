@@ -9,9 +9,7 @@ export 'table_style.dart';
 /// VelocityUI 表格
 class VelocityTable extends StatelessWidget {
   const VelocityTable({
-    super.key,
-    required this.columns,
-    required this.rows,
+    required this.columns, required this.rows, super.key,
     this.showHeader = true,
     this.striped = false,
     this.bordered = false,

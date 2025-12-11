@@ -12,9 +12,7 @@ enum VelocityTooltipPosition { top, bottom, left, right }
 /// VelocityUI 提示框
 class VelocityTooltip extends StatelessWidget {
   const VelocityTooltip({
-    super.key,
-    required this.message,
-    required this.child,
+    required this.message, required this.child, super.key,
     this.position = VelocityTooltipPosition.top,
     this.richMessage,
     this.style,
@@ -52,9 +50,7 @@ class VelocityTooltip extends StatelessWidget {
 /// VelocityUI Popover 气泡
 class VelocityPopover extends StatefulWidget {
   const VelocityPopover({
-    super.key,
-    required this.content,
-    required this.child,
+    required this.content, required this.child, super.key,
     this.position = VelocityTooltipPosition.bottom,
     this.trigger = VelocityPopoverTrigger.tap,
     this.style,

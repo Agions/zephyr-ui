@@ -9,9 +9,7 @@ export 'switch_style.dart';
 /// VelocityUI 开关
 class VelocitySwitch extends StatelessWidget {
   const VelocitySwitch({
-    super.key,
-    required this.value,
-    required this.onChanged,
+    required this.value, required this.onChanged, super.key,
     this.label,
     this.disabled = false,
     this.style,

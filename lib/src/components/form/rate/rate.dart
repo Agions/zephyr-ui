@@ -9,8 +9,7 @@ export 'rate_style.dart';
 /// VelocityUI 评分
 class VelocityRate extends StatelessWidget {
   const VelocityRate({
-    super.key,
-    required this.value,
+    required this.value, super.key,
     this.onChanged,
     this.count = 5,
     this.allowHalf = false,

@@ -19,33 +19,6 @@ class VelocityTagStyle {
     this.spacing = 4,
   });
 
-  /// 背景颜色
-  final Color? backgroundColor;
-
-  /// 前景颜色
-  final Color? foregroundColor;
-
-  /// 边框
-  final Border? border;
-
-  /// 圆角
-  final BorderRadius? borderRadius;
-
-  /// 高度
-  final double height;
-
-  /// 内边距
-  final EdgeInsets? padding;
-
-  /// 文字样式
-  final TextStyle? textStyle;
-
-  /// 图标尺寸
-  final double iconSize;
-
-  /// 间距
-  final double spacing;
-
   /// 根据类型创建样式
   factory VelocityTagStyle.fromType(dynamic type, {bool outlined = false}) {
     final typeName = type.toString().split('.').last;
@@ -82,6 +55,33 @@ class VelocityTagStyle {
       textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
     );
   }
+
+  /// 背景颜色
+  final Color? backgroundColor;
+
+  /// 前景颜色
+  final Color? foregroundColor;
+
+  /// 边框
+  final Border? border;
+
+  /// 圆角
+  final BorderRadius? borderRadius;
+
+  /// 高度
+  final double height;
+
+  /// 内边距
+  final EdgeInsets? padding;
+
+  /// 文字样式
+  final TextStyle? textStyle;
+
+  /// 图标尺寸
+  final double iconSize;
+
+  /// 间距
+  final double spacing;
 
   /// 复制并修改
   VelocityTagStyle copyWith({

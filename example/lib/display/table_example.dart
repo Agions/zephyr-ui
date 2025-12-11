@@ -49,8 +49,8 @@ class TableExample extends StatelessWidget {
   }
 
   Widget _buildBasicTable() {
-    return VelocityTable(
-      columns: const [
+    return const VelocityTable(
+      columns: [
         VelocityTableColumn(title: '姓名', flex: 1),
         VelocityTableColumn(title: '年龄', flex: 1),
         VelocityTableColumn(title: '地址', flex: 2),

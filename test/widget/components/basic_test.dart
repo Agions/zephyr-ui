@@ -6,8 +6,8 @@ void main() {
   group('VelocityUI Basic Components Test', () {
     testWidgets('VelocityTheme loads correctly', (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: const Scaffold(
+        const MaterialApp(
+          home: Scaffold(
             body: Center(
               child: Text('Test Theme'),
             ),

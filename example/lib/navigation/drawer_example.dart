@@ -21,10 +21,10 @@ class _DrawerExampleState extends State<DrawerExample> {
         foregroundColor: Colors.white,
       ),
       drawer: VelocityDrawer(
-        header: UserAccountsDrawerHeader(
-          decoration: const BoxDecoration(color: VelocityColors.primary),
-          accountName: const Text('Velocity UI'),
-          accountEmail: const Text('velocity@example.com'),
+        header: const UserAccountsDrawerHeader(
+          decoration: BoxDecoration(color: VelocityColors.primary),
+          accountName: Text('Velocity UI'),
+          accountEmail: Text('velocity@example.com'),
           currentAccountPicture: CircleAvatar(
             backgroundColor: Colors.white,
             child: Text('V', style: TextStyle(fontSize: 24, color: VelocityColors.primary)),

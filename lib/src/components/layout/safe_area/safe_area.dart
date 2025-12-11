@@ -6,8 +6,7 @@ import 'package:flutter/material.dart';
 /// VelocityUI 安全区域
 class VelocitySafeArea extends StatelessWidget {
   const VelocitySafeArea({
-    super.key,
-    required this.child,
+    required this.child, super.key,
     this.top = true,
     this.bottom = true,
     this.left = true,
@@ -16,21 +15,21 @@ class VelocitySafeArea extends StatelessWidget {
   });
 
   const VelocitySafeArea.top(
-      {super.key, required this.child, this.minimum = EdgeInsets.zero})
+      {required this.child, super.key, this.minimum = EdgeInsets.zero})
       : top = true,
         bottom = false,
         left = false,
         right = false;
 
   const VelocitySafeArea.bottom(
-      {super.key, required this.child, this.minimum = EdgeInsets.zero})
+      {required this.child, super.key, this.minimum = EdgeInsets.zero})
       : top = false,
         bottom = true,
         left = false,
         right = false;
 
   const VelocitySafeArea.horizontal(
-      {super.key, required this.child, this.minimum = EdgeInsets.zero})
+      {required this.child, super.key, this.minimum = EdgeInsets.zero})
       : top = false,
         bottom = false,
         left = true,

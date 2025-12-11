@@ -76,10 +76,10 @@ class ListExample extends StatelessWidget {
     return VelocityListGroup(
       header: const Text('设置'),
       children: [
-        VelocityListTile(
-          leading: const Icon(Icons.wifi),
-          title: const Text('Wi-Fi'),
-          trailing: const VelocitySwitch(value: true, onChanged: null),
+        const VelocityListTile(
+          leading: Icon(Icons.wifi),
+          title: Text('Wi-Fi'),
+          trailing: VelocitySwitch(value: true, onChanged: null),
         ),
         VelocityListTile(
           leading: const Icon(Icons.bluetooth),

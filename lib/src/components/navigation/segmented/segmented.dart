@@ -9,12 +9,12 @@ export 'segmented_style.dart';
 /// VelocityUI 分段控制器
 class VelocitySegmented<T> extends StatelessWidget {
   const VelocitySegmented({
-    super.key,
     required this.value,
     required this.segments,
     required this.onChanged,
     this.disabled = false,
     this.style,
+    super.key,
   });
 
   final T value;

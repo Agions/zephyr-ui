@@ -29,8 +29,7 @@ enum VelocityIconPosition { left, right }
 class VelocityButton extends StatelessWidget {
   /// 创建一个按钮
   const VelocityButton({
-    super.key,
-    required this.child,
+    required this.child, super.key,
     this.onPressed,
     this.onLongPress,
     this.type = VelocityButtonType.primary,
@@ -45,8 +44,7 @@ class VelocityButton extends StatelessWidget {
 
   /// 创建一个带文本的按钮
   const VelocityButton.text({
-    super.key,
-    required String text,
+    required String text, super.key,
     this.onPressed,
     this.onLongPress,
     this.type = VelocityButtonType.primary,
@@ -62,9 +60,7 @@ class VelocityButton extends StatelessWidget {
 
   /// 创建一个带图标的按钮
   const VelocityButton.icon({
-    super.key,
-    required String text,
-    required IconData icon,
+    required String text, required IconData icon, super.key,
     VelocityIconPosition iconPosition = VelocityIconPosition.left,
     this.onPressed,
     this.onLongPress,
@@ -99,7 +95,7 @@ class VelocityButton extends StatelessWidget {
         VelocityButtonStyle.resolve(type: type, size: size, customStyle: style);
     final effectiveDisabled = disabled || loading;
 
-    Widget content = _buildContent(effectiveStyle);
+    var content = _buildContent(effectiveStyle);
 
     final bgColor = effectiveDisabled
         ? (effectiveStyle.disabledBackgroundColor ?? Colors.grey)
@@ -199,8 +195,7 @@ class VelocityButton extends StatelessWidget {
 /// VelocityUI 图标按钮组件
 class VelocityIconButton extends StatelessWidget {
   const VelocityIconButton({
-    super.key,
-    required this.icon,
+    required this.icon, super.key,
     this.onPressed,
     this.size = 40,
     this.iconSize = 20,

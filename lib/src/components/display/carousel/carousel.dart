@@ -9,8 +9,7 @@ export 'carousel_style.dart';
 /// VelocityUI 轮播图
 class VelocityCarousel extends StatefulWidget {
   const VelocityCarousel({
-    super.key,
-    required this.items,
+    required this.items, super.key,
     this.height = 200,
     this.autoPlay = true,
     this.autoPlayInterval = const Duration(seconds: 3),

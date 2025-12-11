@@ -9,8 +9,7 @@ export 'statistic_style.dart';
 /// VelocityUI 统计数值
 class VelocityStatistic extends StatelessWidget {
   const VelocityStatistic({
-    super.key,
-    required this.value,
+    required this.value, super.key,
     this.title,
     this.prefix,
     this.suffix,
@@ -74,7 +73,7 @@ class VelocityStatistic extends StatelessWidget {
                       ? effectiveStyle.upColor
                       : effectiveStyle.downColor,
                 ),
-                SizedBox(width: 4),
+                const SizedBox(width: 4),
                 Text(trendValue!,
                     style: effectiveStyle.trendStyle.copyWith(
                         color: trend == VelocityStatisticTrend.up
@@ -93,8 +92,7 @@ enum VelocityStatisticTrend { up, down }
 /// VelocityUI 倒计时
 class VelocityCountdown extends StatefulWidget {
   const VelocityCountdown({
-    super.key,
-    required this.endTime,
+    required this.endTime, super.key,
     this.onFinish,
     this.format = 'HH:mm:ss',
     this.style,
@@ -137,8 +135,9 @@ class _VelocityCountdownState extends State<VelocityCountdown> {
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = widget.style ?? const VelocityCountdownStyle();
-    if (_remaining.isNegative)
+    if (_remaining.isNegative) {
       return Text('00:00:00', style: effectiveStyle.textStyle);
+    }
 
     final hours = _remaining.inHours.toString().padLeft(2, '0');
     final minutes = (_remaining.inMinutes % 60).toString().padLeft(2, '0');

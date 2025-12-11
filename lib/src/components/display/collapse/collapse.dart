@@ -9,9 +9,7 @@ export 'collapse_style.dart';
 /// VelocityUI 折叠面板
 class VelocityCollapse extends StatefulWidget {
   const VelocityCollapse({
-    super.key,
-    required this.title,
-    required this.child,
+    required this.title, required this.child, super.key,
     this.leading,
     this.initiallyExpanded = false,
     this.onChanged,
@@ -108,8 +106,7 @@ class _VelocityCollapseState extends State<VelocityCollapse>
 /// VelocityUI 手风琴组件
 class VelocityAccordion extends StatefulWidget {
   const VelocityAccordion({
-    super.key,
-    required this.items,
+    required this.items, super.key,
     this.allowMultiple = false,
     this.style,
   });
@@ -129,7 +126,7 @@ class _VelocityAccordionState extends State<VelocityAccordion> {
   void initState() {
     super.initState();
     _expandedIndices = {};
-    for (int i = 0; i < widget.items.length; i++) {
+    for (var i = 0; i < widget.items.length; i++) {
       if (widget.items[i].initiallyExpanded) _expandedIndices.add(i);
     }
   }

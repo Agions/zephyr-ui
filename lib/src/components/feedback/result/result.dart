@@ -13,10 +13,8 @@ enum VelocityResultType { success, error, warning, info }
 /// VelocityUI 结果页
 class VelocityResult extends StatelessWidget {
   const VelocityResult({
-    super.key,
-    required this.type,
+    required this.type, required this.title, super.key,
     this.icon,
-    required this.title,
     this.subtitle,
     this.extra,
     this.actions,

@@ -14,21 +14,21 @@ class VelocityRadioStyle {
     this.labelSpacing,
   });
 
+  factory VelocityRadioStyle.defaults() {
+    return const VelocityRadioStyle(
+      activeColor: VelocityColors.primary,
+      inactiveColor: VelocityColors.gray400,
+      disabledColor: VelocityColors.gray300,
+      labelStyle: TextStyle(fontSize: 14, color: VelocityColors.gray700),
+      disabledLabelColor: VelocityColors.gray400,
+      labelSpacing: 8,
+    );
+  }
+
   final Color? activeColor;
   final Color? inactiveColor;
   final Color? disabledColor;
   final TextStyle? labelStyle;
   final Color? disabledLabelColor;
   final double? labelSpacing;
-
-  factory VelocityRadioStyle.defaults() {
-    return VelocityRadioStyle(
-      activeColor: VelocityColors.primary,
-      inactiveColor: VelocityColors.gray400,
-      disabledColor: VelocityColors.gray300,
-      labelStyle: const TextStyle(fontSize: 14, color: VelocityColors.gray700),
-      disabledLabelColor: VelocityColors.gray400,
-      labelSpacing: 8,
-    );
-  }
 }

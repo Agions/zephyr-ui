@@ -6,7 +6,7 @@ void main() {
   group('VelocityCheckbox Widget Tests', () {
     testWidgets('renders checkbox with default properties',
         (WidgetTester tester) async {
-      bool value = false;
+      var value = false;
 
       await tester.pumpWidget(
         MaterialApp(
@@ -25,7 +25,7 @@ void main() {
 
     testWidgets('renders checkbox with label',
         (WidgetTester tester) async {
-      bool value = false;
+      var value = false;
 
       await tester.pumpWidget(
         MaterialApp(
@@ -46,7 +46,7 @@ void main() {
 
     testWidgets('handles checkbox selection',
         (WidgetTester tester) async {
-      bool value = false;
+      var value = false;
 
       await tester.pumpWidget(
         MaterialApp(
@@ -71,7 +71,7 @@ void main() {
 
     testWidgets('handles checkbox deselection',
         (WidgetTester tester) async {
-      bool value = true;
+      var value = true;
 
       await tester.pumpWidget(
         MaterialApp(
@@ -96,8 +96,8 @@ void main() {
 
     testWidgets('handles disabled checkbox',
         (WidgetTester tester) async {
-      bool value = false;
-      bool callbackCalled = false;
+      var value = false;
+      var callbackCalled = false;
 
       await tester.pumpWidget(
         MaterialApp(
@@ -127,7 +127,7 @@ void main() {
 
     testWidgets('handles tap on label to toggle checkbox',
         (WidgetTester tester) async {
-      bool value = false;
+      var value = false;
 
       await tester.pumpWidget(
         MaterialApp(
@@ -152,9 +152,9 @@ void main() {
 
     testWidgets('renders multiple checkboxes in same screen',
         (WidgetTester tester) async {
-      bool value1 = false;
-      bool value2 = true;
-      bool value3 = false;
+      var value1 = false;
+      var value2 = true;
+      var value3 = false;
 
       await tester.pumpWidget(
         MaterialApp(
@@ -192,7 +192,7 @@ void main() {
     testWidgets('handles checkbox with null callback',
         (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: VelocityCheckbox(
               value: false,

@@ -61,8 +61,9 @@ class _VelocityAccessibleSwitchState extends State<VelocityAccessibleSwitch> {
 
     return Focus(
       focusNode: _focusNode,
-      onKey: (node, event) {
+      onKeyEvent: (node, event) {
         if (isEnabled &&
+            event is KeyDownEvent &&
             (event.logicalKey == LogicalKeyboardKey.enter ||
                 event.logicalKey == LogicalKeyboardKey.space)) {
           _toggleSwitch();

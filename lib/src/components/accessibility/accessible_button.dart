@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:velocity_ui/src/core/accessibility/accessibility_types.dart';
 
 class VelocityAccessibleButton extends StatelessWidget {
   const VelocityAccessibleButton({
@@ -35,8 +34,9 @@ class VelocityAccessibleButton extends StatelessWidget {
 
     return Focus(
       focusNode: focusNode,
-      onKey: (node, event) {
+      onKeyEvent: (node, event) {
         if (isEnabled &&
+            event is KeyDownEvent &&
             (event.logicalKey == LogicalKeyboardKey.enter ||
                 event.logicalKey == LogicalKeyboardKey.space)) {
           onPressed?.call();

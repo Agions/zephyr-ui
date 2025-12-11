@@ -9,13 +9,13 @@ export 'scroll_style.dart';
 /// VelocityUI 滚动视图
 class VelocityScrollView extends StatelessWidget {
   const VelocityScrollView({
-    super.key,
     required this.children,
     this.direction = Axis.vertical,
     this.padding,
     this.physics,
     this.controller,
     this.reverse = false,
+    super.key,
   });
 
   final List<Widget> children;
@@ -46,12 +46,12 @@ class VelocityScrollView extends StatelessWidget {
 /// VelocityUI 下拉刷新
 class VelocityRefresh extends StatelessWidget {
   const VelocityRefresh({
-    super.key,
     required this.child,
     required this.onRefresh,
     this.color,
     this.backgroundColor,
     this.displacement = 40,
+    super.key,
   });
 
   final Widget child;
@@ -75,11 +75,11 @@ class VelocityRefresh extends StatelessWidget {
 /// VelocityUI 滚动到顶部按钮
 class VelocityScrollToTop extends StatefulWidget {
   const VelocityScrollToTop({
-    super.key,
     required this.child,
     required this.controller,
     this.showAfter = 200,
     this.style,
+    super.key,
   });
 
   final Widget child;

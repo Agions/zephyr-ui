@@ -9,10 +9,7 @@ export 'select_style.dart';
 /// VelocityUI 选择器
 class VelocitySelect<T> extends StatelessWidget {
   const VelocitySelect({
-    super.key,
-    required this.value,
-    required this.items,
-    required this.onChanged,
+    required this.value, required this.items, required this.onChanged, super.key,
     this.hint,
     this.label,
     this.disabled = false,

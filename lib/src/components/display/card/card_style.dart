@@ -19,6 +19,22 @@ class VelocityCardStyle {
     this.clipBehavior,
   });
 
+  /// 默认样式
+  factory VelocityCardStyle.defaults() {
+    return VelocityCardStyle(
+      padding: const EdgeInsets.all(16),
+      backgroundColor: VelocityColors.white,
+      borderRadius: const BorderRadius.all(Radius.circular(12)),
+      boxShadow: [
+        BoxShadow(
+          color: VelocityColors.withOpacity(VelocityColors.black, 0.08),
+          blurRadius: 8,
+          offset: const Offset(0, 2),
+        ),
+      ],
+    );
+  }
+
   /// 宽度
   final double? width;
 
@@ -45,22 +61,6 @@ class VelocityCardStyle {
 
   /// 裁剪行为
   final Clip? clipBehavior;
-
-  /// 默认样式
-  factory VelocityCardStyle.defaults() {
-    return VelocityCardStyle(
-      padding: const EdgeInsets.all(16),
-      backgroundColor: VelocityColors.white,
-      borderRadius: const BorderRadius.all(Radius.circular(12)),
-      boxShadow: [
-        BoxShadow(
-          color: VelocityColors.withOpacity(VelocityColors.black, 0.08),
-          blurRadius: 8,
-          offset: const Offset(0, 2),
-        ),
-      ],
-    );
-  }
 
   /// 轮廓边框
   static Border outlinedBorder() {

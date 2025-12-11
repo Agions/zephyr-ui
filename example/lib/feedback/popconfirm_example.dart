@@ -63,7 +63,7 @@ class PopconfirmExample extends StatelessWidget {
           const SnackBar(content: Text('已取消')),
         );
       },
-      child: VelocityButton.text(
+      child: const VelocityButton.text(
         text: '删除',
         type: VelocityButtonType.danger,
         onPressed: null,
@@ -81,7 +81,7 @@ class PopconfirmExample extends StatelessWidget {
           const SnackBar(content: Text('已提交')),
         );
       },
-      child: VelocityButton.text(
+      child: const VelocityButton.text(
         text: '提交表单',
         onPressed: null,
       ),
@@ -99,7 +99,7 @@ class PopconfirmExample extends StatelessWidget {
           const SnackBar(content: Text('账户已注销')),
         );
       },
-      child: VelocityButton.text(
+      child: const VelocityButton.text(
         text: '注销账户',
         type: VelocityButtonType.danger,
         onPressed: null,

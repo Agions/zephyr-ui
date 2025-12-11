@@ -10,9 +10,8 @@ export 'action_sheet_style.dart';
 class VelocityActionSheet {
   static Future<T?> show<T>({
     required BuildContext context,
-    String? title,
+    required List<VelocityActionSheetItem<T>> actions, String? title,
     String? message,
-    required List<VelocityActionSheetItem<T>> actions,
     VelocityActionSheetItem<T>? cancelAction,
     VelocityActionSheetStyle? style,
   }) {

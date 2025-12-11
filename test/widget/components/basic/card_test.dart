@@ -316,9 +316,9 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
-          home: Scaffold(
+          home: const Scaffold(
             body: Column(
-              children: const [
+              children: [
                 VelocityCard(
                   child: Text('Default Card'),
                 ),

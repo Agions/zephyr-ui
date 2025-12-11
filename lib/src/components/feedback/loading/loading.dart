@@ -58,9 +58,7 @@ class VelocityLoading extends StatelessWidget {
 /// VelocityUI 加载覆盖层
 class VelocityLoadingOverlay extends StatelessWidget {
   const VelocityLoadingOverlay({
-    super.key,
-    required this.child,
-    required this.loading,
+    required this.child, required this.loading, super.key,
     this.message,
     this.style,
   });

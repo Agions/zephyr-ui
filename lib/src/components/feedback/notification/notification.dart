@@ -57,14 +57,8 @@ class VelocityNotification {
 class _VelocityNotificationWidget extends StatefulWidget {
   const _VelocityNotificationWidget({
     required this.title,
-    this.message,
-    required this.type,
-    required this.position,
-    required this.duration,
+    required this.type, required this.position, required this.duration, required this.showClose, required this.style, required this.onDismiss, this.message,
     this.onTap,
-    required this.showClose,
-    required this.style,
-    required this.onDismiss,
   });
 
   final String title;

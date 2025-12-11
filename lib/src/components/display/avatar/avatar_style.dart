@@ -13,6 +13,14 @@ class VelocityAvatarStyle {
     this.border,
   });
 
+  /// 默认样式
+  factory VelocityAvatarStyle.defaults() {
+    return const VelocityAvatarStyle(
+      backgroundColor: VelocityColors.primaryLight,
+      foregroundColor: VelocityColors.white,
+    );
+  }
+
   /// 背景颜色
   final Color? backgroundColor;
 
@@ -21,14 +29,6 @@ class VelocityAvatarStyle {
 
   /// 边框
   final Border? border;
-
-  /// 默认样式
-  factory VelocityAvatarStyle.defaults() {
-    return const VelocityAvatarStyle(
-      backgroundColor: VelocityColors.primaryLight,
-      foregroundColor: VelocityColors.white,
-    );
-  }
 
   /// 复制并修改
   VelocityAvatarStyle copyWith({
@@ -54,6 +54,11 @@ class VelocityAvatarGroupStyle {
     this.overflowForegroundColor = VelocityColors.gray700,
   });
 
+  /// 默认样式
+  factory VelocityAvatarGroupStyle.defaults() {
+    return const VelocityAvatarGroupStyle();
+  }
+
   /// 边框颜色
   final Color borderColor;
 
@@ -65,9 +70,4 @@ class VelocityAvatarGroupStyle {
 
   /// 溢出前景色
   final Color overflowForegroundColor;
-
-  /// 默认样式
-  factory VelocityAvatarGroupStyle.defaults() {
-    return const VelocityAvatarGroupStyle();
-  }
 }

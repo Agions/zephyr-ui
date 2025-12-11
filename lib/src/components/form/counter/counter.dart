@@ -9,9 +9,7 @@ export 'counter_style.dart';
 /// VelocityUI 计数器/数字输入
 class VelocityCounter extends StatefulWidget {
   const VelocityCounter({
-    super.key,
-    required this.value,
-    required this.onChanged,
+    required this.value, required this.onChanged, super.key,
     this.min = 0,
     this.max = 99999,
     this.step = 1,

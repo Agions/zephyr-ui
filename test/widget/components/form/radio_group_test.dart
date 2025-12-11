@@ -6,7 +6,7 @@ void main() {
   group('VelocityRadio Widget Tests', () {
     testWidgets('renders radio with default properties',
         (WidgetTester tester) async {
-      String groupValue = '1';
+      var groupValue = '1';
 
       await tester.pumpWidget(
         MaterialApp(
@@ -25,7 +25,7 @@ void main() {
 
     testWidgets('renders radio with label',
         (WidgetTester tester) async {
-      String groupValue = '1';
+      var groupValue = '1';
 
       await tester.pumpWidget(
         MaterialApp(
@@ -46,7 +46,7 @@ void main() {
 
     testWidgets('handles radio selection',
         (WidgetTester tester) async {
-      String groupValue = '1';
+      var groupValue = '1';
 
       await tester.pumpWidget(
         MaterialApp(
@@ -82,8 +82,8 @@ void main() {
 
     testWidgets('handles disabled radio',
         (WidgetTester tester) async {
-      String groupValue = '1';
-      bool callbackCalled = false;
+      var groupValue = '1';
+      var callbackCalled = false;
 
       await tester.pumpWidget(
         MaterialApp(
@@ -114,7 +114,7 @@ void main() {
 
     testWidgets('handles tap on label to toggle radio',
         (WidgetTester tester) async {
-      String groupValue = '1';
+      var groupValue = '1';
 
       await tester.pumpWidget(
         MaterialApp(
@@ -140,7 +140,7 @@ void main() {
 
     testWidgets('renders multiple radios in same screen',
         (WidgetTester tester) async {
-      String groupValue = '2';
+      var groupValue = '2';
 
       await tester.pumpWidget(
         MaterialApp(
@@ -180,7 +180,7 @@ void main() {
     testWidgets('handles radio with null callback',
         (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: VelocityRadio(
               value: '1',
@@ -197,7 +197,7 @@ void main() {
 
     testWidgets('handles radio with null group value',
         (WidgetTester tester) async {
-      String? groupValue = null;
+      String? groupValue;
 
       await tester.pumpWidget(
         MaterialApp(

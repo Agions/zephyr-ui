@@ -7,8 +7,8 @@ void main() {
     testWidgets('renders horizontal divider with default properties',
         (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: const Scaffold(
+        const MaterialApp(
+          home: Scaffold(
             body: VelocityDivider(),
           ),
         ),
@@ -26,8 +26,8 @@ void main() {
     testWidgets('renders vertical divider with default properties',
         (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: const Scaffold(
+        const MaterialApp(
+          home: Scaffold(
             body: VelocityDivider(vertical: true),
           ),
         ),
@@ -45,8 +45,8 @@ void main() {
     testWidgets('applies custom style to horizontal divider',
         (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: const Scaffold(
+        const MaterialApp(
+          home: Scaffold(
             body: VelocityDivider(
               style: VelocityDividerStyle(
                 color: Colors.red,
@@ -63,8 +63,8 @@ void main() {
     testWidgets('applies custom style to vertical divider',
         (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: const Scaffold(
+        const MaterialApp(
+          home: Scaffold(
             body: VelocityDivider(
               vertical: true,
               style: VelocityDividerStyle(
@@ -82,8 +82,8 @@ void main() {
     testWidgets('renders multiple dividers in same screen',
         (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: const Scaffold(
+        const MaterialApp(
+          home: Scaffold(
             body: Column(
               children: [
                 Text('Content 1'),
@@ -109,8 +109,8 @@ void main() {
     testWidgets('renders vertical divider in row layout',
         (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: const Scaffold(
+        const MaterialApp(
+          home: Scaffold(
             body: Row(
               children: [
                 Text('Left'),

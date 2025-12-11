@@ -32,6 +32,15 @@ class _VelocitySpinnerState extends State<VelocitySpinner>
     with TickerProviderStateMixin {
   late AnimationController _controller;
 
+  Color _applyOpacity(Color color, double opacity) {
+    return Color.fromARGB(
+      (opacity * 255).round(),
+      (color.r * 255).round(),
+      (color.g * 255).round(),
+      (color.b * 255).round(),
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -88,7 +97,7 @@ class _VelocitySpinnerState extends State<VelocitySpinner>
                       width: widget.size / 5,
                       height: widget.size / 5,
                       decoration: BoxDecoration(
-                          color: color.withOpacity(0.3 + value * 0.7),
+                          color: _applyOpacity(color, 0.3 + value * 0.7),
                           shape: BoxShape.circle),
                     );
                   },
@@ -133,14 +142,14 @@ class _VelocitySpinnerState extends State<VelocitySpinner>
           width: widget.size,
           height: widget.size,
           decoration: BoxDecoration(
-            color: color.withOpacity(1 - _controller.value),
+            color: _applyOpacity(color, 1 - _controller.value),
             shape: BoxShape.circle,
           ),
           child: Transform.scale(
             scale: 0.5 + _controller.value * 0.5,
             child: Container(
                 decoration: BoxDecoration(
-                    color: color.withOpacity(0.3), shape: BoxShape.circle)),
+                    color: _applyOpacity(color, 0.3), shape: BoxShape.circle)),
           ),
         );
       },
@@ -157,7 +166,7 @@ class _VelocitySpinnerState extends State<VelocitySpinner>
           height: widget.size,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: Border.all(color: color.withOpacity(0.2), width: 3),
+            border: Border.all(color: _applyOpacity(color, 0.2), width: 3),
           ),
           child: Align(
             alignment: Alignment.topCenter,

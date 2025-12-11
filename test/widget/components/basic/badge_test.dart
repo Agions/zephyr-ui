@@ -176,8 +176,8 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
-          home: Column(
-            children: const [
+          home: const Column(
+            children: [
               VelocityBadge(
                 count: 1,
                 type: VelocityBadgeType.primary,

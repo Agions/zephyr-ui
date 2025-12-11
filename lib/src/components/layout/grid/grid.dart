@@ -9,8 +9,7 @@ export 'grid_style.dart';
 /// VelocityUI 网格
 class VelocityGrid extends StatelessWidget {
   const VelocityGrid({
-    super.key,
-    required this.children,
+    required this.children, super.key,
     this.columns = 2,
     this.mainAxisSpacing = 16,
     this.crossAxisSpacing = 16,
@@ -52,8 +51,7 @@ class VelocityGrid extends StatelessWidget {
 /// VelocityUI 响应式网格
 class VelocityResponsiveGrid extends StatelessWidget {
   const VelocityResponsiveGrid({
-    super.key,
-    required this.children,
+    required this.children, super.key,
     this.minItemWidth = 150,
     this.mainAxisSpacing = 16,
     this.crossAxisSpacing = 16,
@@ -95,8 +93,7 @@ class VelocityResponsiveGrid extends StatelessWidget {
 /// VelocityUI Wrap 流式布局
 class VelocityWrap extends StatelessWidget {
   const VelocityWrap({
-    super.key,
-    required this.children,
+    required this.children, super.key,
     this.spacing = 8,
     this.runSpacing = 8,
     this.alignment = WrapAlignment.start,

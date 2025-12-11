@@ -9,8 +9,7 @@ export 'timeline_style.dart';
 /// VelocityUI 时间线
 class VelocityTimeline extends StatelessWidget {
   const VelocityTimeline({
-    super.key,
-    required this.items,
+    required this.items, super.key,
     this.reverse = false,
     this.style,
   });

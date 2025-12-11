@@ -11,9 +11,9 @@ import 'velocity_typography.dart';
 /// VelocityUI 主题
 class VelocityTheme extends StatelessWidget {
   const VelocityTheme({
-    super.key,
     required this.data,
     required this.child,
+    super.key,
   });
 
   /// 主题数据
@@ -66,8 +66,8 @@ class _InheritedVelocityTheme extends InheritedWidget {
 /// VelocityUI 主题构建器
 class VelocityThemeBuilder extends StatelessWidget {
   const VelocityThemeBuilder({
-    super.key,
     required this.builder,
+    super.key,
   });
 
   /// 构建器
@@ -83,11 +83,11 @@ class VelocityThemeBuilder extends StatelessWidget {
 /// VelocityUI 动态主题提供者
 class VelocityDynamicTheme extends StatefulWidget {
   const VelocityDynamicTheme({
-    super.key,
     required this.child,
     this.lightTheme,
     this.darkTheme,
     this.themeMode = ThemeMode.system,
+    super.key,
   });
 
   /// 子组件

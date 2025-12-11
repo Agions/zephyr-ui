@@ -9,13 +9,13 @@ export 'pagination_style.dart';
 /// VelocityUI 分页
 class VelocityPagination extends StatelessWidget {
   const VelocityPagination({
-    super.key,
     required this.current,
     required this.total,
     required this.onPageChanged,
     this.pageSize = 10,
     this.simple = false,
     this.style,
+    super.key,
   });
 
   final int current;
@@ -62,7 +62,7 @@ class VelocityPagination extends StatelessWidget {
 
   List<Widget> _buildPageButtons(VelocityPaginationStyle style) {
     final pages = <Widget>[];
-    for (int i = 1; i <= _totalPages; i++) {
+    for (var i = 1; i <= _totalPages; i++) {
       if (i == 1 ||
           i == _totalPages ||
           (i >= current - 1 && i <= current + 1)) {

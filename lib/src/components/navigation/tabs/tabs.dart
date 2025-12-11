@@ -9,12 +9,12 @@ export 'tabs_style.dart';
 /// VelocityUI 标签页
 class VelocityTabs extends StatefulWidget {
   const VelocityTabs({
-    super.key,
     required this.tabs,
     required this.children,
     this.initialIndex = 0,
     this.onChanged,
     this.style,
+    super.key,
   });
 
   final List<String> tabs;
@@ -39,9 +39,10 @@ class _VelocityTabsState extends State<VelocityTabs>
         vsync: this,
         initialIndex: widget.initialIndex);
     _controller.addListener(() {
-      if (!_controller.indexIsChanging)
-        widget.onChanged?.call(_controller.index);
-    });
+        if (!_controller.indexIsChanging) {
+          widget.onChanged?.call(_controller.index);
+        }
+      });
   }
 
   @override

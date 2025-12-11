@@ -6,25 +6,23 @@ import 'package:flutter/material.dart';
 /// VelocityUI 宽高比
 class VelocityAspectRatio extends StatelessWidget {
   const VelocityAspectRatio({
-    super.key,
-    required this.aspectRatio,
-    required this.child,
+    required this.aspectRatio, required this.child, super.key,
   });
 
   /// 16:9 宽高比
-  const VelocityAspectRatio.video({super.key, required this.child})
+  const VelocityAspectRatio.video({required this.child, super.key})
       : aspectRatio = 16 / 9;
 
   /// 4:3 宽高比
-  const VelocityAspectRatio.photo({super.key, required this.child})
+  const VelocityAspectRatio.photo({required this.child, super.key})
       : aspectRatio = 4 / 3;
 
   /// 1:1 正方形
-  const VelocityAspectRatio.square({super.key, required this.child})
+  const VelocityAspectRatio.square({required this.child, super.key})
       : aspectRatio = 1;
 
   /// 3:4 竖版
-  const VelocityAspectRatio.portrait({super.key, required this.child})
+  const VelocityAspectRatio.portrait({required this.child, super.key})
       : aspectRatio = 3 / 4;
 
   final double aspectRatio;

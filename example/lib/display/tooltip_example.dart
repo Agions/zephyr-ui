@@ -59,16 +59,16 @@ class TooltipExample extends StatelessWidget {
         VelocityTooltip(
           message: 'Bottom Tooltip',
           position: VelocityTooltipPosition.bottom,
-          child: VelocityButton(child: Text('下方提示'), onPressed: null),
+          child: VelocityButton(onPressed: null, child: Text('下方提示')),
         ),
       ],
     );
   }
 
   Widget _buildPopover() {
-    return Center(
+    return const Center(
       child: VelocityPopover(
-        content: const Column(
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             VelocityListTile(title: Text('选项一'), dense: true),
@@ -76,9 +76,9 @@ class TooltipExample extends StatelessWidget {
             VelocityListTile(title: Text('选项三'), dense: true),
           ],
         ),
-        child: const VelocityButton(
-          child: Text('点击弹出菜单'),
-          onPressed: null, // Popover 会接管手势
+        child: VelocityButton(
+          onPressed: null,
+          child: Text('点击弹出菜单'), // Popover 会接管手势
         ),
       ),
     );

@@ -12,7 +12,7 @@ class CheckboxExample extends StatefulWidget {
 class _CheckboxExampleState extends State<CheckboxExample> {
   bool _single = false;
   bool _agreed = false;
-  List<String> _selectedFruits = [];
+  final List<String> _selectedFruits = [];
   final _allFruits = ['苹果', '香蕉', '橙子', '草莓', '葡萄'];
 
   @override

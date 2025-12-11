@@ -85,9 +85,8 @@ class VelocityListTile extends StatelessWidget {
 /// VelocityUI 列表分组
 class VelocityListGroup extends StatelessWidget {
   const VelocityListGroup({
-    super.key,
+    required this.children, super.key,
     this.header,
-    required this.children,
     this.divider = true,
     this.style,
   });

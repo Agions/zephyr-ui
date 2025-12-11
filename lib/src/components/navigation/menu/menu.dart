@@ -9,12 +9,12 @@ export 'menu_style.dart';
 /// VelocityUI 弹出菜单
 class VelocityMenu extends StatelessWidget {
   const VelocityMenu({
-    super.key,
     required this.items,
     required this.child,
     this.onSelected,
     this.offset = Offset.zero,
     this.style,
+    super.key,
   });
 
   final List<VelocityMenuItem> items;

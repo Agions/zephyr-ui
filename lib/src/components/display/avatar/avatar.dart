@@ -185,8 +185,7 @@ class VelocityAvatar extends StatelessWidget {
 class VelocityAvatarGroup extends StatelessWidget {
   /// 创建头像组
   const VelocityAvatarGroup({
-    super.key,
-    required this.avatars,
+    required this.avatars, super.key,
     this.max = 5,
     this.size = VelocityAvatarSize.md,
     this.overlap = 8,

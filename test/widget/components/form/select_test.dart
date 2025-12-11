@@ -150,7 +150,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: VelocitySelect<String>(
-              items: [],
+              items: const [],
               value: null,
               onChanged: (value) {},
             ),

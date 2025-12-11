@@ -9,9 +9,7 @@ export 'form_field_style.dart';
 /// VelocityUI 表单字段
 class VelocityFormField extends StatelessWidget {
   const VelocityFormField({
-    super.key,
-    required this.label,
-    required this.child,
+    required this.label, required this.child, super.key,
     this.required = false,
     this.helper,
     this.error,
@@ -97,8 +95,7 @@ class VelocityFormField extends StatelessWidget {
 /// VelocityUI 表单
 class VelocityForm extends StatelessWidget {
   const VelocityForm({
-    super.key,
-    required this.children,
+    required this.children, super.key,
     this.spacing = 16,
     this.padding,
   });

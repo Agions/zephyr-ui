@@ -13,28 +13,23 @@ class VelocityUploadStyle {
     required this.textStyle,
   });
 
-  final Color backgroundColor;
-  final Color borderColor;
-  final Color iconColor;
-  final TextStyle textStyle;
-
   /// 创建浅色主题样式
   factory VelocityUploadStyle.light() {
-    return VelocityUploadStyle(
-      backgroundColor: const Color(0xFFF9FAFB),
-      borderColor: const Color(0xFFE5E7EB),
-      iconColor: const Color(0xFF6B7280),
-      textStyle: const TextStyle(color: Color(0xFF374151)),
+    return const VelocityUploadStyle(
+      backgroundColor: Color(0xFFF9FAFB),
+      borderColor: Color(0xFFE5E7EB),
+      iconColor: Color(0xFF6B7280),
+      textStyle: TextStyle(color: Color(0xFF374151)),
     );
   }
 
   /// 创建深色主题样式
   factory VelocityUploadStyle.dark() {
-    return VelocityUploadStyle(
-      backgroundColor: const Color(0xFF1F2937),
-      borderColor: const Color(0xFF374151),
-      iconColor: const Color(0xFF9CA3AF),
-      textStyle: const TextStyle(color: Color(0xFFF3F4F6)),
+    return const VelocityUploadStyle(
+      backgroundColor: Color(0xFF1F2937),
+      borderColor: Color(0xFF374151),
+      iconColor: Color(0xFF9CA3AF),
+      textStyle: TextStyle(color: Color(0xFFF3F4F6)),
     );
   }
 
@@ -52,6 +47,11 @@ class VelocityUploadStyle {
       textStyle: textStyle ?? const TextStyle(color: Color(0xFF374151)),
     );
   }
+
+  final Color backgroundColor;
+  final Color borderColor;
+  final Color iconColor;
+  final TextStyle textStyle;
 
   /// 复制样式并修改指定属性
   VelocityUploadStyle copyWith({

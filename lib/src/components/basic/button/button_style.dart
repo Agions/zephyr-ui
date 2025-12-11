@@ -265,6 +265,18 @@ class VelocityIconButtonStyle {
     this.border,
   });
 
+  /// 默认样式
+  factory VelocityIconButtonStyle.defaults() {
+    return VelocityIconButtonStyle(
+      backgroundColor: VelocityColors.transparent,
+      iconColor: VelocityColors.gray700,
+      disabledBackgroundColor: VelocityColors.gray200,
+      disabledIconColor: VelocityColors.gray400,
+      splashColor: VelocityColors.withOpacity(VelocityColors.gray700, 0.1),
+      highlightColor: VelocityColors.withOpacity(VelocityColors.gray700, 0.05),
+    );
+  }
+
   /// 背景颜色
   final Color? backgroundColor;
 
@@ -288,16 +300,4 @@ class VelocityIconButtonStyle {
 
   /// 边框
   final Border? border;
-
-  /// 默认样式
-  factory VelocityIconButtonStyle.defaults() {
-    return VelocityIconButtonStyle(
-      backgroundColor: VelocityColors.transparent,
-      iconColor: VelocityColors.gray700,
-      disabledBackgroundColor: VelocityColors.gray200,
-      disabledIconColor: VelocityColors.gray400,
-      splashColor: VelocityColors.withOpacity(VelocityColors.gray700, 0.1),
-      highlightColor: VelocityColors.withOpacity(VelocityColors.gray700, 0.05),
-    );
-  }
 }

@@ -13,8 +13,7 @@ enum VelocityProgressType { linear, circular }
 /// VelocityUI 进度条
 class VelocityProgress extends StatelessWidget {
   const VelocityProgress({
-    super.key,
-    required this.value,
+    required this.value, super.key,
     this.type = VelocityProgressType.linear,
     this.showLabel = false,
     this.label,
@@ -101,9 +100,7 @@ class VelocityProgress extends StatelessWidget {
 /// VelocityUI 步骤进度
 class VelocityStepProgress extends StatelessWidget {
   const VelocityStepProgress({
-    super.key,
-    required this.currentStep,
-    required this.totalSteps,
+    required this.currentStep, required this.totalSteps, super.key,
     this.labels,
     this.style,
   });

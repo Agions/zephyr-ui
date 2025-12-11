@@ -83,10 +83,7 @@ class _VelocitySkeletonState extends State<VelocitySkeleton>
 /// VelocityUI 骨架屏容器
 class VelocitySkeletonContainer extends StatelessWidget {
   const VelocitySkeletonContainer({
-    super.key,
-    required this.loading,
-    required this.skeleton,
-    required this.child,
+    required this.loading, required this.skeleton, required this.child, super.key,
   });
 
   final bool loading;

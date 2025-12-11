@@ -50,11 +50,11 @@ class VelocityNavbar extends StatelessWidget implements PreferredSizeWidget {
 /// VelocityUI 底部导航栏
 class VelocityBottomNavbar extends StatelessWidget {
   const VelocityBottomNavbar({
-    super.key,
     required this.items,
     required this.currentIndex,
     required this.onTap,
     this.style,
+    super.key,
   });
 
   final List<VelocityBottomNavbarItem> items;
@@ -90,8 +90,8 @@ class VelocityBottomNavbar extends StatelessWidget {
 class VelocityBottomNavbarItem {
   const VelocityBottomNavbarItem({
     required this.icon,
-    this.activeIcon,
     required this.label,
+    this.activeIcon,
   });
 
   final IconData icon;

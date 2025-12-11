@@ -155,18 +155,20 @@ class VelocityAccessibilityWrapper extends StatelessWidget {
     // Apply keyboard navigation
     if (config.enableKeyboardNavigation && isInteractive) {
       current = Focus(
-        onKey: (node, event) {
-          if (event.logicalKey == LogicalKeyboardKey.enter) {
-            keyboardCallbacks['onEnter']?.call();
-            return KeyEventResult.handled;
-          }
-          if (event.logicalKey == LogicalKeyboardKey.space) {
-            keyboardCallbacks['onSpace']?.call();
-            return KeyEventResult.handled;
-          }
-          if (event.logicalKey == LogicalKeyboardKey.tab) {
-            keyboardCallbacks['onTab']?.call();
-            return KeyEventResult.handled;
+        onKeyEvent: (node, event) {
+          if (event is KeyDownEvent) {
+            if (event.logicalKey == LogicalKeyboardKey.enter) {
+              keyboardCallbacks['onEnter']?.call();
+              return KeyEventResult.handled;
+            }
+            if (event.logicalKey == LogicalKeyboardKey.space) {
+              keyboardCallbacks['onSpace']?.call();
+              return KeyEventResult.handled;
+            }
+            if (event.logicalKey == LogicalKeyboardKey.tab) {
+              keyboardCallbacks['onTab']?.call();
+              return KeyEventResult.handled;
+            }
           }
           return KeyEventResult.ignored;
         },

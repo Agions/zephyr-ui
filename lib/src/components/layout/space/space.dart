@@ -30,12 +30,12 @@ class VelocitySpace extends StatelessWidget {
 /// VelocityUI Row 组件
 class VelocityRow extends StatelessWidget {
   const VelocityRow(
-      {super.key,
-      required this.children,
+      {required this.children,
       this.spacing = 0,
       this.mainAxisAlignment = MainAxisAlignment.start,
       this.crossAxisAlignment = CrossAxisAlignment.center,
-      this.mainAxisSize = MainAxisSize.max});
+      this.mainAxisSize = MainAxisSize.max,
+      super.key});
   final List<Widget> children;
   final double spacing;
   final MainAxisAlignment mainAxisAlignment;
@@ -61,12 +61,12 @@ class VelocityRow extends StatelessWidget {
 /// VelocityUI Column 组件
 class VelocityColumn extends StatelessWidget {
   const VelocityColumn(
-      {super.key,
-      required this.children,
+      {required this.children,
       this.spacing = 0,
       this.mainAxisAlignment = MainAxisAlignment.start,
       this.crossAxisAlignment = CrossAxisAlignment.start,
-      this.mainAxisSize = MainAxisSize.max});
+      this.mainAxisSize = MainAxisSize.max,
+      super.key});
   final List<Widget> children;
   final double spacing;
   final MainAxisAlignment mainAxisAlignment;

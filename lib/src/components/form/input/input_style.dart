@@ -28,6 +28,20 @@ class VelocityInputStyle {
     this.filled = true,
   });
 
+  factory VelocityInputStyle.defaults() {
+    return const VelocityInputStyle(
+      textStyle:
+          TextStyle(fontSize: 14, color: VelocityColors.textPrimaryLight),
+      hintStyle: TextStyle(fontSize: 14, color: VelocityColors.gray400),
+      labelStyle: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: VelocityColors.gray700),
+      helperStyle: TextStyle(fontSize: 12, color: VelocityColors.gray500),
+      errorStyle: TextStyle(fontSize: 12, color: VelocityColors.error),
+    );
+  }
+
   final TextStyle? textStyle;
   final TextStyle? hintStyle;
   final TextStyle? labelStyle;
@@ -46,18 +60,4 @@ class VelocityInputStyle {
   final double labelSpacing;
   final double helperSpacing;
   final bool filled;
-
-  factory VelocityInputStyle.defaults() {
-    return const VelocityInputStyle(
-      textStyle:
-          TextStyle(fontSize: 14, color: VelocityColors.textPrimaryLight),
-      hintStyle: TextStyle(fontSize: 14, color: VelocityColors.gray400),
-      labelStyle: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-          color: VelocityColors.gray700),
-      helperStyle: TextStyle(fontSize: 12, color: VelocityColors.gray500),
-      errorStyle: TextStyle(fontSize: 12, color: VelocityColors.error),
-    );
-  }
 }

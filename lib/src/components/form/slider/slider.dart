@@ -9,9 +9,7 @@ export 'slider_style.dart';
 /// VelocityUI 滑块
 class VelocitySlider extends StatelessWidget {
   const VelocitySlider({
-    super.key,
-    required this.value,
-    required this.onChanged,
+    required this.value, required this.onChanged, super.key,
     this.min = 0,
     this.max = 100,
     this.divisions,
@@ -72,9 +70,7 @@ class VelocitySlider extends StatelessWidget {
 /// VelocityUI 范围滑块
 class VelocityRangeSlider extends StatelessWidget {
   const VelocityRangeSlider({
-    super.key,
-    required this.values,
-    required this.onChanged,
+    required this.values, required this.onChanged, super.key,
     this.min = 0,
     this.max = 100,
     this.divisions,

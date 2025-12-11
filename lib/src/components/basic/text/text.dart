@@ -155,7 +155,7 @@ class VelocityText extends StatelessWidget {
     final effectiveStyle =
         VelocityTextStyle.resolve(variant: variant, customStyle: style);
 
-    TextStyle textStyle = effectiveStyle.toTextStyle();
+    var textStyle = effectiveStyle.toTextStyle();
     if (color != null) {
       textStyle = textStyle.copyWith(color: color);
     }
