@@ -51,6 +51,8 @@ clover.xml
 
 # Documentation
 doc/api/
+doc/.vitepress/dist/
+doc/node_modules/
 
 # Build artifacts
 dist/

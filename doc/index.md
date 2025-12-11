@@ -8,10 +8,10 @@ hero:
   actions:
     - theme: brand
       text: 快速开始
-      link: /zh-CN/guide/getting-started
+      link: /guide/getting-started
     - theme: alt
       text: 组件文档
-      link: /zh-CN/components/basic/button
+      link: /components/basic/button
 
 features:
   - title: 丰富组件
