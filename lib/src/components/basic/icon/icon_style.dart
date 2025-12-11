@@ -16,13 +16,13 @@ class VelocityIconStyle {
 
   /// 图标颜色
   final Color? color;
-  
+
   /// 背景颜色
   final Color? backgroundColor;
-  
+
   /// 内边距
   final EdgeInsets? padding;
-  
+
   /// 圆角
   final BorderRadius? borderRadius;
 

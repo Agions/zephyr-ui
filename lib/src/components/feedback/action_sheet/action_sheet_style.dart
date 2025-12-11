@@ -10,11 +10,20 @@ class VelocityActionSheetStyle {
     this.margin = const EdgeInsets.all(8),
     this.headerPadding = const EdgeInsets.all(16),
     this.actionPadding = const EdgeInsets.symmetric(vertical: 16),
-    this.titleStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: VelocityColors.gray700),
-    this.messageStyle = const TextStyle(fontSize: 13, color: VelocityColors.gray500),
-    this.actionStyle = const TextStyle(fontSize: 18, color: VelocityColors.primary),
-    this.destructiveStyle = const TextStyle(fontSize: 18, color: VelocityColors.error),
-    this.cancelStyle = const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: VelocityColors.primary),
+    this.titleStyle = const TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w600,
+        color: VelocityColors.gray700),
+    this.messageStyle =
+        const TextStyle(fontSize: 13, color: VelocityColors.gray500),
+    this.actionStyle =
+        const TextStyle(fontSize: 18, color: VelocityColors.primary),
+    this.destructiveStyle =
+        const TextStyle(fontSize: 18, color: VelocityColors.error),
+    this.cancelStyle = const TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
+        color: VelocityColors.primary),
     this.dividerColor = VelocityColors.gray200,
     this.cancelSpacing = 8,
   });

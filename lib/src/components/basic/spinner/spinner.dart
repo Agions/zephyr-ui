@@ -28,13 +28,16 @@ class VelocitySpinner extends StatefulWidget {
   State<VelocitySpinner> createState() => _VelocitySpinnerState();
 }
 
-class _VelocitySpinnerState extends State<VelocitySpinner> with TickerProviderStateMixin {
+class _VelocitySpinnerState extends State<VelocitySpinner>
+    with TickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(duration: const Duration(milliseconds: 1200), vsync: this)..repeat();
+    _controller = AnimationController(
+        duration: const Duration(milliseconds: 1200), vsync: this)
+      ..repeat();
   }
 
   @override
@@ -61,7 +64,9 @@ class _VelocitySpinnerState extends State<VelocitySpinner> with TickerProviderSt
         return SizedBox(
           width: widget.size,
           height: widget.size,
-          child: CircularProgressIndicator(strokeWidth: effectiveStyle.strokeWidth, valueColor: AlwaysStoppedAnimation(color)),
+          child: CircularProgressIndicator(
+              strokeWidth: effectiveStyle.strokeWidth,
+              valueColor: AlwaysStoppedAnimation(color)),
         );
     }
   }
@@ -72,17 +77,22 @@ class _VelocitySpinnerState extends State<VelocitySpinner> with TickerProviderSt
       height: widget.size / 3,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: List.generate(3, (i) => AnimatedBuilder(
-          animation: _controller,
-          builder: (_, __) {
-            final value = ((_controller.value * 3 - i) % 3).clamp(0.0, 1.0);
-            return Container(
-              width: widget.size / 5,
-              height: widget.size / 5,
-              decoration: BoxDecoration(color: color.withOpacity(0.3 + value * 0.7), shape: BoxShape.circle),
-            );
-          },
-        )),
+        children: List.generate(
+            3,
+            (i) => AnimatedBuilder(
+                  animation: _controller,
+                  builder: (_, __) {
+                    final value =
+                        ((_controller.value * 3 - i) % 3).clamp(0.0, 1.0);
+                    return Container(
+                      width: widget.size / 5,
+                      height: widget.size / 5,
+                      decoration: BoxDecoration(
+                          color: color.withOpacity(0.3 + value * 0.7),
+                          shape: BoxShape.circle),
+                    );
+                  },
+                )),
       ),
     );
   }
@@ -94,17 +104,23 @@ class _VelocitySpinnerState extends State<VelocitySpinner> with TickerProviderSt
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: List.generate(4, (i) => AnimatedBuilder(
-          animation: _controller,
-          builder: (_, __) {
-            final value = (((_controller.value + i * 0.15) % 1.0) * 2 - 1).abs();
-            return Container(
-              width: widget.size / 8,
-              height: widget.size * (0.3 + value * 0.7),
-              decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(widget.size / 16)),
-            );
-          },
-        )),
+        children: List.generate(
+            4,
+            (i) => AnimatedBuilder(
+                  animation: _controller,
+                  builder: (_, __) {
+                    final value =
+                        (((_controller.value + i * 0.15) % 1.0) * 2 - 1).abs();
+                    return Container(
+                      width: widget.size / 8,
+                      height: widget.size * (0.3 + value * 0.7),
+                      decoration: BoxDecoration(
+                          color: color,
+                          borderRadius:
+                              BorderRadius.circular(widget.size / 16)),
+                    );
+                  },
+                )),
       ),
     );
   }
@@ -122,7 +138,9 @@ class _VelocitySpinnerState extends State<VelocitySpinner> with TickerProviderSt
           ),
           child: Transform.scale(
             scale: 0.5 + _controller.value * 0.5,
-            child: Container(decoration: BoxDecoration(color: color.withOpacity(0.3), shape: BoxShape.circle)),
+            child: Container(
+                decoration: BoxDecoration(
+                    color: color.withOpacity(0.3), shape: BoxShape.circle)),
           ),
         );
       },

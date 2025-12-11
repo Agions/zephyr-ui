@@ -19,22 +19,22 @@ class VelocityImageStyle {
 
   /// 圆角
   final BorderRadius? borderRadius;
-  
+
   /// 边框
   final Border? border;
-  
+
   /// 阴影
   final List<BoxShadow>? boxShadow;
-  
+
   /// 占位背景色
   final Color? placeholderColor;
-  
+
   /// 占位图标色
   final Color? placeholderIconColor;
-  
+
   /// 错误背景色
   final Color? errorColor;
-  
+
   /// 错误图标色
   final Color? errorIconColor;
 

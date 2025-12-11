@@ -92,7 +92,8 @@ class _VelocityCounterState extends State<VelocityCounter> {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: effectiveStyle.inputBackgroundColor,
-              border: Border.symmetric(vertical: BorderSide(color: effectiveStyle.borderColor)),
+              border: Border.symmetric(
+                  vertical: BorderSide(color: effectiveStyle.borderColor)),
             ),
             child: TextField(
               controller: _controller,
@@ -100,7 +101,10 @@ class _VelocityCounterState extends State<VelocityCounter> {
               keyboardType: TextInputType.number,
               enabled: !widget.disabled,
               onChanged: _onInputChanged,
-              decoration: const InputDecoration(border: InputBorder.none, isDense: true, contentPadding: EdgeInsets.zero),
+              decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  isDense: true,
+                  contentPadding: EdgeInsets.zero),
               style: effectiveStyle.inputStyle,
             ),
           )
@@ -111,29 +115,35 @@ class _VelocityCounterState extends State<VelocityCounter> {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: effectiveStyle.inputBackgroundColor,
-              border: Border.symmetric(vertical: BorderSide(color: effectiveStyle.borderColor)),
+              border: Border.symmetric(
+                  vertical: BorderSide(color: effectiveStyle.borderColor)),
             ),
-            child: Text(widget.value.toString(), style: effectiveStyle.inputStyle),
+            child:
+                Text(widget.value.toString(), style: effectiveStyle.inputStyle),
           ),
         _buildButton(Icons.add, canIncrease, _increase, effectiveStyle),
       ],
     );
   }
 
-  Widget _buildButton(IconData icon, bool enabled, VoidCallback onTap, VelocityCounterStyle style) {
+  Widget _buildButton(IconData icon, bool enabled, VoidCallback onTap,
+      VelocityCounterStyle style) {
     return GestureDetector(
       onTap: enabled ? onTap : null,
       child: Container(
         width: style.buttonSize,
         height: style.height,
         decoration: BoxDecoration(
-          color: enabled ? style.buttonBackgroundColor : style.disabledButtonColor,
+          color:
+              enabled ? style.buttonBackgroundColor : style.disabledButtonColor,
           borderRadius: icon == Icons.remove
               ? BorderRadius.horizontal(left: style.borderRadius.topLeft)
               : BorderRadius.horizontal(right: style.borderRadius.topRight),
           border: Border.all(color: style.borderColor),
         ),
-        child: Icon(icon, size: style.iconSize, color: enabled ? style.iconColor : style.disabledIconColor),
+        child: Icon(icon,
+            size: style.iconSize,
+            color: enabled ? style.iconColor : style.disabledIconColor),
       ),
     );
   }

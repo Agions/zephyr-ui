@@ -97,7 +97,7 @@ class VelocityTextTheme {
 
   static VelocityTextTheme _createTextTheme(Color color, String? fontFamily) {
     final family = fontFamily ?? VelocityTypography.fontFamily;
-    
+
     return VelocityTextTheme(
       displayLarge: TextStyle(
         fontFamily: family,

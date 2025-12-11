@@ -32,24 +32,26 @@ class VelocityStepper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? const VelocityStepperStyle();
-    
+
     if (direction == VelocityStepperDirection.vertical) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           for (int i = 0; i < steps.length; i++) ...[
             _buildVerticalStep(i, effectiveStyle),
-            if (i < steps.length - 1) _buildVerticalConnector(i, effectiveStyle),
+            if (i < steps.length - 1)
+              _buildVerticalConnector(i, effectiveStyle),
           ],
         ],
       );
     }
-    
+
     return Row(
       children: [
         for (int i = 0; i < steps.length; i++) ...[
           Expanded(child: _buildHorizontalStep(i, effectiveStyle)),
-          if (i < steps.length - 1) Expanded(child: _buildHorizontalConnector(i, effectiveStyle)),
+          if (i < steps.length - 1)
+            Expanded(child: _buildHorizontalConnector(i, effectiveStyle)),
         ],
       ],
     );
@@ -64,23 +66,28 @@ class VelocityStepper extends StatelessWidget {
 
   Color _getStatusColor(VelocityStepStatus status, VelocityStepperStyle style) {
     switch (status) {
-      case VelocityStepStatus.finish: return style.finishColor;
-      case VelocityStepStatus.process: return style.processColor;
-      case VelocityStepStatus.error: return style.errorColor;
-      case VelocityStepStatus.wait: return style.waitColor;
+      case VelocityStepStatus.finish:
+        return style.finishColor;
+      case VelocityStepStatus.process:
+        return style.processColor;
+      case VelocityStepStatus.error:
+        return style.errorColor;
+      case VelocityStepStatus.wait:
+        return style.waitColor;
     }
   }
 
   Widget _buildStepIcon(int index, VelocityStepperStyle style) {
     final status = _getStatus(index);
     final color = _getStatusColor(status, style);
-    
+
     if (status == VelocityStepStatus.finish) {
       return Container(
         width: style.iconSize,
         height: style.iconSize,
         decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-        child: Icon(Icons.check, size: style.iconSize * 0.6, color: Colors.white),
+        child:
+            Icon(Icons.check, size: style.iconSize * 0.6, color: Colors.white),
       );
     }
     if (status == VelocityStepStatus.error) {
@@ -88,19 +95,27 @@ class VelocityStepper extends StatelessWidget {
         width: style.iconSize,
         height: style.iconSize,
         decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-        child: Icon(Icons.close, size: style.iconSize * 0.6, color: Colors.white),
+        child:
+            Icon(Icons.close, size: style.iconSize * 0.6, color: Colors.white),
       );
     }
     return Container(
       width: style.iconSize,
       height: style.iconSize,
       decoration: BoxDecoration(
-        color: status == VelocityStepStatus.process ? color : Colors.transparent,
+        color:
+            status == VelocityStepStatus.process ? color : Colors.transparent,
         border: Border.all(color: color, width: 2),
         shape: BoxShape.circle,
       ),
       child: Center(
-        child: Text('${index + 1}', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: status == VelocityStepStatus.process ? Colors.white : color)),
+        child: Text('${index + 1}',
+            style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                color: status == VelocityStepStatus.process
+                    ? Colors.white
+                    : color)),
       ),
     );
   }
@@ -108,7 +123,7 @@ class VelocityStepper extends StatelessWidget {
   Widget _buildHorizontalStep(int index, VelocityStepperStyle style) {
     final status = _getStatus(index);
     final color = _getStatusColor(status, style);
-    
+
     return GestureDetector(
       onTap: onStepTap != null ? () => onStepTap!(index) : null,
       child: Column(
@@ -116,8 +131,15 @@ class VelocityStepper extends StatelessWidget {
         children: [
           _buildStepIcon(index, style),
           SizedBox(height: style.labelSpacing),
-          Text(steps[index].title, style: style.titleStyle.copyWith(color: status == VelocityStepStatus.wait ? style.waitColor : color), textAlign: TextAlign.center),
-          if (steps[index].subtitle != null) Text(steps[index].subtitle!, style: style.subtitleStyle, textAlign: TextAlign.center),
+          Text(steps[index].title,
+              style: style.titleStyle.copyWith(
+                  color: status == VelocityStepStatus.wait
+                      ? style.waitColor
+                      : color),
+              textAlign: TextAlign.center),
+          if (steps[index].subtitle != null)
+            Text(steps[index].subtitle!,
+                style: style.subtitleStyle, textAlign: TextAlign.center),
         ],
       ),
     );
@@ -135,7 +157,7 @@ class VelocityStepper extends StatelessWidget {
   Widget _buildVerticalStep(int index, VelocityStepperStyle style) {
     final status = _getStatus(index);
     final color = _getStatusColor(status, style);
-    
+
     return GestureDetector(
       onTap: onStepTap != null ? () => onStepTap!(index) : null,
       child: Row(
@@ -147,9 +169,17 @@ class VelocityStepper extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(steps[index].title, style: style.titleStyle.copyWith(color: status == VelocityStepStatus.wait ? style.waitColor : color)),
-                if (steps[index].subtitle != null) Text(steps[index].subtitle!, style: style.subtitleStyle),
-                if (steps[index].content != null) Padding(padding: const EdgeInsets.only(top: 8), child: steps[index].content!),
+                Text(steps[index].title,
+                    style: style.titleStyle.copyWith(
+                        color: status == VelocityStepStatus.wait
+                            ? style.waitColor
+                            : color)),
+                if (steps[index].subtitle != null)
+                  Text(steps[index].subtitle!, style: style.subtitleStyle),
+                if (steps[index].content != null)
+                  Padding(
+                      padding: const EdgeInsets.only(top: 8),
+                      child: steps[index].content!),
               ],
             ),
           ),
@@ -163,7 +193,8 @@ class VelocityStepper extends StatelessWidget {
     return Container(
       width: style.connectorThickness,
       height: 24,
-      margin: EdgeInsets.only(left: style.iconSize / 2 - style.connectorThickness / 2),
+      margin: EdgeInsets.only(
+          left: style.iconSize / 2 - style.connectorThickness / 2),
       color: isActive ? style.finishColor : style.waitColor,
     );
   }
@@ -171,7 +202,8 @@ class VelocityStepper extends StatelessWidget {
 
 /// 步骤项
 class VelocityStep {
-  const VelocityStep({required this.title, this.subtitle, this.content, this.status});
+  const VelocityStep(
+      {required this.title, this.subtitle, this.content, this.status});
   final String title;
   final String? subtitle;
   final Widget? content;

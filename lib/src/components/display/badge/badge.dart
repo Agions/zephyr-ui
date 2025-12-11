@@ -26,25 +26,25 @@ class VelocityBadge extends StatelessWidget {
 
   /// 数量
   final int? count;
-  
+
   /// 是否显示为点
   final bool dot;
-  
+
   /// 是否显示零
   final bool showZero;
-  
+
   /// 最大值
   final int max;
-  
+
   /// 类型
   final VelocityBadgeType type;
-  
+
   /// 偏移量
   final Offset? offset;
-  
+
   /// 自定义样式
   final VelocityBadgeStyle? style;
-  
+
   /// 子组件
   final Widget? child;
 
@@ -52,15 +52,16 @@ class VelocityBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? VelocityBadgeStyle.fromType(type);
     final showBadge = dot || (count != null && (count! > 0 || showZero));
-    
+
     if (!showBadge) return child ?? const SizedBox.shrink();
-    
+
     Widget badge;
     if (dot) {
       badge = Container(
         width: effectiveStyle.dotSize,
         height: effectiveStyle.dotSize,
-        decoration: BoxDecoration(color: effectiveStyle.backgroundColor, shape: BoxShape.circle),
+        decoration: BoxDecoration(
+            color: effectiveStyle.backgroundColor, shape: BoxShape.circle),
       );
     } else {
       final displayCount = count! > max ? '$max+' : '$count';
@@ -68,15 +69,17 @@ class VelocityBadge extends StatelessWidget {
         height: effectiveStyle.height,
         constraints: BoxConstraints(minWidth: effectiveStyle.minWidth),
         padding: effectiveStyle.padding,
-        decoration: BoxDecoration(color: effectiveStyle.backgroundColor, borderRadius: effectiveStyle.borderRadius),
+        decoration: BoxDecoration(
+            color: effectiveStyle.backgroundColor,
+            borderRadius: effectiveStyle.borderRadius),
         child: Center(
           child: Text(displayCount, style: effectiveStyle.textStyle),
         ),
       );
     }
-    
+
     if (child == null) return badge;
-    
+
     return Stack(
       clipBehavior: Clip.none,
       children: [

@@ -16,7 +16,8 @@ class VelocityCounterStyle {
     this.iconSize = 18,
     this.iconColor = VelocityColors.gray700,
     this.disabledIconColor = VelocityColors.gray300,
-    this.inputStyle = const TextStyle(fontSize: 14, color: VelocityColors.gray900),
+    this.inputStyle =
+        const TextStyle(fontSize: 14, color: VelocityColors.gray900),
   });
 
   final double height;

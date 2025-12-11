@@ -7,9 +7,14 @@ class VelocityEmptyStyle {
   const VelocityEmptyStyle({
     this.iconSize = 64,
     this.iconColor = VelocityColors.gray300,
-    this.titleStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: VelocityColors.gray600),
-    this.descriptionStyle = const TextStyle(fontSize: 14, color: VelocityColors.gray400),
-    this.actionStyle = const TextStyle(fontSize: 14, color: VelocityColors.primary),
+    this.titleStyle = const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: VelocityColors.gray600),
+    this.descriptionStyle =
+        const TextStyle(fontSize: 14, color: VelocityColors.gray400),
+    this.actionStyle =
+        const TextStyle(fontSize: 14, color: VelocityColors.primary),
     this.padding = const EdgeInsets.all(32),
     this.spacing = 16,
     this.actionSpacing = 24,

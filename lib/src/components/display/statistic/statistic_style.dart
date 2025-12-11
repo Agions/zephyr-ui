@@ -5,10 +5,16 @@ import '../../../core/theme/velocity_colors.dart';
 
 class VelocityStatisticStyle {
   const VelocityStatisticStyle({
-    this.titleStyle = const TextStyle(fontSize: 14, color: VelocityColors.gray500),
-    this.valueStyle = const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: VelocityColors.gray900),
-    this.suffixStyle = const TextStyle(fontSize: 14, color: VelocityColors.gray600),
-    this.trendStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+    this.titleStyle =
+        const TextStyle(fontSize: 14, color: VelocityColors.gray500),
+    this.valueStyle = const TextStyle(
+        fontSize: 28,
+        fontWeight: FontWeight.bold,
+        color: VelocityColors.gray900),
+    this.suffixStyle =
+        const TextStyle(fontSize: 14, color: VelocityColors.gray600),
+    this.trendStyle =
+        const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
     this.titleSpacing = 8,
     this.prefixSpacing = 4,
     this.suffixSpacing = 4,
@@ -33,7 +39,10 @@ class VelocityStatisticStyle {
 
 class VelocityCountdownStyle {
   const VelocityCountdownStyle({
-    this.textStyle = const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: VelocityColors.gray900),
+    this.textStyle = const TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+        color: VelocityColors.gray900),
   });
 
   final TextStyle textStyle;

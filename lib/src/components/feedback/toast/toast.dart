@@ -27,7 +27,7 @@ class VelocityToast {
   }) {
     dismiss();
     final effectiveStyle = style ?? VelocityToastStyle.fromType(type);
-    
+
     _overlayEntry = OverlayEntry(
       builder: (context) => _ToastWidget(
         message: message,
@@ -35,7 +35,7 @@ class VelocityToast {
         style: effectiveStyle,
       ),
     );
-    
+
     Overlay.of(context).insert(_overlayEntry!);
     Future.delayed(duration, dismiss);
   }
@@ -48,7 +48,8 @@ class VelocityToast {
 }
 
 class _ToastWidget extends StatelessWidget {
-  const _ToastWidget({required this.message, required this.position, required this.style});
+  const _ToastWidget(
+      {required this.message, required this.position, required this.style});
   final String message;
   final VelocityToastPosition position;
   final VelocityToastStyle style;
@@ -56,8 +57,12 @@ class _ToastWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: position == VelocityToastPosition.top ? MediaQuery.of(context).padding.top + 50 : null,
-      bottom: position == VelocityToastPosition.bottom ? MediaQuery.of(context).padding.bottom + 50 : null,
+      top: position == VelocityToastPosition.top
+          ? MediaQuery.of(context).padding.top + 50
+          : null,
+      bottom: position == VelocityToastPosition.bottom
+          ? MediaQuery.of(context).padding.bottom + 50
+          : null,
       left: 0,
       right: 0,
       child: Center(
@@ -65,11 +70,18 @@ class _ToastWidget extends StatelessWidget {
           color: Colors.transparent,
           child: Container(
             padding: style.padding,
-            decoration: BoxDecoration(color: style.backgroundColor, borderRadius: style.borderRadius, boxShadow: style.boxShadow),
+            decoration: BoxDecoration(
+                color: style.backgroundColor,
+                borderRadius: style.borderRadius,
+                boxShadow: style.boxShadow),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                if (style.icon != null) ...[Icon(style.icon, size: style.iconSize, color: style.iconColor), SizedBox(width: style.iconSpacing)],
+                if (style.icon != null) ...[
+                  Icon(style.icon,
+                      size: style.iconSize, color: style.iconColor),
+                  SizedBox(width: style.iconSpacing)
+                ],
                 Text(message, style: style.textStyle),
               ],
             ),

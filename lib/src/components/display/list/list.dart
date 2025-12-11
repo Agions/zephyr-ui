@@ -36,9 +36,11 @@ class VelocityListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? const VelocityListTileStyle();
-    
+
     return Material(
-      color: selected ? effectiveStyle.selectedColor : effectiveStyle.backgroundColor,
+      color: selected
+          ? effectiveStyle.selectedColor
+          : effectiveStyle.backgroundColor,
       child: InkWell(
         onTap: enabled ? onTap : null,
         onLongPress: enabled ? onLongPress : null,
@@ -47,21 +49,31 @@ class VelocityListTile extends StatelessWidget {
           padding: dense ? effectiveStyle.densePadding : effectiveStyle.padding,
           child: Row(
             children: [
-              if (leading != null) ...[leading!, SizedBox(width: effectiveStyle.leadingSpacing)],
+              if (leading != null) ...[
+                leading!,
+                SizedBox(width: effectiveStyle.leadingSpacing)
+              ],
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    if (title != null) DefaultTextStyle(style: effectiveStyle.titleStyle, child: title!),
+                    if (title != null)
+                      DefaultTextStyle(
+                          style: effectiveStyle.titleStyle, child: title!),
                     if (subtitle != null) ...[
                       SizedBox(height: effectiveStyle.subtitleSpacing),
-                      DefaultTextStyle(style: effectiveStyle.subtitleStyle, child: subtitle!),
+                      DefaultTextStyle(
+                          style: effectiveStyle.subtitleStyle,
+                          child: subtitle!),
                     ],
                   ],
                 ),
               ),
-              if (trailing != null) ...[SizedBox(width: effectiveStyle.trailingSpacing), trailing!],
+              if (trailing != null) ...[
+                SizedBox(width: effectiveStyle.trailingSpacing),
+                trailing!
+              ],
             ],
           ),
         ),
@@ -88,18 +100,29 @@ class VelocityListGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? const VelocityListGroupStyle();
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (header != null) Padding(padding: effectiveStyle.headerPadding, child: DefaultTextStyle(style: effectiveStyle.headerStyle, child: header!)),
+        if (header != null)
+          Padding(
+              padding: effectiveStyle.headerPadding,
+              child: DefaultTextStyle(
+                  style: effectiveStyle.headerStyle, child: header!)),
         Container(
-          decoration: BoxDecoration(color: effectiveStyle.backgroundColor, borderRadius: effectiveStyle.borderRadius),
+          decoration: BoxDecoration(
+              color: effectiveStyle.backgroundColor,
+              borderRadius: effectiveStyle.borderRadius),
           child: Column(
             children: [
               for (int i = 0; i < children.length; i++) ...[
                 children[i],
-                if (divider && i < children.length - 1) Divider(height: 1, thickness: 1, color: effectiveStyle.dividerColor, indent: effectiveStyle.dividerIndent),
+                if (divider && i < children.length - 1)
+                  Divider(
+                      height: 1,
+                      thickness: 1,
+                      color: effectiveStyle.dividerColor,
+                      indent: effectiveStyle.dividerIndent),
               ],
             ],
           ),

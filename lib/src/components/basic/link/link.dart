@@ -28,8 +28,9 @@ class VelocityLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? const VelocityLinkStyle();
-    final color = disabled ? effectiveStyle.disabledColor : effectiveStyle.color;
-    
+    final color =
+        disabled ? effectiveStyle.disabledColor : effectiveStyle.color;
+
     return GestureDetector(
       onTap: disabled ? null : onTap,
       child: Row(

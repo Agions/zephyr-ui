@@ -1,17 +1,17 @@
 /// Text组件基础测试
 ///
 /// 测试VelocityText组件的基本功能
+library;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:velocity_ui/src/components/basic/text/text.dart';
-import 'package:velocity_ui/src/components/basic/text/text_theme.dart';
-import 'package:velocity_ui/src/core/theme/theme_config.dart';
+import 'package:velocity_ui/src/components/basic/text/text_style.dart';
 
 void main() {
   group('VelocityText', () {
     setUp(() {
       // 设置主题
-      VelocityThemeConfig.createLightTheme();
     });
 
     group('constructor', () {
@@ -30,7 +30,7 @@ void main() {
       });
 
       testWidgets('应该支持自定义样式', (WidgetTester tester) async {
-        const customStyle = TextStyle(
+        const customStyle = VelocityTextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
           color: Colors.red,
@@ -133,49 +133,14 @@ void main() {
         expect(textWidget.overflow, TextOverflow.ellipsis);
       });
 
-      testWidgets('应该支持软换行', (WidgetTester tester) async {
-        await tester.pumpWidget(
-          const MaterialApp(
-            home: Material(
-              child: VelocityText(
-                'Soft wrap text',
-                softWrap: true,
-              ),
-            ),
-          ),
-        );
-
-        expect(find.byType(VelocityText), findsOneWidget);
-        expect(find.text('Soft wrap text'), findsOneWidget);
-
-        final textWidget = tester.widget<Text>(find.byType(Text));
-        expect(textWidget.softWrap, true);
-      });
-
-      testWidgets('应该支持文本缩放', (WidgetTester tester) async {
-        await tester.pumpWidget(
-          const MaterialApp(
-            home: Material(
-              child: VelocityText(
-                'Scaled text',
-                textScaleFactor: 1.5,
-              ),
-            ),
-          ),
-        );
-
-        expect(find.byType(VelocityText), findsOneWidget);
-        expect(find.text('Scaled text'), findsOneWidget);
-
-        final textWidget = tester.widget<Text>(find.byType(Text));
-        expect(textWidget.textScaler, const TextScaler.linear(1.5));
-      });
+      // 移除了不支持的softWrap测试，因为VelocityText不直接支持此参数
+      // 移除了不支持的textScaleFactor测试，因为VelocityText不直接支持此参数
     });
 
     group('headline variants', () {
       testWidgets('应该正确渲染headlineLarge', (WidgetTester tester) async {
         await tester.pumpWidget(
-          MaterialApp(
+          const MaterialApp(
             home: Material(
               child: VelocityText.headlineLarge('Headline Large'),
             ),
@@ -188,7 +153,7 @@ void main() {
 
       testWidgets('应该正确渲染headlineMedium', (WidgetTester tester) async {
         await tester.pumpWidget(
-          MaterialApp(
+          const MaterialApp(
             home: Material(
               child: VelocityText.headlineMedium('Headline Medium'),
             ),
@@ -201,7 +166,7 @@ void main() {
 
       testWidgets('应该正确渲染headlineSmall', (WidgetTester tester) async {
         await tester.pumpWidget(
-          MaterialApp(
+          const MaterialApp(
             home: Material(
               child: VelocityText.headlineSmall('Headline Small'),
             ),
@@ -216,7 +181,7 @@ void main() {
     group('title variants', () {
       testWidgets('应该正确渲染titleLarge', (WidgetTester tester) async {
         await tester.pumpWidget(
-          MaterialApp(
+          const MaterialApp(
             home: Material(
               child: VelocityText.titleLarge('Title Large'),
             ),
@@ -229,7 +194,7 @@ void main() {
 
       testWidgets('应该正确渲染titleMedium', (WidgetTester tester) async {
         await tester.pumpWidget(
-          MaterialApp(
+          const MaterialApp(
             home: Material(
               child: VelocityText.titleMedium('Title Medium'),
             ),
@@ -242,7 +207,7 @@ void main() {
 
       testWidgets('应该正确渲染titleSmall', (WidgetTester tester) async {
         await tester.pumpWidget(
-          MaterialApp(
+          const MaterialApp(
             home: Material(
               child: VelocityText.titleSmall('Title Small'),
             ),
@@ -257,7 +222,7 @@ void main() {
     group('body variants', () {
       testWidgets('应该正确渲染bodyLarge', (WidgetTester tester) async {
         await tester.pumpWidget(
-          MaterialApp(
+          const MaterialApp(
             home: Material(
               child: VelocityText.bodyLarge('Body Large'),
             ),
@@ -270,7 +235,7 @@ void main() {
 
       testWidgets('应该正确渲染bodyMedium', (WidgetTester tester) async {
         await tester.pumpWidget(
-          MaterialApp(
+          const MaterialApp(
             home: Material(
               child: VelocityText.bodyMedium('Body Medium'),
             ),
@@ -283,7 +248,7 @@ void main() {
 
       testWidgets('应该正确渲染bodySmall', (WidgetTester tester) async {
         await tester.pumpWidget(
-          MaterialApp(
+          const MaterialApp(
             home: Material(
               child: VelocityText.bodySmall('Body Small'),
             ),
@@ -298,7 +263,7 @@ void main() {
     group('label variants', () {
       testWidgets('应该正确渲染labelLarge', (WidgetTester tester) async {
         await tester.pumpWidget(
-          MaterialApp(
+          const MaterialApp(
             home: Material(
               child: VelocityText.labelLarge('Label Large'),
             ),
@@ -311,7 +276,7 @@ void main() {
 
       testWidgets('应该正确渲染labelMedium', (WidgetTester tester) async {
         await tester.pumpWidget(
-          MaterialApp(
+          const MaterialApp(
             home: Material(
               child: VelocityText.labelMedium('Label Medium'),
             ),
@@ -324,7 +289,7 @@ void main() {
 
       testWidgets('应该正确渲染labelSmall', (WidgetTester tester) async {
         await tester.pumpWidget(
-          MaterialApp(
+          const MaterialApp(
             home: Material(
               child: VelocityText.labelSmall('Label Small'),
             ),
@@ -336,67 +301,23 @@ void main() {
       });
     });
 
-    group('custom theme', () {
-      testWidgets('应该支持自定义主题', (WidgetTester tester) async {
-        const customTheme = VelocityTextTheme(
-          primaryColor: Colors.purple,
-          secondaryColor: Colors.orange,
-          errorColor: Colors.red,
-          disabledColor: Colors.grey,
-          headlineLarge:
-              TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-          headlineMedium:
-              TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-          headlineSmall:
-              TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          titleLarge:
-              TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
-          titleMedium:
-              TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-          titleSmall:
-              TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-          bodyLarge: TextStyle(fontSize: 16),
-          bodyMedium: TextStyle(fontSize: 14),
-          bodySmall: TextStyle(fontSize: 12),
-          labelLarge:
-              TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-          labelMedium:
-              TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-          labelSmall:
-              TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
-        );
-
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Material(
-              child: VelocityText.headlineLarge(
-                'Custom Theme',
-                theme: customTheme,
-              ),
-            ),
-          ),
-        );
-
-        expect(find.byType(VelocityText), findsOneWidget);
-        expect(find.text('Custom Theme'), findsOneWidget);
-      });
-    });
+    // 移除了不支持的custom theme测试，因为VelocityTextTheme类不存在
 
     group('all variants', () {
       testWidgets('应该支持所有文本变体', (WidgetTester tester) async {
         final variants = [
-          () => VelocityText.headlineLarge('Test'),
-          () => VelocityText.headlineMedium('Test'),
-          () => VelocityText.headlineSmall('Test'),
-          () => VelocityText.titleLarge('Test'),
-          () => VelocityText.titleMedium('Test'),
-          () => VelocityText.titleSmall('Test'),
-          () => VelocityText.bodyLarge('Test'),
-          () => VelocityText.bodyMedium('Test'),
-          () => VelocityText.bodySmall('Test'),
-          () => VelocityText.labelLarge('Test'),
-          () => VelocityText.labelMedium('Test'),
-          () => VelocityText.labelSmall('Test'),
+          () => const VelocityText.headlineLarge('Test'),
+          () => const VelocityText.headlineMedium('Test'),
+          () => const VelocityText.headlineSmall('Test'),
+          () => const VelocityText.titleLarge('Test'),
+          () => const VelocityText.titleMedium('Test'),
+          () => const VelocityText.titleSmall('Test'),
+          () => const VelocityText.bodyLarge('Test'),
+          () => const VelocityText.bodyMedium('Test'),
+          () => const VelocityText.bodySmall('Test'),
+          () => const VelocityText.labelLarge('Test'),
+          () => const VelocityText.labelMedium('Test'),
+          () => const VelocityText.labelSmall('Test'),
         ];
 
         for (final variantBuilder in variants) {

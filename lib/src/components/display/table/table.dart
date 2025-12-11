@@ -35,11 +35,15 @@ class VelocityTable extends StatelessWidget {
         borderRadius: effectiveStyle.borderRadius,
       ),
       clipBehavior: Clip.antiAlias,
-      child: Column(
-        children: [
-          if (showHeader) _buildHeader(effectiveStyle),
-          ...List.generate(rows.length, (i) => _buildRow(rows[i], i, effectiveStyle)),
-        ],
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Column(
+          children: [
+            if (showHeader) _buildHeader(effectiveStyle),
+            ...List.generate(
+                rows.length, (i) => _buildRow(rows[i], i, effectiveStyle)),
+          ],
+        ),
       ),
     );
   }
@@ -49,36 +53,58 @@ class VelocityTable extends StatelessWidget {
       color: style.headerBackgroundColor,
       padding: style.cellPadding,
       child: Row(
-        children: columns.map((col) => Expanded(
-          flex: col.flex,
-          child: Text(col.title, style: style.headerTextStyle, textAlign: col.align),
-        )).toList(),
+        children: columns
+            .map((col) => Expanded(
+                  flex: col.flex,
+                  child: Text(col.title,
+                      style: style.headerTextStyle, textAlign: col.align),
+                ))
+            .toList(),
       ),
     );
   }
 
   Widget _buildRow(VelocityTableRow row, int index, VelocityTableStyle style) {
-    return Container(
-      color: striped && index.isOdd ? style.stripedColor : style.rowBackgroundColor,
+    final rowContent = Container(
+      color: striped && index.isOdd
+          ? style.stripedColor
+          : style.rowBackgroundColor,
       padding: style.cellPadding,
-      decoration: bordered ? BoxDecoration(border: Border(top: BorderSide(color: style.borderColor))) : null,
+      decoration: bordered
+          ? BoxDecoration(
+              border: Border(top: BorderSide(color: style.borderColor)))
+          : null,
       child: Row(
         children: [
           for (int i = 0; i < columns.length; i++)
             Expanded(
               flex: columns[i].flex,
               child: row.cells.length > i
-                  ? (row.cells[i] is Widget ? row.cells[i] as Widget : Text('${row.cells[i]}', style: style.cellTextStyle, textAlign: columns[i].align))
+                  ? (row.cells[i] is Widget
+                      ? row.cells[i] as Widget
+                      : Text('${row.cells[i]}',
+                          style: style.cellTextStyle,
+                          textAlign: columns[i].align))
                   : const SizedBox.shrink(),
             ),
         ],
       ),
     );
+
+    if (row.onTap != null) {
+      return GestureDetector(
+        onTap: row.onTap,
+        child: rowContent,
+      );
+    }
+
+    return rowContent;
   }
 }
 
 class VelocityTableColumn {
-  const VelocityTableColumn({required this.title, this.flex = 1, this.align = TextAlign.left});
+  const VelocityTableColumn(
+      {required this.title, this.flex = 1, this.align = TextAlign.left});
   final String title;
   final int flex;
   final TextAlign align;

@@ -32,7 +32,10 @@ class VelocityNavbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? const VelocityNavbarStyle();
     return AppBar(
-      title: titleWidget ?? (title != null ? Text(title!, style: effectiveStyle.titleStyle) : null),
+      title: titleWidget ??
+          (title != null
+              ? Text(title!, style: effectiveStyle.titleStyle)
+              : null),
       leading: leading,
       actions: actions,
       centerTitle: centerTitle,
@@ -63,11 +66,13 @@ class VelocityBottomNavbar extends StatelessWidget {
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? const VelocityBottomNavbarStyle();
     return BottomNavigationBar(
-      items: items.map((item) => BottomNavigationBarItem(
-        icon: Icon(item.icon),
-        activeIcon: Icon(item.activeIcon ?? item.icon),
-        label: item.label,
-      )).toList(),
+      items: items
+          .map((item) => BottomNavigationBarItem(
+                icon: Icon(item.icon),
+                activeIcon: Icon(item.activeIcon ?? item.icon),
+                label: item.label,
+              ))
+          .toList(),
       currentIndex: currentIndex,
       onTap: onTap,
       type: BottomNavigationBarType.fixed,
@@ -88,7 +93,7 @@ class VelocityBottomNavbarItem {
     this.activeIcon,
     required this.label,
   });
-  
+
   final IconData icon;
   final IconData? activeIcon;
   final String label;

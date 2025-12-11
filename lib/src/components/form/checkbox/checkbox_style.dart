@@ -11,7 +11,8 @@ class VelocityCheckboxStyle {
     this.borderColor = VelocityColors.gray400,
     this.disabledBorderColor = VelocityColors.gray300,
     this.borderRadius = const BorderRadius.all(Radius.circular(4)),
-    this.labelStyle = const TextStyle(fontSize: 14, color: VelocityColors.gray700),
+    this.labelStyle =
+        const TextStyle(fontSize: 14, color: VelocityColors.gray700),
     this.disabledLabelColor = VelocityColors.gray400,
     this.labelSpacing = 8,
   });

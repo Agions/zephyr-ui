@@ -19,20 +19,20 @@ class VelocityCard extends StatelessWidget {
 
   /// 子组件
   final Widget? child;
-  
+
   /// 自定义样式
   final VelocityCardStyle? style;
-  
+
   /// 点击回调
   final VoidCallback? onTap;
-  
+
   /// 长按回调
   final VoidCallback? onLongPress;
 
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? VelocityCardStyle.defaults();
-    
+
     Widget card = Container(
       width: effectiveStyle.width,
       height: effectiveStyle.height,
@@ -47,7 +47,7 @@ class VelocityCard extends StatelessWidget {
       clipBehavior: effectiveStyle.clipBehavior ?? Clip.none,
       child: child,
     );
-    
+
     if (onTap != null || onLongPress != null) {
       card = Material(
         color: Colors.transparent,
@@ -59,7 +59,7 @@ class VelocityCard extends StatelessWidget {
         ),
       );
     }
-    
+
     return card;
   }
 }
@@ -110,7 +110,8 @@ class VelocityFilledCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return VelocityCard(
       style: (style ?? VelocityCardStyle.defaults()).copyWith(
-        backgroundColor: style?.backgroundColor ?? VelocityCardStyle.filledBackground(),
+        backgroundColor:
+            style?.backgroundColor ?? VelocityCardStyle.filledBackground(),
         boxShadow: const [],
       ),
       onTap: onTap,

@@ -12,8 +12,12 @@ class VelocityTimelineStyle {
     this.lineOffset = 24,
     this.contentSpacing = 16,
     this.itemSpacing = 24,
-    this.labelStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: VelocityColors.gray900),
-    this.timeStyle = const TextStyle(fontSize: 12, color: VelocityColors.gray500),
+    this.labelStyle = const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: VelocityColors.gray900),
+    this.timeStyle =
+        const TextStyle(fontSize: 12, color: VelocityColors.gray500),
   });
 
   final double dotSize;

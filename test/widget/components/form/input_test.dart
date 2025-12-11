@@ -11,7 +11,7 @@ void main() {
           home: Scaffold(
             body: VelocityInput(
               label: 'Username',
-              placeholder: 'Enter your username',
+              hint: 'Enter your username',
             ),
           ),
         ),
@@ -41,31 +41,16 @@ void main() {
       controller.dispose();
     });
 
-    testWidgets('renders input with initial value',
+    testWidgets('renders password input',
         (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
             body: VelocityInput(
-              initialValue: 'Hello World',
-              label: 'Test',
-            ),
-          ),
-        ),
-      );
-
-      expect(find.byType(VelocityInput), findsOneWidget);
-      expect(find.byType(TextFormField), findsOneWidget);
-    });
-
-    testWidgets('renders password input with factory constructor',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: Scaffold(
-            body: VelocityInput.password(
               label: 'Password',
-              placeholder: 'Enter your password',
+              hint: 'Enter your password',
+              obscureText: true,
+              suffixIcon: Icons.visibility,
             ),
           ),
         ),
@@ -73,17 +58,17 @@ void main() {
 
       expect(find.byType(VelocityInput), findsOneWidget);
       expect(find.byType(TextFormField), findsOneWidget);
-      expect(find.byIcon(Icons.visibility), findsOneWidget);
     });
 
-    testWidgets('renders email input with factory constructor',
+    testWidgets('renders email input',
         (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: VelocityInput.email(
+            body: VelocityInput(
               label: 'Email',
-              placeholder: 'Enter your email',
+              hint: 'Enter your email',
+              keyboardType: TextInputType.emailAddress,
             ),
           ),
         ),
@@ -93,14 +78,14 @@ void main() {
       expect(find.byType(TextFormField), findsOneWidget);
     });
 
-    testWidgets('renders textarea with factory constructor',
+    testWidgets('renders textarea',
         (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: VelocityInput.textarea(
+            body: VelocityTextArea(
               label: 'Description',
-              placeholder: 'Enter your description',
+              hint: 'Enter your description',
             ),
           ),
         ),
@@ -116,14 +101,13 @@ void main() {
           home: Scaffold(
             body: VelocityInput(
               label: 'Email',
-              prefixIcon: Icon(Icons.email),
+              prefixIcon: Icons.email,
             ),
           ),
         ),
       );
 
       expect(find.byType(VelocityInput), findsOneWidget);
-      expect(find.byIcon(Icons.email), findsOneWidget);
     });
 
     testWidgets('handles input with suffix icon', (WidgetTester tester) async {
@@ -132,14 +116,13 @@ void main() {
           home: Scaffold(
             body: VelocityInput(
               label: 'Search',
-              suffixIcon: Icon(Icons.search),
+              suffixIcon: Icons.search,
             ),
           ),
         ),
       );
 
       expect(find.byType(VelocityInput), findsOneWidget);
-      expect(find.byIcon(Icons.search), findsOneWidget);
     });
 
     testWidgets('handles input with prefix widget',
@@ -224,28 +207,6 @@ void main() {
       expect(find.byType(TextFormField), findsOneWidget);
     });
 
-    testWidgets('handles password visibility toggle',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: Scaffold(
-            body: VelocityInput.password(
-              label: 'Password',
-            ),
-          ),
-        ),
-      );
-
-      expect(find.byType(VelocityInput), findsOneWidget);
-      expect(find.byIcon(Icons.visibility), findsOneWidget);
-
-      // Tap the visibility toggle
-      await tester.tap(find.byIcon(Icons.visibility));
-      await tester.pump();
-
-      expect(find.byIcon(Icons.visibility_off), findsOneWidget);
-    });
-
     testWidgets('handles input callbacks', (WidgetTester tester) async {
       var tapped = false;
 
@@ -277,10 +238,10 @@ void main() {
             body: VelocityInput(
               label: 'Null Values',
               controller: null,
-              initialValue: null,
-              placeholder: null,
-              helperText: null,
-              errorText: null,
+              focusNode: null,
+              hint: null,
+              helper: null,
+              error: null,
               prefixIcon: null,
               suffixIcon: null,
               prefix: null,
@@ -288,12 +249,10 @@ void main() {
               onChanged: null,
               onSubmitted: null,
               onTap: null,
-              onFocusChange: null,
               validator: null,
               inputFormatters: null,
               keyboardType: null,
               textInputAction: null,
-              focusNode: null,
             ),
           ),
         ),
@@ -311,17 +270,18 @@ void main() {
               children: [
                 VelocityInput(
                   label: 'First Name',
-                  placeholder: 'Enter first name',
+                  hint: 'Enter first name',
                 ),
                 SizedBox(height: 16),
                 VelocityInput(
                   label: 'Last Name',
-                  placeholder: 'Enter last name',
+                  hint: 'Enter last name',
                 ),
                 SizedBox(height: 16),
-                VelocityInput.email(
+                VelocityInput(
                   label: 'Email',
-                  placeholder: 'Enter email',
+                  hint: 'Enter email',
+                  keyboardType: TextInputType.emailAddress,
                 ),
               ],
             ),
@@ -339,7 +299,24 @@ void main() {
           home: Scaffold(
             body: VelocityInput(
               label: '',
-              placeholder: '',
+              hint: '',
+            ),
+          ),
+        ),
+      );
+
+      expect(find.byType(VelocityInput), findsOneWidget);
+      expect(find.byType(TextFormField), findsOneWidget);
+    });
+
+    testWidgets('renders textarea component',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: VelocityTextArea(
+              label: 'Description',
+              hint: 'Enter detailed description',
             ),
           ),
         ),

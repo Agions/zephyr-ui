@@ -1,9 +1,9 @@
 ---
-title: Button 按钮
+title: ZephyrButton 按钮
 description: VelocityUI 按钮组件，支持多种类型、尺寸和状态
 ---
 
-# Button 按钮
+# ZephyrButton 按钮
 
 按钮用于触发一个操作或事件，如提交表单、打开对话框、取消操作或执行删除操作。
 

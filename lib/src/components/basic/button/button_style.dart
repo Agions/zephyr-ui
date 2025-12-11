@@ -27,40 +27,40 @@ class VelocityButtonStyle {
 
   /// 背景颜色
   final Color? backgroundColor;
-  
+
   /// 前景颜色（文字、图标）
   final Color? foregroundColor;
-  
+
   /// 禁用状态背景颜色
   final Color? disabledBackgroundColor;
-  
+
   /// 禁用状态前景颜色
   final Color? disabledForegroundColor;
-  
+
   /// 水波纹颜色
   final Color? splashColor;
-  
+
   /// 高亮颜色
   final Color? highlightColor;
-  
+
   /// 圆角
   final BorderRadius? borderRadius;
-  
+
   /// 边框
   final Border? border;
-  
+
   /// 阴影
   final List<BoxShadow>? boxShadow;
-  
+
   /// 内边距
   final EdgeInsets? padding;
-  
+
   /// 文字样式
   final TextStyle? textStyle;
-  
+
   /// 图标尺寸
   final double? iconSize;
-  
+
   /// 图标与文字间距
   final double? iconSpacing;
 
@@ -72,12 +72,16 @@ class VelocityButtonStyle {
   }) {
     final baseStyle = _getStyleForType(type);
     final sizeStyle = _getStyleForSize(size);
-    
+
     return VelocityButtonStyle(
-      backgroundColor: customStyle?.backgroundColor ?? baseStyle.backgroundColor,
-      foregroundColor: customStyle?.foregroundColor ?? baseStyle.foregroundColor,
-      disabledBackgroundColor: customStyle?.disabledBackgroundColor ?? baseStyle.disabledBackgroundColor,
-      disabledForegroundColor: customStyle?.disabledForegroundColor ?? baseStyle.disabledForegroundColor,
+      backgroundColor:
+          customStyle?.backgroundColor ?? baseStyle.backgroundColor,
+      foregroundColor:
+          customStyle?.foregroundColor ?? baseStyle.foregroundColor,
+      disabledBackgroundColor: customStyle?.disabledBackgroundColor ??
+          baseStyle.disabledBackgroundColor,
+      disabledForegroundColor: customStyle?.disabledForegroundColor ??
+          baseStyle.disabledForegroundColor,
       splashColor: customStyle?.splashColor ?? baseStyle.splashColor,
       highlightColor: customStyle?.highlightColor ?? baseStyle.highlightColor,
       borderRadius: customStyle?.borderRadius ?? sizeStyle.borderRadius,
@@ -92,7 +96,7 @@ class VelocityButtonStyle {
 
   static VelocityButtonStyle _getStyleForType(dynamic type) {
     final typeName = type.toString().split('.').last;
-    
+
     switch (typeName) {
       case 'primary':
         return VelocityButtonStyle(
@@ -119,7 +123,8 @@ class VelocityButtonStyle {
           disabledBackgroundColor: VelocityColors.transparent,
           disabledForegroundColor: VelocityColors.gray400,
           splashColor: VelocityColors.withOpacity(VelocityColors.primary, 0.1),
-          highlightColor: VelocityColors.withOpacity(VelocityColors.primary, 0.05),
+          highlightColor:
+              VelocityColors.withOpacity(VelocityColors.primary, 0.05),
           border: Border.all(color: VelocityColors.primary, width: 1),
         );
       case 'text':
@@ -129,7 +134,8 @@ class VelocityButtonStyle {
           disabledBackgroundColor: VelocityColors.transparent,
           disabledForegroundColor: VelocityColors.gray400,
           splashColor: VelocityColors.withOpacity(VelocityColors.primary, 0.1),
-          highlightColor: VelocityColors.withOpacity(VelocityColors.primary, 0.05),
+          highlightColor:
+              VelocityColors.withOpacity(VelocityColors.primary, 0.05),
         );
       case 'danger':
         return VelocityButtonStyle(
@@ -172,7 +178,7 @@ class VelocityButtonStyle {
 
   static VelocityButtonStyle _getStyleForSize(dynamic size) {
     final sizeName = size.toString().split('.').last;
-    
+
     switch (sizeName) {
       case 'small':
         return const VelocityButtonStyle(
@@ -228,8 +234,10 @@ class VelocityButtonStyle {
     return VelocityButtonStyle(
       backgroundColor: backgroundColor ?? this.backgroundColor,
       foregroundColor: foregroundColor ?? this.foregroundColor,
-      disabledBackgroundColor: disabledBackgroundColor ?? this.disabledBackgroundColor,
-      disabledForegroundColor: disabledForegroundColor ?? this.disabledForegroundColor,
+      disabledBackgroundColor:
+          disabledBackgroundColor ?? this.disabledBackgroundColor,
+      disabledForegroundColor:
+          disabledForegroundColor ?? this.disabledForegroundColor,
       splashColor: splashColor ?? this.splashColor,
       highlightColor: highlightColor ?? this.highlightColor,
       borderRadius: borderRadius ?? this.borderRadius,
@@ -259,25 +267,25 @@ class VelocityIconButtonStyle {
 
   /// 背景颜色
   final Color? backgroundColor;
-  
+
   /// 图标颜色
   final Color? iconColor;
-  
+
   /// 禁用状态背景颜色
   final Color? disabledBackgroundColor;
-  
+
   /// 禁用状态图标颜色
   final Color? disabledIconColor;
-  
+
   /// 水波纹颜色
   final Color? splashColor;
-  
+
   /// 高亮颜色
   final Color? highlightColor;
-  
+
   /// 圆角
   final BorderRadius? borderRadius;
-  
+
   /// 边框
   final Border? border;
 

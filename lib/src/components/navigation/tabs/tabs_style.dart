@@ -10,10 +10,11 @@ class VelocityTabsStyle {
     this.unselectedLabelColor = VelocityColors.gray500,
     this.indicatorColor = VelocityColors.primary,
     this.indicatorWeight = 2,
-    this.labelStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+    this.labelStyle =
+        const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
     this.unselectedLabelStyle = const TextStyle(fontSize: 14),
   });
-  
+
   final Color labelColor;
   final Color unselectedLabelColor;
   final Color indicatorColor;

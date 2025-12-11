@@ -18,19 +18,21 @@ class VelocityTheme extends StatelessWidget {
 
   /// 主题数据
   final VelocityThemeData data;
-  
+
   /// 子组件
   final Widget child;
 
   /// 从上下文获取主题数据
   static VelocityThemeData of(BuildContext context) {
-    final inheritedTheme = context.dependOnInheritedWidgetOfExactType<_InheritedVelocityTheme>();
+    final inheritedTheme =
+        context.dependOnInheritedWidgetOfExactType<_InheritedVelocityTheme>();
     return inheritedTheme?.theme.data ?? VelocityThemeData.light();
   }
 
   /// 尝试从上下文获取主题数据
   static VelocityThemeData? maybeOf(BuildContext context) {
-    final inheritedTheme = context.dependOnInheritedWidgetOfExactType<_InheritedVelocityTheme>();
+    final inheritedTheme =
+        context.dependOnInheritedWidgetOfExactType<_InheritedVelocityTheme>();
     return inheritedTheme?.theme.data;
   }
 
@@ -90,13 +92,13 @@ class VelocityDynamicTheme extends StatefulWidget {
 
   /// 子组件
   final Widget child;
-  
+
   /// 亮色主题
   final VelocityThemeData? lightTheme;
-  
+
   /// 暗色主题
   final VelocityThemeData? darkTheme;
-  
+
   /// 主题模式
   final ThemeMode themeMode;
 
@@ -147,7 +149,8 @@ class VelocityDynamicThemeState extends State<VelocityDynamicTheme> {
       case ThemeMode.dark:
         return _darkTheme;
       case ThemeMode.system:
-        final brightness = WidgetsBinding.instance.platformDispatcher.platformBrightness;
+        final brightness =
+            WidgetsBinding.instance.platformDispatcher.platformBrightness;
         return brightness == Brightness.dark ? _darkTheme : _lightTheme;
     }
   }
@@ -164,7 +167,8 @@ class VelocityDynamicThemeState extends State<VelocityDynamicTheme> {
   /// 切换主题
   void toggleTheme() {
     setState(() {
-      _themeMode = _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+      _themeMode =
+          _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
     });
   }
 
@@ -195,13 +199,13 @@ class VelocityDynamicThemeState extends State<VelocityDynamicTheme> {
 extension VelocityThemeExtension on BuildContext {
   /// 获取主题数据
   VelocityThemeData get velocityTheme => VelocityTheme.of(this);
-  
+
   /// 获取颜色方案
   VelocityColorScheme get velocityColors => velocityTheme.colorScheme;
-  
+
   /// 获取文本主题
   VelocityTextTheme get velocityTextTheme => velocityTheme.textTheme;
-  
+
   /// 是否为暗色模式
   bool get isDarkMode => velocityTheme.brightness == Brightness.dark;
 }

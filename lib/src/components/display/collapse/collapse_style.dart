@@ -10,7 +10,10 @@ class VelocityCollapseStyle {
     this.border,
     this.headerPadding = const EdgeInsets.all(16),
     this.contentPadding = const EdgeInsets.fromLTRB(16, 0, 16, 16),
-    this.titleStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: VelocityColors.gray900),
+    this.titleStyle = const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: VelocityColors.gray900),
     this.iconColor = VelocityColors.gray500,
     this.iconSize = 24,
     this.leadingSpacing = 12,

@@ -30,7 +30,7 @@ class VelocitySelect<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? const VelocitySelectStyle();
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -41,26 +41,40 @@ class VelocitySelect<T> extends StatelessWidget {
         ],
         Container(
           decoration: BoxDecoration(
-            color: disabled ? effectiveStyle.disabledBackgroundColor : effectiveStyle.backgroundColor,
+            color: disabled
+                ? effectiveStyle.disabledBackgroundColor
+                : effectiveStyle.backgroundColor,
             borderRadius: effectiveStyle.borderRadius,
             border: Border.all(color: effectiveStyle.borderColor),
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<T>(
               value: value,
-              items: items.map((item) => DropdownMenuItem<T>(
-                value: item.value,
-                enabled: !item.disabled,
-                child: Row(
-                  children: [
-                    if (item.icon != null) ...[Icon(item.icon, size: 20, color: effectiveStyle.iconColor), const SizedBox(width: 8)],
-                    Text(item.label, style: item.disabled ? effectiveStyle.disabledItemStyle : effectiveStyle.itemStyle),
-                  ],
-                ),
-              )).toList(),
+              items: items
+                  .map((item) => DropdownMenuItem<T>(
+                        value: item.value,
+                        enabled: !item.disabled,
+                        child: Row(
+                          children: [
+                            if (item.icon != null) ...[
+                              Icon(item.icon,
+                                  size: 20, color: effectiveStyle.iconColor),
+                              const SizedBox(width: 8)
+                            ],
+                            Text(item.label,
+                                style: item.disabled
+                                    ? effectiveStyle.disabledItemStyle
+                                    : effectiveStyle.itemStyle),
+                          ],
+                        ),
+                      ))
+                  .toList(),
               onChanged: disabled ? null : onChanged,
-              hint: hint != null ? Text(hint!, style: effectiveStyle.hintStyle) : null,
-              icon: Icon(Icons.keyboard_arrow_down, color: effectiveStyle.iconColor),
+              hint: hint != null
+                  ? Text(hint!, style: effectiveStyle.hintStyle)
+                  : null,
+              icon: Icon(Icons.keyboard_arrow_down,
+                  color: effectiveStyle.iconColor),
               isExpanded: true,
               padding: effectiveStyle.padding,
               dropdownColor: effectiveStyle.dropdownColor,
@@ -76,7 +90,11 @@ class VelocitySelect<T> extends StatelessWidget {
 
 /// 选择项
 class VelocitySelectItem<T> {
-  const VelocitySelectItem({required this.value, required this.label, this.icon, this.disabled = false});
+  const VelocitySelectItem(
+      {required this.value,
+      required this.label,
+      this.icon,
+      this.disabled = false});
   final T value;
   final String label;
   final IconData? icon;

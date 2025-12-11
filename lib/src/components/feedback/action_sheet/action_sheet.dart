@@ -28,7 +28,9 @@ class VelocityActionSheet {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                decoration: BoxDecoration(color: effectiveStyle.backgroundColor, borderRadius: effectiveStyle.borderRadius),
+                decoration: BoxDecoration(
+                    color: effectiveStyle.backgroundColor,
+                    borderRadius: effectiveStyle.borderRadius),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -37,36 +39,49 @@ class VelocityActionSheet {
                         padding: effectiveStyle.headerPadding,
                         child: Column(
                           children: [
-                            if (title != null) Text(title, style: effectiveStyle.titleStyle, textAlign: TextAlign.center),
-                            if (message != null) Padding(
-                              padding: EdgeInsets.only(top: title != null ? 4 : 0),
-                              child: Text(message, style: effectiveStyle.messageStyle, textAlign: TextAlign.center),
-                            ),
+                            if (title != null)
+                              Text(title,
+                                  style: effectiveStyle.titleStyle,
+                                  textAlign: TextAlign.center),
+                            if (message != null)
+                              Padding(
+                                padding:
+                                    EdgeInsets.only(top: title != null ? 4 : 0),
+                                child: Text(message,
+                                    style: effectiveStyle.messageStyle,
+                                    textAlign: TextAlign.center),
+                              ),
                           ],
                         ),
                       ),
-                    if (title != null || message != null) Divider(height: 1, color: effectiveStyle.dividerColor),
+                    if (title != null || message != null)
+                      Divider(height: 1, color: effectiveStyle.dividerColor),
                     ...actions.map((action) => Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).pop(action.value);
-                            action.onTap?.call();
-                          },
-                          child: Container(
-                            width: double.infinity,
-                            padding: effectiveStyle.actionPadding,
-                            child: Text(
-                              action.label,
-                              style: action.isDestructive ? effectiveStyle.destructiveStyle : effectiveStyle.actionStyle,
-                              textAlign: TextAlign.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(context).pop(action.value);
+                                action.onTap?.call();
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                padding: effectiveStyle.actionPadding,
+                                child: Text(
+                                  action.label,
+                                  style: action.isDestructive
+                                      ? effectiveStyle.destructiveStyle
+                                      : effectiveStyle.actionStyle,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        if (actions.last != action) Divider(height: 1, color: effectiveStyle.dividerColor),
-                      ],
-                    )),
+                            if (actions.last != action)
+                              Divider(
+                                  height: 1,
+                                  color: effectiveStyle.dividerColor),
+                          ],
+                        )),
                   ],
                 ),
               ),
@@ -74,7 +89,9 @@ class VelocityActionSheet {
                 SizedBox(height: effectiveStyle.cancelSpacing),
                 Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(color: effectiveStyle.backgroundColor, borderRadius: effectiveStyle.borderRadius),
+                  decoration: BoxDecoration(
+                      color: effectiveStyle.backgroundColor,
+                      borderRadius: effectiveStyle.borderRadius),
                   child: InkWell(
                     onTap: () {
                       Navigator.of(context).pop(cancelAction.value);
@@ -83,7 +100,9 @@ class VelocityActionSheet {
                     borderRadius: effectiveStyle.borderRadius,
                     child: Padding(
                       padding: effectiveStyle.actionPadding,
-                      child: Text(cancelAction.label, style: effectiveStyle.cancelStyle, textAlign: TextAlign.center),
+                      child: Text(cancelAction.label,
+                          style: effectiveStyle.cancelStyle,
+                          textAlign: TextAlign.center),
                     ),
                   ),
                 ),
@@ -97,7 +116,11 @@ class VelocityActionSheet {
 }
 
 class VelocityActionSheetItem<T> {
-  const VelocityActionSheetItem({required this.label, this.value, this.onTap, this.isDestructive = false});
+  const VelocityActionSheetItem(
+      {required this.label,
+      this.value,
+      this.onTap,
+      this.isDestructive = false});
   final String label;
   final T? value;
   final VoidCallback? onTap;

@@ -26,16 +26,19 @@ class VelocityCheckbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? const VelocityCheckboxStyle();
-    
+
     Widget checkbox = Checkbox(
       value: value,
       onChanged: disabled ? null : (v) => onChanged?.call(v ?? false),
       activeColor: effectiveStyle.activeColor,
       checkColor: effectiveStyle.checkColor,
-      side: BorderSide(color: disabled ? effectiveStyle.disabledBorderColor : effectiveStyle.borderColor),
+      side: BorderSide(
+          color: disabled
+              ? effectiveStyle.disabledBorderColor
+              : effectiveStyle.borderColor),
       shape: RoundedRectangleBorder(borderRadius: effectiveStyle.borderRadius),
     );
-    
+
     if (label != null) {
       checkbox = GestureDetector(
         onTap: disabled ? null : () => onChanged?.call(!value),
@@ -44,14 +47,15 @@ class VelocityCheckbox extends StatelessWidget {
           children: [
             checkbox,
             SizedBox(width: effectiveStyle.labelSpacing),
-            Text(label!, style: effectiveStyle.labelStyle.copyWith(
-              color: disabled ? effectiveStyle.disabledLabelColor : null,
-            )),
+            Text(label!,
+                style: effectiveStyle.labelStyle.copyWith(
+                  color: disabled ? effectiveStyle.disabledLabelColor : null,
+                )),
           ],
         ),
       );
     }
-    
+
     return checkbox;
   }
 }

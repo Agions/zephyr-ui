@@ -34,7 +34,10 @@ class VelocityScrollView extends StatelessWidget {
       controller: controller,
       reverse: reverse,
       child: direction == Axis.vertical
-          ? Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: children)
+          ? Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: children)
           : Row(mainAxisSize: MainAxisSize.min, children: children),
     );
   }
@@ -110,7 +113,7 @@ class _VelocityScrollToTopState extends State<VelocityScrollToTop> {
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = widget.style ?? const VelocityScrollToTopStyle();
-    
+
     return Stack(
       children: [
         widget.child,
@@ -119,9 +122,12 @@ class _VelocityScrollToTopState extends State<VelocityScrollToTop> {
             right: effectiveStyle.right,
             bottom: effectiveStyle.bottom,
             child: FloatingActionButton.small(
-              onPressed: () => widget.controller.animateTo(0, duration: effectiveStyle.animationDuration, curve: Curves.easeOut),
+              onPressed: () => widget.controller.animateTo(0,
+                  duration: effectiveStyle.animationDuration,
+                  curve: Curves.easeOut),
               backgroundColor: effectiveStyle.backgroundColor,
-              child: Icon(Icons.keyboard_arrow_up, color: effectiveStyle.iconColor),
+              child: Icon(Icons.keyboard_arrow_up,
+                  color: effectiveStyle.iconColor),
             ),
           ),
       ],

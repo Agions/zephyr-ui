@@ -8,11 +8,12 @@ class VelocityNavbarStyle {
   const VelocityNavbarStyle({
     this.backgroundColor = VelocityColors.white,
     this.foregroundColor = VelocityColors.gray900,
-    this.titleStyle = const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+    this.titleStyle =
+        const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
     this.elevation = 0.5,
     this.shadowColor,
   });
-  
+
   final Color backgroundColor;
   final Color foregroundColor;
   final TextStyle titleStyle;
@@ -29,7 +30,7 @@ class VelocityBottomNavbarStyle {
     this.unselectedFontSize = 12,
     this.elevation = 8,
   });
-  
+
   final Color backgroundColor;
   final Color selectedColor;
   final Color unselectedColor;

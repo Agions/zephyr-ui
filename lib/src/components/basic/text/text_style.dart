@@ -18,22 +18,22 @@ class VelocityTextStyle {
 
   /// 字体大小
   final double? fontSize;
-  
+
   /// 字体粗细
   final FontWeight? fontWeight;
-  
+
   /// 字体族
   final String? fontFamily;
-  
+
   /// 颜色
   final Color? color;
-  
+
   /// 行高
   final double? height;
-  
+
   /// 字间距
   final double? letterSpacing;
-  
+
   /// 装饰
   final TextDecoration? decoration;
 
@@ -42,8 +42,10 @@ class VelocityTextStyle {
     dynamic variant,
     VelocityTextStyle? customStyle,
   }) {
-    final baseStyle = variant != null ? _getStyleForVariant(variant) : const VelocityTextStyle();
-    
+    final baseStyle = variant != null
+        ? _getStyleForVariant(variant)
+        : const VelocityTextStyle();
+
     return VelocityTextStyle(
       fontSize: customStyle?.fontSize ?? baseStyle.fontSize,
       fontWeight: customStyle?.fontWeight ?? baseStyle.fontWeight,
@@ -57,40 +59,83 @@ class VelocityTextStyle {
 
   static VelocityTextStyle _getStyleForVariant(dynamic variant) {
     final variantName = variant.toString().split('.').last;
-    
+
     switch (variantName) {
       case 'displayLarge':
-        return const VelocityTextStyle(fontSize: 57, fontWeight: FontWeight.w400, height: 1.12, letterSpacing: -0.25);
+        return const VelocityTextStyle(
+            fontSize: 57,
+            fontWeight: FontWeight.w400,
+            height: 1.12,
+            letterSpacing: -0.25);
       case 'displayMedium':
-        return const VelocityTextStyle(fontSize: 45, fontWeight: FontWeight.w400, height: 1.16);
+        return const VelocityTextStyle(
+            fontSize: 45, fontWeight: FontWeight.w400, height: 1.16);
       case 'displaySmall':
-        return const VelocityTextStyle(fontSize: 36, fontWeight: FontWeight.w400, height: 1.22);
+        return const VelocityTextStyle(
+            fontSize: 36, fontWeight: FontWeight.w400, height: 1.22);
       case 'headlineLarge':
-        return const VelocityTextStyle(fontSize: 32, fontWeight: FontWeight.w400, height: 1.25);
+        return const VelocityTextStyle(
+            fontSize: 32, fontWeight: FontWeight.w400, height: 1.25);
       case 'headlineMedium':
-        return const VelocityTextStyle(fontSize: 28, fontWeight: FontWeight.w400, height: 1.29);
+        return const VelocityTextStyle(
+            fontSize: 28, fontWeight: FontWeight.w400, height: 1.29);
       case 'headlineSmall':
-        return const VelocityTextStyle(fontSize: 24, fontWeight: FontWeight.w400, height: 1.33);
+        return const VelocityTextStyle(
+            fontSize: 24, fontWeight: FontWeight.w400, height: 1.33);
       case 'titleLarge':
-        return const VelocityTextStyle(fontSize: 22, fontWeight: FontWeight.w500, height: 1.27);
+        return const VelocityTextStyle(
+            fontSize: 22, fontWeight: FontWeight.w500, height: 1.27);
       case 'titleMedium':
-        return const VelocityTextStyle(fontSize: 16, fontWeight: FontWeight.w500, height: 1.5, letterSpacing: 0.15);
+        return const VelocityTextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            height: 1.5,
+            letterSpacing: 0.15);
       case 'titleSmall':
-        return const VelocityTextStyle(fontSize: 14, fontWeight: FontWeight.w500, height: 1.43, letterSpacing: 0.1);
+        return const VelocityTextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            height: 1.43,
+            letterSpacing: 0.1);
       case 'bodyLarge':
-        return const VelocityTextStyle(fontSize: 16, fontWeight: FontWeight.w400, height: 1.5, letterSpacing: 0.5);
+        return const VelocityTextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            height: 1.5,
+            letterSpacing: 0.5);
       case 'bodyMedium':
-        return const VelocityTextStyle(fontSize: 14, fontWeight: FontWeight.w400, height: 1.43, letterSpacing: 0.25);
+        return const VelocityTextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+            height: 1.43,
+            letterSpacing: 0.25);
       case 'bodySmall':
-        return const VelocityTextStyle(fontSize: 12, fontWeight: FontWeight.w400, height: 1.33, letterSpacing: 0.4);
+        return const VelocityTextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+            height: 1.33,
+            letterSpacing: 0.4);
       case 'labelLarge':
-        return const VelocityTextStyle(fontSize: 14, fontWeight: FontWeight.w500, height: 1.43, letterSpacing: 0.1);
+        return const VelocityTextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            height: 1.43,
+            letterSpacing: 0.1);
       case 'labelMedium':
-        return const VelocityTextStyle(fontSize: 12, fontWeight: FontWeight.w500, height: 1.33, letterSpacing: 0.5);
+        return const VelocityTextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+            height: 1.33,
+            letterSpacing: 0.5);
       case 'labelSmall':
-        return const VelocityTextStyle(fontSize: 11, fontWeight: FontWeight.w500, height: 1.45, letterSpacing: 0.5);
+        return const VelocityTextStyle(
+            fontSize: 11,
+            fontWeight: FontWeight.w500,
+            height: 1.45,
+            letterSpacing: 0.5);
       default:
-        return const VelocityTextStyle(fontSize: 14, fontWeight: FontWeight.w400, height: 1.43);
+        return const VelocityTextStyle(
+            fontSize: 14, fontWeight: FontWeight.w400, height: 1.43);
     }
   }
 

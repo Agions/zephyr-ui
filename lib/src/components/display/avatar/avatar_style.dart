@@ -15,10 +15,10 @@ class VelocityAvatarStyle {
 
   /// 背景颜色
   final Color? backgroundColor;
-  
+
   /// 前景颜色
   final Color? foregroundColor;
-  
+
   /// 边框
   final Border? border;
 
@@ -56,13 +56,13 @@ class VelocityAvatarGroupStyle {
 
   /// 边框颜色
   final Color borderColor;
-  
+
   /// 边框宽度
   final double borderWidth;
-  
+
   /// 溢出背景色
   final Color overflowBackgroundColor;
-  
+
   /// 溢出前景色
   final Color overflowForegroundColor;
 

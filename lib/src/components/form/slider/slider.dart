@@ -34,19 +34,28 @@ class VelocitySlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? const VelocitySliderStyle();
-    
+
     return SliderTheme(
       data: SliderThemeData(
-        activeTrackColor: disabled ? effectiveStyle.disabledActiveColor : effectiveStyle.activeColor,
-        inactiveTrackColor: disabled ? effectiveStyle.disabledInactiveColor : effectiveStyle.inactiveColor,
-        thumbColor: disabled ? effectiveStyle.disabledThumbColor : effectiveStyle.thumbColor,
+        activeTrackColor: disabled
+            ? effectiveStyle.disabledActiveColor
+            : effectiveStyle.activeColor,
+        inactiveTrackColor: disabled
+            ? effectiveStyle.disabledInactiveColor
+            : effectiveStyle.inactiveColor,
+        thumbColor: disabled
+            ? effectiveStyle.disabledThumbColor
+            : effectiveStyle.thumbColor,
         overlayColor: effectiveStyle.overlayColor,
         trackHeight: effectiveStyle.trackHeight,
-        thumbShape: RoundSliderThumbShape(enabledThumbRadius: effectiveStyle.thumbRadius),
-        overlayShape: RoundSliderOverlayShape(overlayRadius: effectiveStyle.overlayRadius),
+        thumbShape: RoundSliderThumbShape(
+            enabledThumbRadius: effectiveStyle.thumbRadius),
+        overlayShape: RoundSliderOverlayShape(
+            overlayRadius: effectiveStyle.overlayRadius),
         valueIndicatorColor: effectiveStyle.activeColor,
         valueIndicatorTextStyle: effectiveStyle.labelStyle,
-        showValueIndicator: showLabel ? ShowValueIndicator.always : ShowValueIndicator.never,
+        showValueIndicator:
+            showLabel ? ShowValueIndicator.always : ShowValueIndicator.never,
       ),
       child: Slider(
         value: value,
@@ -88,19 +97,28 @@ class VelocityRangeSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? const VelocitySliderStyle();
-    
+
     return SliderTheme(
       data: SliderThemeData(
-        activeTrackColor: disabled ? effectiveStyle.disabledActiveColor : effectiveStyle.activeColor,
-        inactiveTrackColor: disabled ? effectiveStyle.disabledInactiveColor : effectiveStyle.inactiveColor,
-        thumbColor: disabled ? effectiveStyle.disabledThumbColor : effectiveStyle.thumbColor,
+        activeTrackColor: disabled
+            ? effectiveStyle.disabledActiveColor
+            : effectiveStyle.activeColor,
+        inactiveTrackColor: disabled
+            ? effectiveStyle.disabledInactiveColor
+            : effectiveStyle.inactiveColor,
+        thumbColor: disabled
+            ? effectiveStyle.disabledThumbColor
+            : effectiveStyle.thumbColor,
         overlayColor: effectiveStyle.overlayColor,
         trackHeight: effectiveStyle.trackHeight,
-        rangeThumbShape: RoundRangeSliderThumbShape(enabledThumbRadius: effectiveStyle.thumbRadius),
-        overlayShape: RoundSliderOverlayShape(overlayRadius: effectiveStyle.overlayRadius),
+        rangeThumbShape: RoundRangeSliderThumbShape(
+            enabledThumbRadius: effectiveStyle.thumbRadius),
+        overlayShape: RoundSliderOverlayShape(
+            overlayRadius: effectiveStyle.overlayRadius),
         valueIndicatorColor: effectiveStyle.activeColor,
         valueIndicatorTextStyle: effectiveStyle.labelStyle,
-        showValueIndicator: showLabels ? ShowValueIndicator.always : ShowValueIndicator.never,
+        showValueIndicator:
+            showLabels ? ShowValueIndicator.always : ShowValueIndicator.never,
       ),
       child: RangeSlider(
         values: values,
@@ -108,7 +126,9 @@ class VelocityRangeSlider extends StatelessWidget {
         min: min,
         max: max,
         divisions: divisions,
-        labels: labels ?? RangeLabels(values.start.toStringAsFixed(0), values.end.toStringAsFixed(0)),
+        labels: labels ??
+            RangeLabels(
+                values.start.toStringAsFixed(0), values.end.toStringAsFixed(0)),
       ),
     );
   }

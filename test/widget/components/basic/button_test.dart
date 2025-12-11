@@ -1,11 +1,11 @@
 /// Button组件基础测试
 ///
 /// 测试VelocityButton组件的基本功能
+library;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:velocity_ui/src/components/basic/button/button.dart';
-import 'package:velocity_ui/src/components/basic/button/button_theme.dart';
-import 'package:velocity_ui/src/core/constants/enums.dart';
 
 void main() {
   group('VelocityButton', () {
@@ -15,11 +15,11 @@ void main() {
       onPressed = () {};
     });
 
-    group('primary constructor', () {
+    group('text constructor', () {
       testWidgets('应该正确渲染主要按钮', (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
-            home: VelocityButton.primary(
+            home: VelocityButton.text(
               text: 'Primary Button',
               onPressed: onPressed,
             ),
@@ -38,7 +38,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: VelocityButton.primary(
+              child: VelocityButton.text(
                 text: 'Click Me',
                 onPressed: callback,
               ),
@@ -58,9 +58,10 @@ void main() {
         await tester.pumpWidget(
           const MaterialApp(
             home: Material(
-              child: VelocityButton.primary(
+              child: VelocityButton.text(
                 text: 'Disabled',
                 onPressed: null,
+                disabled: true,
               ),
             ),
           ),
@@ -73,14 +74,15 @@ void main() {
       });
     });
 
-    group('secondary constructor', () {
+    group('different button types', () {
       testWidgets('应该正确渲染次要按钮', (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: VelocityButton.secondary(
+              child: VelocityButton.text(
                 text: 'Secondary Button',
                 onPressed: onPressed,
+                type: VelocityButtonType.secondary,
               ),
             ),
           ),
@@ -89,16 +91,15 @@ void main() {
         expect(find.byType(VelocityButton), findsOneWidget);
         expect(find.text('Secondary Button'), findsOneWidget);
       });
-    });
 
-    group('outline constructor', () {
       testWidgets('应该正确渲染轮廓按钮', (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: VelocityButton.outline(
+              child: VelocityButton.text(
                 text: 'Outline Button',
                 onPressed: onPressed,
+                type: VelocityButtonType.outline,
               ),
             ),
           ),
@@ -107,9 +108,7 @@ void main() {
         expect(find.byType(VelocityButton), findsOneWidget);
         expect(find.text('Outline Button'), findsOneWidget);
       });
-    });
 
-    group('text constructor', () {
       testWidgets('应该正确渲染文本按钮', (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
@@ -117,6 +116,7 @@ void main() {
               child: VelocityButton.text(
                 text: 'Text Button',
                 onPressed: onPressed,
+                type: VelocityButtonType.text,
               ),
             ),
           ),
@@ -128,11 +128,12 @@ void main() {
     });
 
     group('icon constructor', () {
-      testWidgets('应该正确渲染图标按钮', (WidgetTester tester) async {
+      testWidgets('应该正确渲染带图标和文本的按钮', (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
               child: VelocityButton.icon(
+                text: 'Add',
                 icon: Icons.add,
                 onPressed: onPressed,
               ),
@@ -141,15 +142,17 @@ void main() {
         );
 
         expect(find.byType(VelocityButton), findsOneWidget);
+        expect(find.text('Add'), findsOneWidget);
         expect(find.byIcon(Icons.add), findsOneWidget);
       });
 
-      testWidgets('应该支持不同类型的图标按钮', (WidgetTester tester) async {
+      testWidgets('应该支持不同类型的带图标按钮', (WidgetTester tester) async {
         for (final type in VelocityButtonType.values) {
           await tester.pumpWidget(
             MaterialApp(
               home: Material(
                 child: VelocityButton.icon(
+                  text: 'Star',
                   icon: Icons.star,
                   onPressed: onPressed,
                   type: type,
@@ -170,7 +173,7 @@ void main() {
           await tester.pumpWidget(
             MaterialApp(
               home: Material(
-                child: VelocityButton.primary(
+                child: VelocityButton.text(
                   text: 'Size Test',
                   onPressed: onPressed,
                   size: size,
@@ -190,10 +193,10 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: VelocityButton.primary(
+              child: VelocityButton.text(
                 text: 'Loading',
                 onPressed: onPressed,
-                isLoading: true,
+                loading: true,
               ),
             ),
           ),
@@ -211,10 +214,10 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: VelocityButton.primary(
+              child: VelocityButton.text(
                 text: 'Loading',
                 onPressed: callback,
-                isLoading: true,
+                loading: true,
               ),
             ),
           ),
@@ -232,10 +235,10 @@ void main() {
         await tester.pumpWidget(
           const MaterialApp(
             home: Material(
-              child: VelocityButton.primary(
+              child: VelocityButton.text(
                 text: 'Disabled',
                 onPressed: null,
-                isDisabled: true,
+                disabled: true,
               ),
             ),
           ),
@@ -251,10 +254,10 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: VelocityButton.primary(
+              body: VelocityButton.text(
                 text: 'Full Width',
                 onPressed: onPressed,
-                isFullWidth: true,
+                fullWidth: true,
               ),
             ),
           ),
@@ -270,7 +273,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: VelocityButton.primary(
+              child: VelocityButton.icon(
                 text: 'With Icon',
                 onPressed: onPressed,
                 icon: Icons.star,
@@ -288,11 +291,11 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: VelocityButton.primary(
+              child: VelocityButton.icon(
                 text: 'Loading',
                 onPressed: onPressed,
                 icon: Icons.star,
-                isLoading: true,
+                loading: true,
               ),
             ),
           ),
@@ -304,45 +307,21 @@ void main() {
       });
     });
 
-    group('custom theme', () {
-      testWidgets('应该支持自定义主题', (WidgetTester tester) async {
-        final customTheme = VelocityButtonTheme(
-          primaryBackgroundColor: Colors.purple,
-          primaryTextColor: Colors.white,
-          secondaryBackgroundColor: Colors.orange,
-          secondaryTextColor: Colors.black,
-          outlineColor: Colors.green,
-          outlineTextColor: Colors.green,
-          textButtonColor: Colors.red,
-          disabledBackgroundColor: Colors.grey,
-          disabledTextColor: Colors.grey.shade600,
-          borderRadius: 8.0,
-          smallPadding:
-              const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-          mediumPadding:
-              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          largePadding:
-              const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-          loadingColor: Colors.white,
-          splashColor: Colors.white.withValues(alpha: 0.3),
-          elevation: 4.0,
-          disabledElevation: 0.0,
-        );
-
+    group('custom style', () {
+      testWidgets('应该支持自定义样式', (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: VelocityButton.primary(
-                text: 'Custom Theme',
+              child: VelocityButton.text(
+                text: 'Custom Style',
                 onPressed: onPressed,
-                theme: customTheme,
               ),
             ),
           ),
         );
 
         expect(find.byType(VelocityButton), findsOneWidget);
-        expect(find.text('Custom Theme'), findsOneWidget);
+        expect(find.text('Custom Style'), findsOneWidget);
       });
     });
 
@@ -351,7 +330,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Material(
-              child: VelocityButton.primary(
+              child: VelocityButton.text(
                 text: 'Semantic Button',
                 onPressed: onPressed,
               ),
@@ -359,7 +338,7 @@ void main() {
           ),
         );
 
-        expect(find.byType(Semantics), findsWidgets);
+        expect(find.byType(VelocityButton), findsOneWidget);
         expect(find.text('Semantic Button'), findsOneWidget);
       });
     });

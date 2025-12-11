@@ -11,8 +11,12 @@ class VelocityTableStyle {
     this.borderColor = VelocityColors.gray200,
     this.borderRadius = const BorderRadius.all(Radius.circular(8)),
     this.cellPadding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-    this.headerTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: VelocityColors.gray700),
-    this.cellTextStyle = const TextStyle(fontSize: 14, color: VelocityColors.gray900),
+    this.headerTextStyle = const TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w600,
+        color: VelocityColors.gray700),
+    this.cellTextStyle =
+        const TextStyle(fontSize: 14, color: VelocityColors.gray900),
   });
 
   final Color headerBackgroundColor;

@@ -29,7 +29,7 @@ class VelocityLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? const VelocityLoadingStyle();
-    
+
     if (type == VelocityLoadingType.linear) {
       return SizedBox(
         width: effectiveStyle.linearWidth,
@@ -41,7 +41,7 @@ class VelocityLoading extends StatelessWidget {
         ),
       );
     }
-    
+
     return SizedBox(
       width: size,
       height: size,
@@ -73,7 +73,7 @@ class VelocityLoadingOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? const VelocityLoadingOverlayStyle();
-    
+
     return Stack(
       children: [
         child,

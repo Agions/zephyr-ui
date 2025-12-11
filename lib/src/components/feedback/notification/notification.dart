@@ -78,19 +78,24 @@ class _VelocityNotificationWidget extends StatefulWidget {
   final VoidCallback onDismiss;
 
   @override
-  State<_VelocityNotificationWidget> createState() => _VelocityNotificationWidgetState();
+  State<_VelocityNotificationWidget> createState() =>
+      _VelocityNotificationWidgetState();
 }
 
-class _VelocityNotificationWidgetState extends State<_VelocityNotificationWidget> with SingleTickerProviderStateMixin {
+class _VelocityNotificationWidgetState
+    extends State<_VelocityNotificationWidget>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _slideAnimation;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(duration: const Duration(milliseconds: 300), vsync: this);
+    _controller = AnimationController(
+        duration: const Duration(milliseconds: 300), vsync: this);
     _slideAnimation = Tween<Offset>(
-      begin: Offset(0, widget.position == VelocityNotificationPosition.top ? -1 : 1),
+      begin: Offset(
+          0, widget.position == VelocityNotificationPosition.top ? -1 : 1),
       end: Offset.zero,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
     _controller.forward();
@@ -110,27 +115,39 @@ class _VelocityNotificationWidgetState extends State<_VelocityNotificationWidget
 
   Color get _typeColor {
     switch (widget.type) {
-      case VelocityNotificationType.success: return widget.style.successColor;
-      case VelocityNotificationType.warning: return widget.style.warningColor;
-      case VelocityNotificationType.error: return widget.style.errorColor;
-      default: return widget.style.infoColor;
+      case VelocityNotificationType.success:
+        return widget.style.successColor;
+      case VelocityNotificationType.warning:
+        return widget.style.warningColor;
+      case VelocityNotificationType.error:
+        return widget.style.errorColor;
+      default:
+        return widget.style.infoColor;
     }
   }
 
   IconData get _typeIcon {
     switch (widget.type) {
-      case VelocityNotificationType.success: return Icons.check_circle;
-      case VelocityNotificationType.warning: return Icons.warning;
-      case VelocityNotificationType.error: return Icons.cancel;
-      default: return Icons.info;
+      case VelocityNotificationType.success:
+        return Icons.check_circle;
+      case VelocityNotificationType.warning:
+        return Icons.warning;
+      case VelocityNotificationType.error:
+        return Icons.cancel;
+      default:
+        return Icons.info;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: widget.position == VelocityNotificationPosition.top ? MediaQuery.of(context).padding.top + 16 : null,
-      bottom: widget.position == VelocityNotificationPosition.bottom ? MediaQuery.of(context).padding.bottom + 16 : null,
+      top: widget.position == VelocityNotificationPosition.top
+          ? MediaQuery.of(context).padding.top + 16
+          : null,
+      bottom: widget.position == VelocityNotificationPosition.bottom
+          ? MediaQuery.of(context).padding.bottom + 16
+          : null,
       left: 16,
       right: 16,
       child: SlideTransition(
@@ -149,7 +166,8 @@ class _VelocityNotificationWidgetState extends State<_VelocityNotificationWidget
               ),
               child: Row(
                 children: [
-                  Icon(_typeIcon, color: _typeColor, size: widget.style.iconSize),
+                  Icon(_typeIcon,
+                      color: _typeColor, size: widget.style.iconSize),
                   SizedBox(width: widget.style.iconSpacing),
                   Expanded(
                     child: Column(
@@ -157,19 +175,23 @@ class _VelocityNotificationWidgetState extends State<_VelocityNotificationWidget
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(widget.title, style: widget.style.titleStyle),
-                        if (widget.message != null) Padding(
-                          padding: const EdgeInsets.only(top: 4),
-                          child: Text(widget.message!, style: widget.style.messageStyle),
-                        ),
+                        if (widget.message != null)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4),
+                            child: Text(widget.message!,
+                                style: widget.style.messageStyle),
+                          ),
                       ],
                     ),
                   ),
-                  if (widget.showClose) IconButton(
-                    onPressed: _dismiss,
-                    icon: Icon(Icons.close, size: 18, color: widget.style.closeColor),
-                    constraints: const BoxConstraints(),
-                    padding: EdgeInsets.zero,
-                  ),
+                  if (widget.showClose)
+                    IconButton(
+                      onPressed: _dismiss,
+                      icon: Icon(Icons.close,
+                          size: 18, color: widget.style.closeColor),
+                      constraints: const BoxConstraints(),
+                      padding: EdgeInsets.zero,
+                    ),
                 ],
               ),
             ),

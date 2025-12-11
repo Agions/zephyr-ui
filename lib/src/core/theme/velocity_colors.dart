@@ -10,46 +10,46 @@ class VelocityColors {
   VelocityColors._();
 
   // ============ 主色调 ============
-  
+
   /// 主色 - 蓝色系
   static const Color primary = Color(0xFF2563EB);
   static const Color primaryLight = Color(0xFF3B82F6);
   static const Color primaryDark = Color(0xFF1D4ED8);
-  
+
   /// 次要色 - 紫色系
   static const Color secondary = Color(0xFF7C3AED);
   static const Color secondaryLight = Color(0xFF8B5CF6);
   static const Color secondaryDark = Color(0xFF6D28D9);
-  
+
   /// 强调色 - 青色系
   static const Color accent = Color(0xFF06B6D4);
   static const Color accentLight = Color(0xFF22D3EE);
   static const Color accentDark = Color(0xFF0891B2);
 
   // ============ 语义色 ============
-  
+
   /// 成功色
   static const Color success = Color(0xFF10B981);
   static const Color successLight = Color(0xFF34D399);
   static const Color successDark = Color(0xFF059669);
-  
+
   /// 警告色
   static const Color warning = Color(0xFFF59E0B);
   static const Color warningLight = Color(0xFFFBBF24);
   static const Color warningDark = Color(0xFFD97706);
-  
+
   /// 错误色
   static const Color error = Color(0xFFEF4444);
   static const Color errorLight = Color(0xFFF87171);
   static const Color errorDark = Color(0xFFDC2626);
-  
+
   /// 信息色
   static const Color info = Color(0xFF3B82F6);
   static const Color infoLight = Color(0xFF60A5FA);
   static const Color infoDark = Color(0xFF2563EB);
 
   // ============ 中性色 ============
-  
+
   /// 灰色系
   static const Color gray50 = Color(0xFFF9FAFB);
   static const Color gray100 = Color(0xFFF3F4F6);
@@ -63,36 +63,36 @@ class VelocityColors {
   static const Color gray900 = Color(0xFF111827);
 
   // ============ 背景色 ============
-  
+
   /// 亮色主题背景
   static const Color backgroundLight = Color(0xFFFFFFFF);
   static const Color surfaceLight = Color(0xFFF9FAFB);
   static const Color cardLight = Color(0xFFFFFFFF);
-  
+
   /// 暗色主题背景
   static const Color backgroundDark = Color(0xFF111827);
   static const Color surfaceDark = Color(0xFF1F2937);
   static const Color cardDark = Color(0xFF374151);
 
   // ============ 文本色 ============
-  
+
   /// 亮色主题文本
   static const Color textPrimaryLight = Color(0xFF111827);
   static const Color textSecondaryLight = Color(0xFF6B7280);
   static const Color textDisabledLight = Color(0xFF9CA3AF);
-  
+
   /// 暗色主题文本
   static const Color textPrimaryDark = Color(0xFFF9FAFB);
   static const Color textSecondaryDark = Color(0xFF9CA3AF);
   static const Color textDisabledDark = Color(0xFF6B7280);
 
   // ============ 边框色 ============
-  
+
   static const Color borderLight = Color(0xFFE5E7EB);
   static const Color borderDark = Color(0xFF374151);
-  
+
   // ============ 透明色 ============
-  
+
   static const Color transparent = Colors.transparent;
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);

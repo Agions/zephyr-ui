@@ -22,29 +22,29 @@ class VelocityImage extends StatelessWidget {
 
   /// 图片地址
   final String? src;
-  
+
   /// 宽度
   final double? width;
-  
+
   /// 高度
   final double? height;
-  
+
   /// 填充方式
   final BoxFit fit;
-  
+
   /// 自定义样式
   final VelocityImageStyle? style;
-  
+
   /// 占位组件
   final Widget? placeholder;
-  
+
   /// 错误组件
   final Widget? errorWidget;
 
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? VelocityImageStyle.defaults();
-    
+
     Widget image;
     if (src == null || src!.isEmpty) {
       image = _buildPlaceholder(effectiveStyle);
@@ -73,11 +73,12 @@ class VelocityImage extends StatelessWidget {
         },
       );
     }
-    
+
     if (effectiveStyle.borderRadius != null) {
-      image = ClipRRect(borderRadius: effectiveStyle.borderRadius!, child: image);
+      image =
+          ClipRRect(borderRadius: effectiveStyle.borderRadius!, child: image);
     }
-    
+
     return image;
   }
 

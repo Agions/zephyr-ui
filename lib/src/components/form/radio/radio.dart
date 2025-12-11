@@ -28,19 +28,21 @@ class VelocityRadio<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? VelocityRadioStyle.defaults();
-    
+
     Widget radio = Radio<T>(
       value: value,
       groupValue: groupValue,
       onChanged: disabled ? null : onChanged,
       activeColor: effectiveStyle.activeColor,
       fillColor: WidgetStateProperty.resolveWith((states) {
-        if (states.contains(WidgetState.disabled)) return effectiveStyle.disabledColor;
-        if (states.contains(WidgetState.selected)) return effectiveStyle.activeColor;
+        if (states.contains(WidgetState.disabled))
+          return effectiveStyle.disabledColor;
+        if (states.contains(WidgetState.selected))
+          return effectiveStyle.activeColor;
         return effectiveStyle.inactiveColor;
       }),
     );
-    
+
     if (label != null) {
       radio = GestureDetector(
         onTap: disabled ? null : () => onChanged?.call(value),
@@ -49,14 +51,15 @@ class VelocityRadio<T> extends StatelessWidget {
           children: [
             radio,
             SizedBox(width: effectiveStyle.labelSpacing),
-            Text(label!, style: effectiveStyle.labelStyle?.copyWith(
-              color: disabled ? effectiveStyle.disabledLabelColor : null,
-            )),
+            Text(label!,
+                style: effectiveStyle.labelStyle?.copyWith(
+                  color: disabled ? effectiveStyle.disabledLabelColor : null,
+                )),
           ],
         ),
       );
     }
-    
+
     return radio;
   }
 }

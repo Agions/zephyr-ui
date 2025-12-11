@@ -12,8 +12,10 @@ class VelocityStepperStyle {
     this.processColor = VelocityColors.primary,
     this.waitColor = VelocityColors.gray400,
     this.errorColor = VelocityColors.error,
-    this.titleStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-    this.subtitleStyle = const TextStyle(fontSize: 12, color: VelocityColors.gray500),
+    this.titleStyle =
+        const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+    this.subtitleStyle =
+        const TextStyle(fontSize: 12, color: VelocityColors.gray500),
   });
 
   final double iconSize;

@@ -15,7 +15,8 @@ class VelocitySliderStyle {
     this.trackHeight = 4,
     this.thumbRadius = 10,
     this.overlayRadius = 20,
-    this.labelStyle = const TextStyle(fontSize: 12, color: VelocityColors.white),
+    this.labelStyle =
+        const TextStyle(fontSize: 12, color: VelocityColors.white),
   });
 
   final Color activeColor;

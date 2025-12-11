@@ -26,7 +26,7 @@ class VelocitySwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? VelocitySwitchStyle.defaults();
-    
+
     Widget switchWidget = Switch(
       value: value,
       onChanged: disabled ? null : onChanged,
@@ -35,20 +35,21 @@ class VelocitySwitch extends StatelessWidget {
       inactiveThumbColor: effectiveStyle.thumbColor,
       inactiveTrackColor: effectiveStyle.inactiveTrackColor,
     );
-    
+
     if (label != null) {
       switchWidget = Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           switchWidget,
           SizedBox(width: effectiveStyle.labelSpacing),
-          Text(label!, style: effectiveStyle.labelStyle?.copyWith(
-            color: disabled ? effectiveStyle.disabledLabelColor : null,
-          )),
+          Text(label!,
+              style: effectiveStyle.labelStyle?.copyWith(
+                color: disabled ? effectiveStyle.disabledLabelColor : null,
+              )),
         ],
       );
     }
-    
+
     return switchWidget;
   }
 }

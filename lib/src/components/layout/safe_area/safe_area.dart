@@ -15,14 +15,26 @@ class VelocitySafeArea extends StatelessWidget {
     this.minimum = EdgeInsets.zero,
   });
 
-  const VelocitySafeArea.top({super.key, required this.child, this.minimum = EdgeInsets.zero})
-      : top = true, bottom = false, left = false, right = false;
+  const VelocitySafeArea.top(
+      {super.key, required this.child, this.minimum = EdgeInsets.zero})
+      : top = true,
+        bottom = false,
+        left = false,
+        right = false;
 
-  const VelocitySafeArea.bottom({super.key, required this.child, this.minimum = EdgeInsets.zero})
-      : top = false, bottom = true, left = false, right = false;
+  const VelocitySafeArea.bottom(
+      {super.key, required this.child, this.minimum = EdgeInsets.zero})
+      : top = false,
+        bottom = true,
+        left = false,
+        right = false;
 
-  const VelocitySafeArea.horizontal({super.key, required this.child, this.minimum = EdgeInsets.zero})
-      : top = false, bottom = false, left = true, right = true;
+  const VelocitySafeArea.horizontal(
+      {super.key, required this.child, this.minimum = EdgeInsets.zero})
+      : top = false,
+        bottom = false,
+        left = true,
+        right = true;
 
   final Widget child;
   final bool top;
@@ -33,6 +45,12 @@ class VelocitySafeArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(top: top, bottom: bottom, left: left, right: right, minimum: minimum, child: child);
+    return SafeArea(
+        top: top,
+        bottom: bottom,
+        left: left,
+        right: right,
+        minimum: minimum,
+        child: child);
   }
 }

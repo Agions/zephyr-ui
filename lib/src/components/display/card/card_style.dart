@@ -21,28 +21,28 @@ class VelocityCardStyle {
 
   /// 宽度
   final double? width;
-  
+
   /// 高度
   final double? height;
-  
+
   /// 外边距
   final EdgeInsets? margin;
-  
+
   /// 内边距
   final EdgeInsets? padding;
-  
+
   /// 背景颜色
   final Color? backgroundColor;
-  
+
   /// 圆角
   final BorderRadius? borderRadius;
-  
+
   /// 边框
   final Border? border;
-  
+
   /// 阴影
   final List<BoxShadow>? boxShadow;
-  
+
   /// 裁剪行为
   final Clip? clipBehavior;
 

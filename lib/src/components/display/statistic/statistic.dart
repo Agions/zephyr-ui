@@ -32,21 +32,31 @@ class VelocityStatistic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? const VelocityStatisticStyle();
-    final formattedValue = precision > 0 ? value.toStringAsFixed(precision) : value.toString();
+    final formattedValue =
+        precision > 0 ? value.toStringAsFixed(precision) : value.toString();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (title != null) Padding(padding: EdgeInsets.only(bottom: effectiveStyle.titleSpacing), child: Text(title!, style: effectiveStyle.titleStyle)),
+        if (title != null)
+          Padding(
+              padding: EdgeInsets.only(bottom: effectiveStyle.titleSpacing),
+              child: Text(title!, style: effectiveStyle.titleStyle)),
         Row(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.baseline,
           textBaseline: TextBaseline.alphabetic,
           children: [
-            if (prefix != null) Padding(padding: EdgeInsets.only(right: effectiveStyle.prefixSpacing), child: prefix),
+            if (prefix != null)
+              Padding(
+                  padding: EdgeInsets.only(right: effectiveStyle.prefixSpacing),
+                  child: prefix),
             Text(formattedValue, style: effectiveStyle.valueStyle),
-            if (suffix != null) Padding(padding: EdgeInsets.only(left: effectiveStyle.suffixSpacing), child: Text(suffix!, style: effectiveStyle.suffixStyle)),
+            if (suffix != null)
+              Padding(
+                  padding: EdgeInsets.only(left: effectiveStyle.suffixSpacing),
+                  child: Text(suffix!, style: effectiveStyle.suffixStyle)),
           ],
         ),
         if (trend != null && trendValue != null)
@@ -56,12 +66,20 @@ class VelocityStatistic extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(
-                  trend == VelocityStatisticTrend.up ? Icons.arrow_upward : Icons.arrow_downward,
+                  trend == VelocityStatisticTrend.up
+                      ? Icons.arrow_upward
+                      : Icons.arrow_downward,
                   size: effectiveStyle.trendIconSize,
-                  color: trend == VelocityStatisticTrend.up ? effectiveStyle.upColor : effectiveStyle.downColor,
+                  color: trend == VelocityStatisticTrend.up
+                      ? effectiveStyle.upColor
+                      : effectiveStyle.downColor,
                 ),
                 SizedBox(width: 4),
-                Text(trendValue!, style: effectiveStyle.trendStyle.copyWith(color: trend == VelocityStatisticTrend.up ? effectiveStyle.upColor : effectiveStyle.downColor)),
+                Text(trendValue!,
+                    style: effectiveStyle.trendStyle.copyWith(
+                        color: trend == VelocityStatisticTrend.up
+                            ? effectiveStyle.upColor
+                            : effectiveStyle.downColor)),
               ],
             ),
           ),
@@ -101,7 +119,8 @@ class _VelocityCountdownState extends State<VelocityCountdown> {
     _tick();
   }
 
-  void _updateRemaining() => _remaining = widget.endTime.difference(DateTime.now());
+  void _updateRemaining() =>
+      _remaining = widget.endTime.difference(DateTime.now());
 
   void _tick() {
     Future.delayed(const Duration(seconds: 1), () {
@@ -118,7 +137,8 @@ class _VelocityCountdownState extends State<VelocityCountdown> {
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = widget.style ?? const VelocityCountdownStyle();
-    if (_remaining.isNegative) return Text('00:00:00', style: effectiveStyle.textStyle);
+    if (_remaining.isNegative)
+      return Text('00:00:00', style: effectiveStyle.textStyle);
 
     final hours = _remaining.inHours.toString().padLeft(2, '0');
     final minutes = (_remaining.inMinutes % 60).toString().padLeft(2, '0');

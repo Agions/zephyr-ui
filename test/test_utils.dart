@@ -5,7 +5,6 @@ library test_utils;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
 /// 测试主题配置
 class TestTheme {
@@ -37,28 +36,6 @@ class TestDevices {
   static const iPad = Size(768, 1024);
   static const desktop = Size(1920, 1080);
   static const smallMobile = Size(320, 568);
-}
-
-/// Mock类
-class MockBuildContext extends Mock implements BuildContext {
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return super.toString();
-  }
-}
-
-class MockTheme extends Mock implements ThemeData {
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return super.toString();
-  }
-}
-
-class MockNavigatorObserver extends Mock implements NavigatorObserver {
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return super.toString();
-  }
 }
 
 /// 测试工具类

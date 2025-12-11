@@ -13,14 +13,18 @@ class VelocityBottomSheetStyle {
     this.handleColor = VelocityColors.gray300,
     this.headerPadding = const EdgeInsets.fromLTRB(16, 12, 16, 0),
     this.contentPadding = const EdgeInsets.all(16),
-    this.titleStyle = const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: VelocityColors.gray900),
+    this.titleStyle = const TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
+        color: VelocityColors.gray900),
     this.closeIconColor = VelocityColors.gray500,
     this.closeIconSize = 24,
     this.actionTextColor = VelocityColors.gray900,
     this.actionIconColor = VelocityColors.gray600,
     this.destructiveColor = VelocityColors.error,
     this.dividerColor = VelocityColors.gray200,
-    this.cancelStyle = const TextStyle(fontSize: 16, color: VelocityColors.gray500),
+    this.cancelStyle =
+        const TextStyle(fontSize: 16, color: VelocityColors.gray500),
   });
 
   final Color backgroundColor;

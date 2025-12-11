@@ -39,12 +39,16 @@ class VelocitySegmented<T> extends StatelessWidget {
           final isSelected = segment.value == value;
           return Expanded(
             child: GestureDetector(
-              onTap: disabled || segment.disabled ? null : () => onChanged(segment.value),
+              onTap: disabled || segment.disabled
+                  ? null
+                  : () => onChanged(segment.value),
               child: AnimatedContainer(
                 duration: effectiveStyle.animationDuration,
                 padding: effectiveStyle.segmentPadding,
                 decoration: BoxDecoration(
-                  color: isSelected ? effectiveStyle.activeBackgroundColor : Colors.transparent,
+                  color: isSelected
+                      ? effectiveStyle.activeBackgroundColor
+                      : Colors.transparent,
                   borderRadius: effectiveStyle.segmentBorderRadius,
                   boxShadow: isSelected ? effectiveStyle.activeShadow : null,
                 ),
@@ -52,10 +56,17 @@ class VelocitySegmented<T> extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     if (segment.icon != null) ...[
-                      Icon(segment.icon, size: effectiveStyle.iconSize, color: isSelected ? effectiveStyle.activeTextColor : effectiveStyle.textColor),
+                      Icon(segment.icon,
+                          size: effectiveStyle.iconSize,
+                          color: isSelected
+                              ? effectiveStyle.activeTextColor
+                              : effectiveStyle.textColor),
                       SizedBox(width: effectiveStyle.iconSpacing),
                     ],
-                    Text(segment.label, style: isSelected ? effectiveStyle.activeTextStyle : effectiveStyle.textStyle),
+                    Text(segment.label,
+                        style: isSelected
+                            ? effectiveStyle.activeTextStyle
+                            : effectiveStyle.textStyle),
                   ],
                 ),
               ),
@@ -68,7 +79,11 @@ class VelocitySegmented<T> extends StatelessWidget {
 }
 
 class VelocitySegment<T> {
-  const VelocitySegment({required this.value, required this.label, this.icon, this.disabled = false});
+  const VelocitySegment(
+      {required this.value,
+      required this.label,
+      this.icon,
+      this.disabled = false});
   final T value;
   final String label;
   final IconData? icon;

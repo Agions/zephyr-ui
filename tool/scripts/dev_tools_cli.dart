@@ -1,5 +1,4 @@
 #!/usr/bin/env dart
-
 // ignore_for_file: avoid_print
 
 import 'dart:io';
@@ -8,7 +7,7 @@ import 'package:args/args.dart';
 import 'package:path/path.dart' as path;
 
 /// VelocityUI 开发工具链命令行界面
-/// 
+///
 /// 功能：
 /// - 组件代码生成
 /// - 主题定制
@@ -17,86 +16,111 @@ import 'package:path/path.dart' as path;
 /// - 构建优化
 class DevToolsCLI {
   static const String version = '1.0.0';
-  
+
   final ArgParser _argParser = ArgParser()
     ..addFlag('help', abbr: 'h', help: '显示帮助信息')
     ..addFlag('version', help: '显示版本信息')
-    ..addFlag('verbose', abbr: 'v', help: '显示详细输出')
-    
+
     // 组件生成命令
-    ..addCommand('generate', ArgParser()
-      ..addOption('type', abbr: 't', help: '组件类型 (basic, form, display)')
-      ..addOption('name', abbr: 'n', help: '组件名称')
-      ..addOption('output', abbr: 'o', help: '输出目录', defaultsTo: 'lib/src/components')
-      ..addFlag('with-test', help: '生成测试文件', defaultsTo: true)
-      ..addFlag('with-doc', help: '生成文档', defaultsTo: true)
-      ..addFlag('with-example', help: '生成示例', defaultsTo: true))
-    
+    ..addCommand(
+        'generate',
+        ArgParser()
+          ..addFlag('verbose', abbr: 'v', help: '显示详细输出')
+          ..addOption('type', abbr: 't', help: '组件类型 (basic, form, display)')
+          ..addOption('name', abbr: 'n', help: '组件名称')
+          ..addOption('output',
+              abbr: 'o', help: '输出目录', defaultsTo: 'lib/src/components')
+          ..addFlag('with-test', help: '生成测试文件', defaultsTo: true)
+          ..addFlag('with-doc', help: '生成文档', defaultsTo: true)
+          ..addFlag('with-example', help: '生成示例', defaultsTo: true))
+
     // 主题生成命令
-    ..addCommand('theme', ArgParser()
-      ..addOption('name', abbr: 'n', help: '主题名称')
-      ..addOption('base', abbr: 'b', help: '基础主题 (light, dark)', defaultsTo: 'light')
-      ..addOption('primary-color', help: '主色调')
-      ..addOption('secondary-color', help: '次要色调')
-      ..addOption('output', abbr: 'o', help: '输出目录', defaultsTo: 'lib/src/core/theme'))
-    
+    ..addCommand(
+        'theme',
+        ArgParser()
+          ..addFlag('verbose', abbr: 'v', help: '显示详细输出')
+          ..addOption('name', abbr: 'n', help: '主题名称')
+          ..addOption('base',
+              abbr: 'b', help: '基础主题 (light, dark)', defaultsTo: 'light')
+          ..addOption('primary-color', help: '主色调')
+          ..addOption('secondary-color', help: '次要色调')
+          ..addOption('output',
+              abbr: 'o', help: '输出目录', defaultsTo: 'lib/src/core/theme'))
+
     // 性能监控命令
-    ..addCommand('monitor', ArgParser()
-      ..addOption('duration', abbr: 'd', help: '监控时长 (秒)', defaultsTo: '60')
-      ..addOption('output', abbr: 'o', help: '输出文件', defaultsTo: 'performance_report.json')
-      ..addOption('format', help: '输出格式 (json, html)', defaultsTo: 'json')
-      ..addFlag('real-time', help: '实时监控', defaultsTo: false))
-    
+    ..addCommand(
+        'monitor',
+        ArgParser()
+          ..addFlag('verbose', abbr: 'v', help: '显示详细输出')
+          ..addOption('duration', abbr: 'd', help: '监控时长 (秒)', defaultsTo: '60')
+          ..addOption('output',
+              abbr: 'o', help: '输出文件', defaultsTo: 'performance_report.json')
+          ..addOption('format', help: '输出格式 (json, html)', defaultsTo: 'json')
+          ..addFlag('real-time', help: '实时监控', defaultsTo: false))
+
     // 代码质量检查命令
-    ..addCommand('lint', ArgParser()
-      ..addOption('path', abbr: 'p', help: '检查路径', defaultsTo: 'lib')
-      ..addOption('rules', help: '自定义规则文件')
-      ..addFlag('fix', help: '自动修复问题', defaultsTo: false)
-      ..addFlag('strict', help: '严格模式', defaultsTo: false))
-    
+    ..addCommand(
+        'lint',
+        ArgParser()
+          ..addFlag('verbose', abbr: 'v', help: '显示详细输出')
+          ..addOption('path', abbr: 'p', help: '检查路径', defaultsTo: 'lib')
+          ..addOption('rules', help: '自定义规则文件')
+          ..addFlag('fix', help: '自动修复问题', defaultsTo: false)
+          ..addFlag('strict', help: '严格模式', defaultsTo: false))
+
     // 构建优化命令
-    ..addCommand('build', ArgParser()
-      ..addOption('target', abbr: 't', help: '构建目标 (debug, release, profile)')
-      ..addOption('flavor', help: '构建风味')
-      ..addFlag('obfuscate', help: '代码混淆', defaultsTo: false)
-      ..addFlag('split-per-abi', help: '按ABI拆分', defaultsTo: false)
-      ..addFlag('shrink', help: '资源压缩', defaultsTo: true))
-    
+    ..addCommand(
+        'build',
+        ArgParser()
+          ..addFlag('verbose', abbr: 'v', help: '显示详细输出')
+          ..addOption('target',
+              abbr: 't', help: '构建目标 (debug, release, profile)')
+          ..addOption('flavor', help: '构建风味')
+          ..addFlag('obfuscate', help: '代码混淆', defaultsTo: false)
+          ..addFlag('split-per-abi', help: '按ABI拆分', defaultsTo: false)
+          ..addFlag('shrink', help: '资源压缩', defaultsTo: true))
+
     // 测试命令
-    ..addCommand('test', ArgParser()
-      ..addOption('coverage', help: '覆盖率报告输出路径')
-      ..addOption('reporter', help: '测试报告格式', defaultsTo: 'expanded')
-      ..addFlag('integration', help: '运行集成测试', defaultsTo: false)
-      ..addFlag('widget', help: '运行Widget测试', defaultsTo: true))
-    
+    ..addCommand(
+        'test',
+        ArgParser()
+          ..addFlag('verbose', abbr: 'v', help: '显示详细输出')
+          ..addOption('coverage', help: '覆盖率报告输出路径')
+          ..addOption('reporter', help: '测试报告格式', defaultsTo: 'expanded')
+          ..addFlag('integration', help: '运行集成测试', defaultsTo: false)
+          ..addFlag('widget', help: '运行Widget测试', defaultsTo: true))
+
     // 文档生成命令
-    ..addCommand('docs', ArgParser()
-      ..addOption('output', abbr: 'o', help: '输出目录', defaultsTo: 'docs')
-      ..addOption('format', help: '输出格式 (html, md)', defaultsTo: 'html')
-      ..addFlag('include-examples', help: '包含示例', defaultsTo: true)
-      ..addFlag('include-api', help: '包含API文档', defaultsTo: true));
-  
+    ..addCommand(
+        'docs',
+        ArgParser()
+          ..addFlag('verbose', abbr: 'v', help: '显示详细输出')
+          ..addOption('output', abbr: 'o', help: '输出目录', defaultsTo: 'docs')
+          ..addOption('format', help: '输出格式 (html, md)', defaultsTo: 'html')
+          ..addFlag('include-examples', help: '包含示例', defaultsTo: true)
+          ..addFlag('include-api', help: '包含API文档', defaultsTo: true));
+
   void run(List<String> args) async {
     try {
       final results = _argParser.parse(args);
-      
+
       if (results['help'] as bool) {
         _printHelp();
         return;
       }
-      
+
       if (results['version'] as bool) {
         print('VelocityUI DevTools CLI v$version');
         return;
       }
-      
+
       final command = results.command;
       if (command == null) {
         print('请指定命令');
         _printHelp();
         return;
       }
-      
+
       await _executeCommand(command);
     } on FormatException catch (e) {
       print('参数错误: ${e.message}');
@@ -106,10 +130,12 @@ class DevToolsCLI {
       exit(1);
     }
   }
-  
+
   Future<void> _executeCommand(ArgResults command) async {
-    final verbose = command.wasParsed('verbose') ? command['verbose'] as bool : false;
-    
+    // 从子命令中获取verbose参数
+    final verbose =
+        command.wasParsed('verbose') ? command['verbose'] as bool : false;
+
     switch (command.name) {
       case 'generate':
         await _handleGenerateCommand(command, verbose);
@@ -137,7 +163,7 @@ class DevToolsCLI {
         _printHelp();
     }
   }
-  
+
   Future<void> _handleGenerateCommand(ArgResults command, bool verbose) async {
     final type = command['type'] as String?;
     final name = command['name'] as String?;
@@ -145,12 +171,12 @@ class DevToolsCLI {
     final withTest = command['with-test'] as bool;
     final withDoc = command['with-doc'] as bool;
     final withExample = command['with-example'] as bool;
-    
+
     if (type == null || name == null) {
       print('错误: 必须指定组件类型和名称');
       return;
     }
-    
+
     if (verbose) {
       print('生成组件: $name (类型: $type)');
       print('输出目录: $output');
@@ -158,7 +184,7 @@ class DevToolsCLI {
       print('生成文档: $withDoc');
       print('生成示例: $withExample');
     }
-    
+
     // 这里应该调用实际的组件生成器
     await _generateComponent(
       type: type,
@@ -168,22 +194,22 @@ class DevToolsCLI {
       withDoc: withDoc,
       withExample: withExample,
     );
-    
+
     print('组件 $name 生成完成！');
   }
-  
+
   Future<void> _handleThemeCommand(ArgResults command, bool verbose) async {
     final name = command['name'] as String?;
     final base = command['base'] as String?;
     final primaryColor = command['primary-color'] as String?;
     final secondaryColor = command['secondary-color'] as String?;
     final output = command['output'] as String?;
-    
+
     if (name == null) {
       print('错误: 必须指定主题名称');
       return;
     }
-    
+
     if (verbose) {
       print('生成主题: $name');
       print('基础主题: $base');
@@ -191,7 +217,7 @@ class DevToolsCLI {
       print('次要色调: $secondaryColor');
       print('输出目录: $output');
     }
-    
+
     // 这里应该调用实际的主题生成器
     await _generateTheme(
       name: name,
@@ -200,16 +226,16 @@ class DevToolsCLI {
       secondaryColor: secondaryColor,
       output: output!,
     );
-    
+
     print('主题 $name 生成完成！');
   }
-  
+
   Future<void> _handleMonitorCommand(ArgResults command, bool verbose) async {
     final duration = int.parse(command['duration'] as String);
     final output = command['output'] as String?;
     final format = command['format'] as String?;
     final realTime = command['real-time'] as bool;
-    
+
     if (verbose) {
       print('性能监控');
       print('监控时长: $duration 秒');
@@ -217,7 +243,7 @@ class DevToolsCLI {
       print('输出格式: $format');
       print('实时监控: $realTime');
     }
-    
+
     // 这里应该调用实际的性能监控器
     await _runPerformanceMonitoring(
       duration: duration,
@@ -225,16 +251,16 @@ class DevToolsCLI {
       format: format!,
       realTime: realTime,
     );
-    
+
     print('性能监控完成！');
   }
-  
+
   Future<void> _handleLintCommand(ArgResults command, bool verbose) async {
     final path = command['path'] as String?;
     final rules = command['rules'] as String?;
     final fix = command['fix'] as bool;
     final strict = command['strict'] as bool;
-    
+
     if (verbose) {
       print('代码质量检查');
       print('检查路径: $path');
@@ -242,7 +268,7 @@ class DevToolsCLI {
       print('自动修复: $fix');
       print('严格模式: $strict');
     }
-    
+
     // 这里应该调用实际的代码质量检查器
     await _runCodeQualityCheck(
       path: path!,
@@ -250,17 +276,17 @@ class DevToolsCLI {
       fix: fix,
       strict: strict,
     );
-    
+
     print('代码质量检查完成！');
   }
-  
+
   Future<void> _handleBuildCommand(ArgResults command, bool verbose) async {
     final target = command['target'] as String?;
     final flavor = command['flavor'] as String?;
     final obfuscate = command['obfuscate'] as bool;
     final splitPerAbi = command['split-per-abi'] as bool;
     final shrink = command['shrink'] as bool;
-    
+
     if (verbose) {
       print('构建优化');
       print('构建目标: $target');
@@ -269,7 +295,7 @@ class DevToolsCLI {
       print('按ABI拆分: $splitPerAbi');
       print('资源压缩: $shrink');
     }
-    
+
     // 这里应该调用实际的构建优化器
     await _runOptimizedBuild(
       target: target!,
@@ -278,16 +304,16 @@ class DevToolsCLI {
       splitPerAbi: splitPerAbi,
       shrink: shrink,
     );
-    
+
     print('构建完成！');
   }
-  
+
   Future<void> _handleTestCommand(ArgResults command, bool verbose) async {
     final coverage = command['coverage'] as String?;
     final reporter = command['reporter'] as String?;
     final integration = command['integration'] as bool;
     final widget = command['widget'] as bool;
-    
+
     if (verbose) {
       print('运行测试');
       print('覆盖率报告: $coverage');
@@ -295,7 +321,7 @@ class DevToolsCLI {
       print('集成测试: $integration');
       print('Widget测试: $widget');
     }
-    
+
     // 这里应该调用实际的测试运行器
     await _runTests(
       coverage: coverage,
@@ -303,16 +329,16 @@ class DevToolsCLI {
       integration: integration,
       widget: widget,
     );
-    
+
     print('测试完成！');
   }
-  
+
   Future<void> _handleDocsCommand(ArgResults command, bool verbose) async {
     final output = command['output'] as String?;
     final format = command['format'] as String?;
     final includeExamples = command['include-examples'] as bool;
     final includeApi = command['include-api'] as bool;
-    
+
     if (verbose) {
       print('生成文档');
       print('输出目录: $output');
@@ -320,7 +346,7 @@ class DevToolsCLI {
       print('包含示例: $includeExamples');
       print('包含API文档: $includeApi');
     }
-    
+
     // 这里应该调用实际的文档生成器
     await _generateDocumentation(
       output: output!,
@@ -328,10 +354,10 @@ class DevToolsCLI {
       includeExamples: includeExamples,
       includeApi: includeApi,
     );
-    
+
     print('文档生成完成！');
   }
-  
+
   Future<void> _generateComponent({
     required String type,
     required String name,
@@ -341,35 +367,116 @@ class DevToolsCLI {
     required bool withExample,
   }) async {
     // 模拟组件生成过程
-    final componentDir = Directory(path.join(output, name));
+    final componentDir = Directory(path.join(output, type, name));
     if (!await componentDir.exists()) {
       await componentDir.create(recursive: true);
     }
-    
+
     // 生成组件文件
     final componentFile = File(path.join(componentDir.path, '$name.dart'));
     await componentFile.writeAsString(_generateComponentCode(name, type));
-    
+
+    // 生成样式文件
+    final styleFile = File(path.join(componentDir.path, '${name}_style.dart'));
+    await styleFile.writeAsString(_generateStyleCode(name));
+
+    // 生成导出文件
+    final exportFile =
+        File(path.join(componentDir.parent.parent.path, '$type.dart'));
+    final exportLine = "export '$type/$name/$name.dart';\n";
+    if (!await exportFile.exists()) {
+      await exportFile.writeAsString(exportLine);
+    } else {
+      final content = await exportFile.readAsString();
+      if (!content.contains(exportLine)) {
+        await exportFile.writeAsString(content + exportLine);
+      }
+    }
+
     if (withTest) {
       final testFile = File(path.join(componentDir.path, '${name}_test.dart'));
       await testFile.writeAsString(_generateTestCode(name));
     }
-    
+
     if (withDoc) {
       final docFile = File(path.join(componentDir.path, '$name.md'));
       await docFile.writeAsString(_generateComponentDocumentation(name, type));
     }
-    
+
     if (withExample) {
-      final exampleFile = File(path.join(componentDir.path, '${name}_example.dart'));
+      final exampleFile =
+          File(path.join(componentDir.path, '${name}_example.dart'));
       await exampleFile.writeAsString(_generateExampleCode(name));
     }
   }
+
+  String _generateStyleCode(String name) {
+    final pascalName = _toPascalCase(name);
+    return '''/// $pascalName 样式类
+class ${pascalName}Style {
+  /// 默认样式
+  static const ${pascalName}Style defaults = ${pascalName}Style(
+    backgroundColor: Colors.transparent,
+    padding: EdgeInsets.all(8.0),
+    borderRadius: BorderRadius.all(Radius.circular(8.0)),
+    border: null,
+    boxShadow: null,
+  );
   
+  /// 构造函数
+  const ${pascalName}Style({
+    this.backgroundColor,
+    this.padding,
+    this.borderRadius,
+    this.border,
+    this.boxShadow,
+    this.textStyle,
+  });
+  
+  /// 背景颜色
+  final Color? backgroundColor;
+  
+  /// 内边距
+  final EdgeInsetsGeometry? padding;
+  
+  /// 圆角
+  final BorderRadiusGeometry? borderRadius;
+  
+  /// 边框
+  final Border? border;
+  
+  /// 阴影
+  final List<BoxShadow>? boxShadow;
+  
+  /// 文本样式
+  final TextStyle? textStyle;
+  
+  /// 合并样式
+  ${pascalName}Style merge(${pascalName}Style? other) {
+    if (other == null) return this;
+    return ${pascalName}Style(
+      backgroundColor: other.backgroundColor ?? backgroundColor,
+      padding: other.padding ?? padding,
+      borderRadius: other.borderRadius ?? borderRadius,
+      border: other.border ?? border,
+      boxShadow: other.boxShadow ?? boxShadow,
+      textStyle: other.textStyle ?? textStyle,
+    );
+  }
+  
+  /// 解析样式
+  static ${pascalName}Style resolve({${pascalName}Style? customStyle}) {
+    return customStyle ?? defaults;
+  }
+}
+''';
+  }
+
   Future<void> _generateTheme({
     required String name,
     required String base,
-    required String output, String? primaryColor,
+    required String output,
+    String? primaryColor,
     String? secondaryColor,
   }) async {
     // 模拟主题生成过程
@@ -377,11 +484,12 @@ class DevToolsCLI {
     if (!await themeDir.exists()) {
       await themeDir.create(recursive: true);
     }
-    
+
     final themeFile = File(path.join(themeDir.path, '${name}_theme.dart'));
-    await themeFile.writeAsString(_generateThemeCode(name, base, primaryColor, secondaryColor));
+    await themeFile.writeAsString(
+        _generateThemeCode(name, base, primaryColor, secondaryColor));
   }
-  
+
   Future<void> _runPerformanceMonitoring({
     required int duration,
     required String output,
@@ -398,7 +506,7 @@ class DevToolsCLI {
       },
       'timestamp': DateTime.now().toIso8601String(),
     };
-    
+
     final outputFile = File(output);
     if (format == 'json') {
       await outputFile.writeAsString(json.encode(results));
@@ -406,85 +514,104 @@ class DevToolsCLI {
       await outputFile.writeAsString(_generateHtmlReport(results));
     }
   }
-  
+
   Future<void> _runCodeQualityCheck({
     required String path,
-    required bool fix, required bool strict, String? rules,
+    required bool fix,
+    required bool strict,
+    String? rules,
   }) async {
     // 模拟代码质量检查过程
     print('检查路径: $path');
     if (rules != null) {
       print('使用规则文件: $rules');
     }
-    
+
     // 模拟检查结果
     final issues = [
-      {'file': 'example.dart', 'line': 10, 'message': 'Missing documentation', 'severity': 'warning'},
-      {'file': 'example.dart', 'line': 25, 'message': 'Unused variable', 'severity': 'info'},
+      {
+        'file': 'example.dart',
+        'line': 10,
+        'message': 'Missing documentation',
+        'severity': 'warning'
+      },
+      {
+        'file': 'example.dart',
+        'line': 25,
+        'message': 'Unused variable',
+        'severity': 'info'
+      },
     ];
-    
+
     print('发现 ${issues.length} 个问题');
     for (final issue in issues) {
-      print('  ${issue['file']}:${issue['line']} - ${issue['message']} (${issue['severity']})');
+      print(
+          '  ${issue['file']}:${issue['line']} - ${issue['message']} (${issue['severity']})');
     }
-    
+
     if (fix) {
       print('自动修复问题...');
     }
   }
-  
+
   Future<void> _runOptimizedBuild({
     required String target,
-    required bool obfuscate, required bool splitPerAbi, required bool shrink, String? flavor,
+    required bool obfuscate,
+    required bool splitPerAbi,
+    required bool shrink,
+    String? flavor,
   }) async {
     // 模拟构建过程
     print('构建目标: $target');
     if (flavor != null) {
       print('构建风味: $flavor');
     }
-    
+
     final buildCommand = 'flutter build ${target == 'apk' ? 'apk' : target}';
     final args = <String>[];
-    
+
     if (flavor != null) args.add('--flavor $flavor');
     if (obfuscate) args.add('--obfuscate');
     if (splitPerAbi) args.add('--split-per-abi');
     if (shrink) args.add('--shrink');
-    
+
     print('执行命令: $buildCommand ${args.join(' ')}');
-    
+
     // 这里应该调用实际的构建命令
     // final result = await Process.run('flutter', ['build', target, ...args]);
     // print(result.stdout);
     // print(result.stderr);
   }
-  
+
   Future<void> _runTests({
-    required String reporter, required bool integration, required bool widget, String? coverage,
+    required String reporter,
+    required bool integration,
+    required bool widget,
+    String? coverage,
   }) async {
     // 模拟测试过程
     const testCommand = 'flutter test';
     final args = <String>[];
-    
+
     if (coverage != null) args.add('--coverage');
     args.add('--reporter=$reporter');
-    
+
     if (integration) {
       args.add('test/integration/');
     }
-    
+
     if (widget) {
       args.add('test/widget/');
     }
-    
+
     print('执行命令: $testCommand ${args.join(' ')}');
-    
+
     // 这里应该调用实际的测试命令
     // final result = await Process.run('flutter', ['test', ...args]);
     // print(result.stdout);
     // print(result.stderr);
   }
-  
+
   Future<void> _generateDocumentation({
     required String output,
     required String format,
@@ -496,35 +623,71 @@ class DevToolsCLI {
     if (!await docsDir.exists()) {
       await docsDir.create(recursive: true);
     }
-    
+
     if (includeApi) {
       final apiFile = File(path.join(docsDir.path, 'api.$format'));
       await apiFile.writeAsString(_generateApiDocumentation());
     }
-    
+
     if (includeExamples) {
       final examplesFile = File(path.join(docsDir.path, 'examples.$format'));
       await examplesFile.writeAsString(_generateExamplesDocumentation());
     }
   }
-  
-  String _generateComponentCode(String name, String type) {
-    return '''
-import 'package:flutter/material.dart';
 
-class ${_toPascalCase(name)} extends StatelessWidget {
-  const ${_toPascalCase(name)}({Key? key}) : super(key: key);
+  String _generateComponentCode(String name, String type) {
+    final pascalName = _toPascalCase(name);
+    return '''/// VelocityUI $pascalName 组件
+///
+/// 提供一个 $type 类型的组件，支持主题定制。
+library velocity_$name;
+
+import 'package:flutter/material.dart';
+import '${name}_style.dart';
+
+export '${name}_style.dart';
+
+/// $pascalName 组件
+class $pascalName extends StatelessWidget {
+  /// 创建一个 $pascalName 组件
+  const $pascalName({
+    super.key,
+    required this.child,
+    this.style,
+  });
+
+  /// 创建一个带文本的 $pascalName 组件
+  const $pascalName.text({
+    super.key,
+    required String text,
+    this.style,
+  }) : child = Text(text);
+
+  /// 子组件
+  final Widget child;
+
+  /// 组件样式
+  final ${pascalName}Style? style;
 
   @override
   Widget build(BuildContext context) {
+    final effectiveStyle = ${pascalName}Style.resolve(customStyle: style);
+
     return Container(
-      child: Text('$name'),
+      decoration: BoxDecoration(
+        color: effectiveStyle.backgroundColor,
+        borderRadius: effectiveStyle.borderRadius,
+        border: effectiveStyle.border,
+        boxShadow: effectiveStyle.boxShadow,
+      ),
+      padding: effectiveStyle.padding,
+      child: child,
     );
   }
 }
 ''';
   }
-  
+
   String _generateTestCode(String name) {
     return '''
 import 'package:flutter_test/flutter_test.dart';
@@ -543,7 +706,7 @@ void main() {
 }
 ''';
   }
-  
+
   String _generateComponentDocumentation(String name, String type) {
     return '''
 # $name
@@ -567,7 +730,7 @@ ${_toPascalCase(name)}()
 暂无示例。
 ''';
   }
-  
+
   String _generateExampleCode(String name) {
     return '''
 import 'package:flutter/material.dart';
@@ -588,25 +751,65 @@ class ${_toPascalCase(name)}Example extends StatelessWidget {
 }
 ''';
   }
-  
-  String _generateThemeCode(String name, String base, String? primaryColor, String? secondaryColor) {
+
+  String _generateThemeCode(
+      String name, String base, String? primaryColor, String? secondaryColor) {
+    final pascalName = _toPascalCase(name);
+    final isLight = base == 'light';
     return '''
 import 'package:flutter/material.dart';
+import 'package:velocity_ui/src/core/theme/velocity_theme_data.dart';
+import 'package:velocity_ui/src/core/theme/velocity_colors.dart';
+import 'package:velocity_ui/src/core/theme/velocity_typography.dart';
 
-class ${_toPascalCase(name)}Theme {
+/// $pascalName 主题扩展
+class ${pascalName}Theme {
+  /// 主题名称
   static const String name = '$name';
   
-  static const Color primary = ${primaryColor ?? 'Colors.blue'};
-  static const Color secondary = ${secondaryColor ?? 'Colors.orange'};
+  /// 主色调
+  static const Color primary = ${primaryColor ?? (isLight ? 'VelocityColors.primary' : 'VelocityColors.primaryLight')};
   
-  static ThemeData get theme => ThemeData(
-    primarySwatch: Colors.blue,
-    visualDensity: VisualDensity.adaptivePlatformDensity,
-  );
+  /// 次要色调
+  static const Color secondary = ${secondaryColor ?? (isLight ? 'VelocityColors.secondary' : 'VelocityColors.secondaryLight')};
+  
+  /// 创建亮色主题
+  static VelocityThemeData light() {
+    return VelocityThemeData.light(
+      primaryColor: primary,
+      secondaryColor: secondary,
+    ).copyWith(
+      colorScheme: VelocityColorScheme.light.copyWith(
+        primary: primary,
+        secondary: secondary,
+      ),
+      buttonTheme: VelocityButtonThemeData.light().copyWith(
+        backgroundColor: primary,
+        foregroundColor: ${isLight ? 'VelocityColors.white' : 'VelocityColors.black'},
+      ),
+    );
+  }
+  
+  /// 创建暗色主题
+  static VelocityThemeData dark() {
+    return VelocityThemeData.dark(
+      primaryColor: primary,
+      secondaryColor: secondary,
+    ).copyWith(
+      colorScheme: VelocityColorScheme.dark.copyWith(
+        primary: primary,
+        secondary: secondary,
+      ),
+      buttonTheme: VelocityButtonThemeData.dark().copyWith(
+        backgroundColor: primary,
+        foregroundColor: ${isLight ? 'VelocityColors.black' : 'VelocityColors.white'},
+      ),
+    );
+  }
 }
 ''';
   }
-  
+
   String _generateHtmlReport(Map<String, dynamic> results) {
     return '''
 <!DOCTYPE html>
@@ -637,7 +840,7 @@ class ${_toPascalCase(name)}Theme {
 </html>
 ''';
   }
-  
+
   String _generateApiDocumentation() {
     return '''
 # API Documentation
@@ -651,7 +854,7 @@ class ${_toPascalCase(name)}Theme {
 暂无主题。
 ''';
   }
-  
+
   String _generateExamplesDocumentation() {
     return '''
 # Examples
@@ -665,11 +868,13 @@ class ${_toPascalCase(name)}Theme {
 暂无示例。
 ''';
   }
-  
+
   String _toPascalCase(String input) {
-    return input[0].toUpperCase() + input.substring(1);
+    return input.split('_').map((word) {
+      return word.isEmpty ? '' : word[0].toUpperCase() + word.substring(1);
+    }).join('');
   }
-  
+
   void _printHelp() {
     print('VelocityUI DevTools CLI - 开发工具链');
     print('');

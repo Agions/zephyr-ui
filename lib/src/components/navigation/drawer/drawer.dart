@@ -28,7 +28,7 @@ class VelocityDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? const VelocityDrawerStyle();
-    
+
     return Drawer(
       backgroundColor: effectiveStyle.backgroundColor,
       width: effectiveStyle.width,
@@ -43,18 +43,29 @@ class VelocityDrawer extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final item = items[index];
                   final isSelected = selectedIndex == index;
-                  
+
                   if (item.isDivider) {
-                    return Divider(color: effectiveStyle.dividerColor, height: effectiveStyle.dividerHeight);
+                    return Divider(
+                        color: effectiveStyle.dividerColor,
+                        height: effectiveStyle.dividerHeight);
                   }
-                  
+
                   return ListTile(
-                    leading: item.icon != null ? Icon(item.icon, color: isSelected ? effectiveStyle.selectedColor : effectiveStyle.iconColor) : null,
-                    title: Text(item.label!, style: (isSelected ? effectiveStyle.selectedLabelStyle : effectiveStyle.labelStyle)),
+                    leading: item.icon != null
+                        ? Icon(item.icon,
+                            color: isSelected
+                                ? effectiveStyle.selectedColor
+                                : effectiveStyle.iconColor)
+                        : null,
+                    title: Text(item.label!,
+                        style: (isSelected
+                            ? effectiveStyle.selectedLabelStyle
+                            : effectiveStyle.labelStyle)),
                     trailing: item.trailing,
                     selected: isSelected,
                     selectedTileColor: effectiveStyle.selectedBackgroundColor,
-                    shape: RoundedRectangleBorder(borderRadius: effectiveStyle.itemBorderRadius),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: effectiveStyle.itemBorderRadius),
                     onTap: () {
                       onItemTap?.call(index);
                       if (item.onTap != null) item.onTap!();
@@ -73,8 +84,14 @@ class VelocityDrawer extends StatelessWidget {
 
 /// 抽屉项
 class VelocityDrawerItem {
-  const VelocityDrawerItem({this.icon, this.label, this.trailing, this.onTap}) : isDivider = false;
-  const VelocityDrawerItem.divider() : icon = null, label = null, trailing = null, onTap = null, isDivider = true;
+  const VelocityDrawerItem({this.icon, this.label, this.trailing, this.onTap})
+      : isDivider = false;
+  const VelocityDrawerItem.divider()
+      : icon = null,
+        label = null,
+        trailing = null,
+        onTap = null,
+        isDivider = true;
 
   final IconData? icon;
   final String? label;

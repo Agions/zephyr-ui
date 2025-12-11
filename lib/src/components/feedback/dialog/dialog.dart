@@ -22,12 +22,20 @@ class VelocityDialog {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(title, style: effectiveStyle.titleStyle),
-        content: content != null ? Text(content, style: effectiveStyle.contentStyle) : null,
+        content: content != null
+            ? Text(content, style: effectiveStyle.contentStyle)
+            : null,
         backgroundColor: effectiveStyle.backgroundColor,
-        shape: RoundedRectangleBorder(borderRadius: effectiveStyle.borderRadius),
+        shape:
+            RoundedRectangleBorder(borderRadius: effectiveStyle.borderRadius),
         actions: [
-          TextButton(onPressed: () => Navigator.of(context).pop(false), child: Text(cancelText, style: effectiveStyle.cancelButtonStyle)),
-          TextButton(onPressed: () => Navigator.of(context).pop(true), child: Text(confirmText, style: effectiveStyle.confirmButtonStyle)),
+          TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text(cancelText, style: effectiveStyle.cancelButtonStyle)),
+          TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child:
+                  Text(confirmText, style: effectiveStyle.confirmButtonStyle)),
         ],
       ),
     );
@@ -46,11 +54,17 @@ class VelocityDialog {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(title, style: effectiveStyle.titleStyle),
-        content: content != null ? Text(content, style: effectiveStyle.contentStyle) : null,
+        content: content != null
+            ? Text(content, style: effectiveStyle.contentStyle)
+            : null,
         backgroundColor: effectiveStyle.backgroundColor,
-        shape: RoundedRectangleBorder(borderRadius: effectiveStyle.borderRadius),
+        shape:
+            RoundedRectangleBorder(borderRadius: effectiveStyle.borderRadius),
         actions: [
-          TextButton(onPressed: () => Navigator.of(context).pop(), child: Text(confirmText, style: effectiveStyle.confirmButtonStyle)),
+          TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child:
+                  Text(confirmText, style: effectiveStyle.confirmButtonStyle)),
         ],
       ),
     );

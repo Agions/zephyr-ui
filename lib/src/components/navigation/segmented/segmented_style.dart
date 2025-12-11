@@ -10,15 +10,22 @@ class VelocitySegmentedStyle {
     this.borderRadius = const BorderRadius.all(Radius.circular(8)),
     this.segmentBorderRadius = const BorderRadius.all(Radius.circular(6)),
     this.padding = const EdgeInsets.all(4),
-    this.segmentPadding = const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-    this.textStyle = const TextStyle(fontSize: 14, color: VelocityColors.gray600),
-    this.activeTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: VelocityColors.gray900),
+    this.segmentPadding =
+        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    this.textStyle =
+        const TextStyle(fontSize: 14, color: VelocityColors.gray600),
+    this.activeTextStyle = const TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        color: VelocityColors.gray900),
     this.textColor = VelocityColors.gray600,
     this.activeTextColor = VelocityColors.gray900,
     this.iconSize = 18,
     this.iconSpacing = 6,
     this.animationDuration = const Duration(milliseconds: 200),
-    this.activeShadow = const [BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 1))],
+    this.activeShadow = const [
+      BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 1))
+    ],
   });
   final Color backgroundColor;
   final Color activeBackgroundColor;

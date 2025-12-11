@@ -21,7 +21,8 @@ class VelocityLoadingOverlayStyle {
   const VelocityLoadingOverlayStyle({
     this.overlayColor,
     this.loadingStyle = const VelocityLoadingStyle(),
-    this.messageStyle = const TextStyle(fontSize: 14, color: VelocityColors.white),
+    this.messageStyle =
+        const TextStyle(fontSize: 14, color: VelocityColors.white),
     this.messageSpacing = 16,
   });
   final Color? overlayColor;
@@ -29,5 +30,6 @@ class VelocityLoadingOverlayStyle {
   final TextStyle messageStyle;
   final double messageSpacing;
 
-  Color get effectiveOverlayColor => overlayColor ?? VelocityColors.withOpacity(VelocityColors.black, 0.3);
+  Color get effectiveOverlayColor =>
+      overlayColor ?? VelocityColors.withOpacity(VelocityColors.black, 0.3);
 }

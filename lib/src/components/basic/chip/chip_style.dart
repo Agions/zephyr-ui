@@ -12,7 +12,8 @@ class VelocityChipStyle {
     this.borderRadius = const BorderRadius.all(Radius.circular(16)),
     this.border,
     this.padding = const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-    this.labelStyle = const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+    this.labelStyle =
+        const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
     this.iconSize = 16,
     this.spacing = 6,
   });
@@ -33,19 +34,25 @@ class VelocityChipStyle {
     switch (typeName) {
       case 'outlined':
         return VelocityChipStyle(
-          backgroundColor: selected ? VelocityColors.primaryLight : VelocityColors.transparent,
+          backgroundColor: selected
+              ? VelocityColors.primaryLight
+              : VelocityColors.transparent,
           foregroundColor: VelocityColors.primary,
           border: Border.all(color: VelocityColors.primary),
         );
       case 'tonal':
         return VelocityChipStyle(
-          backgroundColor: selected ? VelocityColors.primary : VelocityColors.primaryLight,
-          foregroundColor: selected ? VelocityColors.white : VelocityColors.primary,
+          backgroundColor:
+              selected ? VelocityColors.primary : VelocityColors.primaryLight,
+          foregroundColor:
+              selected ? VelocityColors.white : VelocityColors.primary,
         );
       default:
         return VelocityChipStyle(
-          backgroundColor: selected ? VelocityColors.primary : VelocityColors.gray200,
-          foregroundColor: selected ? VelocityColors.white : VelocityColors.gray700,
+          backgroundColor:
+              selected ? VelocityColors.primary : VelocityColors.gray200,
+          foregroundColor:
+              selected ? VelocityColors.white : VelocityColors.gray700,
         );
     }
   }

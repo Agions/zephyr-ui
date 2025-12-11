@@ -19,22 +19,22 @@ class VelocityBadgeStyle {
 
   /// 背景颜色
   final Color? backgroundColor;
-  
+
   /// 文字样式
   final TextStyle? textStyle;
-  
+
   /// 高度
   final double height;
-  
+
   /// 最小宽度
   final double minWidth;
-  
+
   /// 点尺寸
   final double dotSize;
-  
+
   /// 内边距
   final EdgeInsets? padding;
-  
+
   /// 圆角
   final BorderRadius? borderRadius;
 
@@ -42,19 +42,31 @@ class VelocityBadgeStyle {
   factory VelocityBadgeStyle.fromType(dynamic type) {
     final typeName = type.toString().split('.').last;
     Color color;
-    
+
     switch (typeName) {
-      case 'primary': color = VelocityColors.primary; break;
-      case 'success': color = VelocityColors.success; break;
-      case 'warning': color = VelocityColors.warning; break;
-      case 'error': color = VelocityColors.error; break;
-      case 'info': color = VelocityColors.info; break;
-      default: color = VelocityColors.error;
+      case 'primary':
+        color = VelocityColors.primary;
+        break;
+      case 'success':
+        color = VelocityColors.success;
+        break;
+      case 'warning':
+        color = VelocityColors.warning;
+        break;
+      case 'error':
+        color = VelocityColors.error;
+        break;
+      case 'info':
+        color = VelocityColors.info;
+        break;
+      default:
+        color = VelocityColors.error;
     }
-    
+
     return VelocityBadgeStyle(
       backgroundColor: color,
-      textStyle: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w500),
+      textStyle: const TextStyle(
+          color: Colors.white, fontSize: 11, fontWeight: FontWeight.w500),
       padding: const EdgeInsets.symmetric(horizontal: 6),
       borderRadius: const BorderRadius.all(Radius.circular(9)),
     );

@@ -60,22 +60,22 @@ if (confirmed == true) {
 showDialog(
   context: context,
   builder: (context) => AlertDialog(
-    title: const Text('用户反馈'),
+    title: const ZephyrText('用户反馈'),
     content: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Text('请为我们的服务评分'),
+        const ZephyrText('请为我们的服务评分'),
         // 自定义内容
       ],
     ),
     actions: [
       TextButton(
         onPressed: () => Navigator.pop(context),
-        child: const Text('取消'),
+        child: const ZephyrText('取消'),
       ),
       TextButton(
         onPressed: () => Navigator.pop(context),
-        child: const Text('提交'),
+        child: const ZephyrText('提交'),
       ),
     ],
   ),

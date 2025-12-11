@@ -5,25 +5,65 @@ import 'package:velocity_ui/velocity_ui.dart';
 import 'basic/button_example.dart';
 import 'basic/chip_example.dart';
 import 'basic/icon_example.dart';
+import 'basic/image_example.dart';
+import 'basic/link_example.dart';
 import 'basic/spinner_example.dart';
 
-// Feedback examples
-import 'feedback/notification_example.dart';
-import 'feedback/popconfirm_example.dart';
-import 'feedback/dialog_example.dart';
-import 'feedback/toast_example.dart';
-import 'feedback/loading_example.dart';
-import 'feedback/progress_example.dart';
+// Display examples
+import 'display/avatar_example.dart';
+import 'display/badge_example.dart';
+import 'display/card_example.dart';
+import 'display/carousel_example.dart';
+import 'display/collapse_example.dart';
+import 'display/empty_example.dart';
+import 'display/list_example.dart';
+import 'display/statistic_example.dart';
+import 'display/table_example.dart';
+import 'display/tag_example.dart';
+import 'display/timeline_example.dart';
+import 'display/tooltip_example.dart';
 
 // Form examples
+import 'form/counter_example.dart';
+import 'form/form_field_example.dart';
 import 'form/input_example.dart';
 import 'form/checkbox_example.dart';
 import 'form/radio_example.dart';
+import 'form/rate_example.dart';
+import 'form/search_example.dart';
 import 'form/switch_example.dart';
 import 'form/slider_example.dart';
+import 'form/select_example.dart';
 
 // Navigation examples
+import 'navigation/bottom_sheet_example.dart';
+import 'navigation/drawer_example.dart';
+import 'navigation/menu_example.dart';
+import 'navigation/navbar_example.dart';
+import 'navigation/pagination_example.dart';
+import 'navigation/segmented_example.dart';
+import 'navigation/stepper_example.dart';
 import 'navigation/tabs_example.dart';
+
+// Feedback examples
+import 'feedback/action_sheet_example.dart';
+import 'feedback/dialog_example.dart';
+import 'feedback/loading_example.dart';
+import 'feedback/notification_example.dart';
+import 'feedback/popconfirm_example.dart';
+import 'feedback/progress_example.dart';
+import 'feedback/result_example.dart';
+import 'feedback/skeleton_example.dart';
+import 'feedback/toast_example.dart';
+// Layout examples
+import 'layout/aspect_ratio_example.dart';
+import 'layout/container_example.dart';
+import 'layout/divider_example.dart';
+import 'layout/grid_example.dart';
+import 'layout/safe_area_example.dart';
+import 'layout/scroll_example.dart';
+import 'layout/space_example.dart';
+import 'layout/stack_example.dart';
 
 void main() {
   runApp(const VelocityShowcaseApp());
@@ -82,7 +122,83 @@ class ShowcaseHomePage extends StatelessWidget {
               _ComponentItem('Button 按钮', const ButtonExample()),
               _ComponentItem('Chip 芯片', const ChipExample()),
               _ComponentItem('Icon 图标', const IconExample()),
+              _ComponentItem('Image 图片', const ImageExample()),
+              _ComponentItem('Link 链接', const LinkExample()),
               _ComponentItem('Spinner 加载动画', const SpinnerExample()),
+            ],
+          ),
+          const SizedBox(height: 16),
+          _buildComponentCategory(
+            context,
+            '展示组件',
+            Icons.image,
+            VelocityColors.warning,
+            [
+              _ComponentItem('Avatar 头像', const AvatarExample()),
+              _ComponentItem('Badge 徽章', const BadgeExample()),
+              _ComponentItem('Card 卡片', const CardExample()),
+              _ComponentItem('Carousel 轮播图', const CarouselExample()),
+              _ComponentItem('Collapse 折叠面板', const CollapseExample()),
+              _ComponentItem('List 列表', const ListExample()),
+              _ComponentItem('Tag 标签', const TagExample()),
+              _ComponentItem('Timeline 时间线', const TimelineExample()),
+              _ComponentItem('Statistic 统计数值', const StatisticExample()),
+              _ComponentItem('Table 表格', const TableExample()),
+              _ComponentItem('Tooltip 文字提示', const TooltipExample()),
+              _ComponentItem('Empty 空状态', const EmptyExample()),
+            ],
+          ),
+          const SizedBox(height: 16),
+          _buildComponentCategory(
+            context,
+            '布局组件',
+            Icons.view_quilt,
+            VelocityColors.secondary,
+            [
+              _ComponentItem('Container 容器', const ContainerExample()),
+              _ComponentItem('Grid 网格', const GridExample()),
+              _ComponentItem('Divider 分隔线', const DividerExample()),
+              _ComponentItem('Stack 层叠', const StackExample()),
+              _ComponentItem('Scroll 滚动', const ScrollExample()),
+              _ComponentItem('Space 间距', const SpaceExample()),
+              _ComponentItem('SafeArea 安全区域', const SafeAreaExample()),
+              _ComponentItem('AspectRatio 宽高比', const AspectRatioExample()),
+            ],
+          ),
+          const SizedBox(height: 16),
+          _buildComponentCategory(
+            context,
+            '导航组件',
+            Icons.navigation,
+            VelocityColors.warning,
+            [
+              _ComponentItem('Navbar 导航栏', const NavbarExample()),
+              _ComponentItem('Tabs 标签页', const TabsExample()),
+              _ComponentItem('Drawer 抽屉', const DrawerExample()),
+              _ComponentItem('Stepper 步骤条', const StepperExample()),
+              _ComponentItem('BottomSheet 底部面板', const BottomSheetExample()),
+              _ComponentItem('Menu 菜单', const MenuExample()),
+              _ComponentItem('Pagination 分页', const PaginationExample()),
+              _ComponentItem('Segmented 分段器', const SegmentedExample()),
+            ],
+          ),
+          const SizedBox(height: 16),
+          _buildComponentCategory(
+            context,
+            '表单组件',
+            Icons.edit_note,
+            VelocityColors.success,
+            [
+              _ComponentItem('Input 输入框', const InputExample()),
+              _ComponentItem('Search 搜索框', const SearchExample()),
+              _ComponentItem('Counter 计数器', const CounterExample()),
+              _ComponentItem('Select 选择器', const SelectExample()),
+              _ComponentItem('Checkbox 复选框', const CheckboxExample()),
+              _ComponentItem('Radio 单选框', const RadioExample()),
+              _ComponentItem('Switch 开关', const SwitchExample()),
+              _ComponentItem('Slider 滑块', const SliderExample()),
+              _ComponentItem('Rate 评分', const RateExample()),
+              _ComponentItem('FormField 表单字段', const FormFieldExample()),
             ],
           ),
           const SizedBox(height: 16),
@@ -95,33 +211,12 @@ class ShowcaseHomePage extends StatelessWidget {
               _ComponentItem('Notification 通知', const NotificationExample()),
               _ComponentItem('Popconfirm 确认气泡', const PopconfirmExample()),
               _ComponentItem('Dialog 对话框', const DialogExample()),
+              _ComponentItem('ActionSheet 动作面板', const ActionSheetExample()),
               _ComponentItem('Toast 轻提示', const ToastExample()),
               _ComponentItem('Loading 加载', const LoadingExample()),
               _ComponentItem('Progress 进度条', const ProgressExample()),
-            ],
-          ),
-          const SizedBox(height: 16),
-          _buildComponentCategory(
-            context,
-            '表单组件',
-            Icons.edit_note,
-            VelocityColors.success,
-            [
-              _ComponentItem('Input 输入框', const InputExample()),
-              _ComponentItem('Checkbox 复选框', const CheckboxExample()),
-              _ComponentItem('Radio 单选框', const RadioExample()),
-              _ComponentItem('Switch 开关', const SwitchExample()),
-              _ComponentItem('Slider 滑块', const SliderExample()),
-            ],
-          ),
-          const SizedBox(height: 16),
-          _buildComponentCategory(
-            context,
-            '导航组件',
-            Icons.navigation,
-            VelocityColors.warning,
-            [
-              _ComponentItem('Tabs 标签页', const TabsExample()),
+              _ComponentItem('Result 结果页', const ResultExample()),
+              _ComponentItem('Skeleton 骨架屏', const SkeletonExample()),
             ],
           ),
         ],

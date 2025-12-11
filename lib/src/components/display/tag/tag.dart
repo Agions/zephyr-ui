@@ -25,29 +25,30 @@ class VelocityTag extends StatelessWidget {
 
   /// 文本
   final String text;
-  
+
   /// 类型
   final VelocityTagType type;
-  
+
   /// 是否可关闭
   final bool closable;
-  
+
   /// 关闭回调
   final VoidCallback? onClose;
-  
+
   /// 图标
   final IconData? icon;
-  
+
   /// 是否轮廓样式
   final bool outlined;
-  
+
   /// 自定义样式
   final VelocityTagStyle? style;
 
   @override
   Widget build(BuildContext context) {
-    final effectiveStyle = style ?? VelocityTagStyle.fromType(type, outlined: outlined);
-    
+    final effectiveStyle =
+        style ?? VelocityTagStyle.fromType(type, outlined: outlined);
+
     return Container(
       height: effectiveStyle.height,
       padding: effectiveStyle.padding,
@@ -60,15 +61,21 @@ class VelocityTag extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (icon != null) ...[
-            Icon(icon, size: effectiveStyle.iconSize, color: effectiveStyle.foregroundColor),
+            Icon(icon,
+                size: effectiveStyle.iconSize,
+                color: effectiveStyle.foregroundColor),
             SizedBox(width: effectiveStyle.spacing),
           ],
-          Text(text, style: effectiveStyle.textStyle?.copyWith(color: effectiveStyle.foregroundColor)),
+          Text(text,
+              style: effectiveStyle.textStyle
+                  ?.copyWith(color: effectiveStyle.foregroundColor)),
           if (closable) ...[
             SizedBox(width: effectiveStyle.spacing),
             GestureDetector(
               onTap: onClose,
-              child: Icon(Icons.close, size: effectiveStyle.iconSize, color: effectiveStyle.foregroundColor),
+              child: Icon(Icons.close,
+                  size: effectiveStyle.iconSize,
+                  color: effectiveStyle.foregroundColor),
             ),
           ],
         ],

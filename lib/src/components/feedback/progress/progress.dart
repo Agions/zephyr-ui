@@ -31,7 +31,7 @@ class VelocityProgress extends StatelessWidget {
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? const VelocityProgressStyle();
     final clampedValue = value.clamp(0.0, 1.0);
-    
+
     if (type == VelocityProgressType.circular) {
       return SizedBox(
         width: effectiveStyle.circularSize,
@@ -46,12 +46,13 @@ class VelocityProgress extends StatelessWidget {
               valueColor: AlwaysStoppedAnimation<Color>(effectiveStyle.color),
             ),
             if (showLabel)
-              Text(label ?? '${(clampedValue * 100).toInt()}%', style: effectiveStyle.labelStyle),
+              Text(label ?? '${(clampedValue * 100).toInt()}%',
+                  style: effectiveStyle.labelStyle),
           ],
         ),
       );
     }
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -61,7 +62,8 @@ class VelocityProgress extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               if (label != null) Text(label!, style: effectiveStyle.labelStyle),
-              Text('${(clampedValue * 100).toInt()}%', style: effectiveStyle.labelStyle),
+              Text('${(clampedValue * 100).toInt()}%',
+                  style: effectiveStyle.labelStyle),
             ],
           ),
           SizedBox(height: effectiveStyle.labelSpacing),
@@ -81,7 +83,9 @@ class VelocityProgress extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     gradient: effectiveStyle.gradient,
-                    color: effectiveStyle.gradient == null ? effectiveStyle.color : null,
+                    color: effectiveStyle.gradient == null
+                        ? effectiveStyle.color
+                        : null,
                     borderRadius: effectiveStyle.borderRadius,
                   ),
                 ),
@@ -112,7 +116,7 @@ class VelocityStepProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? const VelocityStepProgressStyle();
-    
+
     return Row(
       children: [
         for (int i = 0; i < totalSteps; i++) ...[
@@ -123,19 +127,38 @@ class VelocityStepProgress extends StatelessWidget {
                   width: effectiveStyle.stepSize,
                   height: effectiveStyle.stepSize,
                   decoration: BoxDecoration(
-                    color: i <= currentStep ? effectiveStyle.activeColor : effectiveStyle.inactiveColor,
+                    color: i <= currentStep
+                        ? effectiveStyle.activeColor
+                        : effectiveStyle.inactiveColor,
                     shape: BoxShape.circle,
-                    border: Border.all(color: i <= currentStep ? effectiveStyle.activeColor : effectiveStyle.borderColor, width: 2),
+                    border: Border.all(
+                        color: i <= currentStep
+                            ? effectiveStyle.activeColor
+                            : effectiveStyle.borderColor,
+                        width: 2),
                   ),
                   child: Center(
                     child: i < currentStep
-                        ? Icon(Icons.check, size: effectiveStyle.stepSize * 0.6, color: VelocityColors.white)
-                        : Text('${i + 1}', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: i <= currentStep ? VelocityColors.white : effectiveStyle.borderColor)),
+                        ? Icon(Icons.check,
+                            size: effectiveStyle.stepSize * 0.6,
+                            color: VelocityColors.white)
+                        : Text('${i + 1}',
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: i <= currentStep
+                                    ? VelocityColors.white
+                                    : effectiveStyle.borderColor)),
                   ),
                 ),
                 if (labels != null && i < labels!.length) ...[
                   const SizedBox(height: 8),
-                  Text(labels![i], style: effectiveStyle.labelStyle.copyWith(color: i <= currentStep ? effectiveStyle.activeColor : effectiveStyle.borderColor), textAlign: TextAlign.center),
+                  Text(labels![i],
+                      style: effectiveStyle.labelStyle.copyWith(
+                          color: i <= currentStep
+                              ? effectiveStyle.activeColor
+                              : effectiveStyle.borderColor),
+                      textAlign: TextAlign.center),
                 ],
               ],
             ),
@@ -144,7 +167,9 @@ class VelocityStepProgress extends StatelessWidget {
             Expanded(
               child: Container(
                 height: 2,
-                color: i < currentStep ? effectiveStyle.activeColor : effectiveStyle.inactiveColor,
+                color: i < currentStep
+                    ? effectiveStyle.activeColor
+                    : effectiveStyle.inactiveColor,
               ),
             ),
         ],

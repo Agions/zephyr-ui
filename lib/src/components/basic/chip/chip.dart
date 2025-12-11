@@ -38,28 +38,45 @@ class VelocityChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveStyle = style ?? VelocityChipStyle.fromType(type, selected: selected);
-    
+    final effectiveStyle =
+        style ?? VelocityChipStyle.fromType(type, selected: selected);
+
     return GestureDetector(
       onTap: disabled ? null : onTap,
       child: Container(
         padding: effectiveStyle.padding,
         decoration: BoxDecoration(
-          color: disabled ? effectiveStyle.disabledBackgroundColor : effectiveStyle.backgroundColor,
+          color: disabled
+              ? effectiveStyle.disabledBackgroundColor
+              : effectiveStyle.backgroundColor,
           borderRadius: effectiveStyle.borderRadius,
           border: effectiveStyle.border,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (avatar != null) ...[avatar!, SizedBox(width: effectiveStyle.spacing)],
-            if (icon != null) ...[Icon(icon, size: effectiveStyle.iconSize, color: effectiveStyle.foregroundColor), SizedBox(width: effectiveStyle.spacing)],
-            Text(label, style: effectiveStyle.labelStyle.copyWith(color: disabled ? effectiveStyle.disabledForegroundColor : effectiveStyle.foregroundColor)),
+            if (avatar != null) ...[
+              avatar!,
+              SizedBox(width: effectiveStyle.spacing)
+            ],
+            if (icon != null) ...[
+              Icon(icon,
+                  size: effectiveStyle.iconSize,
+                  color: effectiveStyle.foregroundColor),
+              SizedBox(width: effectiveStyle.spacing)
+            ],
+            Text(label,
+                style: effectiveStyle.labelStyle.copyWith(
+                    color: disabled
+                        ? effectiveStyle.disabledForegroundColor
+                        : effectiveStyle.foregroundColor)),
             if (onDelete != null) ...[
               SizedBox(width: effectiveStyle.spacing),
               GestureDetector(
                 onTap: disabled ? null : onDelete,
-                child: Icon(deleteIcon ?? Icons.close, size: effectiveStyle.iconSize, color: effectiveStyle.foregroundColor),
+                child: Icon(deleteIcon ?? Icons.close,
+                    size: effectiveStyle.iconSize,
+                    color: effectiveStyle.foregroundColor),
               ),
             ],
           ],

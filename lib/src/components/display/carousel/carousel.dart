@@ -46,7 +46,9 @@ class _VelocityCarouselState extends State<VelocityCarousel> {
     Future.delayed(widget.autoPlayInterval, () {
       if (mounted && widget.autoPlay) {
         final nextPage = (_currentPage + 1) % widget.items.length;
-        _controller.animateToPage(nextPage, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+        _controller.animateToPage(nextPage,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut);
         _startAutoPlay();
       }
     });
@@ -88,15 +90,23 @@ class _VelocityCarouselState extends State<VelocityCarousel> {
               bottom: effectiveStyle.indicatorBottom,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(widget.items.length, (index) => Container(
-                  width: _currentPage == index ? effectiveStyle.activeIndicatorWidth : effectiveStyle.indicatorSize,
-                  height: effectiveStyle.indicatorSize,
-                  margin: EdgeInsets.symmetric(horizontal: effectiveStyle.indicatorSpacing / 2),
-                  decoration: BoxDecoration(
-                    color: _currentPage == index ? effectiveStyle.activeIndicatorColor : effectiveStyle.indicatorColor,
-                    borderRadius: BorderRadius.circular(effectiveStyle.indicatorSize / 2),
-                  ),
-                )),
+                children: List.generate(
+                    widget.items.length,
+                    (index) => Container(
+                          width: _currentPage == index
+                              ? effectiveStyle.activeIndicatorWidth
+                              : effectiveStyle.indicatorSize,
+                          height: effectiveStyle.indicatorSize,
+                          margin: EdgeInsets.symmetric(
+                              horizontal: effectiveStyle.indicatorSpacing / 2),
+                          decoration: BoxDecoration(
+                            color: _currentPage == index
+                                ? effectiveStyle.activeIndicatorColor
+                                : effectiveStyle.indicatorColor,
+                            borderRadius: BorderRadius.circular(
+                                effectiveStyle.indicatorSize / 2),
+                          ),
+                        )),
               ),
             ),
         ],

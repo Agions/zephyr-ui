@@ -4,7 +4,14 @@ library velocity_container_style;
 import 'package:flutter/material.dart';
 
 class VelocityContainerStyle {
-  const VelocityContainerStyle({this.padding, this.margin, this.backgroundColor, this.borderRadius, this.border, this.boxShadow, this.clipBehavior});
+  const VelocityContainerStyle(
+      {this.padding,
+      this.margin,
+      this.backgroundColor,
+      this.borderRadius,
+      this.border,
+      this.boxShadow,
+      this.clipBehavior});
   final EdgeInsets? padding;
   final EdgeInsets? margin;
   final Color? backgroundColor;

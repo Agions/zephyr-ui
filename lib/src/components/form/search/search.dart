@@ -48,7 +48,8 @@ class _VelocitySearchState extends State<VelocitySearch> {
     _controller.addListener(_onTextChanged);
   }
 
-  void _onTextChanged() => setState(() => _showClear = _controller.text.isNotEmpty);
+  void _onTextChanged() =>
+      setState(() => _showClear = _controller.text.isNotEmpty);
 
   @override
   void dispose() {
@@ -80,7 +81,9 @@ class _VelocitySearchState extends State<VelocitySearch> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(left: effectiveStyle.iconPadding),
-                  child: Icon(Icons.search, size: effectiveStyle.iconSize, color: effectiveStyle.iconColor),
+                  child: Icon(Icons.search,
+                      size: effectiveStyle.iconSize,
+                      color: effectiveStyle.iconColor),
                 ),
                 Expanded(
                   child: TextField(
@@ -103,8 +106,11 @@ class _VelocitySearchState extends State<VelocitySearch> {
                   GestureDetector(
                     onTap: _clear,
                     child: Padding(
-                      padding: EdgeInsets.only(right: effectiveStyle.iconPadding),
-                      child: Icon(Icons.cancel, size: effectiveStyle.clearIconSize, color: effectiveStyle.clearIconColor),
+                      padding:
+                          EdgeInsets.only(right: effectiveStyle.iconPadding),
+                      child: Icon(Icons.cancel,
+                          size: effectiveStyle.clearIconSize,
+                          color: effectiveStyle.clearIconColor),
                     ),
                   ),
               ],

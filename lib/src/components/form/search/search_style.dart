@@ -14,10 +14,14 @@ class VelocitySearchStyle {
     this.iconPadding = 12,
     this.clearIconSize = 18,
     this.clearIconColor = VelocityColors.gray400,
-    this.textStyle = const TextStyle(fontSize: 15, color: VelocityColors.gray900),
-    this.placeholderStyle = const TextStyle(fontSize: 15, color: VelocityColors.gray400),
-    this.contentPadding = const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-    this.cancelStyle = const TextStyle(fontSize: 15, color: VelocityColors.primary),
+    this.textStyle =
+        const TextStyle(fontSize: 15, color: VelocityColors.gray900),
+    this.placeholderStyle =
+        const TextStyle(fontSize: 15, color: VelocityColors.gray400),
+    this.contentPadding =
+        const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+    this.cancelStyle =
+        const TextStyle(fontSize: 15, color: VelocityColors.primary),
     this.cancelSpacing = 12,
   });
 

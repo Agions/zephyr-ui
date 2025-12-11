@@ -9,9 +9,9 @@ export 'popconfirm_style.dart';
 /// VelocityUI 确认气泡
 class VelocityPopconfirm extends StatefulWidget {
   const VelocityPopconfirm({
-    super.key,
     required this.child,
     required this.title,
+    super.key,
     this.content,
     this.confirmText = '确定',
     this.cancelText = '取消',
@@ -41,18 +41,53 @@ class _VelocityPopconfirmState extends State<VelocityPopconfirm> {
     final effectiveStyle = widget.style ?? const VelocityPopconfirmStyle();
     final renderBox = context.findRenderObject() as RenderBox;
     final size = renderBox.size;
+    final screenSize = MediaQuery.of(context).size;
+
+    // Calculate popconfirm size to check boundaries
+    final popconfirmWidth = effectiveStyle.width;
+    const popconfirmHeight =
+        150; // Estimated height (title + content + buttons + padding)
+    final screenWidth = screenSize.width;
+    final screenHeight = screenSize.height;
 
     _overlayEntry = OverlayEntry(
-      builder: (context) => Stack(
-        children: [
-          GestureDetector(onTap: _hide, child: Container(color: Colors.transparent)),
-          Positioned(
-            child: CompositedTransformFollower(
-              link: _layerLink,
-              showWhenUnlinked: false,
-              offset: Offset(-60 + size.width / 2, -10),
-              targetAnchor: Alignment.topCenter,
-              followerAnchor: Alignment.bottomCenter,
+      builder: (context) {
+        // Calculate the correct position
+        final targetRect = renderBox.localToGlobal(Offset.zero) & size;
+
+        // Determine if it should show above or below based on available space
+        final spaceAbove = targetRect.top;
+        final spaceBelow = screenHeight - targetRect.bottom;
+        final showAbove =
+            spaceAbove > spaceBelow && spaceAbove > popconfirmHeight;
+
+        double topPosition;
+
+        if (showAbove) {
+          // Position above the target element
+          topPosition = targetRect.top - popconfirmHeight - 10;
+        } else {
+          // Position below the target element
+          topPosition = targetRect.bottom + 10;
+        }
+
+        // Calculate horizontal position to center it, then adjust for screen boundaries
+        var leftPosition = targetRect.center.dx - popconfirmWidth / 2;
+
+        // Ensure it stays within screen boundaries with 10px padding
+        leftPosition =
+            leftPosition.clamp(10.0, screenWidth - popconfirmWidth - 10.0);
+        topPosition =
+            topPosition.clamp(10.0, screenHeight - popconfirmHeight - 10.0);
+
+        return Stack(
+          children: [
+            // Click outside to close
+            GestureDetector(
+                onTap: _hide, child: Container(color: Colors.transparent)),
+            Positioned(
+              left: leftPosition,
+              top: topPosition,
               child: Material(
                 color: Colors.transparent,
                 child: Container(
@@ -69,41 +104,57 @@ class _VelocityPopconfirmState extends State<VelocityPopconfirm> {
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.help_outline, size: 16, color: effectiveStyle.iconColor),
+                          Icon(Icons.help_outline,
+                              size: 16, color: effectiveStyle.iconColor),
                           const SizedBox(width: 8),
-                          Expanded(child: Text(widget.title, style: effectiveStyle.titleStyle)),
+                          Expanded(
+                              child: Text(widget.title,
+                                  style: effectiveStyle.titleStyle)),
                         ],
                       ),
-                      if (widget.content != null) Padding(
-                        padding: const EdgeInsets.only(top: 8, left: 24),
-                        child: Text(widget.content!, style: effectiveStyle.contentStyle),
-                      ),
+                      if (widget.content != null)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8, left: 24),
+                          child: Text(widget.content!,
+                              style: effectiveStyle.contentStyle),
+                        ),
                       Padding(
                         padding: const EdgeInsets.only(top: 12),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             GestureDetector(
-                              onTap: () { _hide(); widget.onCancel?.call(); },
+                              onTap: () {
+                                _hide();
+                                widget.onCancel?.call();
+                              },
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 6),
                                 decoration: BoxDecoration(
-                                  border: Border.all(color: effectiveStyle.cancelBorderColor),
+                                  border: Border.all(
+                                      color: effectiveStyle.cancelBorderColor),
                                   borderRadius: BorderRadius.circular(4),
                                 ),
-                                child: Text(widget.cancelText, style: effectiveStyle.cancelStyle),
+                                child: Text(widget.cancelText,
+                                    style: effectiveStyle.cancelStyle),
                               ),
                             ),
                             const SizedBox(width: 8),
                             GestureDetector(
-                              onTap: () { _hide(); widget.onConfirm?.call(); },
+                              onTap: () {
+                                _hide();
+                                widget.onConfirm?.call();
+                              },
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 6),
                                 decoration: BoxDecoration(
                                   color: effectiveStyle.confirmBackgroundColor,
                                   borderRadius: BorderRadius.circular(4),
                                 ),
-                                child: Text(widget.confirmText, style: effectiveStyle.confirmStyle),
+                                child: Text(widget.confirmText,
+                                    style: effectiveStyle.confirmStyle),
                               ),
                             ),
                           ],
@@ -114,9 +165,9 @@ class _VelocityPopconfirmState extends State<VelocityPopconfirm> {
                 ),
               ),
             ),
-          ),
-        ],
-      ),
+          ],
+        );
+      },
     );
 
     Overlay.of(context).insert(_overlayEntry!);
@@ -135,9 +186,6 @@ class _VelocityPopconfirmState extends State<VelocityPopconfirm> {
 
   @override
   Widget build(BuildContext context) {
-    return CompositedTransformTarget(
-      link: _layerLink,
-      child: GestureDetector(onTap: _show, child: widget.child),
-    );
+    return GestureDetector(onTap: _show, child: widget.child);
   }
 }

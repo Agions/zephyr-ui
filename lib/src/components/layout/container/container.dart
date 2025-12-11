@@ -28,7 +28,7 @@ class VelocityContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? VelocityContainerStyle.defaults();
-    
+
     return Container(
       width: width,
       height: height,

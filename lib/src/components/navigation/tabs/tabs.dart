@@ -27,15 +27,20 @@ class VelocityTabs extends StatefulWidget {
   State<VelocityTabs> createState() => _VelocityTabsState();
 }
 
-class _VelocityTabsState extends State<VelocityTabs> with SingleTickerProviderStateMixin {
+class _VelocityTabsState extends State<VelocityTabs>
+    with SingleTickerProviderStateMixin {
   late TabController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = TabController(length: widget.tabs.length, vsync: this, initialIndex: widget.initialIndex);
+    _controller = TabController(
+        length: widget.tabs.length,
+        vsync: this,
+        initialIndex: widget.initialIndex);
     _controller.addListener(() {
-      if (!_controller.indexIsChanging) widget.onChanged?.call(_controller.index);
+      if (!_controller.indexIsChanging)
+        widget.onChanged?.call(_controller.index);
     });
   }
 
@@ -60,7 +65,9 @@ class _VelocityTabsState extends State<VelocityTabs> with SingleTickerProviderSt
           labelStyle: effectiveStyle.labelStyle,
           unselectedLabelStyle: effectiveStyle.unselectedLabelStyle,
         ),
-        Expanded(child: TabBarView(controller: _controller, children: widget.children)),
+        Expanded(
+            child:
+                TabBarView(controller: _controller, children: widget.children)),
       ],
     );
   }

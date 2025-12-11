@@ -13,7 +13,7 @@ from datetime import datetime
 import argparse
 
 class DocsUpdater:
-    def __init__(self, docs_dir: str = "doc"):
+    def __init__(self, docs_dir: str = "docs"):
         self.docs_dir = Path(docs_dir)
         self.updated_files = []
         self.update_stats = {

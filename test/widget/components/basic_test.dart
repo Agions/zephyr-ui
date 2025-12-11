@@ -7,11 +7,6 @@ void main() {
     testWidgets('VelocityTheme loads correctly', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          theme: ThemeData(
-            extensions: [
-              VelocityThemeData.light(),
-            ],
-          ),
           home: const Scaffold(
             body: Center(
               child: Text('Test Theme'),
@@ -26,16 +21,11 @@ void main() {
     testWidgets('VelocityButton renders', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          theme: ThemeData(
-            extensions: [
-              VelocityThemeData.light(),
-            ],
-          ),
-          home: const Scaffold(
+          home: Scaffold(
             body: Center(
               child: VelocityButton(
                 onPressed: () {},
-                child: Text('Test Button'),
+                child: const Text('Test Button'),
               ),
             ),
           ),

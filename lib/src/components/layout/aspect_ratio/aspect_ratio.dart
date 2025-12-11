@@ -12,16 +12,20 @@ class VelocityAspectRatio extends StatelessWidget {
   });
 
   /// 16:9 宽高比
-  const VelocityAspectRatio.video({super.key, required this.child}) : aspectRatio = 16 / 9;
+  const VelocityAspectRatio.video({super.key, required this.child})
+      : aspectRatio = 16 / 9;
 
   /// 4:3 宽高比
-  const VelocityAspectRatio.photo({super.key, required this.child}) : aspectRatio = 4 / 3;
+  const VelocityAspectRatio.photo({super.key, required this.child})
+      : aspectRatio = 4 / 3;
 
   /// 1:1 正方形
-  const VelocityAspectRatio.square({super.key, required this.child}) : aspectRatio = 1;
+  const VelocityAspectRatio.square({super.key, required this.child})
+      : aspectRatio = 1;
 
   /// 3:4 竖版
-  const VelocityAspectRatio.portrait({super.key, required this.child}) : aspectRatio = 3 / 4;
+  const VelocityAspectRatio.portrait({super.key, required this.child})
+      : aspectRatio = 3 / 4;
 
   final double aspectRatio;
   final Widget child;

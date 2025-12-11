@@ -29,7 +29,7 @@ class VelocityTooltip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? const VelocityTooltipStyle();
-    
+
     return Tooltip(
       message: richMessage == null ? message : '',
       richMessage: richMessage,
@@ -37,7 +37,10 @@ class VelocityTooltip extends StatelessWidget {
       verticalOffset: effectiveStyle.verticalOffset,
       padding: effectiveStyle.padding,
       margin: effectiveStyle.margin,
-      decoration: BoxDecoration(color: effectiveStyle.backgroundColor, borderRadius: effectiveStyle.borderRadius, boxShadow: effectiveStyle.boxShadow),
+      decoration: BoxDecoration(
+          color: effectiveStyle.backgroundColor,
+          borderRadius: effectiveStyle.borderRadius,
+          boxShadow: effectiveStyle.boxShadow),
       textStyle: effectiveStyle.textStyle,
       waitDuration: effectiveStyle.waitDuration,
       showDuration: effectiveStyle.showDuration,
@@ -80,9 +83,14 @@ class _VelocityPopoverState extends State<VelocityPopover> {
         child: CompositedTransformFollower(
           link: _layerLink,
           showWhenUnlinked: false,
-          offset: Offset(0, widget.position == VelocityTooltipPosition.bottom ? 8 : -8),
-          targetAnchor: widget.position == VelocityTooltipPosition.bottom ? Alignment.bottomCenter : Alignment.topCenter,
-          followerAnchor: widget.position == VelocityTooltipPosition.bottom ? Alignment.topCenter : Alignment.bottomCenter,
+          offset: Offset(
+              0, widget.position == VelocityTooltipPosition.bottom ? 8 : -8),
+          targetAnchor: widget.position == VelocityTooltipPosition.bottom
+              ? Alignment.bottomCenter
+              : Alignment.topCenter,
+          followerAnchor: widget.position == VelocityTooltipPosition.bottom
+              ? Alignment.topCenter
+              : Alignment.bottomCenter,
           child: Material(
             color: Colors.transparent,
             child: GestureDetector(
@@ -90,7 +98,10 @@ class _VelocityPopoverState extends State<VelocityPopover> {
               behavior: HitTestBehavior.opaque,
               child: Container(
                 padding: effectiveStyle.padding,
-                decoration: BoxDecoration(color: effectiveStyle.backgroundColor, borderRadius: effectiveStyle.borderRadius, boxShadow: effectiveStyle.boxShadow),
+                decoration: BoxDecoration(
+                    color: effectiveStyle.backgroundColor,
+                    borderRadius: effectiveStyle.borderRadius,
+                    boxShadow: effectiveStyle.boxShadow),
                 child: widget.content,
               ),
             ),
@@ -117,8 +128,13 @@ class _VelocityPopoverState extends State<VelocityPopover> {
     return CompositedTransformTarget(
       link: _layerLink,
       child: GestureDetector(
-        onTap: widget.trigger == VelocityPopoverTrigger.tap ? () { _overlayEntry == null ? _show() : _hide(); } : null,
-        onLongPress: widget.trigger == VelocityPopoverTrigger.longPress ? _show : null,
+        onTap: widget.trigger == VelocityPopoverTrigger.tap
+            ? () {
+                _overlayEntry == null ? _show() : _hide();
+              }
+            : null,
+        onLongPress:
+            widget.trigger == VelocityPopoverTrigger.longPress ? _show : null,
         child: widget.child,
       ),
     );

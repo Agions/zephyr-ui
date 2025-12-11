@@ -74,7 +74,7 @@ class VelocityResponsiveGrid extends StatelessWidget {
       builder: (context, constraints) {
         final width = constraints.maxWidth - (padding?.horizontal ?? 0);
         final columns = (width / minItemWidth).floor().clamp(1, 12);
-        
+
         return GridView.builder(
           padding: padding,
           shrinkWrap: shrinkWrap,

@@ -21,7 +21,7 @@ class VelocityBottomSheet {
     VelocityBottomSheetStyle? style,
   }) {
     final effectiveStyle = style ?? const VelocityBottomSheetStyle();
-    
+
     return showModalBottomSheet<T>(
       context: context,
       isDismissible: isDismissible,
@@ -30,7 +30,8 @@ class VelocityBottomSheet {
       isScrollControlled: true,
       builder: (context) => Container(
         height: height,
-        constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.9),
+        constraints:
+            BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.9),
         decoration: BoxDecoration(
           color: effectiveStyle.backgroundColor,
           borderRadius: effectiveStyle.borderRadius,
@@ -39,27 +40,40 @@ class VelocityBottomSheet {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              if (showHandle) Container(
-                margin: effectiveStyle.handleMargin,
-                width: effectiveStyle.handleWidth,
-                height: effectiveStyle.handleHeight,
-                decoration: BoxDecoration(color: effectiveStyle.handleColor, borderRadius: BorderRadius.circular(effectiveStyle.handleHeight / 2)),
-              ),
-              if (title != null || showCloseButton) Padding(
-                padding: effectiveStyle.headerPadding,
-                child: Row(
-                  children: [
-                    if (title != null) Expanded(child: Text(title, style: effectiveStyle.titleStyle)),
-                    if (showCloseButton) IconButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      icon: Icon(Icons.close, color: effectiveStyle.closeIconColor, size: effectiveStyle.closeIconSize),
-                      constraints: const BoxConstraints(),
-                      padding: EdgeInsets.zero,
-                    ),
-                  ],
+              if (showHandle)
+                Container(
+                  margin: effectiveStyle.handleMargin,
+                  width: effectiveStyle.handleWidth,
+                  height: effectiveStyle.handleHeight,
+                  decoration: BoxDecoration(
+                      color: effectiveStyle.handleColor,
+                      borderRadius: BorderRadius.circular(
+                          effectiveStyle.handleHeight / 2)),
                 ),
-              ),
-              Flexible(child: SingleChildScrollView(padding: effectiveStyle.contentPadding, child: child)),
+              if (title != null || showCloseButton)
+                Padding(
+                  padding: effectiveStyle.headerPadding,
+                  child: Row(
+                    children: [
+                      if (title != null)
+                        Expanded(
+                            child:
+                                Text(title, style: effectiveStyle.titleStyle)),
+                      if (showCloseButton)
+                        IconButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          icon: Icon(Icons.close,
+                              color: effectiveStyle.closeIconColor,
+                              size: effectiveStyle.closeIconSize),
+                          constraints: const BoxConstraints(),
+                          padding: EdgeInsets.zero,
+                        ),
+                    ],
+                  ),
+                ),
+              Flexible(
+                  child: SingleChildScrollView(
+                      padding: effectiveStyle.contentPadding, child: child)),
             ],
           ),
         ),
@@ -76,7 +90,7 @@ class VelocityBottomSheet {
     VelocityBottomSheetStyle? style,
   }) {
     final effectiveStyle = style ?? const VelocityBottomSheetStyle();
-    
+
     return show<T>(
       context: context,
       title: title,
@@ -85,17 +99,29 @@ class VelocityBottomSheet {
         mainAxisSize: MainAxisSize.min,
         children: [
           ...actions.map((action) => ListTile(
-            leading: action.icon != null ? Icon(action.icon, color: action.isDestructive ? effectiveStyle.destructiveColor : effectiveStyle.actionIconColor) : null,
-            title: Text(action.label, style: TextStyle(color: action.isDestructive ? effectiveStyle.destructiveColor : effectiveStyle.actionTextColor, fontSize: 16)),
-            onTap: () {
-              Navigator.of(context).pop(action.value);
-              action.onTap?.call();
-            },
-          )),
+                leading: action.icon != null
+                    ? Icon(action.icon,
+                        color: action.isDestructive
+                            ? effectiveStyle.destructiveColor
+                            : effectiveStyle.actionIconColor)
+                    : null,
+                title: Text(action.label,
+                    style: TextStyle(
+                        color: action.isDestructive
+                            ? effectiveStyle.destructiveColor
+                            : effectiveStyle.actionTextColor,
+                        fontSize: 16)),
+                onTap: () {
+                  Navigator.of(context).pop(action.value);
+                  action.onTap?.call();
+                },
+              )),
           if (cancelText != null) ...[
             Divider(color: effectiveStyle.dividerColor),
             ListTile(
-              title: Text(cancelText, style: effectiveStyle.cancelStyle, textAlign: TextAlign.center),
+              title: Text(cancelText,
+                  style: effectiveStyle.cancelStyle,
+                  textAlign: TextAlign.center),
               onTap: () => Navigator.of(context).pop(),
             ),
           ],
@@ -107,7 +133,12 @@ class VelocityBottomSheet {
 
 /// 操作项
 class VelocityBottomSheetAction<T> {
-  const VelocityBottomSheetAction({required this.label, this.value, this.icon, this.onTap, this.isDestructive = false});
+  const VelocityBottomSheetAction(
+      {required this.label,
+      this.value,
+      this.icon,
+      this.onTap,
+      this.isDestructive = false});
   final String label;
   final T? value;
   final IconData? icon;

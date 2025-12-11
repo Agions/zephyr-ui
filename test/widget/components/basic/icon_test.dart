@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:velocity_ui/velocity_ui.dart';
+import 'package:velocity_ui/src/components/basic/icon/icon.dart';
 
 void main() {
   group('VelocityIcon Tests', () {
@@ -15,14 +15,30 @@ void main() {
       expect(find.byType(Icon), findsOneWidget);
     });
 
-    testWidgets('handles different sizes', (WidgetTester tester) async {
+    testWidgets('handles different enum sizes', (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Column(
             children: [
-              VelocityIcon(Icons.home, size: 16),
-              VelocityIcon(Icons.star, size: 24),
-              VelocityIcon(Icons.settings, size: 32),
+              VelocityIcon(Icons.home, size: VelocityIconSize.xs),
+              VelocityIcon(Icons.star, size: VelocityIconSize.md),
+              VelocityIcon(Icons.settings, size: VelocityIconSize.xl),
+            ],
+          ),
+        ),
+      );
+
+      expect(find.byType(VelocityIcon), findsNWidgets(3));
+    });
+
+    testWidgets('handles different custom sizes', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Column(
+            children: [
+              VelocityIcon(Icons.home, customSize: 16),
+              VelocityIcon(Icons.star, customSize: 24),
+              VelocityIcon(Icons.settings, customSize: 32),
             ],
           ),
         ),
@@ -47,39 +63,6 @@ void main() {
       expect(find.byType(VelocityIcon), findsNWidgets(3));
     });
 
-    testWidgets('handles onPressed callback', (WidgetTester tester) async {
-      var wasPressed = false;
-      
-      await tester.pumpWidget(
-        MaterialApp(
-          home: VelocityIcon(
-            Icons.home,
-            onPressed: () {
-              wasPressed = true;
-            },
-          ),
-        ),
-      );
-
-      await tester.tap(find.byType(VelocityIcon));
-      await tester.pump();
-
-      expect(wasPressed, isTrue);
-    });
-
-    testWidgets('handles disabled state', (WidgetTester tester) async {
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: VelocityIcon(
-            Icons.home,
-            onPressed: null,
-          ),
-        ),
-      );
-
-      expect(find.byType(VelocityIcon), findsOneWidget);
-    });
-
     testWidgets('handles semantic label', (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
@@ -93,18 +76,19 @@ void main() {
       expect(find.bySemanticsLabel('Home icon'), findsOneWidget);
     });
 
-    testWidgets('shows tooltip when provided', (WidgetTester tester) async {
+    testWidgets('handles custom style', (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: VelocityIcon(
             Icons.home,
-            tooltip: 'Go to home',
+            style: VelocityIconStyle(
+              color: Colors.purple,
+            ),
           ),
         ),
       );
 
-      // Tooltip should be present but not visible until hovered
-      expect(find.byTooltip('Go to home'), findsOneWidget);
+      expect(find.byType(VelocityIcon), findsOneWidget);
     });
   });
 }

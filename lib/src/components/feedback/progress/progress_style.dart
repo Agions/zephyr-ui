@@ -12,7 +12,8 @@ class VelocityProgressStyle {
     this.gradient,
     this.circularSize = 48,
     this.strokeWidth = 4,
-    this.labelStyle = const TextStyle(fontSize: 12, color: VelocityColors.gray600),
+    this.labelStyle =
+        const TextStyle(fontSize: 12, color: VelocityColors.gray600),
     this.labelSpacing = 8,
     this.animationDuration = const Duration(milliseconds: 300),
   });

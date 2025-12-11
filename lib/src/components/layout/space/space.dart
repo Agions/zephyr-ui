@@ -6,8 +6,12 @@ import 'package:flutter/material.dart';
 /// VelocityUI 间距
 class VelocitySpace extends StatelessWidget {
   const VelocitySpace({super.key, this.width, this.height});
-  const VelocitySpace.horizontal(double size, {super.key}) : width = size, height = null;
-  const VelocitySpace.vertical(double size, {super.key}) : width = null, height = size;
+  const VelocitySpace.horizontal(double size, {super.key})
+      : width = size,
+        height = null;
+  const VelocitySpace.vertical(double size, {super.key})
+      : width = null,
+        height = size;
 
   final double? width;
   final double? height;
@@ -25,7 +29,13 @@ class VelocitySpace extends StatelessWidget {
 
 /// VelocityUI Row 组件
 class VelocityRow extends StatelessWidget {
-  const VelocityRow({super.key, required this.children, this.spacing = 0, this.mainAxisAlignment = MainAxisAlignment.start, this.crossAxisAlignment = CrossAxisAlignment.center, this.mainAxisSize = MainAxisSize.max});
+  const VelocityRow(
+      {super.key,
+      required this.children,
+      this.spacing = 0,
+      this.mainAxisAlignment = MainAxisAlignment.start,
+      this.crossAxisAlignment = CrossAxisAlignment.center,
+      this.mainAxisSize = MainAxisSize.max});
   final List<Widget> children;
   final double spacing;
   final MainAxisAlignment mainAxisAlignment;
@@ -50,7 +60,13 @@ class VelocityRow extends StatelessWidget {
 
 /// VelocityUI Column 组件
 class VelocityColumn extends StatelessWidget {
-  const VelocityColumn({super.key, required this.children, this.spacing = 0, this.mainAxisAlignment = MainAxisAlignment.start, this.crossAxisAlignment = CrossAxisAlignment.start, this.mainAxisSize = MainAxisSize.max});
+  const VelocityColumn(
+      {super.key,
+      required this.children,
+      this.spacing = 0,
+      this.mainAxisAlignment = MainAxisAlignment.start,
+      this.crossAxisAlignment = CrossAxisAlignment.start,
+      this.mainAxisSize = MainAxisSize.max});
   final List<Widget> children;
   final double spacing;
   final MainAxisAlignment mainAxisAlignment;

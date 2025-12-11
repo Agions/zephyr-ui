@@ -32,75 +32,15 @@ class VelocityThemeData {
     this.elevation,
   });
 
-  /// 颜色方案
-  final VelocityColorScheme colorScheme;
-  
-  /// 文本主题
-  final VelocityTextTheme textTheme;
-  
-  /// 亮度模式
-  final Brightness brightness;
-  
-  /// 主色
-  final Color? primaryColor;
-  
-  /// 脚手架背景色
-  final Color? scaffoldBackgroundColor;
-  
-  /// 卡片颜色
-  final Color? cardColor;
-  
-  /// 分隔线颜色
-  final Color? dividerColor;
-  
-  /// 阴影颜色
-  final Color? shadowColor;
-  
-  /// 水波纹颜色
-  final Color? splashColor;
-  
-  /// 高亮颜色
-  final Color? highlightColor;
-  
-  /// 悬停颜色
-  final Color? hoverColor;
-  
-  /// 焦点颜色
-  final Color? focusColor;
-  
-  /// 禁用颜色
-  final Color? disabledColor;
-  
-  /// 按钮主题
-  final VelocityButtonThemeData? buttonTheme;
-  
-  /// 输入框主题
-  final VelocityInputThemeData? inputTheme;
-  
-  /// 卡片主题
-  final VelocityCardThemeData? cardTheme;
-  
-  /// 对话框主题
-  final VelocityDialogThemeData? dialogTheme;
-  
-  /// 圆角配置
-  final VelocityBorderRadiusData? borderRadius;
-  
-  /// 间距配置
-  final VelocitySpacingData? spacing;
-  
-  /// 阴影配置
-  final VelocityElevationData? elevation;
-
   /// 创建亮色主题
   factory VelocityThemeData.light({
     Color? primaryColor,
     Color? secondaryColor,
     String? fontFamily,
   }) {
-    final colorScheme = VelocityColorScheme.light;
+    const colorScheme = VelocityColorScheme.light;
     final textTheme = VelocityTextTheme.light(fontFamily: fontFamily);
-    
+
     return VelocityThemeData(
       colorScheme: colorScheme,
       textTheme: textTheme,
@@ -131,9 +71,9 @@ class VelocityThemeData {
     Color? secondaryColor,
     String? fontFamily,
   }) {
-    final colorScheme = VelocityColorScheme.dark;
+    const colorScheme = VelocityColorScheme.dark;
     final textTheme = VelocityTextTheme.dark(fontFamily: fontFamily);
-    
+
     return VelocityThemeData(
       colorScheme: colorScheme,
       textTheme: textTheme,
@@ -157,6 +97,66 @@ class VelocityThemeData {
       elevation: const VelocityElevationData(),
     );
   }
+
+  /// 颜色方案
+  final VelocityColorScheme colorScheme;
+
+  /// 文本主题
+  final VelocityTextTheme textTheme;
+
+  /// 亮度模式
+  final Brightness brightness;
+
+  /// 主色
+  final Color? primaryColor;
+
+  /// 脚手架背景色
+  final Color? scaffoldBackgroundColor;
+
+  /// 卡片颜色
+  final Color? cardColor;
+
+  /// 分隔线颜色
+  final Color? dividerColor;
+
+  /// 阴影颜色
+  final Color? shadowColor;
+
+  /// 水波纹颜色
+  final Color? splashColor;
+
+  /// 高亮颜色
+  final Color? highlightColor;
+
+  /// 悬停颜色
+  final Color? hoverColor;
+
+  /// 焦点颜色
+  final Color? focusColor;
+
+  /// 禁用颜色
+  final Color? disabledColor;
+
+  /// 按钮主题
+  final VelocityButtonThemeData? buttonTheme;
+
+  /// 输入框主题
+  final VelocityInputThemeData? inputTheme;
+
+  /// 卡片主题
+  final VelocityCardThemeData? cardTheme;
+
+  /// 对话框主题
+  final VelocityDialogThemeData? dialogTheme;
+
+  /// 圆角配置
+  final VelocityBorderRadiusData? borderRadius;
+
+  /// 间距配置
+  final VelocitySpacingData? spacing;
+
+  /// 阴影配置
+  final VelocityElevationData? elevation;
 
   /// 转换为 Material ThemeData
   ThemeData toThemeData() {
@@ -206,7 +206,8 @@ class VelocityThemeData {
       textTheme: textTheme ?? this.textTheme,
       brightness: brightness ?? this.brightness,
       primaryColor: primaryColor ?? this.primaryColor,
-      scaffoldBackgroundColor: scaffoldBackgroundColor ?? this.scaffoldBackgroundColor,
+      scaffoldBackgroundColor:
+          scaffoldBackgroundColor ?? this.scaffoldBackgroundColor,
       cardColor: cardColor ?? this.cardColor,
       dividerColor: dividerColor ?? this.dividerColor,
       shadowColor: shadowColor ?? this.shadowColor,
@@ -239,6 +240,30 @@ class VelocityButtonThemeData {
     this.textStyle,
   });
 
+  factory VelocityButtonThemeData.light() {
+    return const VelocityButtonThemeData(
+      backgroundColor: VelocityColors.primary,
+      foregroundColor: VelocityColors.white,
+      disabledBackgroundColor: VelocityColors.gray300,
+      disabledForegroundColor: VelocityColors.gray500,
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      elevation: 0,
+    );
+  }
+
+  factory VelocityButtonThemeData.dark() {
+    return const VelocityButtonThemeData(
+      backgroundColor: VelocityColors.primaryLight,
+      foregroundColor: VelocityColors.white,
+      disabledBackgroundColor: VelocityColors.gray700,
+      disabledForegroundColor: VelocityColors.gray500,
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      elevation: 0,
+    );
+  }
+
   final Color? backgroundColor;
   final Color? foregroundColor;
   final Color? disabledBackgroundColor;
@@ -247,30 +272,6 @@ class VelocityButtonThemeData {
   final EdgeInsets? padding;
   final double? elevation;
   final TextStyle? textStyle;
-
-  factory VelocityButtonThemeData.light() {
-    return VelocityButtonThemeData(
-      backgroundColor: VelocityColors.primary,
-      foregroundColor: VelocityColors.white,
-      disabledBackgroundColor: VelocityColors.gray300,
-      disabledForegroundColor: VelocityColors.gray500,
-      borderRadius: BorderRadius.circular(8),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      elevation: 0,
-    );
-  }
-
-  factory VelocityButtonThemeData.dark() {
-    return VelocityButtonThemeData(
-      backgroundColor: VelocityColors.primaryLight,
-      foregroundColor: VelocityColors.white,
-      disabledBackgroundColor: VelocityColors.gray700,
-      disabledForegroundColor: VelocityColors.gray500,
-      borderRadius: BorderRadius.circular(8),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      elevation: 0,
-    );
-  }
 }
 
 /// 输入框主题数据
@@ -286,6 +287,32 @@ class VelocityInputThemeData {
     this.padding,
   });
 
+  factory VelocityInputThemeData.light() {
+    return const VelocityInputThemeData(
+      fillColor: VelocityColors.white,
+      borderColor: VelocityColors.gray300,
+      focusedBorderColor: VelocityColors.primary,
+      errorBorderColor: VelocityColors.error,
+      textColor: VelocityColors.textPrimaryLight,
+      hintColor: VelocityColors.gray400,
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+    );
+  }
+
+  factory VelocityInputThemeData.dark() {
+    return const VelocityInputThemeData(
+      fillColor: VelocityColors.gray800,
+      borderColor: VelocityColors.gray600,
+      focusedBorderColor: VelocityColors.primaryLight,
+      errorBorderColor: VelocityColors.errorLight,
+      textColor: VelocityColors.textPrimaryDark,
+      hintColor: VelocityColors.gray500,
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+    );
+  }
+
   final Color? fillColor;
   final Color? borderColor;
   final Color? focusedBorderColor;
@@ -294,32 +321,6 @@ class VelocityInputThemeData {
   final Color? hintColor;
   final BorderRadius? borderRadius;
   final EdgeInsets? padding;
-
-  factory VelocityInputThemeData.light() {
-    return VelocityInputThemeData(
-      fillColor: VelocityColors.white,
-      borderColor: VelocityColors.gray300,
-      focusedBorderColor: VelocityColors.primary,
-      errorBorderColor: VelocityColors.error,
-      textColor: VelocityColors.textPrimaryLight,
-      hintColor: VelocityColors.gray400,
-      borderRadius: BorderRadius.circular(8),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-    );
-  }
-
-  factory VelocityInputThemeData.dark() {
-    return VelocityInputThemeData(
-      fillColor: VelocityColors.gray800,
-      borderColor: VelocityColors.gray600,
-      focusedBorderColor: VelocityColors.primaryLight,
-      errorBorderColor: VelocityColors.errorLight,
-      textColor: VelocityColors.textPrimaryDark,
-      hintColor: VelocityColors.gray500,
-      borderRadius: BorderRadius.circular(8),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-    );
-  }
 }
 
 /// 卡片主题数据
@@ -333,19 +334,12 @@ class VelocityCardThemeData {
     this.elevation,
   });
 
-  final Color? backgroundColor;
-  final Color? borderColor;
-  final Color? shadowColor;
-  final BorderRadius? borderRadius;
-  final EdgeInsets? padding;
-  final double? elevation;
-
   factory VelocityCardThemeData.light() {
     return VelocityCardThemeData(
       backgroundColor: VelocityColors.white,
       borderColor: VelocityColors.gray200,
       shadowColor: VelocityColors.withOpacity(VelocityColors.black, 0.08),
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: const BorderRadius.all(Radius.circular(12)),
       padding: const EdgeInsets.all(16),
       elevation: 1,
     );
@@ -356,11 +350,18 @@ class VelocityCardThemeData {
       backgroundColor: VelocityColors.gray800,
       borderColor: VelocityColors.gray700,
       shadowColor: VelocityColors.withOpacity(VelocityColors.black, 0.3),
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: const BorderRadius.all(Radius.circular(12)),
       padding: const EdgeInsets.all(16),
       elevation: 1,
     );
   }
+
+  final Color? backgroundColor;
+  final Color? borderColor;
+  final Color? shadowColor;
+  final BorderRadius? borderRadius;
+  final EdgeInsets? padding;
+  final double? elevation;
 }
 
 /// 对话框主题数据
@@ -374,34 +375,34 @@ class VelocityDialogThemeData {
     this.elevation,
   });
 
+  factory VelocityDialogThemeData.light() {
+    return const VelocityDialogThemeData(
+      backgroundColor: VelocityColors.white,
+      titleColor: VelocityColors.textPrimaryLight,
+      contentColor: VelocityColors.textSecondaryLight,
+      borderRadius: BorderRadius.all(Radius.circular(16)),
+      padding: EdgeInsets.all(24),
+      elevation: 8,
+    );
+  }
+
+  factory VelocityDialogThemeData.dark() {
+    return const VelocityDialogThemeData(
+      backgroundColor: VelocityColors.gray800,
+      titleColor: VelocityColors.textPrimaryDark,
+      contentColor: VelocityColors.textSecondaryDark,
+      borderRadius: BorderRadius.all(Radius.circular(16)),
+      padding: EdgeInsets.all(24),
+      elevation: 8,
+    );
+  }
+
   final Color? backgroundColor;
   final Color? titleColor;
   final Color? contentColor;
   final BorderRadius? borderRadius;
   final EdgeInsets? padding;
   final double? elevation;
-
-  factory VelocityDialogThemeData.light() {
-    return VelocityDialogThemeData(
-      backgroundColor: VelocityColors.white,
-      titleColor: VelocityColors.textPrimaryLight,
-      contentColor: VelocityColors.textSecondaryLight,
-      borderRadius: BorderRadius.circular(16),
-      padding: const EdgeInsets.all(24),
-      elevation: 8,
-    );
-  }
-
-  factory VelocityDialogThemeData.dark() {
-    return VelocityDialogThemeData(
-      backgroundColor: VelocityColors.gray800,
-      titleColor: VelocityColors.textPrimaryDark,
-      contentColor: VelocityColors.textSecondaryDark,
-      borderRadius: BorderRadius.circular(16),
-      padding: const EdgeInsets.all(24),
-      elevation: 8,
-    );
-  }
 }
 
 /// 圆角配置

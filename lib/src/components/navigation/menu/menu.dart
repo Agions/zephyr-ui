@@ -40,10 +40,17 @@ class VelocityMenu extends StatelessWidget {
           child: Row(
             children: [
               if (item.icon != null) ...[
-                Icon(item.icon, size: effectiveStyle.iconSize, color: item.disabled ? effectiveStyle.disabledColor : effectiveStyle.iconColor),
+                Icon(item.icon,
+                    size: effectiveStyle.iconSize,
+                    color: item.disabled
+                        ? effectiveStyle.disabledColor
+                        : effectiveStyle.iconColor),
                 SizedBox(width: effectiveStyle.iconSpacing),
               ],
-              Text(item.label!, style: item.disabled ? effectiveStyle.disabledStyle : effectiveStyle.labelStyle),
+              Text(item.label!,
+                  style: item.disabled
+                      ? effectiveStyle.disabledStyle
+                      : effectiveStyle.labelStyle),
             ],
           ),
         );
@@ -55,8 +62,15 @@ class VelocityMenu extends StatelessWidget {
 }
 
 class VelocityMenuItem {
-  const VelocityMenuItem({this.label, this.value, this.icon, this.disabled = false}) : isDivider = false;
-  const VelocityMenuItem.divider() : label = null, value = null, icon = null, disabled = false, isDivider = true;
+  const VelocityMenuItem(
+      {this.label, this.value, this.icon, this.disabled = false})
+      : isDivider = false;
+  const VelocityMenuItem.divider()
+      : label = null,
+        value = null,
+        icon = null,
+        disabled = false,
+        isDivider = true;
   final String? label;
   final dynamic value;
   final IconData? icon;

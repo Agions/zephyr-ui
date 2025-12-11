@@ -11,11 +11,17 @@ class VelocitySelectStyle {
     this.borderColor = VelocityColors.gray300,
     this.borderRadius = const BorderRadius.all(Radius.circular(8)),
     this.padding = const EdgeInsets.symmetric(horizontal: 12),
-    this.labelStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: VelocityColors.gray700),
+    this.labelStyle = const TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        color: VelocityColors.gray700),
     this.labelSpacing = 6,
-    this.hintStyle = const TextStyle(fontSize: 14, color: VelocityColors.gray400),
-    this.itemStyle = const TextStyle(fontSize: 14, color: VelocityColors.gray900),
-    this.disabledItemStyle = const TextStyle(fontSize: 14, color: VelocityColors.gray400),
+    this.hintStyle =
+        const TextStyle(fontSize: 14, color: VelocityColors.gray400),
+    this.itemStyle =
+        const TextStyle(fontSize: 14, color: VelocityColors.gray900),
+    this.disabledItemStyle =
+        const TextStyle(fontSize: 14, color: VelocityColors.gray400),
     this.iconColor = VelocityColors.gray500,
   });
 

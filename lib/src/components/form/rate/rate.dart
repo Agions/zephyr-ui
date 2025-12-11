@@ -31,34 +31,51 @@ class VelocityRate extends StatelessWidget {
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? const VelocityRateStyle();
     final icon = character ?? effectiveStyle.defaultIcon;
-    
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: List.generate(count, (index) {
         final starValue = index + 1;
         final isFull = value >= starValue;
         final isHalf = allowHalf && value > index && value < starValue;
-        
+
         return GestureDetector(
-          onTap: disabled ? null : () {
-            if (allowHalf) {
-              final newValue = value == starValue ? starValue - 0.5 : (value == starValue - 0.5 ? starValue.toDouble() : starValue.toDouble());
-              onChanged?.call(newValue);
-            } else {
-              onChanged?.call(starValue.toDouble());
-            }
-          },
+          onTap: disabled
+              ? null
+              : () {
+                  if (allowHalf) {
+                    final newValue = value == starValue
+                        ? starValue - 0.5
+                        : (value == starValue - 0.5
+                            ? starValue.toDouble()
+                            : starValue.toDouble());
+                    onChanged?.call(newValue);
+                  } else {
+                    onChanged?.call(starValue.toDouble());
+                  }
+                },
           child: Padding(
-            padding: EdgeInsets.only(right: index < count - 1 ? effectiveStyle.spacing : 0),
+            padding: EdgeInsets.only(
+                right: index < count - 1 ? effectiveStyle.spacing : 0),
             child: Stack(
               children: [
-                Icon(icon, size: effectiveStyle.size, color: effectiveStyle.inactiveColor),
+                Icon(icon,
+                    size: effectiveStyle.size,
+                    color: effectiveStyle.inactiveColor),
                 if (isFull)
-                  Icon(icon, size: effectiveStyle.size, color: disabled ? effectiveStyle.disabledColor : effectiveStyle.activeColor),
+                  Icon(icon,
+                      size: effectiveStyle.size,
+                      color: disabled
+                          ? effectiveStyle.disabledColor
+                          : effectiveStyle.activeColor),
                 if (isHalf)
                   ClipRect(
                     clipper: _HalfClipper(),
-                    child: Icon(icon, size: effectiveStyle.size, color: disabled ? effectiveStyle.disabledColor : effectiveStyle.activeColor),
+                    child: Icon(icon,
+                        size: effectiveStyle.size,
+                        color: disabled
+                            ? effectiveStyle.disabledColor
+                            : effectiveStyle.activeColor),
                   ),
               ],
             ),

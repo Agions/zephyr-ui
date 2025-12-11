@@ -19,7 +19,8 @@ class VelocityInputStyle {
     this.errorBorderColor = VelocityColors.error,
     this.disabledBorderColor = VelocityColors.gray200,
     this.borderRadius = const BorderRadius.all(Radius.circular(8)),
-    this.contentPadding = const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+    this.contentPadding =
+        const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
     this.iconSize = 20,
     this.iconColor = VelocityColors.gray500,
     this.labelSpacing = 6,
@@ -48,9 +49,13 @@ class VelocityInputStyle {
 
   factory VelocityInputStyle.defaults() {
     return const VelocityInputStyle(
-      textStyle: TextStyle(fontSize: 14, color: VelocityColors.textPrimaryLight),
+      textStyle:
+          TextStyle(fontSize: 14, color: VelocityColors.textPrimaryLight),
       hintStyle: TextStyle(fontSize: 14, color: VelocityColors.gray400),
-      labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: VelocityColors.gray700),
+      labelStyle: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: VelocityColors.gray700),
       helperStyle: TextStyle(fontSize: 12, color: VelocityColors.gray500),
       errorStyle: TextStyle(fontSize: 12, color: VelocityColors.error),
     );

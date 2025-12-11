@@ -21,28 +21,28 @@ class VelocityTagStyle {
 
   /// 背景颜色
   final Color? backgroundColor;
-  
+
   /// 前景颜色
   final Color? foregroundColor;
-  
+
   /// 边框
   final Border? border;
-  
+
   /// 圆角
   final BorderRadius? borderRadius;
-  
+
   /// 高度
   final double height;
-  
+
   /// 内边距
   final EdgeInsets? padding;
-  
+
   /// 文字样式
   final TextStyle? textStyle;
-  
+
   /// 图标尺寸
   final double iconSize;
-  
+
   /// 间距
   final double spacing;
 
@@ -50,18 +50,31 @@ class VelocityTagStyle {
   factory VelocityTagStyle.fromType(dynamic type, {bool outlined = false}) {
     final typeName = type.toString().split('.').last;
     Color color;
-    
+
     switch (typeName) {
-      case 'primary': color = VelocityColors.primary; break;
-      case 'success': color = VelocityColors.success; break;
-      case 'warning': color = VelocityColors.warning; break;
-      case 'error': color = VelocityColors.error; break;
-      case 'info': color = VelocityColors.info; break;
-      default: color = VelocityColors.gray500;
+      case 'primary':
+        color = VelocityColors.primary;
+        break;
+      case 'success':
+        color = VelocityColors.success;
+        break;
+      case 'warning':
+        color = VelocityColors.warning;
+        break;
+      case 'error':
+        color = VelocityColors.error;
+        break;
+      case 'info':
+        color = VelocityColors.info;
+        break;
+      default:
+        color = VelocityColors.gray500;
     }
-    
+
     return VelocityTagStyle(
-      backgroundColor: outlined ? Colors.transparent : VelocityColors.withOpacity(color, 0.1),
+      backgroundColor: outlined
+          ? Colors.transparent
+          : VelocityColors.withOpacity(color, 0.1),
       foregroundColor: color,
       border: outlined ? Border.all(color: color) : null,
       borderRadius: const BorderRadius.all(Radius.circular(4)),

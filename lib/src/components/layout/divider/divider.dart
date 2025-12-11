@@ -16,8 +16,16 @@ class VelocityDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? VelocityDividerStyle.defaults();
     if (vertical) {
-      return Container(width: effectiveStyle.thickness, height: effectiveStyle.length, margin: effectiveStyle.margin, color: effectiveStyle.color);
+      return Container(
+          width: effectiveStyle.thickness,
+          height: effectiveStyle.length,
+          margin: effectiveStyle.margin,
+          color: effectiveStyle.color);
     }
-    return Container(height: effectiveStyle.thickness, width: effectiveStyle.length, margin: effectiveStyle.margin, color: effectiveStyle.color);
+    return Container(
+        height: effectiveStyle.thickness,
+        width: effectiveStyle.length,
+        margin: effectiveStyle.margin,
+        color: effectiveStyle.color);
   }
 }

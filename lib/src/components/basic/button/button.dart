@@ -10,7 +10,13 @@ export 'button_style.dart';
 
 /// 按钮类型
 enum VelocityButtonType {
-  primary, secondary, outline, text, danger, success, warning
+  primary,
+  secondary,
+  outline,
+  text,
+  danger,
+  success,
+  warning
 }
 
 /// 按钮尺寸
@@ -33,7 +39,9 @@ class VelocityButton extends StatelessWidget {
     this.disabled = false,
     this.fullWidth = false,
     this.style,
-  }) : _text = null, _icon = null, _iconPosition = VelocityIconPosition.left;
+  })  : _text = null,
+        _icon = null,
+        _iconPosition = VelocityIconPosition.left;
 
   /// 创建一个带文本的按钮
   const VelocityButton.text({
@@ -47,7 +55,10 @@ class VelocityButton extends StatelessWidget {
     this.disabled = false,
     this.fullWidth = false,
     this.style,
-  }) : child = null, _text = text, _icon = null, _iconPosition = VelocityIconPosition.left;
+  })  : child = null,
+        _text = text,
+        _icon = null,
+        _iconPosition = VelocityIconPosition.left;
 
   /// 创建一个带图标的按钮
   const VelocityButton.icon({
@@ -63,7 +74,10 @@ class VelocityButton extends StatelessWidget {
     this.disabled = false,
     this.fullWidth = false,
     this.style,
-  }) : child = null, _text = text, _icon = icon, _iconPosition = iconPosition;
+  })  : child = null,
+        _text = text,
+        _icon = icon,
+        _iconPosition = iconPosition;
 
   final Widget? child;
   final VoidCallback? onPressed;
@@ -81,15 +95,16 @@ class VelocityButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveStyle = VelocityButtonStyle.resolve(type: type, size: size, customStyle: style);
+    final effectiveStyle =
+        VelocityButtonStyle.resolve(type: type, size: size, customStyle: style);
     final effectiveDisabled = disabled || loading;
-    
+
     Widget content = _buildContent(effectiveStyle);
-    
-    final bgColor = effectiveDisabled 
-        ? (effectiveStyle.disabledBackgroundColor ?? Colors.grey) 
+
+    final bgColor = effectiveDisabled
+        ? (effectiveStyle.disabledBackgroundColor ?? Colors.grey)
         : (effectiveStyle.backgroundColor ?? Colors.blue);
-    
+
     Widget button = Material(
       color: Colors.transparent,
       child: InkWell(
@@ -110,20 +125,20 @@ class VelocityButton extends StatelessWidget {
         ),
       ),
     );
-    
+
     if (fullWidth) {
       button = SizedBox(width: double.infinity, child: button);
     }
-    
+
     return button;
   }
 
   Widget _buildContent(VelocityButtonStyle effectiveStyle) {
     final effectiveDisabled = disabled || loading;
-    final foregroundColor = effectiveDisabled 
-        ? (effectiveStyle.disabledForegroundColor ?? Colors.grey) 
+    final foregroundColor = effectiveDisabled
+        ? (effectiveStyle.disabledForegroundColor ?? Colors.grey)
         : (effectiveStyle.foregroundColor ?? Colors.white);
-    
+
     if (loading) {
       return Row(
         mainAxisSize: MainAxisSize.min,
@@ -139,31 +154,44 @@ class VelocityButton extends StatelessWidget {
           ),
           if (_text != null) ...[
             SizedBox(width: effectiveStyle.iconSpacing ?? 8),
-            Text(_text!, style: effectiveStyle.textStyle?.copyWith(color: foregroundColor)),
+            Text(_text!,
+                style:
+                    effectiveStyle.textStyle?.copyWith(color: foregroundColor)),
           ],
         ],
       );
     }
-    
+
     if (child != null) return child!;
-    
+
     if (_icon != null && _text != null) {
-      final iconWidget = Icon(_icon, size: effectiveStyle.iconSize ?? 18, color: foregroundColor);
-      final textWidget = Text(_text!, style: effectiveStyle.textStyle?.copyWith(color: foregroundColor));
-      
+      final iconWidget = Icon(_icon,
+          size: effectiveStyle.iconSize ?? 18, color: foregroundColor);
+      final textWidget = Text(_text!,
+          style: effectiveStyle.textStyle?.copyWith(color: foregroundColor));
+
       return Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: _iconPosition == VelocityIconPosition.left
-            ? [iconWidget, SizedBox(width: effectiveStyle.iconSpacing ?? 8), textWidget]
-            : [textWidget, SizedBox(width: effectiveStyle.iconSpacing ?? 8), iconWidget],
+            ? [
+                iconWidget,
+                SizedBox(width: effectiveStyle.iconSpacing ?? 8),
+                textWidget
+              ]
+            : [
+                textWidget,
+                SizedBox(width: effectiveStyle.iconSpacing ?? 8),
+                iconWidget
+              ],
       );
     }
-    
+
     if (_text != null) {
-      return Text(_text!, style: effectiveStyle.textStyle?.copyWith(color: foregroundColor));
+      return Text(_text!,
+          style: effectiveStyle.textStyle?.copyWith(color: foregroundColor));
     }
-    
+
     return const SizedBox.shrink();
   }
 }
@@ -195,20 +223,22 @@ class VelocityIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? VelocityIconButtonStyle.defaults();
     final effectiveDisabled = disabled || loading;
-    
-    final effectiveBackgroundColor = effectiveDisabled 
+
+    final effectiveBackgroundColor = effectiveDisabled
         ? (effectiveStyle.disabledBackgroundColor ?? Colors.grey.shade200)
         : (effectiveStyle.backgroundColor ?? Colors.transparent);
-    final effectiveIconColor = effectiveDisabled 
+    final effectiveIconColor = effectiveDisabled
         ? (effectiveStyle.disabledIconColor ?? Colors.grey)
         : (effectiveStyle.iconColor ?? Colors.grey.shade700);
-    
+
     Widget button = Material(
       color: effectiveBackgroundColor,
-      borderRadius: effectiveStyle.borderRadius ?? BorderRadius.circular(size / 2),
+      borderRadius:
+          effectiveStyle.borderRadius ?? BorderRadius.circular(size / 2),
       child: InkWell(
         onTap: effectiveDisabled ? null : onPressed,
-        borderRadius: effectiveStyle.borderRadius ?? BorderRadius.circular(size / 2),
+        borderRadius:
+            effectiveStyle.borderRadius ?? BorderRadius.circular(size / 2),
         splashColor: effectiveStyle.splashColor,
         highlightColor: effectiveStyle.highlightColor,
         child: Container(
@@ -216,7 +246,8 @@ class VelocityIconButton extends StatelessWidget {
           height: size,
           decoration: effectiveStyle.border != null
               ? BoxDecoration(
-                  borderRadius: effectiveStyle.borderRadius ?? BorderRadius.circular(size / 2),
+                  borderRadius: effectiveStyle.borderRadius ??
+                      BorderRadius.circular(size / 2),
                   border: effectiveStyle.border,
                 )
               : null,
@@ -227,7 +258,8 @@ class VelocityIconButton extends StatelessWidget {
                     height: iconSize,
                     child: CircularProgressIndicator(
                       strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation<Color>(effectiveIconColor),
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(effectiveIconColor),
                     ),
                   )
                 : Icon(icon, size: iconSize, color: effectiveIconColor),
@@ -235,11 +267,11 @@ class VelocityIconButton extends StatelessWidget {
         ),
       ),
     );
-    
+
     if (tooltip != null) {
       button = Tooltip(message: tooltip!, child: button);
     }
-    
+
     return button;
   }
 }

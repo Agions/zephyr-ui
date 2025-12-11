@@ -35,7 +35,10 @@ class VelocityFormField extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(label, style: effectiveStyle.labelStyle),
-        if (required) Text(' *', style: TextStyle(color: effectiveStyle.requiredColor, fontSize: 14)),
+        if (required)
+          Text(' *',
+              style:
+                  TextStyle(color: effectiveStyle.requiredColor, fontSize: 14)),
       ],
     );
 
@@ -43,14 +46,27 @@ class VelocityFormField extends StatelessWidget {
       return Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(width: effectiveStyle.labelWidth, child: Padding(padding: EdgeInsets.only(top: effectiveStyle.horizontalLabelOffset), child: labelWidget)),
+          SizedBox(
+              width: effectiveStyle.labelWidth,
+              child: Padding(
+                  padding: EdgeInsets.only(
+                      top: effectiveStyle.horizontalLabelOffset),
+                  child: labelWidget)),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 child,
-                if (helper != null && error == null) Padding(padding: EdgeInsets.only(top: effectiveStyle.helperSpacing), child: Text(helper!, style: effectiveStyle.helperStyle)),
-                if (error != null) Padding(padding: EdgeInsets.only(top: effectiveStyle.helperSpacing), child: Text(error!, style: effectiveStyle.errorStyle)),
+                if (helper != null && error == null)
+                  Padding(
+                      padding:
+                          EdgeInsets.only(top: effectiveStyle.helperSpacing),
+                      child: Text(helper!, style: effectiveStyle.helperStyle)),
+                if (error != null)
+                  Padding(
+                      padding:
+                          EdgeInsets.only(top: effectiveStyle.helperSpacing),
+                      child: Text(error!, style: effectiveStyle.errorStyle)),
               ],
             ),
           ),
@@ -65,8 +81,14 @@ class VelocityFormField extends StatelessWidget {
         labelWidget,
         SizedBox(height: effectiveStyle.labelSpacing),
         child,
-        if (helper != null && error == null) Padding(padding: EdgeInsets.only(top: effectiveStyle.helperSpacing), child: Text(helper!, style: effectiveStyle.helperStyle)),
-        if (error != null) Padding(padding: EdgeInsets.only(top: effectiveStyle.helperSpacing), child: Text(error!, style: effectiveStyle.errorStyle)),
+        if (helper != null && error == null)
+          Padding(
+              padding: EdgeInsets.only(top: effectiveStyle.helperSpacing),
+              child: Text(helper!, style: effectiveStyle.helperStyle)),
+        if (error != null)
+          Padding(
+              padding: EdgeInsets.only(top: effectiveStyle.helperSpacing),
+              child: Text(error!, style: effectiveStyle.errorStyle)),
       ],
     );
   }

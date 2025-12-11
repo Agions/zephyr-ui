@@ -10,8 +10,10 @@ class VelocityListTileStyle {
     this.splashColor,
     this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
     this.densePadding = const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-    this.titleStyle = const TextStyle(fontSize: 16, color: VelocityColors.gray900),
-    this.subtitleStyle = const TextStyle(fontSize: 14, color: VelocityColors.gray500),
+    this.titleStyle =
+        const TextStyle(fontSize: 16, color: VelocityColors.gray900),
+    this.subtitleStyle =
+        const TextStyle(fontSize: 14, color: VelocityColors.gray500),
     this.leadingSpacing = 16,
     this.trailingSpacing = 16,
     this.subtitleSpacing = 4,
@@ -33,7 +35,10 @@ class VelocityListGroupStyle {
   const VelocityListGroupStyle({
     this.backgroundColor = VelocityColors.white,
     this.borderRadius,
-    this.headerStyle = const TextStyle(fontSize: 13, color: VelocityColors.gray500, fontWeight: FontWeight.w500),
+    this.headerStyle = const TextStyle(
+        fontSize: 13,
+        color: VelocityColors.gray500,
+        fontWeight: FontWeight.w500),
     this.headerPadding = const EdgeInsets.only(left: 16, bottom: 8, top: 16),
     this.dividerColor = VelocityColors.gray200,
     this.dividerIndent = 16,

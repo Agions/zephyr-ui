@@ -6,8 +6,12 @@ import '../../../core/theme/velocity_colors.dart';
 class VelocityResultStyle {
   const VelocityResultStyle({
     this.iconSize = 72,
-    this.titleStyle = const TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: VelocityColors.gray900),
-    this.subtitleStyle = const TextStyle(fontSize: 14, color: VelocityColors.gray500),
+    this.titleStyle = const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w600,
+        color: VelocityColors.gray900),
+    this.subtitleStyle =
+        const TextStyle(fontSize: 14, color: VelocityColors.gray500),
     this.padding = const EdgeInsets.all(32),
     this.spacing = 24,
     this.subtitleSpacing = 8,

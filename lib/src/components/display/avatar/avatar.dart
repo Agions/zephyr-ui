@@ -29,71 +29,89 @@ class VelocityAvatar extends StatelessWidget {
 
   /// 图片地址
   final String? imageUrl;
-  
+
   /// 名称（生成首字母）
   final String? name;
-  
+
   /// 自定义图标
   final IconData? icon;
-  
+
   /// 尺寸
   final VelocityAvatarSize size;
-  
+
   /// 形状
   final VelocityAvatarShape shape;
-  
+
   /// 自定义尺寸
   final double? customSize;
-  
+
   /// 自定义样式
   final VelocityAvatarStyle? style;
-  
+
   /// 点击回调
   final VoidCallback? onTap;
 
   double get _size {
     if (customSize != null) return customSize!;
     switch (size) {
-      case VelocityAvatarSize.xs: return 24;
-      case VelocityAvatarSize.sm: return 32;
-      case VelocityAvatarSize.md: return 40;
-      case VelocityAvatarSize.lg: return 48;
-      case VelocityAvatarSize.xl: return 64;
+      case VelocityAvatarSize.xs:
+        return 24;
+      case VelocityAvatarSize.sm:
+        return 32;
+      case VelocityAvatarSize.md:
+        return 40;
+      case VelocityAvatarSize.lg:
+        return 48;
+      case VelocityAvatarSize.xl:
+        return 64;
     }
   }
 
   double get _fontSize {
     switch (size) {
-      case VelocityAvatarSize.xs: return 10;
-      case VelocityAvatarSize.sm: return 12;
-      case VelocityAvatarSize.md: return 14;
-      case VelocityAvatarSize.lg: return 18;
-      case VelocityAvatarSize.xl: return 24;
+      case VelocityAvatarSize.xs:
+        return 10;
+      case VelocityAvatarSize.sm:
+        return 12;
+      case VelocityAvatarSize.md:
+        return 14;
+      case VelocityAvatarSize.lg:
+        return 18;
+      case VelocityAvatarSize.xl:
+        return 24;
     }
   }
 
   double get _iconSize {
     switch (size) {
-      case VelocityAvatarSize.xs: return 14;
-      case VelocityAvatarSize.sm: return 16;
-      case VelocityAvatarSize.md: return 20;
-      case VelocityAvatarSize.lg: return 24;
-      case VelocityAvatarSize.xl: return 32;
+      case VelocityAvatarSize.xs:
+        return 14;
+      case VelocityAvatarSize.sm:
+        return 16;
+      case VelocityAvatarSize.md:
+        return 20;
+      case VelocityAvatarSize.lg:
+        return 24;
+      case VelocityAvatarSize.xl:
+        return 32;
     }
   }
 
   BorderRadius get _borderRadius {
     switch (shape) {
-      case VelocityAvatarShape.circle: return BorderRadius.circular(_size / 2);
-      case VelocityAvatarShape.square: return BorderRadius.zero;
-      case VelocityAvatarShape.rounded: return const BorderRadius.all(Radius.circular(8));
+      case VelocityAvatarShape.circle:
+        return BorderRadius.circular(_size / 2);
+      case VelocityAvatarShape.square:
+        return BorderRadius.zero;
+      case VelocityAvatarShape.rounded:
+        return const BorderRadius.all(Radius.circular(8));
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? VelocityAvatarStyle.defaults();
-    
+
     Widget content;
     if (imageUrl != null && imageUrl!.isNotEmpty) {
       content = ClipRRect(
@@ -103,7 +121,8 @@ class VelocityAvatar extends StatelessWidget {
           width: _size,
           height: _size,
           fit: BoxFit.cover,
-          errorBuilder: (context, error, stackTrace) => _buildFallback(effectiveStyle),
+          errorBuilder: (context, error, stackTrace) =>
+              _buildFallback(effectiveStyle),
           loadingBuilder: (context, child, loadingProgress) {
             if (loadingProgress == null) return child;
             return _buildFallback(effectiveStyle);
@@ -113,7 +132,7 @@ class VelocityAvatar extends StatelessWidget {
     } else {
       content = _buildFallback(effectiveStyle);
     }
-    
+
     Widget avatar = Container(
       width: _size,
       height: _size,
@@ -124,11 +143,11 @@ class VelocityAvatar extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: content,
     );
-    
+
     if (onTap != null) {
       avatar = GestureDetector(onTap: onTap, child: avatar);
     }
-    
+
     return avatar;
   }
 
@@ -144,8 +163,13 @@ class VelocityAvatar extends StatelessWidget {
         child: icon != null
             ? Icon(icon, size: _iconSize, color: style.foregroundColor)
             : name != null && name!.isNotEmpty
-                ? Text(_getInitials(name!), style: TextStyle(color: style.foregroundColor, fontSize: _fontSize, fontWeight: FontWeight.w500))
-                : Icon(Icons.person, size: _iconSize, color: style.foregroundColor),
+                ? Text(_getInitials(name!),
+                    style: TextStyle(
+                        color: style.foregroundColor,
+                        fontSize: _fontSize,
+                        fontWeight: FontWeight.w500))
+                : Icon(Icons.person,
+                    size: _iconSize, color: style.foregroundColor),
       ),
     );
   }
@@ -171,16 +195,16 @@ class VelocityAvatarGroup extends StatelessWidget {
 
   /// 头像列表
   final List<VelocityAvatar> avatars;
-  
+
   /// 最大显示数量
   final int max;
-  
+
   /// 尺寸
   final VelocityAvatarSize size;
-  
+
   /// 重叠距离
   final double overlap;
-  
+
   /// 样式
   final VelocityAvatarGroupStyle? style;
 
@@ -189,7 +213,7 @@ class VelocityAvatarGroup extends StatelessWidget {
     final displayAvatars = avatars.take(max).toList();
     final remaining = avatars.length - max;
     final effectiveStyle = style ?? VelocityAvatarGroupStyle.defaults();
-    
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -204,7 +228,9 @@ class VelocityAvatarGroup extends StatelessWidget {
               style: VelocityAvatarStyle(
                 backgroundColor: displayAvatars[i].style?.backgroundColor,
                 foregroundColor: displayAvatars[i].style?.foregroundColor,
-                border: Border.all(color: effectiveStyle.borderColor, width: effectiveStyle.borderWidth),
+                border: Border.all(
+                    color: effectiveStyle.borderColor,
+                    width: effectiveStyle.borderWidth),
               ),
             ),
           ),
@@ -217,7 +243,9 @@ class VelocityAvatarGroup extends StatelessWidget {
               style: VelocityAvatarStyle(
                 backgroundColor: effectiveStyle.overflowBackgroundColor,
                 foregroundColor: effectiveStyle.overflowForegroundColor,
-                border: Border.all(color: effectiveStyle.borderColor, width: effectiveStyle.borderWidth),
+                border: Border.all(
+                    color: effectiveStyle.borderColor,
+                    width: effectiveStyle.borderWidth),
               ),
             ),
           ),

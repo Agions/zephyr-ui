@@ -8,8 +8,12 @@ class VelocityDrawerStyle {
     this.backgroundColor = VelocityColors.white,
     this.width = 280,
     this.itemsPadding = const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-    this.labelStyle = const TextStyle(fontSize: 14, color: VelocityColors.gray700),
-    this.selectedLabelStyle = const TextStyle(fontSize: 14, color: VelocityColors.primary, fontWeight: FontWeight.w500),
+    this.labelStyle =
+        const TextStyle(fontSize: 14, color: VelocityColors.gray700),
+    this.selectedLabelStyle = const TextStyle(
+        fontSize: 14,
+        color: VelocityColors.primary,
+        fontWeight: FontWeight.w500),
     this.iconColor = VelocityColors.gray500,
     this.selectedColor = VelocityColors.primary,
     this.selectedBackgroundColor = VelocityColors.primaryLight,

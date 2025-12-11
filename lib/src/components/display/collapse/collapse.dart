@@ -29,7 +29,8 @@ class VelocityCollapse extends StatefulWidget {
   State<VelocityCollapse> createState() => _VelocityCollapseState();
 }
 
-class _VelocityCollapseState extends State<VelocityCollapse> with SingleTickerProviderStateMixin {
+class _VelocityCollapseState extends State<VelocityCollapse>
+    with SingleTickerProviderStateMixin {
   late bool _isExpanded;
   late AnimationController _controller;
   late Animation<double> _animation;
@@ -38,7 +39,8 @@ class _VelocityCollapseState extends State<VelocityCollapse> with SingleTickerPr
   void initState() {
     super.initState();
     _isExpanded = widget.initiallyExpanded;
-    _controller = AnimationController(duration: const Duration(milliseconds: 200), vsync: this);
+    _controller = AnimationController(
+        duration: const Duration(milliseconds: 200), vsync: this);
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
     if (_isExpanded) _controller.value = 1.0;
   }
@@ -60,9 +62,12 @@ class _VelocityCollapseState extends State<VelocityCollapse> with SingleTickerPr
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = widget.style ?? const VelocityCollapseStyle();
-    
+
     return Container(
-      decoration: BoxDecoration(color: effectiveStyle.backgroundColor, borderRadius: effectiveStyle.borderRadius, border: effectiveStyle.border),
+      decoration: BoxDecoration(
+          color: effectiveStyle.backgroundColor,
+          borderRadius: effectiveStyle.borderRadius,
+          border: effectiveStyle.border),
       child: Column(
         children: [
           InkWell(
@@ -72,17 +77,28 @@ class _VelocityCollapseState extends State<VelocityCollapse> with SingleTickerPr
               padding: effectiveStyle.headerPadding,
               child: Row(
                 children: [
-                  if (widget.leading != null) ...[widget.leading!, SizedBox(width: effectiveStyle.leadingSpacing)],
-                  Expanded(child: DefaultTextStyle(style: effectiveStyle.titleStyle, child: widget.title)),
+                  if (widget.leading != null) ...[
+                    widget.leading!,
+                    SizedBox(width: effectiveStyle.leadingSpacing)
+                  ],
+                  Expanded(
+                      child: DefaultTextStyle(
+                          style: effectiveStyle.titleStyle,
+                          child: widget.title)),
                   RotationTransition(
                     turns: Tween(begin: 0.0, end: 0.5).animate(_animation),
-                    child: Icon(Icons.expand_more, color: effectiveStyle.iconColor, size: effectiveStyle.iconSize),
+                    child: Icon(Icons.expand_more,
+                        color: effectiveStyle.iconColor,
+                        size: effectiveStyle.iconSize),
                   ),
                 ],
               ),
             ),
           ),
-          SizeTransition(sizeFactor: _animation, child: Padding(padding: effectiveStyle.contentPadding, child: widget.child)),
+          SizeTransition(
+              sizeFactor: _animation,
+              child: Padding(
+                  padding: effectiveStyle.contentPadding, child: widget.child)),
         ],
       ),
     );
@@ -149,7 +165,11 @@ class _VelocityAccordionState extends State<VelocityAccordion> {
 }
 
 class VelocityAccordionItem {
-  const VelocityAccordionItem({required this.title, required this.child, this.leading, this.initiallyExpanded = false});
+  const VelocityAccordionItem(
+      {required this.title,
+      required this.child,
+      this.leading,
+      this.initiallyExpanded = false});
   final Widget title;
   final Widget child;
   final Widget? leading;

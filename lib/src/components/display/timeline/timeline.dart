@@ -32,7 +32,8 @@ class VelocityTimeline extends StatelessWidget {
     );
   }
 
-  Widget _buildItem(VelocityTimelineItem item, int index, int total, VelocityTimelineStyle style) {
+  Widget _buildItem(VelocityTimelineItem item, int index, int total,
+      VelocityTimelineStyle style) {
     final isLast = index == total - 1;
     final dotColor = item.color ?? style.dotColor;
 
@@ -48,8 +49,10 @@ class VelocityTimeline extends StatelessWidget {
                   Container(
                     width: style.dotSize,
                     height: style.dotSize,
-                    decoration: BoxDecoration(color: dotColor, shape: BoxShape.circle),
-                    child: Icon(item.icon, size: style.dotSize * 0.6, color: Colors.white),
+                    decoration:
+                        BoxDecoration(color: dotColor, shape: BoxShape.circle),
+                    child: Icon(item.icon,
+                        size: style.dotSize * 0.6, color: Colors.white),
                   )
                 else
                   Container(
@@ -63,7 +66,8 @@ class VelocityTimeline extends StatelessWidget {
                   ),
                 if (!isLast)
                   Expanded(
-                    child: Container(width: style.lineWidth, color: style.lineColor),
+                    child: Container(
+                        width: style.lineWidth, color: style.lineColor),
                   ),
               ],
             ),

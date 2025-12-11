@@ -36,23 +36,31 @@ class VelocityEmpty extends StatelessWidget {
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? const VelocityEmptyStyle();
     final config = _getConfig();
-    
+
     return Center(
       child: Padding(
         padding: effectiveStyle.padding,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon ?? config.icon, size: effectiveStyle.iconSize, color: effectiveStyle.iconColor),
+            Icon(icon ?? config.icon,
+                size: effectiveStyle.iconSize, color: effectiveStyle.iconColor),
             SizedBox(height: effectiveStyle.spacing),
-            Text(title ?? config.title, style: effectiveStyle.titleStyle, textAlign: TextAlign.center),
+            Text(title ?? config.title,
+                style: effectiveStyle.titleStyle, textAlign: TextAlign.center),
             if ((description ?? config.description) != null) ...[
               SizedBox(height: effectiveStyle.spacing / 2),
-              Text(description ?? config.description!, style: effectiveStyle.descriptionStyle, textAlign: TextAlign.center),
+              Text(description ?? config.description!,
+                  style: effectiveStyle.descriptionStyle,
+                  textAlign: TextAlign.center),
             ],
             if (action != null || actionText != null) ...[
               SizedBox(height: effectiveStyle.actionSpacing),
-              action ?? TextButton(onPressed: onAction, child: Text(actionText!, style: effectiveStyle.actionStyle)),
+              action ??
+                  TextButton(
+                      onPressed: onAction,
+                      child:
+                          Text(actionText!, style: effectiveStyle.actionStyle)),
             ],
           ],
         ),
@@ -62,11 +70,18 @@ class VelocityEmpty extends StatelessWidget {
 
   _EmptyConfig _getConfig() {
     switch (type) {
-      case VelocityEmptyType.noData: return const _EmptyConfig(Icons.inbox_outlined, '暂无数据', null);
-      case VelocityEmptyType.noNetwork: return const _EmptyConfig(Icons.wifi_off_outlined, '网络连接失败', '请检查网络设置后重试');
-      case VelocityEmptyType.noSearch: return const _EmptyConfig(Icons.search_off_outlined, '无搜索结果', '换个关键词试试');
-      case VelocityEmptyType.error: return const _EmptyConfig(Icons.error_outline, '出错了', '请稍后重试');
-      case VelocityEmptyType.custom: return const _EmptyConfig(Icons.inbox_outlined, '', null);
+      case VelocityEmptyType.noData:
+        return const _EmptyConfig(Icons.inbox_outlined, '暂无数据', null);
+      case VelocityEmptyType.noNetwork:
+        return const _EmptyConfig(
+            Icons.wifi_off_outlined, '网络连接失败', '请检查网络设置后重试');
+      case VelocityEmptyType.noSearch:
+        return const _EmptyConfig(
+            Icons.search_off_outlined, '无搜索结果', '换个关键词试试');
+      case VelocityEmptyType.error:
+        return const _EmptyConfig(Icons.error_outline, '出错了', '请稍后重试');
+      case VelocityEmptyType.custom:
+        return const _EmptyConfig(Icons.inbox_outlined, '', null);
     }
   }
 }

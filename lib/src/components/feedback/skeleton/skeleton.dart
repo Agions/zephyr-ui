@@ -27,15 +27,19 @@ class VelocitySkeleton extends StatefulWidget {
   State<VelocitySkeleton> createState() => _VelocitySkeletonState();
 }
 
-class _VelocitySkeletonState extends State<VelocitySkeleton> with SingleTickerProviderStateMixin {
+class _VelocitySkeletonState extends State<VelocitySkeleton>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(duration: const Duration(milliseconds: 1500), vsync: this)..repeat();
-    _animation = Tween<double>(begin: -2, end: 2).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+    _controller = AnimationController(
+        duration: const Duration(milliseconds: 1500), vsync: this)
+      ..repeat();
+    _animation = Tween<double>(begin: -2, end: 2)
+        .animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -48,7 +52,7 @@ class _VelocitySkeletonState extends State<VelocitySkeleton> with SingleTickerPr
   Widget build(BuildContext context) {
     final effectiveStyle = widget.style ?? const VelocitySkeletonStyle();
     final size = widget.circle ? widget.height : null;
-    
+
     return AnimatedBuilder(
       animation: _animation,
       builder: (context, child) {
@@ -56,12 +60,18 @@ class _VelocitySkeletonState extends State<VelocitySkeleton> with SingleTickerPr
           width: widget.circle ? size : widget.width,
           height: widget.height,
           decoration: BoxDecoration(
-            borderRadius: widget.circle ? null : (widget.borderRadius ?? effectiveStyle.borderRadius),
+            borderRadius: widget.circle
+                ? null
+                : (widget.borderRadius ?? effectiveStyle.borderRadius),
             shape: widget.circle ? BoxShape.circle : BoxShape.rectangle,
             gradient: LinearGradient(
               begin: Alignment(_animation.value, 0),
               end: Alignment(_animation.value + 1, 0),
-              colors: [effectiveStyle.baseColor, effectiveStyle.highlightColor, effectiveStyle.baseColor],
+              colors: [
+                effectiveStyle.baseColor,
+                effectiveStyle.highlightColor,
+                effectiveStyle.baseColor
+              ],
             ),
           ),
         );
@@ -96,25 +106,29 @@ class VelocityListSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: List.generate(itemCount, (i) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        child: Row(
-          children: [
-            VelocitySkeleton(height: 48, circle: true, style: style),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  VelocitySkeleton(width: 120, height: 16, style: style),
-                  const SizedBox(height: 8),
-                  VelocitySkeleton(height: 14, style: style),
-                ],
-              ),
-            ),
-          ],
-        ),
-      )),
+      children: List.generate(
+          itemCount,
+          (i) => Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                child: Row(
+                  children: [
+                    VelocitySkeleton(height: 48, circle: true, style: style),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          VelocitySkeleton(
+                              width: 120, height: 16, style: style),
+                          const SizedBox(height: 8),
+                          VelocitySkeleton(height: 14, style: style),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )),
     );
   }
 }
@@ -131,7 +145,10 @@ class VelocityCardSkeleton extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          VelocitySkeleton(height: 180, borderRadius: const BorderRadius.all(Radius.circular(12)), style: style),
+          VelocitySkeleton(
+              height: 180,
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              style: style),
           const SizedBox(height: 16),
           VelocitySkeleton(width: 200, height: 20, style: style),
           const SizedBox(height: 8),

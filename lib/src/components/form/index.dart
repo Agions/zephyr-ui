@@ -11,3 +11,4 @@ export 'select/index.dart';
 export 'search/index.dart';
 export 'counter/index.dart';
 export 'form_field/index.dart';
+export 'upload/index.dart';

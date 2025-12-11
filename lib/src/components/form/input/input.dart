@@ -84,7 +84,7 @@ class _VelocityInputState extends State<VelocityInput> {
   Widget build(BuildContext context) {
     final effectiveStyle = widget.style ?? VelocityInputStyle.defaults();
     final hasError = widget.error != null && widget.error!.isNotEmpty;
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -116,25 +116,56 @@ class _VelocityInputState extends State<VelocityInput> {
             hintText: widget.hint,
             hintStyle: effectiveStyle.hintStyle,
             filled: effectiveStyle.filled,
-            fillColor: widget.enabled ? effectiveStyle.fillColor : effectiveStyle.disabledFillColor,
+            fillColor: widget.enabled
+                ? effectiveStyle.fillColor
+                : effectiveStyle.disabledFillColor,
             contentPadding: effectiveStyle.contentPadding,
-            prefixIcon: widget.prefixIcon != null 
-                ? Icon(widget.prefixIcon, size: effectiveStyle.iconSize, color: effectiveStyle.iconColor) 
+            prefixIcon: widget.prefixIcon != null
+                ? Icon(widget.prefixIcon,
+                    size: effectiveStyle.iconSize,
+                    color: effectiveStyle.iconColor)
                 : widget.prefix,
             suffixIcon: widget.obscureText
                 ? IconButton(
-                    icon: Icon(_obscureText ? Icons.visibility_off : Icons.visibility, size: effectiveStyle.iconSize, color: effectiveStyle.iconColor),
-                    onPressed: () => setState(() => _obscureText = !_obscureText),
+                    icon: Icon(
+                        _obscureText ? Icons.visibility_off : Icons.visibility,
+                        size: effectiveStyle.iconSize,
+                        color: effectiveStyle.iconColor),
+                    onPressed: () =>
+                        setState(() => _obscureText = !_obscureText),
                   )
-                : widget.suffixIcon != null 
-                    ? Icon(widget.suffixIcon, size: effectiveStyle.iconSize, color: effectiveStyle.iconColor) 
+                : widget.suffixIcon != null
+                    ? Icon(widget.suffixIcon,
+                        size: effectiveStyle.iconSize,
+                        color: effectiveStyle.iconColor)
                     : widget.suffix,
-            border: OutlineInputBorder(borderRadius: effectiveStyle.borderRadius, borderSide: BorderSide(color: effectiveStyle.borderColor)),
-            enabledBorder: OutlineInputBorder(borderRadius: effectiveStyle.borderRadius, borderSide: BorderSide(color: hasError ? effectiveStyle.errorBorderColor : effectiveStyle.borderColor)),
-            focusedBorder: OutlineInputBorder(borderRadius: effectiveStyle.borderRadius, borderSide: BorderSide(color: hasError ? effectiveStyle.errorBorderColor : effectiveStyle.focusedBorderColor, width: 2)),
-            errorBorder: OutlineInputBorder(borderRadius: effectiveStyle.borderRadius, borderSide: BorderSide(color: effectiveStyle.errorBorderColor)),
-            focusedErrorBorder: OutlineInputBorder(borderRadius: effectiveStyle.borderRadius, borderSide: BorderSide(color: effectiveStyle.errorBorderColor, width: 2)),
-            disabledBorder: OutlineInputBorder(borderRadius: effectiveStyle.borderRadius, borderSide: BorderSide(color: effectiveStyle.disabledBorderColor)),
+            border: OutlineInputBorder(
+                borderRadius: effectiveStyle.borderRadius,
+                borderSide: BorderSide(color: effectiveStyle.borderColor)),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: effectiveStyle.borderRadius,
+                borderSide: BorderSide(
+                    color: hasError
+                        ? effectiveStyle.errorBorderColor
+                        : effectiveStyle.borderColor)),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: effectiveStyle.borderRadius,
+                borderSide: BorderSide(
+                    color: hasError
+                        ? effectiveStyle.errorBorderColor
+                        : effectiveStyle.focusedBorderColor,
+                    width: 2)),
+            errorBorder: OutlineInputBorder(
+                borderRadius: effectiveStyle.borderRadius,
+                borderSide: BorderSide(color: effectiveStyle.errorBorderColor)),
+            focusedErrorBorder: OutlineInputBorder(
+                borderRadius: effectiveStyle.borderRadius,
+                borderSide: BorderSide(
+                    color: effectiveStyle.errorBorderColor, width: 2)),
+            disabledBorder: OutlineInputBorder(
+                borderRadius: effectiveStyle.borderRadius,
+                borderSide:
+                    BorderSide(color: effectiveStyle.disabledBorderColor)),
             counterText: '',
           ),
         ),
