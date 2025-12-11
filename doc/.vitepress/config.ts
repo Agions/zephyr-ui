@@ -95,7 +95,7 @@ export default defineConfig({
       },
     ],
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/your-repo/velocity_ui' }
+      { icon: 'github', link: 'https://github.com/agions/velocity_ui' }
     ]
   }
 })
