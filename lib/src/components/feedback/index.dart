@@ -10,3 +10,4 @@ export 'result/index.dart';
 export 'action_sheet/index.dart';
 export 'notification/index.dart';
 export 'popconfirm/index.dart';
+export 'popover/index.dart';

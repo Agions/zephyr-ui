@@ -1,9 +1,9 @@
 ---
-title: ZephyrGrid 网格
-description: VelocityUI ZephyrGrid 组件，网格布局系统
+title: Grid 网格
+description: VelocityUI Grid 组件，网格布局系统
 ---
 
-# ZephyrGrid 网格
+# Grid 网格
 
 网格布局系统。
 
@@ -50,20 +50,20 @@ VelocityWrap(
 
 ### VelocityGrid
 
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| children | ZephyrList<Widget> | - | 子组件列表 (必填) |
-| columns | int | 2 | 列数 |
-| mainAxisSpacing | double | 16 | 主轴间距 |
-| crossAxisSpacing | double | 16 | 交叉轴间距 |
-| childAspectRatio | double | 1 | 子项宽高比 |
-| padding | EdgeInsets? | - | 内边距 |
-| shrinkWrap | bool | false | 是否自适应高度 |
-| physics | ScrollPhysics? | - | 滚动物理效果 |
+| 属性             | 类型               | 默认值 | 说明              |
+| ---------------- | ------------------ | ------ | ----------------- |
+| children         | ZephyrList<Widget> | -      | 子组件列表 (必填) |
+| columns          | int                | 2      | 列数              |
+| mainAxisSpacing  | double             | 16     | 主轴间距          |
+| crossAxisSpacing | double             | 16     | 交叉轴间距        |
+| childAspectRatio | double             | 1      | 子项宽高比        |
+| padding          | EdgeInsets?        | -      | 内边距            |
+| shrinkWrap       | bool               | false  | 是否自适应高度    |
+| physics          | ScrollPhysics?     | -      | 滚动物理效果      |
 
 ### VelocityResponsiveGrid
 
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| minItemWidth | double | 150 | 最小子项宽度 |
-| ... | ... | ... | 其他属性类似 VelocityGrid |
+| 属性         | 类型   | 默认值 | 说明                      |
+| ------------ | ------ | ------ | ------------------------- |
+| minItemWidth | double | 150    | 最小子项宽度              |
+| ...          | ...    | ...    | 其他属性类似 VelocityGrid |

@@ -4,11 +4,23 @@ export default defineConfig({
   title: "VelocityUI",
   description: "A high-performance Flutter UI component library",
   themeConfig: {
+    logo: '/images/logo_docs.png',
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Components', link: '/components/basic/button' },
+      { text: '快速开始', link: '/quick-start' },
+      { text: '组件', link: '/components/basic/button' },
+      { text: '主题定制', link: '/theme-customization' },
+      { text: 'API参考', link: '/api-reference' },
     ],
     sidebar: [
+      {
+        text: '指南',
+        items: [
+          { text: '快速开始', link: '/quick-start' },
+          { text: '主题定制', link: '/theme-customization' },
+          { text: 'API参考', link: '/api-reference' },
+        ],
+      },
       {
         text: '基础组件',
         items: [

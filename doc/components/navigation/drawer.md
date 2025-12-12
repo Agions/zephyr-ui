@@ -27,13 +27,13 @@ VelocityDrawer(
 ```dart
 VelocityDrawer(
   header: UserAccountsDrawerHeader(
-    accountName: ZephyrText('User'),
-    accountEmail: ZephyrText('user@example.com'),
+    accountName: Text('User'),
+    accountEmail: Text('user@example.com'),
   ),
   items: [/*...*/],
   footer: Padding(
     padding: EdgeInsets.all(16),
-    child: ZephyrText('Version 1.0.0'),
+    child: Text('Version 1.0.0'),
   ),
 )
 ```
@@ -54,21 +54,21 @@ VelocityDrawer(
 
 ### VelocityDrawer
 
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| items | ZephyrList<VelocityDrawerItem> | - | 菜单项列表 (必填) |
-| selectedIndex | int? | - | 当前选中项索引 |
-| onItemTap | ValueChanged<int>? | - | 点击回调 |
-| header | Widget? | - | 头部组件 |
-| footer | Widget? | - | 底部组件 |
-| style | VelocityDrawerStyle? | - | 自定义样式 |
+| 属性          | 类型                           | 默认值 | 说明              |
+| ------------- | ------------------------------ | ------ | ----------------- |
+| items         | ZephyrList<VelocityDrawerItem> | -      | 菜单项列表 (必填) |
+| selectedIndex | int?                           | -      | 当前选中项索引    |
+| onItemTap     | ValueChanged<int>?             | -      | 点击回调          |
+| header        | Widget?                        | -      | 头部组件          |
+| footer        | Widget?                        | -      | 底部组件          |
+| style         | VelocityDrawerStyle?           | -      | 自定义样式        |
 
 ### VelocityDrawerItem
 
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| icon | IconData? | - | 图标 |
-| label | String? | - | 标签文本 |
-| trailing | Widget? | - | 右侧组件 |
-| onTap | VoidCallback? | - | 点击回调 |
-| isDivider | bool | false | 是否为分隔线 |
+| 属性      | 类型          | 默认值 | 说明         |
+| --------- | ------------- | ------ | ------------ |
+| icon      | IconData?     | -      | 图标         |
+| label     | String?       | -      | 标签文本     |
+| trailing  | Widget?       | -      | 右侧组件     |
+| onTap     | VoidCallback? | -      | 点击回调     |
+| isDivider | bool          | false  | 是否为分隔线 |

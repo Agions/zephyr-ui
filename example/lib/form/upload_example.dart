@@ -59,7 +59,7 @@ class _UploadExampleState extends State<UploadExample> {
     return Column(
       children: [
         VelocityUpload(
-          onUpload: (files) {
+          onUpload: (files) async {
             print('上传文件: $files');
           },
         ),
@@ -81,7 +81,7 @@ class _UploadExampleState extends State<UploadExample> {
       children: [
         VelocityUpload(
           multiple: true,
-          onUpload: (files) {
+          onUpload: (files) async {
             print('上传多个文件: $files');
           },
         ),
@@ -104,8 +104,8 @@ class _UploadExampleState extends State<UploadExample> {
         VelocityUpload(
           multiple: true,
           maxFiles: 3,
-          allowedExtensions: ['.jpg', '.png', '.gif'],
-          onUpload: (files) {
+          allowedTypes: const ['image/jpeg', 'image/png', 'image/gif'],
+          onUpload: (files) async {
             print('上传文件: $files');
           },
         ),
@@ -128,7 +128,7 @@ class _UploadExampleState extends State<UploadExample> {
         VelocityUpload(
           multiple: true,
           maxFiles: 5,
-          onUpload: (files) {
+          onUpload: (files) async {
             print('上传文件: $files');
           },
         ),

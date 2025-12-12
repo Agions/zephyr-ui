@@ -1,3 +1,4 @@
+/// VelocityUI 弹窗组件索引
 library dialog;
 
 export 'dialog.dart';

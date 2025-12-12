@@ -10,8 +10,8 @@ export 'breadcrumb_style.dart';
 class VelocityBreadcrumb extends StatelessWidget {
   /// 创建面包屑导航组件
   const VelocityBreadcrumb({
-    super.key,
     required this.items,
+    super.key,
     this.style,
     this.onItemTap,
     this.separator,
@@ -33,7 +33,7 @@ class VelocityBreadcrumb extends StatelessWidget {
   final String? separator;
 
   /// 是否自动换行
-  final bool wrap;
+  final bool? wrap;
 
   /// 主轴对齐方式
   final MainAxisAlignment mainAxisAlignment;
@@ -63,10 +63,11 @@ class VelocityBreadcrumb extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildItems(VelocityBreadcrumbStyle effectiveStyle, String actualSeparator) {
-    final List<Widget> children = [];
+  List<Widget> _buildItems(
+      VelocityBreadcrumbStyle effectiveStyle, String actualSeparator) {
+    final children = <Widget>[];
 
-    for (int i = 0; i < items.length; i++) {
+    for (var i = 0; i < items.length; i++) {
       final item = items[i];
       final isActive = i == items.length - 1;
 
@@ -76,7 +77,9 @@ class VelocityBreadcrumb extends StatelessWidget {
           padding: effectiveStyle.itemPadding,
           child: Text(
             item.label,
-            style: isActive ? effectiveStyle.activeTextStyle : effectiveStyle.textStyle,
+            style: isActive
+                ? effectiveStyle.activeTextStyle
+                : effectiveStyle.textStyle,
           ),
         ),
       ));

@@ -9,7 +9,7 @@
 ![Flutter](https://img.shields.io/badge/Flutter-3.0+-02569B?style=for-the-badge&logo=flutter&logoColor=white)
 ![Dart](https://img.shields.io/badge/Dart-3.0+-0175C2?style=for-the-badge&logo=dart&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-28A745?style=for-the-badge)
-![Version](https://img.shields.io/badge/Version-1.0.0-FF6B6B?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-1.0.3-FF6B6B?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/Platform-iOS%20%7C%20Android%20%7C%20Web-4A90E2?style=for-the-badge)
 
 [![Stars](https://img.shields.io/github/stars/Agions/velocity-ui?style=for-the-badge&logo=github)](https://github.com/Agions/velocity-ui)
@@ -79,7 +79,7 @@
 dependencies:
   flutter:
     sdk: flutter
-  velocity_ui: ^1.0.2
+  velocity_ui: ^1.0.3
 
 dev_dependencies:
   flutter_test:

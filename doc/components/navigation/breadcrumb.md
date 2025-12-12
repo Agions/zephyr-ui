@@ -81,32 +81,32 @@ VelocityBreadcrumb(
 
 ### VelocityBreadcrumb
 
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| items | List<VelocityBreadcrumbItem> | - | 面包屑项列表 |
-| style | VelocityBreadcrumbStyle? | - | 样式 |
-| onItemTap | ValueChanged<int>? | - | 项点击事件 |
-| separator | String? | / | 分隔符 |
-| wrap | bool | false | 是否自动换行 |
-| mainAxisAlignment | MainAxisAlignment | MainAxisAlignment.start | 主轴对齐方式 |
-| crossAxisAlignment | CrossAxisAlignment | CrossAxisAlignment.center | 交叉轴对齐方式 |
+| 属性               | 类型                         | 默认值                    | 说明           |
+| ------------------ | ---------------------------- | ------------------------- | -------------- |
+| items              | List<VelocityBreadcrumbItem> | -                         | 面包屑项列表   |
+| style              | VelocityBreadcrumbStyle?     | -                         | 样式           |
+| onItemTap          | ValueChanged<int>?           | -                         | 项点击事件     |
+| separator          | String?                      | /                         | 分隔符         |
+| wrap               | bool                         | false                     | 是否自动换行   |
+| mainAxisAlignment  | MainAxisAlignment            | MainAxisAlignment.start   | 主轴对齐方式   |
+| crossAxisAlignment | CrossAxisAlignment           | CrossAxisAlignment.center | 交叉轴对齐方式 |
 
 ### VelocityBreadcrumbItem
 
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| label | String | - | 标签文本 |
-| icon | IconData? | - | 图标 |
-| route | String? | - | 路由路径 |
+| 属性  | 类型      | 默认值 | 说明     |
+| ----- | --------- | ------ | -------- |
+| label | String    | -      | 标签文本 |
+| icon  | IconData? | -      | 图标     |
+| route | String?   | -      | 路由路径 |
 
 ### VelocityBreadcrumbStyle
 
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| textStyle | TextStyle | TextStyle(fontSize: 14, color: Colors.black87) | 文本样式 |
-| activeTextStyle | TextStyle | TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.blue) | 激活状态文本样式 |
-| separatorStyle | TextStyle | TextStyle(fontSize: 14, color: Colors.grey) | 分隔符样式 |
-| separator | String | / | 分隔符 |
-| spacing | double | 8.0 | 间距 |
-| itemPadding | EdgeInsets | EdgeInsets.symmetric(horizontal: 4.0) | 项内边距 |
-| wrap | bool | false | 是否自动换行 |
+| 属性            | 类型       | 默认值                                                                   | 说明             |
+| --------------- | ---------- | ------------------------------------------------------------------------ | ---------------- |
+| textStyle       | TextStyle  | TextStyle(fontSize: 14, color: Colors.black87)                           | 文本样式         |
+| activeTextStyle | TextStyle  | TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.blue) | 激活状态文本样式 |
+| separatorStyle  | TextStyle  | TextStyle(fontSize: 14, color: Colors.grey)                              | 分隔符样式       |
+| separator       | String     | /                                                                        | 分隔符           |
+| spacing         | double     | 8.0                                                                      | 间距             |
+| itemPadding     | EdgeInsets | EdgeInsets.symmetric(horizontal: 4.0)                                    | 项内边距         |
+| wrap            | bool       | false                                                                    | 是否自动换行     |

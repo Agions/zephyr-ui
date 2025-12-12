@@ -108,7 +108,8 @@ class _CheckboxExampleState extends State<CheckboxExample> {
           }).toList(),
         ),
         const SizedBox(height: 8),
-        Text('已选择: ${_selectedFruits.isEmpty ? "无" : _selectedFruits.join(", ")}'),
+        Text(
+            '已选择: ${_selectedFruits.isEmpty ? "无" : _selectedFruits.join(", ")}'),
       ],
     );
   }
@@ -157,7 +158,8 @@ class _CheckboxExampleState extends State<CheckboxExample> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('注册表单', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            const Text('注册表单',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             const SizedBox(height: 16),
             VelocityCheckbox(
               value: _agreed,

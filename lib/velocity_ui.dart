@@ -24,3 +24,6 @@ export 'src/components/layout/index.dart';
 
 // Navigation Components
 export 'src/components/navigation/index.dart';
+
+// Utils
+export 'src/utils/index.dart';

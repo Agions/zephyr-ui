@@ -14,11 +14,11 @@ VelocityTimeline(
   items: [
     VelocityTimelineItem(
       label: '2023-01-01',
-      content: ZephyrText('创建项目'),
+      content: Text('创建项目'),
     ),
     VelocityTimelineItem(
       label: '2023-02-01',
-      content: ZephyrText('发布 v1.0'),
+      content: Text('发布 v1.0'),
     ),
   ],
 )
@@ -47,19 +47,19 @@ VelocityTimelineItem(
 
 ### VelocityTimeline
 
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| items | ZephyrList<VelocityTimelineItem> | - | 时间轴项列表 (必填) |
-| reverse | bool | false | 是否倒序 |
-| style | VelocityTimelineStyle? | - | 自定义样式 |
+| 属性    | 类型                             | 默认值 | 说明                |
+| ------- | -------------------------------- | ------ | ------------------- |
+| items   | ZephyrList<VelocityTimelineItem> | -      | 时间轴项列表 (必填) |
+| reverse | bool                             | false  | 是否倒序            |
+| style   | VelocityTimelineStyle?           | -      | 自定义样式          |
 
 ### VelocityTimelineItem
 
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| label | String? | - | 标签 |
-| time | String? | - | 时间 |
-| content | Widget? | - | 内容 |
-| icon | IconData? | - | 图标 |
-| color | Color? | - | 颜色 |
-| hollow | bool | false | 是否空心 (幽灵节点) |
+| 属性    | 类型      | 默认值 | 说明                |
+| ------- | --------- | ------ | ------------------- |
+| label   | String?   | -      | 标签                |
+| time    | String?   | -      | 时间                |
+| content | Widget?   | -      | 内容                |
+| icon    | IconData? | -      | 图标                |
+| color   | Color?    | -      | 颜色                |
+| hollow  | bool      | false  | 是否空心 (幽灵节点) |

@@ -22,7 +22,7 @@ VelocityStatistic(
 VelocityStatistic(
   title: 'Feedback',
   value: 1128,
-  prefix: ZephyrIcon(Icons.thumb_up),
+  prefix: Icon(Icons.thumb_up),
   suffix: '/ 100',
 )
 ```
@@ -43,22 +43,22 @@ VelocityCountdown(
 
 ### VelocityStatistic
 
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| title | String? | - | 标题 |
-| value | num | - | 数值 (必填) |
-| precision | int | 0 | 精度 |
-| prefix | Widget? | - | 前缀 |
-| suffix | String? | - | 后缀 |
-| trend | VelocityStatisticTrend? | - | 趋势 (up, down) |
-| trendValue | String? | - | 趋势值 |
-| style | VelocityStatisticStyle? | - | 自定义样式 |
+| 属性       | 类型                    | 默认值 | 说明            |
+| ---------- | ----------------------- | ------ | --------------- |
+| title      | String?                 | -      | 标题            |
+| value      | num                     | -      | 数值 (必填)     |
+| precision  | int                     | 0      | 精度            |
+| prefix     | Widget?                 | -      | 前缀            |
+| suffix     | String?                 | -      | 后缀            |
+| trend      | VelocityStatisticTrend? | -      | 趋势 (up, down) |
+| trendValue | String?                 | -      | 趋势值          |
+| style      | VelocityStatisticStyle? | -      | 自定义样式      |
 
 ### VelocityCountdown
 
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| endTime | DateTime | - | 结束时间 (必填) |
-| format | String | HH:mm:ss | 格式 |
-| onFinish | VoidCallback? | - | 结束回调 |
-| style | VelocityCountdownStyle? | - | 自定义样式 |
+| 属性     | 类型                    | 默认值   | 说明            |
+| -------- | ----------------------- | -------- | --------------- |
+| endTime  | DateTime                | -        | 结束时间 (必填) |
+| format   | String                  | HH:mm:ss | 格式            |
+| onFinish | VoidCallback?           | -        | 结束回调        |
+| style    | VelocityCountdownStyle? | -        | 自定义样式      |

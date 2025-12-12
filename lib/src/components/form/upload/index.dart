@@ -1,5 +1,5 @@
 /// VelocityUI 上传组件
-library velocity_upload;
+library upload;
 
 export 'upload.dart';
 export 'upload_item.dart';

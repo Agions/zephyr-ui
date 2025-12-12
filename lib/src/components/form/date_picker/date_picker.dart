@@ -3,7 +3,6 @@ library velocity_date_picker;
 
 import 'package:flutter/material.dart';
 import '../input/input.dart';
-import '../input/input_style.dart';
 import 'date_picker_style.dart';
 
 export 'date_picker_style.dart';
@@ -12,8 +11,10 @@ export 'date_picker_style.dart';
 enum VelocityDatePickerType {
   /// 仅日期选择
   date,
+
   /// 仅时间选择
   time,
+
   /// 日期时间选择
   datetime,
 }
@@ -91,13 +92,15 @@ class _VelocityDatePickerState extends State<VelocityDatePicker> {
   Future<void> _showDatePicker() async {
     final now = DateTime.now();
     final initialDate = widget.initialDate ?? now;
-    final firstDate = widget.firstDate ?? now.subtract(const Duration(days: 365 * 10));
+    final firstDate =
+        widget.firstDate ?? now.subtract(const Duration(days: 365 * 10));
     final lastDate = widget.lastDate ?? now.add(const Duration(days: 365 * 10));
 
     DateTime? selectedDate;
     TimeOfDay? selectedTime;
 
-    if (widget.type == VelocityDatePickerType.date || widget.type == VelocityDatePickerType.datetime) {
+    if (widget.type == VelocityDatePickerType.date ||
+        widget.type == VelocityDatePickerType.datetime) {
       selectedDate = await showDatePicker(
         context: context,
         initialDate: initialDate,
@@ -108,7 +111,7 @@ class _VelocityDatePickerState extends State<VelocityDatePicker> {
             data: Theme.of(context).copyWith(
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
             ),
-            child: child!, 
+            child: child!,
           );
         },
       );
@@ -116,7 +119,12 @@ class _VelocityDatePickerState extends State<VelocityDatePicker> {
       selectedDate = initialDate;
     }
 
-    if (selectedDate != null && (widget.type == VelocityDatePickerType.time || widget.type == VelocityDatePickerType.datetime)) {
+    // 检查widget是否仍然挂载
+    if (!mounted) return;
+
+    if (selectedDate != null &&
+        (widget.type == VelocityDatePickerType.time ||
+            widget.type == VelocityDatePickerType.datetime)) {
       selectedTime = await showTimePicker(
         context: context,
         initialTime: TimeOfDay.fromDateTime(initialDate),
@@ -125,7 +133,7 @@ class _VelocityDatePickerState extends State<VelocityDatePicker> {
             data: Theme.of(context).copyWith(
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
             ),
-            child: child!, 
+            child: child!,
           );
         },
       );
@@ -133,8 +141,11 @@ class _VelocityDatePickerState extends State<VelocityDatePicker> {
       selectedTime = TimeOfDay.fromDateTime(initialDate);
     }
 
+    // 检查widget是否仍然挂载
+    if (!mounted) return;
+
     if (selectedDate != null && selectedTime != null) {
-      final DateTime finalDate = DateTime(
+      final finalDate = DateTime(
         selectedDate.year,
         selectedDate.month,
         selectedDate.day,
@@ -148,13 +159,16 @@ class _VelocityDatePickerState extends State<VelocityDatePicker> {
       } else {
         switch (widget.type) {
           case VelocityDatePickerType.date:
-            formattedDate = '${finalDate.year}-${finalDate.month.toString().padLeft(2, '0')}-${finalDate.day.toString().padLeft(2, '0')}';
+            formattedDate =
+                '${finalDate.year}-${finalDate.month.toString().padLeft(2, '0')}-${finalDate.day.toString().padLeft(2, '0')}';
             break;
           case VelocityDatePickerType.time:
-            formattedDate = '${finalDate.hour.toString().padLeft(2, '0')}:${finalDate.minute.toString().padLeft(2, '0')}';
+            formattedDate =
+                '${finalDate.hour.toString().padLeft(2, '0')}:${finalDate.minute.toString().padLeft(2, '0')}';
             break;
           case VelocityDatePickerType.datetime:
-            formattedDate = '${finalDate.year}-${finalDate.month.toString().padLeft(2, '0')}-${finalDate.day.toString().padLeft(2, '0')} ${finalDate.hour.toString().padLeft(2, '0')}:${finalDate.minute.toString().padLeft(2, '0')}';
+            formattedDate =
+                '${finalDate.year}-${finalDate.month.toString().padLeft(2, '0')}-${finalDate.day.toString().padLeft(2, '0')} ${finalDate.hour.toString().padLeft(2, '0')}:${finalDate.minute.toString().padLeft(2, '0')}';
             break;
         }
       }
@@ -248,7 +262,8 @@ class VelocityTimePicker extends StatelessWidget {
       format: format,
       type: VelocityDatePickerType.time,
       initialDate: initialTime != null
-          ? DateTime.now().copyWith(hour: initialTime!.hour, minute: initialTime!.minute)
+          ? DateTime.now()
+              .copyWith(hour: initialTime!.hour, minute: initialTime!.minute)
           : null,
       onChanged: onChanged,
       onDateSelected: (date) {

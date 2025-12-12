@@ -1,3 +1,4 @@
+/// VelocityUI 骨架屏组件索引
 library skeleton;
 
 export 'skeleton.dart';
